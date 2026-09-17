@@ -70,10 +70,12 @@ export function PublishForm() {
           type="number"
           min="0"
           step="0.01"
-          defaultValue="0"
+          defaultValue="10"
           className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-accent/50"
         />
-        <p className="mt-1 text-xs text-muted">Paid checkout isn&apos;t wired up yet — this just records the intended price.</p>
+        <p className="mt-1 text-xs text-muted">
+          Suggested starting price — about half what similar templates go for elsewhere, to keep the marketplace affordable early on. Set to 0 to publish for free.
+        </p>
       </div>
 
       <div>
