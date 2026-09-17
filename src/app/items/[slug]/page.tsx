@@ -74,12 +74,16 @@ export default async function ItemDetailPage({ params, searchParams }: PageProps
       } catch {}
     }
 
-    const promptUrl = item.source_url ? promptUrlFor(item.source_url) : null;
-    if (promptUrl) {
-      try {
-        const res = await fetch(promptUrl);
-        if (res.ok) promptText = await res.text();
-      } catch {}
+    if (item.prompt_text) {
+      promptText = item.prompt_text;
+    } else {
+      const promptUrl = item.source_url ? promptUrlFor(item.source_url) : null;
+      if (promptUrl) {
+        try {
+          const res = await fetch(promptUrl);
+          if (res.ok) promptText = await res.text();
+        } catch {}
+      }
     }
   }
 

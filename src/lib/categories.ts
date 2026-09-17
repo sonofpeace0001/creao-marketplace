@@ -10,6 +10,7 @@ export const CATEGORIES: { key: ItemCategory; label: string; description: string
   { key: "real_estate", label: "Real Estate", description: "Agencies, property management, architecture, interior design" },
   { key: "institutions", label: "Institutions", description: "Churches, schools, clinics, nonprofits, coworking spaces" },
   { key: "portfolio_creative", label: "Portfolio & Creative", description: "Designers, photographers, artists, musicians, and other creatives" },
+  { key: "ui_components", label: "UI Components", description: "Reusable buttons, cards, navs, forms, and other interface pieces — not tied to a business niche" },
 ];
 
 export function categoryLabel(key: ItemCategory): string {

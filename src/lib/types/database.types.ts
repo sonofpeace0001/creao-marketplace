@@ -214,6 +214,7 @@ export type Database = {
         | "real_estate"
         | "institutions"
         | "portfolio_creative"
+        | "ui_components"
       item_kind: "component" | "page"
       item_status: "draft" | "published" | "archived"
     }
@@ -350,6 +351,7 @@ export const Constants = {
         "real_estate",
         "institutions",
         "portfolio_creative",
+        "ui_components",
       ],
       item_kind: ["component", "page"],
       item_status: ["draft", "published", "archived"],
