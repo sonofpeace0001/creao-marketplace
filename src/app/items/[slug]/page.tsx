@@ -2,12 +2,18 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { categoryLabel, promptUrlFor } from "@/lib/categories";
 import { formatPrice } from "@/lib/utils";
+import { getStripe } from "@/lib/stripe";
+import { recordCompletedCheckout } from "@/lib/purchases";
 import { LivePreviewFrame } from "@/components/live-preview-frame";
 import { CodeViewer } from "@/components/code-viewer";
 import { PromptPanel } from "@/components/prompt-panel";
+import { PaywallCard } from "@/components/paywall-card";
 
-export default async function ItemDetailPage({ params }: PageProps<"/items/[slug]">) {
+export default async function ItemDetailPage({ params, searchParams }: PageProps<"/items/[slug]">) {
   const { slug } = await params;
+  const sp = await searchParams;
+  const sessionId = typeof sp.session_id === "string" ? sp.session_id : undefined;
+
   const supabase = await createClient();
 
   const { data: item } = await supabase
@@ -19,21 +25,62 @@ export default async function ItemDetailPage({ params }: PageProps<"/items/[slug
 
   if (!item) notFound();
 
-  let sourceHtml = item.source_html;
-  if (!sourceHtml && item.source_url) {
-    try {
-      const res = await fetch(item.source_url);
-      if (res.ok) sourceHtml = await res.text();
-    } catch {}
+  const { data: userData } = await supabase.auth.getUser();
+  const user = userData.user;
+
+  const isFree = item.price_cents === 0;
+  const isOwner = user?.id === item.creator_id;
+  let hasPurchased = false;
+
+  if (!isFree && !isOwner && user) {
+    const { data: purchase } = await supabase
+      .from("purchases")
+      .select("id")
+      .eq("item_id", item.id)
+      .eq("buyer_id", user.id)
+      .eq("status", "completed")
+      .maybeSingle();
+    hasPurchased = !!purchase;
+
+    // Fallback for the instant post-checkout redirect: the webhook may not
+    // have landed yet, so verify the session directly with Stripe and
+    // record it ourselves (idempotent — safe if the webhook also fires).
+    if (!hasPurchased && sessionId) {
+      try {
+        const stripe = getStripe();
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+        if (
+          session.metadata?.item_id === item.id &&
+          session.metadata?.buyer_id === user.id &&
+          session.payment_status === "paid"
+        ) {
+          hasPurchased = await recordCompletedCheckout(session);
+        }
+      } catch {}
+    }
   }
 
+  const hasAccess = isFree || isOwner || hasPurchased;
+
+  let sourceHtml: string | null = null;
   let promptText: string | null = null;
-  const promptUrl = item.source_url ? promptUrlFor(item.source_url) : null;
-  if (promptUrl) {
-    try {
-      const res = await fetch(promptUrl);
-      if (res.ok) promptText = await res.text();
-    } catch {}
+
+  if (hasAccess) {
+    sourceHtml = item.source_html;
+    if (!sourceHtml && item.source_url) {
+      try {
+        const res = await fetch(item.source_url);
+        if (res.ok) sourceHtml = await res.text();
+      } catch {}
+    }
+
+    const promptUrl = item.source_url ? promptUrlFor(item.source_url) : null;
+    if (promptUrl) {
+      try {
+        const res = await fetch(promptUrl);
+        if (res.ok) promptText = await res.text();
+      } catch {}
+    }
   }
 
   return (
@@ -65,11 +112,13 @@ export default async function ItemDetailPage({ params }: PageProps<"/items/[slug
         </div>
       )}
 
-      {sourceHtml && (
-        <div className="mt-6">
-          <CodeViewer code={sourceHtml} />
-        </div>
-      )}
+      <div className="mt-6">
+        {hasAccess ? (
+          sourceHtml && <CodeViewer code={sourceHtml} />
+        ) : (
+          <PaywallCard itemId={item.id} priceCents={item.price_cents} currency={item.currency} />
+        )}
+      </div>
     </div>
   );
 }
