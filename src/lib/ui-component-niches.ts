@@ -1,9 +1,7 @@
 // Full UI-component category taxonomy for the marketplace's component browser sidebar.
-// The "Marketing Blocks" and "UI Components" sections mirror 21st.dev's real sidebar
-// (78 categories total, verified live against https://21st.dev/community/components).
-// "CREAO Exclusive" adds categories 21st.dev doesn't have, so our sidebar covers more
-// ground than theirs. Every entry appears here whether or not a template has shipped
-// yet — counts simply read 0 until a batch fills them in.
+// "CREAO Exclusive" adds categories beyond the standard set. Every entry appears here
+// whether or not a template has shipped yet — counts simply read 0 until a batch fills
+// them in.
 
 export type NicheSection = "Marketing Blocks" | "UI Components" | "CREAO Exclusive";
 
@@ -102,7 +100,7 @@ const UI_COMPONENTS: string[] = [
   "Tooltips",
 ];
 
-// Categories 21st.dev's sidebar does not have.
+// Categories beyond the standard component-marketplace taxonomy.
 const CREAO_EXCLUSIVE: string[] = [
   "AI Agents",
   "Chatbots & Live Chat",

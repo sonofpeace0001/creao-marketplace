@@ -1,6 +1,6 @@
 # CREAO Marketplace
 
-A marketplace for shippable landing pages and components — modeled on [21st.dev](https://21st.dev/community/components), built to fill the gap it leaves: 21st.dev only ships tiny React/Tailwind UI snippets. This ships full, framework-agnostic, production-ready **pages**, not just components, with a live interactive preview, one-click code copy, and — for every seeded item — **the exact AI prompt that generated it**, so anyone can regenerate or customize it via [CREAO's own agent](https://agent.creao.ai/@Sonofpeace). No other component marketplace ships that.
+A marketplace for shippable landing pages and components — full, framework-agnostic, production-ready **pages**, not just tiny UI snippets, with a live interactive preview, one-click code copy, and — for every seeded item — **the exact AI prompt that generated it**, so anyone can regenerate or customize it via [CREAO's own agent](https://agent.creao.ai/@Sonofpeace). No other component marketplace ships that.
 
 ## Stack
 

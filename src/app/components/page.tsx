@@ -38,13 +38,12 @@ export default async function ComponentsPage({ searchParams }: PageProps<"/compo
     <div className="mx-auto max-w-7xl px-6 py-10">
       <div className="mb-8 border-b border-border pb-8">
         <span className="inline-block rounded-full border border-border bg-accent/10 px-3.5 py-1.5 text-xs uppercase tracking-wide text-accent">
-          {UI_COMPONENT_NICHES.length} categories · more than 21st.dev
+          {UI_COMPONENT_NICHES.length} categories
         </span>
         <h1 className="mt-5 font-serif text-4xl sm:text-5xl">UI Components</h1>
         <p className="mt-3 max-w-2xl text-muted">
-          Every category from 21st.dev&rsquo;s own sidebar, verified live — plus categories they
-          don&rsquo;t have. {liveCategoryCount} are filled so far ({totalCount} components);
-          the rest are open for the next batch.
+          The full component taxonomy, organized by category. {liveCategoryCount} are filled so
+          far ({totalCount} components); the rest are open for the next batch.
         </p>
         <form action="/components" method="GET" className="mt-6 max-w-md">
           {niche && <input type="hidden" name="niche" value={niche} />}
