@@ -17,6 +17,7 @@ export async function NavBar() {
         </Link>
         <nav className="flex flex-1 items-center gap-6 text-sm text-muted">
           <Link href="/browse" className="hover:text-fg">Browse</Link>
+          <Link href="/components" className="hover:text-fg">Components</Link>
           <Link href="/showcase" className="hover:text-fg">Showcase</Link>
           {user && <Link href="/dashboard" className="hover:text-fg">Dashboard</Link>}
         </nav>
