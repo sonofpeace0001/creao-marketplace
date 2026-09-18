@@ -48,7 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <footer className="border-t border-border py-10 text-center text-sm text-muted">
           <p>
             Built with{" "}
-            <a href="https://agent.creao.ai" className="text-accent hover:underline" target="_blank" rel="noopener">
+            <a href="https://agent.creao.ai/@Sonofpeace" className="text-accent hover:underline" target="_blank" rel="noopener">
               CREAO
             </a>
             . <Link href="/showcase" className="hover:underline">The original 100-page pack</Link> is free to browse.

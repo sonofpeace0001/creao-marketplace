@@ -41,7 +41,7 @@ export function PromptPanel({ promptText }: { promptText: string }) {
               {copied ? "Copied" : "Copy prompt"}
             </button>
             <a
-              href="https://agent.creao.ai"
+              href="https://agent.creao.ai/@Sonofpeace"
               target="_blank"
               rel="noopener"
               className="text-sm text-accent hover:underline"

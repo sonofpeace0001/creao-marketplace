@@ -18,7 +18,7 @@ export default async function ShowcasePage() {
           100 production-ready landing pages across SaaS, local service, retail, real estate,
           institutions, and portfolio &amp; creative niches — free to browse, copy, and deploy.
           Built entirely with{" "}
-          <a href="https://agent.creao.ai" target="_blank" rel="noopener" className="text-accent hover:underline">
+          <a href="https://agent.creao.ai/@Sonofpeace" target="_blank" rel="noopener" className="text-accent hover:underline">
             CREAO
           </a>
           , and hosted at{" "}
