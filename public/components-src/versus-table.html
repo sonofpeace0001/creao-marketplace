@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Versus Split</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08080B;color:#ECECF2;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:40px 20px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:880px;position:relative}
+h1{font-family:'Syne';font-weight:800;font-size:clamp(30px,4.6vw,46px);letter-spacing:-.04em;text-align:center;margin-bottom:34px}
+h1 span{color:#35E08A}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:20px;position:relative}
+.vs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:58px;height:58px;border-radius:50%;background:#08080B;border:1px solid #2A2A33;display:grid;place-items:center;font:800 15px 'Syne';letter-spacing:.04em;color:#8A8A98;box-shadow:0 0 0 8px #08080B}
+.p{border-radius:24px;padding:30px 28px;border:1px solid #23232B;background:#0F0F14}
+.p.us{background:linear-gradient(180deg,#0E1A14,#0B120F);border-color:rgba(53,224,138,.35);box-shadow:0 0 70px -24px rgba(53,224,138,.45)}
+.p h2{font-family:'Syne';font-weight:700;font-size:21px;letter-spacing:-.03em;margin-bottom:4px}
+.p small{color:#7C7C8A;font-size:13px}.us small{color:#6FB394}
+ul{list-style:none;margin-top:22px;display:grid;gap:0}
+li{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-top:1px solid rgba(255,255,255,.06);font-size:14.5px;line-height:1.4;opacity:0;transform:translateX(var(--d));animation:in .6s forwards}
+.p li{--d:-14px}.us li{--d:14px}
+li:nth-child(1){animation-delay:.1s}li:nth-child(2){animation-delay:.22s}li:nth-child(3){animation-delay:.34s}li:nth-child(4){animation-delay:.46s}li:nth-child(5){animation-delay:.58s}
+@keyframes in{to{opacity:1;transform:none}}
+li i{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;margin-top:1px}
+.old li{color:#8A8A98}.old li i{background:rgba(255,77,77,.14);color:#FF5C5C}
+.us li{color:#E4F5EC}.us li i{background:rgba(53,224,138,.18);color:#35E08A}
+@media(max-width:700px){.g{grid-template-columns:1fr}.vs{display:none}}
+@media(prefers-reduced-motion:reduce){li{animation:none;opacity:1;transform:none}}
+</style></head><body>
+<div class="w"><h1>Us <span>versus</span> the old way</h1>
+<div class="g"><div class="vs">VS</div>
+ <div class="p old"><h2>The old way</h2><small>Spreadsheets, inboxes, standing meetings</small><ul>
+  <li><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></i>Status lives in six different tools</li>
+  <li><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></i>Weekly update meetings to find out what happened</li>
+  <li><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></i>Handoffs depend on someone remembering</li>
+  <li><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></i>Reports built by hand every Friday</li>
+ </ul></div>
+ <div class="p us"><h2>With Relay</h2><small>One live plan, always current</small><ul>
+  <li><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>One source of truth the whole team trusts</li>
+  <li><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Updates write themselves from real work</li>
+  <li><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Automatic handoffs with owners and due dates</li>
+  <li><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Live reports, shared with a link</li>
+ </ul></div>
+</div></div></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior conversion-UX designer and front-end engineer with 15+ years of experience. Build "Application Wizard": a three-step application form with a segmented progress bar, per-step validation, choice cards and a review summary.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep plum card with coral-to-pink progress and buttons; Epilogue type with generous spacing.
+- Palette: #8A7FAE, #E84393, #17132A, #2B2445, #EFEAF8, #FF8A5B
+- Type: Epilogue (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Step counter and title, three-segment progress bar, steps for About you, Experience (inputs, select, choice cards) and Review (summary list), Back and Continue/Submit buttons.
+
+INTERACTION & STATES
+- Continue validates the current step before advancing; Back preserves entered data; choice cards use aria-pressed; the final step submits to a thank-you message.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

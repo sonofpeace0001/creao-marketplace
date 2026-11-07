@@ -1,0 +1,31 @@
+ROLE
+You are a senior brand designer and front-end engineer (design-tool marketing) with 15+ years of experience. Build "Prism Bento": a dark bento grid with a rotating neon-ring hero cell, glowing orb and keyboard-shortcut chips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Neon-on-black: conic cyan→violet→magenta ring around a deep indigo hero with a blurred spinning orb.
+- Palette: #00E5FF, #7B61FF, #FF3D9A, #07070B, #EFEFF6, #101018
+- Type: Unbounded, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Tall hero cell with kicker, headline, paragraph, orb and CTA.
+- Two small icon cells (Instant preview, Multiplayer) and a wide 'Keyboard-first' cell with key chips and mini bars.
+
+INTERACTION & STATES
+- Hero border and orb rotate continuously; cells lift on hover; CTA lifts.
+- Animation is disabled under reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

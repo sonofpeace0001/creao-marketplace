@@ -1,0 +1,29 @@
+ROLE
+You are a senior ops-dashboard designer and front-end engineer with 15+ years of experience. Build "Mission Control": a sci-fi HUD of three vitals (uptime, latency, error rate) with chamfered panels, count-up numbers and bar sparklines.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black-teal HUD with a faint grid, glowing numerals in Chakra Petch and clipped-corner tiles.
+- Palette: #00F5C4, #05080C, #CFE6EE, #4D7C8A, #11343F, #F2FBFF
+- Type: Chakra Petch, Barlow (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with title and a pulsing 'Systems nominal' indicator; three chamfered tiles each with icon label, glowing value, trend line and eight-bar sparkline; footer meta.
+
+INTERACTION & STATES
+- Values count up with easing; tiles brighten their border and lift on hover; status dot pulses; reduced motion shows final numbers.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Phosphor Terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#39FF88;--dim:#1c9e55;--bg:#04100A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#020805;min-height:100vh;display:grid;place-items:center;padding:40px 20px;font-family:'IBM Plex Mono',monospace;-webkit-font-smoothing:antialiased}
+.win{width:100%;max-width:760px;background:var(--bg);border:1px solid #14301f;border-radius:12px;box-shadow:0 0 0 1px #000,0 0 80px -20px rgba(57,255,136,.35),0 40px 80px -30px #000;overflow:hidden;position:relative}
+.win::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px);pointer-events:none;mix-blend-mode:multiply}
+.tb{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid #123022;background:#071a10;font-size:12px;color:var(--dim)}
+.tb i{width:11px;height:11px;border-radius:50%;background:#134d2c}.tb span{margin-left:auto;margin-right:auto;padding-right:44px}
+pre{color:var(--g);text-shadow:0 0 10px rgba(57,255,136,.55);font-size:clamp(7px,1.35vw,12.5px);line-height:1.12;padding:26px 28px 6px;overflow:hidden;font-weight:700;letter-spacing:0}
+.out{padding:6px 28px 26px;font-size:13.5px;line-height:1.75;color:#7DE8A9;min-height:150px}
+.out .d{color:var(--dim)}.out .ok{color:var(--g)}
+.cur{display:inline-block;width:9px;height:17px;background:var(--g);vertical-align:-3px;animation:b 1s steps(2) infinite;box-shadow:0 0 10px var(--g)}
+@keyframes b{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.cur{animation:none}}
+</style></head><body>
+<div class="win">
+  <div class="tb"><i></i><i></i><i></i><span>atlas — zsh — 96×24</span></div>
+<pre aria-label="ATLAS">
+    _  _____ _      _   ___
+   /_\|_   _| |    /_\ / __|
+  / _ \ | | | |__ / _ \\__ \
+ /_/ \_\|_| |____/_/ \_\___/
+</pre>
+  <div class="out" id="o" aria-live="off"></div>
+</div>
+<script>
+const L=[['<span class="d">$</span> atlas init --template saas','t'],['<span class="ok">✔</span> scaffolded project in 0.4s','o'],['<span class="ok">✔</span> installed 212 packages','o'],['<span class="ok">✔</span> provisioned edge runtime (iad1, fra1, sin1)','o'],['<span class="d">$</span> atlas deploy','t'],['<span class="ok">✔</span> live at https://atlas.run/demo','o']];
+const o=document.getElementById('o');let i=0;
+function strip(s){return s.replace(/<[^>]+>/g,'')}
+function line(){if(i>=L.length){o.insertAdjacentHTML('beforeend','<span class="cur"></span>');return}
+ const [h,k]=L[i++],div=document.createElement('div');o.appendChild(div);
+ if(k==='o'){div.innerHTML=h;setTimeout(line,380);return}
+ const txt=strip(h).slice(2);div.innerHTML='<span class="d">$</span> ';let n=0;const sp=document.createElement('span');div.appendChild(sp);
+ const t=setInterval(()=>{sp.textContent=txt.slice(0,++n);if(n>=txt.length){clearInterval(t);setTimeout(line,300)}},38)}
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){L.forEach(([h])=>{const d=document.createElement('div');d.innerHTML=h;o.appendChild(d)})}else line();
+</script></body></html>

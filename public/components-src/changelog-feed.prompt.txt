@@ -1,0 +1,29 @@
+ROLE
+You are a senior product-marketing designer and front-end engineer with 15+ years of experience. Build "Changelog Feed": a product changelog timeline with version badges, type tags, filter chips and an illustrated entry.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Off-white page with Geist type, a thin timeline rail and colour-coded dots per change type.
+- Palette: #171717, #737373, #E5E5E5, #525252, #FAFAF9, #F0F0EF
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with title and RSS link; filter chips (All, New, Improved, Fixed); timeline of three entries with date, version, tag, heading, copy, optional bullet list and preview image.
+
+INTERACTION & STATES
+- Filter chips use aria-pressed and hide non-matching entries; hover and focus states on links and chips; timeline rail connects entries.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

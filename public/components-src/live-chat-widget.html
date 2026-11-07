@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Live Chat Widget</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#FFEFE0,#FBE3F0 60%,#E6E2FF);color:#2A1630;font-family:'Be Vietnam Pro',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:380px;height:520px;background:#fff;border-radius:28px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 50px 80px -36px rgba(120,40,120,.55),0 0 0 1px rgba(42,22,48,.06)}
+.hd{display:flex;align-items:center;gap:12px;padding:16px 18px;background:linear-gradient(135deg,#F97316,#EC4899);color:#fff}
+.ag{position:relative;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-weight:700;font-size:15px}.ag i{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#4ADE80;border:2px solid #F97316}
+.hd b{display:block;font-size:15.5px;font-weight:700}.hd span{font-size:12.5px;opacity:.9}.hd .x{margin-left:auto;width:32px;height:32px;border:0;border-radius:10px;background:rgba(255,255,255,.18);color:#fff;cursor:pointer;display:grid;place-items:center}.hd .x:hover{background:rgba(255,255,255,.3)}.hd .x:focus-visible{outline:2px solid #fff}
+.ms{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px;background:#FFFBF8;scroll-behavior:smooth}
+.m{max-width:80%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.5;animation:in .3s cubic-bezier(.3,1.3,.5,1)}@keyframes in{from{opacity:0;transform:translateY(8px) scale(.96)}}
+.m.a{align-self:flex-start;background:#fff;border:1px solid #F2E5E8;border-bottom-left-radius:5px}.m.u{align-self:flex-end;background:linear-gradient(135deg,#F97316,#EC4899);color:#fff;border-bottom-right-radius:5px}
+.tm{align-self:center;font-size:11.5px;color:#B49AAA;font-weight:600;margin:2px 0}
+.ty{align-self:flex-start;display:flex;gap:4px;background:#fff;border:1px solid #F2E5E8;padding:13px 15px;border-radius:18px;border-bottom-left-radius:5px}.ty i{width:6px;height:6px;border-radius:50%;background:#C7A9BC;animation:b 1.1s infinite}.ty i:nth-child(2){animation-delay:.15s}.ty i:nth-child(3){animation-delay:.3s}@keyframes b{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.qr{display:flex;flex-wrap:wrap;gap:7px;align-self:flex-start}.qr button{border:1.5px solid #F6C9D9;background:#fff;color:#C2255C;border-radius:99px;padding:7px 13px;font:600 13px 'Be Vietnam Pro';cursor:pointer;transition:all .15s}.qr button:hover{background:#FFF0F5}.qr button:focus-visible{outline:2px solid #EC4899;outline-offset:2px}
+.cp{display:flex;gap:8px;padding:12px 14px;border-top:1px solid #F5E9EC;background:#fff}.cp input{flex:1;min-width:0;border:1.5px solid #EEDDE3;border-radius:14px;padding:11px 14px;font:500 14px 'Be Vietnam Pro';color:#2A1630;outline:0;transition:all .2s}.cp input:focus{border-color:#EC4899;box-shadow:0 0 0 3px rgba(236,72,153,.14)}
+.cp button{flex:none;width:44px;height:44px;border:0;border-radius:14px;background:linear-gradient(135deg,#F97316,#EC4899);color:#fff;cursor:pointer;display:grid;place-items:center;transition:transform .15s}.cp button:hover{transform:scale(1.06)}.cp button:focus-visible{outline:3px solid #2A1630;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+</style></head><body>
+<div class="w"><div class="hd"><div class="ag">SK<i></i></div><div><b>Sofia from Support</b><span>Online · replies in minutes</span></div><button class="x" aria-label="Minimize"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round"><path d="M5 12h14"/></svg></button></div>
+<div class="ms" id="ms" role="log" aria-live="polite"></div>
+<form class="cp" id="f"><input id="i" placeholder="Type your message…" aria-label="Message" autocomplete="off"><button aria-label="Send"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></button></form></div>
+<script>
+const ms=document.getElementById('ms'),f=document.getElementById('f'),i=document.getElementById('i');
+const R={price:'Our Pro plan is $24 per seat each month, or $19 billed yearly. There is a 14-day free trial with no card needed.',trial:'Yes! Start a 14-day free trial from the pricing page. You can upgrade or cancel at any time.',human:'Of course. I am a real person on the support team. What can I help you with today?'};
+function add(t,w,h){const d=document.createElement('div');d.className='m '+w;d.textContent=t;ms.appendChild(d);ms.scrollTop=ms.scrollHeight}
+function qr(){const q=document.createElement('div');q.className='qr';q.innerHTML='<button data-k="price">Pricing</button><button data-k="trial">Free trial</button><button data-k="human">Talk to a human</button>';q.querySelectorAll('button').forEach(b=>b.onclick=()=>{q.remove();say(b.textContent,R[b.dataset.k])});ms.appendChild(q);ms.scrollTop=ms.scrollHeight}
+function say(u,a){add(u,'u');const t=document.createElement('div');t.className='ty';t.innerHTML='<i></i><i></i><i></i>';ms.appendChild(t);ms.scrollTop=ms.scrollHeight;setTimeout(()=>{t.remove();add(a||'Thanks for reaching out! A teammate will follow up shortly with the details.','a');qr()},1100)}
+const tm=document.createElement('div');tm.className='tm';tm.textContent='Today 10:24';ms.appendChild(tm);add('Hi! I am Sofia. How can I help you today?','a');add('Looking at plans — is there a free trial?','u');add('Yes, every plan starts with a 14-day trial. Anything else you would like to know?','a');qr();
+f.onsubmit=e=>{e.preventDefault();const v=i.value.trim();if(!v)return;i.value='';ms.querySelectorAll('.qr').forEach(x=>x.remove());say(v)};
+</script></body></html>

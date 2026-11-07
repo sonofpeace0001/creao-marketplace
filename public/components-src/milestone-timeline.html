@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Our Story Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F5EFE3;color:#2B241A;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:40px 22px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:760px}
+.h{text-align:center;margin-bottom:34px}.h small{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:#A8541F}
+.h h1{font:500 clamp(34px,5vw,52px)/1 'Fraunces',serif;letter-spacing:-.035em;margin-top:10px}.h h1 em{font-weight:400;color:#A8541F}
+.tl{position:relative;padding:6px 0}
+.tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:repeating-linear-gradient(#CDBEA3 0 6px,transparent 6px 12px)}
+.m{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:26px;opacity:0;transform:translateY(22px);transition:all .7s cubic-bezier(.2,.8,.2,1)}
+.m.in{opacity:1;transform:none}
+.m:nth-child(even) .c{grid-column:2}.m:nth-child(even) .y{grid-column:1;grid-row:1;text-align:right}
+.y{font:500 54px/1 'Fraunces',serif;letter-spacing:-.05em;color:#D9C9AC;align-self:center}
+.c{background:#fff;border-radius:20px;padding:20px 22px;box-shadow:0 0 0 1px rgba(43,36,26,.07),0 14px 24px -18px rgba(43,36,26,.4);transition:transform .3s}
+.c:hover{transform:translateY(-3px)}
+.c b{display:block;font:500 20px 'Fraunces',serif;letter-spacing:-.02em}.c p{font-size:14.5px;color:#6B5F4D;line-height:1.55;margin-top:6px}
+.dot{position:absolute;left:50%;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F4A261,#A8541F);box-shadow:0 0 0 5px #F5EFE3,0 0 0 6px #CDBEA3;z-index:1}
+@media(max-width:620px){.tl::before{left:12px}.m{grid-template-columns:1fr;gap:6px;padding-left:38px}.m:nth-child(even) .c,.m:nth-child(even) .y{grid-column:1;text-align:left}.m:nth-child(even) .y{grid-row:auto}.dot{left:12px;top:26px}.y{font-size:36px}}
+@media(prefers-reduced-motion:reduce){.m{opacity:1;transform:none;transition:none}}
+</style></head><body>
+<div class="w"><div class="h"><small>Since 2016</small><h1>Nine years of <em>making it better.</em></h1></div>
+<div class="tl" id="t"></div></div>
+<script>
+const M=[['2016','Founded in a spare room','Two friends, one laptop and a very opinionated spreadsheet.'],['2018','First 1,000 customers','We hired our first support engineer and finally slept in on Sundays.'],['2020','Went fully remote','Team of 14 across five time zones, with a strict no-meetings Wednesday.'],['2022','Raised our Series A','$18M to keep building slowly, carefully and in public.'],['2025','Today: 40,000 teams','And the same spreadsheet, framed on the wall.']];
+const t=document.getElementById('t');t.innerHTML=M.map(m=>'<div class="m"><div class="y">'+m[0]+'</div><span class="dot"></span><div class="c"><b>'+m[1]+'</b><p>'+m[2]+'</p></div></div>').join('');
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.m').forEach((m,i)=>{m.style.transitionDelay=(i*90)+'ms';io.observe(m)});
+setTimeout(()=>document.querySelectorAll('.m').forEach(m=>m.classList.add('in')),1200);
+</script></body></html>

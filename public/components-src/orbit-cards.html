@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Metric Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF1F5;color:#141B2B;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:30px 18px;-webkit-font-smoothing:antialiased}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:100%;max-width:840px}
+.c{--rx:0deg;--ry:0deg;position:relative;background:#fff;border-radius:26px;padding:24px 22px 22px;box-shadow:0 0 0 1px rgba(20,27,43,.06),0 20px 36px -26px rgba(20,27,43,.4);transform:perspective(700px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .25s ease-out,box-shadow .3s;overflow:hidden}
+.c::before{content:"";position:absolute;right:-50px;top:-50px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,var(--g1),transparent 68%);opacity:.5}
+.c:hover{box-shadow:0 0 0 1px rgba(20,27,43,.06),0 34px 46px -26px rgba(20,27,43,.5)}
+.ic{position:relative;width:48px;height:48px;border-radius:16px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--g1),var(--g2));box-shadow:0 12px 20px -10px var(--g1)}
+.lb{position:relative;font-size:14px;font-weight:600;color:#6B7690;margin-top:20px}
+.v{position:relative;font-size:38px;font-weight:800;letter-spacing:-.05em;line-height:1;margin-top:6px;font-variant-numeric:tabular-nums}
+.tr{position:relative;display:flex;align-items:center;justify-content:space-between;margin-top:16px}
+.tg{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;padding:5px 10px;border-radius:99px}
+.up{background:#E1F8EC;color:#0F8A55}.dn{background:#FDE8EA;color:#C1272D}
+.tr span{font-size:12.5px;color:#8B95AB;font-weight:500}
+.sp{position:relative;display:block;width:100%;height:36px;margin-top:14px}
+.sp path{fill:none;stroke:var(--g1);stroke-width:2.500;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:720px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.c{transition:none;transform:none!important}}
+</style></head><body>
+<div class="g" id="g"></div>
+<script>
+const D=[['Total revenue',48250,'$',12.5,1,'#6366F1','#8B5CF6','<path d="M12 2v20M17 6H9.500a3.500 3.500 0 0 0 0 7h5a3.500 3.500 0 0 1 0 7H6"/>','M0 28 18 24 36 26 54 16 72 18 90 8 108 10'],['New customers',1284,'',8.2,1,'#10B981','#06B6D4','<circle cx="9" cy="8" r="3.500"/><path d="M3 20a6 6 0 0 1 12 0M18 8v6M15 11h6"/>','M0 26 18 22 36 24 54 14 72 16 90 10 108 4'],['Refund rate',1.8,'%',0.4,0,'#F43F5E','#FB923C','<path d="M3 12a9 9 0 1 0 3-6.700L3 8M3 3v5h5"/>','M0 6 18 10 36 8 54 18 72 16 90 24 108 28']];
+const g=document.getElementById('g'),fm=(v,p)=>p==='%'?v.toFixed(1):Math.round(v).toLocaleString();
+g.innerHTML=D.map((d,i)=>'<article class="c" style="--g1:'+d[5]+';--g2:'+d[6]+'"><span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round" stroke-linejoin="round">'+d[7]+'</svg></span><div class="lb">'+d[0]+'</div><div class="v" data-i="'+i+'">0</div><svg class="sp" viewBox="0 0 108 32" preserveAspectRatio="none"><path d="'+d[8]+'"/></svg><div class="tr"><span class="tg '+(d[4]?'up':'dn')+'">'+(d[4]?'▲':'▼')+' '+d[3]+'%</span><span>vs last month</span></div></article>').join('');
+const R=matchMedia('(prefers-reduced-motion: reduce)').matches;
+g.querySelectorAll('.v').forEach(el=>{const d=D[+el.dataset.i],t0=performance.now();(function f(t){const p=R?1:Math.min(1,(t-t0)/1200),e=1-Math.pow(1-p,3);el.textContent=(d[2]==='$'?'$':'')+fm(d[1]*e,d[2])+(d[2]==='%'?'%':'');if(p<1)requestAnimationFrame(f)})(t0)});
+if(!R)g.querySelectorAll('.c').forEach(c=>{c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.setProperty('--ry',(x*8)+'deg');c.style.setProperty('--rx',(-y*8)+'deg')});c.addEventListener('pointerleave',()=>{c.style.setProperty('--ry','0deg');c.style.setProperty('--rx','0deg')})});
+</script></body></html>

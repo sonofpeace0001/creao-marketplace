@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Docs Accordion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0D12;color:#E4E8F2;font-family:'IBM Plex Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:34px 20px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:620px}
+.h{margin-bottom:16px}.h small{font:500 11.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#4ADE80}.h h1{font-size:25px;font-weight:600;letter-spacing:-.025em;margin-top:6px}
+.s{background:#10131B;border:1px solid #1E2330;border-radius:18px;overflow:hidden}
+.i{border-bottom:1px solid #1B2030;position:relative}.i:last-child{border-bottom:0}
+.i::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#4ADE80;transform:scaleY(0);transform-origin:top;transition:transform .35s}
+.i.open::before{transform:scaleY(1)}
+.q{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:14px;padding:19px 22px;cursor:pointer;transition:background .2s}
+.q:hover{background:rgba(255,255,255,.025)}.q:focus-visible{outline:2px solid #4ADE80;outline-offset:-2px}
+.q .n{font:500 12px 'IBM Plex Mono',monospace;color:#4B556C;width:24px}.i.open .n{color:#4ADE80}
+.q .t{flex:1;font-size:16px;font-weight:500;letter-spacing:-.01em}
+.q svg{flex:none;color:#6B7690;transition:transform .35s cubic-bezier(.3,1.3,.4,1),color .2s}.i.open .q svg{transform:rotate(180deg);color:#4ADE80}
+.a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s ease}.i.open .a{grid-template-rows:1fr}
+.a>div{overflow:hidden}.a p{padding:0 22px 20px 60px;font-size:14.5px;line-height:1.65;color:#9AA4BC}
+.a code{font:400 12.5px 'IBM Plex Mono',monospace;background:#171B27;border:1px solid #232A3B;border-radius:6px;padding:1px 6px;color:#86EFAC}
+.ft{margin-top:14px;font-size:12.5px;color:#5C667E;display:flex;justify-content:space-between}.ft kbd{font:500 11px 'IBM Plex Mono',monospace;background:#151924;border:1px solid #232A3B;border-bottom-width:2px;border-radius:5px;padding:2px 6px;color:#9AA4BC}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="h"><small>DOCS · API</small><h1>Authentication &amp; limits</h1></div>
+<div class="s" id="s">
+ <div class="i open"><button class="q" aria-expanded="true"><span class="n">01</span><span class="t">How do I authenticate requests?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="a"><div><p>Send your secret key in the <code>Authorization: Bearer</code> header. Keys are scoped per environment and can be rotated any time from the dashboard.</p></div></div></div>
+ <div class="i"><button class="q" aria-expanded="false"><span class="n">02</span><span class="t">What are the rate limits?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="a"><div><p>600 requests per minute per key on Pro. Exceeding it returns <code>429</code> with a <code>Retry-After</code> header in seconds.</p></div></div></div>
+ <div class="i"><button class="q" aria-expanded="false"><span class="n">03</span><span class="t">Can I use webhooks instead of polling?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="a"><div><p>Yes. Register an endpoint under Developers → Webhooks; we sign each delivery with <code>X-Signature</code> and retry for 24 hours.</p></div></div></div>
+ <div class="i"><button class="q" aria-expanded="false"><span class="n">04</span><span class="t">Is there a sandbox environment?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="a"><div><p>Every workspace includes a free sandbox with test keys prefixed <code>sk_test_</code> — no real data, no limits.</p></div></div></div>
+</div><div class="ft"><span>One section open at a time</span><span><kbd>↑</kbd> <kbd>↓</kbd> to move</span></div></div>
+<script>
+const items=[...document.querySelectorAll('.i')];
+function open(i){items.forEach(x=>{const o=x===i&&!i.classList.contains('open');x.classList.toggle('open',o);x.querySelector('.q').setAttribute('aria-expanded',o)})}
+items.forEach(i=>i.querySelector('.q').addEventListener('click',()=>open(i)));
+document.addEventListener('keydown',e=>{const f=document.activeElement.closest('.i');if(!f)return;const k=items.indexOf(f);if(e.key==='ArrowDown'){e.preventDefault();items[(k+1)%items.length].querySelector('.q').focus()}if(e.key==='ArrowUp'){e.preventDefault();items[(k-1+items.length)%items.length].querySelector('.q').focus()}});
+</script></body></html>

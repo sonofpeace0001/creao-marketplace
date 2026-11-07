@@ -1,0 +1,29 @@
+ROLE
+You are a senior motion designer and front-end engineer with 15+ years of experience. Build "Odometer Stats": three platform stats built from rolling-digit odometer wheels with a replay button.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black-violet HUD with tinted labels and digit wheels that roll with staggered delays.
+- Palette: #FFB547, #5C6586, #07080C, #E8EAF4, #232842, #0E1120
+- Type: Space Grotesk, Space Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with live label and Replay; three cards, each with prefix/suffix, comma separators and per-digit rolling columns (0–9), label and detail.
+
+INTERACTION & STATES
+- Each digit column translates to its target with a long ease-out and a per-digit delay; Replay resets and rolls again; reduced motion jumps to the final value.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

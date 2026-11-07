@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Gallery Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 500px at 50% 0,#1C1626,#0A090D 70%);min-height:100vh;display:grid;place-items:center;padding:36px 20px;font-family:'Inter',sans-serif;color:#EFEAF5;-webkit-font-smoothing:antialiased}
+.card{width:100%;max-width:400px;background:#14111A;border:1px solid #262031;border-radius:24px;overflow:hidden;box-shadow:0 40px 80px -30px #000}
+.img{position:relative;height:300px;overflow:hidden;background:linear-gradient(180deg,#2A1B4A 0%,#B8456E 48%,#FF9A5C 74%,#FFD08A 100%)}
+.img svg{position:absolute;inset:0;width:100%;height:100%}
+.sun{position:absolute;left:50%;top:44%;width:84px;height:84px;margin-left:-42px;border-radius:50%;background:radial-gradient(circle,#FFF3C4,#FFC56B 60%,#FF9A5C);box-shadow:0 0 70px 20px rgba(255,170,90,.55)}
+.badge{position:absolute;left:16px;top:16px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:rgba(20,17,26,.55);backdrop-filter:blur(10px);padding:6px 11px;border-radius:99px;border:1px solid rgba(255,255,255,.18)}
+.act{position:absolute;right:14px;top:14px;display:flex;gap:8px}
+.act button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(20,17,26,.5);backdrop-filter:blur(10px);color:#fff;cursor:pointer;display:grid;place-items:center;transition:transform .2s,background .2s}
+.act button:hover{transform:scale(1.1)}.act button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.act button[aria-pressed=true]{background:#fff;color:#C2255C}
+.act button[aria-pressed=true] svg{fill:currentColor}
+.cap{padding:20px 22px 22px}
+.cap h1{font:italic 500 25px 'Fraunces',serif;letter-spacing:-.02em}
+.cap p{color:#A79FB8;font-size:14px;line-height:1.55;margin-top:6px}
+.row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:15px;border-top:1px solid #262031;font-size:13px;color:#8E86A0}
+.by{display:flex;align-items:center;gap:10px}.by i{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#FF9A5C,#B8456E);display:grid;place-items:center;font:700 11px 'Inter';color:#14111A;font-style:normal}
+.by b{color:#EFEAF5;font-weight:600;display:block;font-size:13.5px}
+.cnt{display:flex;align-items:center;gap:6px}
+</style></head><body>
+<article class="card">
+ <div class="img"><svg viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 220 80 170l60 36 70-64 70 54 60-38 60 50v92H0Z" fill="#3B1D52" opacity=".9"/><path d="M0 250l70-40 70 34 80-52 90 56 90-44v100H0Z" fill="#241038"/></svg><div class="sun"></div>
+  <span class="badge">Golden hour</span>
+  <div class="act"><button id="lk" aria-pressed="false" aria-label="Like"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.800 4.600a5.500 5.500 0 0 0-7.800 0L12 5.700l-1-1.100a5.500 5.500 0 0 0-7.800 7.800l1 1.100L12 21l7.800-7.500 1-1.100a5.500 5.500 0 0 0 0-7.800Z"/></svg></button><button id="sv" aria-pressed="false" aria-label="Save"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4Z"/></svg></button></div></div>
+ <div class="cap"><h1>The last light over Sintra</h1><p>Shot from the Moorish Castle at 8:42pm, a few minutes before the fog rolled in from the coast.</p>
+ <div class="row"><div class="by"><i>MA</i><div><b>Marta Almeida</b>Lisbon, Portugal</div></div><div class="cnt"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.800 4.600a5.500 5.500 0 0 0-7.800 0L12 5.700l-1-1.100a5.500 5.500 0 0 0-7.800 7.800l1 1.100L12 21l7.800-7.500 1-1.100a5.500 5.500 0 0 0 0-7.800Z"/></svg><span id="n">1,284</span></div></div></div>
+</article>
+<script>
+const lk=document.getElementById('lk'),sv=document.getElementById('sv'),n=document.getElementById('n');let c=1284;
+lk.onclick=()=>{const on=lk.getAttribute('aria-pressed')!=='true';lk.setAttribute('aria-pressed',on);c+=on?1:-1;n.textContent=c.toLocaleString()};
+sv.onclick=()=>sv.setAttribute('aria-pressed',sv.getAttribute('aria-pressed')!=='true');
+</script></body></html>

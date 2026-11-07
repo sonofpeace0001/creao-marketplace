@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Date Range Picker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EAF0FA;color:#14203A;font-family:'Karla',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:700px;background:#fff;border-radius:28px;padding:22px 24px 20px;box-shadow:0 36px 60px -38px rgba(20,32,58,.5),0 0 0 1px rgba(20,32,58,.06)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.sm{display:flex;gap:10px;align-items:center}.pill{background:#F0F4FC;border-radius:14px;padding:9px 14px;min-width:132px}.pill small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:#7C8AAA;text-transform:uppercase}.pill b{font-size:15px;font-weight:700}
+.ar{color:#9AA7C4}
+.pr{display:flex;gap:6px;flex-wrap:wrap}.pr button{border:1.5px solid #DCE4F4;background:#fff;color:#4A5B80;font:700 12.5px 'Karla';padding:7px 12px;border-radius:99px;cursor:pointer;transition:all .2s}.pr button:hover{border-color:#2F6BFF;color:#2F6BFF}.pr button:focus-visible{outline:2px solid #2F6BFF;outline-offset:2px}
+.mo{display:grid;grid-template-columns:1fr 1fr;gap:26px;position:relative}
+.mh{display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;letter-spacing:-.02em;height:34px;margin-bottom:6px}
+.nv{position:absolute;top:0;width:34px;height:34px;border:0;border-radius:10px;background:#F0F4FC;color:#34476E;cursor:pointer;display:grid;place-items:center}.nv:hover{background:#E3EAF8}.nv:focus-visible{outline:2px solid #2F6BFF}.nv.l{left:0}.nv.r{right:0}
+.g{display:grid;grid-template-columns:repeat(7,1fr)}.dn{text-align:center;font-size:11.5px;font-weight:700;color:#9AA7C4;padding:6px 0}
+.d{position:relative;aspect-ratio:1.1;border:0;background:none;font:600 14px 'Karla';color:#23345A;cursor:pointer;display:grid;place-items:center;z-index:0}
+.d::before{content:"";position:absolute;inset:3px 0;background:#E7EEFF;z-index:-1;opacity:0}
+.d.in::before{opacity:1}.d.rs::before{opacity:1;left:50%}.d.re::before{opacity:1;right:50%}.d.rs.re::before{opacity:0}
+.d b{position:absolute;inset:2px;border-radius:50%;z-index:1;display:grid;place-items:center;font-weight:600}
+.d.e b{background:#2F6BFF;color:#fff;box-shadow:0 8px 16px -6px rgba(47,107,255,.7)}
+.d.e{color:#fff}.d.o{visibility:hidden}.d:hover:not(.e) b{background:#DCE6FF}.d:focus-visible b{outline:2px solid #14203A}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid #EDF1F9}
+.ft span{font-size:14px;color:#5A6B90;font-weight:600}.ft span b{color:#14203A}
+.ft button{border:0;border-radius:13px;padding:12px 22px;font:800 14px 'Karla';background:#14203A;color:#fff;cursor:pointer}.ft button:focus-visible{outline:2px solid #2F6BFF;outline-offset:2px}
+@media(max-width:620px){.mo{grid-template-columns:1fr}.mo>div:nth-child(3){display:none}}
+</style></head><body>
+<div class="c"><div class="top"><div class="sm"><div class="pill"><small>Check-in</small><b id="a">—</b></div><span class="ar">→</span><div class="pill"><small>Check-out</small><b id="b">—</b></div></div>
+ <div class="pr" id="pr"><button data-n="3">3 nights</button><button data-n="7">7 nights</button><button data-n="14">14 nights</button></div></div>
+ <div class="mo"><button class="nv l" id="pv" aria-label="Previous month"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button><button class="nv r" id="nx" aria-label="Next month"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button><div id="m0"></div><div id="m1"></div></div>
+ <div class="ft"><span id="s"></span><button id="ap">Apply</button></div></div>
+<script>
+const MN=['January','February','March','April','May','June','July','August','September','October','November','December'],DN=['Mo','Tu','We','Th','Fr','Sa','Su'],day=864e5;
+const n=new Date();n.setHours(0,0,0,0);let vy=n.getFullYear(),vm=n.getMonth();let a=new Date(vy,vm,n.getDate()+2),b=new Date(vy,vm,n.getDate()+9),hov=null;
+const fm=d=>d?d.toLocaleDateString('en-US',{month:'short',day:'numeric'}):'—';
+function month(y,m){const f=(new Date(y,m,1).getDay()+6)%7,dim=new Date(y,m+1,0).getDate();let h='<div class="mh">'+MN[m]+' '+y+'</div><div class="g">'+DN.map(d=>'<div class="dn">'+d+'</div>').join('');
+ for(let i=0;i<f;i++)h+='<span class="d o"></span>';
+ for(let d=1;d<=dim;d++){const dt=new Date(y,m,d),t=+dt,e=b||hov;let c='d';const lo=a&&e?Math.min(+a,+e):0,hi=a&&e?Math.max(+a,+e):0;
+  if(a&&+dt===+a)c+=' e rs';if(b&&+dt===+b)c+=' e re';if(!b&&hov&&+dt===+hov)c+=' e re';if(a&&e&&t>lo&&t<hi)c+=' in';if(a&&e&&+a>+e&&+dt===+a){c=c.replace(' rs',' re')}
+  h+='<button class="'+c+'" data-t="'+t+'" aria-label="'+dt.toDateString()+'"><b>'+d+'</b></button>'}
+ return h+'</div>'}
+function draw(){const m1=vm+1>11?0:vm+1,y1=vm+1>11?vy+1:vy;document.getElementById('m0').innerHTML=month(vy,vm);document.getElementById('m1').innerHTML=month(y1,m1);
+ document.getElementById('a').textContent=fm(a);document.getElementById('b').textContent=fm(b);const nt=a&&b?Math.round(Math.abs(b-a)/day):0;
+ document.getElementById('s').innerHTML=nt?'<b>'+nt+' night'+(nt>1?'s':'')+'</b> selected':'Choose your dates'}
+const mo=document.querySelector('.mo');
+mo.addEventListener('click',e=>{const d=e.target.closest('.d');if(!d||!d.dataset.t)return;const t=new Date(+d.dataset.t);if(!a||(a&&b)){a=t;b=null;hov=null}else{if(t<a){b=a;a=t}else b=t;hov=null}draw()});
+mo.addEventListener('pointerover',e=>{const d=e.target.closest('.d');if(!d||!d.dataset.t||!a||b)return;hov=new Date(+d.dataset.t);draw()});
+document.getElementById('pv').onclick=()=>{vm--;if(vm<0){vm=11;vy--}draw()};document.getElementById('nx').onclick=()=>{vm++;if(vm>11){vm=0;vy++}draw()};
+document.getElementById('pr').addEventListener('click',e=>{const x=e.target.closest('button');if(!x)return;a=new Date(vy,vm,n.getDate()+1);b=new Date(+a+x.dataset.n*day);draw()});
+document.getElementById('ap').onclick=e=>{e.target.textContent='Applied ✓';setTimeout(()=>e.target.textContent='Apply',1300)};draw();
+</script></body></html>

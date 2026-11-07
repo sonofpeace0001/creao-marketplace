@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Feature Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0C;color:#EDEDF1;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:44px 24px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:880px;display:grid;grid-template-columns:300px 1fr;gap:60px;align-items:start}
+.h{position:sticky;top:40px}
+.h small{font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#FFB347}
+.h h1{font-size:clamp(32px,4.4vw,46px);font-weight:800;letter-spacing:-.05em;line-height:.98;margin:14px 0 14px}
+.h p{color:#8B8B97;font-size:16px;line-height:1.55}
+ul{list-style:none;border-top:1px solid #222228}
+li{position:relative;display:grid;grid-template-columns:62px 1fr auto;gap:18px;align-items:center;padding:26px 6px;border-bottom:1px solid #222228;cursor:pointer;transition:padding .3s}
+li::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,179,71,.09),transparent 70%);opacity:0;transition:opacity .3s}
+li:hover,li:focus-visible{padding-left:18px;outline:0}li:hover::before,li:focus-visible::before{opacity:1}
+.ic{position:relative;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;color:#0A0A0C;background:var(--g);box-shadow:0 12px 24px -10px var(--s)}
+.ic svg{width:25px;height:25px}
+.t{position:relative}.t b{display:block;font-size:19px;font-weight:700;letter-spacing:-.025em}.t span{display:block;color:#8B8B97;font-size:15px;line-height:1.45;margin-top:3px}
+.n{position:relative;font:500 12px 'JetBrains Mono',monospace;color:#55555F;transition:color .3s}
+li:hover .n{color:#FFB347}
+.ar{position:absolute;right:6px;opacity:0;transform:translateX(-8px);transition:all .3s;color:#FFB347}
+li:hover .ar{opacity:1;transform:none}
+li:hover .n{opacity:0}
+@media(max-width:760px){.w{grid-template-columns:1fr;gap:28px}.h{position:static}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w">
+ <div class="h"><small>/ 03 FEATURES</small><h1>Less ceremony. More shipping.</h1><p>Three things that quietly remove an hour of busywork from every single day.</p></div>
+ <ul>
+  <li tabindex="0"><span class="ic" style="--g:linear-gradient(145deg,#FFD27A,#FF9A2E);--s:#ff9a2e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg></span><div class="t"><b>Instant search</b><span>Find any task, doc or decision in under 100 milliseconds.</span></div><span class="n">01</span><svg class="ar" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+  <li tabindex="0"><span class="ic" style="--g:linear-gradient(145deg,#8CF0D0,#22C7A0);--s:#22c7a0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4-4 4M3 11V9a2 2 0 0 1 2-2h16M7 21l-4-4 4-4M21 13v2a2 2 0 0 1-2 2H3"/></svg></span><div class="t"><b>Two-way sync</b><span>Edits flow to GitHub, Linear and Slack — and back — automatically.</span></div><span class="n">02</span><svg class="ar" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+  <li tabindex="0"><span class="ic" style="--g:linear-gradient(145deg,#C9B3FF,#8D6BFF);--s:#8d6bff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg></span><div class="t"><b>Guardrails built in</b><span>Roles, approvals and audit trails you configure once and forget.</span></div><span class="n">03</span><svg class="ar" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+ </ul>
+</div></body></html>

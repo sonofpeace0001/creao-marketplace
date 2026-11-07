@@ -1,0 +1,29 @@
+ROLE
+You are a senior infrastructure-marketing designer and front-end engineer with 15+ years of experience. Build "Edge Network Globe": a light glassy globe with clickable server pins linked to a region list showing latency.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft periwinkle sphere with translucent land masses and indigo pins on a white card.
+- Palette: #4F46E5, #13203A, #EEF4FF, #F7F1FF, #DCE8FF, #B9CFFF
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Globe with landmasses, sweeping meridians, latitude lines and four pins; headline, paragraph and a list of regions with status dot and latency.
+
+INTERACTION & STATES
+- Selecting a pin or a list row syncs both (selected pin turns cyan and enlarges); meridians sweep slowly; list buttons use aria-pressed.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

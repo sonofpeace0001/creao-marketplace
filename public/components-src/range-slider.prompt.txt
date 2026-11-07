@@ -1,0 +1,29 @@
+ROLE
+You are a senior marketplace filter designer and front-end engineer with 15+ years of experience. Build "Price Range Slider": a dual-handle price slider with a live histogram, value pills and a result count.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black-violet card with a cyan-to-magenta glowing track and mono labels.
+- Palette: #0F0E1A, #818CF8, #ECE9FA, #8C83BC, #5E5784, #38BDF8
+- Type: Space Grotesk, Space Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; large min and max values; histogram bars; track with gradient fill, two thumbs and floating value pills; scale labels; footer with match count and Show results.
+
+INTERACTION & STATES
+- Two overlaid native range inputs with a minimum gap; the fill, pills, values and highlighted histogram bars update live; the count recomputes; keyboard arrows work.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

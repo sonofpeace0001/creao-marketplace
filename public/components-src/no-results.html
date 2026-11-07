@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>No Results State</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0C10;color:#E4E8F1;font-family:'IBM Plex Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:26px 16px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:600px;background:#10141B;border:1px solid #1D2430;border-radius:26px;overflow:hidden;box-shadow:0 40px 80px -34px #000}
+.sb{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid #1B2230;background:#0D1117}
+.sb svg{color:#6A7690}.sb input{flex:1;background:none;border:0;outline:0;color:#E4E8F1;font:500 16px 'IBM Plex Sans'}
+.sb kbd{font:500 11.5px 'IBM Plex Mono',monospace;color:#6A7690;background:#161B25;border:1px solid #232B3B;border-radius:6px;padding:3px 7px}
+.fl{display:flex;gap:8px;padding:12px 18px;border-bottom:1px solid #1B2230;flex-wrap:wrap;align-items:center}.fl small{font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#566178;margin-right:4px}
+.ch{display:inline-flex;align-items:center;gap:7px;background:#171C28;border:1px solid #2A3347;color:#C9D3EA;font:500 13px 'IBM Plex Sans';padding:6px 8px 6px 12px;border-radius:99px;cursor:pointer}
+.ch:hover{border-color:#FF7A7A;color:#fff}.ch:focus-visible{outline:2px solid #7AA2FF;outline-offset:2px}.ch i{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#262E42;font-style:normal}
+.em{padding:44px 30px 38px;text-align:center}
+.ic{position:relative;width:84px;height:84px;margin:0 auto 20px;border-radius:26px;background:#161B25;border:1px solid #232B3B;display:grid;place-items:center;color:#7C88A6}
+.ic::after{content:"";position:absolute;right:-8px;bottom:-8px;width:30px;height:30px;border-radius:50%;background:#FF6B6B;border:4px solid #10141B;display:grid;place-items:center}
+.ic .x{position:absolute;right:-8px;bottom:-8px;width:30px;height:30px;display:grid;place-items:center;color:#fff;z-index:1}
+.em h1{font-size:22px;font-weight:600;letter-spacing:-.025em}.em h1 code{font:500 19px 'IBM Plex Mono',monospace;color:#FF8A8A;background:rgba(255,107,107,.1);padding:2px 8px;border-radius:8px}
+.em p{color:#7B879E;font-size:15px;line-height:1.6;margin:10px auto 22px;max-width:380px}
+.bt{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.pr{border:0;background:#E4E8F1;color:#0A0C10;font:600 14.5px 'IBM Plex Sans';padding:12px 20px;border-radius:12px;cursor:pointer}.pr:hover{background:#fff}
+.sc{border:1px solid #2A3347;background:none;color:#C9D3EA;font:600 14.5px 'IBM Plex Sans';padding:12px 20px;border-radius:12px;cursor:pointer}.sc:hover{border-color:#7AA2FF}
+.pr:focus-visible,.sc:focus-visible{outline:2px solid #7AA2FF;outline-offset:2px}
+.sg{margin-top:26px;padding-top:20px;border-top:1px dashed #212A3A;font-size:13px;color:#566178}.sg b{color:#9AA8C6;font-weight:500;cursor:pointer;border-bottom:1px solid #2A3347;margin:0 4px}.sg b:hover{color:#fff}
+.rs{display:none}.rs.on{display:block}.rs div{padding:14px 20px;border-bottom:1px solid #1B2230;font-size:15px;display:flex;justify-content:space-between}.rs span{color:#6A7690;font-family:'IBM Plex Mono',monospace;font-size:12.5px}
+</style></head><body>
+<div class="c"><div class="sb"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><input id="q" value="quarterly forecast v9" aria-label="Search"><kbd>⌘K</kbd></div>
+ <div class="fl" id="fl"><small>FILTERS</small></div>
+ <div class="em" id="em"><div class="ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 14h6"/></svg><span class="x"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.400" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></div>
+  <h1>No results for <code id="qt">quarterly forecast v9</code></h1><p>We couldn't find anything matching your search and filters. Try fewer filters or check the spelling.</p>
+  <div class="bt"><button class="pr" id="cf">Clear all filters</button><button class="sc" id="cs">Reset search</button></div>
+  <div class="sg">Try<b data-s="forecast">forecast</b><b data-s="budget">budget</b><b data-s="roadmap">roadmap</b></div></div>
+ <div class="rs" id="rs"></div></div>
+<script>
+let F=['Type: Spreadsheet','Owner: Me','Updated: Last 7 days'];const fl=document.getElementById('fl'),q=document.getElementById('q'),em=document.getElementById('em'),rs=document.getElementById('rs');
+const DB=['Q3 forecast model','Budget 2025 draft','Product roadmap H1','Forecast assumptions','Hiring plan','Budget review notes'];
+function draw(){fl.innerHTML='<small>FILTERS</small>'+F.map((f,i)=>'<button class="ch" data-i="'+i+'">'+f+'<i aria-hidden="true">×</i><span class="sr" style="position:absolute;left:-9999px">Remove filter</span></button>').join('')+(F.length?'':'<span style="font-size:13px;color:#566178">None applied</span>');
+ const s=q.value.trim().toLowerCase(),res=DB.filter(d=>s.split(/\s+/).every(w=>d.toLowerCase().includes(w)))
+ const show=res.length&&!(F.length&&s==='quarterly forecast v9');em.style.display=res.length?'none':'block';rs.classList.toggle('on',res.length>0);rs.innerHTML=res.map(r=>'<div>'+r+'<span>Updated today</span></div>').join('');document.getElementById('qt').textContent=q.value}
+fl.addEventListener('click',e=>{const c=e.target.closest('.ch');if(c){F.splice(+c.dataset.i,1);draw()}});
+q.addEventListener('input',draw);document.getElementById('cf').onclick=()=>{F=[];draw()};document.getElementById('cs').onclick=()=>{q.value='';draw()};
+document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{q.value=b.dataset.s;F=[];draw()});draw();
+</script></body></html>

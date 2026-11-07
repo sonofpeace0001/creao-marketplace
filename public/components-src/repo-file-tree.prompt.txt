@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer-tools designer and front-end engineer (code hosting) with 15+ years of experience. Build "Repository Browser": a GitHub-style repository browser: expandable tree, status marks, breadcrumb and a live preview of the selected file.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Crisp GitHub-light chrome with IBM Plex, blue selection and amber/green change markers.
+- Palette: #F6F8FA, #1F2328, #D1D9E0, #59636E, #0969DA, #D8DEE4
+- Type: IBM Plex Sans, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Breadcrumb bar with branch chip; left tree of folders and typed file icons with M/U badges; right panel with file name, state, size/contributors/age and a code excerpt.
+
+INTERACTION & STATES
+- Folders expand and collapse with rotating chevrons; selecting a file updates the breadcrumb and the preview; ArrowUp/ArrowDown move focus; items use role=treeitem and aria-expanded.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

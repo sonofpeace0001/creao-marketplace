@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Corner Toast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF0F4;color:#10131C;font-family:'Inter Tight',sans-serif;min-height:100vh;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.st{position:relative;max-width:640px;min-height:440px;margin:0 auto;background:#fff;border:1px solid #E1E4EC;border-radius:22px;padding:28px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(16,19,28,.4)}
+.st h1{font-size:22px;font-weight:700;letter-spacing:-.03em}.st p{font-size:14.5px;color:#6A7184;margin:6px 0 22px;max-width:40ch}
+.bt{display:flex;flex-wrap:wrap;gap:8px}.bt button{border:1px solid #D7DBE6;background:#fff;border-radius:11px;padding:10px 15px;font:600 13.5px 'Inter Tight';color:#10131C;cursor:pointer;transition:all .15s}.bt button:hover{background:#F4F5F9;transform:translateY(-1px)}.bt button:focus-visible{outline:2px solid #4F46E5;outline-offset:2px}
+.tw{position:absolute;right:18px;bottom:18px;width:min(360px,calc(100% - 36px))}
+.to{position:relative;display:flex;gap:13px;align-items:flex-start;background:#10131C;color:#fff;border-radius:16px;padding:15px 16px;box-shadow:0 24px 40px -16px rgba(16,19,28,.7);overflow:hidden;animation:in .5s cubic-bezier(.2,1.2,.4,1)}
+@keyframes in{from{transform:translateY(30px) scale(.94);opacity:0}}.to.out{animation:out .3s forwards}@keyframes out{to{transform:translateX(40px);opacity:0}}
+.to .ic{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center}.to b{display:block;font-size:14.5px;font-weight:600;margin-bottom:2px}.to span.m{font-size:13.5px;color:#A4ABBD;line-height:1.4;display:block}
+.to .ac{margin-top:9px;display:flex;gap:14px}.to .ac button{all:unset;font-size:13px;font-weight:700;color:#A5B4FC;cursor:pointer}.to .ac button:hover{text-decoration:underline}.to .ac button:focus-visible{outline:2px solid #A5B4FC;border-radius:3px}
+.to .x{margin-left:auto;flex:none;width:26px;height:26px;border:0;border-radius:8px;background:none;color:#7F879B;cursor:pointer;display:grid;place-items:center}.to .x:hover{background:#232838;color:#fff}.to .x:focus-visible{outline:2px solid #A5B4FC}
+.to .pg{position:absolute;left:0;bottom:0;height:3px;width:100%;transform-origin:left;animation:pg 5s linear forwards}@keyframes pg{to{transform:scaleX(0)}}.to:hover .pg{animation-play-state:paused}
+.ok .ic{background:#12392A;color:#4ADE80}.ok .pg{background:#4ADE80}.er .ic{background:#40181C;color:#F87171}.er .pg{background:#F87171}.in2 .ic{background:#1E2548;color:#818CF8}.in2 .pg{background:#818CF8}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important}.to .pg{animation:pg 5s linear forwards!important}}
+</style></head><body>
+<div class="st"><h1>Notification toasts</h1><p>Trigger a corner toast. It pauses on hover, dismisses itself after five seconds and can be closed any time.</p>
+<div class="bt"><button data-k="ok">Save changes</button><button data-k="er">Simulate error</button><button data-k="in2">Invite teammate</button></div>
+<div class="tw" id="tw" aria-live="polite" role="status"></div></div>
+<script>
+const I={ok:['<path d="m5 12.500 4.500 4.500L19 7"/>','Changes saved','Your project settings were updated.',['Undo']],er:['<path d="M12 8v5M12 16.500h.01"/><circle cx="12" cy="12" r="9"/>','Upload failed','brand-kit.zip is larger than the 50 MB limit.',['Retry','Details']],in2:['<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M19 8v6M22 11h-6"/>','Invite sent','We emailed maya@northwind.co a link to join.',['View team']]};
+const tw=document.getElementById('tw');let tm;
+function show(k){const d=I[k];tw.innerHTML='';clearTimeout(tm);const e=document.createElement('div');e.className='to '+k;
+ e.innerHTML='<div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round">'+d[0]+'</svg></div><div><b>'+d[1]+'</b><span class="m">'+d[2]+'</span><div class="ac">'+d[3].map(a=>'<button>'+a+'</button>').join('')+'</div></div><button class="x" aria-label="Dismiss"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button><i class="pg"></i>';
+ const close=()=>{e.classList.add('out');setTimeout(()=>e.remove(),280)};e.querySelector('.x').onclick=close;e.querySelectorAll('.ac button').forEach(b=>b.onclick=close);e.querySelector('.pg').addEventListener('animationend',close);tw.appendChild(e)}
+document.querySelectorAll('.bt button').forEach(b=>b.onclick=()=>show(b.dataset.k));show('ok');
+</script></body></html>

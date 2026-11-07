@@ -1,0 +1,29 @@
+ROLE
+You are a senior product-feedback designer and front-end engineer with 15+ years of experience. Build "Feedback Form": a feedback card with a five-face rating radiogroup, a textarea with a ring character counter and a thank-you state.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Peach page with a white card, orange accent and friendly DM Sans.
+- Palette: #F26B21, #8A6F5E, #2B1B12, #EDDFD3, #FFFBF8, #FFF4EC
+- Type: DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading and subcopy; five rating buttons with face icons; textarea with circular progress counter; reply checkbox; Send button; success panel.
+
+INTERACTION & STATES
+- Arrow keys move the rating (radio semantics); the counter ring fills and turns amber then red; Send enables with a rating and 10+ characters; submit swaps to a thank-you.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

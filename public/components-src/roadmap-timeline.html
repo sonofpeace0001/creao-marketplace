@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Roadmap Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0C10;color:#E6E9F0;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;background:#10131A;border:1px solid #1F2430;border-radius:22px;padding:24px;box-shadow:0 40px 80px -40px #000;overflow-x:auto}
+.in{min-width:620px}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.hd h1{font-size:19px;font-weight:700;letter-spacing:-.03em}.hd span{font:700 11.5px 'Space Mono',monospace;color:#6B7488;letter-spacing:.12em}
+.gr{position:relative;display:grid;grid-template-columns:130px repeat(6,1fr)}
+.mh{font:700 11.5px 'Space Mono',monospace;color:#6B7488;letter-spacing:.1em;padding:0 0 12px;border-bottom:1px solid #1F2430}.mh.cur{color:#38BDF8}
+.ln{position:absolute;top:0;bottom:0;left:calc(130px + (100% - 130px)*0.42);width:1.5px;background:linear-gradient(#38BDF8,transparent);z-index:2}.ln::before{content:"TODAY";position:absolute;top:-4px;left:50%;transform:translateX(-50%);font:700 10px 'Space Mono',monospace;background:#38BDF8;color:#06141F;padding:2px 6px;border-radius:4px}
+.lb{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;padding:0;height:52px;border-bottom:1px solid #171B24}.lb i{width:9px;height:9px;border-radius:3px;background:var(--c)}
+.tr{grid-column:2/8;position:relative;height:52px;border-bottom:1px solid #171B24;background:repeating-linear-gradient(90deg,transparent 0 calc(100%/6 - 1px),#171B24 calc(100%/6 - 1px) calc(100%/6))}
+.bar{position:absolute;top:10px;height:32px;border-radius:10px;background:color-mix(in srgb,var(--c) 22%,#10131A);border:1px solid color-mix(in srgb,var(--c) 55%,#10131A);display:flex;align-items:center;padding:0 12px;font-size:12.5px;font-weight:600;color:#fff;overflow:hidden;white-space:nowrap;cursor:pointer;transition:transform .2s,box-shadow .2s;transform-origin:left}.bar:hover,.bar:focus-visible{transform:scaleY(1.12);box-shadow:0 8px 20px -6px var(--c);outline:0}
+.bar::before{content:"";position:absolute;inset:0;width:var(--p);background:color-mix(in srgb,var(--c) 40%,transparent)}.bar span{position:relative}
+.bar.dn::after{content:"";width:14px;height:14px;margin-left:auto;position:relative;background:var(--c);border-radius:50%;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m5 12.500 4.500 4.500L19 7' fill='none' stroke='%23000' stroke-width='3.500' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m5 12.500 4.500 4.500L19 7' fill='none' stroke='%23000' stroke-width='3.500' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;border-radius:0}
+.dt{margin-top:18px;background:#0C0E13;border:1px solid #1F2430;border-radius:14px;padding:14px 16px;font-size:14px;color:#9AA3B6;min-height:64px}.dt b{color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="in"><div class="hd"><h1>Delivery timeline</h1><span>H2 2026</span></div>
+<div class="gr" id="g"><div class="mh"></div><div class="mh">JUL</div><div class="mh">AUG</div><div class="mh">SEP</div><div class="mh cur">OCT</div><div class="mh">NOV</div><div class="mh">DEC</div></div>
+<div class="dt" id="dt" aria-live="polite"><b>Select a bar</b> to see its scope, owner and status.</div></div></div>
+<script>
+const R=[['Platform','#38BDF8',[['Edge runtime',0,2.3,100,'Platform team','Shipped'],['Streaming API',2.3,2.4,100,'Platform team','Shipped']]],['Growth','#F472B6',[['Self-serve billing',1,2.8,100,'Growth team','Shipped'],['Referral program',3.6,2.4,45,'Growth team','In progress']]],['Mobile','#A78BFA',[['iOS beta',2,2,100,'Mobile team','Shipped'],['Android launch',4.1,1.9,22,'Mobile team','In progress']]],['Security','#34D399',[['SOC 2 Type II',0.5,3.4,100,'Security','Complete'],['SSO and SCIM',4,2,10,'Security','Planned']]]];
+const g=document.getElementById('g');g.insertAdjacentHTML('beforeend','<i class="ln"></i>');
+R.forEach(r=>{g.insertAdjacentHTML('beforeend','<div class="lb" style="--c:'+r[1]+'"><i></i>'+r[0]+'</div>');const t=document.createElement('div');t.className='tr';t.style.setProperty('--c',r[1]);
+ r[2].forEach(b=>{const e=document.createElement('button');e.className='bar'+(b[3]===100?' dn':'');e.style.cssText='left:'+(b[1]/6*100)+'%;width:calc('+(b[2]/6*100)+'% - 4px);--c:'+r[1]+';--p:'+b[3]+'%';e.innerHTML='<span>'+b[0]+'</span>';e.onclick=()=>document.getElementById('dt').innerHTML='<b>'+b[0]+'</b> · '+b[5]+' · '+b[3]+'% complete · owned by '+b[4]+'.';t.appendChild(e)});g.appendChild(t)});
+document.querySelector('.bar:last-of-type');
+</script></body></html>

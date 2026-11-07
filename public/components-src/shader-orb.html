@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Plasma Orb</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05050A;color:#EDEBFF;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;overflow:hidden;position:relative;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(106,60,255,.18),transparent 55%)}
+.s{position:relative;display:grid;place-items:center;perspective:900px}
+.orb{--rx:0deg;--ry:0deg;position:relative;width:min(420px,70vmin);aspect-ratio:1;border-radius:50%;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .25s ease-out;transform-style:preserve-3d}
+.orb i{position:absolute;inset:0;border-radius:50%}
+.l1{background:conic-gradient(from var(--a),#00E5FF,#6A3CFF,#FF2E93,#FFB020,#00E5FF);animation:r 9s linear infinite;filter:blur(2px)}
+.l2{inset:10%!important;background:conic-gradient(from calc(var(--a)*-1.4),#FF2E93,#00E5FF,#6A3CFF,#FF2E93);animation:r2 7s linear infinite;mix-blend-mode:screen;opacity:.85;filter:blur(18px)}
+.l3{inset:22%!important;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.9),rgba(255,255,255,0) 40%),radial-gradient(circle,#0A0620 30%,transparent 70%);mix-blend-mode:normal}
+.l4{background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.55),transparent 28%);mix-blend-mode:overlay}
+@keyframes r{to{--a:360deg}}@keyframes r2{to{--a:360deg}}
+.glow{position:absolute;inset:-18%;border-radius:50%;background:conic-gradient(from var(--a),#00E5FF,#6A3CFF,#FF2E93,#00E5FF);filter:blur(70px);opacity:.38;animation:r 9s linear infinite;z-index:-1}
+.lb{position:absolute;bottom:-70px;text-align:center}
+.lb small{font:500 11px 'Geist Mono',monospace;letter-spacing:.3em;text-transform:uppercase;color:#7C74B8}
+.lb h1{font-weight:700;font-size:26px;letter-spacing:-.04em;margin-top:6px}
+.stack{padding-bottom:90px}
+@media(prefers-reduced-motion:reduce){.l1,.l2,.glow{animation:none}.orb{transition:none}}
+</style></head><body>
+<div class="stack"><div class="s" id="s"><div class="glow"></div><div class="orb" id="o"><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i></div>
+<div class="lb"><small>Shader · plasma</small><h1>Move your cursor</h1></div></div></div>
+<script>
+const s=document.getElementById('s'),o=document.getElementById('o');
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+ addEventListener('pointermove',e=>{const r=s.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)/r.width,y=(e.clientY-r.top-r.height/2)/r.height;o.style.setProperty('--ry',(x*28)+'deg');o.style.setProperty('--rx',(-y*28)+'deg')});
+ addEventListener('pointerleave',()=>{o.style.setProperty('--ry','0deg');o.style.setProperty('--rx','0deg')})}
+</script></body></html>

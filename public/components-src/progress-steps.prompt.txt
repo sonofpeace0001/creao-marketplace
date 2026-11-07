@@ -1,0 +1,31 @@
+ROLE
+You are a senior e-commerce designer and front-end engineer with 15+ years of experience. Build "Checkout Steps": a three-step checkout stepper whose connector lines fill as you advance through cart, details and payment.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Fresh green on white with Rubik type; reassuring and unfussy.
+- Palette: #16A34A, #10231A, #6C7F74, #DDE7E0, #EEF4EF
+- Type: Rubik (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Stepper with numbered circles and filling connectors (done, current glow, upcoming).
+- Panel per step: cart summary, shipping fields, payment summary; Back/Continue footer.
+
+INTERACTION & STATES
+- Continue advances; Back is disabled on step 1; the last step becomes 'Pay $146.00' and then a thank-you state.
+- Completed steps show check marks; the active step has a soft green halo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

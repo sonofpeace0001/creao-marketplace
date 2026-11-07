@@ -1,0 +1,29 @@
+ROLE
+You are a senior marketplace designer and front-end engineer with 15+ years of experience. Build "Creator Badges": three creator cards with conic-ring avatars and Verified, Top-rated and Online badges with hover tooltips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep violet night with gradient ring avatars and tiny glossy status badges.
+- Palette: #12121C, #251848, #09090F, #F0EEFA, #23233A, #1C1C2E
+- Type: Schibsted Grotesk (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Three cards: ring avatar with initials and a corner badge (check, star, dot), name, role and two tag chips; a tooltip explaining each badge.
+
+INTERACTION & STATES
+- Cards lift and take the ring colour as a border on hover/focus; a white tooltip fades in above (keyboard focusable).
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Kanban Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1B1F2A;color:#E8EBF3;font-family:'Figtree',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:860px}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.hd h1{font-size:22px;font-weight:800;letter-spacing:-.03em}.hd p{font-size:13.5px;color:#8B93A8;margin-top:2px}
+.av{display:flex}.av i{width:30px;height:30px;border-radius:50%;border:2.5px solid #1B1F2A;margin-left:-8px;display:grid;place-items:center;font:700 11px 'Figtree';font-style:normal;color:#fff}.av i:first-child{margin:0}
+.bd{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+.col{background:#242938;border:1px solid #2F3548;border-radius:18px;padding:12px;min-height:290px;transition:background .15s,border-color .15s}.col.ov{background:#2A3045;border-color:#6366F1}
+.ch{display:flex;align-items:center;gap:8px;padding:4px 6px 12px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#B4BBCE}.ch i{width:9px;height:9px;border-radius:50%;background:var(--c)}.ch span{margin-left:auto;font-size:12px;background:#171B26;border-radius:99px;padding:2px 9px;color:#8B93A8}
+.cd{background:#2E3447;border:1px solid #3A4159;border-radius:13px;padding:13px;margin-bottom:9px;cursor:grab;transition:transform .15s,box-shadow .15s,opacity .15s;user-select:none}.cd:hover{transform:translateY(-2px);box-shadow:0 10px 18px -8px #000}.cd:active{cursor:grabbing}.cd.dg{opacity:.35}.cd:focus-visible{outline:2px solid #818CF8;outline-offset:2px}
+.cd b{display:block;font-size:14.5px;font-weight:600;line-height:1.35;margin-bottom:10px}.mt{display:flex;align-items:center;gap:8px}.tg{font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px}.dd{font-size:12px;color:#8B93A8;font-weight:600;margin-left:auto}.cd .a{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:700 10px 'Figtree';color:#fff}
+.mv{display:flex;gap:4px;margin-top:10px}.mv button{flex:1;border:1px solid #3A4159;background:#272C3D;color:#B4BBCE;border-radius:8px;padding:5px 0;font:600 11.5px 'Figtree';cursor:pointer}.mv button:hover{background:#343B52;color:#fff}.mv button:focus-visible{outline:2px solid #818CF8}
+.ad{display:flex;align-items:center;gap:7px;width:100%;border:1.5px dashed #3A4159;background:none;color:#8B93A8;border-radius:12px;padding:10px;font:600 13.5px 'Figtree';cursor:pointer;margin-top:2px;justify-content:center}.ad:hover{border-color:#818CF8;color:#C7D2FE}.ad:focus-visible{outline:2px solid #818CF8}
+@media(max-width:680px){.bd{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Website relaunch</h1><p id="sm"></p></div><div class="av"><i style="background:#6366F1">MR</i><i style="background:#EC4899">TK</i><i style="background:#0EA5E9">AO</i><i style="background:#F59E0B">+2</i></div></div>
+<div class="bd" id="bd"></div></div>
+<script>
+const COLS=[['To do','#94A3B8'],['In progress','#F59E0B'],['Done','#34D399']];
+let T=[['Audit current sitemap',0,'Research','#1E3A8A','#BFDBFE','Nov 12','#0EA5E9','AO'],['Write homepage copy',0,'Content','#831843','#FBCFE8','Nov 14','#EC4899','TK'],['Design pricing page',1,'Design','#4C1D95','#DDD6FE','Nov 10','#6366F1','MR'],['Set up analytics events',1,'Engineering','#064E3B','#A7F3D0','Nov 11','#10B981','TK'],['Choose CMS platform',2,'Research','#1E3A8A','#BFDBFE','Nov 4','#0EA5E9','AO'],['Brand colour refresh',2,'Design','#4C1D95','#DDD6FE','Nov 2','#6366F1','MR']];
+const bd=document.getElementById('bd');let drag=null;
+function r(){bd.innerHTML=COLS.map((c,ci)=>'<section class="col" data-c="'+ci+'" aria-label="'+c[0]+'" style="--c:'+c[1]+'"><div class="ch"><i></i>'+c[0]+'<span>'+T.filter(t=>t[1]===ci).length+'</span></div>'+T.map((t,i)=>t[1]===ci?'<article class="cd" draggable="true" tabindex="0" data-i="'+i+'"><b>'+t[0]+'</b><div class="mt"><span class="tg" style="background:'+t[3]+';color:'+t[4]+'">'+t[2]+'</span><span class="dd">'+t[5]+'</span><span class="a" style="background:'+t[6]+'">'+t[7]+'</span></div><div class="mv">'+(ci>0?'<button data-m="-1" aria-label="Move '+t[0]+' back">&larr;</button>':'')+(ci<2?'<button data-m="1" aria-label="Move '+t[0]+' forward">&rarr;</button>':'')+'</div></article>':'').join('')+'</section>').join('');
+ document.getElementById('sm').textContent=T.filter(t=>t[1]===2).length+' of '+T.length+' tasks complete'}
+bd.addEventListener('click',e=>{const b=e.target.closest('[data-m]');if(b){const i=+b.closest('.cd').dataset.i;T[i][1]+=+b.dataset.m;r()}});
+bd.addEventListener('dragstart',e=>{const c=e.target.closest('.cd');if(c){drag=+c.dataset.i;c.classList.add('dg');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',drag)}});
+bd.addEventListener('dragend',()=>{drag=null;r()});
+bd.addEventListener('dragover',e=>{const c=e.target.closest('.col');if(c){e.preventDefault();document.querySelectorAll('.col').forEach(x=>x.classList.toggle('ov',x===c))}});
+bd.addEventListener('drop',e=>{const c=e.target.closest('.col');if(c&&drag!==null){e.preventDefault();T[drag][1]=+c.dataset.c;drag=null;r()}});r();
+</script></body></html>

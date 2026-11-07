@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Billing Period Selector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 400px at 10% 0,#102A22,transparent 60%),#070B09;color:#E7F2EC;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:500px;background:#0D1411;border:1px solid #1A2A22;border-radius:28px;padding:26px;box-shadow:0 40px 80px -34px #000}
+.k{font:500 11.5px 'Geist Mono',monospace;letter-spacing:.16em;color:#34D399}h1{font-size:23px;font-weight:800;letter-spacing:-.04em;margin:8px 0 18px}
+.g{display:grid;gap:10px}
+.o{position:relative;display:block;cursor:pointer}.o input{position:absolute;opacity:0;inset:0}
+.r{display:grid;grid-template-columns:24px 1fr auto;gap:14px;align-items:center;padding:16px 18px;border:1.5px solid #1F3329;border-radius:18px;background:#0A100D;transition:all .2s}
+.o:hover .r{border-color:#2E4A3C}.o input:focus-visible+.r{outline:2px solid #34D399;outline-offset:3px}
+.o input:checked+.r{border-color:#34D399;background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(52,211,153,.03))}
+.d{width:22px;height:22px;border-radius:50%;border:2px solid #36503F;display:grid;place-items:center;transition:all .2s}.d::after{content:"";width:10px;height:10px;border-radius:50%;background:#34D399;transform:scale(0);transition:transform .22s cubic-bezier(.3,1.8,.4,1)}
+.o input:checked+.r .d{border-color:#34D399}.o input:checked+.r .d::after{transform:scale(1)}
+.t b{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;letter-spacing:-.015em}.t span{font-size:13px;color:#7C9488;display:block;margin-top:2px}
+.sv{font-size:11px;font-weight:800;letter-spacing:.05em;background:#34D399;color:#05150E;padding:3px 8px;border-radius:99px}
+.p{text-align:right}.p b{font-size:20px;font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.p s{display:block;font-size:12.5px;color:#58705F;font-weight:500}
+.sm{margin-top:18px;display:grid;gap:9px;padding:16px 18px;border:1.5px dashed #24392E;border-radius:18px;font-size:14px}.sm div{display:flex;justify-content:space-between;color:#8FA89B}.sm b{color:#E7F2EC;font-weight:700}.sm .tt{padding-top:10px;border-top:1px solid #1F3329;font-size:16px}.sm .tt b{font-size:19px;color:#34D399}
+.go{width:100%;margin-top:16px;border:0;border-radius:15px;padding:16px;font:800 15.5px 'Manrope';background:#34D399;color:#05150E;cursor:pointer;transition:transform .15s}.go:hover{transform:translateY(-1px)}.go:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="k">BILLING</div><h1>Pick your billing period</h1>
+<div class="g" role="radiogroup" aria-label="Billing period">
+ <label class="o"><input type="radio" name="b" data-m="1" data-t="Monthly"><span class="r"><span class="d"></span><span class="t"><b>Monthly</b><span>Pay as you go, cancel anytime</span></span><span class="p"><b>$29</b><s>per month</s></span></span></label>
+ <label class="o"><input type="radio" name="b" data-m="12" data-t="Yearly" checked><span class="r"><span class="d"></span><span class="t"><b>Yearly <i class="sv">SAVE 25%</i></b><span>Two months free, billed once a year</span></span><span class="p"><b>$22</b><s>per month</s></span></span></label>
+ <label class="o"><input type="radio" name="b" data-m="24" data-t="2 years"><span class="r"><span class="d"></span><span class="t"><b>2 years <i class="sv">BEST VALUE</i></b><span>Lock in today's price for 24 months</span></span><span class="p"><b>$19</b><s>per month</s></span></span></label></div>
+<div class="sm"><div><span>Plan</span><b id="a">Pro · Yearly</b></div><div><span>Discount</span><b id="b">−$84.00</b></div><div class="tt"><span>Due today</span><b id="c">$264.00</b></div></div><button class="go" id="g">Start subscription</button></div>
+<script>
+const P={1:[29,0],12:[22,84],24:[19,240]};const rs=[...document.querySelectorAll('input[name=b]')];
+function upd(){const r=rs.find(x=>x.checked),m=+r.dataset.m,[p,d]=P[m];document.getElementById('a').textContent='Pro · '+r.dataset.t;document.getElementById('b').textContent=d?'−$'+d.toFixed(2):'—';document.getElementById('c').textContent='$'+(p*m).toFixed(2)}
+rs.forEach(r=>r.addEventListener('change',upd));upd();document.getElementById('g').onclick=e=>e.target.textContent='Starting…';
+</script></body></html>

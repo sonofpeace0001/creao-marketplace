@@ -1,0 +1,31 @@
+ROLE
+You are a senior brand designer and front-end engineer with 15+ years of experience. Build "Feature Index": a sticky-heading feature index of three rows with gradient icon tiles that slide and reveal an arrow on hover.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black with an amber accent and mono numerals; confident, editorial and spacious.
+- Palette: #FFB347, #0A0A0C, #8B8B97, #222228, #EDEDF1, #55555F
+- Type: Hanken Grotesk, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Sticky left column with mono label, headline and paragraph.
+- Right list of three rows: gradient icon tile, bold title, description, index number that becomes an arrow.
+
+INTERACTION & STATES
+- Hover/focus shifts the row 12px, washes it with amber, swaps the number for an arrow.
+- Rows are focusable (tabindex=0) with visible focus.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

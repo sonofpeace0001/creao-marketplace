@@ -1,0 +1,31 @@
+ROLE
+You are a senior design-systems engineer (CSS craft) with 15+ years of experience. Build "Border Specimens": a 2×2 specimen sheet of hairline, dashed, rotating gradient and glow borders, each with its CSS.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: A museum plate: off-white, tidy type, tiny mono captions, each card demonstrating one edge treatment.
+- Palette: #FF5E7E, #F7F6F2, #17171A, #77757E, #5A5864, #F1F0EC
+- Type: Sora, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with title and 'Plate 04 / Edges'.
+- Four cards: Hairline, Dashed, Gradient ring (conic, rotating), Glow — each with a description and a code chip.
+
+INTERACTION & STATES
+- Cards lift 3px on hover; the glow card intensifies its halo on hover.
+- Gradient ring rotates through an animated @property angle; disabled under reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

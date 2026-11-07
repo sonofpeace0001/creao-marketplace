@@ -1,0 +1,30 @@
+ROLE
+You are a senior portfolio designer and front-end engineer with 15+ years of experience. Build "Magnetic Project Card": a portfolio project card whose pointer becomes a 'View' bubble that follows the cursor with easing.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm ember-and-amber artwork on near-black with a huge heavy-weight Archivo title and a white cursor bubble.
+- Palette: #15130F, #FF4D2E, #E9E5DC, #FFB020, #1A1410
+- Type: Archivo (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Card with gradient artwork and a rotating overlay shape, top meta row, big title and blurb; a custom pointer made of a dot and a 'View ↗' bubble.
+
+INTERACTION & STATES
+- The native cursor is hidden; a smoothed follower (lerp) tracks the pointer and the dot swells into a labelled bubble on hover; the artwork zooms slowly.
+- On touch devices the card behaves as a normal link.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

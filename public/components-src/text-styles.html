@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Type Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--base:16px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0B0E;color:#ECECF1;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:36px 20px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:820px;background:#111116;border:1px solid #22222B;border-radius:24px;padding:30px 34px;box-shadow:0 40px 80px -36px #000}
+.h{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:6px}
+.h h1{font:italic 400 28px 'Instrument Serif',serif;letter-spacing:-.02em}
+.ctl{display:flex;align-items:center;gap:12px;font:500 12px 'JetBrains Mono',monospace;color:#7C7C8A}
+input[type=range]{-webkit-appearance:none;appearance:none;width:150px;height:5px;border-radius:5px;background:#2A2A34;outline:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#FFB347;border:3px solid #111116;cursor:grab}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#FFB347;border:3px solid #111116}
+input:focus-visible{box-shadow:0 0 0 4px rgba(255,179,71,.25)}
+.r{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:baseline;padding:16px 0;border-bottom:1px solid #1E1E26}
+.r:last-child{border-bottom:0}
+.m{font:400 11.5px 'JetBrains Mono',monospace;color:#6C6C7A;line-height:1.6}.m b{display:block;color:#FFB347;font-weight:500}
+.d{font:400 calc(var(--base)*3.4)/1 'Instrument Serif',serif;letter-spacing:-.04em}
+.d em{font-style:italic}
+.h1{font:700 calc(var(--base)*2.2)/1.1 'Inter',sans-serif;letter-spacing:-.04em}
+.h2{font:600 calc(var(--base)*1.5)/1.2 'Inter',sans-serif;letter-spacing:-.03em}
+.b{font:400 var(--base)/1.65 'Inter',sans-serif;color:#B6B6C2;max-width:520px}
+.c{font:500 calc(var(--base)*.78)/1.4 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8A8A98}
+.cd{font:400 calc(var(--base)*.9)/1.5 'JetBrains Mono',monospace;color:#9DC4FF;background:#171720;border:1px solid #262633;border-radius:10px;padding:8px 12px;display:inline-block}
+@media(max-width:600px){.r{grid-template-columns:1fr;gap:6px}}
+</style></head><body>
+<div class="w"><div class="h"><h1>Type scale</h1><div class="ctl"><label for="s">BASE</label><input id="s" type="range" min="13" max="20" step="1" value="16"><output id="o">16px</output></div></div>
+ <div class="r"><div class="m"><b>Display</b>Instrument Serif<br>3.4 × base</div><div class="d">Quiet <em>confidence</em></div></div>
+ <div class="r"><div class="m"><b>Heading 1</b>Inter 700<br>2.2 × base</div><div class="h1">Design with intention</div></div>
+ <div class="r"><div class="m"><b>Heading 2</b>Inter 600<br>1.5 × base</div><div class="h2">Every size has a job to do</div></div>
+ <div class="r"><div class="m"><b>Body</b>Inter 400<br>1 × base</div><p class="b">Good type is invisible. It sets the pace of a page, guides the eye from one idea to the next and never asks to be admired.</p></div>
+ <div class="r"><div class="m"><b>Caption</b>Inter 500 caps<br>0.78 × base</div><div class="c">Figure 04 — Reading rhythm</div></div>
+ <div class="r"><div class="m"><b>Code</b>JetBrains Mono<br>0.9 × base</div><div><span class="cd">font-size: calc(var(--base) * 1.5);</span></div></div></div>
+<script>
+const s=document.getElementById('s'),o=document.getElementById('o');
+s.addEventListener('input',()=>{document.documentElement.style.setProperty('--base',s.value+'px');o.textContent=s.value+'px'});
+</script></body></html>

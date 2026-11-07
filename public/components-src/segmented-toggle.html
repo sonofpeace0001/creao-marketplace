@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Segmented Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F0F2F5;color:#1A1F2B;font-family:'Rubik',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:480px;background:#fff;border-radius:26px;padding:26px;display:grid;gap:26px;box-shadow:0 40px 70px -46px rgba(20,30,60,.5),0 0 0 1px rgba(26,31,43,.06)}
+.r h2{font-size:12.5px;font-weight:600;color:#7A8499;letter-spacing:.06em;text-transform:uppercase;margin-bottom:11px;display:flex;justify-content:space-between}.r h2 em{font-style:normal;color:#1A1F2B;letter-spacing:0;text-transform:none}
+.sg{position:relative;display:grid;background:#EEF0F5;border-radius:14px;padding:4px}
+.sg .th{position:absolute;top:4px;bottom:4px;left:4px;border-radius:10px;background:#fff;box-shadow:0 2px 6px rgba(20,30,60,.16);transition:transform .3s cubic-bezier(.4,1.2,.5,1)}
+.sg input{position:absolute;opacity:0;pointer-events:none}.sg label{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 6px;font-size:14px;font-weight:500;color:#6A7489;cursor:pointer;transition:color .2s;border-radius:10px}.sg input:checked+label{color:#1A1F2B;font-weight:600}.sg input:focus-visible+label{outline:2px solid #3B82F6;outline-offset:1px}
+.s2{grid-template-columns:repeat(2,1fr)}.s2 .th{width:calc(50% - 4px)}.s3{grid-template-columns:repeat(3,1fr)}.s3 .th{width:calc(33.333% - 2.667px)}
+.s3.dk{background:#1A1F2B}.s3.dk .th{background:#3B82F6;box-shadow:0 4px 10px -2px rgba(59,130,246,.6)}.s3.dk label{color:#8B93A7}.s3.dk input:checked+label{color:#fff}
+.pv{margin-top:14px;border-radius:16px;padding:18px;background:#F7F8FB;font-size:14.5px;line-height:1.55;color:#4A5367;transition:all .3s}
+.pv b{color:#1A1F2B}
+</style></head><body>
+<div class="c">
+<div class="r"><h2>View <em id="v1">List</em></h2><div class="sg s2" id="g1"><span class="th"></span>
+<input type="radio" name="v" id="a1" value="List" checked><label for="a1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>List</label>
+<input type="radio" name="v" id="a2" value="Grid"><label for="a2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.500"/><rect x="14" y="3" width="7" height="7" rx="1.500"/><rect x="3" y="14" width="7" height="7" rx="1.500"/><rect x="14" y="14" width="7" height="7" rx="1.500"/></svg>Grid</label></div></div>
+<div class="r"><h2>Billing <em id="v2">Monthly</em></h2><div class="sg s2" id="g2"><span class="th"></span>
+<input type="radio" name="b" id="b1" value="Monthly" checked><label for="b1">Monthly</label><input type="radio" name="b" id="b2" value="Yearly"><label for="b2">Yearly <span style="font-size:11px;font-weight:600;color:#16A34A;background:#DCFCE7;padding:2px 7px;border-radius:99px">-20%</span></label></div>
+<div class="pv" id="pv"><b>$24</b> per seat, billed monthly. Cancel any time.</div></div>
+<div class="r"><h2>Theme <em id="v3">System</em></h2><div class="sg s3 dk" id="g3"><span class="th"></span>
+<input type="radio" name="t" id="c1" value="Light"><label for="c1">Light</label><input type="radio" name="t" id="c2" value="Dark"><label for="c2">Dark</label><input type="radio" name="t" id="c3" value="System" checked><label for="c3">System</label></div></div></div>
+<script>
+function wire(g,v,n,cb){const rs=[...document.querySelectorAll('#'+g+' input')],th=document.querySelector('#'+g+' .th');const upd=()=>{const i=rs.findIndex(r=>r.checked);th.style.transform='translateX('+i*100+'%)';document.getElementById(v).textContent=rs[i].value;cb&&cb(rs[i].value)};rs.forEach(r=>r.addEventListener('change',upd));upd()}
+wire('g1','v1');wire('g2','v2',0,v=>document.getElementById('pv').innerHTML=v==='Monthly'?'<b>$24</b> per seat, billed monthly. Cancel any time.':'<b>$19</b> per seat per month, billed <b>$228</b> yearly. You save $60.');wire('g3','v3');
+</script></body></html>

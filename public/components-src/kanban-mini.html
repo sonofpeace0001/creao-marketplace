@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mini Kanban</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFF7E6;color:#2D2412;font-family:'Karla',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:520px;background:#fff;border:2px solid #2D2412;border-radius:22px;padding:20px;box-shadow:6px 6px 0 #2D2412}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.hd h1{font:800 20px 'Syne',sans-serif;letter-spacing:-.03em}.hd span{font-size:13px;font-weight:700;background:#FFD84D;border:2px solid #2D2412;border-radius:99px;padding:3px 11px}
+.bd{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.col h2{font:700 12px 'Karla';letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;display:flex;justify-content:space-between;color:#6B5E3E}.col h2 b{color:#2D2412}
+.tk{display:block;width:100%;text-align:left;border:2px solid #2D2412;border-radius:12px;padding:10px 11px;margin-bottom:8px;background:var(--b);font:600 13.5px/1.3 'Karla';color:#2D2412;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:2px 2px 0 #2D2412}.tk:hover{transform:translate(-1px,-2px);box-shadow:4px 5px 0 #2D2412}.tk:active{transform:translate(2px,2px);box-shadow:0 0 0 #2D2412}.tk:focus-visible{outline:3px solid #6D28D9;outline-offset:2px}
+.tk small{display:block;font-size:11.5px;font-weight:700;color:rgba(45,36,18,.65);margin-top:5px}
+.ad{display:flex;gap:8px;margin-top:16px}.ad input{flex:1;min-width:0;border:2px solid #2D2412;border-radius:12px;padding:10px 13px;font:600 14px 'Karla';color:#2D2412;outline:0;background:#FFFBF0}.ad input:focus{box-shadow:3px 3px 0 #2D2412}.ad button{border:2px solid #2D2412;border-radius:12px;background:#FF6B4A;color:#fff;font:800 14px 'Syne';padding:0 18px;cursor:pointer;box-shadow:2px 2px 0 #2D2412}.ad button:active{transform:translate(2px,2px);box-shadow:none}.ad button:focus-visible{outline:3px solid #6D28D9;outline-offset:2px}
+.hn{font-size:12.5px;color:#8C7E58;margin-top:10px;font-weight:600}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>This week</h1><span id="pc">2/6 done</span></div><div class="bd" id="bd"></div>
+<form class="ad" id="f"><input id="i" placeholder="Add a task…" aria-label="New task" autocomplete="off"><button>Add</button></form><p class="hn">Click a card to move it to the next column.</p></div>
+<script>
+let T=[['Book venue',0,'Fri'],['Draft agenda',0,'Mon'],['Invite speakers',1,'Wed'],['Order swag',1,'Thu'],['Send save-the-date',2,'Mon'],['Pick the date',2,'Sun']];
+const N=['To do','Doing','Done'],B=['#FFE0D6','#FFF1B8','#CFF5D9'],bd=document.getElementById('bd');
+function r(){bd.innerHTML=N.map((n,c)=>'<section class="col"><h2>'+n+'<b>'+T.filter(t=>t[1]===c).length+'</b></h2>'+T.map((t,i)=>t[1]===c?'<button class="tk" style="--b:'+B[c]+'" data-i="'+i+'" aria-label="'+t[0]+', '+n+'. Move to '+(c<2?N[c+1]:N[0])+'">'+t[0]+'<small>'+t[2]+'</small></button>':'').join('')+'</section>').join('');document.getElementById('pc').textContent=T.filter(t=>t[1]===2).length+'/'+T.length+' done'}
+bd.addEventListener('click',e=>{const b=e.target.closest('.tk');if(b){const t=T[+b.dataset.i];t[1]=(t[1]+1)%3;r()}});
+document.getElementById('f').onsubmit=e=>{e.preventDefault();const v=document.getElementById('i').value.trim();if(v){T.unshift([v,0,'Soon']);document.getElementById('i').value='';r()}};r();
+</script></body></html>

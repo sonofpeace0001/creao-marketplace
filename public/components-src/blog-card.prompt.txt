@@ -1,0 +1,29 @@
+ROLE
+You are a senior content-marketing designer and front-end engineer with 15+ years of experience. Build "Blog Card": a featured and a compact blog card with gradient covers, category chips, author row, bookmark and hover motion.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft grey page with large rounded white cards and vivid mesh-gradient covers.
+- Palette: #14172B, #5B3DF5, #E9ECF5, #7C829E, #5B6180
+- Type: Bricolage Grotesque, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Featured card: gradient cover with category chip and bookmark button, meta line, headline, excerpt, author and arrow button; compact card with the same structure minus excerpt.
+
+INTERACTION & STATES
+- Hover lifts the card, zooms the cover and rotates the arrow button into violet; bookmark toggles aria-pressed and fills; cards are links with focus outlines.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

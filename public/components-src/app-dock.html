@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glass Dock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;display:flex;align-items:flex-end;justify-content:center;padding:0 20px 46px;font-family:'Onest',sans-serif;background:radial-gradient(900px 600px at 20% 10%,#FFD2A8,transparent 60%),radial-gradient(800px 600px at 85% 20%,#B9C8FF,transparent 60%),radial-gradient(900px 600px at 50% 110%,#F8A6C8,transparent 60%),#F3E4DC;-webkit-font-smoothing:antialiased;overflow:hidden}
+.t{position:fixed;top:0;left:0;right:0;height:28px;background:rgba(255,255,255,.4);backdrop-filter:blur(20px);display:flex;align-items:center;gap:20px;padding:0 18px;font-size:13px;font-weight:600;color:#241B2B}
+.t span:last-child{margin-left:auto;font-weight:500}
+.dock{display:flex;align-items:flex-end;gap:10px;padding:10px 14px;border-radius:26px;background:rgba(255,255,255,.34);border:1px solid rgba(255,255,255,.7);backdrop-filter:blur(26px) saturate(1.6);box-shadow:0 28px 60px -20px rgba(70,40,60,.5),inset 0 1px 0 rgba(255,255,255,.8)}
+.i{position:relative;width:60px;height:60px;display:grid;place-items:center;transform-origin:bottom center;transition:transform .12s ease-out}
+.i button{width:100%;height:100%;border:0;border-radius:15px;cursor:pointer;display:grid;place-items:center;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 6px 12px -4px rgba(0,0,0,.35)}
+.i button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.i .tip{position:absolute;bottom:calc(100% + 14px);left:50%;transform:translateX(-50%);background:rgba(36,27,43,.88);color:#fff;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:9px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.i:hover .tip{opacity:1}
+.i.on::after{content:"";position:absolute;bottom:-9px;width:5px;height:5px;border-radius:50%;background:#3b2f46}
+.sep{width:1px;align-self:stretch;margin:6px 4px;background:rgba(36,27,43,.18)}
+.bounce{animation:bn .5s}
+@keyframes bn{30%{transform:translateY(-22px)}60%{transform:translateY(0)}80%{transform:translateY(-8px)}}
+@media(prefers-reduced-motion:reduce){.i{transition:none}.bounce{animation:none}}
+</style></head><body>
+<div class="t"><span></span><span>Finder</span><span>File</span><span>Edit</span><span>View</span><span>Tue 9:41</span></div>
+<div class="dock" id="d" role="toolbar" aria-label="Application dock">
+ <div class="i on"><span class="tip">Finder</span><button style="background:linear-gradient(160deg,#5CC8FF,#2F7BFF)" aria-label="Finder"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 10v1M15 10v1M8.5 15c1 1.2 2.1 1.8 3.5 1.8s2.5-.6 3.5-1.8"/></svg></button></div>
+ <div class="i on"><span class="tip">Messages</span><button style="background:linear-gradient(160deg,#6EE7A0,#18B968)" aria-label="Messages"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.5 3.4 6L4.5 21l4.2-2.1c1 .2 2.2.3 3.3.3 5.5 0 10-3.6 10-8s-4.5-8.2-10-8.2Z"/></svg></button></div>
+ <div class="i"><span class="tip">Calendar</span><button style="background:linear-gradient(160deg,#FF8A7A,#F2453D)" aria-label="Calendar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></button></div>
+ <div class="i"><span class="tip">Notes</span><button style="background:linear-gradient(160deg,#FFE27A,#F5B721)" aria-label="Notes"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 4h12v16H6zM9 9h6M9 13h6M9 17h3"/></svg></button></div>
+ <div class="i"><span class="tip">Music</span><button style="background:linear-gradient(160deg,#FF7AA8,#E8346B)" aria-label="Music"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5" fill="currentColor"/><circle cx="16.5" cy="16" r="2.5" fill="currentColor"/></svg></button></div>
+ <div class="sep"></div>
+ <div class="i"><span class="tip">Trash</span><button style="background:linear-gradient(160deg,#C9CED8,#8E96A6)" aria-label="Trash"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg></button></div>
+</div>
+<script>
+const d=document.getElementById('d'),it=[...d.querySelectorAll('.i')],R=130,MAX=.75;
+function mag(x){it.forEach(i=>{const r=i.getBoundingClientRect(),c=r.left+r.width/2,k=Math.max(0,1-Math.abs(x-c)/R);const s=1+MAX*Math.pow(k,1.4);i.style.transform='scale('+s+') translateY('+(-(s-1)*6)+'px)';i.style.margin='0 '+((s-1)*26)+'px'})}
+function reset(){it.forEach(i=>{i.style.transform='';i.style.margin=''})}
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.addEventListener('pointermove',e=>mag(e.clientX));d.addEventListener('pointerleave',reset)}
+it.forEach(i=>i.querySelector('button').addEventListener('click',()=>{i.classList.remove('bounce');void i.offsetWidth;i.classList.add('bounce');i.classList.add('on')}));
+</script></body></html>

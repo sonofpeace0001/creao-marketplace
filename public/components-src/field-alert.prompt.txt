@@ -1,0 +1,30 @@
+ROLE
+You are a senior form-UX designer and front-end engineer with 15+ years of experience. Build "Field Validation": an account form with live email and password validation, a strength meter, rule checklist and shake-on-error.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Calm white card on cool grey with an indigo focus colour and unmistakable red/green states.
+- Palette: #22A06B, #171A26, #6B7185, #4F5BFF, #E5484D, #1E8A5C
+- Type: Public Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Email field with state icon and message; password field with four-segment strength meter and a three-rule checklist; submit button that unlocks only when both are valid.
+
+INTERACTION & STATES
+- Validates on every keystroke: invalid fields turn red with a shaking input, an icon and a specific message; valid fields turn green.
+- Strength segments fill red/amber/green; the button enables when both fields pass and confirms on submit.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

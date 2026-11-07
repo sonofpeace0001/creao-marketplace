@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Drag and Drop Zone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF1F8;color:#161B33;font-family:'Figtree',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:520px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 34px 60px -38px rgba(22,27,51,.5),0 0 0 1px rgba(22,27,51,.06)}
+.dz{position:relative;border-radius:22px;padding:34px 20px 28px;text-align:center;cursor:pointer;background:#F7F8FD;transition:background .25s,transform .25s;isolation:isolate}
+.dz::before{content:"";position:absolute;inset:0;border-radius:22px;padding:2px;background:repeating-conic-gradient(from 0deg,#B8C0E6 0 6deg,transparent 6deg 12deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:-1}
+.dz{border:2px dashed #BAC2E8}.dz::before{display:none}
+.dz.ov{background:#EBEEFF;border-color:#4C5CFF;transform:scale(1.015)}
+.ic{width:64px;height:64px;margin:0 auto 14px;border-radius:20px;background:linear-gradient(135deg,#6C7BFF,#4C5CFF);display:grid;place-items:center;color:#fff;box-shadow:0 16px 26px -12px rgba(76,92,255,.7);transition:transform .3s cubic-bezier(.3,1.6,.4,1)}
+.dz.ov .ic{transform:translateY(-8px) scale(1.1)}
+.dz h1{font-size:19px;font-weight:800;letter-spacing:-.03em}.dz p{font-size:14px;color:#6B7399;margin-top:5px}.dz p u{color:#4C5CFF;text-decoration:none;font-weight:700;border-bottom:2px solid #BEC6FF}
+.dz small{display:block;margin-top:14px;font-size:12px;color:#9AA2C4;letter-spacing:.04em}
+.dz:focus-visible{outline:3px solid #161B33;outline-offset:3px}
+.l{display:grid;gap:10px;margin-top:16px}
+.r{display:grid;grid-template-columns:42px 1fr 28px;gap:12px;align-items:center;padding:11px;border-radius:15px;background:#F7F8FD;animation:in .3s cubic-bezier(.3,1.4,.4,1)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.r .t{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#fff;color:#4C5CFF;box-shadow:0 0 0 1px #E3E7F6}
+.r b{display:block;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.r span.s{font-size:12px;color:#8089B0;font-weight:500}
+.r .p{height:5px;border-radius:5px;background:#E3E7F6;margin-top:7px;overflow:hidden}.r .p i{display:block;height:100%;width:0;border-radius:5px;background:#4C5CFF;transition:width .2s linear}
+.r.d .p i{background:#16A34A}.r.d .s{color:#16A34A}
+.r .x{border:0;background:none;color:#9AA2C4;cursor:pointer;width:28px;height:28px;border-radius:8px;display:grid;place-items:center}.r .x:hover{background:#E8EBFA;color:#161B33}.r .x:focus-visible{outline:2px solid #4C5CFF}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="c"><div class="dz" id="d" tabindex="0" role="button" aria-label="Upload files: drag and drop or press Enter to browse"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></div>
+ <h1>Drop your files here</h1><p>or <u>browse your computer</u> to upload</p><small>PNG, JPG, PDF or ZIP · up to 50 MB each</small><input type="file" id="i" multiple hidden></div>
+<div class="l" id="l"></div></div>
+<script>
+const d=document.getElementById('d'),i=document.getElementById('i'),l=document.getElementById('l');
+const ico='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.100" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg>';
+function esc(s){return s.replace(/[&<>]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[x]))}
+function add(n,sz){const r=document.createElement('div');r.className='r';r.innerHTML='<span class="t">'+ico+'</span><div><b>'+esc(n)+'</b><span class="s">'+sz+' · uploading…</span><div class="p"><i></i></div></div><button class="x" aria-label="Remove '+esc(n)+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>';l.prepend(r);
+ r.querySelector('.x').onclick=()=>r.remove();let p=0;const bar=r.querySelector('.p i'),s=r.querySelector('.s');const t=setInterval(()=>{p=Math.min(100,p+4+Math.random()*9);bar.style.width=p+'%';if(p>=100){clearInterval(t);r.classList.add('d');s.textContent=sz+' · uploaded'}},150)}
+const fm=b=>b>1048576?(b/1048576).toFixed(1)+' MB':Math.max(1,Math.round(b/1024))+' KB';
+function files(fs){[...fs].forEach(f=>add(f.name,fm(f.size)))}
+d.addEventListener('click',()=>i.click());d.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();i.click()}});i.addEventListener('change',()=>{files(i.files);i.value=''});
+['dragenter','dragover'].forEach(e=>d.addEventListener(e,x=>{x.preventDefault();d.classList.add('ov')}));['dragleave','drop'].forEach(e=>d.addEventListener(e,x=>{x.preventDefault();d.classList.remove('ov')}));d.addEventListener('drop',e=>files(e.dataTransfer.files));
+add('Product-shots-final.zip','48.2 MB');add('Pitch-deck-v7.pdf','6.8 MB');
+</script></body></html>

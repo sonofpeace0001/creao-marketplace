@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Studio Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEFF4;color:#12172A;font-family:'Onest',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.sh{width:100%;max-width:940px;display:grid;grid-template-columns:200px 1fr;background:#fff;border-radius:30px;overflow:hidden;box-shadow:0 40px 70px -40px rgba(18,23,42,.5),0 0 0 1px rgba(18,23,42,.06)}
+.sd{background:#12172A;color:#B9C0DA;padding:22px 16px;display:flex;flex-direction:column;gap:6px}
+.lg{display:flex;align-items:center;gap:9px;color:#fff;font-weight:800;font-size:18px;letter-spacing:-.04em;margin:0 8px 18px}.lg i{width:22px;height:22px;border-radius:8px;background:linear-gradient(135deg,#7C8CFF,#34D3B0)}
+.sd a{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:12px;font-size:14px;font-weight:600;color:inherit;text-decoration:none;transition:all .2s}.sd a:hover{background:rgba(255,255,255,.07);color:#fff}.sd a.on{background:rgba(124,140,255,.18);color:#fff}
+.sd .pro{margin-top:auto;background:linear-gradient(160deg,#2A3158,#1B2040);border-radius:16px;padding:14px;font-size:12.5px;line-height:1.45;color:#C9CEE8}.sd .pro b{display:block;color:#fff;font-size:14px;margin-bottom:3px}
+.mn{padding:22px 22px 22px;background:#F6F7FB}
+.tp{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.tp h1{font-size:22px;font-weight:800;letter-spacing:-.04em}.tp span{font-size:13px;color:#7B829E}
+.bt{display:flex;gap:8px;align-items:center}.bt i{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#FFB86B,#F43F8E);display:grid;place-items:center;font:700 12px 'Onest';color:#fff;font-style:normal}
+.g{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(0,auto);gap:12px}
+.c{background:#fff;border-radius:20px;padding:16px;box-shadow:0 0 0 1px rgba(18,23,42,.05);transition:transform .25s}.c:hover{transform:translateY(-3px)}
+.c small{font-size:12px;font-weight:600;color:#7B829E}.c .v{font-size:25px;font-weight:800;letter-spacing:-.045em;margin-top:5px;font-variant-numeric:tabular-nums}
+.d{font-size:11.5px;font-weight:700;color:#0E9F6E;margin-top:3px}.d.n{color:#E5484D}
+.ch{grid-column:span 3;grid-row:span 2}
+.bars{display:flex;align-items:flex-end;gap:7px;height:150px;margin-top:14px}.bars i{flex:1;border-radius:8px 8px 3px 3px;background:#E1E5F8;height:var(--h);transition:background .2s;position:relative}.bars i:nth-child(10){background:linear-gradient(180deg,#7C8CFF,#4C5CE0)}.bars i:hover{background:#7C8CFF}
+.xl{display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:#9AA1BA;font-weight:600}
+.ls{grid-column:span 4}
+.r{display:grid;grid-template-columns:90px 1fr 46px;align-items:center;gap:12px;padding:8px 0;font-size:13.5px;font-weight:600}.r .tr{height:8px;border-radius:8px;background:#EEF0F8;overflow:hidden}.r .tr i{display:block;height:100%;border-radius:8px;background:var(--c);width:0;animation:g 1.1s .2s cubic-bezier(.3,1,.4,1) forwards}.r b{text-align:right;color:#4A5170}
+@keyframes g{to{width:var(--w)}}
+@media(max-width:780px){.sh{grid-template-columns:1fr}.sd{display:none}.g{grid-template-columns:1fr 1fr}.ch{grid-column:span 2}.ls{grid-column:span 2}}
+@media(prefers-reduced-motion:reduce){.r .tr i{animation:none;width:var(--w)}*{transition:none!important}}
+</style></head><body>
+<div class="sh"><aside class="sd"><div class="lg"><i></i>Pulse</div><a class="on" href="#">Overview</a><a href="#">Campaigns</a><a href="#">Audience</a><a href="#">Reports</a><a href="#">Settings</a><div class="pro"><b>Go Pro</b>Unlock unlimited reports and team seats.</div></aside>
+<main class="mn"><div class="tp"><div><h1>Good morning, Maya</h1><span>Here's how your channels did this week</span></div><div class="bt"><i>MA</i></div></div>
+<div class="g"><div class="c"><small>Visitors</small><div class="v">48.2k</div><div class="d">▲ 12.4%</div></div><div class="c"><small>Signups</small><div class="v">3,184</div><div class="d">▲ 8.1%</div></div><div class="c"><small>Conv. rate</small><div class="v">6.6%</div><div class="d n">▼ 0.3%</div></div><div class="c"><small>Revenue</small><div class="v">$21.4k</div><div class="d">▲ 15.9%</div></div>
+ <div class="c ch"><small>Daily signups · last 14 days</small><div class="bars" id="b"></div><div class="xl"><span>Oct 6</span><span>Oct 13</span><span>Oct 19</span></div></div>
+ <div class="c ls"><small>Top channels</small><div id="l"></div></div></div></main></div>
+<script>
+const v=[38,52,44,61,57,70,48,66,74,92,63,78,70,84];document.getElementById('b').innerHTML=v.map(x=>'<i style="--h:'+x+'%" title="'+Math.round(x*3.4)+' signups"></i>').join('');
+document.getElementById('l').innerHTML=[['Organic search',78,'#7C8CFF'],['Referrals',54,'#34D3B0'],['Paid social',36,'#FFB86B'],['Email',27,'#F43F8E']].map(r=>'<div class="r"><span>'+r[0]+'</span><div class="tr"><i style="--w:'+r[1]+'%;--c:'+r[2]+'"></i></div><b>'+r[1]+'%</b></div>').join('');
+</script></body></html>

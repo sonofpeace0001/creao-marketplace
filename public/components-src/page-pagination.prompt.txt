@@ -1,0 +1,29 @@
+ROLE
+You are a senior listing-page designer and front-end engineer (travel and rentals) with 15+ years of experience. Build "Pill Pagination": a pill pagination bar with page-size select and go-to-page input, paging a gallery grid.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream page with colourful gradient cards and a rounded white pager with a green current page.
+- Palette: #1E2A22, #16794E, #6A7A70, #F1F4F1, #EFEDE6, #4A5A50
+- Type: Karla (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- 3×3 grid of gradient stay cards; a pill bar with 'Show' select, previous/next, numbered pages with ellipses and a 'Go to' input.
+
+INTERACTION & STATES
+- Pages, size changes and the go-to field (Enter) re-render the grid; the card count and page list adapt; buttons disable at the ends.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

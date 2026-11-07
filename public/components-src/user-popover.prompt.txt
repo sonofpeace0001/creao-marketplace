@@ -1,0 +1,29 @@
+ROLE
+You are a senior social-product designer and front-end engineer with 15+ years of experience. Build "Profile Hover Card": an inline @mention that opens a rich profile hover card with a follow toggle.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark article card with a periwinkle mention link and a gradient-cover profile card.
+- Palette: #ECEEF6, #8FA4FF, #151826, #10121A, #7C84A4, #0A0B10
+- Type: Rethink Sans (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Article snippet with an inline mention; popover with gradient cover, avatar with presence dot, verified name, follow button, headline, bio and three stats.
+
+INTERACTION & STATES
+- Hover, focus or click opens the card; leaving closes it after a short delay (hover bridge); Follow toggles aria-pressed; Escape closes.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

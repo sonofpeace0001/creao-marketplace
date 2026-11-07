@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Collapsible Sidebar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9ECF2;color:#161B2E;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.ap{display:flex;width:100%;max-width:760px;height:440px;background:#F6F7FB;border-radius:28px;overflow:hidden;box-shadow:0 36px 60px -36px rgba(22,27,46,.5),0 0 0 1px rgba(22,27,46,.07)}
+.sb{position:relative;flex:none;width:236px;background:#fff;border-right:1px solid #E6E9F2;padding:16px 12px;display:flex;flex-direction:column;gap:4px;transition:width .35s cubic-bezier(.3,1,.4,1)}
+.ap.c .sb{width:74px}
+.lg{display:flex;align-items:center;gap:12px;padding:6px 8px 16px;overflow:hidden;white-space:nowrap}.lg i{flex:none;width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#6C7BFF,#C084FC)}.lg b{font-size:18px;font-weight:800;letter-spacing:-.04em}
+.nv{position:relative;display:flex;align-items:center;gap:13px;height:46px;padding:0 14px;border:0;background:none;border-radius:14px;color:#5A6285;font:600 15px 'Inter Tight';cursor:pointer;overflow:hidden;white-space:nowrap;text-align:left;transition:background .2s,color .2s}
+.nv svg{flex:none}.nv:hover{background:#F1F3FA;color:#161B2E}.nv.on{background:#EEEDFF;color:#4338CA}.nv:focus-visible{outline:2px solid #4F46E5;outline-offset:-2px}
+.nv span{opacity:1;transition:opacity .2s}.ap.c .nv span{opacity:0}
+.nv em{margin-left:auto;font-style:normal;font-size:12px;font-weight:700;background:#F43F5E;color:#fff;padding:2px 7px;border-radius:99px}.ap.c .nv em{position:absolute;right:10px;top:8px;padding:0 5px;font-size:10.5px}
+.tg{position:absolute;right:-14px;top:22px;width:28px;height:28px;border-radius:50%;border:1px solid #E1E4EF;background:#fff;color:#5A6285;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 10px rgba(22,27,46,.12);z-index:5;transition:transform .35s,color .2s}
+.tg:hover{color:#4338CA}.ap.c .tg{transform:rotate(180deg)}.tg:focus-visible{outline:2px solid #4F46E5;outline-offset:2px}
+.tp{position:fixed;left:0;top:0;background:#161B2E;color:#fff;font:600 13px 'Inter Tight';padding:7px 12px;border-radius:9px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:9;white-space:nowrap}
+.us{margin-top:auto;display:flex;align-items:center;gap:12px;padding:10px 8px;border-top:1px solid #EEF0F6;overflow:hidden;white-space:nowrap}.us i{flex:none;width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#FFB86B,#F43F8E);display:grid;place-items:center;font:700 13px 'Inter Tight';color:#fff;font-style:normal}.us div{opacity:1;transition:opacity .2s}.ap.c .us div{opacity:0}.us b{display:block;font-size:14px}.us span{font-size:12px;color:#8A91AF}
+.mn{flex:1;padding:24px;display:grid;gap:14px;align-content:start;min-width:0}.mn h1{font-size:22px;font-weight:800;letter-spacing:-.04em}.mn p{font-size:14px;color:#7A82A4;margin-top:-6px}
+.cd{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.cd i{height:96px;border-radius:18px;background:#fff;box-shadow:0 0 0 1px #E6E9F2}.bg{height:150px;border-radius:18px;background:#fff;box-shadow:0 0 0 1px #E6E9F2}
+@media(max-width:560px){.sb{width:74px}.nv span,.lg b,.us div{display:none}.tg{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="ap c" id="ap"><aside class="sb" aria-label="Sidebar"><button class="tg" id="tg" aria-label="Toggle sidebar" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button>
+ <div class="lg"><i></i><b>Orbit</b></div>
+ <button class="nv on" data-t="Dashboard"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z"/></svg><span>Dashboard</span></button>
+ <button class="nv" data-t="Projects"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><span>Projects</span></button>
+ <button class="nv" data-t="Inbox"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h5l1 3h6l1-3h5M5 5h14l2 8v6H3v-6Z"/></svg><span>Inbox</span><em>5</em></button>
+ <button class="nv" data-t="Calendar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><rect x="3.500" y="5" width="17" height="15.500" rx="3"/><path d="M3.500 10h17M8 3v4M16 3v4"/></svg><span>Calendar</span></button>
+ <button class="nv" data-t="Reports"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Reports</span></button>
+ <div class="us"><i>MA</i><div><b>Maya Alvarez</b><span>Pro plan</span></div></div></aside>
+ <main class="mn"><h1>Dashboard</h1><p>Collapse the rail for more room.</p><div class="cd"><i></i><i></i></div><div class="bg"></div></main></div><div class="tp" id="tp"></div>
+<script>
+const ap=document.getElementById('ap'),tg=document.getElementById('tg'),tp=document.getElementById('tp');
+tg.onclick=()=>{ap.classList.toggle('c');tg.setAttribute('aria-expanded',!ap.classList.contains('c'))};
+document.querySelectorAll('.nv').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.nv').forEach(x=>x.classList.toggle('on',x===b));document.querySelector('.mn h1').textContent=b.dataset.t});
+ b.addEventListener('mouseenter',()=>{if(!ap.classList.contains('c'))return;const r=b.getBoundingClientRect();tp.textContent=b.dataset.t;tp.style.left=(r.right+12)+'px';tp.style.top=(r.top+r.height/2-16)+'px';tp.style.opacity=1});b.addEventListener('mouseleave',()=>tp.style.opacity=0)});
+</script></body></html>

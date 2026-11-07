@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lightbox Masonry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0C;color:#EEE;font-family:'Inter',sans-serif;min-height:100vh;padding:44px 24px;display:grid;place-items:center;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:880px}
+.h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px}
+h1{font:italic 400 38px 'Fraunces',serif;letter-spacing:-.03em}.h span{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6E6E78}
+.m{columns:3;column-gap:12px}
+.t{position:relative;break-inside:avoid;margin-bottom:12px;border-radius:16px;overflow:hidden;cursor:zoom-in;background:var(--bg);height:var(--h);border:0;display:block;width:100%;transition:transform .35s,box-shadow .35s}
+.t::before{content:"";position:absolute;inset:0;background:var(--p)}
+.t::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.72));opacity:0;transition:opacity .3s}
+.t:hover,.t:focus-visible{transform:scale(.985);box-shadow:0 20px 40px -18px #000;outline:0}.t:hover::after,.t:focus-visible::after{opacity:1}
+.c{position:absolute;left:14px;right:14px;bottom:12px;z-index:2;text-align:left;opacity:0;transform:translateY(8px);transition:all .3s}
+.t:hover .c,.t:focus-visible .c{opacity:1;transform:none}
+.c b{display:block;font-size:14px;font-weight:600}.c small{font-size:12px;color:#C9C9D3}
+.lb{position:fixed;inset:0;background:rgba(5,5,8,.88);backdrop-filter:blur(10px);display:none;place-items:center;z-index:9;padding:30px}
+.lb.on{display:grid}
+.lb .f{width:min(560px,86vw);aspect-ratio:4/3;border-radius:20px;position:relative;overflow:hidden;box-shadow:0 40px 90px -20px #000}
+.lb .f::before{content:"";position:absolute;inset:0;background:var(--p)}
+.lb .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 24px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.75));z-index:2}
+.lb .cap b{font-size:20px;display:block}.lb .cap small{color:#CFCFD8;font-size:14px}
+.lb button{position:absolute;top:22px;right:22px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;display:grid;place-items:center}
+@media(max-width:640px){.m{columns:2}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="h"><h1>Field studies</h1><span>Series 03 · 9 plates</span></div>
+<div class="m" id="m"></div></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image preview"><button id="cl" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button><div class="f" id="f"><div class="cap"><b id="ct"></b><small id="cs"></small></div></div></div>
+<script>
+const D=[['Dusk over Lisbon','Alfama, 2024',210,'linear-gradient(160deg,#FF9A6B,#C2417F 55%,#3B1E5E)'],['Salt flats','Uyuni, 2023',150,'linear-gradient(180deg,#CFE7F5,#7FB4D6)'],['Studio light','Brooklyn, 2024',260,'conic-gradient(from 210deg at 30% 70%,#F7E3C0,#D98A4B,#4A2A1A,#F7E3C0)'],['Night market','Taipei, 2022',170,'radial-gradient(circle at 70% 30%,#FFD36B,#E8453C 40%,#1B0E2E 80%)'],['Glacier edge','Vatnajökull, 2023',230,'linear-gradient(200deg,#E9F6FF,#7CC5E8 50%,#12507A)'],['Terracotta','Marrakech, 2024',150,'linear-gradient(140deg,#F2A56B,#C4592A 60%,#7A2E14)'],['Fern study','Hokkaido, 2022',200,'radial-gradient(circle at 30% 40%,#9BD97A,#2F7A3E 55%,#0D2E1A)'],['Concrete bloom','Milan, 2024',160,'linear-gradient(135deg,#C9C9CF,#6E6E78 60%,#2B2B31)'],['Blue hour','Oslo, 2023',220,'linear-gradient(180deg,#2B3A8C,#7F8FE0 55%,#F6C8A0)']];
+const m=document.getElementById('m');
+D.forEach(([a,b,h,p],i)=>{const t=document.createElement('button');t.className='t';t.style.setProperty('--h',h+'px');t.style.setProperty('--p',p);t.setAttribute('aria-label',a);t.innerHTML='<span class="c"><b>'+a+'</b><small>'+b+'</small></span>';t.onclick=()=>open(i);m.appendChild(t)});
+const lb=document.getElementById('lb'),f=document.getElementById('f');
+function open(i){f.style.setProperty('--p',D[i][3]);document.getElementById('ct').textContent=D[i][0];document.getElementById('cs').textContent=D[i][1];lb.classList.add('on');document.getElementById('cl').focus()}
+function close(){lb.classList.remove('on')}
+document.getElementById('cl').onclick=close;lb.addEventListener('click',e=>{if(e.target===lb)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+</script></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior scheduling-UX designer and front-end engineer with 15+ years of experience. Build "Month Planner": a month calendar with today ring, event dots and an agenda panel that updates when you pick a day.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight blue calendar with a blue-to-violet selected day and mono weekday labels.
+- Palette: #4DA3FF, #1E2533, #6C7891, #5B677F, #142238, #090B10
+- Type: Manrope, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Month/year header with previous/next buttons; 7×6 grid with outside-month days dimmed and event dots; side agenda with date and event cards or a friendly empty state.
+
+INTERACTION & STATES
+- Selecting a day updates the agenda; previous/next change the month; today has a ring; every day button has an aria-label with its event count.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

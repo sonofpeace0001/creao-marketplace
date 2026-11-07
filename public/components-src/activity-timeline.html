@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Order Tracker Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0C10;color:#E9EDF4;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:34px 20px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:520px;background:#10141B;border:1px solid #1E2430;border-radius:24px;padding:26px 28px;box-shadow:0 40px 80px -34px #000}
+.h{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}
+.h small{font:500 11.5px 'DM Mono',monospace;color:#6C788F;letter-spacing:.1em}.h h1{font-size:21px;font-weight:700;letter-spacing:-.03em;margin-top:4px}
+.eta{text-align:right;font-size:12.5px;color:#6C788F}.eta b{display:block;font-size:18px;color:#5EEAD4;font-weight:700;margin-top:2px}
+ol{list-style:none;position:relative}
+ol::before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:2px;background:#1E2430}
+ol::after{content:"";position:absolute;left:15px;top:8px;width:2px;height:var(--h,0);background:linear-gradient(#5EEAD4,#38BDF8);transition:height 1s cubic-bezier(.3,1,.4,1)}
+li{position:relative;padding:0 0 22px 50px;cursor:pointer}
+li:last-child{padding-bottom:0}
+.d{position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#10141B;border:2px solid #1E2430;color:#4B566C;z-index:1;transition:all .4s}
+li.done .d{background:#5EEAD4;border-color:#5EEAD4;color:#04201C}
+li.now .d{border-color:#38BDF8;color:#38BDF8;box-shadow:0 0 0 6px rgba(56,189,248,.16);animation:pu 2s infinite}
+@keyframes pu{50%{box-shadow:0 0 0 10px rgba(56,189,248,.04)}}
+.t{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.t b{font-size:15.5px;font-weight:600;letter-spacing:-.01em;color:#6F7A90}li.done .t b,li.now .t b{color:#EEF2F8}
+.t time{font:400 12px 'DM Mono',monospace;color:#5A667C;white-space:nowrap}
+.x{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}
+.x>div{overflow:hidden}.x p{font-size:14px;color:#8A95AB;line-height:1.55;padding-top:5px}
+li.open .x{grid-template-rows:1fr}
+li:focus-visible{outline:2px solid #38BDF8;outline-offset:4px;border-radius:8px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="h"><div><small>ORDER #84-2217</small><h1>Out for delivery</h1></div><div class="eta">Arriving today<b>4:30 – 6:00 pm</b></div></div>
+<ol id="o">
+ <li class="done" tabindex="0"><span class="d"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span><div class="t"><b>Order confirmed</b><time>Mon 9:12</time></div><div class="x"><div><p>Payment received. We've started picking your items.</p></div></div></li>
+ <li class="done" tabindex="0"><span class="d"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span><div class="t"><b>Packed &amp; shipped</b><time>Mon 16:40</time></div><div class="x"><div><p>Packed at our Leeds warehouse and handed to the courier.</p></div></div></li>
+ <li class="done" tabindex="0"><span class="d"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span><div class="t"><b>Arrived at local depot</b><time>Wed 5:55</time></div><div class="x"><div><p>Sorted at Manchester North. Out for delivery within hours.</p></div></div></li>
+ <li class="now open" tabindex="0"><span class="d"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.800"/><circle cx="17" cy="18" r="1.800"/></svg></span><div class="t"><b>Out for delivery</b><time>Today 8:02</time></div><div class="x"><div><p>Your driver, Sam, is 6 stops away. We'll text you 10 minutes before.</p></div></div></li>
+ <li tabindex="0"><span class="d"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9H4z"/></svg></span><div class="t"><b>Delivered</b><time>Est. 5:15 pm</time></div><div class="x"><div><p>Left safely at your door or with a neighbour — we'll tell you which.</p></div></div></li>
+</ol></div>
+<script>
+const o=document.getElementById('o'),L=[...o.children];
+function bar(){const n=L.findIndex(l=>l.classList.contains('now'));const t=L[n>=0?n:L.length-1];o.style.setProperty('--h',(t.offsetTop+16)+'px')}
+L.forEach(l=>{l.addEventListener('click',()=>l.classList.toggle('open'));l.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();l.classList.toggle('open')}})});
+requestAnimationFrame(()=>setTimeout(bar,50));addEventListener('resize',bar);
+</script></body></html>

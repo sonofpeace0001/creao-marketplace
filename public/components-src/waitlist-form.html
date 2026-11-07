@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Waitlist Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFE9DC;color:#1E1B16;font-family:'Instrument Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:460px;background:#FBF8F1;border:1px solid #D9D0BC;border-radius:6px;padding:40px 36px 30px;position:relative;box-shadow:0 1px 0 #fff inset,0 40px 60px -40px rgba(60,45,10,.5)}
+.c::before{content:"";position:absolute;inset:8px;border:1px solid #E3DAC6;border-radius:3px;pointer-events:none}
+.k{font-size:12px;font-weight:700;letter-spacing:.22em;color:#A0522D;text-transform:uppercase;text-align:center}
+h1{font:400 clamp(34px,7vw,44px)/1 'Instrument Serif',serif;letter-spacing:-.02em;text-align:center;margin:14px 0 12px}h1 em{color:#A0522D}
+.sub{font-size:15px;line-height:1.55;color:#6B6455;text-align:center;max-width:34ch;margin:0 auto 26px}
+.f{margin-bottom:14px}.f label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:#6B6455;margin-bottom:6px;text-transform:uppercase}
+.f input{width:100%;background:#fff;border:1px solid #CFC6B0;border-radius:4px;padding:13px 14px;font:500 15.5px 'Instrument Sans';color:#1E1B16;outline:0;transition:all .2s}.f input:focus{border-color:#A0522D;box-shadow:0 0 0 3px rgba(160,82,45,.16)}.f.bad input{border-color:#C0392B}.er{display:none;font-size:12.5px;color:#C0392B;margin-top:5px}.f.bad .er{display:block}
+.rl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}.rl label{position:relative}.rl input{position:absolute;opacity:0}.rl span{display:block;text-align:center;border:1px solid #CFC6B0;border-radius:4px;padding:11px 6px;font-size:14px;font-weight:600;background:#fff;cursor:pointer;transition:all .15s}.rl input:checked+span{background:#1E1B16;color:#FBF8F1;border-color:#1E1B16}.rl input:focus-visible+span{outline:2px solid #A0522D;outline-offset:2px}
+.go{width:100%;border:0;border-radius:4px;padding:15px;font:700 15.5px 'Instrument Sans';background:#A0522D;color:#fff;cursor:pointer;letter-spacing:.02em;transition:all .15s;box-shadow:0 3px 0 #6E3418}.go:hover{transform:translateY(-1px)}.go:active{transform:translateY(2px);box-shadow:0 1px 0 #6E3418}.go:focus-visible{outline:3px solid #1E1B16;outline-offset:3px}
+.ft{display:flex;justify-content:center;gap:8px;align-items:center;font-size:13px;color:#8C8470;margin-top:18px}.ft i{width:5px;height:5px;border-radius:50%;background:#C4BBA5}
+.ok{display:none;text-align:center;padding:10px 0}.ok .nb{font:400 64px 'Instrument Serif',serif;color:#A0522D;line-height:1}.ok h2{font:400 32px 'Instrument Serif',serif;margin:10px 0 8px}.ok p{color:#6B6455;font-size:15px;line-height:1.55}
+.dn .fm{display:none}.dn .ok{display:block}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c" id="c"><div class="fm"><div class="k">Private beta</div><h1>Get on the <em>list</em></h1><p class="sub">We are letting people in slowly. Tell us a little about yourself and we will save you a seat.</p>
+<form id="f" novalidate><div class="f" id="fn"><label for="n">Name</label><input id="n" placeholder="Ada Lovelace" autocomplete="off"><div class="er">Please tell us your name.</div></div><div class="f" id="fe"><label for="e">Email</label><input id="e" type="email" placeholder="ada@studio.com" autocomplete="off"><div class="er">Enter a valid email address.</div></div>
+<div class="rl" role="radiogroup" aria-label="I am a"><label><input type="radio" name="r" checked><span>Designer</span></label><label><input type="radio" name="r"><span>Developer</span></label></div>
+<button class="go">Reserve my spot</button></form><div class="ft"><span>No spam</span><i></i><span>Unsubscribe anytime</span><i></i><span>Invite in ~2 weeks</span></div></div>
+<div class="ok" role="status"><div class="nb" id="nb">#12,848</div><h2>You are on the list</h2><p id="ms">We will email you the moment your invite is ready.</p></div></div>
+<script>
+const $=id=>document.getElementById(id);
+$('f').addEventListener('submit',x=>{x.preventDefault();const a=$('n').value.trim().length>1,b=/^\S+@\S+\.\S+$/.test($('e').value);$('fn').classList.toggle('bad',!a);$('fe').classList.toggle('bad',!b);if(a&&b){$('ms').textContent='Thanks, '+$('n').value.trim().split(' ')[0]+'. We will email '+$('e').value+' the moment your invite is ready.';$('c').classList.add('dn')}});
+['n','e'].forEach(i=>$(i).addEventListener('input',()=>$(i).parentElement.classList.remove('bad')));
+</script></body></html>

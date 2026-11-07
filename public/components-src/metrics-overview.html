@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mission Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05080C;color:#CFE6EE;font-family:'Barlow',sans-serif;min-height:100vh;display:grid;place-items:center;padding:26px 16px;-webkit-font-smoothing:antialiased;background-image:linear-gradient(rgba(0,255,200,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,200,.04) 1px,transparent 1px);background-size:36px 36px}
+.w{width:100%;max-width:840px}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font:600 12px 'Chakra Petch';letter-spacing:.2em;color:#4D7C8A;text-transform:uppercase}
+.hd b{color:#00F5C4;display:flex;align-items:center;gap:8px}.hd b i{width:8px;height:8px;background:#00F5C4;box-shadow:0 0 12px #00F5C4;animation:p 1.4s infinite}@keyframes p{50%{opacity:.3}}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.c{position:relative;padding:20px 20px 18px;background:linear-gradient(180deg,rgba(0,40,50,.45),rgba(4,14,20,.8));border:1px solid #11343F;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px));transition:border-color .3s,transform .3s}
+.c:hover{border-color:var(--c);transform:translateY(-3px)}
+.c::before{content:"";position:absolute;left:0;top:0;width:34px;height:2px;background:var(--c);box-shadow:0 0 10px var(--c)}
+.ic{display:flex;align-items:center;gap:10px;font:600 12px 'Chakra Petch';letter-spacing:.16em;text-transform:uppercase;color:var(--c)}.ic svg{width:18px;height:18px}
+.v{font:700 46px 'Chakra Petch';letter-spacing:-.02em;color:#F2FBFF;line-height:1;margin:16px 0 6px;font-variant-numeric:tabular-nums;text-shadow:0 0 22px color-mix(in srgb,var(--c) 50%,transparent)}
+.v small{font-size:20px;color:#6FA0AE;margin-left:3px;font-weight:600}
+.tr{display:inline-flex;align-items:center;gap:6px;font:600 13px 'Chakra Petch';color:var(--t)}
+.sp{display:flex;align-items:flex-end;gap:3px;height:34px;margin-top:14px}.sp i{flex:1;background:var(--c);opacity:.35;height:var(--h);transition:opacity .2s}.sp i:last-child{opacity:1;box-shadow:0 0 10px var(--c)}.c:hover .sp i{opacity:.7}
+.ft{margin-top:14px;display:flex;justify-content:space-between;font:500 11px 'Chakra Petch';letter-spacing:.14em;color:#3E6674;text-transform:uppercase}
+@media(max-width:720px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.hd b i{animation:none}*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><span>Mission control / Q3</span><b><i></i>Systems nominal</b></div>
+<div class="g" id="g"></div><div class="ft"><span>Sync 00:00:12 ago</span><span>Region · Global</span></div></div>
+<script>
+const D=[['Uptime',99.98,'%',0.02,1,'#00F5C4','<path d="M12 2 4 6v6c0 5 3.400 8 8 9 4.600-1 8-4 8-9V6Z"/><path d="m9 12 2 2 4-4"/>',[60,64,62,70,68,74,80,86]],['Latency',142,'ms',9,1,'#38BDF8','<path d="M13 2 4 14h7l-1 8 9-12h-7Z"/>',[80,74,78,66,60,58,50,44]],['Error rate',0.42,'%',0.08,0,'#FF5C7A','<circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.500v.01"/>',[30,38,34,46,52,48,60,70]]];
+const g=document.getElementById('g');
+g.innerHTML=D.map((d,i)=>{const good=(d[0]==='Latency')?d[4]:d[4];const col=(d[0]==='Error rate')?'#FF5C7A':'#00F5C4';return '<article class="c" style="--c:'+d[5]+';--t:'+(d[0]==='Error rate'?'#FF5C7A':'#00F5C4')+'"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round">'+d[6]+'</svg>'+d[0]+'</div><div class="v" data-i="'+i+'">0<small>'+d[2]+'</small></div><span class="tr">'+(d[4]?'▲':'▼')+' '+d[3]+(d[2]==='ms'?' ms':' pts')+' vs last week</span><div class="sp">'+d[7].map(h=>'<i style="--h:'+h+'%"></i>').join('')+'</div></article>'}).join('');
+const R=matchMedia('(prefers-reduced-motion: reduce)').matches;
+g.querySelectorAll('.v').forEach(el=>{const d=D[+el.dataset.i],t0=performance.now(),dec=d[1]%1?2:0;(function f(t){const k=R?1:Math.min(1,(t-t0)/1300),e=1-Math.pow(1-k,3);el.firstChild.textContent=(d[1]*e).toFixed(dec);if(k<1)requestAnimationFrame(f)})(t0)});
+</script></body></html>

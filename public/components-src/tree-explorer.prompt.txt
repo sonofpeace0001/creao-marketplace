@@ -1,0 +1,29 @@
+ROLE
+You are a senior IDE-UX designer and front-end engineer with 15+ years of experience. Build "Editor Explorer": a VS Code-style explorer with indent guides, git status colours and a synced editor tab and code view.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight-blue editor chrome with JetBrains Mono, tinted file icons and a bright status bar.
+- Palette: #1C2140, #6C76A0, #7AA2FF, #0A0C14, #0F1220, #0C0F1B
+- Type: JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- EXPLORER header; nested tree with indent guides, folder/file icons and M/U badges; editor with tab, numbered syntax-highlighted code and a blue status bar.
+
+INTERACTION & STATES
+- Click toggles folders or opens a file (updating the tab and code); selected row is highlighted; arrow keys move focus between rows.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

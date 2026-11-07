@@ -1,0 +1,31 @@
+ROLE
+You are a senior brand designer and front-end engineer with 15+ years of experience. Build "Giant Wordmark Footer": a dark multi-column footer with a live status pill, social icons and an oversized fading wordmark.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Quiet dark footer where the brand name is cropped huge at the bottom and fades into the page.
+- Palette: #FF7A59, #0C0C0E, #34D399, #6C6C77, #E7E7EC, #3A3A42
+- Type: Inter Tight (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Brand block with tagline and an 'All systems normal' pulsing status link.
+- Three link columns (Product, Company, Resources), a legal bar with social icon buttons, and a giant gradient-clipped wordmark.
+
+INTERACTION & STATES
+- Links brighten on hover with a visible focus ring; social buttons lift and tint coral.
+- Status dot pulses; stops under reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

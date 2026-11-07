@@ -1,0 +1,29 @@
+ROLE
+You are a senior project-management designer and front-end engineer with 15+ years of experience. Build "Kanban Board": a three-column task board with drag-and-drop, arrow buttons for keyboard users, tags, due dates and assignees.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Graphite board with soft columns, tinted tags and an indigo drop highlight.
+- Palette: #8B93A8, #818CF8, #3A4159, #1B1F2A, #B4BBCE, #E8EBF3
+- Type: Figtree (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with project and member avatars; columns To do, In progress, Done with counts; draggable cards with title, tag, due date and avatar; back/forward buttons; progress summary.
+
+INTERACTION & STATES
+- HTML5 drag-and-drop between columns with a highlighted target; the arrow buttons move cards for keyboard and touch; counts and summary update.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

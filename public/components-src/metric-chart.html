@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Traffic Line Chart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 400px at 100% 0,#1A1030,transparent 60%),#0A0910;color:#F0EDFA;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px 18px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:620px;background:#120F1C;border:1px solid #251F38;border-radius:28px;padding:26px 28px 22px;box-shadow:0 40px 80px -34px #000}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.hd small{font:500 12px 'DM Mono',monospace;letter-spacing:.1em;color:#8A81A8}
+.v{font-size:46px;font-weight:800;letter-spacing:-.05em;line-height:1;margin-top:6px;font-variant-numeric:tabular-nums}
+.d{display:inline-flex;align-items:center;gap:5px;font:500 13px 'DM Mono',monospace;color:#5EEAD4;background:rgba(94,234,212,.1);padding:4px 10px;border-radius:99px;margin-top:10px}
+.rg{display:flex;gap:4px;background:#1A1628;border-radius:13px;padding:4px}.rg button{border:0;background:none;color:#8A81A8;font:700 13px 'Bricolage Grotesque';padding:8px 14px;border-radius:10px;cursor:pointer}.rg button[aria-pressed=true]{background:#F0EDFA;color:#120F1C}.rg button:focus-visible{outline:2px solid #C084FC;outline-offset:1px}
+.ch{position:relative;margin-top:18px;height:220px;touch-action:none}
+svg{width:100%;height:100%;overflow:visible;display:block}
+.gr line{stroke:#221C34;stroke-width:1;stroke-dasharray:3 5}
+.ar{fill:url(#a);opacity:.9}.ln{fill:none;stroke:url(#l);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.cr{stroke:#8A81A8;stroke-width:1;stroke-dasharray:3 4;opacity:0;transition:opacity .15s}.dot{fill:#120F1C;stroke:#C084FC;stroke-width:3;opacity:0;transition:opacity .15s}
+.ch:hover .cr,.ch:hover .dot{opacity:1}
+.tp{position:absolute;pointer-events:none;background:#F0EDFA;color:#120F1C;border-radius:11px;padding:7px 11px;font-size:13px;font-weight:700;white-space:nowrap;transform:translate(-50%,-125%);opacity:0;transition:opacity .15s;box-shadow:0 12px 24px rgba(0,0,0,.45)}
+.tp small{display:block;font:500 11px 'DM Mono',monospace;color:#6A6285;font-weight:500}
+.ch:hover .tp{opacity:1}
+.xl{display:flex;justify-content:space-between;margin-top:10px;font:500 11.5px 'DM Mono',monospace;color:#6E6590}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><small id="lb">UNIQUE VISITORS · LAST 7 DAYS</small><div class="v" id="v">0</div><span class="d" id="dl">▲ 18.2%</span></div><div class="rg" role="group" aria-label="Range"><button aria-pressed="true" data-r="7">7D</button><button aria-pressed="false" data-r="30">30D</button><button aria-pressed="false" data-r="90">90D</button></div></div>
+<div class="ch" id="ch"><svg id="s" viewBox="0 0 560 220" preserveAspectRatio="none"><defs><linearGradient id="a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C084FC" stop-opacity=".45"/><stop offset="1" stop-color="#C084FC" stop-opacity="0"/></linearGradient><linearGradient id="l" x1="0" x2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#C084FC"/></linearGradient></defs><g class="gr"><line x1="0" x2="560" y1="40" y2="40"/><line x1="0" x2="560" y1="95" y2="95"/><line x1="0" x2="560" y1="150" y2="150"/><line x1="0" x2="560" y1="205" y2="205"/></g><path class="ar" id="ar"/><path class="ln" id="ln"/><line class="cr" id="cr" y1="0" y2="210"/><circle class="dot" id="dt" r="6"/></svg><div class="tp" id="tp"></div></div>
+<div class="xl" id="xl"></div></div>
+<script>
+function gen(n,seed){let a=[],v=seed;for(let i=0;i<n;i++){v+=Math.sin(i*.9+seed)*40+((i*37+seed*13)%23)-8+i*(n===7?18:n===30?6:2.4);a.push(Math.max(90,Math.round(v)))}return a}
+const R={7:{d:gen(7,300),l:'LAST 7 DAYS',x:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],dl:'▲ 18.2%'},30:{d:gen(30,420),l:'LAST 30 DAYS',x:['Oct 1','Oct 8','Oct 15','Oct 22','Oct 30'],dl:'▲ 9.6%'},90:{d:gen(90,520),l:'LAST 90 DAYS',x:['Aug','Sep','Oct','Nov'],dl:'▲ 24.1%'}};
+const W=560,H=210;let cur=7,pts=[];const s=document.getElementById('s');
+function path(d){const mx=Math.max(...d)*1.08,mn=Math.min(...d)*.85;pts=d.map((v,i)=>[i/(d.length-1)*W,H-(v-mn)/(mx-mn)*(H-24)-8]);
+ let p='M'+pts[0][0]+' '+pts[0][1];for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],c=(a[0]+b[0])/2;p+=' C'+c+' '+a[1]+' '+c+' '+b[1]+' '+b[0]+' '+b[1]}return p}
+function draw(){const r=R[cur],p=path(r.d);document.getElementById('ln').setAttribute('d',p);document.getElementById('ar').setAttribute('d',p+' L'+W+' '+H+' L0 '+H+'Z');
+ const t=r.d.reduce((a,b)=>a+b,0);document.getElementById('lb').textContent='UNIQUE VISITORS · '+r.l;document.getElementById('dl').textContent=r.dl;document.getElementById('xl').innerHTML=r.x.map(x=>'<span>'+x+'</span>').join('');
+ const el=document.getElementById('v'),t0=performance.now();(function f(n){const k=Math.min(1,(n-t0)/800),e=1-Math.pow(1-k,3);el.textContent=Math.round(t*e).toLocaleString();if(k<1)requestAnimationFrame(f)})(t0);
+ const ln=document.getElementById('ln'),L=ln.getTotalLength();ln.style.strokeDasharray=L;ln.style.strokeDashoffset=L;ln.getBoundingClientRect();ln.style.transition='stroke-dashoffset 1s ease';ln.style.strokeDashoffset=0}
+document.querySelectorAll('.rg button').forEach(b=>b.addEventListener('click',()=>{cur=+b.dataset.r;document.querySelectorAll('.rg button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw()}));
+const ch=document.getElementById('ch'),tp=document.getElementById('tp'),cr=document.getElementById('cr'),dt=document.getElementById('dt');
+ch.addEventListener('pointermove',e=>{const r=ch.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*W;let k=0,bd=1e9;pts.forEach((p,i)=>{const d=Math.abs(p[0]-x);if(d<bd){bd=d;k=i}});
+ const p=pts[k];cr.setAttribute('x1',p[0]);cr.setAttribute('x2',p[0]);dt.setAttribute('cx',p[0]);dt.setAttribute('cy',p[1]);tp.style.left=(p[0]/W*100)+'%';tp.style.top=(p[1]/H*100)+'%';
+ tp.innerHTML=R[cur].d[k].toLocaleString()+'<small>'+(cur===7?R[7].x[k]:'Day '+(k+1))+'</small>'});
+draw();
+</script></body></html>

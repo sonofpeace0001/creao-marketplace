@@ -1,0 +1,29 @@
+ROLE
+You are a senior AI-product designer and front-end engineer with 15+ years of experience. Build "AI Agent Card": an AI agent profile card with animated presence ring, skill chips, performance stats and a live task log with Run task.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight blue card with a conic gradient avatar ring, soft blue glow and mono terminal log.
+- Palette: #0F1730, #38BDF8, #34D399, #7F92BE, #6366F1, #C084FC
+- Type: Sora, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Avatar with pinging status dot, name and mono role line; description; skill chips; three stat tiles (tasks, success, latency); terminal-style log; Run task and Configure buttons.
+
+INTERACTION & STATES
+- Run task streams log lines on a timer, flips the status dot and label to working, then restores them and relabels the button Run again; log region is aria-live.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

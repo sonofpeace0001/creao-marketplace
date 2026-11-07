@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Filter Search Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 400px at 90% 0,#172A1F,transparent 60%),#090C0A;color:#E8F1EA;font-family:'Albert Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px}
+.bar{display:flex;align-items:stretch;background:#101713;border:1.5px solid #1F2D24;border-radius:20px;padding:6px;gap:4px;transition:border-color .2s,box-shadow .2s;box-shadow:0 30px 50px -30px #000}
+.bar:focus-within{border-color:#4ADE80;box-shadow:0 0 0 4px rgba(74,222,128,.12),0 30px 50px -30px #000}
+.q{flex:1;display:flex;align-items:center;gap:11px;padding:0 14px;min-width:0}.q svg{color:#6F8A78;flex:none}.q input{flex:1;min-width:0;background:none;border:0;outline:0;color:#E8F1EA;font:500 16px 'Albert Sans'}.q input::placeholder{color:#5F7767}
+.dv{width:1px;background:#1F2D24;margin:10px 0}
+.sl{position:relative}.sl button.t{height:100%;display:flex;align-items:center;gap:8px;background:none;border:0;color:#C9DACE;font:600 14.5px 'Albert Sans';padding:0 16px;border-radius:14px;cursor:pointer}.sl button.t:hover,.sl button.t[aria-expanded=true]{background:#17211B}
+.sl button.t:focus-visible{outline:2px solid #4ADE80;outline-offset:-2px}.sl .t svg{color:#6F8A78;transition:transform .2s}.sl .t[aria-expanded=true] svg{transform:rotate(180deg)}
+.mn{position:absolute;right:0;top:calc(100% + 10px);width:200px;background:#121A15;border:1px solid #243329;border-radius:16px;padding:6px;box-shadow:0 26px 40px -16px #000;opacity:0;transform:translateY(-6px);pointer-events:none;transition:all .18s;z-index:3}
+.mn.on{opacity:1;transform:none;pointer-events:auto}
+.mn button{display:flex;justify-content:space-between;width:100%;border:0;background:none;color:#C9DACE;font:500 14.5px 'Albert Sans';padding:10px 12px;border-radius:11px;cursor:pointer;text-align:left}
+.mn button:hover,.mn button:focus-visible{background:#1A261E;outline:0}.mn button[aria-selected=true]{color:#4ADE80;font-weight:700}
+.go{border:0;border-radius:14px;padding:0 22px;background:#4ADE80;color:#052010;font:700 15px 'Albert Sans';cursor:pointer;transition:transform .15s}.go:hover{transform:translateY(-1px)}.go:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.rs{margin-top:16px;display:grid;gap:8px}
+.rw{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:12px 14px;border-radius:16px;background:#0E1511;border:1px solid #19251E;animation:in .3s}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.rw i{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-style:normal;font-weight:800;color:#052010;background:var(--c)}
+.rw b{display:block;font-size:15px;font-weight:600}.rw span{font-size:13px;color:#6F8A78}.rw em{font-style:normal;font-size:12px;font-weight:700;color:#8FB09B;background:#16211B;padding:5px 10px;border-radius:99px}
+.rw mark{background:rgba(74,222,128,.22);color:#9DF0BC;border-radius:3px}
+.mt{margin-top:12px;font-size:13px;color:#5F7767;text-align:center}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="bar"><label class="q"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><input id="i" placeholder="Search recipes, ingredients…" aria-label="Search" autocomplete="off"></label><span class="dv"></span>
+ <div class="sl"><button class="t" id="t" aria-haspopup="listbox" aria-expanded="false"><span id="tl">All categories</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="mn" id="m" role="listbox"></div></div>
+ <button class="go" id="go">Search</button></div>
+ <div class="rs" id="rs"></div><div class="mt" id="mt"></div></div>
+<script>
+const R=[['Charred miso aubergine','Dinner','35 min','#86EFAC'],['Brown butter banana bread','Baking','1 hr 10','#FDE68A'],['Smashed cucumber salad','Sides','10 min','#7DD3FC'],['Harissa chickpea stew','Dinner','45 min','#FDBA74'],['Sourdough focaccia','Baking','4 hr','#FCA5A5'],['Lemon ricotta pancakes','Breakfast','25 min','#C4B5FD']];
+const C=['All categories','Dinner','Baking','Sides','Breakfast'];let cat=0;const $=id=>document.getElementById(id);
+$('m').innerHTML=C.map((c,i)=>'<button role="option" data-i="'+i+'" aria-selected="'+(i===0)+'">'+c+(i===0?'':'')+'</button>').join('');
+function esc(s){return s.replace(/[&<>]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[x]))}
+function draw(){const q=$('i').value.trim().toLowerCase(),r=R.filter(x=>(!cat||x[1]===C[cat])&&x[0].toLowerCase().includes(q));
+ $('rs').innerHTML=r.map(x=>{const t=esc(x[0]),k=q?t.toLowerCase().indexOf(q):-1;const h=k<0?t:t.slice(0,k)+'<mark>'+t.slice(k,k+q.length)+'</mark>'+t.slice(k+q.length);return '<div class="rw"><i style="--c:'+x[3]+'">'+x[0][0]+'</i><div><b>'+h+'</b><span>'+x[1]+'</span></div><em>'+x[2]+'</em></div>'}).join('');
+ $('mt').textContent=r.length?r.length+' result'+(r.length>1?'s':'')+(cat?' in '+C[cat]:''):'No recipes match — try another word or category.'}
+function set(o){$('m').classList.toggle('on',o);$('t').setAttribute('aria-expanded',o)}
+$('t').onclick=e=>{e.stopPropagation();set(!$('m').classList.contains('on'))};
+$('m').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cat=+b.dataset.i;$('tl').textContent=C[cat];[...$('m').children].forEach(x=>x.setAttribute('aria-selected',x===b));set(false);draw()});
+document.addEventListener('click',()=>set(false));document.addEventListener('keydown',e=>{if(e.key==='Escape'){set(false);$('t').focus()}});
+$('i').addEventListener('input',draw);$('go').onclick=draw;draw();
+</script></body></html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Editable Grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0F14;color:#E5ECF4;font-family:'Figtree',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:700px;background:#11171F;border:1px solid #1E2733;border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -40px #000}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid #1E2733}.hd h1{font-size:16px;font-weight:700;letter-spacing:-.02em}.hd small{display:block;font-size:12.5px;color:#7B8CA3;margin-top:2px;font-weight:500}
+.sv{font:500 12px 'Fira Code',monospace;color:#7B8CA3;display:flex;align-items:center;gap:7px}.sv i{width:7px;height:7px;border-radius:50%;background:#34D399;transition:background .2s}.sv.dirty i{background:#FBBF24}
+table{width:100%;border-collapse:collapse}th{text-align:left;font:500 11px 'Fira Code',monospace;color:#5E6F86;letter-spacing:.08em;text-transform:uppercase;padding:11px 20px;background:#0E141B}
+td{padding:4px 12px;border-top:1px solid #1A232E}td:first-child{padding-left:12px}
+.cell{display:block;width:100%;padding:11px 8px;border-radius:9px;font:500 14px 'Figtree',sans-serif;color:#E5ECF4;cursor:text;border:1.5px solid transparent;min-height:42px;transition:background .15s}.cell:hover{background:#18212C}
+input.cell{background:#0B0F14;border-color:#38BDF8;outline:0;box-shadow:0 0 0 3px rgba(56,189,248,.16)}.cell.num{font-family:'Fira Code',monospace;font-size:13.5px;text-align:right}.cell.saved{animation:fl 1s}
+@keyframes fl{0%{background:rgba(52,211,153,.28)}100%{background:transparent}}
+.cell:focus-visible{outline:2px solid #38BDF8;outline-offset:-2px}
+.rm{width:30px;height:30px;border:0;border-radius:8px;background:none;color:#5E6F86;cursor:pointer;display:grid;place-items:center;opacity:0;transition:all .15s}tr:hover .rm,.rm:focus-visible{opacity:1}.rm:hover{background:#2A1A1E;color:#F87171}.rm:focus-visible{outline:2px solid #38BDF8}
+.ad{display:flex;align-items:center;gap:8px;width:100%;border:0;border-top:1px dashed #263241;background:none;color:#7B8CA3;font:600 13.5px 'Figtree';padding:14px 20px;cursor:pointer;transition:all .15s}.ad:hover{background:#141B24;color:#38BDF8}.ad:focus-visible{outline:2px solid #38BDF8;outline-offset:-2px}
+.tt{display:flex;justify-content:space-between;padding:14px 20px;border-top:1px solid #1E2733;background:#0E141B;font-size:13.5px;color:#7B8CA3}.tt b{font:500 15px 'Fira Code',monospace;color:#E5ECF4}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Q3 budget lines</h1><small>Click any cell to edit · Enter saves · Esc cancels</small></div><div class="sv" id="sv"><i></i><span>All changes saved</span></div></div>
+<table><thead><tr><th>Line item</th><th>Owner</th><th style="text-align:right">Budget</th><th style="width:48px"></th></tr></thead><tbody id="b"></tbody></table>
+<button class="ad" id="ad"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add line item</button>
+<div class="tt"><span>Total budget</span><b id="t"></b></div></div>
+<script>
+let R=[['Paid acquisition','Dana',18500],['Design contractors','Luis',9200],['Tooling & licenses','Priya',4350],['Events & travel','Marcus',7800]];
+const b=document.getElementById('b'),sv=document.getElementById('sv'),f=n=>'$'+n.toLocaleString();
+function tot(){document.getElementById('t').textContent=f(R.reduce((s,x)=>s+x[2],0))}
+function dirty(){sv.classList.add('dirty');sv.lastChild.textContent='Saving…';clearTimeout(dirty.t);dirty.t=setTimeout(()=>{sv.classList.remove('dirty');sv.lastChild.textContent='All changes saved'},700)}
+function draw(){b.innerHTML=R.map((x,i)=>'<tr><td><span class="cell" tabindex="0" data-i="'+i+'" data-c="0">'+x[0]+'</span></td><td><span class="cell" tabindex="0" data-i="'+i+'" data-c="1">'+x[1]+'</span></td><td><span class="cell num" tabindex="0" data-i="'+i+'" data-c="2">'+f(x[2])+'</span></td><td><button class="rm" data-i="'+i+'" aria-label="Remove row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12h10l1-12M9 7V4h6v3"/></svg></button></td></tr>').join('');tot()}
+function edit(el){if(el.tagName==='INPUT')return;const i=+el.dataset.i,c=+el.dataset.c,v=R[i][c],inp=document.createElement('input');inp.className='cell'+(c===2?' num':'');inp.value=v;inp.setAttribute('aria-label','Edit value');el.replaceWith(inp);inp.focus();inp.select();let done=false;
+ const end=ok=>{if(done)return;done=true;if(ok){let n=inp.value.trim();if(c===2){n=parseInt(n.replace(/[^0-9]/g,''),10);if(isNaN(n))n=v}else if(!n)n=v;if(n!==v){R[i][c]=n;dirty()}}draw();const nc=b.querySelector('[data-i="'+i+'"][data-c="'+c+'"]');if(nc){if(ok)nc.classList.add('saved');nc.focus()}};
+ inp.onkeydown=e=>{if(e.key==='Enter')end(true);if(e.key==='Escape')end(false)};inp.onblur=()=>end(true)}
+b.addEventListener('click',e=>{const c=e.target.closest('.cell');if(c)edit(c);const r=e.target.closest('.rm');if(r){R.splice(+r.dataset.i,1);draw();dirty()}});
+b.addEventListener('keydown',e=>{const c=e.target.closest('span.cell');if(c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();edit(c)}});
+document.getElementById('ad').onclick=()=>{R.push(['New line item','Unassigned',0]);draw();dirty();edit(b.querySelector('[data-i="'+(R.length-1)+'"][data-c="0"]'))};draw();
+</script></body></html>

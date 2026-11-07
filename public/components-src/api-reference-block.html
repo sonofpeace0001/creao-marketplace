@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>API Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F5F6F8;color:#0F172A;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:900px;background:#fff;border:1px solid #E2E8F0;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(15,23,42,.45)}
+.l{padding:28px 28px 24px}.ep{display:flex;align-items:center;gap:10px;margin-bottom:16px}.mt{font:700 12px 'JetBrains Mono',monospace;background:#DCFCE7;color:#15803D;padding:4px 9px;border-radius:7px}.pt{font:500 14px 'JetBrains Mono',monospace;color:#334155}
+.l h1{font-size:24px;font-weight:700;letter-spacing:-.03em;margin-bottom:8px}.l>p{font-size:14.5px;line-height:1.6;color:#64748B;margin-bottom:22px}
+.l h2{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#94A3B8;margin-bottom:6px;padding-bottom:8px;border-bottom:1px solid #EEF2F6}
+.pr{padding:12px 0;border-bottom:1px solid #F1F5F9}.pr:last-child{border:0}.pn{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.pn code{font:700 13.5px 'JetBrains Mono',monospace}.pn span{font:500 12px 'JetBrains Mono',monospace;color:#94A3B8}.rq{font:600 11px 'Inter';color:#DC2626;background:#FEF2F2;padding:2px 7px;border-radius:99px}.pr p{font-size:13.5px;color:#64748B;margin-top:4px;line-height:1.5}
+.r{background:#0B1220;color:#CBD5E1;display:flex;flex-direction:column}
+.tb{display:flex;align-items:center;border-bottom:1px solid #1E293B;padding:0 8px}.tb button{border:0;background:none;color:#64748B;padding:14px 12px;font:600 12.5px 'Inter';cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}.tb button[aria-selected=true]{color:#fff;border-color:#38BDF8}.tb button:focus-visible{outline:2px solid #38BDF8;outline-offset:-2px}.tb .cp{margin-left:auto;border:1px solid #1E293B;border-radius:8px;padding:6px 10px;font:600 12px 'Inter';color:#94A3B8;border-bottom:1px solid #1E293B}.tb .cp:hover{color:#fff}
+pre{flex:1;margin:0;padding:20px;font:400 13px/1.75 'JetBrains Mono',monospace;overflow:auto;white-space:pre}.k{color:#7DD3FC}.s{color:#86EFAC}.n{color:#FDBA74}.c2{color:#64748B}.f{color:#C4B5FD}
+.rs{border-top:1px solid #1E293B;padding:14px 20px 18px}.rs b{display:flex;align-items:center;gap:8px;font:700 12px 'Inter';color:#86EFAC;margin-bottom:8px}.rs b i{width:7px;height:7px;border-radius:50%;background:#4ADE80}.rs pre{padding:0;font-size:12.5px;line-height:1.65}
+@media(max-width:760px){.c{grid-template-columns:1fr}}
+</style></head><body>
+<div class="c"><section class="l"><div class="ep"><span class="mt">POST</span><span class="pt">/v1/customers</span></div><h1>Create a customer</h1><p>Creates a new customer object. You can attach metadata and a default payment method in the same request.</p>
+<h2>Body parameters</h2>
+<div class="pr"><div class="pn"><code>email</code><span>string</span><span class="rq">required</span></div><p>The customer's email address, used for receipts.</p></div>
+<div class="pr"><div class="pn"><code>name</code><span>string</span></div><p>Full name or business name.</p></div>
+<div class="pr"><div class="pn"><code>metadata</code><span>object</span></div><p>Up to 20 key-value pairs for your own use.</p></div>
+<div class="pr"><div class="pn"><code>payment_method</code><span>string</span></div><p>ID of a payment method to attach and set as default.</p></div></section>
+<section class="r"><div class="tb" role="tablist"><button role="tab" aria-selected="true" data-l="curl">cURL</button><button role="tab" aria-selected="false" data-l="node">Node</button><button role="tab" aria-selected="false" data-l="py">Python</button><button class="cp" id="cp">Copy</button></div>
+<pre id="cd"></pre><div class="rs"><b><i></i>200 OK</b><pre><span class="c2">{</span>
+  <span class="k">"id"</span>: <span class="s">"cus_9s6XKz"</span>,
+  <span class="k">"email"</span>: <span class="s">"ada@studio.com"</span>,
+  <span class="k">"created"</span>: <span class="n">1730764800</span>
+<span class="c2">}</span></pre></div></section></div>
+<script>
+const C={curl:'<span class="f">curl</span> https://api.example.com/v1/customers \\\n  -H <span class="s">"Authorization: Bearer sk_test_…"</span> \\\n  -d <span class="k">email</span>=<span class="s">"ada@studio.com"</span> \\\n  -d <span class="k">name</span>=<span class="s">"Ada Lovelace"</span>',node:'<span class="k">import</span> Client <span class="k">from</span> <span class="s">"example"</span>;\n\n<span class="k">const</span> client = <span class="k">new</span> <span class="f">Client</span>(process.env.KEY);\n\n<span class="k">const</span> customer = <span class="k">await</span> client.customers.<span class="f">create</span>({\n  email: <span class="s">"ada@studio.com"</span>,\n  name: <span class="s">"Ada Lovelace"</span>,\n});',py:'<span class="k">import</span> example\n\nclient = example.<span class="f">Client</span>(api_key=<span class="s">"sk_test_…"</span>)\n\ncustomer = client.customers.<span class="f">create</span>(\n    email=<span class="s">"ada@studio.com"</span>,\n    name=<span class="s">"Ada Lovelace"</span>,\n)'};
+const cd=document.getElementById('cd'),T=[...document.querySelectorAll('[role=tab]')];let cur='curl';
+function s(k){cur=k;cd.innerHTML=C[k];T.forEach(t=>t.setAttribute('aria-selected',t.dataset.l===k))}
+T.forEach(t=>t.onclick=()=>s(t.dataset.l));s('curl');
+document.getElementById('cp').onclick=e=>{navigator.clipboard&&navigator.clipboard.writeText(cd.textContent).catch(()=>{});e.target.textContent='Copied';setTimeout(()=>e.target.textContent='Copy',1400)};
+</script></body></html>

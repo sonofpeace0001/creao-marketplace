@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Filterable Mosaic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3F0E8;color:#1D1B16;font-family:'Familjen Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:42px 22px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:880px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+h1{font-size:clamp(30px,4.6vw,44px);font-weight:700;letter-spacing:-.045em;line-height:.95}
+.f{display:flex;gap:7px;flex-wrap:wrap}
+.f button{border:1.5px solid #1D1B16;background:transparent;color:#1D1B16;font:600 13.5px 'Familjen Grotesk';padding:7px 14px;border-radius:99px;cursor:pointer;transition:all .2s}
+.f button[aria-pressed=true]{background:#1D1B16;color:#F3F0E8}
+.f button:focus-visible{outline:3px solid #FF5A36;outline-offset:2px}
+.g{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:118px;gap:10px;grid-auto-flow:dense}
+.t{position:relative;border-radius:20px;overflow:hidden;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;color:var(--fg,#1D1B16);background:var(--bg);transition:transform .3s cubic-bezier(.3,1.3,.4,1),opacity .3s}
+.t:hover{transform:translateY(-4px) rotate(-.6deg)}
+.t.w2{grid-column:span 2}.t.h2{grid-row:span 2}
+.t.out{display:none}
+.t b{font-size:17px;letter-spacing:-.02em;line-height:1.1;position:relative;z-index:1}
+.t small{font-size:12px;font-weight:600;opacity:.7;position:relative;z-index:1;margin-top:3px}
+.t svg{position:absolute;right:-14px;top:-14px;width:96px;height:96px;opacity:.22}
+@media(max-width:640px){.g{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="top"><h1>Selected<br>work</h1>
+<div class="f" role="group" aria-label="Filter"><button aria-pressed="true" data-c="all">All</button><button aria-pressed="false" data-c="brand">Brand</button><button aria-pressed="false" data-c="web">Web</button><button aria-pressed="false" data-c="print">Print</button></div></div>
+<div class="g" id="g">
+ <div class="t w2 h2" data-c="brand" style="--bg:#FF5A36;--fg:#fff"><svg viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="50" r="46"/></svg><b>Ember Coffee Roasters</b><small>Identity · Packaging</small></div>
+ <div class="t" data-c="web" style="--bg:#1D1B16;--fg:#F3F0E8"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="8" y="8" width="84" height="84" rx="14"/></svg><b>Northwind</b><small>Website</small></div>
+ <div class="t" data-c="print" style="--bg:#F5D547"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 4 96 96H4Z"/></svg><b>Almanac No. 9</b><small>Editorial</small></div>
+ <div class="t w2" data-c="web" style="--bg:#CFE3F5"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="4" y="30" width="92" height="40" rx="20"/></svg><b>Tidepool App</b><small>Product design · Web</small></div>
+ <div class="t h2" data-c="brand" style="--bg:#2F5D50;--fg:#EAF4EE"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 6c28 14 38 42 0 88C12 48 22 20 50 6Z"/></svg><b>Fernhill</b><small>Identity</small></div>
+ <div class="t" data-c="print" style="--bg:#F4B8C8"><svg viewBox="0 0 100 100" fill="currentColor"><circle cx="35" cy="50" r="30"/><circle cx="65" cy="50" r="30"/></svg><b>Duet Poster</b><small>Print</small></div>
+ <div class="t" data-c="web" style="--bg:#E3DCCB"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M10 90V10l80 80V10"/></svg><b>Lumen Studio</b><small>Website</small></div>
+</div></div>
+<script>
+const ts=[...document.querySelectorAll('.t')];
+document.querySelectorAll('.f button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.f button').forEach(x=>x.setAttribute('aria-pressed',x===b));ts.forEach(t=>t.classList.toggle('out',b.dataset.c!=='all'&&t.dataset.c!==b.dataset.c))}));
+</script></body></html>

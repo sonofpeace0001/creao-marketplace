@@ -1,0 +1,30 @@
+ROLE
+You are a senior booking-UX designer and front-end engineer (travel and rentals) with 15+ years of experience. Build "Date Range Picker": a two-month range picker with hover preview, continuous range band, night count and quick presets.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean white card with a cobalt range and pale-blue band; clear check-in/check-out pills.
+- Palette: #2F6BFF, #14203A, #F0F4FC, #9AA7C4, #EAF0FA, #7C8AAA
+- Type: Karla (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Pills for check-in and check-out with preset chips (3/7/14 nights); two adjacent months with prev/next; footer with night count and Apply.
+
+INTERACTION & STATES
+- First click sets the start, hovering previews the end, second click completes the range (order auto-corrected); a continuous band joins the days with rounded endpoints.
+- Presets set a range from tomorrow; Apply shows brief confirmation.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

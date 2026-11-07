@@ -1,0 +1,29 @@
+ROLE
+You are a senior conversational-UI designer and front-end engineer with 15+ years of experience. Build "Live Chat Widget": a complete support chat window with agent header, seeded conversation, quick replies, typing indicator and composer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm orange-to-pink header on a white chat surface, rounded bubbles and friendly Be Vietnam Pro.
+- Palette: #EC4899, #F97316, #2A1630, #F2E5E8, #FFEFE0, #FBE3F0
+- Type: Be Vietnam Pro (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with agent avatar, online dot and minimize; scrolling log with timestamp, agent and user bubbles, quick-reply chips and typing dots; composer with send button.
+
+INTERACTION & STATES
+- Sending a message or tapping a chip adds a user bubble, shows typing for about a second, then a canned agent reply and fresh chips; the log auto-scrolls and is aria-live.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

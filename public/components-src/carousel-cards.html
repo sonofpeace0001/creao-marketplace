@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Snap Carousel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08090D;color:#EEF0F7;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:30px 0;-webkit-font-smoothing:antialiased;overflow:hidden}
+.w{width:100%;max-width:900px}
+.hd{display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px;margin-bottom:18px}
+.hd h1{font-size:30px;font-weight:800;letter-spacing:-.045em;line-height:1}.hd p{color:#7C8499;font-size:14.5px;margin-top:6px}
+.nv{display:flex;gap:8px}.nv button{width:44px;height:44px;border-radius:50%;border:1px solid #23283A;background:#10131C;color:#E4E8F5;cursor:pointer;display:grid;place-items:center;transition:all .2s}
+.nv button:hover:not(:disabled){background:#fff;color:#08090D}.nv button:disabled{opacity:.3;cursor:default}.nv button:focus-visible{outline:2px solid #7CF5C4;outline-offset:3px}
+.tr{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 28px 20px;scrollbar-width:none;scroll-behavior:smooth;cursor:grab}.tr::-webkit-scrollbar{display:none}
+.tr.drag{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto}
+.cd{flex:none;width:280px;height:340px;border-radius:26px;scroll-snap-align:start;position:relative;overflow:hidden;padding:22px;display:flex;flex-direction:column;justify-content:space-between;background:var(--g);transition:transform .3s;user-select:none}
+.cd:hover{transform:translateY(-6px)}
+.cd::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 0,rgba(255,255,255,.35),transparent 55%)}
+.cd>*{position:relative;z-index:1}
+.tg{align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.28);backdrop-filter:blur(8px);padding:6px 11px;border-radius:99px;color:#fff}
+.no{font-size:92px;font-weight:800;letter-spacing:-.07em;line-height:.8;color:rgba(255,255,255,.28)}
+.cd h2{font-size:23px;font-weight:800;letter-spacing:-.04em;line-height:1.05;color:#fff}.cd p{font-size:13.5px;color:rgba(255,255,255,.82);margin-top:6px;line-height:1.4}
+.ds{display:flex;justify-content:center;gap:8px}
+.ds i{width:8px;height:8px;border-radius:99px;background:#2A2F42;transition:all .3s}.ds i.on{width:28px;background:#7CF5C4}
+@media(prefers-reduced-motion:reduce){.tr{scroll-behavior:auto}*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><div><h1>Featured journeys</h1><p>Swipe, drag or use the arrows</p></div><div class="nv"><button id="pv" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button id="nx" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
+<div class="tr" id="t" tabindex="0" aria-label="Journeys carousel"></div><div class="ds" id="d"></div></div>
+<script>
+const D=[['Iceland','8 days','Ring road in the northern lights','linear-gradient(160deg,#0F5E6E,#1B2B6B 60%,#3B1D6E)'],['Kyoto','6 days','Temples, tea houses and quiet lanes','linear-gradient(160deg,#C2410C,#9D174D)'],['Patagonia','10 days','Glaciers, granite towers and wind','linear-gradient(160deg,#047857,#0E4A6B)'],['Marrakech','5 days','Souks, courtyards and rooftop dinners','linear-gradient(160deg,#B45309,#7C2D12)'],['Lofoten','7 days','Fishing villages under the midnight sun','linear-gradient(160deg,#1D4ED8,#6D28D9)']];
+const t=document.getElementById('t'),d=document.getElementById('d');
+t.innerHTML=D.map((x,i)=>'<article class="cd" style="--g:'+x[3]+'"><span class="tg">'+x[1]+'</span><div class="no">0'+(i+1)+'</div><div><h2>'+x[0]+'</h2><p>'+x[2]+'</p></div></article>').join('');
+d.innerHTML=D.map(()=>'<i></i>').join('');
+const cs=[...t.children],step=()=>cs[1].offsetLeft-cs[0].offsetLeft;
+function upd(){const i=Math.round(t.scrollLeft/step());[...d.children].forEach((x,k)=>x.classList.toggle('on',k===Math.min(i,cs.length-1)));document.getElementById('pv').disabled=t.scrollLeft<4;document.getElementById('nx').disabled=t.scrollLeft+t.clientWidth>=t.scrollWidth-4}
+t.addEventListener('scroll',upd);document.getElementById('pv').onclick=()=>t.scrollBy({left:-step()});document.getElementById('nx').onclick=()=>t.scrollBy({left:step()});
+let dn=false,sx=0,sl=0;t.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;dn=true;sx=e.clientX;sl=t.scrollLeft;t.classList.add('drag')});
+addEventListener('pointermove',e=>{if(dn)t.scrollLeft=sl-(e.clientX-sx)});addEventListener('pointerup',()=>{if(!dn)return;dn=false;t.classList.remove('drag');t.scrollTo({left:Math.round(t.scrollLeft/step())*step()})});
+t.addEventListener('keydown',e=>{if(e.key==='ArrowRight')t.scrollBy({left:step()});if(e.key==='ArrowLeft')t.scrollBy({left:-step()})});upd();
+</script></body></html>

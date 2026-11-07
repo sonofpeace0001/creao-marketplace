@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Token Price Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Red+Hat+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(500px 360px at 80% 0,#1C1050,transparent 65%),#05060D;color:#E8EAFF;font-family:'Chakra Petch',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:400px;background:linear-gradient(#0F1224,#0A0C1A);border:1px solid #22274A;border-radius:24px;padding:22px;position:relative;overflow:hidden;box-shadow:0 40px 70px -30px #000,0 0 60px -30px #7C5CFA}
+.c::before{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(124,92,250,.35),transparent 70%)}
+.hd{display:flex;align-items:center;gap:13px;position:relative}.tk{width:46px;height:46px;border-radius:50%;background:conic-gradient(#7C5CFA,#22D3EE,#7C5CFA);display:grid;place-items:center}.tk i{width:38px;height:38px;border-radius:50%;background:#0F1224;display:grid;place-items:center;font:700 15px 'Chakra Petch';color:#C4B5FD;font-style:normal}
+.hd b{display:block;font-size:19px;font-weight:700}.hd span{font:500 12.5px 'Red Hat Mono',monospace;color:#7C85B8}.rk{margin-left:auto;font:600 11.5px 'Red Hat Mono',monospace;background:#1A1E3D;color:#A5B4FC;padding:5px 9px;border-radius:7px}
+.pr{display:flex;align-items:baseline;gap:12px;margin:22px 0 4px;position:relative}.pr b{font:600 36px 'Red Hat Mono',monospace;letter-spacing:-.04em}.ch{font:600 14px 'Red Hat Mono',monospace;padding:4px 9px;border-radius:8px}.up{background:rgba(34,197,94,.15);color:#4ADE80}.dn{background:rgba(239,68,68,.15);color:#F87171}
+.tb{display:flex;gap:4px;margin:16px 0 8px;background:#0A0C1A;border:1px solid #1B1F3D;border-radius:11px;padding:3px;width:fit-content}.tb button{border:0;background:none;color:#7C85B8;font:600 12px 'Red Hat Mono',monospace;padding:6px 11px;border-radius:8px;cursor:pointer}.tb button[aria-pressed=true]{background:#2A2F5C;color:#fff}.tb button:focus-visible{outline:2px solid #7C5CFA}
+svg.cht{width:100%;height:110px;display:block;overflow:visible}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0 18px}.st div{background:#0B0E1E;border:1px solid #1B1F3D;border-radius:12px;padding:10px 12px}.st span{display:block;font:500 11px 'Red Hat Mono',monospace;color:#6A73A8;letter-spacing:.06em;text-transform:uppercase}.st b{font:600 14px 'Red Hat Mono',monospace}
+.ac{display:flex;gap:10px}.ac button{flex:1;border:0;border-radius:13px;padding:13px;font:700 15px 'Chakra Petch';cursor:pointer;transition:transform .15s}.ac button:hover{transform:translateY(-1px)}.ac button:focus-visible{outline:2px solid #fff;outline-offset:2px}.b{background:linear-gradient(135deg,#7C5CFA,#22D3EE);color:#06081A}.s{background:#1A1E3D;color:#C7CCF7}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<article class="c"><div class="hd"><div class="tk"><i>N</i></div><div><b>Nova</b><span>NOVA / USD</span></div><span class="rk">#42</span></div>
+<div class="pr"><b id="p">$2.847</b><span class="ch up" id="ch">+5.42%</span></div>
+<div class="tb" role="group" aria-label="Range"><button aria-pressed="false" data-r="0">1D</button><button aria-pressed="true" data-r="1">1W</button><button aria-pressed="false" data-r="2">1M</button></div>
+<svg class="cht" id="s" viewBox="0 0 300 110" preserveAspectRatio="none" role="img" aria-label="Price chart"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7C5CFA" stop-opacity=".45"/><stop offset="1" stop-color="#7C5CFA" stop-opacity="0"/></linearGradient></defs><path id="a" fill="url(#g)"/><path id="l" fill="none" stroke="#A78BFA" stroke-width="2.500" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+<div class="st"><div><span>Market cap</span><b>$412M</b></div><div><span>24h vol</span><b>$38.2M</b></div><div><span>Supply</span><b>144.7M</b></div></div>
+<div class="ac"><button class="b">Buy NOVA</button><button class="s">Swap</button></div></article>
+<script>
+const D=[[60,58,62,55,50,54,48,52,45,47,40,43,36,38,30,28,32,24,20,22],[80,72,76,64,70,58,62,52,56,44,50,38,42,30,36,26,30,20,24,16],[40,48,44,56,50,62,54,66,58,70,64,60,68,52,58,44,48,34,30,22]],P=['$2.791','$2.847','$2.612'],C=['+1.84%','+5.42%','+12.60%'];
+function dr(i){const d=D[i],w=300/(d.length-1),pts=d.map((y,k)=>[k*w,y+10]);let p='M'+pts.map(q=>q.join(',')).join(' L');document.getElementById('l').setAttribute('d',p);document.getElementById('a').setAttribute('d',p+' L300,110 L0,110Z');document.getElementById('p').textContent=P[i];document.getElementById('ch').textContent=C[i];document.querySelectorAll('.tb button').forEach((b,k)=>b.setAttribute('aria-pressed',k===i))}
+document.querySelectorAll('.tb button').forEach((b,k)=>b.onclick=()=>dr(k));dr(1);
+</script></body></html>

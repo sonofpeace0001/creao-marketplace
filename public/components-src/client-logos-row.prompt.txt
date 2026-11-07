@@ -1,0 +1,30 @@
+ROLE
+You are a senior brand designer and front-end engineer (B2B social proof) with 15+ years of experience. Build "Wordmark Wall": a hairline-gridded wall of eight wordmarks in eight typefaces that light up in brand colour on hover.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Understated and editorial: near-black, hairline cells, muted wordmarks that wake up one at a time.
+- Palette: #23232A, #EDEDF0, #0B0B0D, #7C7C86, #8C8C98, #6C6C76
+- Type: Fraunces, Space Mono, Archivo Black, Playfair Display, Bebas Neue, Pacifico, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Intro line with the customer count, a 4×2 grid of cells each with a different typeface wordmark and an industry caption that fades in.
+
+INTERACTION & STATES
+- Hover tints the wordmark with its own colour and lifts the cell background; caption fades in.
+- Collapses to two columns on small screens.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,30 @@
+ROLE
+You are a senior collaboration-UI designer and front-end engineer with 15+ years of experience. Build "Presence Avatars": an overlapping avatar stack with a +N expander, a size scale and live presence dots.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark card with vivid two-tone gradient avatars and soft status indicators.
+- Palette: #10141C, #0A0C10, #EAEEF6, #1F2633, #6C7791, #1B2231
+- Type: Rethink Sans (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Stack of five avatars plus a '+3' button; five-step size scale (28–72px); four presence rows (editing, away, do not disturb, offline) with coloured dots.
+
+INTERACTION & STATES
+- Hovering the stack tightens the overlap and lifts the hovered avatar; '+3' toggles the remaining avatars (aria-expanded) and becomes '−'.
+- The 'editing' dot pulses.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

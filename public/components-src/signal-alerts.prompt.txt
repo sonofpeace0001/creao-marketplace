@@ -1,0 +1,30 @@
+ROLE
+You are a senior design-systems designer and front-end engineer with 15+ years of experience. Build "Signal Alerts": four semantic alert banners (success, warning, error, info) that collapse smoothly when dismissed, plus restore-all.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Crisp tinted banners with a thick left accent, icon tiles and strong text/background contrast.
+- Palette: #1B1F1A, #F3F4F1, #6B7568, #B9C0B5, #EEF9F1, #CBE9D5
+- Type: Work Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with title and 'Restore all'; four alerts each with an icon, bold title, message, optional action link and a close button.
+
+INTERACTION & STATES
+- Dismissing animates the row's height and opacity to zero (grid-template-rows) so neighbours slide up; Restore all brings them back.
+- Close buttons have labels and focus rings.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,30 @@
+ROLE
+You are a senior productivity-app designer and front-end engineer with 15+ years of experience. Build "Task Checklist": a playful to-do list with animated check boxes, strike-through, a progress bar and add/clear actions.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Candy-soft gradient background with a frosted card, rounded rows and a coral-to-pink check state.
+- Palette: #F43F8E, #2A2140, #9A8DB5, #FF8A5B, #B7A9D0, #FFF3D6
+- Type: Quicksand (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with 'n of m done'; progress bar; five task rows with custom checkbox and label; add-task field and Add button; Clear completed.
+
+INTERACTION & STATES
+- Checking a task draws a check mark, strikes through the label and updates the progress bar; clicking a row toggles it.
+- Adding a task appends it with an entrance animation; Clear completed removes finished tasks.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

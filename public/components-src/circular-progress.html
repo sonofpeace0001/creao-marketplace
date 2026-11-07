@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ring Progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@property --p{syntax:'<number>';inherits:false;initial-value:0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 420px at 50% 20%,#14243F,transparent 65%),#070A12;color:#E8EEFB;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:420px;background:#0E1424;border:1px solid #1C2540;border-radius:30px;padding:30px 28px 26px;text-align:center;box-shadow:0 40px 80px -34px #000}
+.k{font-size:12px;letter-spacing:.2em;font-weight:600;color:#5F78B4;text-transform:uppercase}
+.rg{--p:0;position:relative;width:240px;height:240px;margin:22px auto 20px;border-radius:50%;background:conic-gradient(from 0deg,#38BDF8,#6366F1 calc(var(--p)*.6%),#C084FC calc(var(--p)*1%),#1A2340 0);display:grid;place-items:center;transition:--p .9s cubic-bezier(.3,1,.4,1);filter:drop-shadow(0 0 26px rgba(99,102,241,.35))}
+.rg::before{content:"";position:absolute;inset:18px;border-radius:50%;background:#0E1424}
+.rg::after{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from 0deg,transparent 0 5deg,#0E1424 5deg 6deg);mask:radial-gradient(circle,transparent 62%,#000 63%);-webkit-mask:radial-gradient(circle,transparent 62%,#000 63%)}
+.in{position:relative;z-index:1}.in b{display:block;font-size:56px;font-weight:800;letter-spacing:-.06em;line-height:1;font-variant-numeric:tabular-nums}.in b sup{font-size:22px;color:#7C8FC8;margin-left:2px}
+.in span{font-size:13.5px;color:#7C8FC8;font-weight:500}
+.st{display:flex;justify-content:center;gap:8px;margin-bottom:22px}.st i{font-style:normal;font-size:12px;font-weight:600;padding:6px 12px;border-radius:99px;background:#141C32;color:#6F83BD;transition:all .3s}.st i.on{background:rgba(99,102,241,.18);color:#B8C2FF}.st i.dn{background:rgba(52,211,153,.14);color:#6EE7B7}
+.ct{display:flex;gap:10px;justify-content:center}.ct button{border:1px solid #243058;background:#131B33;color:#D5DDF7;font:600 14px 'Sora';padding:11px 18px;border-radius:13px;cursor:pointer;transition:all .2s}.ct button:hover{border-color:#6366F1;color:#fff}.ct .go{background:linear-gradient(135deg,#38BDF8,#6366F1);border:0;color:#fff}.ct button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.rg{transition:none}}
+</style></head><body>
+<div class="c"><div class="k">Importing your library</div><div class="rg" id="rg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Import progress"><div class="in"><b id="n">0<sup>%</sup></b><span id="s">Preparing…</span></div></div>
+<div class="st" id="st"><i>Upload</i><i>Process</i><i>Publish</i></div><div class="ct"><button id="m">−10</button><button class="go" id="g">Simulate</button><button id="p">+10</button></div></div>
+<script>
+let v=0,tm=null;const $=id=>document.getElementById(id),rg=$('rg');
+function set(x){v=Math.max(0,Math.min(100,Math.round(x)));rg.style.setProperty('--p',v);rg.setAttribute('aria-valuenow',v);$('n').firstChild.textContent=v;
+ const ph=v>=100?3:v>=66?2:v>=33?1:0;[...$('st').children].forEach((e,i)=>e.className=i<ph?'dn':i===ph?'on':'');$('s').textContent=v>=100?'All done':['Uploading files…','Processing…','Publishing…'][Math.min(2,ph)]}
+$('p').onclick=()=>set(v+10);$('m').onclick=()=>set(v-10);
+$('g').onclick=()=>{clearInterval(tm);set(0);tm=setInterval(()=>{if(v>=100){clearInterval(tm);return}set(v+2+Math.random()*4)},160)};
+setTimeout(()=>set(72),120);
+</script></body></html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Switchboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#14161B;color:#E7E9EE;font-family:'Chakra Petch',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:linear-gradient(#1A1D24 1px,transparent 1px),linear-gradient(90deg,#1A1D24 1px,transparent 1px);background-size:32px 32px}
+.c{width:100%;max-width:520px;background:linear-gradient(#22262E,#1B1E25);border:1px solid #2E333D;border-radius:22px;padding:22px;box-shadow:0 1px 0 #3A404C inset,0 40px 60px -30px #000}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #2E333D}.hd h1{font-size:17px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}.hd span{font:400 13px 'Share Tech Mono',monospace;color:#7C8494}.hd b{color:#4ADE80}
+.rw{display:flex;align-items:center;gap:14px;padding:13px 4px;border-bottom:1px solid #262A33}.rw:last-of-type{border:0}
+.led{flex:none;width:10px;height:10px;border-radius:50%;background:#3A3F4A;box-shadow:inset 0 1px 2px #000;transition:all .25s}.rw[data-on=true] .led{background:var(--c);box-shadow:0 0 10px var(--c),0 0 3px var(--c)}
+.tx{flex:1;min-width:0}.tx b{display:block;font-size:15px;font-weight:600}.tx span{font:400 12.5px 'Share Tech Mono',monospace;color:#7C8494}
+.sw{position:relative;flex:none;width:58px;height:32px;border:0;border-radius:99px;background:#0E1014;box-shadow:inset 0 2px 5px #000,0 1px 0 #3A404C;cursor:pointer;transition:background .25s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:linear-gradient(#EDEEF2,#B9BDC8);box-shadow:0 3px 6px rgba(0,0,0,.6),0 1px 0 #fff inset;transition:transform .28s cubic-bezier(.4,1.4,.5,1)}
+.sw[aria-checked=true]{background:color-mix(in srgb,var(--c) 30%,#0E1014)}.sw[aria-checked=true]::after{transform:translateX(26px)}.sw:focus-visible{outline:2px solid var(--c);outline-offset:3px}.sw:active::after{width:30px}.sw[aria-checked=true]:active::after{transform:translateX(22px)}
+.mst{display:flex;gap:10px;margin-top:16px}.mst button{flex:1;border:1px solid #2E333D;background:#1F232B;color:#C5C9D3;border-radius:12px;padding:11px;font:600 12.5px 'Chakra Petch';letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .15s}.mst button:hover{background:#272C36;color:#fff}.mst button:focus-visible{outline:2px solid #4ADE80;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Switchboard</h1><span><b id="n">0</b> / 5 ACTIVE</span></div><div id="l"></div><div class="mst"><button id="all">All on</button><button id="off">All off</button></div></div>
+<script>
+const R=[['Email alerts','Delivery on every new reply','#4ADE80',1],['Push notifications','Mobile and desktop devices','#38BDF8',1],['Weekly digest','Summary every Monday, 9:00','#FBBF24',0],['Two-factor auth','Require code at sign-in','#F472B6',1],['Beta features','Early access experiments','#A78BFA',0]];
+const l=document.getElementById('l');
+l.innerHTML=R.map((r,i)=>'<div class="rw" data-on="'+!!r[3]+'" style="--c:'+r[2]+'"><i class="led"></i><div class="tx"><b id="t'+i+'">'+r[0]+'</b><span>'+r[1]+'</span></div><button class="sw" role="switch" aria-checked="'+!!r[3]+'" aria-labelledby="t'+i+'"></button></div>').join('');
+const S=[...l.querySelectorAll('.sw')];function set(b,v){b.setAttribute('aria-checked',v);b.parentElement.dataset.on=v}
+function cnt(){document.getElementById('n').textContent=S.filter(b=>b.getAttribute('aria-checked')==='true').length}
+S.forEach(b=>b.onclick=()=>{set(b,b.getAttribute('aria-checked')!=='true');cnt()});
+document.getElementById('all').onclick=()=>{S.forEach(b=>set(b,true));cnt()};document.getElementById('off').onclick=()=>{S.forEach(b=>set(b,false));cnt()};cnt();
+</script></body></html>

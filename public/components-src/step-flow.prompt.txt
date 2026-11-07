@@ -1,0 +1,30 @@
+ROLE
+You are a senior onboarding designer and front-end engineer with 15+ years of experience. Build "Onboarding Wizard": a four-step onboarding wizard with pill progress, selectable option cards and a celebratory finish.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm peach-to-lilac gradient with a frosted card, plum text and coral-to-pink accents; friendly and energetic.
+- Palette: #2A1B3D, #FF7A59, #8C7AA3, #E84393, #A294B8, #FFF1E6
+- Type: Urbanist (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Step counter, progress bar, four step pills (Role, Goals, Team, Launch) and a content area with a heading and 2×2 option cards with coloured icon tiles; Skip and Continue controls.
+
+INTERACTION & STATES
+- Option cards are toggle buttons (aria-pressed) that persist per step; Continue/Skip advance; pills mark done/current.
+- The final step shows a gradient 'Let's ship.' state and 'Open workspace'.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Release Pill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(800px 420px at 50% 0,#14243F,#070A12 70%);color:#E9EEF8;font-family:'Instrument Sans',system-ui,sans-serif;min-height:100vh;display:grid;place-items:center;padding:40px 20px;-webkit-font-smoothing:antialiased;position:relative;overflow:hidden}
+body::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(circle at 50% 40%,#000,transparent 65%)}
+.stage{position:relative;text-align:center;max-width:640px}
+.pill{position:relative;display:inline-flex;align-items:center;gap:12px;padding:6px 8px 6px 8px;border-radius:99px;background:#0B1120;border:1px solid transparent;background:linear-gradient(#0B1120,#0B1120) padding-box,conic-gradient(from var(--a),#35E0A1,#4C8DFF,#B58CFF,#FF7A8C,#35E0A1) border-box;animation:spin 5s linear infinite;box-shadow:0 0 40px -8px rgba(76,141,255,.45);transition:opacity .35s,transform .35s}
+@keyframes spin{to{--a:360deg}}
+.pill.out{opacity:0;transform:translateY(-14px) scale(.96);pointer-events:none}
+.tag{font:500 11px 'Geist Mono',monospace;letter-spacing:.06em;background:linear-gradient(135deg,#35E0A1,#4C8DFF);color:#04121E;padding:5px 10px;border-radius:99px}
+.txt{font-size:14px;color:#C9D3E6}.txt b{color:#fff;font-weight:600}
+.more{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:#fff;text-decoration:none;padding:6px 6px 6px 12px;border-left:1px solid rgba(255,255,255,.14)}
+.more svg{transition:transform .2s}.more:hover svg{transform:translateX(3px)}
+.x{width:26px;height:26px;border-radius:50%;border:0;background:rgba(255,255,255,.07);color:#9AA7BD;cursor:pointer;display:grid;place-items:center}
+.x:hover{background:rgba(255,255,255,.16);color:#fff}
+h1{font-weight:600;font-size:clamp(34px,5vw,56px);letter-spacing:-.04em;line-height:1.02;margin:34px 0 14px}
+p.s{color:#8D9AB2;font-size:17px;line-height:1.55}
+.re{margin-top:26px;background:none;border:1px solid rgba(255,255,255,.14);color:#C9D3E6;font:500 13px 'Instrument Sans';padding:9px 16px;border-radius:99px;cursor:pointer;display:none}
+.pill.out~.re{display:inline-block}.re:hover{border-color:#4C8DFF}
+@media(prefers-reduced-motion:reduce){.pill{animation:none}}
+</style></head><body>
+<div class="stage">
+  <div class="pill" id="pill" role="status">
+    <span class="tag">v3.4</span>
+    <span class="txt"><b>Offline sync is here</b> · dark mode, faster search</span>
+    <a class="more" href="#">What's new <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <button class="x" id="x" aria-label="Dismiss"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <button class="re" id="re">Show the announcement again</button>
+  <h1>Notes that follow you offline.</h1>
+  <p class="s">Write on a plane, sync on landing. Meridian keeps every draft safe and every device in step.</p>
+</div>
+<script>const p=document.getElementById('pill');document.getElementById('x').onclick=()=>p.classList.add('out');document.getElementById('re').onclick=()=>p.classList.remove('out')</script>
+</body></html>

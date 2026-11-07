@@ -1,0 +1,29 @@
+ROLE
+You are a senior Web3 wallet designer and front-end engineer with 15+ years of experience. Build "Wallet Card": a wallet overview with copyable address pill, total balance, Send/Receive/Swap actions and asset rows.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Violet-and-cyan gradient card with glassy buttons, Sora numerals and Martian Mono addresses.
+- Palette: #EDEFFA, #A8B0DC, #13162A, #34D399, #0B0D14, #3B2A8C
+- Type: Sora, Martian Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Address pill and network indicator; balance with daily change; three circular action buttons; asset list with token marks, amounts, USD value and change.
+
+INTERACTION & STATES
+- Clicking the address pill copies it and shows Copied briefly; action buttons lift on hover; rows highlight on hover.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

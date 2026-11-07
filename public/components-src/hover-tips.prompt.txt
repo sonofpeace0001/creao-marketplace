@@ -1,0 +1,29 @@
+ROLE
+You are a senior design-system engineer with 15+ years of experience. Build "Hover Tooltips": icon toolbar tooltips with shortcut keycaps, a gradient variant and top/bottom placements, on hover and focus.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on lavender with ink tooltips, springy pop-in and a violet gradient accent.
+- Palette: #1D1538, #7C5CFA, #F5F1FF, #7A6FA3, #E4DDF7, #FBF9FF
+- Type: Urbanist (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Row of six icon buttons each with a role=tooltip bubble and arrow; keyboard shortcuts as kbd chips; two tooltips open below.
+
+INTERACTION & STATES
+- Tooltips show on hover and focus-visible and are linked by aria-describedby; they scale and slide in; the first demo tooltip is open until the user interacts.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

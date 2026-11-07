@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Angle Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--ang:135deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F1F6;color:#1A1826;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:40px 22px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:820px;background:#fff;border-radius:28px;padding:30px;box-shadow:0 30px 60px -34px rgba(26,24,38,.4),0 0 0 1px rgba(26,24,38,.06)}
+.h{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+h1{font-size:24px;letter-spacing:-.04em;font-weight:700}
+.ctl{display:flex;align-items:center;gap:14px;background:#F5F4FA;border-radius:16px;padding:10px 16px}
+.ctl label{font:500 12px 'Geist Mono',monospace;color:#6B6880;letter-spacing:.06em}
+.ctl output{font:500 13px 'Geist Mono',monospace;min-width:48px;text-align:right}
+input[type=range]{-webkit-appearance:none;appearance:none;width:180px;height:6px;border-radius:6px;background:#D8D6E6;outline:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#1A1826;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);cursor:grab}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#1A1826;border:3px solid #fff;cursor:grab}
+input[type=range]:focus-visible{box-shadow:0 0 0 4px rgba(91,70,255,.25)}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.s{border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(26,24,38,.08);transition:transform .3s}
+.s:hover{transform:translateY(-3px)}
+.s i{display:block;height:132px;background:linear-gradient(var(--ang),var(--a),var(--b))}
+.s div{padding:12px 14px 14px}
+.s b{font-size:14px;letter-spacing:-.02em;display:block}.s code{font:500 11px 'Geist Mono',monospace;color:#7C7990;margin-top:4px;display:block}
+@media(max-width:620px){.g{grid-template-columns:repeat(2,1fr)}input[type=range]{width:120px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="h"><h1>Angle lab</h1><div class="ctl"><label for="a">ANGLE</label><input id="a" type="range" min="0" max="360" value="135"><output id="o">135°</output></div></div>
+<div class="g" id="g"></div></div>
+<script>
+const S=[['Peach fizz','#FF9A8B','#FF6A88'],['Lagoon','#43E97B','#38F9D7'],['Midnight','#232526','#5B6FE8'],['Lilac haze','#C9B6FF','#FFC6E8'],['Citrus','#FDEB71','#F8D800'],['Plasma','#7F00FF','#E100FF']];
+const g=document.getElementById('g'),a=document.getElementById('a'),o=document.getElementById('o');
+S.forEach(([n,x,y])=>{const d=document.createElement('div');d.className='s';d.style.setProperty('--a',x);d.style.setProperty('--b',y);d.innerHTML='<i></i><div><b>'+n+'</b><code>'+x+' → '+y+'</code></div>';g.appendChild(d)});
+a.addEventListener('input',()=>{document.documentElement.style.setProperty('--ang',a.value+'deg');o.textContent=a.value+'°'});
+</script></body></html>

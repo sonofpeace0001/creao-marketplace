@@ -1,0 +1,30 @@
+ROLE
+You are a senior typographic designer and front-end engineer with 15+ years of experience. Build "Gradient Headline": a huge serif headline with a flowing clipped gradient and four palette swatches that re-colour it live.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm off-white editorial page with giant Instrument Serif and an animated sunset gradient on the key word.
+- Palette: #7C3AED, #241C2E, #FF6A3D, #E83E8C, #FBF9F5, #8A7C99
+- Type: Instrument Serif, Instrument Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Mono-ish kicker, two-line headline (second line italic with a flowing gradient), supporting paragraph, and a pill of four gradient swatches.
+
+INTERACTION & STATES
+- Gradient pans across the text on a 7s loop via background-position.
+- Swatches (aria-pressed) swap the three CSS gradient variables instantly; static under reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

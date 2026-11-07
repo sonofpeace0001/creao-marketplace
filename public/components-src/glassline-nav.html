@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glass Nav</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;color:#F1F2F8;font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;background:radial-gradient(800px 500px at 15% 10%,#3B1F77,transparent 60%),radial-gradient(700px 500px at 90% 20%,#0E4D7A,transparent 60%),#070812;padding:22px}
+.nav{position:sticky;top:0;max-width:960px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:9px 12px 9px 18px;border-radius:20px;background:rgba(18,20,38,.55);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(22px) saturate(1.5);box-shadow:0 20px 50px -20px #000,inset 0 1px 0 rgba(255,255,255,.1);z-index:5}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:19px;letter-spacing:-.04em;margin-right:14px}
+.logo i{width:20px;height:20px;border-radius:7px;background:conic-gradient(from 160deg,#7C5CFF,#22D3EE,#F472B6,#7C5CFF)}
+.it{position:relative}
+.it>button,.it>a{display:flex;align-items:center;gap:6px;border:0;background:none;color:#C9CCE0;font:500 14.5px 'Inter Tight';padding:9px 13px;border-radius:12px;cursor:pointer;text-decoration:none;transition:background .2s,color .2s}
+.it>button:hover,.it>a:hover,.it.open>button{background:rgba(255,255,255,.09);color:#fff}
+.it>button:focus-visible,.it>a:focus-visible{outline:2px solid #A78BFA;outline-offset:1px}
+.it svg{transition:transform .25s}.it.open svg{transform:rotate(180deg)}
+.dd{position:absolute;top:calc(100% + 12px);left:0;width:300px;padding:8px;border-radius:18px;background:rgba(20,22,42,.92);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -20px #000;opacity:0;transform:translateY(-8px) scale(.98);pointer-events:none;transition:all .22s}
+.it.open .dd{opacity:1;transform:none;pointer-events:auto}
+.dd a{display:flex;gap:13px;align-items:flex-start;padding:11px 12px;border-radius:12px;text-decoration:none;color:#E8EAF5;transition:background .2s}
+.dd a:hover,.dd a:focus-visible{background:rgba(255,255,255,.08);outline:0}
+.dd .ic{flex:none;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--g);color:#fff}
+.dd b{display:block;font-size:14.5px;font-weight:600}.dd span{display:block;font-size:13px;color:#9AA0BE;margin-top:2px;line-height:1.35}
+.sp{flex:1}
+.cta{background:#fff;color:#0B0C1A;font-weight:600;font-size:14px;padding:10px 17px;border-radius:12px;text-decoration:none;transition:transform .2s}.cta:hover{transform:translateY(-1px)}
+.hero{max-width:960px;margin:250px auto 0;padding:0 8px}.hero h1{font-weight:800;font-size:clamp(40px,6.5vw,76px);line-height:.95;letter-spacing:-.055em;max-width:700px}
+.hero p{color:#9AA0BE;font-size:18px;margin-top:18px;max-width:440px;line-height:1.5}
+@media(max-width:700px){.it:not(.keep){display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<nav class="nav" aria-label="Main"><div class="logo"><i></i>Prism</div>
+ <div class="it keep" id="p"><button aria-expanded="false" aria-haspopup="true">Product <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+  <div class="dd"><a href="#"><span class="ic" style="--g:linear-gradient(135deg,#7C5CFF,#4F46E5)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z"/></svg></span><div><b>Canvas</b><span>Design, prototype and hand off in one file.</span></div></a>
+  <a href="#"><span class="ic" style="--g:linear-gradient(135deg,#22D3EE,#0EA5E9)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><div><b>Insights</b><span>Usage analytics that explain the why.</span></div></a>
+  <a href="#"><span class="ic" style="--g:linear-gradient(135deg,#F472B6,#E11D74)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.400 8 8 9 4.600-1 8-4 8-9V6Z"/></svg></span><div><b>Shield</b><span>Roles, SSO and audit logs for every plan.</span></div></a></div></div>
+ <div class="it"><a href="#">Customers</a></div><div class="it"><a href="#">Pricing</a></div><div class="it"><a href="#">Docs</a></div>
+ <span class="sp"></span><div class="it"><a href="#">Sign in</a></div><a class="cta" href="#">Get started</a></nav>
+<div class="hero"><h1>Build the thing, not the process.</h1><p>One canvas for the whole product team.</p></div>
+<script>
+const p=document.getElementById('p'),b=p.querySelector('button');
+function set(o){p.classList.toggle('open',o);b.setAttribute('aria-expanded',o)}
+b.addEventListener('click',e=>{e.stopPropagation();set(!p.classList.contains('open'))});
+p.addEventListener('mouseenter',()=>set(true));p.addEventListener('mouseleave',()=>set(false));
+document.addEventListener('click',()=>set(false));document.addEventListener('keydown',e=>{if(e.key==='Escape'){set(false);b.focus()}});
+setTimeout(()=>set(true),300);
+</script></body></html>

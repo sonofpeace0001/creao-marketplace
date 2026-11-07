@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Notification Bell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF1F7;color:#171C33;font-family:'Figtree',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{position:relative;width:min(420px,100%);min-height:520px}
+.tb{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-bottom:12px}
+.bl{position:relative;width:48px;height:48px;border:0;border-radius:16px;background:#fff;color:#171C33;cursor:pointer;display:grid;place-items:center;box-shadow:0 0 0 1px rgba(23,28,51,.08),0 10px 18px -12px rgba(23,28,51,.4);transition:transform .2s}
+.bl:hover{transform:translateY(-2px)}.bl:focus-visible{outline:3px solid #4F46E5;outline-offset:3px}.bl[aria-expanded=true]{background:#171C33;color:#fff}.bl svg{transform-origin:50% 10%}.bl.ring svg{animation:r .8s}
+@keyframes r{20%{transform:rotate(14deg)}40%{transform:rotate(-12deg)}60%{transform:rotate(8deg)}80%{transform:rotate(-4deg)}}
+.ud{position:absolute;right:9px;top:9px;width:11px;height:11px;border-radius:50%;background:#F43F5E;border:2.5px solid #fff;transition:transform .25s}.bl[aria-expanded=true] .ud{border-color:#171C33}.ud.z{transform:scale(0)}
+.av{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#FFB86B,#F43F8E);display:grid;place-items:center;font-weight:800;color:#fff;box-shadow:0 10px 18px -12px rgba(244,63,142,.7)}
+.pn{position:absolute;right:0;top:62px;width:100%;background:#fff;border-radius:24px;box-shadow:0 36px 60px -20px rgba(23,28,51,.5),0 0 0 1px rgba(23,28,51,.07);overflow:hidden;opacity:0;transform:translateY(-8px) scale(.98);transform-origin:top right;pointer-events:none;transition:all .22s;z-index:3}
+.pn.on{opacity:1;transform:none;pointer-events:auto}
+.ph{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 10px}.ph h1{font-size:19px;font-weight:800;letter-spacing:-.03em}.ph button{border:0;background:none;font:700 13px 'Figtree';color:#4F46E5;cursor:pointer;padding:6px 8px;border-radius:8px}.ph button:hover{background:#EEEDFF}.ph button:focus-visible{outline:2px solid #4F46E5}
+.tb2{display:flex;gap:4px;padding:0 20px;border-bottom:1px solid #EEF0F6}.tb2 button{border:0;background:none;font:700 14px 'Figtree';color:#8087A8;padding:9px 12px 11px;cursor:pointer;position:relative}.tb2 button[aria-selected=true]{color:#171C33}.tb2 button[aria-selected=true]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:3px;border-radius:3px;background:#4F46E5}.tb2 button:focus-visible{outline:2px solid #4F46E5;border-radius:6px}
+.tb2 i{font-style:normal;font-size:11px;background:#EEEDFF;color:#4F46E5;padding:2px 7px;border-radius:99px;margin-left:5px}
+.ls{max-height:330px;overflow-y:auto}.ls::-webkit-scrollbar{width:0}
+.n{display:flex;gap:13px;padding:14px 20px;cursor:pointer;position:relative;transition:background .2s}.n:hover{background:#F8F9FD}.n.u{background:#F6F5FF}.n.u::before{content:"";position:absolute;left:8px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:#4F46E5}
+.n .a{flex:none;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff;background:var(--c)}
+.n p{font-size:14.5px;line-height:1.4;color:#41486B}.n p b{color:#171C33;font-weight:700}.n time{display:block;font-size:12.5px;color:#9AA0BD;margin-top:3px;font-weight:600}
+.em{padding:44px 20px;text-align:center;color:#8087A8;font-size:14.5px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w"><div class="tb"><button class="bl" id="b" aria-haspopup="true" aria-expanded="true" aria-label="Notifications"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.300 21a1.900 1.900 0 0 0 3.400 0"/></svg><i class="ud" id="d"></i></button><div class="av">MA</div></div>
+ <div class="pn on" id="p"><div class="ph"><h1>Notifications</h1><button id="mk">Mark all as read</button></div><div class="tb2" role="tablist"><button role="tab" aria-selected="true" data-t="all">All</button><button role="tab" aria-selected="false" data-t="unread">Unread<i id="uc"></i></button></div><div class="ls" id="l"></div></div></div>
+<script>
+let N=[['Sofia Lund','#8B5CF6','commented on <b>Brand refresh</b>: “Love the new palette.”','2m ago',1],['Marcus Reid','#10B981','assigned you to <b>Checkout redesign</b>','18m ago',1],['Deploy bot','#F59E0B','<b>web@4f2a9c1</b> shipped to production','1h ago',1],['Aisha Khan','#EC4899','accepted your invite to <b>Northwind</b>','3h ago',0],['Billing','#0EA5E9','Your invoice <b>#2041</b> was paid','Yesterday',0]];
+let tab='all';const $=id=>document.getElementById(id);
+function draw(){const u=N.filter(n=>n[4]).length;$('uc').textContent=u;$('uc').style.display=u?'':'none';$('d').classList.toggle('z',!u);
+ const r=N.filter(n=>tab==='all'||n[4]);$('l').innerHTML=r.length?r.map(n=>'<div class="n'+(n[4]?' u':'')+'" data-i="'+N.indexOf(n)+'"><span class="a" style="--c:'+n[1]+'">'+n[0].split(' ').map(w=>w[0]).join('').slice(0,2)+'</span><div><p><b>'+n[0]+'</b> '+n[2]+'</p><time>'+n[3]+'</time></div></div>').join(''):'<div class="em">You\'re all caught up.</div>'}
+function set(o){$('p').classList.toggle('on',o);$('b').setAttribute('aria-expanded',o)}
+$('b').onclick=e=>{e.stopPropagation();set(!$('p').classList.contains('on'))};document.addEventListener('click',e=>{if(!e.target.closest('.w'))set(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){set(false);$('b').focus()}});
+$('l').addEventListener('click',e=>{const n=e.target.closest('.n');if(n){N[+n.dataset.i][4]=0;draw()}});$('mk').onclick=()=>{N.forEach(n=>n[4]=0);draw()};
+document.querySelectorAll('.tb2 button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;document.querySelectorAll('.tb2 button').forEach(x=>x.setAttribute('aria-selected',x===b));draw()});draw();
+</script></body></html>

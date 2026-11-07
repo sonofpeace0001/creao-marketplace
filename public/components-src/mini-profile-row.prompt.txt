@@ -1,0 +1,29 @@
+ROLE
+You are a senior social-UX designer and front-end engineer with 15+ years of experience. Build "Suggested People": a people-to-follow list with presence dots, verified badges and Follow buttons that turn into Unfollow on hover.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Friendly white card on warm grey with saturated avatars and pill buttons.
+- Palette: #1D2420, #16794E, #F0EFEA, #F6F8F6, #22C55E, #2563EB
+- Type: Albert Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with See all; four rows (avatar with presence, name with badge, role, followers, Follow button); summary footer.
+
+INTERACTION & STATES
+- Follow toggles to Following (aria-pressed); hovering Following reveals 'Unfollow' in red; the summary count updates; rows enter with a stagger.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

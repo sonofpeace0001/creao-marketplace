@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Repository Browser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F6F8FA;color:#1F2328;font-family:'IBM Plex Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;background:#fff;border:1px solid #D1D9E0;border-radius:14px;overflow:hidden;box-shadow:0 20px 40px -30px rgba(31,35,40,.35)}
+.bc{display:flex;align-items:center;gap:8px;padding:12px 16px;background:#F6F8FA;border-bottom:1px solid #D1D9E0;font:500 13px 'IBM Plex Mono',monospace;color:#59636E}
+.bc b{color:#0969DA;font-weight:500}.bc i{font-style:normal;color:#9AA3AE}.bc .br{margin-left:auto;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #D1D9E0;border-radius:7px;padding:3px 9px;color:#1F2328}
+.bd{display:grid;grid-template-columns:260px 1fr;min-height:340px}
+.tr{border-right:1px solid #D8DEE4;padding:8px 6px;font:400 13.5px 'IBM Plex Mono',monospace;overflow:auto}
+.n{display:flex;align-items:center;gap:7px;width:100%;border:0;background:none;color:inherit;font:inherit;padding:5px 8px 5px calc(8px + var(--d)*16px);border-radius:7px;cursor:pointer;text-align:left;position:relative}
+.n:hover{background:#EEF1F4}.n:focus-visible{outline:2px solid #0969DA;outline-offset:-2px}.n.on{background:#DDF4FF;color:#0550AE}
+.n .cv{width:12px;height:12px;flex:none;color:#7D8590;transition:transform .15s}.n.open .cv{transform:rotate(90deg)}.n .sp{width:12px;flex:none}
+.n .ic{flex:none;width:16px;height:16px}
+.n .g{margin-left:auto;font-size:11px;font-weight:500}
+.pv{padding:18px 22px}.pv small{font:500 11.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#8A949F}
+.pv h2{font:600 19px 'IBM Plex Mono',monospace;margin:6px 0 4px;word-break:break-all}.pv p{font-size:14px;color:#59636E;line-height:1.5}
+.mt{display:flex;gap:18px;margin:16px 0;font-size:13px;color:#59636E}.mt b{display:block;font-size:17px;color:#1F2328;font-weight:600}
+.cd{background:#F6F8FA;border:1px solid #E1E6EB;border-radius:10px;padding:12px 14px;font:400 12.5px/1.7 'IBM Plex Mono',monospace;color:#3B434B;overflow:hidden}
+.cd .k{color:#CF222E}.cd .s{color:#0A3069}.cd .c2{color:#8A949F}
+@media(max-width:600px){.bd{grid-template-columns:1fr}.tr{border-right:0;border-bottom:1px solid #D8DEE4}}
+</style></head><body>
+<div class="c"><div class="bc"><b>northwind</b><i>/</i><b>app</b><i>/</i><span id="bc">src/components/Button.tsx</span><span class="br"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round"><circle cx="6" cy="6" r="2.500"/><circle cx="6" cy="18" r="2.500"/><circle cx="18" cy="9" r="2.500"/><path d="M6 8.500v7M18 11.500c0 4-6 3-12 4"/></svg>main</span></div>
+<div class="bd"><div class="tr" id="t" role="tree" aria-label="Files"></div><div class="pv" id="p"></div></div></div>
+<script>
+const T=[['src','d',0,[['components','d',1,[['Button.tsx','f',2,0,'142 lines','M'],['Card.tsx','f',2,0,'96 lines',''],['Modal.tsx','f',2,0,'188 lines','']]],['hooks','d',1,[['useDebounce.ts','f',2,0,'24 lines','']]],['App.tsx','f',1,0,'61 lines',''],['index.css','f',1,0,'210 lines','']]],['public','d',0,[['logo.svg','f',1,0,'2 KB','']]],['package.json','f',0,0,'38 lines','M'],['README.md','f',0,0,'54 lines','U']];
+const flat=[];function walk(a,p){a.forEach(n=>{const path=p?p+'/'+n[0]:n[0];flat.push({n:n[0],t:n[1],d:n[2],path,kids:n[3]||null,size:n[4],g:n[5]});if(n[3])walk(n[3],path)})}walk(T,'');
+const open=new Set(['src','src/components']);let sel='src/components/Button.tsx';
+const col={ts:'#3178C6',tsx:'#3178C6',css:'#8250DF',json:'#BF8700',md:'#1A7F37',svg:'#E16F24'};
+const dir='<svg class="ic" viewBox="0 0 24 24" fill="#54AEFF"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>';
+const fi=n=>{const e=n.split('.').pop();return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="'+(col[e]||'#7D8590')+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg>'};
+function vis(){const out=[];flat.forEach(x=>{const parts=x.path.split('/');let ok=true;for(let i=1;i<parts.length;i++)if(!open.has(parts.slice(0,i).join('/')))ok=false;if(ok)out.push(x)});return out}
+function draw(){const t=document.getElementById('t');t.innerHTML=vis().map(x=>'<button class="n'+(x.kids&&open.has(x.path)?' open':'')+(x.path===sel?' on':'')+'" style="--d:'+x.d+'" data-p="'+x.path+'" role="treeitem"'+(x.kids?' aria-expanded="'+open.has(x.path)+'"':'')+'>'+(x.kids?'<svg class="cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>':'<span class="sp"></span>')+(x.kids?dir:fi(x.n))+x.n+(x.g?'<span class="g" style="color:'+(x.g==='M'?'#BF8700':'#1A7F37')+'">'+x.g+'</span>':'')+'</button>').join('');
+ const f=flat.find(x=>x.path===sel);document.getElementById('bc').textContent=sel;
+ document.getElementById('p').innerHTML=f&&!f.kids?'<small>SELECTED FILE</small><h2>'+f.n+'</h2><p>'+(f.g==='M'?'Modified in your working tree.':f.g==='U'?'New file, not yet tracked.':'Unchanged since the last commit.')+'</p><div class="mt"><div><b>'+f.size+'</b>size</div><div><b>3</b>contributors</div><div><b>2d</b>last edit</div></div><div class="cd"><span class="k">export</span> <span class="k">function</span> '+f.n.split('.')[0]+'() {<br>&nbsp;&nbsp;<span class="c2">// …</span><br>&nbsp;&nbsp;<span class="k">return</span> <span class="s">null</span>;<br>}</div>':'<small>FOLDER</small><h2>'+(f?f.n:'')+'</h2><p>'+(f&&f.kids?f.kids.length+' items':'')+'</p>'}
+document.getElementById('t').addEventListener('click',e=>{const b=e.target.closest('.n');if(!b)return;const p=b.dataset.p,x=flat.find(y=>y.path===p);if(x.kids){open.has(p)?open.delete(p):open.add(p)}sel=p;draw()});
+document.getElementById('t').addEventListener('keydown',e=>{const bs=[...document.querySelectorAll('.n')],i=bs.indexOf(document.activeElement);if(e.key==='ArrowDown'){e.preventDefault();(bs[i+1]||bs[0]).focus()}if(e.key==='ArrowUp'){e.preventDefault();(bs[i-1]||bs[bs.length-1]).focus()}});draw();
+</script></body></html>

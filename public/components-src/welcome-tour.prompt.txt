@@ -1,0 +1,29 @@
+ROLE
+You are a senior onboarding designer and front-end engineer with 15+ years of experience. Build "Product Tour": a guided product tour with a dimmed app, highlighted targets, a positioned tooltip and step dots.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft periwinkle workspace under a dim overlay with a crisp white tooltip and indigo highlight ring.
+- Palette: #4F46E5, #161B38, #F4F5FC, #E4E7F6, #E7EAF6, #E7E9F6
+- Type: Outfit (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Mock app (sidebar, cards, button) with a scrim; tooltip with step label, title, body, progress dots, Skip and Next; a 'Restart the tour' end state.
+
+INTERACTION & STATES
+- Next/Finish moves the highlight ring and repositions the tooltip (with a tracked arrow) onto each target; Skip ends the tour; Restart returns to step one.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

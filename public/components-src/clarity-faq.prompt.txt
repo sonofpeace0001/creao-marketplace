@@ -1,0 +1,31 @@
+ROLE
+You are a senior editorial designer and front-end engineer with 15+ years of experience. Build "Numbered FAQ": an editorial two-column FAQ with italic numerals, a morphing plus/minus and smooth height-animated answers.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper, serif questions and a burnt-orange accent; reads like a well-set magazine page.
+- Palette: #1B1A17, #6F6B61, #DDD8CB, #C2410C, #F8F5EE, #4D4A42
+- Type: Newsreader, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Left column with kicker, serif headline and a 'Talk to a human' link.
+- Right column with four numbered question rows; the first starts open.
+
+INTERACTION & STATES
+- Multiple items can be open at once; answers animate with grid-template-rows 0fr→1fr.
+- The icon morphs from plus to minus; titles tint on hover; buttons expose aria-expanded.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

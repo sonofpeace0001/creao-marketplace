@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Editor Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0C14;color:#C9D1E8;font-family:'JetBrains Mono',monospace;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:640px;display:grid;grid-template-columns:270px 1fr;background:#0F1220;border:1px solid #222845;border-radius:14px;overflow:hidden;box-shadow:0 40px 80px -34px #000}
+.ex{background:#0C0F1B;border-right:1px solid #1C2140;padding:10px 0;min-height:360px}
+.hd{display:flex;justify-content:space-between;padding:6px 16px 10px;font-size:11px;letter-spacing:.14em;color:#6C76A0;font-weight:500}
+.r{position:relative;display:flex;align-items:center;gap:7px;width:100%;border:0;background:none;color:#B3BCDA;font:400 13px 'JetBrains Mono',monospace;padding:4px 14px 4px calc(14px + var(--d)*14px);cursor:pointer;text-align:left;height:26px}
+.r::before{content:"";position:absolute;left:calc(21px + var(--d)*14px - 14px);top:0;bottom:0;border-left:1px solid #1C2140;display:var(--g,none)}
+.r:hover{background:#151A30}.r.on{background:#1B2347;color:#fff}.r:focus-visible{outline:1px solid #7AA2FF;outline-offset:-1px}
+.r .cv{width:11px;height:11px;flex:none;color:#6C76A0;transition:transform .12s}.r.open .cv{transform:rotate(90deg)}.r .sp{width:11px;flex:none}
+.r .ic{flex:none;width:15px;height:15px}
+.r .bd{margin-left:auto;font-size:11px;font-weight:500}.M{color:#E2C08D}.U{color:#73C991}.D{color:#F87171}
+.nm.dm{color:#6C76A0}
+.ed{display:flex;flex-direction:column}
+.tab{display:flex;background:#0C0F1B;border-bottom:1px solid #1C2140;font-size:12.5px}.tab div{padding:10px 16px;color:#8D97C0;border-right:1px solid #1C2140}.tab div.on{background:#0F1220;color:#fff;box-shadow:inset 0 -2px 0 #7AA2FF}
+pre{padding:16px 0;font:400 12.5px/1.8 'JetBrains Mono',monospace;overflow:hidden;counter-reset:l;flex:1}
+pre span.l{display:block;white-space:pre;padding-right:16px}pre span.l::before{counter-increment:l;content:counter(l);display:inline-block;width:38px;text-align:right;padding-right:16px;color:#3A4268}
+.k{color:#C792EA}.f{color:#82AAFF}.s{color:#C3E88D}.c{color:#4F587F;font-style:italic}.p{color:#89DDFF}
+.sb{display:flex;gap:16px;padding:6px 14px;background:#7AA2FF;color:#0A0C14;font-size:11.5px;font-weight:500}
+@media(max-width:560px){.w{grid-template-columns:1fr}.ed{display:none}}
+</style></head><body>
+<div class="w"><div class="ex" id="x" role="tree" aria-label="Explorer"><div class="hd"><span>EXPLORER</span><span>NORTHWIND</span></div><div id="t"></div></div>
+<div class="ed"><div class="tab"><div class="on" id="tb">App.tsx</div></div><pre id="cd"></pre><div class="sb"><span>main</span><span>0 ↓ 2 ↑</span><span style="margin-left:auto">TypeScript React</span></div></div></div>
+<script>
+const T=[['src',0,[['components',1,[['Button.tsx',2,'M'],['Card.tsx',2,''],['Modal.tsx',2,'']]],['hooks',1,[['useAuth.ts',2,'U'],['useDebounce.ts',2,'']]],['App.tsx',1,'M'],['main.tsx',1,''],['index.css',1,'']]],['public',0,[['favicon.svg',1,'']]],['.env.local',0,'U'],['package.json',0,''],['tsconfig.json',0,'']];
+const flat=[];(function w(a,p){a.forEach(n=>{const path=p?p+'/'+n[0]:n[0];const kids=Array.isArray(n[2])?n[2]:null;flat.push({n:n[0],d:n[1],path,kids,g:kids?'':n[2]});if(kids)w(kids,path)})})(T,'');
+const open=new Set(['src','src/components']);let sel='src/App.tsx';
+const C={tsx:'#61AFEF',ts:'#61AFEF',css:'#C792EA',json:'#E5C07B',svg:'#E06C75'};
+const fi=n=>'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="'+(C[n.split('.').pop()]||'#7C86B0')+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg>';
+const dir=o=>'<svg class="ic" viewBox="0 0 24 24" fill="'+(o?'#7AA2FF':'#5A6AA8')+'"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>';
+function vis(){return flat.filter(x=>{const p=x.path.split('/');for(let i=1;i<p.length;i++)if(!open.has(p.slice(0,i).join('/')))return false;return true})}
+function code(n){return [['<span class="k">import</span> <span class="p">{</span> Button <span class="p">}</span> <span class="k">from</span> <span class="s">\'./components/Button\'</span><span class="p">;</span>'],[''],['<span class="c">// '+n+'</span>'],['<span class="k">export default function</span> <span class="f">App</span><span class="p">()</span> <span class="p">{</span>'],['  <span class="k">return</span> <span class="p">(</span>'],['    <span class="p">&lt;</span><span class="f">main</span><span class="p">&gt;</span>'],['      <span class="p">&lt;</span><span class="f">Button</span><span class="p">&gt;</span>Get started<span class="p">&lt;/</span><span class="f">Button</span><span class="p">&gt;</span>'],['    <span class="p">&lt;/</span><span class="f">main</span><span class="p">&gt;</span>'],['  <span class="p">);</span>'],['<span class="p">}</span>']].map(l=>'<span class="l">'+l[0]+'</span>').join('')}
+function draw(){document.getElementById('t').innerHTML=vis().map(x=>{const o=open.has(x.path);return '<button class="r'+(o&&x.kids?' open':'')+(x.path===sel?' on':'')+'" style="--d:'+x.d+';--g:'+(x.d?'block':'none')+'" data-p="'+x.path+'" role="treeitem"'+(x.kids?' aria-expanded="'+o+'"':'')+'>'+(x.kids?'<svg class="cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>'+dir(o):'<span class="sp"></span>'+fi(x.n))+'<span class="nm'+(x.g==='U'?'':'')+'" style="'+(x.g==='M'?'color:#E2C08D':x.g==='U'?'color:#73C991':'')+'">'+x.n+'</span>'+(x.g?'<span class="bd '+x.g+'">'+x.g+'</span>':'')+'</button>'}).join('');
+ const f=flat.find(x=>x.path===sel);document.getElementById('tb').textContent=f&&!f.kids?f.n:'App.tsx';document.getElementById('cd').innerHTML=code(f&&!f.kids?f.n:'App.tsx')}
+document.getElementById('t').addEventListener('click',e=>{const b=e.target.closest('.r');if(!b)return;const p=b.dataset.p,x=flat.find(y=>y.path===p);if(x.kids)open.has(p)?open.delete(p):open.add(p);else sel=p;draw()});
+document.getElementById('x').addEventListener('keydown',e=>{const bs=[...document.querySelectorAll('.r')],i=bs.indexOf(document.activeElement);if(e.key==='ArrowDown'){e.preventDefault();(bs[i+1]||bs[0]).focus()}if(e.key==='ArrowUp'){e.preventDefault();(bs[i-1]||bs[bs.length-1]).focus()}});draw();
+</script></body></html>

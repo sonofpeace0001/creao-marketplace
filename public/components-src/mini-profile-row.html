@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Suggested People</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F0EFEA;color:#1D2420;font-family:'Albert Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:480px;background:#fff;border-radius:28px;padding:22px;box-shadow:0 34px 60px -38px rgba(29,36,32,.5),0 0 0 1px rgba(29,36,32,.07)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.hd h1{font-size:19px;font-weight:800;letter-spacing:-.03em}.hd a{font-size:13.5px;font-weight:700;color:#16794E;text-decoration:none}
+.r{display:flex;align-items:center;gap:14px;padding:12px 8px;border-radius:18px;transition:background .2s;animation:in .35s cubic-bezier(.3,1.4,.4,1) both}.r:hover{background:#F6F8F6}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.av{position:relative;flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:16px;color:#fff;background:var(--c)}
+.av.on::after{content:"";position:absolute;right:0;bottom:0;width:13px;height:13px;border-radius:50%;background:#22C55E;border:3px solid #fff}
+.tx{flex:1;min-width:0}.tx b{display:flex;align-items:center;gap:5px;font-size:16px;font-weight:700;letter-spacing:-.015em}.tx b svg{color:#2563EB;flex:none}
+.tx span{display:block;font-size:13.5px;color:#6D7A72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}.tx em{font-style:normal;font-size:12.5px;color:#93A099;font-weight:600}
+.fb{flex:none;min-width:104px;border:1.5px solid #1D2420;background:#1D2420;color:#fff;font:700 14px 'Albert Sans';padding:9px 16px;border-radius:99px;cursor:pointer;transition:all .2s}
+.fb:hover{transform:translateY(-1px)}.fb:focus-visible{outline:3px solid #16794E;outline-offset:2px}
+.fb[aria-pressed=true]{background:#fff;color:#1D2420;border-color:#D5DDD8}.fb[aria-pressed=true]:hover{border-color:#E5484D;color:#D13438}.fb[aria-pressed=true]:hover .t{display:none}.fb .u{display:none}.fb[aria-pressed=true]:hover .u{display:inline}
+.fn{margin-top:8px;padding-top:14px;border-top:1px solid #EEF1EE;font-size:13px;color:#8B988F;text-align:center}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>People to follow</h1><a href="#">See all</a></div><div id="l"></div><div class="fn" id="fn"></div></div>
+<script>
+const P=[['Ines Carvalho','Brand strategist · Lisbon','IC','#F97316',1,1,'4.1k followers'],['Theo Bergström','Backend engineer · Stockholm','TB','#8B5CF6',0,0,'2.8k followers'],['Priya Raman','Design lead at Flux · Bengaluru','PR','#0EA5A4',1,1,'9.6k followers'],['Diego Marín','Illustrator · Mexico City','DM','#E11D74',0,0,'1.3k followers']];
+const v='<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.400 2 3.100-.2.900 3 2.700 1.600-.9 3 .9 3-2.700 1.600-.9 3-3.100-.2L12 22l-2.400-2-3.100.2-.9-3L3.100 15.600l.9-3-.9-3L5.600 8l.9-3 3.100.2Z"/><path d="m8.500 12.200 2.500 2.500 4.500-5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const l=document.getElementById('l');let st=P.map(p=>p[5]);
+l.innerHTML=P.map((p,i)=>'<div class="r" style="animation-delay:'+i*70+'ms"><span class="av'+(p[4]?' on':'')+'" style="--c:'+p[3]+'">'+p[2]+'</span><div class="tx"><b>'+p[0]+(i%2===0?v:'')+'</b><span>'+p[1]+'</span><em>'+p[6]+'</em></div><button class="fb" data-i="'+i+'" aria-pressed="'+!!st[i]+'"><span class="t">'+(st[i]?'Following':'Follow')+'</span><span class="u">Unfollow</span></button></div>').join('');
+function note(){const n=st.filter(Boolean).length;document.getElementById('fn').textContent='You follow '+n+' of '+P.length+' suggested people'}
+l.addEventListener('click',e=>{const b=e.target.closest('.fb');if(!b)return;const i=+b.dataset.i;st[i]=st[i]?0:1;b.setAttribute('aria-pressed',!!st[i]);b.querySelector('.t').textContent=st[i]?'Following':'Follow';note()});note();
+</script></body></html>

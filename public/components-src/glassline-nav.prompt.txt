@@ -1,0 +1,31 @@
+ROLE
+You are a senior navigation designer and front-end engineer with 15+ years of experience. Build "Glass Nav": a floating glass navbar with an accessible Product dropdown of three icon links.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Aurora-lit midnight page with a frosted rounded nav, gradient icon tiles and a white CTA.
+- Palette: #7C5CFF, #9AA0BE, #F1F2F8, #3B1F77, #0E4D7A, #070812
+- Type: Inter Tight (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Sticky blurred nav: logo, Product dropdown trigger, Customers/Pricing/Docs links, Sign in and a white Get started button.
+- Dropdown with three rows (icon tile, title, description) and a hero below.
+
+INTERACTION & STATES
+- Dropdown opens on hover or click, closes on outside click and Escape (returning focus), with aria-expanded kept in sync.
+- Opens briefly on load to show the state.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

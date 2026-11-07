@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Launch Checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+@property --p{syntax:'<number>';inherits:false;initial-value:0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9F1EE;color:#14302A;font-family:'Nunito Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:460px;background:#fff;border-radius:30px;padding:26px;box-shadow:0 36px 60px -38px rgba(20,48,42,.5),0 0 0 1px rgba(20,48,42,.06)}
+.hd{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+.rg{--p:0;flex:none;width:76px;height:76px;border-radius:50%;background:conic-gradient(#10B981 calc(var(--p)*1%),#E4EEEA 0);display:grid;place-items:center;transition:--p .8s cubic-bezier(.3,1,.4,1);position:relative}
+.rg::before{content:"";position:absolute;inset:8px;border-radius:50%;background:#fff}.rg b{position:relative;font-size:19px;font-weight:800;letter-spacing:-.03em}
+.hd h1{font-size:21px;font-weight:800;letter-spacing:-.03em}.hd p{font-size:14px;color:#6A8078;margin-top:3px}
+.gp{font-size:11.5px;font-weight:800;letter-spacing:.14em;color:#8DA39B;text-transform:uppercase;margin:16px 0 8px}
+.it{display:flex;align-items:center;gap:13px;padding:12px 12px;border-radius:15px;cursor:pointer;transition:background .2s}.it:hover{background:#F3F8F6}.it:focus-visible{outline:2px solid #10B981;outline-offset:-2px}
+.ck{flex:none;width:26px;height:26px;border-radius:50%;border:2.5px solid #C9DAD3;display:grid;place-items:center;color:#fff;transition:all .3s cubic-bezier(.3,1.6,.4,1)}
+.ck svg{width:14px;height:14px;opacity:0;transform:scale(.3);transition:all .25s}
+.it.d .ck{background:#10B981;border-color:#10B981}.it.d .ck svg{opacity:1;transform:none}
+.tx{flex:1;min-width:0}.tx b{display:block;font-size:15.5px;font-weight:700;transition:color .2s}.tx span{font-size:13px;color:#7C928A}
+.it.d .tx b{color:#8DA39B;text-decoration:line-through;text-decoration-color:#C9DAD3}
+.tg{font-size:11.5px;font-weight:800;color:#0D8F63;background:#DDF6EC;padding:4px 9px;border-radius:99px}
+.it.pn .tg{color:#9A6A00;background:#FFF1CC}
+.ft{margin-top:16px;padding-top:16px;border-top:1px dashed #DCE9E4;display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:#6A8078}
+.ft button{border:0;border-radius:12px;padding:11px 18px;font:800 14px 'Nunito Sans';background:#14302A;color:#fff;cursor:pointer}.ft button:disabled{background:#D5E2DD;color:#9AB0A8;cursor:not-allowed}.ft button:focus-visible{outline:2px solid #10B981;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div class="rg" id="rg"><b id="pc">0%</b></div><div><h1>Launch checklist</h1><p id="sb"></p></div></div><div id="l"></div>
+<div class="ft"><span id="ft"></span><button id="go" disabled>Go live</button></div></div>
+<script>
+const G=[['Product',[['Add your first product','Name, price and photos',1],['Connect a payment method','Stripe or PayPal',1],['Set shipping rates','Domestic and international',0]]],['Store',[['Choose a theme','Pick colours and fonts',1],['Connect your domain','yourshop.com',0],['Write your About page','Tell your story',0]]]];
+const l=document.getElementById('l'),ck='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg>';
+let h='';G.forEach((g,gi)=>{h+='<div class="gp">'+g[0]+'</div>';g[1].forEach((t,ti)=>h+='<div class="it'+(t[2]?' d':' pn')+'" tabindex="0" role="checkbox" aria-checked="'+!!t[2]+'" data-g="'+gi+'" data-t="'+ti+'"><span class="ck">'+ck+'</span><div class="tx"><b>'+t[0]+'</b><span>'+t[1]+'</span></div><span class="tg">'+(t[2]?'Done':'To do')+'</span></div>')});l.innerHTML=h;
+function upd(){const all=[...l.querySelectorAll('.it')],d=all.filter(x=>x.classList.contains('d')).length,p=Math.round(d/all.length*100);document.getElementById('rg').style.setProperty('--p',p);document.getElementById('pc').textContent=p+'%';document.getElementById('sb').textContent=d+' of '+all.length+' steps complete';document.getElementById('ft').textContent=d===all.length?'You\'re ready to launch.':(all.length-d)+' step'+(all.length-d>1?'s':'')+' to go';document.getElementById('go').disabled=d!==all.length}
+function tog(it){const o=!it.classList.contains('d');it.classList.toggle('d',o);it.classList.toggle('pn',!o);it.setAttribute('aria-checked',o);it.querySelector('.tg').textContent=o?'Done':'To do';upd()}
+l.addEventListener('click',e=>{const it=e.target.closest('.it');if(it)tog(it)});l.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){const it=e.target.closest('.it');if(it){e.preventDefault();tog(it)}}});
+document.getElementById('go').onclick=e=>e.target.textContent='Live!';setTimeout(upd,60);
+</script></body></html>

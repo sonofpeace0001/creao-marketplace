@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Rich Tooltip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0D1117;color:#E6EDF3;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:580px;background:#151B23;border:1px solid #232C38;border-radius:22px;padding:28px;box-shadow:0 40px 70px -40px #000}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.hd h1{font-size:18px;font-weight:700;letter-spacing:-.02em}.hd span{font:500 11.5px 'Spline Sans Mono',monospace;color:#6E7B8C;letter-spacing:.1em}
+.tx{font-size:16px;line-height:1.85;color:#A6B3C2;min-height:0;padding:236px 0 8px}
+.tg{position:relative;display:inline;color:#7DD3FC;border-bottom:1.5px dotted #38BDF8;cursor:help;font-weight:600}.tg:focus-visible{outline:2px solid #38BDF8;outline-offset:3px;border-radius:3px}
+.pp{position:absolute;left:50%;bottom:calc(100% + 14px);width:270px;transform:translateX(-50%) translateY(8px);background:#1B2430;border:1px solid #2F3B4B;border-radius:16px;padding:16px;box-shadow:0 26px 44px -14px rgba(0,0,0,.8);opacity:0;visibility:hidden;transition:all .22s cubic-bezier(.3,1.2,.5,1);color:#E6EDF3;text-align:left;font-weight:400;line-height:1.5;cursor:default;z-index:5}
+.pp::before{content:"";position:absolute;left:0;right:0;top:100%;height:16px}.pp::after{content:"";position:absolute;left:50%;top:100%;width:12px;height:12px;background:#1B2430;border-right:1px solid #2F3B4B;border-bottom:1px solid #2F3B4B;transform:translate(-50%,-6px) rotate(45deg)}
+.tg:hover .pp,.tg:focus .pp,.tg:focus-within .pp,.tg.open .pp{opacity:1;visibility:visible;transform:translateX(-50%)}
+.pp .t{display:flex;align-items:center;gap:10px;margin-bottom:9px}.pp .t i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none}.pp b{font-size:14.5px;color:#fff}.pp small{display:block;font:500 11px 'Spline Sans Mono',monospace;color:#6E7B8C;letter-spacing:.06em}
+.pp .pd{display:block;font-size:13.5px;color:#A6B3C2;margin-bottom:12px}.pp .m{display:flex;gap:8px;margin-bottom:12px}.pp .m div{flex:1;background:#121922;border-radius:10px;padding:8px 10px}.pp .m strong{display:block;font-size:15px;color:#fff}.pp .m span{font-size:11.5px;color:#6E7B8C}
+.pp a{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#7DD3FC;text-decoration:none}.pp a:hover{text-decoration:underline}.pp a:focus-visible{outline:2px solid #38BDF8;border-radius:3px}
+.l{left:0;transform:translateX(0) translateY(8px)}.l::after{left:34px}.tg:hover .l,.tg:focus .l,.tg.open .l{transform:translateX(0)}.tg.open:not(:hover):not(:focus-within) .pp:not(.l){}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Release notes · v4.2</h1><span>TOOLTIP DEMO</span></div>
+<div class="tx">This release moves our edge layer to
+<span class="tg open" id="first" tabindex="0" aria-describedby="d1">Edge Functions<span class="pp l" role="tooltip" id="d1"><span class="t"><i style="background:#0C3A52;color:#38BDF8"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></i><span><b>Edge Functions</b><small>RUNTIME · STABLE</small></span></span><span class="pd">Run server code in 280+ locations, close to every user, with cold starts under 5 ms.</span><span class="m"><div><strong>4 ms</strong><span>Cold start</span></div><div><strong>280+</strong><span>Regions</span></div></span><a href="#">Read the docs <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span>
+and adds first-class support for
+<span class="tg" tabindex="0" aria-describedby="d2">streaming responses<span class="pp" role="tooltip" id="d2"><span class="t"><i style="background:#2B1B52;color:#A78BFA"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></i><span><b>Streaming</b><small>API · NEW</small></span></span><span class="pd">Send the first byte instantly and flush the rest as it is ready, ideal for AI output.</span><span class="m"><div><strong>-62%</strong><span>Time to first byte</span></div><div><strong>Zero</strong><span>Config</span></div></span><a href="#">See the guide <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span>.
+Existing projects migrate automatically, and your
+<span class="tg" tabindex="0" aria-describedby="d3">environment variables<span class="pp" role="tooltip" id="d3"><span class="t"><i style="background:#3D2A0F;color:#FBBF24"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2.500"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></i><span><b>Secrets</b><small>SECURITY · ENCRYPTED</small></span></span><span class="pd">Variables are encrypted at rest and only exposed to the environments you choose.</span><a href="#">Manage secrets <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span> carry over untouched.</div></div>
+<script>
+const f=document.getElementById('first');const done=()=>f.classList.remove('open');
+document.querySelectorAll('.tg').forEach(t=>{t.addEventListener('mouseenter',done);t.addEventListener('focus',done)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')done()});
+</script></body></html>

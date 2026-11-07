@@ -1,0 +1,31 @@
+ROLE
+You are a senior data-product designer and front-end engineer (analytics dashboards) with 15+ years of experience. Build "KPI Strip": a four-cell live KPI strip with count-up gradient figures, trend chips and self-drawing sparklines.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark analytics surface with Red Hat Display numerals, each metric tinted with its own two-colour gradient.
+- Palette: #1B2230, #2DD4A0, #080B10, #E8EDF5, #9AA7BC, #5A6880
+- Type: Red Hat Display, Red Hat Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with period label and a live-updated indicator.
+- Four cells (Active users, Revenue, Churn, NPS), each with a gradient number, an up/down trend chip and a sparkline.
+
+INTERACTION & STATES
+- Numbers count up over 1.4s with an eased curve and tabular figures; sparklines draw via stroke-dashoffset.
+- Cells brighten on hover; the grid becomes 2×2 on small screens; static under reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

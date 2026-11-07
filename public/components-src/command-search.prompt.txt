@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial search designer and front-end engineer with 15+ years of experience. Build "Minimal Search": a big serif prompt with a pill search bar, removable recent-search chips and keyboard hints.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black stage with an italic serif headline, amber search button and quiet chips.
+- Palette: #FFB547, #EDEDF1, #26262C, #5E5E6A, #6A6A76, #0B0B0D
+- Type: Instrument Sans, Instrument Serif (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Headline; pill search field with icon and Search button; Recent label with removable chips and Clear all; keyboard hint line.
+
+INTERACTION & STATES
+- Clicking a chip fills the field; the chip x removes it; Clear all empties the list; Enter submits and adds a new recent; Escape clears the field.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

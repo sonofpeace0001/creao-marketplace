@@ -1,0 +1,29 @@
+ROLE
+You are a senior cloud-storage designer and front-end engineer with 15+ years of experience. Build "Upload Queue": a live upload queue with per-file progress, completion ticks, a failed state with retry and cancel buttons.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark card with indigo-to-teal progress, mono sizes and colour-coded file-type tiles.
+- Palette: #7C8CFF, #5EEAD4, #6C7791, #08090D, #EAECF4, #1F2332
+- Type: Epilogue, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with file count and total MB; overall progress bar; four file rows (type tile, name, size/percent, bar, action) in uploading, complete and failed states; footer with Add files.
+
+INTERACTION & STATES
+- Progress advances continuously and updates in place (no re-render churn); completion swaps to a green tick; Cancel removes a file; Retry restarts a failed one; Add files appends a new upload.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

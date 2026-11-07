@@ -1,0 +1,29 @@
+ROLE
+You are a senior documentation designer and front-end engineer with 15+ years of experience. Build "Rich Tooltip": inline term tooltips that open rich cards with icon, description, metrics and a link, using a hover bridge.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: GitHub-dark release notes with dotted cyan terms and elevated detail cards.
+- Palette: #6E7B8C, #38BDF8, #2F3B4B, #E6EDF3, #A6B3C2, #7DD3FC
+- Type: Hanken Grotesk, Spline Sans Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Release-notes card with paragraph containing three dotted terms; each opens a popover with icon tile, title and tag, description, optional metric tiles and a Read more link; arrow notch.
+
+INTERACTION & STATES
+- Hover or focus (also focus-within) opens the card; a pseudo-element bridge lets the pointer travel into it; Escape closes the demo-open card; links are keyboard reachable.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

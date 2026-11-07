@@ -1,0 +1,30 @@
+ROLE
+You are a senior brand designer and front-end engineer (creator and media) with 15+ years of experience. Build "Margin Notes Signup": a sticker-style newsletter card with a hand-drawn underline, inline email field and success state.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Neo-brutalist friendliness: butter-yellow card, thick ink border, hard shadow, a tilted coral sticker.
+- Palette: #231D12, #FFE27A, #5E5230, #FFF8EA, #E9DDBF, #FF5E3A
+- Type: Bricolage Grotesque, Instrument Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Card with 'Free · Fridays' sticker, headline with a hand-drawn SVG underline, one-line promise, email + button bar, error line, avatar-stack proof, hidden success state.
+
+INTERACTION & STATES
+- Submit validates; invalid shows an inline message and refocuses; valid swaps to a thank-you.
+- Focus adds a 4px hard shadow to the field; the button scales on hover.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

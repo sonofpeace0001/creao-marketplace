@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Segmented Tabs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#E8EEFF,#F7ECFF);color:#1C2040;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:520px;background:rgba(255,255,255,.85);backdrop-filter:blur(14px);border-radius:28px;padding:22px;box-shadow:0 40px 70px -40px rgba(60,50,140,.5),0 0 0 1px rgba(255,255,255,.9)}
+.tl{position:relative;display:grid;grid-template-columns:repeat(4,1fr);background:#ECEFFA;border-radius:16px;padding:5px}
+.th{position:absolute;top:5px;bottom:5px;left:5px;width:calc((100% - 10px)/4);border-radius:12px;background:#fff;box-shadow:0 6px 14px -6px rgba(60,50,140,.45);transition:transform .35s cubic-bezier(.4,1.3,.5,1)}
+.tl button{position:relative;z-index:1;border:0;background:none;padding:11px 4px;font:700 13.5px 'Plus Jakarta Sans';color:#7480A8;cursor:pointer;border-radius:12px;transition:color .2s}.tl button[aria-selected=true]{color:#1C2040}.tl button:focus-visible{outline:2px solid #5B5BF6;outline-offset:1px}
+.pn{padding:26px 8px 8px;min-height:190px}.pn[hidden]{display:none}.pn h2{font-size:23px;font-weight:800;letter-spacing:-.04em;margin-bottom:8px}.pn p{font-size:15px;color:#5A6490;line-height:1.6;max-width:42ch}
+.kp{display:flex;gap:10px;margin-top:20px}.kp div{flex:1;background:#F4F5FD;border-radius:16px;padding:14px}.kp b{display:block;font-size:22px;font-weight:800;letter-spacing:-.04em;color:#4338CA}.kp span{font-size:12.5px;color:#7480A8;font-weight:600}
+.pn.in{animation:fi .35s ease}@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="tl" role="tablist" aria-label="Report sections" id="tl"><span class="th" id="th"></span>
+<button role="tab" id="t0" aria-controls="p0" aria-selected="true">Overview</button><button role="tab" id="t1" aria-controls="p1" aria-selected="false" tabindex="-1">Activity</button><button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Billing</button><button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">Team</button></div>
+<div class="pn" id="p0" role="tabpanel" aria-labelledby="t0"><h2>Everything at a glance</h2><p>A calm summary of how your workspace performed this month across every project.</p><div class="kp"><div><b>98.2%</b><span>Uptime</span></div><div><b>12.4k</b><span>Requests</span></div><div><b>3</b><span>Open issues</span></div></div></div>
+<div class="pn" id="p1" role="tabpanel" aria-labelledby="t1" hidden><h2>Recent activity</h2><p>Deploys, comments and merges from your team, newest first, grouped by day.</p><div class="kp"><div><b>41</b><span>Deploys</span></div><div><b>128</b><span>Comments</span></div><div><b>17</b><span>Merges</span></div></div></div>
+<div class="pn" id="p2" role="tabpanel" aria-labelledby="t2" hidden><h2>Billing and usage</h2><p>Your Pro plan renews on the 1st. Usage is well inside your included limits.</p><div class="kp"><div><b>$48</b><span>This month</span></div><div><b>62%</b><span>Of quota</span></div><div><b>1st</b><span>Renews</span></div></div></div>
+<div class="pn" id="p3" role="tabpanel" aria-labelledby="t3" hidden><h2>Your team</h2><p>Invite teammates, assign roles and review who has access to which projects.</p><div class="kp"><div><b>8</b><span>Members</span></div><div><b>2</b><span>Invites</span></div><div><b>3</b><span>Admins</span></div></div></div></div>
+<script>
+const T=[...document.querySelectorAll('[role=tab]')],P=[...document.querySelectorAll('[role=tabpanel]')];
+function go(i,f){T.forEach((t,k)=>{t.setAttribute('aria-selected',k===i);t.tabIndex=k===i?0:-1;P[k].hidden=k!==i;P[k].classList.toggle('in',k===i)});document.getElementById('th').style.transform='translateX('+i*100+'%)';if(f)T[i].focus()}
+T.forEach((t,i)=>{t.onclick=()=>go(i);t.onkeydown=e=>{let n=null;if(e.key==='ArrowRight')n=(i+1)%4;if(e.key==='ArrowLeft')n=(i+3)%4;if(e.key==='Home')n=0;if(e.key==='End')n=3;if(n!==null){e.preventDefault();go(n,1)}}});
+</script></body></html>

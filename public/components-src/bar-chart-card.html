@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Weekly Bar Chart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#090A0E;color:#ECEEF6;font-family:'Instrument Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px 18px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;background:#10121A;border:1px solid #1E2230;border-radius:26px;padding:24px 26px 22px;box-shadow:0 40px 80px -34px #000}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.hd small{font:500 11px 'Geist Mono',monospace;letter-spacing:.14em;color:#667088}
+.big{font-size:38px;font-weight:700;letter-spacing:-.045em;margin-top:5px;font-variant-numeric:tabular-nums}.big span{font-size:14px;color:#34D399;font-weight:600;letter-spacing:0;margin-left:8px}
+.sg{display:flex;background:#161A25;border-radius:12px;padding:3px}.sg button{border:0;background:none;font:600 13px 'Instrument Sans';color:#7B849C;padding:7px 13px;border-radius:9px;cursor:pointer}.sg button[aria-pressed=true]{background:#262C3E;color:#fff}.sg button:focus-visible{outline:2px solid #7C8CFF;outline-offset:1px}
+.ch{position:relative;height:210px;margin-top:22px;display:flex;align-items:flex-end;gap:12px;padding-bottom:26px;border-bottom:1px solid #1E2230}
+.gl{position:absolute;left:0;right:0;border-top:1px dashed #1B1F2D}
+.bw{position:relative;flex:1;height:100%;display:flex;align-items:flex-end;cursor:pointer}
+.b{width:100%;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#7C8CFF,#4452D8);height:var(--h);transition:height .7s cubic-bezier(.3,1,.4,1),filter .2s,background .3s;transform-origin:bottom}
+.bw:hover .b,.bw:focus-visible .b{filter:brightness(1.25)}.bw.pk .b{background:linear-gradient(180deg,#5EEAD4,#14B8A6)}
+.bw:focus-visible{outline:0}
+.lb{position:absolute;bottom:-24px;left:0;right:0;text-align:center;font:500 11px 'Geist Mono',monospace;color:#667088}.bw:hover .lb{color:#fff}
+.tp{position:absolute;bottom:calc(var(--h) + 10px);left:50%;transform:translate(-50%,6px);background:#fff;color:#10121A;font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:9px;white-space:nowrap;opacity:0;pointer-events:none;transition:all .18s;z-index:2}
+.tp::after{content:"";position:absolute;left:50%;bottom:-4px;width:8px;height:8px;background:#fff;transform:translateX(-50%) rotate(45deg)}
+.bw:hover .tp,.bw:focus-visible .tp{opacity:1;transform:translate(-50%,0)}
+.ft{display:flex;justify-content:space-between;margin-top:16px;font-size:13px;color:#7B849C}.ft b{color:#ECEEF6;font-weight:600}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><small id="lb">REVENUE · THIS WEEK</small><div class="big" id="bg">$0<span>▲ 12.4%</span></div></div><div class="sg" role="group" aria-label="Metric"><button aria-pressed="true" data-m="r">Revenue</button><button aria-pressed="false" data-m="o">Orders</button></div></div>
+<div class="ch" id="ch"><i class="gl" style="bottom:calc(26px + 25%)"></i><i class="gl" style="bottom:calc(26px + 50%)"></i><i class="gl" style="bottom:calc(26px + 75%)"></i></div>
+<div class="ft"><span>Best day <b id="bd">Saturday</b></span><span>Avg / day <b id="av"></b></span></div></div>
+<script>
+const D={r:{l:'REVENUE · THIS WEEK',p:'$',v:[3200,4100,3650,5200,4800,7400,5900]},o:{l:'ORDERS · THIS WEEK',p:'',v:[84,112,97,141,128,196,153]}};
+const dy=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],full=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],ch=document.getElementById('ch');let m='r';
+const f=(p,v)=>p+Math.round(v).toLocaleString();
+function draw(first){const d=D[m],mx=Math.max(...d.v),tot=d.v.reduce((a,b)=>a+b,0),pk=d.v.indexOf(mx);
+ ch.querySelectorAll('.bw').forEach(x=>x.remove());
+ d.v.forEach((v,i)=>{const w=document.createElement('div');w.className='bw'+(i===pk?' pk':'');w.tabIndex=0;w.setAttribute('role','img');w.setAttribute('aria-label',full[i]+' '+f(d.p,v));w.style.setProperty('--h',(v/mx*86)+'%');
+  w.innerHTML='<span class="tp">'+f(d.p,v)+'</span><div class="b" style="height:0"></div><span class="lb">'+dy[i]+'</span>';ch.appendChild(w);requestAnimationFrame(()=>requestAnimationFrame(()=>w.querySelector('.b').style.height=(v/mx*86)+'%'))});
+ document.getElementById('lb').textContent=d.l;document.getElementById('bd').textContent=full[pk];document.getElementById('av').textContent=f(d.p,tot/7);
+ const el=document.getElementById('bg'),t0=performance.now();(function s(t){const k=Math.min(1,(t-t0)/900),e=1-Math.pow(1-k,3);el.firstChild.textContent=f(d.p,tot*e);if(k<1)requestAnimationFrame(s)})(t0)}
+document.querySelectorAll('.sg button').forEach(b=>b.addEventListener('click',()=>{m=b.dataset.m;document.querySelectorAll('.sg button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw()}));draw();
+</script></body></html>

@@ -1,0 +1,30 @@
+ROLE
+You are a senior design-systems engineer with 15+ years of experience. Build "Gradient Library": a five-swatch gradient library where each swatch copies its CSS on click.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark tool-like surface with big saturated gradients and mono colour stops.
+- Palette: #0B0B0F, #ECECF1, #6C6C78, #13131A, #23232C, #3A3A48
+- Type: Space Grotesk, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with count label; five tall gradient swatches each with a name and two hex stops with chips.
+
+INTERACTION & STATES
+- Hover reveals a 'Copy CSS' pill; click copies a ready-to-paste background declaration and shows 'Copied' for 1.4s.
+- Swatches are real buttons with focus rings and lift on hover.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

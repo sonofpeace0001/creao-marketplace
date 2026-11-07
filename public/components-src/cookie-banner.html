@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Cookie Banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F6F4EE;color:#221C14;font-family:'Epilogue',sans-serif;min-height:100vh;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.pg{position:relative;max-width:700px;min-height:440px;margin:0 auto;background:#fff;border-radius:22px;overflow:hidden;padding:30px;box-shadow:0 30px 60px -40px rgba(34,28,20,.45),0 0 0 1px rgba(34,28,20,.06)}
+.nv{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.nv b{font-weight:800;font-size:18px;letter-spacing:-.03em}.nv span{display:flex;gap:18px}.nv i{width:44px;height:8px;border-radius:6px;background:#EEEAE0}
+.h{width:70%;height:28px;border-radius:8px;background:#E9E4D7;margin-bottom:14px}.l{height:11px;border-radius:6px;background:#F1EEE5;margin-bottom:10px}.l:nth-child(4){width:90%}.l:nth-child(5){width:75%}.l:nth-child(6){width:82%}
+.bn{position:absolute;left:16px;right:16px;bottom:16px;display:flex;align-items:center;gap:18px;background:#221C14;color:#F6F1E6;border-radius:18px;padding:16px 18px;box-shadow:0 24px 44px -14px rgba(0,0,0,.6);animation:up .55s cubic-bezier(.2,1.1,.4,1) .2s both}@keyframes up{from{transform:translateY(120%);opacity:0}}
+.bn.out{animation:dn .35s forwards}@keyframes dn{to{transform:translateY(120%);opacity:0}}
+.ck{flex:none;width:44px;height:44px;border-radius:50%;background:#F5B544;display:grid;place-items:center}
+.tx{flex:1;min-width:0}.tx b{display:block;font-size:15px;font-weight:700;margin-bottom:2px}.tx p{font-size:13.5px;line-height:1.5;color:#C9C2B1}.tx a{color:#F5B544;font-weight:700}
+.ac{display:flex;gap:8px;flex:none}.ac button{border-radius:11px;padding:11px 16px;font:700 13.5px 'Epilogue';cursor:pointer;white-space:nowrap;transition:transform .15s}.ac button:hover{transform:translateY(-1px)}.ac button:focus-visible{outline:2px solid #F5B544;outline-offset:2px}.ok{background:#F5B544;color:#221C14;border:0}.no{background:transparent;color:#F6F1E6;border:1.5px solid #4A4234}
+.rs{display:none;position:absolute;left:16px;bottom:16px;border:1.5px solid #D8D0BD;background:#fff;border-radius:99px;padding:9px 15px;font:600 13px 'Epilogue';cursor:pointer;color:#221C14}.rs.on{display:block}.rs:hover{background:#F6F4EE}.rs:focus-visible{outline:2px solid #221C14;outline-offset:2px}
+@media(max-width:620px){.bn{flex-direction:column;align-items:stretch;gap:12px}.ck{display:none}.ac{justify-content:stretch}.ac button{flex:1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="pg"><div class="nv"><b>Fieldnote</b><span><i></i><i></i><i></i></span></div><div class="h"></div><div class="l"></div><div class="l"></div><div class="l"></div>
+<div class="bn" id="bn" role="region" aria-label="Cookie consent"><div class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#221C14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9 4 4 0 0 0 5 5 3 3 0 0 0 4 4z"/><path d="M8.500 11h.01M12 16h.01M15.500 14h.01M9 15h.01"/></svg></div>
+<div class="tx"><b>We bake cookies, but only the helpful kind.</b><p>We use them to keep you signed in and to learn what to improve. See our <a href="#">cookie policy</a>.</p></div>
+<div class="ac"><button class="no" id="no">Essential only</button><button class="ok" id="ok">Accept all</button></div></div>
+<button class="rs" id="rs">Cookie settings</button></div>
+<script>
+const bn=document.getElementById('bn'),rs=document.getElementById('rs');
+function hide(){bn.classList.add('out');setTimeout(()=>{bn.style.display='none';rs.classList.add('on')},330)}
+document.getElementById('ok').onclick=hide;document.getElementById('no').onclick=hide;
+rs.onclick=()=>{rs.classList.remove('on');bn.style.display='';bn.classList.remove('out');bn.style.animation='none';void bn.offsetWidth;bn.style.animation=''};
+</script></body></html>

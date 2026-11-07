@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Minimal Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0B0D;color:#EDEDF1;font-family:'Instrument Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:620px;text-align:center}
+.w h1{font:italic 400 clamp(36px,6vw,58px)/1 'Instrument Serif',serif;letter-spacing:-.03em;margin-bottom:26px}.w h1 em{font-style:normal;color:#FFB547}
+.sb{position:relative;display:flex;align-items:center;gap:14px;background:#121215;border:1.5px solid #26262C;border-radius:99px;padding:8px 8px 8px 24px;transition:border-color .2s,box-shadow .2s;box-shadow:0 30px 50px -30px #000}
+.sb:focus-within{border-color:#FFB547;box-shadow:0 0 0 5px rgba(255,181,71,.12),0 30px 50px -30px #000}
+.sb svg{color:#7C7C88;flex:none}.sb input{flex:1;min-width:0;background:none;border:0;outline:0;color:#EDEDF1;font:500 18px 'Instrument Sans'}.sb input::placeholder{color:#5E5E6A}
+.sb button{border:0;border-radius:99px;padding:13px 24px;font:700 15px 'Instrument Sans';background:#FFB547;color:#1A1000;cursor:pointer;transition:transform .15s}.sb button:hover{transform:scale(1.03)}.sb button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.rc{margin-top:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.rc small{font-size:12px;letter-spacing:.14em;color:#6A6A76;font-weight:600;text-transform:uppercase;margin-right:2px}
+.ch{display:inline-flex;align-items:center;gap:6px;background:#16161A;border:1px solid #26262C;border-radius:99px;padding:3px 3px 3px 15px;animation:in .3s cubic-bezier(.3,1.5,.4,1) both;transition:border-color .2s}
+@keyframes in{from{opacity:0;transform:scale(.8)}}
+.ch:hover{border-color:#FFB547}.ch button.t{border:0;background:none;color:#CFCFD8;font:500 14px 'Instrument Sans';cursor:pointer;padding:6px 0}.ch button.t:hover{color:#fff}
+.ch button.x{width:26px;height:26px;border:0;border-radius:50%;background:#212127;color:#8A8A96;cursor:pointer;display:grid;place-items:center}.ch button.x:hover{background:#FF6B6B;color:#fff}
+.ch button:focus-visible{outline:2px solid #FFB547;outline-offset:1px;border-radius:99px}
+.clr{border:0;background:none;color:#6A6A76;font:600 13px 'Instrument Sans';cursor:pointer;padding:6px 8px;border-radius:8px}.clr:hover{color:#FFB547}.clr:focus-visible{outline:2px solid #FFB547}
+.hn{margin-top:26px;font-size:13px;color:#5E5E6A}.hn kbd{font:600 11.5px 'Instrument Sans';background:#17171B;border:1px solid #2A2A31;border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:#9A9AA6}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><h1>What are you <em>looking</em> for?</h1>
+<form class="sb" id="f" role="search"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><input id="i" placeholder="Search the library…" aria-label="Search" autocomplete="off"><button>Search</button></form>
+<div class="rc" id="rc"></div><div class="hn" id="hn"><kbd>Enter</kbd> to search · click a chip to reuse it</div></div>
+<script>
+let R=['invoice template','brand guidelines','Q4 roadmap','onboarding emails'];const i=document.getElementById('i'),rc=document.getElementById('rc');
+function esc(s){return s.replace(/[&<>"]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]))}
+function draw(){rc.innerHTML=R.length?'<small>Recent</small>'+R.map((r,k)=>'<span class="ch" style="animation-delay:'+k*50+'ms"><button class="t" data-u="'+k+'">'+esc(r)+'</button><button class="x" data-r="'+k+'" aria-label="Remove '+esc(r)+'"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.200" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span>').join('')+'<button class="clr" id="cl">Clear all</button>':'<small>No recent searches</small>'}
+rc.addEventListener('click',e=>{const u=e.target.closest('[data-u]'),r=e.target.closest('[data-r]');if(u){i.value=R[+u.dataset.u];i.focus()}if(r){R.splice(+r.dataset.r,1);draw()}if(e.target.id==='cl'){R=[];draw()}});
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();const v=i.value.trim();if(!v)return;R=[v,...R.filter(x=>x!==v)].slice(0,6);i.value='';draw();document.getElementById('hn').textContent='Searching for “'+v+'”…'});draw();
+</script></body></html>

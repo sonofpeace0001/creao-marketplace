@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial designer and front-end engineer (campaigns and events) with 15+ years of experience. Build "Headline Ticker": two tilted bold-serif text tapes — one black, one yellow — scrolling in opposite directions.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Loud poster energy: signal yellow, black tape, giant Fraunces with italic and outlined words and star dividers.
+- Palette: #14110A, #FFE14D
+- Type: Fraunces, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Top bar with 'Open call · 2025' and Apply link; two rotated tapes with repeated slogans and star glyphs; a short paragraph.
+
+INTERACTION & STATES
+- Tapes scroll opposite ways (22s / 28s), pause on hover, and stop under reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

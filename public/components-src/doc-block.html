@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Documentation Block</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F4F1EA;color:#26241F;font-family:'Source Sans 3',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:700px;background:#FFFEFA;border:1px solid #E2DCCD;border-radius:14px;padding:34px 38px;box-shadow:0 30px 50px -36px rgba(70,55,20,.45)}
+.bc{font-size:13px;color:#8F8873;font-weight:600;margin-bottom:12px;display:flex;gap:6px}.bc b{color:#C2410C}
+h1{font:700 32px/1.12 'Source Serif 4',serif;letter-spacing:-.02em;margin-bottom:10px}.lead{font:400 18px/1.55 'Source Serif 4',serif;color:#5A5546;margin-bottom:22px}
+.st{display:flex;gap:14px;margin-bottom:10px}.nb{flex:none;width:30px;height:30px;border-radius:50%;background:#26241F;color:#FFFEFA;font:700 14px 'Source Sans 3';display:grid;place-items:center;margin-top:2px}.st h2{font:600 18px 'Source Serif 4',serif;margin-bottom:5px}.st p{font-size:16px;line-height:1.6;color:#4A463A}.st code{font:500 14px 'Source Code Pro',monospace;background:#F1ECDF;padding:2px 6px;border-radius:5px;color:#9A3412}
+.cb{position:relative;margin:14px 0 22px 44px;background:#201E1A;border-radius:12px;overflow:hidden}.cb .h{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:1px solid #35322B}.cb .h span{font:500 12px 'Source Code Pro',monospace;color:#9B9582}.cb button{border:0;background:#35322B;color:#D9D3BF;border-radius:6px;padding:4px 10px;font:600 12px 'Source Sans 3';cursor:pointer}.cb button:hover{background:#44403A}.cb button:focus-visible{outline:2px solid #FB923C}
+.cb pre{margin:0;padding:14px 16px;font:400 13.5px/1.7 'Source Code Pro',monospace;color:#EDE8D8;overflow-x:auto}.p{color:#FB923C}.q{color:#A3E635}.m{color:#7A7566}
+.no{display:flex;gap:12px;background:#FFF4E5;border:1px solid #F8D9A8;border-left:4px solid #EA7A12;border-radius:10px;padding:14px 16px;margin:6px 0 20px}.no svg{flex:none;color:#C2620B;margin-top:2px}.no b{font-size:15px}.no p{font-size:14.5px;line-height:1.55;color:#6B4A18;margin-top:2px}
+.nx{display:flex;justify-content:space-between;gap:12px;padding-top:18px;border-top:1px solid #ECE6D6}.nx a{flex:1;text-decoration:none;color:inherit;border:1px solid #E2DCCD;border-radius:10px;padding:12px 16px;transition:all .15s}.nx a:hover{border-color:#C2410C;background:#FFF9F3}.nx a:focus-visible{outline:2px solid #C2410C;outline-offset:2px}.nx small{display:block;font-size:12px;color:#8F8873;font-weight:600;letter-spacing:.04em;text-transform:uppercase}.nx b{font:600 16px 'Source Serif 4',serif;color:#C2410C}.nx a:last-child{text-align:right}
+@media(max-width:560px){.c{padding:24px 20px}.cb{margin-left:0}}
+</style></head><body>
+<article class="c"><div class="bc">Guides <span>/</span> Getting started <span>/</span> <b>Installation</b></div><h1>Install the CLI</h1><p class="lead">Set up the command-line tool in under a minute, then verify that everything works.</p>
+<div class="st"><div class="nb">1</div><div><h2>Install the package</h2><p>Install it globally with your package manager. Node 18 or newer is required.</p></div></div>
+<div class="cb"><div class="h"><span>terminal</span><button id="cp">Copy</button></div><pre id="cd"><span class="m"># npm</span>
+<span class="p">$</span> npm install -g <span class="q">@acme/cli</span></pre></div>
+<div class="st"><div class="nb">2</div><div><h2>Sign in</h2><p>Run <code>acme login</code> and approve the request in your browser. Your token is stored securely.</p></div></div>
+<div class="no" role="note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><div><b>Using CI?</b><p>Set the <code>ACME_TOKEN</code> environment variable instead of running the interactive login.</p></div></div>
+<div class="nx"><a href="#"><small>Previous</small><b>Introduction</b></a><a href="#"><small>Next</small><b>Your first project</b></a></div></article>
+<script>
+document.getElementById('cp').onclick=e=>{navigator.clipboard&&navigator.clipboard.writeText('npm install -g @acme/cli').catch(()=>{});e.target.textContent='Copied';setTimeout(()=>e.target.textContent='Copy',1400)};
+</script></body></html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Proof Strip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F5FA;color:#14203A;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:40px 20px;-webkit-font-smoothing:antialiased}
+.card{width:100%;max-width:900px;background:#fff;border-radius:26px;padding:34px 36px;box-shadow:0 30px 60px -36px rgba(20,32,58,.35),0 0 0 1px rgba(20,32,58,.06);display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center}
+.stat{padding-right:36px;border-right:1px solid #E4E9F2}
+.stat b{display:block;font-size:56px;font-weight:800;letter-spacing:-.06em;line-height:1;background:linear-gradient(135deg,#2563EB,#06B6D4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{display:block;margin-top:8px;font-size:14px;color:#5C6B88;font-weight:600;max-width:150px;line-height:1.35}
+.logos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.l{position:relative;display:flex;align-items:center;gap:10px;padding:16px 14px;border-radius:14px;color:#8A97B0;font-weight:800;font-size:16px;letter-spacing:-.03em;transition:all .25s;cursor:default}
+.l svg{flex:none}
+.l:hover{background:#F2F5FA;color:#14203A;transform:translateY(-2px)}
+.l .tip{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translate(-50%,6px);background:#14203A;color:#fff;font:600 12px 'Manrope';padding:7px 11px;border-radius:9px;white-space:nowrap;opacity:0;pointer-events:none;transition:all .2s;z-index:2}
+.l:hover .tip{opacity:1;transform:translate(-50%,0)}
+@media(max-width:720px){.card{grid-template-columns:1fr;padding:28px 22px}.stat{border-right:0;border-bottom:1px solid #E4E9F2;padding:0 0 22px}.stat span{max-width:none}}
+</style></head><body>
+<div class="card">
+ <div class="stat"><b>1,200+</b><span>teams ship faster with Relay</span></div>
+ <div class="logos">
+  <div class="l"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><circle cx="12" cy="12" r="4" fill="#fff"/></svg>Orbitly<span class="tip">Cut release time by 62%</span></div>
+  <div class="l"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="currentColor"/><path d="M8 12h8" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>Stackline<span class="tip">Onboarded 400 engineers in a week</span></div>
+  <div class="l"><svg width="22" height="22" viewBox="0 0 24 24"><path d="m12 2 10 18H2Z" fill="currentColor"/></svg>Apex Labs<span class="tip">2.1× faster deploy cycles</span></div>
+  <div class="l"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0v8H4Z" fill="currentColor"/></svg>Cloudmint<span class="tip">Replaced 3 internal tools</span></div>
+  <div class="l"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2 22 12 12 22 2 12Z" fill="currentColor"/></svg>Quartz<span class="tip">Rolled out to 14 countries</span></div>
+  <div class="l"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="8" cy="12" r="6" fill="currentColor"/><circle cx="16" cy="12" r="6" fill="currentColor" opacity=".55"/></svg>Duet<span class="tip">NPS up 31 points</span></div>
+ </div>
+</div></body></html>

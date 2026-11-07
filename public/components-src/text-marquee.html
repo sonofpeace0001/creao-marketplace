@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Headline Ticker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,800;1,9..144,500&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFE14D;color:#14110A;min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:0;overflow:hidden;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+.top{display:flex;justify-content:space-between;align-items:center;padding:0 40px 26px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.top a{color:#14110A;text-decoration:none;border-bottom:2px solid #14110A;padding-bottom:2px}
+.tape{position:relative;overflow:hidden;white-space:nowrap;border-block:3px solid #14110A;background:#14110A;color:#FFE14D;padding:14px 0;transform:rotate(-2deg) scale(1.04)}
+.tape.alt{background:#FFE14D;color:#14110A;transform:rotate(1.5deg) scale(1.04);margin-top:-6px;border-color:#14110A}
+.row{display:inline-flex;animation:m 22s linear infinite}
+.alt .row{animation-direction:reverse;animation-duration:28s}
+.tape:hover .row{animation-play-state:paused}
+@keyframes m{to{transform:translateX(-50%)}}
+.item{display:inline-flex;align-items:center;gap:30px;padding-right:30px;font:800 clamp(40px,7vw,84px)/1 'Fraunces',serif;letter-spacing:-.04em}
+.item em{font-weight:500;font-style:italic}
+.item.o{color:transparent;-webkit-text-stroke:2px currentColor}
+.item svg{flex:none;width:.7em;height:.7em}
+.bot{padding:36px 40px 0;font-size:15px;max-width:520px;line-height:1.55;font-weight:500}
+@media(prefers-reduced-motion:reduce){.row{animation:none}}
+</style></head><body>
+<div class="top"><span>Open call · 2025</span><a href="#">Apply now</a></div>
+<div class="tape"><div class="row" id="a"></div></div>
+<div class="tape alt"><div class="row" id="b"></div></div>
+<div class="bot">A residency for writers, designers and builders making things slowly. Four weeks, one studio, no deliverables.</div>
+<script>
+const star='<svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 1 2.600 8.400L23 12l-8.400 2.600L12 23l-2.600-8.400L1 12l8.400-2.600Z"/></svg>';
+function build(el,items){let h='';items.forEach(([t,c])=>h+='<span class="item '+c+'">'+t+star+'</span>');el.innerHTML=h+h+h+h}
+build(document.getElementById('a'),[['Make <em>slowly</em>',''],['Ship <em>weirdly</em>','o'],['Stay <em>curious</em>','']]);
+build(document.getElementById('b'),[['Apply by <em>May 30</em>','o'],['Four weeks','' ],['Fully funded','o']]);
+</script></body></html>

@@ -1,0 +1,31 @@
+ROLE
+You are a senior brand designer and front-end engineer (studio and portfolio sites) with 15+ years of experience. Build "Studio Footer": a warm serif footer with an underline-style newsletter field, animated link underlines and a back-to-top button.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream paper and forest green with a burnt-orange accent; typographic and hand-made in feel.
+- Palette: #F4EDE0, #1E3A2F, #E8590C, #FBF8F1, #BDB5A2, #4F6157
+- Type: DM Serif Display, DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Left: serif headline 'Letters from the studio', short promise and an email field with a Subscribe link.
+- Two link columns, a bottom bar with copyright, a language select and a round back-to-top button.
+
+INTERACTION & STATES
+- Submit validates the email and shows a green thank-you or an orange error message.
+- Link underlines grow from the left on hover; the back-to-top arrow lifts.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

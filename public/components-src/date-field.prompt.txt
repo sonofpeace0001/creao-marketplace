@@ -1,0 +1,30 @@
+ROLE
+You are a senior form-component designer and front-end engineer with 15+ years of experience. Build "Date Picker Field": a date input with an accessible calendar popover, month navigation, Today/Clear and long-form selected value.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm stone background with a deep green selection colour and generous 14px radii.
+- Palette: #16794E, #1D2A24, #34463D, #8E9E94, #EAF2EC, #F3F1EC
+- Type: Instrument Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Label, trigger button with calendar icon and formatted value; popover with month header, weekday row, 6-week grid and Today/Clear footer.
+
+INTERACTION & STATES
+- Selecting a day updates the field with a long date and closes the popover; month arrows navigate; Escape closes and refocuses the trigger.
+- The trigger exposes aria-expanded; day buttons have full-date aria-labels.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

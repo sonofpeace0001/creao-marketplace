@@ -1,0 +1,30 @@
+ROLE
+You are a senior developer-tools designer and front-end engineer (status pages) with 15+ years of experience. Build "Status Badges": a status-badge system (six states plus Live) with tag chips and a service table whose statuses cycle on click.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Graphite panel; tinted pill badges pair a dot, a label and a colour so state never depends on colour alone.
+- Palette: #636B80, #0C0D11, #E6E8EF, #111319, #1E212B, #4ADE80
+- Type: Inter, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Status variants row, tag chips, and a four-row service table (name, region, status button).
+
+INTERACTION & STATES
+- Clicking a row's status cycles Operational → Degraded → Outage → Maintenance and keeps focus on the button; each button has an accessible name describing the current status.
+- The Live dot pulses.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

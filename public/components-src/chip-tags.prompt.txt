@@ -1,0 +1,29 @@
+ROLE
+You are a senior form-UX designer and front-end engineer with 15+ years of experience. Build "Tag Input": a tag input with hash-coloured chips, Enter/comma to add, Backspace to remove and suggestion chips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on cool grey with soft pastel chips and an indigo focus ring.
+- Palette: #6D5EF5, #8A90B0, #171B34, #F3F4F9, #DDE0F0, #CBD0E6
+- Type: Onest (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Label with count; bordered chip box containing chips and an inline input; Suggested row of dashed pills; footer hints.
+
+INTERACTION & STATES
+- Enter or comma adds (deduped, max 8); Backspace on empty input removes the last; chip x removes; suggestions add and then hide; chip colours derive from a string hash.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

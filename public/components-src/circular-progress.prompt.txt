@@ -1,0 +1,29 @@
+ROLE
+You are a senior upload-flow designer and front-end engineer with 15+ years of experience. Build "Ring Progress": a conic-gradient progress ring with a live percentage, step chips and Simulate / plus-minus controls.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep navy card with a glowing blue-to-violet segmented ring and Sora numerals.
+- Palette: #0E1424, #6366F1, #38BDF8, #7C8FC8, #14243F, #070A12
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Card with kicker label; ring built from a conic gradient with a masked hole, large percentage and status text; three stage chips (Upload, Process, Publish); Simulate, minus-10 and plus-10 controls.
+
+INTERACTION & STATES
+- Simulate animates progress to 100% and stage chips light up as thresholds pass; plus/minus adjust by 10; status text changes per stage; reduced motion jumps to the value.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

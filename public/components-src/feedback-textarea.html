@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Feedback Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFF4EC;color:#2B1B12;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:470px;background:#fff;border-radius:28px;padding:28px;box-shadow:0 40px 70px -44px rgba(160,70,20,.55),0 0 0 1px rgba(43,27,18,.06)}
+h1{font-size:23px;font-weight:700;letter-spacing:-.035em}.sub{font-size:14.5px;color:#8A6F5E;margin:6px 0 20px}
+.rt{display:flex;gap:8px;margin-bottom:18px}.rt button{flex:1;border:1.5px solid #EDDFD3;background:#FFFBF8;border-radius:14px;padding:11px 0;cursor:pointer;display:grid;gap:4px;justify-items:center;font:600 12px 'DM Sans';color:#8A6F5E;transition:all .2s}.rt button:hover{transform:translateY(-2px)}.rt button[aria-checked=true]{border-color:#F26B21;background:#FFF1E7;color:#C2490D}.rt button:focus-visible{outline:2px solid #F26B21;outline-offset:2px}
+.rt svg{width:24px;height:24px}
+.tb{position:relative}textarea{width:100%;min-height:130px;resize:none;border:1.5px solid #EDDFD3;border-radius:16px;padding:15px 15px 38px;font:500 15px/1.55 'DM Sans';color:#2B1B12;outline:0;transition:all .2s;background:#FFFBF8}textarea:focus{border-color:#F26B21;background:#fff;box-shadow:0 0 0 4px rgba(242,107,33,.13)}textarea::placeholder{color:#BBA394}
+.cn{position:absolute;right:14px;bottom:12px;display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:#A88F7E;font-variant-numeric:tabular-nums}.cn svg{transform:rotate(-90deg)}.cn.warn{color:#D97706}.cn.max{color:#DC2626}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:12px}.ft label{display:flex;align-items:center;gap:9px;font-size:13.5px;color:#8A6F5E;cursor:pointer}.ft input{width:17px;height:17px;accent-color:#F26B21}
+.go{border:0;border-radius:14px;padding:13px 22px;font:700 14.5px 'DM Sans';background:#F26B21;color:#fff;cursor:pointer;box-shadow:0 12px 22px -12px rgba(242,107,33,.9);transition:all .15s}.go:hover:not(:disabled){transform:translateY(-1px)}.go:disabled{background:#EBD9CB;box-shadow:none;cursor:not-allowed}.go:focus-visible{outline:3px solid #2B1B12;outline-offset:3px}
+.ok{display:none;text-align:center;padding:26px 0 10px}.ok i{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:#FFE8D6;color:#F26B21}.ok h2{font-size:22px;letter-spacing:-.03em}.ok p{color:#8A6F5E;margin-top:6px;font-size:14.5px}
+.dn .fm{display:none}.dn .ok{display:block}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c" id="c"><div class="fm"><h1>How was your experience?</h1><p class="sub">Your feedback goes straight to the team that builds this.</p>
+<div class="rt" role="radiogroup" aria-label="Rating" id="rt"></div>
+<div class="tb"><textarea id="t" maxlength="280" placeholder="What worked well? What could be better?" aria-label="Your feedback"></textarea><div class="cn" id="cn"><span id="n">0 / 280</span><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="#EDDFD3" stroke-width="3"/><circle id="rg" cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="50.27" stroke-dashoffset="50.27"/></svg></div></div>
+<div class="ft"><label><input type="checkbox" checked>Reply to my email</label><button class="go" id="go" disabled>Send feedback</button></div></div>
+<div class="ok" role="status"><i><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i><h2>Thank you!</h2><p>We read every note. Your feedback was sent.</p></div></div>
+<script>
+const F=[['Awful','M8 15s1.500-2 4-2 4 2 4 2M9 9.500h.01M15 9.500h.01'],['Poor','M9 15.500h6M9 9.500h.01M15 9.500h.01'],['Okay','M9 14.500h6M9 9.500h.01M15 9.500h.01'],['Good','M8 14s1.500 2 4 2 4-2 4-2M9 9.500h.01M15 9.500h.01'],['Great','M7.500 13.500s1.500 3 4.500 3 4.500-3 4.500-3M9 9.500h.01M15 9.500h.01']];
+const rt=document.getElementById('rt'),t=document.getElementById('t'),go=document.getElementById('go');let v=0;
+rt.innerHTML=F.map((f,i)=>'<button role="radio" aria-checked="false" aria-label="'+f[0]+'" tabindex="'+(i?-1:0)+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="'+f[1]+'"/></svg>'+f[0]+'</button>').join('');
+const B=[...rt.children];function sel(i){v=i+1;B.forEach((b,k)=>{b.setAttribute('aria-checked',k===i);b.tabIndex=k===i?0:-1});chk()}
+B.forEach((b,i)=>{b.onclick=()=>sel(i);b.onkeydown=e=>{let n=null;if(e.key==='ArrowRight'||e.key==='ArrowDown')n=(i+1)%5;if(e.key==='ArrowLeft'||e.key==='ArrowUp')n=(i+4)%5;if(n!==null){e.preventDefault();sel(n);B[n].focus()}}});
+function chk(){go.disabled=!(v&&t.value.trim().length>=10)}
+t.oninput=()=>{const l=t.value.length,c=document.getElementById('cn');document.getElementById('n').textContent=l+' / 280';document.getElementById('rg').style.strokeDashoffset=50.27*(1-l/280);c.className='cn'+(l>=280?' max':l>240?' warn':'');chk()};
+go.onclick=()=>document.getElementById('c').classList.add('dn');
+</script></body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Neon Pass Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 500px at 50% 30%,#1A1240,#070612 70%);color:#EDEBFF;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:40px 20px;-webkit-font-smoothing:antialiased}
+.card{position:relative;width:100%;max-width:400px;border-radius:26px;padding:2px;background:conic-gradient(from var(--a),#00F0FF,#7A5CFF,#FF3DCB,#FFB800,#00F0FF);animation:s 5s linear infinite;box-shadow:0 0 60px -10px rgba(122,92,255,.6)}
+@keyframes s{to{--a:360deg}}
+.in{border-radius:24px;background:linear-gradient(180deg,#120E2B,#0B0820);padding:30px 28px 28px;position:relative;overflow:hidden}
+.in::before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,61,203,.35),transparent 70%)}
+.t{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#00F0FF}
+.t i{width:7px;height:7px;border-radius:50%;background:#00F0FF;box-shadow:0 0 10px #00F0FF}
+h1{font-family:'Unbounded';font-weight:700;font-size:30px;line-height:1.05;letter-spacing:-.04em;margin:16px 0 10px}
+p{color:#A9A4D6;font-size:14.5px;line-height:1.55}
+.price{display:flex;align-items:baseline;gap:8px;margin:22px 0 18px;font-family:'Unbounded';font-weight:700}
+.price b{font-size:44px;letter-spacing:-.05em}.price span{font:500 13px 'Inter';color:#8F8AC4}
+ul{list-style:none;display:grid;gap:11px;font-size:14px;margin-bottom:24px}
+li{display:flex;align-items:center;gap:11px;color:#D9D6FF}
+li svg{flex:none;color:#00F0FF}
+.b{display:block;text-align:center;text-decoration:none;font-weight:600;font-size:15px;color:#0A0820;background:linear-gradient(135deg,#00F0FF,#7A5CFF 60%,#FF3DCB);padding:14px;border-radius:14px;transition:transform .2s,filter .2s}
+.b:hover{transform:translateY(-2px);filter:brightness(1.1)}
+@media(prefers-reduced-motion:reduce){.card{animation:none}}
+</style></head><body>
+<div class="card"><div class="in">
+ <span class="t"><i></i>Season pass</span>
+ <h1>Neon Pass</h1>
+ <p>Everything unlocked for the full season — every live set, every backstage drop.</p>
+ <div class="price"><b>$49</b><span>one payment · 90 days</span></div>
+ <ul>
+  <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>All 24 live streamed shows</li>
+  <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Lossless audio archive</li>
+  <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Early access to presale tickets</li>
+ </ul>
+ <a class="b" href="#">Get the pass</a>
+</div></div></body></html>

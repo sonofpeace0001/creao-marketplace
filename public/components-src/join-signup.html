@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Create Account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2EFE8;color:#1D2420;font-family:'Schibsted Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:430px;background:#fff;border-radius:30px;padding:32px 30px 26px;box-shadow:0 40px 70px -42px rgba(40,50,30,.55),0 0 0 1px rgba(29,36,32,.07)}
+.k{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.08em;color:#16794E;background:#E4F2E9;padding:6px 12px;border-radius:99px;text-transform:uppercase}
+h1{font-size:27px;font-weight:800;letter-spacing:-.045em;margin:14px 0 6px}.sub{font-size:14.5px;color:#6A7A70;margin-bottom:22px}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}.f{margin-bottom:13px}.f label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}
+.f input{width:100%;border:1.5px solid #D9DFD9;border-radius:14px;padding:13px 14px;font:500 15px 'Schibsted Grotesk';color:#1D2420;outline:0;transition:all .2s}.f input:focus{border-color:#16794E;box-shadow:0 0 0 4px rgba(22,121,78,.14)}.f.bad input{border-color:#E5484D}
+.st{display:flex;gap:5px;margin-top:9px}.st i{flex:1;height:5px;border-radius:5px;background:#E6EBE6;transition:background .3s}.sl{font-size:12.5px;color:#7A8B80;margin-top:6px;display:flex;justify-content:space-between}
+.er{display:none;font-size:12.5px;color:#D13A3F;margin-top:6px}.f.bad .er{display:block}
+.tm{display:flex;gap:11px;align-items:flex-start;font-size:13px;color:#5C6D62;line-height:1.45;margin:6px 0 18px;cursor:pointer}.tm input{width:18px;height:18px;accent-color:#16794E;margin-top:1px;flex:none}.tm a{color:#16794E;font-weight:600}
+.go{width:100%;border:0;border-radius:15px;padding:15px;font:800 15.5px 'Schibsted Grotesk';background:#1D2420;color:#fff;cursor:pointer;transition:all .15s}.go:hover:not(:disabled){transform:translateY(-1px)}.go:disabled{background:#CBD5CD;cursor:not-allowed}.go:focus-visible{outline:3px solid #16794E;outline-offset:3px}
+.dv{display:flex;align-items:center;gap:12px;margin:18px 0;font-size:12.5px;color:#9AA89F}.dv::before,.dv::after{content:"";flex:1;height:1px;background:#E4EAE4}
+.oa{display:flex;gap:10px}.oa button{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid #DDE3DD;background:#fff;border-radius:14px;padding:12px;font:700 14px 'Schibsted Grotesk';color:#1D2420;cursor:pointer;transition:all .2s}.oa button:hover{border-color:#16794E}.oa button:focus-visible{outline:2px solid #16794E;outline-offset:2px}
+.ft{text-align:center;font-size:13.5px;color:#6A7A70;margin-top:18px}.ft a{color:#16794E;font-weight:700;text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<form class="c" id="fm" novalidate><span class="k">Free forever plan</span><h1>Create your account</h1><p class="sub">Join 40,000 teams planning with Fieldnote.</p>
+ <div class="g"><div class="f" id="fn"><label for="n">First name</label><input id="n" value="Maya" autocomplete="off"><div class="er">Required.</div></div><div class="f"><label for="l">Last name</label><input id="l" value="Alvarez" autocomplete="off"></div></div>
+ <div class="f" id="fe"><label for="e">Work email</label><input id="e" type="email" value="maya@northwind.co" autocomplete="off"><div class="er">Enter a valid email address.</div></div>
+ <div class="f"><label for="p">Password</label><input id="p" type="password" value="Fieldnote24" autocomplete="off"><div class="st" id="st"><i></i><i></i><i></i><i></i></div><div class="sl"><span id="sw"></span><span>Use 8+ characters with a mix</span></div></div>
+ <label class="tm"><input type="checkbox" id="t" checked><span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</span></label>
+ <button class="go" id="go">Create free account</button><div class="dv">or sign up with</div>
+ <div class="oa"><button type="button"><svg width="17" height="17" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 10.200v3.900h5.500c-.2 1.300-1.600 3.800-5.500 3.800a6 6 0 1 1 0-12c1.900 0 3.100.8 3.800 1.500l2.600-2.500C16.800 3.400 14.600 2.400 12 2.400a9.600 9.600 0 1 0 0 19.200c5.500 0 9.200-3.900 9.200-9.300 0-.6-.1-1.100-.2-1.600Z"/></svg>Google</button><button type="button"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.200 19.500c.5.1.7-.2.7-.5v-1.800c-2.800.6-3.400-1.200-3.400-1.200-.5-1.200-1.100-1.500-1.100-1.500-.9-.6.1-.6.1-.6 1 .1 1.500 1 1.500 1 .9 1.500 2.400 1.100 2.900.8.1-.7.4-1.100.6-1.400-2.200-.3-4.600-1.100-4.600-5 0-1.100.4-2 1-2.700-.1-.3-.4-1.300.1-2.700 0 0 .8-.3 2.800 1a9.600 9.600 0 0 1 5 0c2-1.300 2.800-1 2.800-1 .5 1.400.2 2.400.1 2.700.6.700 1 1.600 1 2.700 0 3.900-2.400 4.700-4.600 5 .4.3.7.9.7 1.900v2.800c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>GitHub</button></div>
+ <div class="ft">Already have an account? <a href="#">Sign in</a></div></form>
+<script>
+const $=id=>document.getElementById(id);
+function str(){const p=$('p').value;let s=0;if(p.length>=8)s++;if(/[A-Z]/.test(p)&&/[a-z]/.test(p))s++;if(/\d/.test(p))s++;if(/[^A-Za-z0-9]/.test(p)||p.length>=12)s++;
+ const c=['#E5484D','#F5A524','#7FC95A','#16794E'];[...$('st').children].forEach((x,i)=>x.style.background=p&&i<s?c[s-1]:'');$('sw').textContent=p?['Weak','Fair','Good','Strong'][Math.max(0,s-1)]:'';return s}
+function ok(){return $('n').value.trim()&&/^\S+@\S+\.\S+$/.test($('e').value)&&str()>=2&&$('t').checked}
+function upd(){$('go').disabled=!ok()}
+['n','l','e','p'].forEach(i=>$(i).addEventListener('input',()=>{$('fn').classList.toggle('bad',!$('n').value.trim()&&i==='n');if(i==='e')$('fe').classList.toggle('bad',!/^\S+@\S+\.\S+$/.test($('e').value));upd()}));$('t').onchange=upd;
+$('fm').addEventListener('submit',e=>{e.preventDefault();if(!ok())return;$('go').textContent='Creating…';setTimeout(()=>$('go').textContent='Welcome, '+$('n').value.trim()+'!',900)});str();upd();
+</script></body></html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Polaroid Frame</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9DFCF;min-height:100vh;display:grid;place-items:center;padding:40px 20px;font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;background-image:radial-gradient(#D9CDB8 1.2px,transparent 1.2px);background-size:22px 22px}
+.pl{position:relative;width:min(340px,100%);background:#FDFBF6;padding:16px 16px 20px;border-radius:6px;box-shadow:0 2px 0 #fff inset,0 30px 50px -20px rgba(70,45,20,.5),0 0 0 1px rgba(70,45,20,.08);transform:rotate(-3deg);transition:transform .45s cubic-bezier(.3,1.4,.4,1);cursor:pointer}
+.pl:hover,.pl:focus-visible{transform:rotate(0) translateY(-8px) scale(1.02);outline:0}
+.tape{position:absolute;top:-16px;left:50%;width:110px;height:32px;margin-left:-55px;background:rgba(255,226,140,.78);transform:rotate(2deg);box-shadow:0 2px 6px rgba(0,0,0,.12);clip-path:polygon(2% 0,98% 0,100% 15%,97% 35%,100% 55%,97% 78%,99% 100%,1% 100%,3% 80%,0 55%,3% 35%,0 15%)}
+.ph{position:relative;aspect-ratio:1/1.12;overflow:hidden;background:linear-gradient(180deg,#8FD3F4 0%,#C7ECFF 45%,#FDE7B7 62%,#F6C27A 100%)}
+.ph svg{position:absolute;inset:0;width:100%;height:100%}
+.bd{position:absolute;right:12px;top:12px;font:600 11px 'DM Sans';letter-spacing:.1em;text-transform:uppercase;background:#FDFBF6;color:#4A3820;padding:6px 10px;border-radius:99px;box-shadow:0 3px 8px rgba(0,0,0,.18)}
+.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(60,35,10,.35));mix-blend-mode:multiply}
+.sc{position:absolute;left:0;right:0;bottom:0;padding:14px;z-index:2;color:#fff;font:600 12.5px 'DM Sans';text-shadow:0 1px 6px rgba(0,0,0,.45);opacity:0;transform:translateY(8px);transition:all .3s}
+.pl:hover .sc,.pl:focus-visible .sc{opacity:1;transform:none}
+.cap{padding-top:16px;display:flex;align-items:flex-end;justify-content:space-between}
+.cap b{font:700 30px/1 'Caveat',cursive;color:#3C2C18;display:block}
+.cap span{font:500 20px 'Caveat',cursive;color:#8A6F4D}
+.hr{font-size:12px;color:#A18B6C;letter-spacing:.14em;text-transform:uppercase}
+</style></head><body>
+<div class="pl" tabindex="0"><span class="tape"></span>
+ <div class="ph"><svg viewBox="0 0 300 336" preserveAspectRatio="none" aria-hidden="true"><circle cx="228" cy="86" r="34" fill="#FFF4CC" opacity=".95"/><path d="M0 214c40-16 70-14 110-4s88 14 190-6v132H0Z" fill="#5EC2D8"/><path d="M0 238c50-12 96-8 140 2s100 6 160-8v104H0Z" fill="#2E9DB8"/><path d="M0 268c60-6 110 4 160 8s90-2 140-10v70H0Z" fill="#F3D9A4"/><path d="M60 270c-4-40 6-70 22-92" stroke="#6B4A2B" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M82 178c-18-10-40-8-56 6 18-4 36-2 56-6Zm0 0c10-18 30-26 50-22-16 2-34 10-50 22Zm0 0c18-4 38 2 50 18-18-10-34-14-50-18Z" fill="#2F8F5B"/></svg>
+  <span class="bd">Summer ’24</span><div class="sc">Praia da Marinha, Algarve</div></div>
+ <div class="cap"><div><b>Salt &amp; sun</b><span>July, 4pm</span></div><span class="hr">№ 12</span></div>
+</div></body></html>

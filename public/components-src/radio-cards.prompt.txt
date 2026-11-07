@@ -1,0 +1,29 @@
+ROLE
+You are a senior pricing-flow designer and front-end engineer with 15+ years of experience. Build "Plan Radio Cards": selectable plan cards built on a real radio group with price, badge and a live summary row.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean white card on pale blue with an indigo selected state and ink CTA.
+- Palette: #4F46E5, #171C3A, #6B7399, #F0F2FB, #E4E7F5, #C5CBEF
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading; three plan rows (Starter, Pro with Popular badge, Team) each with radio dot, name, hint and price; summary line with total; Continue to payment button.
+
+INTERACTION & STATES
+- Native radios drive the selected style (indigo border and tint); arrow keys move selection; the summary and total update to the chosen plan.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

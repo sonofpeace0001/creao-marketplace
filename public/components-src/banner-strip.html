@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Launch Strip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0E0E0C;--lime:#D4FF3A;--paper:#F5F3EC;--muted:#6C6A60}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+.bar{display:flex;align-items:center;justify-content:center;gap:18px;background:var(--ink);color:#F2F0E6;padding:11px 56px 11px 20px;position:relative;font-size:14px;overflow:hidden;max-height:60px;transition:max-height .4s,padding .4s}
+.bar.gone{max-height:0;padding-top:0;padding-bottom:0}
+.live{display:inline-flex;align-items:center;gap:8px;font:500 12px 'Geist Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--lime);animation:p 1.6s infinite}
+@keyframes p{50%{opacity:.25;transform:scale(.7)}}
+.bar b{font-weight:800}
+.cd{display:inline-flex;gap:6px;font:500 13px 'Geist Mono',monospace}
+.cd span{background:rgba(255,255,255,.1);padding:3px 7px;border-radius:5px;min-width:30px;text-align:center}
+.cta{color:var(--ink);background:var(--lime);font-weight:800;font-size:13px;padding:7px 14px;border-radius:99px;text-decoration:none;white-space:nowrap;transition:transform .2s}
+.cta:hover{transform:translateX(3px)}
+.x{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:8px;border:0;background:none;color:#aaa;cursor:pointer;display:grid;place-items:center}
+.x:hover{background:rgba(255,255,255,.12);color:#fff}
+.nav{display:flex;align-items:center;gap:28px;padding:22px 40px;max-width:1100px;margin:0 auto}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.04em}.logo i{display:inline-block;width:12px;height:12px;background:var(--ink);border-radius:50%;margin-right:7px}
+.nav a{color:var(--muted);font-size:14px;text-decoration:none;font-weight:500}
+.sp{flex:1}.btn{background:var(--ink);color:#fff!important;padding:9px 16px;border-radius:10px}
+.hero{max-width:1100px;margin:46px auto 0;padding:0 40px}
+.hero h1{font-weight:800;font-size:clamp(40px,6vw,76px);line-height:.95;letter-spacing:-.05em;max-width:760px}
+.hero p{margin-top:18px;color:var(--muted);font-size:18px;max-width:480px;line-height:1.5}
+.sk{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}.sk i{height:120px;border-radius:16px;background:#E9E6DA}
+@media(max-width:700px){.bar{flex-wrap:wrap;gap:8px 14px;padding-right:48px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="bar" id="bar" role="region" aria-label="Announcement">
+  <span class="live"><i></i>Launch week</span>
+  <span><b>30% off every annual plan</b> — ends Friday at midnight.</span>
+  <span class="cd" aria-label="Time remaining"><span id="d">02d</span><span id="h">14h</span><span id="m">36m</span><span id="s">09s</span></span>
+  <a class="cta" href="#">Claim the offer →</a>
+  <button class="x" id="x" aria-label="Dismiss announcement"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+</div>
+<div class="nav"><span class="logo"><i></i>Tandem</span><a href="#">Product</a><a href="#">Pricing</a><a href="#">Stories</a><span class="sp"></span><a href="#">Log in</a><a class="btn" href="#">Get started</a></div>
+<div class="hero"><h1>Work that finishes itself.</h1><p>Plans, handoffs and follow-ups on autopilot, so your team can ship instead of chase.</p><div class="sk"><i></i><i></i><i></i></div></div>
+<script>
+let t=(2*86400+14*3600+36*60+9);const f=n=>String(n).padStart(2,'0');
+function tick(){const d=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),s=t%60;
+ d_.textContent=f(d)+'d';h_.textContent=f(h)+'h';m_.textContent=f(m)+'m';s_.textContent=f(s)+'s';if(t>0)t--}
+const d_=document.getElementById('d'),h_=document.getElementById('h'),m_=document.getElementById('m'),s_=document.getElementById('s');
+tick();setInterval(tick,1000);
+document.getElementById('x').onclick=()=>document.getElementById('bar').classList.add('gone');
+</script></body></html>

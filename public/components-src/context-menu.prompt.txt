@@ -1,0 +1,29 @@
+ROLE
+You are a senior design-tool UX designer and front-end engineer with 15+ years of experience. Build "Context Menu": a right-click context menu on a canvas with icons, shortcuts, a submenu hint and a destructive action.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Frosted white menu over a dotted canvas; precise macOS-like details.
+- Palette: #9AA0B8, #1A1D2A, #DDE1EC, #8A90A8, #3B49E0, #D33A3A
+- Type: Inter Tight (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Canvas with a sample frame card and hint; frosted menu with Copy, Duplicate, Paste here, Arrange (submenu), Copy link and Delete, separated by dividers; toast.
+
+INTERACTION & STATES
+- Right-click (or Shift+F10 / ContextMenu key) opens the menu at the pointer, clamped to the canvas; arrow keys move focus, Escape and outside click close it; choosing an item shows a toast.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

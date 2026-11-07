@@ -1,0 +1,29 @@
+ROLE
+You are a senior spreadsheet-UX designer and front-end engineer with 15+ years of experience. Build "Editable Grid": a budget table where any cell edits in place with Enter/Escape, plus add and remove row and a live total.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark graphite grid with cyan edit focus, mono numerals and a green saved flash.
+- Palette: #38BDF8, #7B8CA3, #E5ECF4, #1E2733, #0B0F14, #5E6F86
+- Type: Figtree, Fira Code (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with title, hint and save status; table of line item, owner and budget; hover remove buttons; dashed Add line item row; total footer.
+
+INTERACTION & STATES
+- Click or Enter turns a cell into an input; Enter saves, Escape cancels, blur saves; numbers are parsed; saved cells flash; status shows Saving then Saved; total recalculates.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

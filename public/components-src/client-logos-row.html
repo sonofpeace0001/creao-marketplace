@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Wordmark Wall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Space+Mono:wght@700&family=Archivo+Black&family=Playfair+Display:wght@700&family=Bebas+Neue&family=Pacifico&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0B0D;color:#EDEDF0;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:40px 24px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:900px}
+.k{text-align:center;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#7C7C86;margin-bottom:30px}
+.k b{color:#EDEDF0;font-weight:600}
+.g{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #23232A;border-left:1px solid #23232A}
+.c{height:112px;display:grid;place-items:center;border-right:1px solid #23232A;border-bottom:1px solid #23232A;color:#8C8C98;font-size:26px;transition:color .3s,background .3s;cursor:default;position:relative}
+.c:hover{color:var(--c);background:rgba(255,255,255,.025)}
+.c small{position:absolute;bottom:9px;left:0;right:0;text-align:center;font:500 10px 'Inter';letter-spacing:.14em;text-transform:uppercase;color:#6c6c76;opacity:0;transition:opacity .3s}
+.c:hover small{opacity:1}
+.f1{font-family:'Fraunces';font-weight:600;letter-spacing:-.02em}
+.f2{font-family:'Space Mono';font-weight:700;font-size:22px}
+.f3{font-family:'Archivo Black';letter-spacing:-.04em;text-transform:lowercase}
+.f4{font-family:'Playfair Display';font-weight:700;font-style:italic}
+.f5{font-family:'Bebas Neue';letter-spacing:.14em;font-size:30px}
+.f6{font-family:'Pacifico';font-size:25px}
+.f7{font-family:'Inter';font-weight:600;letter-spacing:-.05em;font-size:28px}
+.f8{font-family:'Fraunces';font-style:italic;font-weight:500;font-size:27px}
+@media(max-width:640px){.g{grid-template-columns:repeat(2,1fr)}}
+</style></head><body>
+<div class="w"><div class="k">Trusted by <b>1,200+</b> teams, from seed-stage to the Fortune 500</div>
+<div class="g">
+ <div class="c f1" style="--c:#FF7A59">Northwind<small>Logistics</small></div>
+ <div class="c f2" style="--c:#39FF88">&lt;stackly/&gt;<small>Developer tools</small></div>
+ <div class="c f3" style="--c:#4C8DFF">brightwave<small>Fintech</small></div>
+ <div class="c f4" style="--c:#E8C468">Marlowe &amp; Co.<small>Hospitality</small></div>
+ <div class="c f5" style="--c:#FF4D4D">LATTICE LABS<small>Biotech</small></div>
+ <div class="c f6" style="--c:#FF8FD0">Sunday Co.<small>Consumer</small></div>
+ <div class="c f7" style="--c:#7CF5C4">orbitly<small>Analytics</small></div>
+ <div class="c f8" style="--c:#B58CFF">Fjord Studio<small>Design</small></div>
+</div></div></body></html>

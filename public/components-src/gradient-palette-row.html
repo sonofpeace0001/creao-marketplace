@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Gradient Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0B0F;color:#ECECF1;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:40px 22px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:900px}
+.h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px}
+h1{font-size:30px;letter-spacing:-.04em;font-weight:700}.h span{font:500 11px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#6C6C78}
+.r{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+button.s{all:unset;box-sizing:border-box;cursor:pointer;display:block;border-radius:20px;overflow:hidden;background:#13131A;border:1px solid #23232C;transition:transform .3s,border-color .3s}
+button.s:hover,button.s:focus-visible{transform:translateY(-6px);border-color:#3A3A48}
+button.s:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.c{height:190px;background:var(--g);position:relative}
+.c::after{content:"Copy CSS";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.9);background:rgba(10,10,15,.72);backdrop-filter:blur(8px);color:#fff;font:500 12px 'JetBrains Mono',monospace;padding:7px 12px;border-radius:99px;opacity:0;transition:all .25s}
+button.s:hover .c::after,button.s:focus-visible .c::after{opacity:1;transform:translate(-50%,-50%)}
+button.s.ok .c::after{content:"Copied ✓";opacity:1;background:#17C47A;color:#04150D}
+.m{padding:14px 14px 15px}
+.m b{display:block;font-size:15px;font-weight:700;letter-spacing:-.02em}
+.m i{display:flex;gap:5px;margin-top:9px;font:400 11px 'JetBrains Mono',monospace;color:#7B7B88;font-style:normal;align-items:center}
+.m i u{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:3px}
+@media(max-width:760px){.r{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="h"><h1>Gradient library</h1><span>05 · click to copy</span></div><div class="r" id="r"></div></div>
+<script>
+const G=[['Solar flare','#FF512F','#F09819'],['Deep sea','#0F2027','#2C7A9B'],['Orchid','#DA22FF','#9733EE'],['Mint rush','#00F5A0','#00D9F5'],['Dusk','#FF6B9E','#4338CA']];
+const r=document.getElementById('r');
+G.forEach(([n,a,b])=>{const css='linear-gradient(135deg, '+a+' 0%, '+b+' 100%)';const s=document.createElement('button');s.className='s';s.style.setProperty('--g',css);
+ s.setAttribute('aria-label','Copy '+n+' gradient CSS');
+ s.innerHTML='<div class="c"></div><div class="m"><b>'+n+'</b><i><u style="background:'+a+'"></u>'+a+'<u style="background:'+b+';margin-left:6px"></u>'+b+'</i></div>';
+ s.onclick=()=>{(navigator.clipboard?navigator.clipboard.writeText('background: '+css+';'):Promise.resolve()).catch(()=>{});s.classList.add('ok');setTimeout(()=>s.classList.remove('ok'),1400)};r.appendChild(s)});
+</script></body></html>

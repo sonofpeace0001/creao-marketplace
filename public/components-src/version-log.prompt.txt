@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer-tools designer and front-end engineer with 15+ years of experience. Build "Version Log": a CHANGELOG.md-style terminal window with collapsible releases and colour-coded ADDED/FIXED/CHANGED/BREAKING labels.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: GitHub-dark window chrome with Fira Code versions and tinted pill labels.
+- Palette: #0D1117, #30363D, #C9D1D9, #8B949E, #58A6FF, #3FB950
+- Type: Fira Code, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Window bar with traffic lights and filename; three release rows (latest, patch, major) each with chevron, version, label and date; expandable lists of tagged change lines.
+
+INTERACTION & STATES
+- Row buttons toggle aria-expanded and animate height via grid-template-rows; the chevron rotates; the latest release is open by default.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,31 @@
+ROLE
+You are a senior photo-editor-minded designer and front-end engineer with 15+ years of experience. Build "Lightbox Masonry": a three-column masonry of generated gradient plates with hover captions and a click-to-open lightbox.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: A dark gallery wall: richly graded CSS 'photographs', italic serif title and discreet captions.
+- Palette: #0A0A0C, #6E6E78, #C9C9D3, #CFCFD8
+- Type: Inter, Fraunces (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with an italic serif title and series note.
+- Nine plates of varied heights built from CSS gradients; a modal lightbox with caption and close button.
+
+INTERACTION & STATES
+- Hover/focus shows a caption scrim; click opens a blurred-backdrop lightbox focused on its close button.
+- Escape, the close button or a backdrop click closes it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

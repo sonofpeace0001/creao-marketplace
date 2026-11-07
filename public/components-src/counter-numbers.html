@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Impact Numbers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F5F1E8;color:#1D1A14;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 16px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:900px}
+.h{text-align:center;margin-bottom:34px}.h small{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:#C2410C}.h h1{font:700 clamp(26px,4vw,38px)/1.05 'Unbounded',sans-serif;letter-spacing:-.05em;margin-top:12px}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-block:2px solid #1D1A14}
+.c{padding:34px 24px 30px;text-align:center;border-right:2px solid #1D1A14;transition:background .3s}.c:last-child{border-right:0}.c:hover{background:#FFF9EC}
+.n{font:800 clamp(46px,8vw,86px)/.95 'Unbounded',sans-serif;letter-spacing:-.07em;background:linear-gradient(135deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;display:inline-block}
+.n sup{font-size:.45em;letter-spacing:0;margin-left:2px;vertical-align:.9em;font-weight:700}
+.l{font-size:15px;font-weight:600;margin-top:12px}.d{font-size:13.5px;color:#7A7364;margin-top:4px;line-height:1.4}
+.bar{width:44px;height:5px;border-radius:5px;margin:16px auto 0;background:linear-gradient(90deg,var(--a),var(--b));transform:scaleX(0);transform-origin:center;transition:transform .9s .3s cubic-bezier(.3,1,.4,1)}.on .bar{transform:scaleX(1)}
+@media(max-width:680px){.g{grid-template-columns:1fr}.c{border-right:0;border-bottom:2px solid #1D1A14}.c:last-child{border-bottom:0}}
+@media(prefers-reduced-motion:reduce){.bar{transform:scaleX(1);transition:none}}
+</style></head><body>
+<div class="w"><div class="h"><small>Since 2019</small><h1>The numbers behind the work</h1></div>
+<div class="g" id="g"></div></div>
+<script>
+const D=[['Trees planted',2.4,'M','+','#16A34A','#65A30D','Across 14 reforestation sites'],['Households powered',48200,'','','#F59E0B','#EA580C','With community solar'],['Tonnes of CO₂ offset',91,'k','','#0EA5E9','#6366F1','Independently verified every year']];
+const g=document.getElementById('g');g.innerHTML=D.map((d,i)=>'<div class="c" data-i="'+i+'" style="--a:'+d[4]+';--b:'+d[5]+'"><div class="n"><span class="v">0</span><sup>'+d[2]+d[3]+'</sup></div><div class="l">'+d[0]+'</div><div class="d">'+d[6]+'</div><div class="bar"></div></div>').join('');
+const R=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function run(c){const d=D[+c.dataset.i],v=c.querySelector('.v'),dec=d[1]%1?1:0,t0=performance.now();c.classList.add('on');(function f(t){const k=R?1:Math.min(1,(t-t0)/1600),e=1-Math.pow(1-k,3);v.textContent=(d[1]*e).toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec});if(k<1)requestAnimationFrame(f)})(t0)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){run(e.target);io.unobserve(e.target)}}),{threshold:.3});g.querySelectorAll('.c').forEach((c,i)=>setTimeout(()=>io.observe(c),i*120));
+setTimeout(()=>g.querySelectorAll('.c:not(.on)').forEach(run),1500);
+</script></body></html>

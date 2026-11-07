@@ -1,0 +1,29 @@
+ROLE
+You are a senior technical-writing designer and front-end engineer with 15+ years of experience. Build "Documentation Block": a long-form docs page snippet with breadcrumb, numbered steps, copyable code, a callout and previous/next navigation.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper page with Source Serif headings, dark code block and an orange note callout.
+- Palette: #C2410C, #26241F, #FFFEFA, #E2DCCD, #8F8873, #35322B
+- Type: Source Serif 4, Source Sans 3, Source Code Pro (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Breadcrumb; serif title and lead; two numbered steps; terminal code block with Copy; note callout; previous and next cards.
+
+INTERACTION & STATES
+- Copy button writes the command and shows Copied; next/previous cards have hover and focus states; layout tightens on mobile.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

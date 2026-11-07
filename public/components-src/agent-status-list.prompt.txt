@@ -1,0 +1,29 @@
+ROLE
+You are a senior agent-ops dashboard designer and front-end engineer with 15+ years of experience. Build "Agent Fleet": a fleet overview listing agents with icon tiles, status tags, task progress and enable switches.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean white list on cool grey with saturated icon tiles and mono secondary text.
+- Palette: #7A869F, #6366F1, #EEF1F7, #F3F5F9, #141B2D, #F1F4FA
+- Type: Outfit, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with title and active count; five rows each with coloured icon tile, name plus status tag (Idle, Working, Paused, Error), mono task line, progress bar and a role=switch toggle.
+
+INTERACTION & STATES
+- Toggling a switch updates aria-checked and the active-agent count; the Working tag dot blinks; rows highlight on hover; progress hides on narrow screens.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

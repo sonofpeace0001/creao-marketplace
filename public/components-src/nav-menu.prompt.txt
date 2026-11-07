@@ -1,0 +1,29 @@
+ROLE
+You are a senior studio-site designer and front-end engineer with 15+ years of experience. Build "Pill Navigation": a glass pill navbar with a hover highlight that slides between links and an underline that tracks the active page.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight violet page with a frosted pill nav, serif wordmark and lilac-to-pink accents.
+- Palette: #C4A6FF, #2B1B4A, #0A0910, #F1EEFA, #BDB4D6, #FF9BD0
+- Type: Fraunces, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Rounded pill with wordmark, five links, a sliding hover background, a gradient active underline and a white CTA; large serif hero line below.
+
+INTERACTION & STATES
+- A background pill glides to the hovered or focused link with a springy ease and returns to the active link on leave; clicking sets the active link and moves the underline.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

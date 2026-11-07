@@ -1,0 +1,30 @@
+ROLE
+You are a senior notification-UX designer and front-end engineer with 15+ years of experience. Build "Notification Badges": icon buttons with count, 99+ overflow and presence-dot badges that animate when changed or cleared.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Airy light card with rounded-square icon buttons and punchy coral count badges with a white cut-out ring.
+- Palette: #5B6CFF, #1A1F36, #6A7292, #22C55E, #EFF1F7, #F2F4FB
+- Type: Mulish (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Five icon buttons (Messages 3, Alerts 12, Inbox 99+, Online dot, Cart 2) with labels; controls for Add to cart and Reset badges.
+
+INTERACTION & STATES
+- Clicking an icon scales its badge away; Add to cart increments the cart badge with a bounce (99+ cap); Reset restores cleared badges.
+- The online dot pulses.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

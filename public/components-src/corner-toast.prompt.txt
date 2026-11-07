@@ -1,0 +1,29 @@
+ROLE
+You are a senior feedback-UX designer and front-end engineer with 15+ years of experience. Build "Corner Toast": corner toasts with success, error and info variants, action links, hover-to-pause progress and dismiss.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Ink-black toasts with tinted icon tiles and coloured progress bars on a clean white stage.
+- Palette: #10131C, #A5B4FC, #4ADE80, #F87171, #818CF8, #EEF0F4
+- Type: Inter Tight (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Stage with title, copy and three trigger buttons; bottom-right toast with icon, title, message, action links, close button and countdown bar.
+
+INTERACTION & STATES
+- Triggers show a variant toast that replaces the previous; progress bar counts down 5 s and pauses on hover; actions and close dismiss with an exit animation; aria-live polite.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

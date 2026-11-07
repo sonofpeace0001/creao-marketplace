@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI Agent Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 400px at 20% 0,#12234A,transparent 60%),#070B16;color:#E8EEFF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{position:relative;width:100%;max-width:400px;background:linear-gradient(#0F1730,#0B1124);border:1px solid #1E2C52;border-radius:28px;padding:26px;box-shadow:0 50px 80px -40px #000,0 0 80px -40px #3B82F6}
+.top{display:flex;align-items:center;gap:15px}
+.av{position:relative;flex:none;width:64px;height:64px;border-radius:20px;background:conic-gradient(from 200deg,#38BDF8,#6366F1,#C084FC,#38BDF8);display:grid;place-items:center;color:#fff}.av::after{content:"";position:absolute;inset:2px;border-radius:18px;background:#0F1730;z-index:0}.av svg{position:relative;z-index:1}
+.av i{position:absolute;right:-3px;bottom:-3px;z-index:2;width:16px;height:16px;border-radius:50%;background:#34D399;border:3px solid #0F1730}.av i::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid #34D399;animation:pg 2s infinite}@keyframes pg{to{transform:scale(1.8);opacity:0}}
+.top h1{font-size:20px;font-weight:700;letter-spacing:-.03em}.top p{font:400 12.5px 'JetBrains Mono',monospace;color:#7F92BE;margin-top:3px}
+.ds{font-size:14.5px;line-height:1.6;color:#A8B6D8;margin:18px 0}
+.sk{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}.sk span{font:500 11.5px 'JetBrains Mono',monospace;background:#16224A;color:#9DB4FF;border:1px solid #243566;padding:5px 10px;border-radius:8px}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}.st div{background:#0A1022;border:1px solid #182346;border-radius:14px;padding:12px}.st b{display:block;font-size:19px;font-weight:700;letter-spacing:-.03em}.st span{font-size:11.5px;color:#7F92BE}
+.lg{background:#080D1C;border:1px solid #182346;border-radius:14px;padding:12px 14px;font:400 12px/1.7 'JetBrains Mono',monospace;color:#7F92BE;margin-bottom:20px;min-height:84px}.lg b{color:#34D399;font-weight:500}.lg em{color:#C084FC;font-style:normal}
+.ac{display:flex;gap:10px}.ac button{flex:1;border:0;border-radius:14px;padding:13px;font:600 14px 'Sora';cursor:pointer;transition:transform .15s}.ac button:hover{transform:translateY(-1px)}.ac button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.p{background:linear-gradient(135deg,#38BDF8,#6366F1);color:#04102E;box-shadow:0 14px 26px -12px rgba(99,102,241,.9)}.s{background:#16224A;color:#C9D6FF;border:1px solid #243566!important}
+.run .av i{background:#FBBF24;border-color:#0F1730}.run .av i::after{border-color:#FBBF24}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<article class="c" id="c"><div class="top"><div class="av"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="4"/><path d="M12 8V4M9 14h.01M15 14h.01M2 14h2M20 14h2"/><circle cx="12" cy="3.500" r="1"/></svg><i></i></div><div><h1>Atlas</h1><p id="stt">research-agent · online</p></div></div>
+<p class="ds">Reads the web, cross-checks sources and returns a cited brief. Best for competitive research and market scans.</p>
+<div class="sk"><span>web.search</span><span>pdf.read</span><span>sheet.write</span><span>cite</span></div>
+<div class="st"><div><b>1,284</b><span>Tasks done</span></div><div><b>96%</b><span>Success</span></div><div><b>4.2s</b><span>Avg latency</span></div></div>
+<div class="lg" id="lg" aria-live="polite"><b>$</b> atlas --status<br>ready · waiting for a task</div>
+<div class="ac"><button class="p" id="run">Run task</button><button class="s">Configure</button></div></article>
+<script>
+const L=['<b>$</b> atlas run "EV charger market"','<em>search</em> 14 sources found','<em>read</em> 6 reports parsed','<em>cite</em> 11 citations verified','<b>done</b> brief ready in 4.1s'];
+const run=document.getElementById('run'),lg=document.getElementById('lg'),c=document.getElementById('c');let busy=false;
+run.onclick=()=>{if(busy)return;busy=true;c.classList.add('run');run.textContent='Running…';document.getElementById('stt').textContent='research-agent · working';lg.innerHTML='';L.forEach((l,i)=>setTimeout(()=>{lg.innerHTML+=(i?'<br>':'')+l;if(i===L.length-1){busy=false;c.classList.remove('run');run.textContent='Run again';document.getElementById('stt').textContent='research-agent · online'}},(i+1)*650))};
+lg.innerHTML=L.slice(0,2).join('<br>')+'<br><em>read</em> 6 reports parsed';
+</script></body></html>

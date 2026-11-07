@@ -1,0 +1,30 @@
+ROLE
+You are a senior conversational-UI designer and front-end engineer (AI products) with 15+ years of experience. Build "Copilot Chat": an AI assistant chat panel with suggested prompts, a typing indicator and canned-but-contextual replies.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Ink-black panel with a warm amber accent; the assistant feels calm, specific and fast.
+- Palette: #FFB547, #26262B, #1A1000, #F1EEE8, #202025, #0F0F11
+- Type: Inter Tight (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with gradient logo, name, online status and BETA tag; message thread with assistant and user bubbles; suggestion chips; input with send button.
+
+INTERACTION & STATES
+- Chips and typed messages post a user bubble, show a three-dot typing indicator for ~1.3s, then a contextual reply (summarise / risk / plan or a fallback).
+- Thread auto-scrolls; user text is escaped; the input has a clear focus ring.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

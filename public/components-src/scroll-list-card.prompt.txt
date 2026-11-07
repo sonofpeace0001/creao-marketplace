@@ -1,0 +1,29 @@
+ROLE
+You are a senior product designer and front-end engineer (activity feeds) with 15+ years of experience. Build "Feed Card": a card with a fixed header and a scrolling activity feed with edge fades and a jump-to-top button.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Friendly light card with rounded avatar tiles in saturated colours and a live status pill.
+- Palette: #17202E, #0E9F6E, #EEF1F6, #EDF0F5, #7A8498, #E1F7EE
+- Type: Hanken Grotesk (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with title, subtitle and Live pill; nine feed items; top/bottom fade overlays; floating Top button.
+
+INTERACTION & STATES
+- Top fade appears after scrolling; bottom fade hides at the end; the Top button appears past 120px and smooth-scrolls up.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

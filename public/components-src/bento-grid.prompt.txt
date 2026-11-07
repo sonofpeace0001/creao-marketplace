@@ -1,0 +1,29 @@
+ROLE
+You are a senior product designer and front-end engineer (dashboards) with 15+ years of experience. Build "Control Room Bento": an asymmetric bento dashboard with a big blue hero cell, sparkline, progress ring, week calendar, milestone bar and team stack.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cool grey canvas with white tiles and one saturated cobalt hero; calm, dense and legible.
+- Palette: #2F6BFF, #EEF0F4, #12141C, #6A6F80, #1B3FD6, #14289A
+- Type: Figtree (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Hero cell with headline and status pills; velocity tile with sparkline; sprint ring; week strip; milestone progress; team avatars.
+
+INTERACTION & STATES
+- Tiles lift 3px on hover; the grid collapses to two columns on small screens.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

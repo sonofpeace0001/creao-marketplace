@@ -1,0 +1,29 @@
+ROLE
+You are a senior settings-panel designer and front-end engineer with 15+ years of experience. Build "Switchboard": a hardware-style panel of toggle switches with LEDs, an active counter and All on / All off.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Brushed graphite panel with recessed switches, metallic knobs and per-row coloured LEDs.
+- Palette: #2E333D, #1A1D24, #3A404C, #7C8494, #4ADE80, #0E1014
+- Type: Chakra Petch, Share Tech Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with count; five rows with LED, title, mono description and role=switch button; All on and All off buttons.
+
+INTERACTION & STATES
+- Switches toggle aria-checked with a springy knob and lit track; the LED glows in the row colour; counter and bulk buttons update; focus rings use the row colour.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

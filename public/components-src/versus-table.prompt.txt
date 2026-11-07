@@ -1,0 +1,30 @@
+ROLE
+You are a senior conversion designer and front-end engineer with 15+ years of experience. Build "Versus Split": two side-by-side cards — the old way versus the new — with staggered row reveals and a central VS badge.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cinematic contrast: a cold grey 'old way' card against a green-glowing hero card on near-black.
+- Palette: #08080B, #35E08A, #8A8A98, #ECECF2, #2A2A33, #23232B
+- Type: Syne, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Syne headline, two cards with titles and subtitles, four rows each with red-X or green-check badges, a circular VS marker between them.
+
+INTERACTION & STATES
+- Rows slide in from opposite sides with 120ms stagger; disabled under reduced motion.
+- Stacks on narrow screens and hides the VS badge.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

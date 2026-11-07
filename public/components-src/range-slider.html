@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Price Range Slider</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 400px at 90% 0,#241540,transparent 60%),#08080F;color:#ECE9FA;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:520px;background:#0F0E1A;border:1px solid #221F3A;border-radius:28px;padding:30px 30px 26px;box-shadow:0 40px 80px -34px #000}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}.hd h1{font-size:21px;font-weight:700;letter-spacing:-.035em}.hd small{font:700 11.5px 'Space Mono',monospace;letter-spacing:.14em;color:#8C83BC}
+.vs{display:flex;align-items:baseline;gap:10px;margin:22px 0 34px;font-size:46px;font-weight:700;letter-spacing:-.05em;font-variant-numeric:tabular-nums}.vs span{color:#5E5784;font-size:26px;font-weight:500}
+.rg{position:relative;height:56px;margin:0 8px}
+.tr{position:absolute;left:0;right:0;top:25px;height:8px;border-radius:8px;background:#1C1A30}
+.fl{position:absolute;top:25px;height:8px;border-radius:8px;background:linear-gradient(90deg,#38BDF8,#818CF8,#E879F9);box-shadow:0 0 18px rgba(129,140,248,.5)}
+.hs{position:absolute;top:0;width:100%;height:56px;margin:0;-webkit-appearance:none;appearance:none;background:none;pointer-events:none;outline:0}
+.hs::-webkit-slider-thumb{-webkit-appearance:none;pointer-events:auto;width:30px;height:30px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 5px rgba(129,140,248,.35),0 6px 14px rgba(0,0,0,.5);cursor:grab;transition:box-shadow .2s}
+.hs::-moz-range-thumb{pointer-events:auto;width:30px;height:30px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 5px rgba(129,140,248,.35),0 6px 14px rgba(0,0,0,.5);cursor:grab}
+.hs:active::-webkit-slider-thumb{cursor:grabbing;box-shadow:0 0 0 9px rgba(129,140,248,.35),0 6px 14px rgba(0,0,0,.5)}.hs:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px #0F0E1A,0 0 0 7px #E879F9}
+.pl{position:absolute;top:-34px;transform:translateX(-50%);font:700 12.5px 'Space Mono',monospace;background:#fff;color:#0F0E1A;padding:5px 10px;border-radius:9px;white-space:nowrap;pointer-events:none}.pl::after{content:"";position:absolute;left:50%;bottom:-4px;width:8px;height:8px;background:#fff;transform:translateX(-50%) rotate(45deg)}
+.mm{display:flex;justify-content:space-between;font:400 12px 'Space Mono',monospace;color:#5E5784;margin:4px 6px 0}
+.hist{display:flex;align-items:flex-end;gap:3px;height:46px;margin:0 8px 48px}.hist i{flex:1;border-radius:3px 3px 1px 1px;background:#2A2748;transition:background .2s}.hist i.in{background:linear-gradient(180deg,#818CF8,#4F46E5)}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:20px;border-top:1px solid #1E1B35;font-size:14px;color:#8C83BC}.ft b{color:#ECE9FA}
+.ft button{border:0;border-radius:13px;padding:12px 20px;font:700 14.5px 'Space Grotesk';background:linear-gradient(135deg,#38BDF8,#818CF8);color:#06081A;cursor:pointer}.ft button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Price range</h1><small>FILTER</small></div><div class="vs"><b id="a">$120</b><span>—</span><b id="b">$480</b></div>
+<div class="hist" id="h" aria-hidden="true"></div>
+<div class="rg" id="rg"><div class="tr"></div><div class="fl" id="fl"></div><span class="pl" id="pa"></span><span class="pl" id="pb"></span><input class="hs" id="i0" type="range" min="0" max="1000" step="10" value="120" aria-label="Minimum price"><input class="hs" id="i1" type="range" min="0" max="1000" step="10" value="480" aria-label="Maximum price"></div>
+<div class="mm"><span>$0</span><span>$500</span><span>$1,000</span></div>
+<div class="ft"><span><b id="n">0</b> stays match</span><button id="ap">Show results</button></div></div>
+<script>
+const $=id=>document.getElementById(id),i0=$('i0'),i1=$('i1'),H=[2,4,6,9,12,15,18,16,14,11,9,7,6,5,4,3,2,2,1,1];
+$('h').innerHTML=H.map(h=>'<i style="height:'+(h/18*100)+'%"></i>').join('');
+function upd(src){let a=+i0.value,b=+i1.value;if(a>b-50){if(src===i0){a=b-50;i0.value=a}else{b=a+50;i1.value=b}}
+ const pa=a/10,pb=b/10;$('fl').style.left=pa+'%';$('fl').style.right=(100-pb)+'%';$('pa').style.left=pa+'%';$('pb').style.left=pb+'%';$('pa').textContent='$'+a;$('pb').textContent='$'+b;$('a').textContent='$'+a;$('b').textContent='$'+b;
+ let n=0;[...$('h').children].forEach((x,k)=>{const lo=k*50,hi=lo+50,on=hi>a&&lo<b;x.classList.toggle('in',on);if(on)n+=H[k]*4});$('n').textContent=n.toLocaleString()}
+i0.addEventListener('input',()=>upd(i0));i1.addEventListener('input',()=>upd(i1));upd();$('ap').onclick=e=>{e.target.textContent='Showing '+$('n').textContent+' stays'};
+</script></body></html>

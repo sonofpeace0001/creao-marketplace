@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Course Video Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF2FF;color:#1A2140;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:34px 20px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:420px;background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 30px 60px -34px rgba(26,33,64,.5),0 0 0 1px rgba(26,33,64,.06);transition:transform .3s}
+.cd:hover{transform:translateY(-4px)}
+.th{position:relative;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(135deg,#6C63FF,#38BDF8);cursor:pointer;border:0;display:block;width:100%}
+.sc{position:absolute;inset:0}
+.sc i{position:absolute;border-radius:50%;filter:blur(2px);transition:transform 4s ease-in-out}
+.sc .a{width:150px;height:150px;background:rgba(255,255,255,.2);left:-30px;top:-40px}
+.sc .b{width:220px;height:220px;background:rgba(255,180,90,.45);right:-70px;bottom:-90px}
+.sc .c{width:70px;height:70px;background:rgba(255,255,255,.3);left:55%;top:20%}
+.th:hover .a{transform:translate(60px,30px) scale(1.2)}.th:hover .b{transform:translate(-40px,-30px) scale(1.15)}.th:hover .c{transform:translate(-30px,50px)}
+.bars{position:absolute;left:20px;bottom:20px;display:flex;gap:5px;align-items:flex-end;height:30px;opacity:0;transition:opacity .3s}
+.th:hover .bars,.on .bars{opacity:1}
+.bars i{width:5px;border-radius:3px;background:#fff;animation:eq 1s ease-in-out infinite}
+.bars i:nth-child(2){animation-delay:.2s}.bars i:nth-child(3){animation-delay:.4s}.bars i:nth-child(4){animation-delay:.1s}
+@keyframes eq{0%,100%{height:6px}50%{height:28px}}
+.pb{position:absolute;left:50%;top:50%;width:66px;height:66px;margin:-33px;border-radius:50%;background:#fff;color:#4F46E5;display:grid;place-items:center;box-shadow:0 14px 30px -8px rgba(26,33,64,.5);transition:transform .25s}
+.th:hover .pb{transform:scale(1.1)}.on .pb{background:#4F46E5;color:#fff}
+.du{position:absolute;right:14px;bottom:14px;background:rgba(10,14,36,.7);backdrop-filter:blur(6px);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px}
+.lv{position:absolute;left:14px;top:14px;background:#fff;color:#4F46E5;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:6px 11px;border-radius:99px}
+.th:focus-visible{outline:3px solid #1A2140;outline-offset:-3px}
+.pr{height:4px;background:#E4E8FA}.pr i{display:block;height:100%;width:0;background:#4F46E5;transition:width 4s linear}.on .pr i{width:100%}
+.bd{padding:20px 22px 22px}
+.bd small{font-size:12px;font-weight:700;color:#6B6FEE;letter-spacing:.06em;text-transform:uppercase}
+.bd h1{font-size:21px;font-weight:800;letter-spacing:-.035em;line-height:1.15;margin:7px 0 8px}
+.bd p{font-size:14.5px;color:#5E678A;line-height:1.55}
+.mt{display:flex;align-items:center;gap:11px;margin-top:16px;padding-top:15px;border-top:1px solid #EDF0FB;font-size:13px;color:#5E678A;font-weight:500}
+.mt i{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FF8A5B,#F43F5E);display:grid;place-items:center;font:800 11px 'Plus Jakarta Sans';color:#fff;font-style:normal}.mt b{color:#1A2140;font-weight:700}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<article class="cd"><button class="th" id="t" aria-label="Preview lesson: Designing your first design system" aria-pressed="false"><div class="sc"><i class="a"></i><i class="b"></i><i class="c"></i></div><span class="lv">Lesson 04</span><div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div><span class="pb" id="pb"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" style="margin-left:3px"><path d="M8 5.500v13a1 1 0 0 0 1.500.860l10.500-6.500a1 1 0 0 0 0-1.720L9.500 4.640A1 1 0 0 0 8 5.500Z"/></svg></span><span class="du">12:38</span></button>
+ <div class="pr"><i></i></div>
+ <div class="bd"><small>Design systems · Module 2</small><h1>Designing your first design system</h1><p>Tokens, components and the small rules that keep a product consistent as it grows.</p><div class="mt"><i>RK</i><span><b>Rhea Kapoor</b> · Staff designer at Linewise</span></div></div></article>
+<script>
+const t=document.getElementById('t'),c=document.querySelector('.cd');
+t.addEventListener('click',()=>{const on=!c.classList.contains('on');c.classList.toggle('on',on);t.setAttribute('aria-pressed',on);document.getElementById('pb').innerHTML=on?'<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>':'<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" style="margin-left:3px"><path d="M8 5.500v13a1 1 0 0 0 1.500.860l10.500-6.500a1 1 0 0 0 0-1.720L9.500 4.640A1 1 0 0 0 8 5.500Z"/></svg>'});
+</script></body></html>

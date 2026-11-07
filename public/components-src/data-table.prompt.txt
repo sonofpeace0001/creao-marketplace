@@ -1,0 +1,29 @@
+ROLE
+You are a senior B2B data-table designer and front-end engineer with 15+ years of experience. Build "Customer Table": a sortable, searchable, filterable customer table with avatars, status tags and mono MRR figures.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Crisp white table on cool grey with IBM Plex type, mono headers and a dark active filter.
+- Palette: #12203A, #7C89A6, #E6EAF2, #2F6BFF, #EEF1F6, #D9DFEB
+- Type: IBM Plex Sans, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Toolbar with title, search field and All/Active/Trial filters; table with sortable headers (aria-sort), avatar rows, plan, status tag and right-aligned MRR; footer count; empty state.
+
+INTERACTION & STATES
+- Header buttons sort and toggle direction; typing filters live; filter chips use aria-pressed; footer count updates; the table scrolls horizontally on mobile.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

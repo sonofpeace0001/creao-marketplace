@@ -1,0 +1,32 @@
+ROLE
+You are a senior conversion designer and front-end engineer (growth marketing sites) with 15+ years of experience. Build "Launch Strip": a top-of-page announcement bar with a live countdown, a lime call-to-action and a slide-up dismiss.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Confident and urgent without being loud: a near-black strip with a single lime accent over a calm cream page.
+- Palette: #0E0E0C, #D4FF3A, #F5F3EC, #6C6A60, #F2F0E6, #E9E6DA
+- Type: Archivo, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Black bar with a pulsing 'Launch week' live label, one-line offer, four-cell mono countdown (d/h/m/s), lime pill CTA and a dismiss button.
+- Below it a faint site nav and headline skeleton so the strip is shown in context.
+
+INTERACTION & STATES
+- Countdown ticks every second and never shows negative values.
+- Dismiss collapses the bar (max-height + padding to 0) with a 400ms transition; the page reflows smoothly.
+- CTA nudges 3px right on hover.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

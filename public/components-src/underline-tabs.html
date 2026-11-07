@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Underline Tabs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F7F2E9;color:#27211A;font-family:'Work Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:600px}
+.hd{font:600 30px/1.1 'Fraunces',serif;letter-spacing:-.025em;margin-bottom:22px}.hd em{font-style:italic;color:#B4471F;font-weight:500}
+.tl{position:relative;display:flex;gap:26px;border-bottom:1.5px solid #DDD2BE;overflow-x:auto}
+.tl button{position:relative;border:0;background:none;padding:12px 2px 14px;font:500 15px 'Work Sans';color:#8D8068;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px;transition:color .2s}.tl button:hover{color:#27211A}.tl button[aria-selected=true]{color:#27211A;font-weight:600}.tl button:focus-visible{outline:2px solid #B4471F;outline-offset:2px;border-radius:4px}
+.tl .n{font-size:11.5px;font-weight:600;background:#EADFCB;color:#6C5F48;padding:2px 8px;border-radius:99px}.tl button[aria-selected=true] .n{background:#B4471F;color:#fff}
+.bar{position:absolute;bottom:-1.5px;height:3px;border-radius:3px 3px 0 0;background:#B4471F;transition:left .35s cubic-bezier(.5,0,.2,1),width .35s cubic-bezier(.5,0,.2,1)}
+.pn{padding:26px 0;min-height:200px}.pn[hidden]{display:none}.pn.in{animation:fi .4s ease}@keyframes fi{from{opacity:0;transform:translateX(10px)}}
+.it{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid #E8DFCC}.it:last-child{border:0}.it .d{font:600 13px 'Work Sans';color:#B4471F;min-width:46px;padding-top:3px}.it b{display:block;font:600 19px 'Fraunces',serif;letter-spacing:-.01em;margin-bottom:4px}.it p{font-size:14.5px;color:#7A6E58;line-height:1.55}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><h1 class="hd">The <em>reading</em> room</h1>
+<div class="tl" role="tablist" aria-label="Library sections" id="tl"><button role="tab" id="t0" aria-controls="p0" aria-selected="true">Essays<span class="n">12</span></button><button role="tab" id="t1" aria-controls="p1" aria-selected="false" tabindex="-1">Interviews<span class="n">7</span></button><button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Field notes<span class="n">24</span></button><span class="bar" id="bar"></span></div>
+<div class="pn" id="p0" role="tabpanel" aria-labelledby="t0"><div class="it"><span class="d">Nov 4</span><div><b>On designing for slowness</b><p>Why the best interfaces give people room to think before they act.</p></div></div><div class="it"><span class="d">Oct 21</span><div><b>A grammar of empty states</b><p>Small moments of nothing, and what they say about your product.</p></div></div></div>
+<div class="pn" id="p1" role="tabpanel" aria-labelledby="t1" hidden><div class="it"><span class="d">Nov 1</span><div><b>Ines Duarte, type designer</b><p>On drawing letters that still feel human at the smallest sizes.</p></div></div><div class="it"><span class="d">Oct 9</span><div><b>Tomas Berg, editor</b><p>What a decade of cutting copy teaches you about interface text.</p></div></div></div>
+<div class="pn" id="p2" role="tabpanel" aria-labelledby="t2" hidden><div class="it"><span class="d">Nov 6</span><div><b>Notes from a week of user calls</b><p>Seven conversations, three surprises and one deleted feature.</p></div></div><div class="it"><span class="d">Oct 30</span><div><b>Sketches from the whiteboard</b><p>Half-ideas worth keeping, captured before they disappear.</p></div></div></div></div>
+<script>
+const T=[...document.querySelectorAll('[role=tab]')],P=[...document.querySelectorAll('[role=tabpanel]')],bar=document.getElementById('bar');
+function mv(i){const t=T[i];bar.style.left=t.offsetLeft+'px';bar.style.width=t.offsetWidth+'px'}
+function go(i,f){T.forEach((t,k)=>{t.setAttribute('aria-selected',k===i);t.tabIndex=k===i?0:-1;P[k].hidden=k!==i;P[k].classList.toggle('in',k===i)});mv(i);if(f)T[i].focus()}
+T.forEach((t,i)=>{t.onclick=()=>go(i);t.onkeydown=e=>{let n=null;if(e.key==='ArrowRight')n=(i+1)%3;if(e.key==='ArrowLeft')n=(i+2)%3;if(n!==null){e.preventDefault();go(n,1)}}});
+(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>mv(0));mv(0);addEventListener('resize',()=>mv(T.findIndex(t=>t.getAttribute('aria-selected')==='true')));
+</script></body></html>

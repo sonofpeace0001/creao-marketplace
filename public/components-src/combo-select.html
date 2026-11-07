@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Assignee Combobox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F3F8;color:#181C30;font-family:'Public Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{position:relative;width:min(380px,100%);min-height:440px}
+label{display:block;font-size:13.5px;font-weight:600;margin-bottom:8px;color:#2D3354}
+.cb{display:flex;align-items:center;gap:11px;background:#fff;border:1.5px solid #D6DAEA;border-radius:15px;padding:8px 12px 8px 10px;transition:all .2s}
+.cb:focus-within{border-color:#4F46E5;box-shadow:0 0 0 4px rgba(79,70,229,.14)}
+.sa{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 11px 'Public Sans';color:#fff;background:var(--c,#C7CCE2)}
+.cb input{flex:1;min-width:0;border:0;outline:0;background:none;font:500 15.5px 'Public Sans';color:#181C30;padding:6px 0}.cb input::placeholder{color:#9AA0BC}
+.cb svg{color:#7A82A8;transition:transform .2s;flex:none}.cb[aria-expanded=true] svg{transform:rotate(180deg)}
+.ls.on~.hn{opacity:0}
+.ls{position:absolute;left:0;right:0;top:84px;background:#fff;border:1px solid #E1E4F0;border-radius:18px;padding:6px;box-shadow:0 30px 48px -20px rgba(24,28,48,.45);max-height:290px;overflow:auto;opacity:0;transform:translateY(-6px);pointer-events:none;transition:all .18s;z-index:3}
+.ls.on{opacity:1;transform:none;pointer-events:auto}
+.o{display:flex;align-items:center;gap:12px;padding:10px 11px;border-radius:12px;cursor:pointer}
+.o.h{background:#F0EFFF}.o .sa{width:34px;height:34px;font-size:12px}
+.o b{display:block;font-size:14.5px;font-weight:600}.o span.r{font-size:12.5px;color:#7A82A8}.o mark{background:#FFE58A;color:inherit;border-radius:3px}
+.o .ck{margin-left:auto;color:#4F46E5;opacity:0}.o[aria-selected=true] .ck{opacity:1}.o[aria-selected=true] b{color:#4F46E5}
+.em{padding:26px;text-align:center;color:#8A91B0;font-size:14px}
+.hd{padding:9px 11px 5px;font-size:11.5px;font-weight:700;letter-spacing:.1em;color:#9AA0BC;text-transform:uppercase}
+.hn{margin-top:10px;font-size:12.5px;color:#8A91B0}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><label for="i">Assign to</label>
+<div class="cb" id="cb" aria-expanded="true"><span class="sa" id="sa"></span><input id="i" role="combobox" aria-expanded="true" aria-controls="ls" aria-autocomplete="list" placeholder="Search teammates…" autocomplete="off"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+<div class="ls on" id="ls" role="listbox"></div><div class="hn" id="hn"></div></div>
+<script>
+const P=[['Aisha Khan','Design lead','AK','#F59E0B'],['Marcus Reid','Engineering manager','MR','#10B981'],['Sofia Lund','Product designer','SL','#8B5CF6'],['Jonas Tran','Backend engineer','JT','#EF4444'],['Elena Ortiz','QA engineer','EO','#0EA5E9'],['Dev Patel','Data analyst','DP','#EC4899']];
+let sel=2,cur=0,open=true;const $=id=>document.getElementById(id),i=$('i'),ls=$('ls');
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function hl(t,s){const k=s?t.toLowerCase().indexOf(s.toLowerCase()):-1;return k<0?esc(t):esc(t.slice(0,k))+'<mark>'+esc(t.slice(k,k+s.length))+'</mark>'+esc(t.slice(k+s.length))}
+function rows(){const s=i.value.trim().toLowerCase();return P.map((p,k)=>[p,k]).filter(([p])=>!s||p[0].toLowerCase().includes(s)||p[1].toLowerCase().includes(s))}
+function draw(){const s=i.value.trim(),r=rows();cur=Math.min(cur,Math.max(0,r.length-1));
+ $('sa').style.setProperty('--c',sel>=0?P[sel][3]:'#C7CCE2');$('sa').textContent=sel>=0?P[sel][2]:'';
+ ls.innerHTML=r.length?'<div class="hd">Teammates</div>'+r.map(([p,k],n)=>'<div class="o'+(n===cur?' h':'')+'" role="option" aria-selected="'+(k===sel)+'" data-k="'+k+'" data-n="'+n+'"><span class="sa" style="--c:'+p[3]+'">'+p[2]+'</span><div><b>'+hl(p[0],s)+'</b><span class="r">'+p[1]+'</span></div><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></div>').join(''):'<div class="em">No teammates match “'+esc(s)+'”</div>';
+ $('hn').textContent=sel>=0?'Assigned to '+P[sel][0]:'Unassigned'}
+function setOpen(o){open=o;ls.classList.toggle('on',o);$('cb').setAttribute('aria-expanded',o);i.setAttribute('aria-expanded',o)}
+function pick(k){sel=k;i.value=P[k][0];setOpen(false);draw()}
+i.addEventListener('input',()=>{cur=0;setOpen(true);draw()});i.addEventListener('focus',()=>{if(sel>=0&&i.value===P[sel][0])i.select();setOpen(true)});
+i.addEventListener('keydown',e=>{const r=rows();if(e.key==='ArrowDown'){e.preventDefault();setOpen(true);cur=(cur+1)%Math.max(1,r.length);draw()}if(e.key==='ArrowUp'){e.preventDefault();cur=(cur-1+r.length)%Math.max(1,r.length);draw()}if(e.key==='Enter'&&r[cur]){e.preventDefault();pick(r[cur][1])}if(e.key==='Escape')setOpen(false)});
+ls.addEventListener('mousedown',e=>{const o=e.target.closest('.o');if(o){e.preventDefault();pick(+o.dataset.k)}});document.addEventListener('click',e=>{if(!e.target.closest('.w'))setOpen(false)});
+i.value=P[sel][0];draw();
+</script></body></html>

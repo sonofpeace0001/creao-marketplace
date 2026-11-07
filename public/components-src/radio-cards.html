@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Plan Radio Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F0F2FB;color:#171C3A;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;background:#fff;border-radius:30px;padding:28px;box-shadow:0 36px 60px -38px rgba(23,28,58,.5),0 0 0 1px rgba(23,28,58,.06)}
+h1{font-size:22px;font-weight:800;letter-spacing:-.04em}.sub{font-size:14.5px;color:#6B7399;margin:5px 0 20px}
+.g{display:grid;gap:12px;border:0}
+.o{position:relative;display:block;cursor:pointer}.o input{position:absolute;opacity:0;inset:0}
+.cd{display:grid;grid-template-columns:28px 1fr auto;gap:14px;align-items:center;padding:18px 18px;border:2px solid #E4E7F5;border-radius:20px;background:#fff;transition:all .22s}
+.o:hover .cd{border-color:#C5CBEF}.o input:focus-visible+.cd{outline:3px solid #171C3A;outline-offset:3px}
+.o input:checked+.cd{border-color:#4F46E5;background:linear-gradient(135deg,#F7F6FF,#EEF0FF);box-shadow:0 14px 26px -16px rgba(79,70,229,.6)}
+.rd{width:26px;height:26px;border-radius:50%;border:2px solid #C3C9EA;display:grid;place-items:center;transition:all .22s}.rd::after{content:"";width:12px;height:12px;border-radius:50%;background:#4F46E5;transform:scale(0);transition:transform .25s cubic-bezier(.3,1.8,.4,1)}
+.o input:checked+.cd .rd{border-color:#4F46E5}.o input:checked+.cd .rd::after{transform:scale(1)}
+.tx b{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:800;letter-spacing:-.025em}.tx span{display:block;font-size:13.5px;color:#6B7399;margin-top:3px;line-height:1.4}
+.tg{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:#4F46E5;color:#fff;padding:3px 8px;border-radius:99px}
+.pr{text-align:right}.pr b{font-size:24px;font-weight:800;letter-spacing:-.04em}.pr span{display:block;font-size:12px;color:#8089B0;font-weight:600}
+.sm{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding:16px 18px;background:#F5F6FD;border-radius:18px}.sm span{font-size:14px;color:#6B7399;font-weight:600}.sm b{font-size:15px}
+.go{width:100%;margin-top:14px;border:0;border-radius:16px;padding:16px;font:800 15.5px 'Plus Jakarta Sans';background:#171C3A;color:#fff;cursor:pointer;transition:transform .15s}.go:hover{transform:translateY(-1px)}.go:focus-visible{outline:3px solid #4F46E5;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><h1>Choose your plan</h1><p class="sub">You can switch or cancel at any time.</p>
+<div class="g" role="radiogroup" aria-label="Plan">
+ <label class="o"><input type="radio" name="p" value="Starter" data-p="9"><span class="cd"><span class="rd"></span><span class="tx"><b>Starter</b><span>For individuals getting started</span></span><span class="pr"><b>$9</b><span>/ month</span></span></span></label>
+ <label class="o"><input type="radio" name="p" value="Pro" data-p="24" checked><span class="cd"><span class="rd"></span><span class="tx"><b>Pro <i class="tg">Popular</i></b><span>Unlimited projects and priority support</span></span><span class="pr"><b>$24</b><span>/ month</span></span></span></label>
+ <label class="o"><input type="radio" name="p" value="Team" data-p="59"><span class="cd"><span class="rd"></span><span class="tx"><b>Team</b><span>Roles, SSO and shared workspaces</span></span><span class="pr"><b>$59</b><span>/ month</span></span></span></label></div>
+<div class="sm"><span id="sl">Pro · billed monthly</span><b id="tt">$24.00 / mo</b></div><button class="go" id="g">Continue to payment</button></div>
+<script>
+const rs=[...document.querySelectorAll('input[name=p]')];
+function upd(){const r=rs.find(x=>x.checked);document.getElementById('sl').textContent=r.value+' · billed monthly';document.getElementById('tt').textContent='$'+(+r.dataset.p).toFixed(2)+' / mo'}
+rs.forEach(r=>r.addEventListener('change',upd));upd();
+document.getElementById('g').onclick=e=>{e.target.textContent='Redirecting…'};
+</script></body></html>

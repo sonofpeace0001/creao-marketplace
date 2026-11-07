@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial landing-page designer and front-end engineer with 15+ years of experience. Build "Waitlist Form": a letterpress-style waitlist card with validated name and email, role chips and a numbered confirmation.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream stationery card with double border, Instrument Serif headline and a terracotta button.
+- Palette: #A0522D, #1E1B16, #6B6455, #FBF8F1, #CFC6B0, #C0392B
+- Type: Instrument Serif, Instrument Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Private beta kicker; serif headline with italic accent; subcopy; name and email fields with inline errors; Designer/Developer radio chips; Reserve button; reassurance row; success state with queue number.
+
+INTERACTION & STATES
+- Submit validates name and email and shows inline errors that clear on input; success swaps to a numbered confirmation naming the user; button has a pressed offset effect.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior app-shell designer and front-end engineer with 15+ years of experience. Build "Collapsible Sidebar": an icon rail sidebar that expands on toggle and shows tooltips when collapsed.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Light grey dashboard shell with a violet logo tile and rounded icon buttons.
+- Palette: #161B2E, #E6E9F2, #5A6285, #4338CA, #4F46E5, #E9ECF2
+- Type: Inter Tight (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Sidebar with logo, collapse toggle, five nav items with icons and labels, avatar footer; main area with title and skeleton cards.
+
+INTERACTION & STATES
+- The toggle animates the sidebar between rail and full width (aria-expanded); labels fade; collapsed items show tooltips on hover or focus; active item highlights.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

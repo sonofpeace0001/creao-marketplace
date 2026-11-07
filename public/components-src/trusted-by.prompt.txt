@@ -1,0 +1,30 @@
+ROLE
+You are a senior product designer and front-end engineer (SaaS marketing) with 15+ years of experience. Build "Proof Strip": a social-proof card pairing a big gradient customer count with six SVG logo marks and result tooltips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean and credible: white card on cool grey, one blue-to-cyan gradient number, muted marks that darken on hover.
+- Palette: #14203A, #F2F5FA, #E4E9F2, #2563EB, #06B6D4, #5C6B88
+- Type: Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Left stat block ('1,200+ teams ship faster'), a divider, and a 3×2 grid of logo marks (circle, square, triangle, arch, diamond, duet) with names.
+
+INTERACTION & STATES
+- Hover darkens a logo, lifts it 2px and reveals a dark tooltip with a concrete result ('Cut release time by 62%').
+- Stacks vertically under 720px.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

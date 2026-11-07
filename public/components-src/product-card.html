@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Headphone Product Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDE8DF;color:#1E1B16;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:26px 16px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:370px;background:#fff;border-radius:30px;padding:14px;box-shadow:0 36px 60px -34px rgba(60,40,10,.55),0 0 0 1px rgba(30,27,22,.06)}
+.im{position:relative;aspect-ratio:1/.92;border-radius:22px;background:var(--bg);display:grid;place-items:center;transition:background .5s;overflow:hidden}
+.im::before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.45);filter:blur(2px)}
+.im svg.p{position:relative;width:70%;transition:transform .4s cubic-bezier(.3,1.4,.4,1);filter:drop-shadow(0 22px 20px rgba(30,27,22,.28))}
+.c:hover .p{transform:translateY(-6px) rotate(-3deg)}
+.sale{position:absolute;left:14px;top:14px;background:#E8330E;color:#fff;font-size:12px;font-weight:800;letter-spacing:.04em;padding:6px 11px;border-radius:99px}
+.wl{position:absolute;right:12px;top:12px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:#1E1B16;cursor:pointer;display:grid;place-items:center;box-shadow:0 6px 14px -4px rgba(0,0,0,.25);transition:transform .2s}
+.wl:hover{transform:scale(1.1)}.wl:focus-visible{outline:3px solid #1E1B16;outline-offset:2px}
+.wl[aria-pressed=true]{color:#E8330E}.wl[aria-pressed=true] svg{fill:currentColor;animation:pp .4s cubic-bezier(.3,1.8,.4,1)}@keyframes pp{40%{transform:scale(1.35)}}
+.bd{padding:18px 8px 8px}
+.rt{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#8B8272}.rt svg{color:#F5A524}
+.nm{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:6px}
+.nm h1{font-size:21px;font-weight:800;letter-spacing:-.035em;line-height:1.1}
+.pr{text-align:right;white-space:nowrap}.pr b{font-size:21px;font-weight:800;letter-spacing:-.03em}.pr s{font-size:13.5px;color:#A89F8E;margin-left:6px;font-weight:500}
+.ds{font-size:14px;color:#7A7262;line-height:1.5;margin:8px 0 16px}
+.row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.sw{display:flex;gap:9px}.sw button{width:26px;height:26px;border-radius:50%;border:0;background:var(--c);cursor:pointer;box-shadow:0 0 0 2px #fff,0 0 0 3.500px rgba(30,27,22,.15);transition:transform .2s}
+.sw button:hover{transform:scale(1.15)}.sw button[aria-pressed=true]{box-shadow:0 0 0 2px #fff,0 0 0 4px #1E1B16}.sw button:focus-visible{outline:2px solid #1E1B16;outline-offset:4px}
+.cl{font-size:13px;font-weight:700;color:#4A4336}
+.add{width:100%;border:0;border-radius:16px;padding:16px;font:800 15.5px 'DM Sans';background:#1E1B16;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s,background .3s}
+.add:hover{transform:translateY(-2px)}.add:focus-visible{outline:3px solid #E8330E;outline-offset:3px}
+.add.ok{background:#16A34A}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<article class="c"><div class="im" id="im"><span class="sale">−25%</span><button class="wl" id="wl" aria-pressed="false" aria-label="Add to wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round" stroke-linejoin="round"><path d="M20.800 4.600a5.500 5.500 0 0 0-7.800 0L12 5.700l-1-1.100a5.500 5.500 0 0 0-7.800 7.800l1 1.100L12 21l7.800-7.500 1-1.100a5.500 5.500 0 0 0 0-7.800Z"/></svg></button>
+ <svg class="p" viewBox="0 0 220 200" aria-hidden="true"><path d="M44 118V98a66 66 0 0 1 132 0v20" fill="none" stroke="var(--d)" stroke-width="13" stroke-linecap="round"/><rect x="26" y="106" width="44" height="72" rx="22" fill="var(--b)"/><rect x="150" y="106" width="44" height="72" rx="22" fill="var(--b)"/><rect x="36" y="118" width="24" height="48" rx="12" fill="var(--d)" opacity=".35"/><rect x="160" y="118" width="24" height="48" rx="12" fill="var(--d)" opacity=".35"/><circle cx="48" cy="142" r="5" fill="var(--a)"/></svg></div>
+ <div class="bd"><div class="rt"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.600 2.900 6 6.600.9-4.800 4.600 1.200 6.500L12 17.400l-5.900 3.200 1.200-6.500L2.500 9.500l6.600-.9Z"/></svg>4.8 · 2,184 reviews</div>
+ <div class="nm"><h1>Halo Pro Wireless</h1><div class="pr"><b>$189</b><s>$249</s></div></div>
+ <p class="ds">Adaptive noise cancelling, 40-hour battery and a fit you forget you're wearing.</p>
+ <div class="row"><div class="sw" id="sw"></div><span class="cl" id="cl"></span></div>
+ <button class="add" id="ad"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.400 11h10l2-8H6.500M9 20h.01M17 20h.01"/></svg><span id="at">Add to bag</span></button></div></article>
+<script>
+const C=[['Sand','#D8CBB6','#2B2620','#B9A98F','#E8330E','#F1E8D8'],['Midnight','#2D3347','#12151F','#586080','#5EEAD4','#CBD3E8'],['Sage','#9DB8A3','#27382C','#7F9F87','#F59E0B','#DCEADF'],['Rose','#E7A9B0','#4A1F28','#C98089','#FDE68A','#F6DADD']];
+const sw=document.getElementById('sw'),im=document.getElementById('im');
+sw.innerHTML=C.map((c,i)=>'<button style="--c:'+c[1]+'" data-i="'+i+'" aria-pressed="'+(i===0)+'" aria-label="'+c[0]+'"></button>').join('');
+function set(i){const c=C[i];im.style.setProperty('--bg',c[5]);im.style.setProperty('--b',c[1]);im.style.setProperty('--d',c[2]);im.style.setProperty('--a',c[4]);document.getElementById('cl').textContent=c[0];sw.querySelectorAll('button').forEach((b,k)=>b.setAttribute('aria-pressed',k===i))}
+sw.addEventListener('click',e=>{const b=e.target.closest('button');if(b)set(+b.dataset.i)});set(0);
+const wl=document.getElementById('wl');wl.onclick=()=>wl.setAttribute('aria-pressed',wl.getAttribute('aria-pressed')!=='true');
+const ad=document.getElementById('ad'),at=document.getElementById('at');ad.onclick=()=>{ad.classList.add('ok');at.textContent='Added to bag';setTimeout(()=>{ad.classList.remove('ok');at.textContent='Add to bag'},1600)};
+</script></body></html>

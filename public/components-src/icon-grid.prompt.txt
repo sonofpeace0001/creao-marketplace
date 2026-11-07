@@ -1,0 +1,29 @@
+ROLE
+You are a senior icon-system designer and front-end engineer with 15+ years of experience. Build "Icon Library": a searchable grid of 25 custom line icons — click any icon to copy its SVG.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark library with amber hover accents, mono captions and consistent 2px round-cap strokes.
+- Palette: #6C6C78, #34D399, #EDEDF2, #17171B, #2A2A31, #FFB547
+- Type: Inter, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with title, live count and a search field; five-column grid of icon tiles with hover names; footer with specs.
+
+INTERACTION & STATES
+- Typing filters by name with an empty state; hover lifts a tile and reveals its name; click copies the SVG markup and confirms in green.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

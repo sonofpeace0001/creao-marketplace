@@ -1,0 +1,29 @@
+ROLE
+You are a senior writing-tool designer and front-end engineer with 15+ years of experience. Build "Notes Editor": a ruled-paper note editor with a formatting toolbar, auto-growing textarea, autosave status and word count.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper sheet with ruled lines, Newsreader serif body and an amber caret.
+- Palette: #25231E, #ECE8DB, #FAF8F0, #EFEBDC, #B45309, #9A957F
+- Type: Newsreader, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Toolbar with bold, italic and list buttons plus save status; ruled textarea; footer with words, reading time and characters.
+
+INTERACTION & STATES
+- Typing updates counts and auto-grows the field; Saving then Saved indicator on a debounce; toolbar buttons wrap the selection or prefix the line.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Customer Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF1F6;color:#12203A;font-family:'IBM Plex Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;background:#fff;border:1px solid #D9DFEB;border-radius:18px;box-shadow:0 30px 60px -40px rgba(18,32,58,.5);overflow:hidden}
+.tb{display:flex;gap:10px;align-items:center;padding:16px 18px;border-bottom:1px solid #E6EAF2}.tb h1{font-size:16px;font-weight:600;flex:1}
+.sr{display:flex;align-items:center;gap:8px;background:#F4F6FA;border:1px solid #E1E6F0;border-radius:10px;padding:0 12px;color:#7C89A6}.sr:focus-within{border-color:#2F6BFF;background:#fff;box-shadow:0 0 0 3px rgba(47,107,255,.14)}.sr input{border:0;outline:0;background:none;padding:9px 0;font:400 13.5px 'IBM Plex Sans';width:150px;color:#12203A}
+.fb{display:flex;gap:6px}.fb button{border:1px solid #DCE2EE;background:#fff;border-radius:9px;padding:8px 12px;font:500 12.5px 'IBM Plex Sans';color:#4A5878;cursor:pointer}.fb button[aria-pressed=true]{background:#12203A;border-color:#12203A;color:#fff}.fb button:focus-visible,th button:focus-visible{outline:2px solid #2F6BFF;outline-offset:2px}
+.sc{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:560px}
+th{text-align:left;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#7C89A6;padding:0;background:#F8F9FC;border-bottom:1px solid #E6EAF2}th button{all:unset;display:flex;align-items:center;gap:6px;padding:11px 18px;cursor:pointer;width:100%;box-sizing:border-box}th button:hover{color:#12203A}th svg{transition:transform .2s;opacity:.35}th[aria-sort=ascending] svg,th[aria-sort=descending] svg{opacity:1;color:#2F6BFF}th[aria-sort=descending] svg{transform:rotate(180deg)}
+td{padding:13px 18px;font-size:14px;border-bottom:1px solid #EFF2F8}tr:last-child td{border:0}tbody tr{transition:background .15s}tbody tr:hover{background:#F6F8FD}
+.cu{display:flex;align-items:center;gap:11px}.av{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font:600 12px 'IBM Plex Sans';color:#fff}.cu b{display:block;font-weight:500}.cu span{font-size:12.5px;color:#7C89A6}
+.pl{font:500 12.5px 'IBM Plex Mono',monospace}.mrr{font:500 13.5px 'IBM Plex Mono',monospace;text-align:right}
+.tg{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:4px 10px;border-radius:99px}.tg::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}.ok{background:#E3F6EC;color:#12804A}.tr{background:#FFF3DA;color:#A66300}.ch{background:#FDE7E7;color:#B42318}
+.ft{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;font-size:13px;color:#7C89A6;border-top:1px solid #E6EAF2;background:#FBFCFE}.em{display:none;padding:34px;text-align:center;color:#7C89A6;font-size:14px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="tb"><h1>Customers</h1><label class="sr"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><input id="q" placeholder="Search customers" aria-label="Search customers"></label><div class="fb" id="fb"><button aria-pressed="true" data-f="all">All</button><button aria-pressed="false" data-f="Active">Active</button><button aria-pressed="false" data-f="Trial">Trial</button></div></div>
+<div class="sc"><table><thead><tr><th aria-sort="none" data-k="name"><button>Customer<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button></th><th aria-sort="none" data-k="plan"><button>Plan<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button></th><th aria-sort="none" data-k="status"><button>Status<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button></th><th aria-sort="descending" data-k="mrr"><button style="justify-content:flex-end">MRR<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button></th></tr></thead><tbody id="tb"></tbody></table><div class="em" id="em">No customers match your search.</div></div>
+<div class="ft"><span id="ct"></span><span>Updated just now</span></div></div>
+<script>
+const D=[['Northwind Co.','hello@northwind.co','Scale','Active',4200,'#2F6BFF'],['Fjord Studio','team@fjord.studio','Growth','Active',1850,'#0E9F6E'],['Helios Labs','ops@helioslabs.io','Scale','Trial',0,'#E8590C'],['Pinecone Ltd','ap@pinecone.ltd','Starter','Active',290,'#9333EA'],['Atlas Freight','it@atlasfreight.com','Growth','Churned',0,'#64748B'],['Marlow & Finch','accounts@marlowfinch.com','Scale','Active',3100,'#DB2777'],['Kite Analytics','hi@kite.so','Starter','Trial',0,'#0891B2']];
+let sk='mrr',sd=-1,f='all',q='';const tb=document.getElementById('tb');
+const cls={Active:'ok',Trial:'tr',Churned:'ch'},ix={name:0,plan:2,status:3,mrr:4};
+function r(){let a=D.filter(x=>(f==='all'||x[3]===f)&&(x[0]+x[1]).toLowerCase().includes(q));a.sort((x,y)=>{const i=ix[sk];return (typeof x[i]==='number'?x[i]-y[i]:String(x[i]).localeCompare(y[i]))*sd});
+ tb.innerHTML=a.map(x=>'<tr><td><div class="cu"><div class="av" style="background:'+x[5]+'">'+x[0].slice(0,2).toUpperCase()+'</div><div><b>'+x[0]+'</b><span>'+x[1]+'</span></div></div></td><td class="pl">'+x[2]+'</td><td><span class="tg '+cls[x[3]]+'">'+x[3]+'</span></td><td class="mrr">'+(x[4]?'$'+x[4].toLocaleString():'—')+'</td></tr>').join('');
+ document.getElementById('em').style.display=a.length?'none':'block';document.getElementById('ct').textContent=a.length+' of '+D.length+' customers';
+ document.querySelectorAll('th').forEach(h=>h.setAttribute('aria-sort',h.dataset.k===sk?(sd>0?'ascending':'descending'):'none'))}
+document.querySelectorAll('th').forEach(h=>h.onclick=()=>{const k=h.dataset.k;if(sk===k)sd*=-1;else{sk=k;sd=k==='mrr'?-1:1}r()});
+document.getElementById('q').oninput=e=>{q=e.target.value.toLowerCase();r()};
+document.querySelectorAll('#fb button').forEach(b=>b.onclick=()=>{f=b.dataset.f;document.querySelectorAll('#fb button').forEach(x=>x.setAttribute('aria-pressed',x===b));r()});r();
+</script></body></html>

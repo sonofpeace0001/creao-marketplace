@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Creator Badges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 440px at 50% -10%,#251848,transparent 65%),#09090F;color:#F0EEFA;font-family:'Schibsted Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:30px 18px;-webkit-font-smoothing:antialiased}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:100%;max-width:640px}
+.c{position:relative;background:#12121C;border:1px solid #23233A;border-radius:24px;padding:26px 18px 22px;text-align:center;transition:transform .3s,border-color .3s}
+.c:hover,.c:focus-visible{transform:translateY(-5px);border-color:var(--a);outline:0}
+.av{position:relative;width:88px;height:88px;margin:0 auto 14px;border-radius:50%;padding:3px;background:conic-gradient(from 0deg,var(--a),var(--b),var(--a))}
+.av span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#12121C;font-weight:800;font-size:27px;letter-spacing:-.04em;color:#fff;border:3px solid #12121C;background:linear-gradient(135deg,#1C1C2E,#2A2A44)}
+.bd{position:absolute;right:-2px;bottom:-2px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:3px solid #12121C;color:#fff}
+.v{background:#3B82F6}.t{background:#F59E0B}.o{background:#22C55E}
+.c h2{font-size:17px;font-weight:700;letter-spacing:-.025em;display:flex;align-items:center;justify-content:center;gap:6px}
+.c p{font-size:13px;color:#8A88AC;margin-top:3px}
+.tags{display:flex;gap:6px;justify-content:center;margin-top:14px}
+.tags i{font-style:normal;font-size:11px;font-weight:700;letter-spacing:.04em;padding:5px 9px;border-radius:99px;background:rgba(255,255,255,.07);color:#C9C6EA}
+.tip{position:absolute;left:50%;top:-14px;transform:translate(-50%,-100%) scale(.96);background:#fff;color:#12121C;font-size:12.5px;font-weight:700;padding:7px 12px;border-radius:10px;white-space:nowrap;opacity:0;pointer-events:none;transition:all .2s;box-shadow:0 12px 24px rgba(0,0,0,.4)}
+.tip::after{content:"";position:absolute;left:50%;bottom:-5px;width:10px;height:10px;background:#fff;transform:translateX(-50%) rotate(45deg)}
+.c:hover .tip,.c:focus-visible .tip{opacity:1;transform:translate(-50%,-100%)}
+@media(max-width:560px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="g">
+ <article class="c" tabindex="0" style="--a:#60A5FA;--b:#A78BFA"><span class="tip">Identity verified by ID check</span><div class="av"><span>NH</span><i class="bd v"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.400" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i></div><h2>Noor Haddad</h2><p>Product designer</p><div class="tags"><i>VERIFIED</i><i>128 projects</i></div></article>
+ <article class="c" tabindex="0" style="--a:#FBBF24;--b:#F97316"><span class="tip">Top 1% by client ratings</span><div class="av"><span>TB</span><i class="bd t"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.500 2.900 6 6.600.900-4.800 4.600 1.200 6.500L12 17.400l-5.900 3.100 1.200-6.500L2.500 9.400l6.600-.900Z"/></svg></i></div><h2>Theo Bergström</h2><p>Backend engineer</p><div class="tags"><i>TOP RATED</i><i>4.98 ★</i></div></article>
+ <article class="c" tabindex="0" style="--a:#4ADE80;--b:#22D3EE"><span class="tip">Replies within an hour</span><div class="av"><span>IC</span><i class="bd o"><svg width="9" height="9" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#fff"/></svg></i></div><h2>Ines Carvalho</h2><p>Brand strategist</p><div class="tags"><i>ONLINE</i><i>Lisbon</i></div></article>
+</div></body></html>

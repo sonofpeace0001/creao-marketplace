@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Notes Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9E6DD;color:#25231E;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;background:#FFFEF9;border-radius:6px 22px 22px 22px;box-shadow:0 1px 0 #fff inset,0 40px 60px -36px rgba(60,50,20,.5),0 0 0 1px rgba(37,35,30,.08);overflow:hidden}
+.tb{display:flex;align-items:center;gap:4px;padding:10px 14px;border-bottom:1px solid #ECE8DB;background:#FAF8F0}.tb button{width:34px;height:34px;border:0;border-radius:9px;background:none;color:#6E6A58;cursor:pointer;display:grid;place-items:center;font:700 14px 'Inter'}.tb button:hover{background:#EFEBDC;color:#25231E}.tb button:focus-visible{outline:2px solid #B45309}.tb .sp{flex:1}.tb .st{font-size:12.5px;font-weight:600;color:#9A957F}
+.ed{position:relative}.ed .ln{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(transparent 0 33px,#EFEBDC 33px 34px);background-position:0 18px;opacity:.9}
+textarea{position:relative;display:block;width:100%;min-height:270px;resize:none;border:0;outline:0;background:none;padding:18px 26px 26px;font:400 19px/34px 'Newsreader',serif;color:#25231E;caret-color:#B45309}textarea::placeholder{color:#B8B29B;font-style:italic}
+.ft{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-top:1px solid #ECE8DB;background:#FAF8F0;font-size:12.5px;font-weight:600;color:#9A957F}.ft div{display:flex;gap:16px}
+</style></head><body>
+<div class="c"><div class="tb" role="toolbar" aria-label="Formatting"><button data-w="**" aria-label="Bold"><b>B</b></button><button data-w="_" aria-label="Italic" style="font-style:italic;font-family:'Newsreader',serif;font-size:17px">I</button><button data-w="- " aria-label="List"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg></button><span class="sp"></span><span class="st" id="sv">Saved</span></div>
+<div class="ed"><div class="ln"></div><textarea id="t" aria-label="Note" placeholder="Start writing. Notes save automatically as you type…">Reading list for the offsite
+
+- The Design of Everyday Things
+- Seeing Like a State
+- A Pattern Language
+
+Remember to ask Priya about the keynote slot.</textarea></div>
+<div class="ft"><div><span id="w">0 words</span><span id="m">0 min read</span></div><span id="ch">0 characters</span></div></div>
+<script>
+const t=document.getElementById('t'),sv=document.getElementById('sv');let tm;
+function stat(){const x=t.value.trim(),w=x?x.split(/\s+/).length:0;document.getElementById('w').textContent=w+(w===1?' word':' words');document.getElementById('m').textContent=Math.max(1,Math.ceil(w/200))+' min read';document.getElementById('ch').textContent=t.value.length+' characters'}
+function grow(){t.style.height='auto';t.style.height=Math.max(270,t.scrollHeight)+'px'}
+t.addEventListener('input',()=>{stat();grow();sv.textContent='Saving…';clearTimeout(tm);tm=setTimeout(()=>sv.textContent='Saved',800)});
+document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{const w=b.dataset.w,s=t.selectionStart,e=t.selectionEnd,v=t.value;if(w==='- '){const ls=v.lastIndexOf('\n',s-1)+1;t.value=v.slice(0,ls)+'- '+v.slice(ls);t.setSelectionRange(s+2,e+2)}else{t.value=v.slice(0,s)+w+v.slice(s,e)+w+v.slice(e);t.setSelectionRange(s+w.length,e+w.length)}t.focus();t.dispatchEvent(new Event('input'))});
+stat();grow();
+</script></body></html>

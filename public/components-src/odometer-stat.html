@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Odometer Stats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#07080C;color:#E8EAF4;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 16px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:860px}
+.h{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font:700 12px 'Space Mono',monospace;letter-spacing:.2em;color:#5C6586;text-transform:uppercase}
+.h button{border:1px solid #232842;background:#0E1120;color:#AAB2D6;font:700 11.5px 'Space Mono',monospace;letter-spacing:.14em;padding:8px 14px;border-radius:99px;cursor:pointer;text-transform:uppercase}.h button:hover{border-color:#FFB547;color:#FFB547}.h button:focus-visible{outline:2px solid #FFB547;outline-offset:2px}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.c{background:linear-gradient(180deg,#0E111E,#0A0C16);border:1px solid #1B2038;border-radius:24px;padding:26px 22px 22px;transition:border-color .3s,transform .3s}.c:hover{border-color:var(--c);transform:translateY(-4px)}
+.od{display:flex;align-items:center;height:78px;font:700 64px 'Space Grotesk';letter-spacing:-.04em;color:#fff}
+.pre,.suf{font-size:30px;color:var(--c);margin:0 4px;font-weight:700}
+.dg{position:relative;width:.62em;height:1em;overflow:hidden;line-height:1;margin:0 1px;border-radius:6px;background:linear-gradient(180deg,#141830,#0C0F20);box-shadow:inset 0 0 0 1px #1C2140;mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent);-webkit-mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
+.dg i{position:absolute;left:0;right:0;top:0;display:flex;flex-direction:column;align-items:center;transition:transform 1.8s cubic-bezier(.2,.8,.15,1);transition-delay:var(--d)}
+.dg i b{display:block;height:1em;font-weight:700}
+.cm{color:#4A5278;margin:0 -1px;font-size:.7em;align-self:flex-end;padding-bottom:9px}
+.lb{font-size:15px;font-weight:700;margin-top:6px;color:var(--c);letter-spacing:.02em}.ds{font:400 12.5px 'Space Mono',monospace;color:#5C6586;margin-top:6px;letter-spacing:.04em}
+@media(max-width:700px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.dg i{transition:none}}
+</style></head><body>
+<div class="w"><div class="h"><span>Live platform stats</span><button id="rp">Replay ↻</button></div><div class="g" id="g"></div></div>
+<script>
+const D=[['Orders shipped',1284907,'','','#FFB547','Since launch'],['Active merchants',48213,'','','#5EEAD4','Across 62 countries'],['Revenue processed',9.8,'$','B','#C4A6FF','Gross merchandise value']];
+const g=document.getElementById('g');
+function build(){g.innerHTML=D.map(d=>{const s=d[2]===''&&d[1]%1===0?d[1].toLocaleString():d[1].toFixed(1);let h='';[...s].forEach((ch,i)=>{if(/\d/.test(ch))h+='<span class="dg" data-t="'+ch+'"><i style="--d:'+(i*.08)+'s">'+[0,1,2,3,4,5,6,7,8,9].map(n=>'<b>'+n+'</b>').join('')+'</i></span>';else h+='<span class="cm">'+ch+'</span>'});
+ return '<div class="c" style="--c:'+d[4]+'"><div class="od">'+(d[2]?'<span class="pre">'+d[2]+'</span>':'')+h+(d[3]?'<span class="suf">'+d[3]+'</span>':'')+'</div><div class="lb">'+d[0]+'</div><div class="ds">'+d[5]+'</div></div>'}).join('')}
+function roll(){document.querySelectorAll('.dg i').forEach(i=>{i.style.transition='none';i.style.transform='translateY(0)'});void g.offsetWidth;requestAnimationFrame(()=>document.querySelectorAll('.dg').forEach(d=>{const i=d.firstElementChild;i.style.transition='';i.style.transform='translateY(-'+(+d.dataset.t)+'em)'}))}
+build();setTimeout(roll,60);document.getElementById('rp').onclick=roll;
+</script></body></html>

@@ -1,0 +1,30 @@
+ROLE
+You are a senior retail-UX designer and front-end engineer with 15+ years of experience. Build "Store Locator": a store locator with a light map, three clickable pins and a details panel that updates per store.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream map with water and park shapes, grey pins and one orange active pin; friendly and legible.
+- Palette: #1C2B24, #E8530E, #6A7A72, #F1EFE8, #E9EDE3, #9AA79F
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Map pane with three pins (SoHo, Williamsburg, Dumbo) and a side panel: kicker, store name, address, hours, tags and a dark Directions button.
+
+INTERACTION & STATES
+- Clicking a pin selects it (orange, enlarged), swaps the panel content with a short fade, and sets aria-pressed.
+- The first store is selected on load.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

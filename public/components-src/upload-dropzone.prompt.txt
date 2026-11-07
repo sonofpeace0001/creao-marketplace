@@ -1,0 +1,29 @@
+ROLE
+You are a senior file-upload UX designer and front-end engineer with 15+ years of experience. Build "Drag and Drop Zone": a drag-and-drop upload area that reacts to drag-over, opens the file picker and lists files with progress.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Airy light card with a dashed indigo drop zone and a gradient upload icon that lifts on drag-over.
+- Palette: #4C5CFF, #161B33, #F7F8FD, #9AA2C4, #E3E7F6, #16A34A
+- Type: Figtree (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Drop zone with icon, headline, 'browse' link and limits; list of uploaded rows with icon, name, size/status, progress bar and remove button.
+
+INTERACTION & STATES
+- Drag-over highlights and scales the zone; drop or browse adds rows with simulated progress; Enter/Space opens the picker; file names are escaped; rows can be removed.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,30 @@
+ROLE
+You are a senior creative technologist and front-end engineer (brand and landing visuals) with 15+ years of experience. Build "Plasma Orb": a layered conic-gradient plasma orb with a halo that tilts in 3D toward the cursor.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep-space black with a luminous cyan/violet/magenta/amber orb, specular highlight and a soft halo.
+- Palette: #00E5FF, #FF2E93, #6A3CFF, #05050A, #EDEBFF, #FFB020
+- Type: Space Grotesk, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Four stacked layers (outer conic ring, counter-rotating blurred core, dark centre with highlight, specular overlay), a blurred glow, and a caption.
+
+INTERACTION & STATES
+- Layers rotate via an animated @property angle; pointer movement tilts the orb up to ±28° with eased transition.
+- Motion and tilt are disabled under reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

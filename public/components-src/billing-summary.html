@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Billing Summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFF2F7;color:#0E1A33;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:480px;background:#fff;border-radius:26px;padding:26px;box-shadow:0 40px 70px -44px rgba(14,26,51,.55),0 0 0 1px rgba(14,26,51,.06)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.hd h1{font-size:19px;font-weight:800;letter-spacing:-.03em}.hd span{font-size:12.5px;font-weight:700;color:#0F8A52;background:#E1F7EC;padding:5px 11px;border-radius:99px}
+.pl{background:linear-gradient(135deg,#0E1A33,#1E3A8A);color:#fff;border-radius:20px;padding:20px 22px;position:relative;overflow:hidden}.pl::after{content:"";position:absolute;right:-30px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(96,165,250,.25)}
+.pl small{font-size:12.5px;font-weight:600;color:#93B4FF;letter-spacing:.06em;text-transform:uppercase;position:relative}.pl b{display:flex;align-items:baseline;gap:7px;font-size:34px;font-weight:800;letter-spacing:-.04em;margin:4px 0 2px;position:relative}.pl b span{font-size:15px;font-weight:600;color:#A8C0F5;letter-spacing:0}.pl p{font-size:13.5px;color:#B6C8F5;position:relative}
+.us{margin:22px 0}.us h2{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#6B7A99;margin-bottom:12px}.u{margin-bottom:14px}.u div.t{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:6px}.u div.t span{font:500 13px 'JetBrains Mono',monospace;color:#6B7A99}.br{height:8px;border-radius:8px;background:#EBEFF6;overflow:hidden}.br i{display:block;height:100%;border-radius:8px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.ln{border-top:1px solid #EAEFF7;padding-top:16px}.ln div{display:flex;justify-content:space-between;font-size:14.5px;padding:5px 0;color:#42506E}.ln div b{font:500 14px 'JetBrains Mono',monospace;color:#0E1A33}.ln .tt{border-top:1.5px solid #0E1A33;margin-top:8px;padding-top:12px;font-weight:800;color:#0E1A33}
+.pm{display:flex;align-items:center;gap:13px;background:#F5F7FB;border-radius:16px;padding:13px 16px;margin:18px 0}.pm .cc{width:44px;height:30px;border-radius:7px;background:linear-gradient(135deg,#1E3A8A,#60A5FA);display:grid;place-items:center;color:#fff;font:800 10px 'Manrope';font-style:italic}.pm b{display:block;font-size:14px}.pm span{font-size:12.5px;color:#6B7A99}.pm button{margin-left:auto;border:0;background:none;color:#2563EB;font:700 13.5px 'Manrope';cursor:pointer}.pm button:focus-visible{outline:2px solid #2563EB;border-radius:4px}
+.ac{display:flex;gap:10px}.ac button{flex:1;border:0;border-radius:14px;padding:14px;font:700 14.5px 'Manrope';cursor:pointer;transition:transform .15s}.ac button:hover{transform:translateY(-1px)}.ac button:focus-visible{outline:3px solid #0E1A33;outline-offset:2px}.p{background:#2563EB;color:#fff;box-shadow:0 12px 22px -12px #2563EB}.s{background:#EEF2FA;color:#0E1A33}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Billing</h1><span>Active</span></div>
+<div class="pl"><small>Current plan</small><b>Business<span>$149 / month</span></b><p>Renews on Dec 5, 2026 · 12 seats</p></div>
+<div class="us"><h2>Usage this cycle</h2>
+<div class="u"><div class="t">Seats<span>12 / 15</span></div><div class="br"><i data-w="80" style="background:#2563EB"></i></div></div>
+<div class="u"><div class="t">API calls<span>641k / 1M</span></div><div class="br"><i data-w="64" style="background:#10B981"></i></div></div>
+<div class="u"><div class="t">Storage<span>43 / 50 GB</span></div><div class="br"><i data-w="86" style="background:#F59E0B"></i></div></div></div>
+<div class="ln"><div>Business plan<b>$149.00</b></div><div>Extra storage (10 GB)<b>$8.00</b></div><div>Tax (8%)<b>$12.56</b></div><div class="tt">Next invoice<b>$169.56</b></div></div>
+<div class="pm"><div class="cc">VISA</div><div><b>Visa ending 4242</b><span>Expires 08/28</span></div><button>Update</button></div>
+<div class="ac"><button class="p">Upgrade plan</button><button class="s">View invoices</button></div></div>
+<script>
+requestAnimationFrame(()=>setTimeout(()=>document.querySelectorAll('.br i').forEach(i=>i.style.width=i.dataset.w+'%'),120));
+</script></body></html>

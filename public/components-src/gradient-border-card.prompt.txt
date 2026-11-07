@@ -1,0 +1,31 @@
+ROLE
+You are a senior product designer and front-end engineer (events and entertainment) with 15+ years of experience. Build "Neon Pass Card": a season-pass pricing card framed by a spinning neon conic border with checklist and gradient CTA.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Night-club neon: deep indigo field, cyan/violet/magenta/amber ring and a magenta corner glow.
+- Palette: #00F0FF, #7A5CFF, #FF3DCB, #1A1240, #070612, #EDEBFF
+- Type: Unbounded, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Outer ring (2px conic-gradient) wrapping an inner dark card.
+- Live tag, Unbounded title, supporting line, $49 price with terms, three check items, gradient button.
+
+INTERACTION & STATES
+- Ring rotates every 5s; button lifts and brightens on hover.
+- Reduced motion freezes the ring.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

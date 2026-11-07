@@ -1,0 +1,29 @@
+ROLE
+You are a senior motion designer and front-end engineer with 15+ years of experience. Build "Pulse Loaders": six rhythmic loaders: sonar rings, bouncing dots, equalizer bars, heartbeat, orbit and a sweeping bar.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight panel tiles with one saturated accent per loader and mono captions.
+- Palette: #38BDF8, #06090F, #E6F0FF, #0C121C, #182234, #2B4468
+- Type: Manrope, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Grid of six tiles, each with a CSS-only loader (Sonar, Bounce, Equalizer, Heartbeat, Orbit, Sweep), a role=status label and a mono caption.
+
+INTERACTION & STATES
+- Pure CSS keyframes with staggered delays; tiles brighten their border on hover; reduced motion slows the animations instead of stopping them.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

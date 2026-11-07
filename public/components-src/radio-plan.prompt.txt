@@ -1,0 +1,29 @@
+ROLE
+You are a senior checkout designer and front-end engineer with 15+ years of experience. Build "Billing Period Selector": a billing-period radio list with savings badges and a live order summary and CTA.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark green-black card with mint accents and mono labels.
+- Palette: #34D399, #E7F2EC, #1F3329, #05150E, #102A22, #070B09
+- Type: Manrope, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Kicker and heading; three options (Monthly, Yearly with Save badge, 2 years with Best value); summary with plan, discount and due today; Start subscription button.
+
+INTERACTION & STATES
+- Selecting an option highlights it and recalculates discount and total; keyboard arrows work through native radios; focus rings visible.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

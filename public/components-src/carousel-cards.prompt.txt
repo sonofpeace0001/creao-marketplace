@@ -1,0 +1,29 @@
+ROLE
+You are a senior travel-product designer and front-end engineer with 15+ years of experience. Build "Snap Carousel": a scroll-snap card carousel with arrow buttons, pill dots, mouse dragging and keyboard control.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black stage with large saturated gradient destination cards and oversized ghost numerals.
+- Palette: #08090D, #7CF5C4, #EEF0F7, #7C8499, #23283A, #10131C
+- Type: Inter Tight (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with title and prev/next buttons; track of five cards (tag, big number, destination, blurb); expanding-pill dots.
+
+INTERACTION & STATES
+- Arrows scroll one card; mouse drag scrolls and snaps on release; arrow keys work on the focused track; arrows disable at the ends and the dots follow scroll position.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

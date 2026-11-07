@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Message Thread</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E6EFEA;color:#17302A;font-family:'Nunito',sans-serif;min-height:100vh;display:grid;place-items:center;padding:26px 16px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:420px;height:620px;background:#F7FBF8;border-radius:30px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 70px -34px rgba(23,48,42,.55),0 0 0 1px rgba(23,48,42,.06)}
+.hd{display:flex;align-items:center;gap:12px;padding:14px 18px;background:#fff;border-bottom:1px solid #E3EEE8}
+.av{position:relative;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#34D399,#0EA5A4);display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px}
+.av::after{content:"";position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#22C55E;border:2px solid #fff}
+.hd b{font-size:16px;font-weight:800;letter-spacing:-.01em;display:block}.hd span{font-size:12.5px;color:#6F8A80;font-weight:600}
+.bd{flex:1;overflow-y:auto;padding:16px 16px 6px;display:flex;flex-direction:column;gap:5px;background:radial-gradient(circle at 20% 10%,#EFF8F3,transparent 50%);scrollbar-width:none}.bd::-webkit-scrollbar{width:0}
+.dt{align-self:center;font-size:11.5px;font-weight:700;color:#7F988E;background:#E4EFE9;padding:4px 12px;border-radius:99px;margin:8px 0}
+.b{position:relative;max-width:78%;padding:9px 13px 8px;font-size:14.5px;line-height:1.4;border-radius:18px;font-weight:500;animation:i .3s cubic-bezier(.2,.9,.3,1);cursor:pointer;user-select:none}
+@keyframes i{from{opacity:0;transform:translateY(6px) scale(.97)}}
+.r{align-self:flex-start;background:#fff;border:1px solid #E2EDE7;border-bottom-left-radius:5px}
+.s{align-self:flex-end;background:linear-gradient(135deg,#10B981,#0D9488);color:#fff;border-bottom-right-radius:5px}
+.s+.s{border-top-right-radius:6px}.r+.r{border-top-left-radius:6px}
+.q{border-left:3px solid #A7F3D0;background:rgba(255,255,255,.18);border-radius:8px;padding:5px 9px;margin-bottom:6px;font-size:12.5px;opacity:.95}
+.r .q{background:#EEF8F3;border-color:#10B981}
+.t{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:10.5px;margin-top:3px;opacity:.7;font-weight:700}
+.rx{position:absolute;bottom:-10px;right:10px;background:#fff;border:1px solid #E2EDE7;border-radius:99px;font-size:12px;padding:1px 7px;box-shadow:0 3px 8px rgba(0,0,0,.1);animation:pop .35s cubic-bezier(.3,1.8,.4,1)}
+@keyframes pop{from{transform:scale(0)}}
+.b:has(.rx){margin-bottom:10px}
+.in{display:flex;align-items:center;gap:10px;padding:12px 14px 14px;background:#fff;border-top:1px solid #E3EEE8}
+.in input{flex:1;border:0;background:#EEF6F1;border-radius:99px;padding:13px 18px;font:500 15px 'Nunito';color:#17302A;outline:0}.in input:focus{box-shadow:0 0 0 3px rgba(16,185,129,.25)}
+.in button{width:46px;height:46px;border:0;border-radius:50%;background:#10B981;color:#fff;cursor:pointer;display:grid;place-items:center;transition:transform .15s}.in button:hover{transform:scale(1.07)}
+.in button:focus-visible{outline:2px solid #17302A;outline-offset:2px}
+.hint{text-align:center;font-size:11px;color:#8AA399;padding:0 0 6px;background:#F7FBF8}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><div class="av">SK</div><div><b>Sana Karim</b><span>Online · Design sync</span></div></div>
+<div class="bd" id="b"></div><div class="hint">Double-click a message to react</div>
+<form class="in" id="f"><input id="i" placeholder="Message Sana" aria-label="Message" autocomplete="off"><button aria-label="Send"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M3.400 20.400 21 12 3.400 3.600 3 10l12 2-12 2Z"/></svg></button></form></div>
+<script>
+const b=document.getElementById('b'),tick='<svg width="15" height="10" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m1 6 4 4L12 2M7 10l1 .8L17 2"/></svg>';
+function esc(s){return s.replace(/[&<>]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[x]))}
+function add(t,w,time,q){const d=document.createElement('div');d.className='b '+w;d.innerHTML=(q?'<div class="q">'+q+'</div>':'')+esc(t)+'<div class="t">'+time+(w==='s'?tick:'')+'</div>';b.appendChild(d);b.scrollTop=b.scrollHeight}
+const dt=document.createElement('div');dt.className='dt';dt.textContent='Today';b.appendChild(dt);
+add('Hey! Did the new onboarding flow get approved?','r','9:41');
+add('Just got the green light!','s','9:42');
+add('Amazing. Can you share the final frames before standup?','r','9:42');
+add('Sending them over now — link in the channel.','s','9:43','Amazing. Can you share the final frames…');
+add('You\'re the best. See you at 10!','r','9:44');
+b.addEventListener('dblclick',e=>{const m=e.target.closest('.b');if(!m||m.querySelector('.rx'))return;const r=document.createElement('span');r.className='rx';r.textContent='♥';m.appendChild(r)});
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();const i=document.getElementById('i'),t=i.value.trim();if(!t)return;i.value='';add(t,'s','9:45');setTimeout(()=>add('Got it — thanks!','r','9:45'),900)});
+</script></body></html>

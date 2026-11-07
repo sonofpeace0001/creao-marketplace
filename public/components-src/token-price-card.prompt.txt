@@ -1,0 +1,29 @@
+ROLE
+You are a senior fintech designer and front-end engineer (Web3) with 15+ years of experience. Build "Token Price Card": a crypto token card with price, change pill, 1D/1W/1M sparkline, market stats and Buy/Swap buttons.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep indigo card with violet glow, Chakra Petch headings, Red Hat Mono figures and a violet-to-cyan CTA.
+- Palette: #7C5CFA, #0F1224, #0A0C1A, #22D3EE, #7C85B8, #1A1E3D
+- Type: Chakra Petch, Red Hat Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with token mark, name, pair and rank; price and change pill; range toggle; area chart; three stat tiles (market cap, volume, supply); Buy and Swap buttons.
+
+INTERACTION & STATES
+- Range buttons redraw the chart path, price and change via aria-pressed; chart is an SVG area with a gradient fill; buttons lift on hover.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Agent Fleet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3F5F9;color:#141B2D;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:520px;background:#fff;border-radius:24px;box-shadow:0 40px 70px -44px rgba(20,30,70,.5),0 0 0 1px rgba(20,27,45,.06);overflow:hidden}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:20px 22px 14px}.hd h1{font-size:19px;font-weight:700;letter-spacing:-.03em}.hd p{font-size:13px;color:#7A869F;margin-top:2px}
+.sm{display:flex;gap:6px}.sm span{font:500 12px 'IBM Plex Mono',monospace;padding:5px 9px;border-radius:8px;background:#F1F4FA;color:#51607F}
+.rw{display:flex;align-items:center;gap:14px;padding:14px 22px;border-top:1px solid #EEF1F7;transition:background .15s}.rw:hover{background:#FAFBFE}
+.ic{flex:none;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#fff}
+.tx{flex:1;min-width:0}.tx b{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600}.tx span{display:block;font:400 12px 'IBM Plex Mono',monospace;color:#7A869F;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tg{display:inline-flex;align-items:center;gap:6px;font:600 11.5px 'Outfit';padding:3px 9px;border-radius:99px}.tg::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.on{background:#E1F7EC;color:#0F8A52}.bz{background:#FFF0D4;color:#B26A00}.bz::before{animation:bl 1s infinite}.id{background:#EEF1F7;color:#5D6B88}.er{background:#FDE6E6;color:#C0272D}@keyframes bl{50%{opacity:.2}}
+.pg{width:84px;flex:none}.pg div{height:6px;border-radius:6px;background:#EBEFF6;overflow:hidden}.pg i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#6366F1,#38BDF8)}.pg small{display:block;text-align:right;font:500 11px 'IBM Plex Mono',monospace;color:#7A869F;margin-top:4px}
+.tb{position:relative;flex:none;width:44px;height:26px;border:0;border-radius:99px;background:#DDE3EF;cursor:pointer;transition:background .2s}.tb::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:transform .22s cubic-bezier(.4,1.4,.5,1)}.tb[aria-checked=true]{background:#6366F1}.tb[aria-checked=true]::after{transform:translateX(18px)}.tb:focus-visible{outline:2px solid #6366F1;outline-offset:2px}
+@media(max-width:480px){.pg{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Agent fleet</h1><p>5 agents in this workspace</p></div><div class="sm"><span id="a">3 active</span></div></div><div id="l"></div></div>
+<script>
+const A=[['Atlas','Researching "EV charger market"','bz',64,'#6366F1',1,'M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z'],['Scribe','Drafted 3 emails · 2m ago','on',100,'#0EA5E9',1,'M4 20h4L19 9l-4-4L4 16zM14 6l4 4'],['Sentry','Monitoring 12 services','on',100,'#10B981',1,'M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z'],['Ledger','Paused by Maya · 1h ago','id',0,'#94A3B8',0,'M4 6h16v12H4zM4 10h16M8 15h3'],['Courier','Rate limit hit · retrying in 30s','er',22,'#F43F5E',0,'M3 11l18-8-8 18-2-8z']];
+const T={on:'Idle',bz:'Working',id:'Paused',er:'Error'};
+document.getElementById('l').innerHTML=A.map((x,i)=>'<div class="rw"><div class="ic" style="background:'+x[4]+'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="'+x[6]+'"/></svg></div><div class="tx"><b>'+x[0]+'<span class="tg '+x[2]+'" style="margin:0;font-family:Outfit">'+T[x[2]]+'</span></b><span>'+x[1]+'</span></div><div class="pg"><div><i style="width:'+x[3]+'%"></i></div><small>'+x[3]+'%</small></div><button class="tb" role="switch" aria-checked="'+!!x[5]+'" aria-label="Enable '+x[0]+'"></button></div>').join('');
+const B=[...document.querySelectorAll('.tb')];const upd=()=>document.getElementById('a').textContent=B.filter(b=>b.getAttribute('aria-checked')==='true').length+' active';
+B.forEach(b=>b.onclick=()=>{b.setAttribute('aria-checked',b.getAttribute('aria-checked')!=='true');upd()});upd();
+</script></body></html>

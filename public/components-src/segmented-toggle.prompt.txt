@@ -1,0 +1,29 @@
+ROLE
+You are a senior settings-UI designer and front-end engineer with 15+ years of experience. Build "Segmented Control": three segmented controls (view, billing, theme) built on radios with a sliding thumb and live price preview.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on soft grey; light and dark control tracks with a spring-slid thumb.
+- Palette: #1A1F2B, #3B82F6, #F0F2F5, #7A8499, #EEF0F5, #6A7489
+- Type: Rubik (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Three labelled rows: View (List/Grid with icons), Billing (Monthly/Yearly with discount badge and price preview), Theme (Light/Dark/System on dark track).
+
+INTERACTION & STATES
+- Native radios with visually hidden inputs; the thumb translates to the checked index; the value label and billing preview update; arrow keys work.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

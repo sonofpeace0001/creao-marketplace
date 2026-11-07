@@ -1,0 +1,29 @@
+ROLE
+You are a senior search-UX designer and front-end engineer with 15+ years of experience. Build "No Results State": a search empty state with removable filter chips, a failed query and recovery actions that really restore results.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Graphite search surface with mono details and a restrained red error accent.
+- Palette: #E4E8F1, #1B2230, #6A7690, #2A3347, #7AA2FF, #0A0C10
+- Type: IBM Plex Sans, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Search bar, filter chip row (type, owner, date), empty state with icon, headline quoting the query, explanation, Clear filters / Reset search buttons and suggested searches.
+
+INTERACTION & STATES
+- Removing chips, clearing filters, editing the query or choosing a suggestion re-runs a small in-memory search and swaps the empty state for matching result rows.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

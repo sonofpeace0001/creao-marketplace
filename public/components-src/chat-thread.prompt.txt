@@ -1,0 +1,30 @@
+ROLE
+You are a senior messaging-UX designer and front-end engineer with 15+ years of experience. Build "Message Thread": a messenger thread with grouped bubbles, a quoted reply, read ticks and double-click reactions.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Fresh mint-and-teal messenger: soft green wallpaper, white received bubbles and a green gradient for sent ones.
+- Palette: #17302A, #10B981, #F7FBF8, #E3EEE8, #E2EDE7, #E6EFEA
+- Type: Nunito (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with presence avatar; 'Today' separator; five bubbles including a quoted reply; double-tick timestamps; composer with round send button.
+
+INTERACTION & STATES
+- Sending adds a bubble then an auto-reply; double-clicking any bubble adds a pop-in heart reaction.
+- Consecutive bubbles from one sender join with tighter corners.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

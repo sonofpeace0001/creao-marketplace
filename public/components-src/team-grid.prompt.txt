@@ -1,0 +1,30 @@
+ROLE
+You are a senior brand designer and front-end engineer with 15+ years of experience. Build "Spotlight Team": a three-card team grid with a cursor-following gradient border and glow on dark.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black cards with gradient avatars; a moving radial spotlight traces the card borders under the pointer.
+- Palette: #08090E, #ECEFF8, #7C86A8, #10121B, #1D2030, #06070B
+- Type: Be Vietnam Pro (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Centred kicker and headline; three cards each with gradient avatar, name, coloured role, bio and tag chips.
+
+INTERACTION & STATES
+- Pointer movement sets --mx/--my per card, driving a masked gradient border and a soft inner glow across the whole grid.
+- Cards lift 4px on hover; single column on mobile.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

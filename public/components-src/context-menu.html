@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Context Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEEF3;color:#1A1D2A;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cv{position:relative;width:100%;max-width:640px;height:420px;border-radius:26px;background:#fff;overflow:hidden;box-shadow:0 34px 60px -38px rgba(26,29,42,.5),0 0 0 1px rgba(26,29,42,.07);background-image:radial-gradient(#DDE1EC 1.2px,transparent 1.2px);background-size:22px 22px;cursor:context-menu}
+.hint{position:absolute;left:0;right:0;bottom:20px;text-align:center;font-size:13.5px;color:#8A90A8;font-weight:500}.hint kbd{font:600 11.5px 'Inter Tight';background:#F4F5F9;border:1px solid #DDE1EC;border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:#4A5070}
+.cd{position:absolute;left:58px;top:56px;width:180px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 18px 30px -18px rgba(26,29,42,.5),0 0 0 1px rgba(26,29,42,.08)}
+.cd i{display:block;height:84px;border-radius:12px;background:linear-gradient(135deg,#6C7BFF,#C084FC)}.cd b{display:block;font-size:14.5px;margin-top:10px}.cd span{font-size:12px;color:#8A90A8}
+.mn{position:absolute;min-width:224px;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-radius:16px;padding:6px;box-shadow:0 30px 50px -14px rgba(26,29,42,.5),0 0 0 1px rgba(26,29,42,.1);opacity:0;transform:scale(.96);transform-origin:top left;pointer-events:none;transition:opacity .14s,transform .14s;z-index:4}
+.mn.on{opacity:1;transform:none;pointer-events:auto}
+.it{display:flex;align-items:center;gap:11px;width:100%;border:0;background:none;color:#232738;font:500 14px 'Inter Tight';padding:9px 11px;border-radius:10px;cursor:pointer;text-align:left}
+.it svg{flex:none;color:#7A819E}.it:hover,.it:focus-visible{background:#EEF0FF;color:#3B49E0;outline:0}.it:hover svg{color:#3B49E0}
+.it kbd{margin-left:auto;font:500 12px 'Inter Tight';color:#9AA0B8}.it.sub::after{content:"";margin-left:auto;width:7px;height:7px;border-top:2px solid #9AA0B8;border-right:2px solid #9AA0B8;transform:rotate(45deg)}
+.sp{height:1px;background:#E6E8F0;margin:5px 8px}.dg{color:#D33A3A}.dg svg{color:#D33A3A}.dg:hover,.dg:focus-visible{background:#FFECEC;color:#C02828}
+.to{position:absolute;left:50%;top:18px;transform:translate(-50%,-16px);background:#1A1D2A;color:#fff;font-size:13.5px;font-weight:600;padding:9px 15px;border-radius:99px;opacity:0;transition:all .25s;pointer-events:none}.to.on{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cv" id="cv" tabindex="0" aria-label="Canvas. Right-click or press the context menu key to open the menu"><div class="cd"><i></i><b>Hero section</b><span>Frame · 1440 × 900</span></div><div class="hint">Right-click anywhere <kbd>or</kbd> press <kbd>Shift</kbd> + <kbd>F10</kbd></div><div class="to" id="to" role="status"></div>
+ <div class="mn" id="m" role="menu" style="left:150px;top:130px">
+  <button class="it" role="menuitem" data-a="Copied"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.100" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>Copy<kbd>⌘C</kbd></button>
+  <button class="it" role="menuitem" data-a="Duplicated"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.100" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="13" height="13" rx="2"/><path d="M8 21h11a2 2 0 0 0 2-2V8"/></svg>Duplicate<kbd>⌘D</kbd></button>
+  <button class="it" role="menuitem" data-a="Pasted"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.100" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6v3H9zM7 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1"/></svg>Paste here<kbd>⌘V</kbd></button>
+  <div class="sp"></div>
+  <button class="it sub" role="menuitem" data-a="Arrange"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.100" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5ZM3 13l9 5 9-5"/></svg>Arrange</button>
+  <button class="it" role="menuitem" data-a="Link copied"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.100" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.700 0l3-3a4 4 0 0 0-5.700-5.700l-1 1M14 10a4 4 0 0 0-5.700 0l-3 3a4 4 0 0 0 5.700 5.700l1-1"/></svg>Copy link to frame<kbd>⌥⌘L</kbd></button>
+  <div class="sp"></div>
+  <button class="it dg" role="menuitem" data-a="Deleted"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.100" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg>Delete<kbd>⌫</kbd></button></div></div>
+<script>
+const cv=document.getElementById('cv'),m=document.getElementById('m'),to=document.getElementById('to');
+function show(x,y){const r=cv.getBoundingClientRect();m.style.left=Math.min(x,r.width-236)+'px';m.style.top=Math.min(y,r.height-270)+'px';m.classList.add('on');setTimeout(()=>m.querySelector('.it').focus(),20)}
+function hide(){m.classList.remove('on')}
+cv.addEventListener('contextmenu',e=>{e.preventDefault();const r=cv.getBoundingClientRect();show(e.clientX-r.left,e.clientY-r.top)});
+cv.addEventListener('keydown',e=>{if((e.shiftKey&&e.key==='F10')||e.key==='ContextMenu'){e.preventDefault();show(150,130)}});
+document.addEventListener('click',e=>{if(!m.contains(e.target))hide()});
+m.addEventListener('click',e=>{const b=e.target.closest('.it');if(!b)return;hide();to.textContent=b.dataset.a;to.classList.add('on');setTimeout(()=>to.classList.remove('on'),1300)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){hide();cv.focus()}if(!m.classList.contains('on'))return;const its=[...m.querySelectorAll('.it')],i=its.indexOf(document.activeElement);if(e.key==='ArrowDown'){e.preventDefault();its[(i+1)%its.length].focus()}if(e.key==='ArrowUp'){e.preventDefault();its[(i-1+its.length)%its.length].focus()}});
+setTimeout(()=>m.classList.add('on'),100);
+</script></body></html>

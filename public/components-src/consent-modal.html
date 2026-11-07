@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Consent Modal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#6B7280;color:#14201A;font-family:'Albert Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:linear-gradient(rgba(20,32,26,.55),rgba(20,32,26,.55)),repeating-linear-gradient(0deg,#C7CCD6 0 22px,#D5D9E2 22px 44px)}
+.m{width:100%;max-width:470px;background:#fff;border-radius:26px;padding:26px;box-shadow:0 50px 90px -30px rgba(0,0,0,.7);animation:in .45s cubic-bezier(.3,1.3,.5,1)}@keyframes in{from{opacity:0;transform:translateY(20px) scale(.95)}}
+.ic{width:46px;height:46px;border-radius:14px;background:#DDF4E6;color:#15803D;display:grid;place-items:center;margin-bottom:14px}
+.m h1{font-size:22px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}.m>p{font-size:14.5px;line-height:1.55;color:#55645B;margin-bottom:18px}.m>p a{color:#15803D;font-weight:700}
+.ct{border:1.5px solid #E5ECE7;border-radius:16px;overflow:hidden;margin-bottom:20px}.rw{display:flex;align-items:center;gap:14px;padding:14px 16px}.rw+.rw{border-top:1px solid #EDF2EE}.rw div{flex:1}.rw b{display:block;font-size:14.5px;font-weight:700}.rw span{font-size:13px;color:#6B7A71}.rw em{font-style:normal;font-size:11.5px;font-weight:700;color:#6B7A71;background:#EEF3EF;padding:4px 9px;border-radius:99px}
+.tg{position:relative;flex:none;width:46px;height:28px;border:0;border-radius:99px;background:#D3DCD6;cursor:pointer;transition:background .2s}.tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:transform .22s cubic-bezier(.4,1.4,.5,1)}.tg[aria-checked=true]{background:#16A34A}.tg[aria-checked=true]::after{transform:translateX(18px)}.tg:focus-visible{outline:2px solid #14201A;outline-offset:2px}
+.ac{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ac button{border-radius:14px;padding:14px;font:700 14.5px 'Albert Sans';cursor:pointer;transition:transform .15s}.ac button:hover{transform:translateY(-1px)}.ac button:focus-visible{outline:3px solid #14201A;outline-offset:2px}.ar{background:#16A34A;color:#fff;border:0;box-shadow:0 12px 22px -12px #16A34A}.sv{background:#fff;color:#14201A;border:1.5px solid #CFD9D2}.rj{grid-column:1/-1;background:none;border:0;color:#6B7A71;font:600 13.5px 'Albert Sans';padding:6px}.rj:hover{text-decoration:underline}
+.dn{display:none;text-align:center;padding:14px 0 6px}.dn p{font-size:15px;color:#55645B;margin-top:6px}
+.m.ok>:not(.dn){display:none}.m.ok .dn{display:block}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="m" id="m" role="dialog" aria-modal="true" aria-labelledby="t"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+<h1 id="t">Your privacy, your choice</h1><p>We use cookies to keep the site working and, with your permission, to understand how it is used. Read our <a href="#">cookie policy</a>.</p>
+<div class="ct"><div class="rw"><div><b>Strictly necessary</b><span>Sign-in, security and preferences</span></div><em>Always on</em></div><div class="rw"><div><b>Analytics</b><span>Anonymous usage statistics</span></div><button class="tg" role="switch" aria-checked="true" aria-label="Analytics"></button></div><div class="rw"><div><b>Marketing</b><span>Personalised ads and campaigns</span></div><button class="tg" role="switch" aria-checked="false" aria-label="Marketing"></button></div></div>
+<div class="ac"><button class="sv" id="sv">Save choices</button><button class="ar" id="ar">Accept all</button><button class="rj" id="rj">Reject non-essential</button></div>
+<div class="dn" role="status"><div class="ic" style="margin:0 auto 12px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></div><h1>Preferences saved</h1><p id="ms"></p></div></div>
+<script>
+const m=document.getElementById('m'),T=[...document.querySelectorAll('.tg')];
+T.forEach(t=>t.onclick=()=>t.setAttribute('aria-checked',t.getAttribute('aria-checked')!=='true'));
+function done(s){document.getElementById('ms').textContent=s;m.classList.add('ok')}
+document.getElementById('ar').onclick=()=>{T.forEach(t=>t.setAttribute('aria-checked','true'));done('You accepted all cookies.')};
+document.getElementById('rj').onclick=()=>{T.forEach(t=>t.setAttribute('aria-checked','false'));done('Only essential cookies are enabled.')};
+document.getElementById('sv').onclick=()=>done('Analytics '+(T[0].getAttribute('aria-checked')==='true'?'on':'off')+', marketing '+(T[1].getAttribute('aria-checked')==='true'?'on':'off')+'.');
+</script></body></html>

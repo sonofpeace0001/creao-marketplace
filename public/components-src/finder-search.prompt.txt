@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer-docs designer and front-end engineer with 15+ years of experience. Build "Docs Search": a command-style docs search with grouped results, highlighted matches and full keyboard navigation.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Airy white search sheet on pale grey with lilac result tiles and mono keycaps.
+- Palette: #DDE2EE, #8791AC, #171D2E, #7A84A0, #F3F5FA, #98A1BA
+- Type: Figtree (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Search field with command-K keycap; grouped listbox (Guides, Reference) with icon tiles, title and description; footer with navigation hints.
+
+INTERACTION & STATES
+- Typing filters results and highlights the match; arrow keys move the active option (aria-activedescendant); Enter opens; Escape clears; Cmd/Ctrl+K focuses the field.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

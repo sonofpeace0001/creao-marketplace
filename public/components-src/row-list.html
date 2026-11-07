@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Recent Files List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F0EB;color:#1E2420;font-family:'Instrument Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:620px;background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 34px 60px -38px rgba(30,36,32,.45),0 0 0 1px rgba(30,36,32,.07)}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:20px 22px 12px}.hd h1{font-size:19px;font-weight:700;letter-spacing:-.03em}.hd a{font-size:13.5px;font-weight:600;color:#C2410C;text-decoration:none}
+.th,.r{display:grid;grid-template-columns:44px 1fr 90px 80px;gap:14px;align-items:center;padding:0 22px}
+.th{height:34px;font:500 11px 'Geist Mono',monospace;letter-spacing:.1em;color:#8A9690;border-block:1px solid #EEF1EE;background:#FAFBFA}
+.th button{all:unset;cursor:pointer;display:flex;align-items:center;gap:5px}.th button:hover{color:#1E2420}.th button:focus-visible{outline:2px solid #C2410C;outline-offset:2px}.th button.on{color:#1E2420}
+.th .ar{opacity:0;transition:transform .2s}.th .on .ar{opacity:1}.th .on.rv .ar{transform:rotate(180deg)}
+.r{height:66px;border-bottom:1px solid #F1F4F1;transition:background .2s;position:relative;cursor:pointer}.r:hover{background:#FAFBFA}.r:last-child{border-bottom:0}
+.ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--b);color:var(--c);font:700 11px 'Geist Mono',monospace}
+.nm b{display:block;font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nm span{font-size:12.5px;color:#8A9690}
+.sz,.dt{font-size:13.5px;color:#5C6862;font-weight:500}.dt{text-align:right}
+.ac{position:absolute;right:16px;display:flex;gap:4px;opacity:0;transform:translateX(8px);transition:all .2s;background:linear-gradient(90deg,transparent,#FAFBFA 20%);padding-left:26px}.r:hover .ac,.r:focus-within .ac{opacity:1;transform:none}
+.ac button{width:34px;height:34px;border:0;border-radius:10px;background:#fff;box-shadow:0 0 0 1px #E3E8E4;color:#4A5651;cursor:pointer;display:grid;place-items:center}.ac button:hover{background:#1E2420;color:#fff}.ac button:focus-visible{outline:2px solid #C2410C}
+@media(max-width:560px){.th,.r{grid-template-columns:44px 1fr 70px}.sz,.th [data-k=size]{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Recent files</h1><a href="#">View all</a></div>
+<div class="th"><span></span><button data-k="name" class="on">NAME<svg class="ar" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button><button data-k="size">SIZE<svg class="ar" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button><button data-k="date" style="justify-self:end">MODIFIED<svg class="ar" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button></div>
+<div id="l"></div></div>
+<script>
+const F=[['Q4 roadmap','Figma · Product','FIG',4.2,2,'#E8E1FB','#6D4AE0'],['Brand guidelines','PDF · Marketing','PDF',11,26,'#FDE3E0','#D9382C'],['Pricing model','Sheets · Finance','XLS',0.9,50,'#DDF3E4','#1E8E4E'],['Launch assets','ZIP · Design','ZIP',64,74,'#FCEFC9','#A8730A'],['Customer interviews','Notion · Research','DOC',1.4,120,'#E1ECFB','#2B64C9'],['Onboarding video','MP4 · Growth','MP4',182,200,'#D9F2F5','#0F7C8C']];
+let k='name',rev=false;const l=document.getElementById('l');
+const ago=h=>h<24?h+'h ago':Math.round(h/24)+'d ago';
+function draw(){const a=F.slice().sort((x,y)=>{const m=k==='name'?x[0].localeCompare(y[0]):k==='size'?x[3]-y[3]:x[4]-y[4];return rev?-m:m});
+ l.innerHTML=a.map(f=>'<div class="r" tabindex="0"><span class="ic" style="--b:'+f[5]+';--c:'+f[6]+'">'+f[2]+'</span><div class="nm"><b>'+f[0]+'</b><span>'+f[1]+'</span></div><span class="sz">'+(f[3]>=1?f[3]+' MB':Math.round(f[3]*1000)+' KB')+'</span><span class="dt">'+ago(f[4])+'</span><div class="ac"><button aria-label="Download '+f[0]+'"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg></button><button aria-label="Share '+f[0]+'"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.500"/><circle cx="18" cy="6" r="2.500"/><circle cx="18" cy="18" r="2.500"/><path d="m8.200 10.900 7.600-3.800M8.200 13.100l7.600 3.800"/></svg></button></div></div>').join('');
+ document.querySelectorAll('.th button').forEach(b=>{b.classList.toggle('on',b.dataset.k===k);b.classList.toggle('rv',b.dataset.k===k&&rev)})}
+document.querySelector('.th').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(k===b.dataset.k)rev=!rev;else{k=b.dataset.k;rev=false}draw()});draw();
+</script></body></html>

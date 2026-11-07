@@ -1,0 +1,31 @@
+ROLE
+You are a senior logistics-app designer and front-end engineer with 15+ years of experience. Build "Order Tracker Timeline": a delivery-tracking timeline with a progress line that fills to the current stage and expandable step details.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark card with teal-to-sky progress, mono timestamps and a pulsing current-stage marker.
+- Palette: #5EEAD4, #38BDF8, #1E2430, #10141B, #6C788F, #0A0C10
+- Type: DM Sans, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with order number, status and ETA window.
+- Five stages (confirmed, shipped, depot, out for delivery, delivered) with icon nodes, titles, times and hidden detail text.
+
+INTERACTION & STATES
+- The vertical progress line animates to the current stage; the current node pulses.
+- Each stage is focusable and toggles its detail with a smooth height transition (Enter/Space).
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

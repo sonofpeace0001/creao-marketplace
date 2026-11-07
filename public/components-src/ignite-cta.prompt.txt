@@ -1,0 +1,30 @@
+ROLE
+You are a senior conversion designer and front-end engineer with 15+ years of experience. Build "Spotlight CTA": a full-width call-to-action band lit by a spotlight that follows the cursor, revealing a hidden grid.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Ember and charcoal: a dark band where a warm orange spotlight and a masked grid appear under the pointer.
+- Palette: #FF8A3D, #0A0605, #150C09, #FFF3EA, #C9A794, #1A0B04
+- Type: Archivo, Archivo Narrow (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Rounded band with kicker, huge two-line headline (second line outlined), supporting copy, primary and ghost buttons, trust line.
+
+INTERACTION & STATES
+- pointermove updates --x/--y on the band, moving both the glow and the grid mask.
+- Primary button lifts and scales slightly on hover.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

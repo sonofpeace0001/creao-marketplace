@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Label Pills</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0B;color:#ECECEE;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:580px;display:grid;gap:22px}
+.s{background:#111113;border:1px solid #232327;border-radius:20px;padding:20px}.s h2{font:500 11px 'Geist Mono',monospace;letter-spacing:.14em;color:#6E6E78;text-transform:uppercase;margin-bottom:14px}
+.r{display:flex;flex-wrap:wrap;gap:8px}
+.p{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;padding:5px 11px;border-radius:99px;border:1px solid}
+.p.dot::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p.g{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3);color:#4ADE80}.p.y{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.3);color:#FBBF24}.p.r2{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.3);color:#F87171}.p.b{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);color:#60A5FA}.p.v{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.3);color:#A78BFA}.p.n{background:#1A1A1D;border-color:#2C2C31;color:#A1A1AA}
+.p.sq{border-radius:7px;font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:.02em}.p.gr{border:0;color:#fff;background:linear-gradient(135deg,#8B5CF6,#EC4899)}
+.p.nw{border:0;color:#0A0A0B;background:#ECECEE;font-weight:600}.p.nw::before{content:"";width:6px;height:6px;border-radius:50%;background:#EF4444;animation:b 1.4s infinite}@keyframes b{50%{opacity:.25}}
+.fl button{cursor:pointer;font:500 12.5px 'Geist';padding:6px 13px 6px 11px;border-radius:99px;background:#17171A;border:1px solid #2C2C31;color:#A1A1AA;display:inline-flex;align-items:center;gap:7px;transition:all .15s}.fl button:hover{border-color:#52525B;color:#ECECEE}.fl button:focus-visible{outline:2px solid #A78BFA;outline-offset:2px}
+.fl button[aria-pressed=true]{background:#ECECEE;border-color:#ECECEE;color:#0A0A0B}.fl button .k{font:500 11px 'Geist Mono',monospace;opacity:.6}
+.ls{display:grid;gap:8px;margin-top:14px}.ls div{display:flex;justify-content:space-between;align-items:center;background:#17171A;border-radius:12px;padding:11px 14px;font-size:14px;transition:opacity .2s}.ls div[hidden]{display:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="s"><h2>Status</h2><div class="r"><span class="p dot g">Operational</span><span class="p dot y">Degraded</span><span class="p dot r2">Outage</span><span class="p dot b">Maintenance</span><span class="p dot n">Archived</span></div></div>
+<div class="s"><h2>Badges</h2><div class="r"><span class="p nw">Live now</span><span class="p gr">Pro</span><span class="p v">Beta</span><span class="p sq n">v2.4.1</span><span class="p sq b">API</span><span class="p sq y">Deprecated</span></div></div>
+<div class="s"><h2>Filter chips</h2><div class="r fl" id="f" role="group" aria-label="Filter by status"><button aria-pressed="true" data-f="all">All <span class="k">5</span></button><button aria-pressed="false" data-f="ok">Operational <span class="k">3</span></button><button aria-pressed="false" data-f="warn">Degraded <span class="k">1</span></button><button aria-pressed="false" data-f="down">Outage <span class="k">1</span></button></div>
+<div class="ls" id="ls"><div data-s="ok">API gateway<span class="p dot g">Operational</span></div><div data-s="ok">Dashboard<span class="p dot g">Operational</span></div><div data-s="warn">Webhooks<span class="p dot y">Degraded</span></div><div data-s="ok">Auth<span class="p dot g">Operational</span></div><div data-s="down">Exports<span class="p dot r2">Outage</span></div></div></div></div>
+<script>
+document.querySelectorAll('#f button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#f button').forEach(x=>x.setAttribute('aria-pressed',x===b));document.querySelectorAll('#ls div').forEach(d=>d.hidden=b.dataset.f!=='all'&&d.dataset.s!==b.dataset.f)});
+</script></body></html>

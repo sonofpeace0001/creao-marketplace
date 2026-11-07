@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Notification Badges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFF1F7;color:#1A1F36;font-family:'Mulish',sans-serif;min-height:100vh;display:grid;place-items:center;padding:30px 18px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;background:#fff;border-radius:28px;padding:30px;box-shadow:0 30px 60px -36px rgba(26,31,54,.45),0 0 0 1px rgba(26,31,54,.06)}
+h1{font-size:22px;font-weight:800;letter-spacing:-.03em}.sub{color:#6A7292;font-size:14.5px;margin:5px 0 28px}
+.r{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start;margin-bottom:26px}
+.t{display:flex;flex-direction:column;align-items:center;gap:10px;font-size:12.5px;font-weight:700;color:#6A7292}
+.b{position:relative;width:58px;height:58px;border-radius:18px;border:0;background:#F2F4FB;color:#1A1F36;cursor:pointer;display:grid;place-items:center;transition:transform .2s,background .2s}
+.b:hover{background:#E8EBF7;transform:translateY(-3px)}.b:active{transform:scale(.94)}.b:focus-visible{outline:3px solid #5B6CFF;outline-offset:3px}
+.n{position:absolute;right:-6px;top:-6px;min-width:24px;height:24px;padding:0 7px;border-radius:99px;background:#F43F5E;color:#fff;font-size:12.5px;font-weight:800;display:grid;place-items:center;border:3px solid #fff;box-shadow:0 4px 10px -2px rgba(244,63,94,.6);transition:transform .25s cubic-bezier(.3,1.8,.4,1)}
+.n.bump{animation:bp .4s cubic-bezier(.3,1.8,.4,1)}@keyframes bp{40%{transform:scale(1.4)}}
+.n.zero{transform:scale(0)}
+.dot{position:absolute;right:-1px;top:-1px;width:16px;height:16px;border-radius:50%;background:#22C55E;border:3px solid #fff}
+.dot::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid #22C55E;animation:pu 1.8s infinite}
+@keyframes pu{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.8);opacity:0}}
+.pill{display:flex;align-items:center;gap:8px}
+.ct{background:#5B6CFF;color:#fff}.ct:hover{background:#4B5CF0}
+.ctl{display:flex;gap:10px;padding-top:22px;border-top:1px solid #EEF0F7}
+.ctl button{border:1.5px solid #DDE1F0;background:#fff;font:700 13.5px 'Mulish';padding:9px 16px;border-radius:99px;cursor:pointer;color:#1A1F36;transition:all .2s}.ctl button:hover{border-color:#5B6CFF;color:#5B6CFF}.ctl button:focus-visible{outline:2px solid #5B6CFF;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><h1>Notification badges</h1><p class="sub">Counts, presence dots and overflow — tap an icon to clear it.</p>
+ <div class="r">
+  <div class="t"><button class="b" data-n="3" aria-label="Messages"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.500 7.200L3 21l1.800-5.500A8 8 0 1 1 21 12Z"/></svg><span class="n">3</span></button>Messages</div>
+  <div class="t"><button class="b" data-n="12" aria-label="Alerts"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.300 21a1.900 1.900 0 0 0 3.400 0"/></svg><span class="n">12</span></button>Alerts</div>
+  <div class="t"><button class="b" data-n="128" aria-label="Inbox"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h5l1 3h6l1-3h5M5 5h14l2 8v6H3v-6Z"/></svg><span class="n">99+</span></button>Inbox</div>
+  <div class="t"><button class="b" aria-label="Teammates online"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.500"/><path d="M3 20a6 6 0 0 1 12 0M17 4a3.500 3.500 0 0 1 0 7M21 20a6 6 0 0 0-4-5.600"/></svg><i class="dot"></i></button>Online</div>
+  <div class="t"><button class="b ct" id="cart" aria-label="Cart"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.400 11h10l2-8H6.500M9 20a1 1 0 1 0 0 .01M17 20a1 1 0 1 0 0 .01"/></svg><span class="n" id="cn">2</span></button>Cart</div>
+ </div>
+ <div class="ctl"><button id="add">Add to cart</button><button id="rs">Reset badges</button></div></div>
+<script>
+const bs=[...document.querySelectorAll('.b[data-n]')];
+bs.forEach(b=>b.addEventListener('click',()=>b.querySelector('.n').classList.add('zero')));
+document.getElementById('rs').onclick=()=>document.querySelectorAll('.n.zero').forEach(n=>n.classList.remove('zero'));
+let c=2;const cn=document.getElementById('cn');
+document.getElementById('add').onclick=()=>{c++;cn.textContent=c>99?'99+':c;cn.classList.remove('bump','zero');void cn.offsetWidth;cn.classList.add('bump')};
+document.getElementById('cart').onclick=()=>{c=0;cn.classList.add('zero')};
+</script></body></html>

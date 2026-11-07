@@ -1,0 +1,29 @@
+ROLE
+You are a senior dashboard designer and front-end engineer with 15+ years of experience. Build "Hover Rail": a dark icon rail that expands on hover or focus to reveal labels over a stats dashboard.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black-green shell with an emerald active marker and a glowing area chart.
+- Palette: #34D399, #1B212B, #6A768C, #E6EBF2, #10141B, #06080B
+- Type: DM Sans (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Rail with logo, five icons and avatar; expanding labels; main panel with Overview heading, three stat tiles and an area chart.
+
+INTERACTION & STATES
+- Hovering or focusing the rail widens it and fades labels in; leaving collapses it; clicking an item moves the active marker; arrow-friendly focus order.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

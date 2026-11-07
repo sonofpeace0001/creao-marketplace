@@ -1,0 +1,31 @@
+ROLE
+You are a senior developer-experience designer and front-end engineer (docs and developer marketing) with 15+ years of experience. Build "Hook Editor": an editor-style code card with line numbers, syntax colours, a highlighted block, a copy button and a live debounce demo.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: A midnight-blue code editor with Material-style syntax colours and an amber-free, cool accent.
+- Palette: #7AA2FF, #1C2038, #0F1220, #232844, #0B0E1A, #E3E7FF
+- Type: JetBrains Mono, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Window chrome with traffic lights, a file tab (useDebounce.ts) and a Copy button.
+- Numbered code with highlighted lines 7–10, then a 'Try it' input row showing the debounced value.
+
+INTERACTION & STATES
+- Copy puts the code on the clipboard and flips to 'Copied' for 1.4s.
+- Typing in the demo input shows 'debouncing…' then the debounced value after 300ms.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

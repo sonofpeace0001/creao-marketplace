@@ -1,0 +1,29 @@
+ROLE
+You are a senior app-shell designer and front-end engineer with 15+ years of experience. Build "Account Menu": a user account dropdown with workspace header, shortcuts, a dark-mode switch and keyboard navigation.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep violet-black menu with a gradient avatar, soft borders and a violet switch.
+- Palette: #8A87A8, #14131F, #A59BFF, #2A2840, #D8D6EC, #FF8A9A
+- Type: DM Sans (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Trigger with avatar, name, email and chevron; menu with workspace header and PRO tag, Profile/Billing/Settings items with shortcut chips, a dark-mode row with a switch, divider and a red Sign out.
+
+INTERACTION & STATES
+- Opens/closes on click, outside click and Escape; ArrowUp/ArrowDown move focus between items; the switch toggles aria-checked; chevron rotates.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

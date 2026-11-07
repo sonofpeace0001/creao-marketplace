@@ -1,0 +1,31 @@
+ROLE
+You are a senior product designer and front-end engineer (help centres) with 15+ years of experience. Build "Quick Answers": a searchable 2×2 grid of FAQ cards with category filter chips and live filtering.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep navy with a teal accent; compact cards that feel like a help-centre command surface.
+- Palette: #38E1C9, #E8F0F8, #6E8398, #0E1823, #1D2D3E, #8EA3B8
+- Type: Outfit (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with title and a search field; filter chips (All, Billing, Security, Setup).
+- Four answer cards with category tag, question and answer; an empty state.
+
+INTERACTION & STATES
+- Search and chip filters combine; non-matching cards are hidden; an empty message shows when nothing matches.
+- Chips use aria-pressed; cards lift on hover.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

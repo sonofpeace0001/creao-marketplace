@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Waitlist Counter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(500px 340px at 80% 10%,#3A1672,transparent 65%),radial-gradient(500px 340px at 10% 90%,#0B3B52,transparent 60%),#07060F;color:#F1EEFF;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:480px;text-align:center}
+.k{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#C4B5FD;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.3);padding:7px 14px;border-radius:99px}.k i{width:7px;height:7px;border-radius:50%;background:#4ADE80;animation:b 1.5s infinite}@keyframes b{50%{opacity:.3}}
+h1{font:800 clamp(30px,6vw,40px)/1.05 'Unbounded';letter-spacing:-.04em;margin:20px 0 12px}h1 span{background:linear-gradient(90deg,#A78BFA,#F472B6,#38BDF8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:16px;color:#A89FD0;line-height:1.55;max-width:38ch;margin:0 auto 28px}
+.nm{display:flex;justify-content:center;gap:7px;margin-bottom:10px}.dg{position:relative;width:52px;height:72px;border-radius:14px;background:linear-gradient(#1A1433,#120E26);border:1px solid #2C2354;overflow:hidden;box-shadow:0 12px 24px -10px #000}.dg::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.5)}
+.dg div{display:flex;flex-direction:column;transition:transform .9s cubic-bezier(.2,.8,.2,1)}.dg span{height:72px;display:grid;place-items:center;font:700 38px 'Unbounded';flex:none}.cm{align-self:flex-end;font:700 34px 'Unbounded';color:#6B5FA0;padding-bottom:6px}
+.lb{font-size:14px;color:#8E84BC;margin-bottom:24px}.lb b{color:#E7E2FF}
+.av{display:flex;justify-content:center;align-items:center;margin-bottom:26px}.av i{width:34px;height:34px;border-radius:50%;border:3px solid #0E0B1E;margin-left:-9px;display:grid;place-items:center;font:700 11px 'Manrope';color:#fff;font-style:normal}.av i:first-child{margin:0}.av span{font-size:13.5px;color:#A89FD0;margin-left:12px;font-weight:600}
+.pr{height:8px;border-radius:8px;background:#1A1433;overflow:hidden;margin-bottom:8px}.pr i{display:block;height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,#8B5CF6,#EC4899);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}.pl{display:flex;justify-content:space-between;font-size:12.5px;color:#8E84BC;font-weight:600}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><span class="k"><i></i>Early access · Cohort 03</span><h1>Join <span>the line</span> for early access</h1><p class="sub">Be among the first to try the new workspace. Invites go out in the order you joined.</p>
+<div class="nm" id="nm" role="img" aria-label="12,847 people waiting"></div><p class="lb"><b>people</b> already on the waitlist</p>
+<div class="av"><i style="background:#8B5CF6">AK</i><i style="background:#EC4899">JM</i><i style="background:#0EA5E9">RS</i><i style="background:#F59E0B">LT</i><i style="background:#10B981">MP</i><span>+ 12,842 others</span></div>
+<div class="pr"><i id="pb"></i></div><div class="pl"><span>Cohort 03 spots</span><span id="pt">0% claimed</span></div></div>
+<script>
+const val='12847',nm=document.getElementById('nm');
+val.split('').forEach((d,i)=>{if(i===2){const c=document.createElement('span');c.className='cm';c.textContent=',';nm.appendChild(c)}const w=document.createElement('div');w.className='dg';const s=document.createElement('div');s.innerHTML=[...'0123456789'].map(x=>'<span>'+x+'</span>').join('');w.appendChild(s);nm.appendChild(w);setTimeout(()=>s.style.transform='translateY(-'+(+d)*72+'px)',200+i*160)});
+setTimeout(()=>{document.getElementById('pb').style.width='82%';let n=0;const t=setInterval(()=>{n+=2;document.getElementById('pt').textContent=Math.min(n,82)+'% claimed';if(n>=82)clearInterval(t)},30)},500);
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('.dg div').forEach((s,i)=>s.style.transform='translateY(-'+(+val[i])*72+'px)')}
+</script></body></html>

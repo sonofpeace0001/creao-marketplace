@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Free Trial Signup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFF1E4;color:#2A1A0E;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(#F2D9BF 1.2px,transparent 1.2px);background-size:24px 24px}
+.c{position:relative;width:100%;max-width:460px;background:#fff;border:2.5px solid #2A1A0E;border-radius:30px;padding:36px 32px 28px;box-shadow:9px 9px 0 #2A1A0E}
+.bd{position:absolute;top:-16px;left:30px;background:#FF5A36;color:#fff;font:800 12.5px 'Bricolage Grotesque';letter-spacing:.08em;text-transform:uppercase;padding:9px 15px;border:2.5px solid #2A1A0E;border-radius:99px;transform:rotate(-3deg)}
+h1{font:800 clamp(30px,6vw,38px)/.98 'Bricolage Grotesque';letter-spacing:-.05em}h1 u{text-decoration:none;background:linear-gradient(transparent 60%,#FFD84D 60%)}
+.sub{font-size:15.5px;color:#7A5A3E;margin:12px 0 20px;line-height:1.5}
+.pk{list-style:none;display:grid;gap:9px;margin-bottom:22px}.pk li{display:flex;align-items:center;gap:11px;font-size:14.5px;font-weight:500}.pk i{flex:none;width:22px;height:22px;border-radius:50%;background:#2A1A0E;color:#FFD84D;display:grid;place-items:center}
+form{display:flex;background:#fff;border:2.5px solid #2A1A0E;border-radius:18px;padding:5px;transition:box-shadow .2s}form:focus-within{box-shadow:5px 5px 0 #2A1A0E}
+input{flex:1;min-width:0;border:0;outline:0;background:none;padding:0 15px;font:500 16px 'Inter';color:#2A1A0E}input::placeholder{color:#B8A18A}
+button.go{border:0;border-radius:13px;background:#FF5A36;color:#fff;font:800 15px 'Bricolage Grotesque';padding:15px 22px;cursor:pointer;white-space:nowrap;transition:transform .15s}button.go:hover{transform:scale(1.04)}button.go:focus-visible{outline:3px solid #2A1A0E;outline-offset:2px}
+.er{height:20px;margin:8px 4px 0;font-size:13px;font-weight:600;color:#D1361A}
+.fn{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:#8A6C52;margin-top:4px}.fn b{color:#2A1A0E}
+.ok{display:none;text-align:center;padding:14px 0 6px}.ok i{display:grid;place-items:center;width:70px;height:70px;margin:0 auto 16px;border-radius:50%;background:#FFD84D;border:2.5px solid #2A1A0E;animation:p .5s cubic-bezier(.3,1.8,.4,1)}@keyframes p{from{transform:scale(.3)}}
+.ok h2{font:800 28px 'Bricolage Grotesque';letter-spacing:-.04em}.ok p{color:#7A5A3E;font-size:15px;margin-top:8px;line-height:1.5}
+.dn .fm{display:none}.dn .ok{display:block}
+@media(max-width:460px){form{flex-direction:column;gap:6px;padding:8px}input{padding:13px 12px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c" id="c"><span class="bd">14 days free</span>
+ <div class="fm"><h1>Try everything <u>free</u> for two weeks.</h1><p class="sub">Build your first board in minutes. No credit card, no catch.</p>
+ <ul class="pk"><li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i>Unlimited projects and teammates</li><li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i>Every integration, including Slack and GitHub</li><li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i>Priority support from a real human</li></ul>
+ <form id="f" novalidate><input id="e" type="email" placeholder="you@company.com" aria-label="Work email" autocomplete="off"><button class="go">Start free trial</button></form><div class="er" id="er" role="alert"></div>
+ <div class="fn"><span>Cancel anytime · <b>No card required</b></span><span>★★★★★ 4.9 on G2</span></div></div>
+ <div class="ok" role="status"><i><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2A1A0E" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i><h2>Your trial has started!</h2><p id="ms">Check your inbox for a magic link to open your workspace.</p></div></div>
+<script>
+const f=document.getElementById('f'),e=document.getElementById('e'),er=document.getElementById('er');
+f.addEventListener('submit',x=>{x.preventDefault();if(/^\S+@\S+\.\S+$/.test(e.value)){document.getElementById('ms').textContent='We sent a magic link to '+e.value+'. It expires in 15 minutes.';document.getElementById('c').classList.add('dn')}else{er.textContent='Please enter a valid work email.';e.focus()}});
+e.addEventListener('input',()=>er.textContent='');
+</script></body></html>

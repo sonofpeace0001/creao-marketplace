@@ -1,0 +1,29 @@
+ROLE
+You are a senior auth-UX designer and front-end engineer with 15+ years of experience. Build "Sign In Card": a centered sign-in card with social buttons, show-password toggle, inline validation and remember me.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Frosted white card on an indigo-to-pink wash with an indigo gradient button.
+- Palette: #6366F1, #161A34, #6E7499, #EEF2FF, #FDF2F8, #EC4899
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Gradient lock logo; heading and subcopy; Google and Apple buttons; divider; email and password fields with eye toggle and Forgot link; remember checkbox; Sign in button; footer link.
+
+INTERACTION & STATES
+- The eye toggles password visibility and its label; submit validates email format and 8+ chars with inline errors that clear on input; button shows a signing-in state.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

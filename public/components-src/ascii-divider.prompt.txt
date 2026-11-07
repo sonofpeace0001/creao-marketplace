@@ -1,0 +1,32 @@
+ROLE
+You are a senior editorial designer and front-end engineer with 15+ years of experience. Build "Typewriter Dividers": four ASCII section dividers on a typewritten page — click any to copy it.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: A slightly crooked sheet of typewriter paper with grain, red-ribbon accents and monospace warmth.
+- Palette: #F2EBDC, #2B2620, #B8402B, #8A8070, #D9D0BD, #4A4238
+- Type: Courier Prime (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Paper sheet with an issue label, title and three short paragraphs.
+- Four divider styles between them: double rule with a star, boxed chapter label, dot leader, tilde wave.
+- A small hint line and a toast.
+
+INTERACTION & STATES
+- Each divider is a real button: hover turns it red, click copies the exact characters and flashes green.
+- A toast confirms 'Copied to clipboard' for 1.4s.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Shipping Panels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2EEE6;color:#241F18;font-family:'Libre Franklin',sans-serif;min-height:100vh;display:grid;place-items:center;padding:34px 20px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:560px}
+h1{font-size:28px;font-weight:800;letter-spacing:-.04em;margin-bottom:6px}.sub{color:#7A6F5E;font-size:15px;margin-bottom:20px}
+.p{background:#fff;border:2px solid #241F18;border-radius:18px;margin-bottom:12px;overflow:hidden;box-shadow:4px 4px 0 #241F18;transition:transform .2s,box-shadow .2s}
+.p.open{box-shadow:6px 6px 0 #D9531E;transform:translate(-2px,-2px)}
+.b{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer}
+.b:focus-visible{outline:3px solid #D9531E;outline-offset:-5px}
+.ic{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--c);border:2px solid #241F18}
+.t{flex:1}.t b{display:block;font-size:16.5px;font-weight:700;letter-spacing:-.02em}.t span{font-size:13px;color:#7A6F5E;font-weight:500}
+.pm{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid #241F18;position:relative;transition:background .2s}
+.pm::before,.pm::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2.5px;background:#241F18;margin:-1.25px 0 0 -6px;border-radius:2px;transition:transform .3s}
+.pm::after{transform:rotate(90deg)}.open .pm{background:#D9531E}.open .pm::after{transform:rotate(0)}.open .pm::before,.open .pm::after{background:#fff}
+.a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}.open .a{grid-template-rows:1fr}
+.a>div{overflow:hidden}.a .in{padding:0 18px 18px 72px;font-size:14.5px;line-height:1.6;color:#5C5242}
+.a ul{list-style:none;display:grid;gap:8px;margin-top:10px}.a li{display:flex;justify-content:space-between;padding:9px 12px;background:#F7F3EA;border-radius:10px;font-weight:600;color:#241F18;font-size:14px}.a li span{color:#7A6F5E;font-weight:500}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><h1>Shipping &amp; returns</h1><p class="sub">Everything you need before you hit “Buy”.</p>
+ <div class="p open"><button class="b" aria-expanded="true"><span class="ic" style="--c:#FFD9B8"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#241F18" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.800"/><circle cx="17" cy="18" r="1.800"/></svg></span><span class="t"><b>Delivery options</b><span>Free over $60</span></span><span class="pm"></span></button><div class="a"><div><div class="in">Orders ship from our Portland studio within one business day.<ul><li>Standard <span>3–5 days · Free over $60</span></li><li>Express <span>1–2 days · $9</span></li></ul></div></div></div></div>
+ <div class="p"><button class="b" aria-expanded="false"><span class="ic" style="--c:#C8E8D2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#241F18" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.700L3 8M3 3v5h5"/></svg></span><span class="t"><b>Returns &amp; exchanges</b><span>30-day window</span></span><span class="pm"></span></button><div class="a"><div><div class="in">Changed your mind? Send it back unworn within 30 days for a full refund or free exchange.</div></div></div></div>
+ <div class="p"><button class="b" aria-expanded="false"><span class="ic" style="--c:#CFE0F7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#241F18" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span class="t"><b>International shipping</b><span>40+ countries</span></span><span class="pm"></span></button><div class="a"><div><div class="in">We ship worldwide via DHL. Duties are calculated at checkout so there are no surprises at the door.</div></div></div></div>
+</div>
+<script>
+document.querySelectorAll('.p').forEach(p=>p.querySelector('.b').addEventListener('click',()=>{const o=p.classList.toggle('open');p.querySelector('.b').setAttribute('aria-expanded',o)}));
+</script></body></html>

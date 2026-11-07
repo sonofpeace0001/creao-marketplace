@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Night Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070A10;min-height:100vh;display:grid;place-items:center;padding:36px 20px;font-family:'Manrope',sans-serif;color:#EAF0FA;-webkit-font-smoothing:antialiased}
+.card{width:100%;max-width:460px;border-radius:26px;overflow:hidden;background:#0E1420;border:1px solid #1D2638;box-shadow:0 40px 80px -30px #000}
+.map{position:relative;height:290px;background:#0B111B;overflow:hidden}
+.map svg.m{position:absolute;inset:0;width:100%;height:100%}
+.pin{position:absolute;left:56%;top:48%;width:0;height:0}
+.pulse{position:absolute;left:-30px;top:-30px;width:60px;height:60px;border-radius:50%;background:rgba(255,92,92,.28);animation:p 2.2s ease-out infinite}
+.pulse:nth-child(2){animation-delay:1.1s}
+@keyframes p{0%{transform:scale(.3);opacity:1}100%{transform:scale(1.6);opacity:0}}
+.dot{position:absolute;left:-17px;top:-46px;width:34px;height:46px;filter:drop-shadow(0 8px 10px rgba(0,0,0,.6));animation:b 2.4s ease-in-out infinite}
+@keyframes b{50%{transform:translateY(-5px)}}
+.ctrl{position:absolute;right:14px;top:14px;display:grid;gap:1px;background:#1D2638;border-radius:12px;overflow:hidden;border:1px solid #1D2638}
+.ctrl button{width:36px;height:36px;border:0;background:#121A29;color:#CBD6EA;font:600 18px 'Manrope';cursor:pointer}.ctrl button:hover{background:#1A2538}
+.badge{position:absolute;left:14px;top:14px;font-size:12px;font-weight:700;background:rgba(10,14,22,.8);backdrop-filter:blur(8px);border:1px solid #1D2638;padding:7px 12px;border-radius:99px;display:flex;align-items:center;gap:7px}
+.badge i{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 8px #34D399}
+.info{padding:20px 22px 22px;display:flex;gap:16px;align-items:center;justify-content:space-between}
+.info h1{font-size:19px;letter-spacing:-.02em;font-weight:800}
+.info p{color:#8D9BB5;font-size:14px;margin-top:4px;line-height:1.45}
+.info small{display:block;margin-top:9px;font-size:12.5px;color:#34D399;font-weight:700}
+.go{flex:none;display:flex;align-items:center;gap:8px;background:#fff;color:#0B111B;font:700 14px 'Manrope';text-decoration:none;padding:13px 18px;border-radius:14px;transition:transform .2s}
+.go:hover{transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){.pulse,.dot{animation:none}}
+</style></head><body>
+<div class="card"><div class="map" role="img" aria-label="Map showing the Harbour Coffee location">
+ <svg class="m" viewBox="0 0 460 290" preserveAspectRatio="xMidYMid slice"><rect width="460" height="290" fill="#0B111B"/>
+  <path d="M-10 230C60 210 90 250 160 240S260 200 320 232 420 250 470 226V300H-10Z" fill="#0E2238"/>
+  <g fill="#121B2A"><rect x="20" y="24" width="86" height="54" rx="6"/><rect x="124" y="24" width="64" height="54" rx="6"/><rect x="204" y="24" width="96" height="54" rx="6"/><rect x="318" y="24" width="110" height="54" rx="6"/><rect x="20" y="102" width="52" height="60" rx="6"/><rect x="88" y="102" width="100" height="60" rx="6"/><rect x="326" y="102" width="102" height="60" rx="6"/><rect x="20" y="176" width="130" height="34" rx="6"/><rect x="170" y="176" width="130" height="34" rx="6"/></g>
+  <g stroke="#1C2840" stroke-width="10" stroke-linecap="round" fill="none"><path d="M-10 90H470M-10 168H470M112 -10V300M196 -10V210M308 -10V210"/></g>
+  <g stroke="#2A3A5C" stroke-width="3" fill="none"><path d="M-10 90H470M308 -10V210" /></g>
+  <rect x="208" y="104" width="108" height="60" rx="8" fill="#10301F" opacity=".7"/></svg>
+ <span class="badge"><i></i>Open now · closes 7pm</span>
+ <div class="pin"><span class="pulse"></span><span class="pulse"></span><svg class="dot" viewBox="0 0 34 46"><path d="M17 1C8.200 1 1 8 1 16.800 1 28.500 17 45 17 45s16-16.500 16-28.200C33 8 25.800 1 17 1Z" fill="#FF5C5C"/><circle cx="17" cy="17" r="6.500" fill="#fff"/></svg></div>
+ <div class="ctrl"><button aria-label="Zoom in">+</button><button aria-label="Zoom out">−</button></div></div>
+ <div class="info"><div><h1>Harbour Coffee Roasters</h1><p>14 Dock Street, Brooklyn, NY 11201</p><small>6 min walk · from Borough Hall</small></div><a class="go" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-8-8 18-2-8Z"/></svg>Directions</a></div></div>
+</body></html>

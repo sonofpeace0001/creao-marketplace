@@ -1,0 +1,30 @@
+ROLE
+You are a senior file-manager designer and front-end engineer with 15+ years of experience. Build "Row Actions Menu": a file list whose kebab menus offer Open, Rename, Duplicate, Share and an inline delete confirmation.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark teal-black list with tinted file-type tiles and a floating menu with a red destructive action.
+- Palette: #2DD4BF, #121B1D, #243436, #CFE0DE, #FF8E8E, #080C0D
+- Type: Outfit, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Four file rows with coloured icon tiles, name and meta; a kebab button per row; floating menu with four actions, divider and Delete; toast.
+
+INTERACTION & STATES
+- One menu open at a time; actions fire a toast; Delete swaps the menu for an inline 'Delete this file?' confirm with Delete/Cancel, and confirming removes the row.
+- Escape or outside click closes; kebabs have labels and aria-expanded.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

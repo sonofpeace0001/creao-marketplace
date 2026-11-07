@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Prism Bento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#07070B;color:#EFEFF6;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:36px 20px;-webkit-font-smoothing:antialiased}
+.g{width:100%;max-width:880px;display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:200px 200px;gap:12px}
+.c{position:relative;border-radius:26px;padding:24px;background:#101018;border:1px solid #1E1E2A;overflow:hidden;transition:transform .3s,border-color .3s}
+.c:hover{transform:translateY(-3px);border-color:#34344A}
+.c h2{font:700 17px 'Unbounded';letter-spacing:-.04em;line-height:1.15}.c p{font-size:13.5px;color:#9A9AB2;line-height:1.5;margin-top:7px;max-width:240px}
+.hero{grid-row:span 2;border:0;padding:2px;background:conic-gradient(from var(--a),#00E5FF,#7B61FF,#FF3D9A,#FFB020,#00E5FF);animation:s 8s linear infinite}
+@keyframes s{to{--a:360deg}}
+.hero>div{height:100%;border-radius:24px;background:radial-gradient(420px 300px at 20% 0,#2A1B5E,#0F0C22 70%);padding:28px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.hero small{font:600 11px 'Inter';letter-spacing:.2em;text-transform:uppercase;color:#7FE9FF}
+.hero h2{font-size:30px;letter-spacing:-.05em;line-height:1.02;margin:10px 0 12px}
+.hero p{max-width:300px;font-size:15px}
+.orb{position:absolute;right:-50px;bottom:-60px;width:260px;height:260px;border-radius:50%;background:conic-gradient(from 0deg,#00E5FF,#7B61FF,#FF3D9A,#00E5FF);filter:blur(34px);opacity:.7;animation:r 12s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}
+.cta{position:relative;z-index:1;align-self:flex-start;background:#fff;color:#0A0A12;font:600 14px 'Inter';padding:12px 20px;border-radius:13px;text-decoration:none;transition:transform .2s}.cta:hover{transform:translateY(-2px)}
+.ic{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;margin-bottom:14px;background:var(--g)}
+.ic svg{width:21px;height:21px;color:#fff}
+.kb{display:flex;gap:6px;margin-top:14px}.kb i{font:500 12px 'Inter';font-style:normal;background:#1A1A26;border:1px solid #2A2A3A;border-bottom-width:2px;border-radius:8px;padding:5px 10px;color:#C7C7E0}
+.wide{grid-column:span 2}
+.bar{display:flex;gap:6px;margin-top:16px;align-items:flex-end;height:54px}.bar i{flex:1;border-radius:6px;background:linear-gradient(180deg,#7B61FF,#3B2BA8);height:var(--h)}
+@media(max-width:760px){.g{grid-template-columns:1fr 1fr;grid-template-rows:auto}.hero{grid-row:auto;grid-column:span 2;min-height:300px}.wide{grid-column:span 2}}
+@media(prefers-reduced-motion:reduce){.hero,.orb{animation:none}*{transition:none!important}}
+</style></head><body>
+<div class="g">
+ <div class="c hero"><div><div style="position:relative;z-index:1"><small>Prism platform</small><h2>One canvas for every idea you have.</h2><p>Sketch, prototype and ship from the same file — no hand-offs, no exports.</p></div><div class="orb"></div><a class="cta" href="#">Start for free</a></div></div>
+ <div class="c"><span class="ic" style="--g:linear-gradient(135deg,#00B8D9,#3B82F6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg></span><h2>Instant preview</h2><p>See every change in under 50ms.</p></div>
+ <div class="c"><span class="ic" style="--g:linear-gradient(135deg,#FF3D9A,#FF7A59)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0M15 20a4.500 4.500 0 0 1 6 0"/></svg></span><h2>Multiplayer</h2><p>Cursors, comments and follow mode.</p></div>
+ <div class="c wide"><h2>Keyboard-first</h2><p>Every action has a shortcut — and a command palette for the rest.</p><div class="kb"><i>⌘ K</i><i>⌘ ⇧ P</i><i>G then D</i><i>⌥ ↑</i></div><div class="bar" style="position:absolute;right:24px;bottom:22px;width:34%;margin:0"><i style="--h:40%"></i><i style="--h:70%"></i><i style="--h:50%"></i><i style="--h:90%"></i><i style="--h:62%"></i></div></div>
+</div></body></html>

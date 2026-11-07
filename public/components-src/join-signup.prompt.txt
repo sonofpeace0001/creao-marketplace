@@ -1,0 +1,29 @@
+ROLE
+You are a senior onboarding designer and front-end engineer with 15+ years of experience. Build "Create Account": a sign-up card with password strength meter, validation, terms consent and OAuth buttons.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper page with a white card, green accents and an ink submit button.
+- Palette: #16794E, #1D2420, #6A7A70, #F2EFE8, #E4F2E9, #D9DFD9
+- Type: Schibsted Grotesk (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Free plan pill; heading; first and last name; email; password with four-segment strength meter and label; terms checkbox; Create button; OAuth row; sign-in link.
+
+INTERACTION & STATES
+- The meter scores length, case, digits and symbols; the button stays disabled until name, email, password strength and terms are valid; inline errors appear; success greets by name.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

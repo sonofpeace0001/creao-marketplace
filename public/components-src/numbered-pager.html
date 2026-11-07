@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Numbered Pager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08090C;color:#E9EBF2;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;background:#0F1116;border:1px solid #1D2029;border-radius:24px;overflow:hidden;box-shadow:0 40px 80px -34px #000}
+.hd{display:flex;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #1A1D26;font:500 12px 'Geist Mono',monospace;letter-spacing:.08em;color:#6A7188}.hd b{color:#E9EBF2;font-weight:500}
+.ls{min-height:290px}.r{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:center;padding:13px 20px;border-bottom:1px solid #15181F;animation:in .3s}@keyframes in{from{opacity:0;transform:translateX(8px)}}
+.r i{font:500 12px 'Geist Mono',monospace;color:#4F566E;font-style:normal}.r b{font-size:15px;font-weight:500}.r span{font:500 12px 'Geist Mono',monospace;color:#6A7188}
+.pg{display:flex;align-items:center;justify-content:center;gap:5px;padding:18px;background:#0B0D11}
+.pg button{min-width:40px;height:40px;border:1px solid transparent;border-radius:12px;background:none;color:#A6ADC4;font:500 14px 'Geist Mono',monospace;cursor:pointer;display:grid;place-items:center;transition:all .15s}
+.pg button:hover:not(:disabled):not(.on){background:#171A22;color:#fff}.pg button:disabled{opacity:.3;cursor:not-allowed}.pg button:focus-visible{outline:2px solid #7CF5C4;outline-offset:1px}
+.pg button.on{background:#7CF5C4;color:#06140F;font-weight:500;box-shadow:0 8px 16px -8px rgba(124,245,196,.7)}
+.pg .el{width:28px;text-align:center;color:#4F566E;font:500 14px 'Geist Mono',monospace}
+.pg .nv{border-color:#232733;color:#C9CEE0}
+@media(max-width:480px){.pg button{min-width:34px;height:36px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><span>INVOICES</span><span id="rg"></span></div><div class="ls" id="ls"></div><nav class="pg" id="pg" aria-label="Pagination"></nav></div>
+<script>
+const N=['Northwind Ltd','Brightwave','Duet Labs','Stackline','Quartz & Co','Orbitly','Cloudmint','Apex Labs','Lumen','Fieldwork','Harbour Co','Meridian','Tandem','Nimbus','Atlas Studio','Halcyon','Foxglove','Ironwood','Kestrel','Lattice'];
+const T=60,P=7;let cur=4;const $=id=>document.getElementById(id);
+function pages(c,t){const o=[1];let a=Math.max(2,c-1),b=Math.min(t-1,c+1);if(c<=3){a=2;b=4}if(c>=t-2){a=t-3;b=t-1}if(a>2)o.push('…');for(let i=a;i<=b;i++)o.push(i);if(b<t-1)o.push('…');o.push(t);return o}
+function draw(){const tp=Math.ceil(T/P);cur=Math.max(1,Math.min(tp,cur));const s=(cur-1)*P;$('rg').textContent=(s+1)+'–'+Math.min(T,s+P)+' OF '+T;
+ $('ls').innerHTML=Array.from({length:Math.min(P,T-s)},(_,i)=>{const k=s+i;return '<div class="r"><i>'+String(k+1).padStart(3,'0')+'</i><b>'+N[k%N.length]+'</b><span>INV-'+(2000+k)+' · $'+(((k*377)%4800)+240).toLocaleString()+'</span></div>'}).join('');
+ $('pg').innerHTML='<button class="nv" data-p="'+(cur-1)+'" '+(cur===1?'disabled':'')+' aria-label="Previous page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>'+pages(cur,tp).map(p=>p==='…'?'<span class="el">…</span>':'<button class="'+(p===cur?'on':'')+'" data-p="'+p+'" '+(p===cur?'aria-current="page"':'')+'>'+p+'</button>').join('')+'<button class="nv" data-p="'+(cur+1)+'" '+(cur===tp?'disabled':'')+' aria-label="Next page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button>'}
+$('pg').addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(b&&!b.disabled){cur=+b.dataset.p;draw()}});draw();
+</script></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial designer and front-end engineer with 15+ years of experience. Build "Underline Tabs": editorial underline tabs with count pills and a bar that glides between tabs, over an article list.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream page, Fraunces serif headings and a terracotta underline.
+- Palette: #B4471F, #27211A, #F7F2E9, #DDD2BE, #8D8068, #EADFCB
+- Type: Fraunces, Work Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Serif heading with italic accent; tablist with counts and a sliding bar; three panels of dated entries.
+
+INTERACTION & STATES
+- Arrow keys and clicks switch tabs; the bar animates left and width; panels slide in; bar is re-measured on font load and resize.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior billing-email designer and front-end engineer with 15+ years of experience. Build "Receipt Email": a payment receipt with big mono amount, receipt meta, line items, total, download button and a torn paper edge.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White receipt on cool grey with IBM Plex Mono figures, dashed dividers and a scalloped bottom edge.
+- Palette: #111827, #9CA3AF, #D1D5DB, #ECEEF3, #DCFCE7, #16A34A
+- Type: Inter, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Green check; Payment received heading; large amount and card line; receipt number and date; three line items; total row; Download invoice button; zigzag edge; legal footer.
+
+INTERACTION & STATES
+- Static email-style layout; the download button has hover and focus states; figures use tabular mono type.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

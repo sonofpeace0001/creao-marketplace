@@ -1,0 +1,31 @@
+ROLE
+You are a senior visual designer and front-end engineer (brand and landing pages) with 15+ years of experience. Build "Aurora Backdrop": a living three-light gradient backdrop with dot grid and grain, with one-click Aurora / Ember / Tide presets.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: A night-sky aurora: huge blurred light sources, screen-blended, with a masked dot grid and film grain.
+- Palette: #00E0B8, #2D6BFF, #7A3CFF, #050810, #0A0D18
+- Type: Syne, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Three oversized blurred orbs driven by CSS custom properties, a dot-grid overlay and grain.
+- Centred label, giant Syne headline, one-line description and a glass segmented preset switcher.
+
+INTERACTION & STATES
+- Choosing a preset swaps the three colours via CSS variables with a 1.2s background transition and updates the headline.
+- Buttons use aria-pressed and have visible focus rings; orbs drift slowly and stop under reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

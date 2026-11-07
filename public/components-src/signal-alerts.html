@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Signal Alerts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3F4F1;color:#1B1F1A;font-family:'Work Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:30px 18px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:600px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}.hd h1{font-size:20px;font-weight:700;letter-spacing:-.025em}
+.rs{border:0;background:none;font:600 13px 'Work Sans';color:#6B7568;cursor:pointer;border-bottom:1.5px solid #B9C0B5}.rs:hover{color:#1B1F1A;border-color:#1B1F1A}
+.l{display:grid;gap:12px}
+.a{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s ease,opacity .3s,margin .35s}
+.a.gone{grid-template-rows:0fr;opacity:0;margin-bottom:-12px}
+.a>div{overflow:hidden}
+.in{position:relative;display:flex;gap:14px;align-items:flex-start;background:var(--bg);border:1px solid var(--bd);border-left:5px solid var(--ac);border-radius:14px;padding:15px 16px}
+.ic{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--ac);color:#fff}
+.tx{flex:1;padding-right:26px}.tx b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--tc)}.tx p{font-size:14px;line-height:1.5;color:var(--pc);margin-top:3px}
+.tx a{display:inline-block;margin-top:8px;font-size:13.5px;font-weight:700;color:var(--tc);text-decoration:none;border-bottom:2px solid var(--ac)}
+.x{position:absolute;right:10px;top:10px;width:28px;height:28px;border-radius:8px;border:0;background:none;color:var(--pc);cursor:pointer;display:grid;place-items:center;opacity:.7;transition:all .2s}.x:hover{opacity:1;background:rgba(0,0,0,.07)}.x:focus-visible{outline:2px solid var(--tc);outline-offset:1px;opacity:1}
+.ok{--bg:#EEF9F1;--bd:#CBE9D5;--ac:#1F9D55;--tc:#0F5C30;--pc:#3F7A58}
+.wn{--bg:#FFF8E6;--bd:#F5E2A8;--ac:#E8A200;--tc:#7A5200;--pc:#99772A}
+.er{--bg:#FEF0EF;--bd:#F7CBC8;--ac:#DC3D36;--tc:#8F1D18;--pc:#B05652}
+.if{--bg:#EEF4FE;--bd:#C9DAF7;--ac:#2F6FDB;--tc:#173F85;--pc:#52709F}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Notifications</h1><button class="rs" id="rs">Restore all</button></div>
+<div class="l" id="l">
+ <div class="a"><div><div class="in ok"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span><div class="tx"><b>Payment received</b><p>Invoice #2041 for $1,280.00 was paid by Northwind Ltd.</p></div><button class="x" aria-label="Dismiss"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div></div>
+ <div class="a"><div><div class="in wn"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20ZM12 10v5M12 17.500v.01"/></svg></span><div class="tx"><b>Storage almost full</b><p>You've used 92% of your 50 GB plan. Uploads pause at 100%.</p><a href="#">Upgrade storage</a></div><button class="x" aria-label="Dismiss"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div></div>
+ <div class="a"><div><div class="in er"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.500v.01"/></svg></span><div class="tx"><b>Deploy failed</b><p>Build 4f2a9c1 exited with code 1 — missing environment variable DATABASE_URL.</p><a href="#">View build log</a></div><button class="x" aria-label="Dismiss"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div></div>
+ <div class="a"><div><div class="in if"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.500v.01"/></svg></span><div class="tx"><b>Scheduled maintenance</b><p>We'll be offline Sunday 2–4am UTC for a database upgrade.</p></div><button class="x" aria-label="Dismiss"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div></div>
+</div></div>
+<script>
+const l=document.getElementById('l');
+l.addEventListener('click',e=>{const x=e.target.closest('.x');if(x)x.closest('.a').classList.add('gone')});
+document.getElementById('rs').onclick=()=>l.querySelectorAll('.a').forEach(a=>a.classList.remove('gone'));
+</script></body></html>

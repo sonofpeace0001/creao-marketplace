@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Magnetic Project Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9E5DC;color:#15130F;font-family:'Archivo',sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px 18px;-webkit-font-smoothing:antialiased}
+.cd{position:relative;width:100%;max-width:560px;aspect-ratio:4/3;border-radius:30px;overflow:hidden;cursor:none;background:#15130F;color:#fff;isolation:isolate;box-shadow:0 40px 70px -34px rgba(21,19,15,.7)}
+.cd:focus-visible{outline:3px solid #FF4D2E;outline-offset:3px}
+.art{position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 25% 20%,#FF4D2E,transparent 60%),radial-gradient(70% 80% at 85% 90%,#FFB020,transparent 60%),#1A1410;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.cd:hover .art{transform:scale(1.07)}
+.sh{position:absolute;left:56%;top:30%;width:34%;aspect-ratio:1;background:#fff;mix-blend-mode:overlay;border-radius:50% 12% 50% 12%;opacity:.4;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.cd:hover .sh{transform:rotate(25deg) scale(1.1)}
+.tp{position:absolute;left:26px;right:26px;top:24px;display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.bt{position:absolute;left:26px;right:26px;bottom:26px}
+.bt h1{font-size:clamp(34px,6.4vw,58px);font-weight:900;letter-spacing:-.06em;line-height:.9}.bt p{font-size:15px;opacity:.82;margin-top:10px;max-width:340px;line-height:1.45;font-weight:500}
+.ptr{position:absolute;left:0;top:0;pointer-events:none;z-index:5;transform:translate(-50%,-50%);transition:opacity .2s}
+.ptr .dt{width:12px;height:12px;border-radius:50%;background:#fff}
+.ptr .lb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:104px;height:104px;border-radius:50%;background:#fff;color:#15130F;display:grid;place-items:center;font:800 13px 'Archivo';letter-spacing:.06em;text-transform:uppercase;transition:transform .35s cubic-bezier(.3,1.6,.4,1)}
+.cd:hover .ptr .dt{opacity:0}.cd:hover .ptr .lb{transform:translate(-50%,-50%) scale(1)}
+.ptr{opacity:0}.cd:hover .ptr{opacity:1}
+.arw{width:30px;height:30px;border-radius:50%;background:#fff;color:#15130F;display:none;place-items:center}
+@media(pointer:coarse){.cd{cursor:pointer}.ptr{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<a class="cd" id="c" href="#" aria-label="View project: Meridian rebrand"><div class="art"></div><div class="sh"></div>
+ <div class="tp"><span>Brand · 2025</span><span>Case study</span></div>
+ <div class="bt"><h1>Meridian<br>rebrand</h1><p>A new identity for a 40-year-old shipping company, rebuilt for screens.</p></div>
+ <div class="ptr" id="p"><i class="dt"></i><span class="lb">View ↗</span></div></a>
+<script>
+const c=document.getElementById('c'),p=document.getElementById('p');let tx=0,ty=0,x=0,y=0,raf=0;const R=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function loop(){x+=(tx-x)*.22;y+=(ty-y)*.22;p.style.left=x+'px';p.style.top=y+'px';raf=(Math.abs(tx-x)+Math.abs(ty-y)>.3)?requestAnimationFrame(loop):0}
+c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();tx=e.clientX-r.left;ty=e.clientY-r.top;if(R){p.style.left=tx+'px';p.style.top=ty+'px'}else if(!raf)raf=requestAnimationFrame(loop)});
+c.addEventListener('pointerenter',e=>{const r=c.getBoundingClientRect();x=tx=e.clientX-r.left;y=ty=e.clientY-r.top;p.style.left=x+'px';p.style.top=y+'px'});
+c.addEventListener('click',e=>e.preventDefault());
+</script></body></html>

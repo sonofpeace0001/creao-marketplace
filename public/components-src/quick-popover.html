@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Share Popover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 420px at 0 0,#1A2744,transparent 60%),#080A12;color:#E9EDF8;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{position:relative;width:min(420px,100%);min-height:470px}
+.tb{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.tb h1{font-size:19px;font-weight:700;letter-spacing:-.03em}.tb p{font-size:13px;color:#7B88A8;margin-top:3px}
+.sh{display:flex;align-items:center;gap:9px;border:0;border-radius:14px;padding:12px 18px;background:linear-gradient(135deg,#6C8CFF,#7C5CFF);color:#fff;font:600 14.5px 'Sora';cursor:pointer;box-shadow:0 14px 24px -12px rgba(124,92,255,.8);transition:transform .15s}
+.sh:hover{transform:translateY(-1px)}.sh:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.pp{position:absolute;right:0;top:72px;width:360px;max-width:100%;background:#12162A;border:1px solid #252C4A;border-radius:22px;padding:18px;box-shadow:0 40px 70px -24px #000;opacity:0;transform:translateY(-8px) scale(.97);transform-origin:top right;pointer-events:none;transition:all .22s cubic-bezier(.3,1.3,.4,1)}
+.pp.on{opacity:1;transform:none;pointer-events:auto}
+.pp::before{content:"";position:absolute;right:30px;top:-7px;width:14px;height:14px;background:#12162A;border-left:1px solid #252C4A;border-top:1px solid #252C4A;transform:rotate(45deg)}
+.pp h2{font-size:15.5px;font-weight:600;margin-bottom:12px;letter-spacing:-.02em}
+.lk{display:flex;gap:8px;background:#0C0F1F;border:1px solid #252C4A;border-radius:13px;padding:6px 6px 6px 13px;align-items:center}
+.lk span{flex:1;font-size:13px;color:#8F9CC0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lk button{border:0;border-radius:9px;padding:9px 13px;font:600 13px 'Sora';background:#E9EDF8;color:#0C0F1F;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s}.lk button.ok{background:#34D399;color:#04201A}.lk button:focus-visible{outline:2px solid #6C8CFF;outline-offset:2px}
+.ac{display:flex;align-items:center;justify-content:space-between;margin:16px 0 4px;font-size:13.5px;color:#9AA7C8}
+.ac select{background:#0C0F1F;border:1px solid #252C4A;color:#E9EDF8;border-radius:10px;padding:7px 10px;font:600 13px 'Sora';outline:0;cursor:pointer}.ac select:focus-visible{border-color:#6C8CFF}
+.pl{margin-top:12px;display:grid;gap:2px}.pr{display:flex;align-items:center;gap:12px;padding:8px 6px;border-radius:12px}.pr:hover{background:#171C35}
+.pr i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 12px 'Sora';font-style:normal;color:#0C0F1F;background:var(--c)}.pr b{display:block;font-size:14px;font-weight:600}.pr span{font-size:12.5px;color:#7B88A8}.pr em{margin-left:auto;font-style:normal;font-size:12.5px;color:#7B88A8}
+.sc{display:flex;gap:9px;margin-top:14px;padding-top:14px;border-top:1px solid #20274A}.sc button{flex:1;border:1px solid #252C4A;background:#0C0F1F;color:#C6D0EC;border-radius:12px;padding:11px;font:600 13px 'Sora';cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}.sc button:hover{border-color:#6C8CFF;color:#fff}.sc button:focus-visible{outline:2px solid #6C8CFF;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="tb"><div><h1>Q4 roadmap</h1><p>Edited 4 minutes ago</p></div><button class="sh" id="b" aria-haspopup="dialog" aria-expanded="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.500"/><circle cx="18" cy="6" r="2.500"/><circle cx="18" cy="18" r="2.500"/><path d="m8.200 10.900 7.600-3.800M8.200 13.100l7.600 3.800"/></svg>Share</button></div>
+ <div class="pp on" id="p" role="dialog" aria-label="Share this document"><h2>Share this document</h2>
+  <div class="lk"><span>northwind.app/d/q4-roadmap-8f2k</span><button id="cp"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span id="ct" style="color:inherit;flex:none">Copy</span></button></div>
+  <div class="ac"><span>Anyone with the link can</span><select aria-label="Link permission"><option>view</option><option>comment</option><option>edit</option></select></div>
+  <div class="pl"><div class="pr"><i style="--c:#FFB86B">MA</i><div><b>Maya Alvarez</b><span>maya@northwind.co</span></div><em>Owner</em></div><div class="pr"><i style="--c:#7CF5C4">MR</i><div><b>Marcus Reid</b><span>marcus@northwind.co</span></div><em>Editor</em></div><div class="pr"><i style="--c:#C4A6FF">SL</i><div><b>Sofia Lund</b><span>sofia@northwind.co</span></div><em>Viewer</em></div></div>
+  <div class="sc"><button><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>Email</button><button><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.500 7.200L3 21l1.800-5.500A8 8 0 1 1 21 12Z"/></svg>Slack</button></div></div></div>
+<script>
+const b=document.getElementById('b'),p=document.getElementById('p'),cp=document.getElementById('cp'),ct=document.getElementById('ct');
+function set(o){p.classList.toggle('on',o);b.setAttribute('aria-expanded',o)}
+b.onclick=e=>{e.stopPropagation();set(!p.classList.contains('on'))};document.addEventListener('click',e=>{if(!p.contains(e.target))set(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){set(false);b.focus()}});
+cp.onclick=()=>{(navigator.clipboard?navigator.clipboard.writeText('https://northwind.app/d/q4-roadmap-8f2k'):Promise.resolve()).catch(()=>{});cp.classList.add('ok');ct.textContent='Copied';setTimeout(()=>{cp.classList.remove('ok');ct.textContent='Copy'},1500)};
+</script></body></html>

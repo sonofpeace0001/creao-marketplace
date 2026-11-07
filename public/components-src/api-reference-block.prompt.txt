@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer-docs designer and front-end engineer with 15+ years of experience. Build "API Reference": a two-column endpoint reference: parameters on the left, tabbed cURL/Node/Python samples and a response on the right.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White parameter column beside a navy code panel with syntax-coloured tokens.
+- Palette: #64748B, #1E293B, #94A3B8, #38BDF8, #86EFAC, #F5F6F8
+- Type: Inter, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Left: method pill and path, title, summary, parameter list with type and required tags. Right: language tabs with Copy, highlighted request sample and 200 OK JSON response.
+
+INTERACTION & STATES
+- Tabs swap the sample (aria-selected); Copy writes the visible code and confirms; columns stack below 760px.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

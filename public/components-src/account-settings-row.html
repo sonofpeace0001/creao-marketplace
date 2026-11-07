@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Account Settings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F1F3F7;color:#15192B;font-family:'Public Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;background:#fff;border-radius:22px;box-shadow:0 30px 60px -42px rgba(21,25,43,.5),0 0 0 1px rgba(21,25,43,.06);overflow:hidden}
+.hd{padding:22px 24px 14px}.hd h1{font-size:20px;font-weight:700;letter-spacing:-.025em}.hd p{font-size:14px;color:#6B7390;margin-top:3px}
+.rw{border-top:1px solid #EEF0F6}.rh{display:flex;align-items:center;gap:14px;padding:16px 24px}.rh .lb{flex:1;min-width:0}.rh .lb span{display:block;font-size:12.5px;font-weight:600;color:#8A92AD;margin-bottom:2px}.rh .lb b{font-size:15px;font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ed{border:1px solid #DCE0EC;background:#fff;border-radius:9px;padding:7px 14px;font:600 13.5px 'Public Sans';color:#15192B;cursor:pointer;transition:all .15s}.ed:hover{background:#F4F6FB;border-color:#B8BFD6}.ed:focus-visible{outline:2px solid #4F46E5;outline-offset:2px}
+.fm{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}.rw.op .fm{grid-template-rows:1fr}.fm>div{overflow:hidden}.fi{padding:0 24px 20px;display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.fi input{flex:1;min-width:200px;border:1.5px solid #CFD5E6;border-radius:10px;padding:11px 14px;font:500 15px 'Public Sans';color:#15192B;outline:0}.fi input:focus{border-color:#4F46E5;box-shadow:0 0 0 4px rgba(79,70,229,.14)}
+.fi .sv{background:#4F46E5;color:#fff;border:0;border-radius:10px;padding:11px 18px;font:600 14px 'Public Sans';cursor:pointer}.fi .sv:focus-visible{outline:2px solid #15192B;outline-offset:2px}.fi .cn{background:none;border:0;color:#6B7390;font:600 14px 'Public Sans';padding:11px 8px;cursor:pointer}
+.av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#EC4899);display:grid;place-items:center;color:#fff;font-weight:700;flex:none}
+.tg{position:relative;width:46px;height:28px;border:0;border-radius:99px;background:#D7DCEA;cursor:pointer;transition:background .2s;flex:none}.tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:transform .22s cubic-bezier(.4,1.4,.5,1)}.tg[aria-checked=true]{background:#4F46E5}.tg[aria-checked=true]::after{transform:translateX(18px)}.tg:focus-visible{outline:2px solid #4F46E5;outline-offset:2px}
+.bd{font-size:12px;font-weight:700;color:#0F8A52;background:#E1F7EC;padding:3px 9px;border-radius:99px;margin-left:8px}
+.dz{display:flex;align-items:center;gap:14px;padding:16px 24px;border-top:1px solid #EEF0F6;background:#FFF8F8}.dz .lb{flex:1}.dz b{display:block;font-size:15px;color:#B42318}.dz span{font-size:13px;color:#8A6A6A}.dz button{border:1px solid #F3C4C4;background:#fff;color:#B42318;border-radius:9px;padding:7px 14px;font:600 13.5px 'Public Sans';cursor:pointer}.dz button:hover{background:#FEECEC}.dz button:focus-visible{outline:2px solid #B42318;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Account</h1><p>Manage how you sign in and how we reach you.</p></div>
+<div class="rw"><div class="rh"><div class="av">AL</div><div class="lb"><span>Display name</span><b data-v>Ada Lovelace</b></div><button class="ed" aria-expanded="false">Edit</button></div><div class="fm"><div><div class="fi"><input aria-label="Display name" value="Ada Lovelace"><button class="sv">Save</button><button class="cn">Cancel</button></div></div></div></div>
+<div class="rw"><div class="rh"><div class="lb"><span>Email address</span><b data-v>ada@studio.com</b></div><span class="bd">Verified</span><button class="ed" aria-expanded="false">Edit</button></div><div class="fm"><div><div class="fi"><input type="email" aria-label="Email" value="ada@studio.com"><button class="sv">Save</button><button class="cn">Cancel</button></div></div></div></div>
+<div class="rw"><div class="rh"><div class="lb"><span>Password</span><b>Last changed 3 months ago</b></div><button class="ed" aria-expanded="false">Change</button></div><div class="fm"><div><div class="fi"><input type="password" aria-label="New password" placeholder="New password"><button class="sv">Update</button><button class="cn">Cancel</button></div></div></div></div>
+<div class="rw"><div class="rh"><div class="lb"><span>Two-factor authentication</span><b>Authenticator app</b></div><button class="tg" role="switch" aria-checked="true" aria-label="Two-factor authentication"></button></div></div>
+<div class="rw"><div class="rh"><div class="lb"><span>Product emails</span><b>Tips, updates and offers</b></div><button class="tg" role="switch" aria-checked="false" aria-label="Product emails"></button></div></div>
+<div class="dz"><div class="lb"><b>Delete account</b><span>Permanently remove your data. This cannot be undone.</span></div><button>Delete</button></div></div>
+<script>
+document.querySelectorAll('.ed').forEach(b=>{const r=b.closest('.rw'),f=r.querySelector('.fm'),label=b.textContent;
+ b.onclick=()=>{const o=!r.classList.contains('op');r.classList.toggle('op',o);b.setAttribute('aria-expanded',o);b.textContent=o?'Close':label;if(o)f.querySelector('input').focus()};
+ f.querySelector('.cn').onclick=()=>b.click();
+ f.querySelector('.sv').onclick=()=>{const i=f.querySelector('input'),v=r.querySelector('[data-v]');if(v&&i.value.trim())v.textContent=i.value.trim();b.click()}});
+document.querySelectorAll('.tg').forEach(t=>t.onclick=()=>t.setAttribute('aria-checked',t.getAttribute('aria-checked')!=='true'));
+</script></body></html>

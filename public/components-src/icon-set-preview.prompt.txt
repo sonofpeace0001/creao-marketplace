@@ -1,0 +1,29 @@
+ROLE
+You are a senior icon-system designer and front-end engineer with 15+ years of experience. Build "Stroke Weight Studio": a preview of eight icons that re-draw live as you drag a stroke-weight slider and pick an accent colour.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean white studio card with cobalt accent, soft tiles and a custom range slider with swatches.
+- Palette: #14193A, #6A7096, #2F4BFF, #EFF1F8, #F4F6FD, #DCE1F5
+- Type: Manrope, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with a control card (stroke readout, slider, five colour swatches); grid of eight icon tiles with labels; spec footer.
+
+INTERACTION & STATES
+- The slider (1–3px) updates --w so every icon stroke changes live; swatches update --c; tiles lift and glow on hover.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

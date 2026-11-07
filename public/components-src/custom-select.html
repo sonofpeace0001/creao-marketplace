@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Country Select</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3F0EA;color:#1E2A24;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{position:relative;width:min(360px,100%);min-height:430px}
+label{display:block;font-size:13.5px;font-weight:700;margin-bottom:8px}
+.tr{display:flex;align-items:center;gap:13px;width:100%;background:#fff;border:1.5px solid #D9DFD9;border-radius:16px;padding:13px 15px;font:600 16px 'Hanken Grotesk';color:#1E2A24;cursor:pointer;text-align:left;transition:all .2s}
+.tr:hover{border-color:#A9B8AE}.tr[aria-expanded=true]{border-color:#16794E;box-shadow:0 0 0 4px rgba(22,121,78,.14)}.tr:focus-visible{outline:0;border-color:#16794E;box-shadow:0 0 0 4px rgba(22,121,78,.14)}
+.fg{flex:none;width:30px;height:22px;border-radius:5px;box-shadow:0 0 0 1px rgba(0,0,0,.12);overflow:hidden;display:block}
+.tr span.n{flex:1}.tr svg{color:#6A7B70;transition:transform .2s;flex:none}.tr[aria-expanded=true] svg{transform:rotate(180deg)}
+.pn{position:absolute;left:0;right:0;top:80px;background:#fff;border:1px solid #E1E7E1;border-radius:20px;padding:6px;box-shadow:0 30px 50px -22px rgba(30,42,36,.5);opacity:0;transform:translateY(-6px);pointer-events:none;transition:all .18s;z-index:3}
+.pn.on{opacity:1;transform:none;pointer-events:auto}
+.o{display:flex;align-items:center;gap:13px;width:100%;border:0;background:none;padding:11px 12px;border-radius:13px;font:600 15px 'Hanken Grotesk';color:#1E2A24;cursor:pointer;text-align:left}
+.o:hover,.o:focus-visible{background:#EEF5F0;outline:0}.o[aria-selected=true]{background:#E4F2E9}.o code{margin-left:auto;font:600 12.5px 'Hanken Grotesk';color:#7A8B80}
+.o .ck{color:#16794E;opacity:0;margin-left:4px}.o[aria-selected=true] .ck{opacity:1}
+.hn{margin-top:12px;font-size:13px;color:#7A8B80}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><label id="l">Country or region</label>
+<button class="tr" id="t" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="l v"><span class="fg" id="f"></span><span class="n" id="v"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="pn on" id="p" role="listbox" aria-labelledby="l"></div><div class="hn" id="hn"></div></div>
+<script>
+const F={us:'<svg viewBox="0 0 30 22"><rect width="30" height="22" fill="#fff"/><g fill="#C8283C"><rect y="0" width="30" height="2.500"/><rect y="5" width="30" height="2.500"/><rect y="10" width="30" height="2.500"/><rect y="15" width="30" height="2.500"/><rect y="20" width="30" height="2"/></g><rect width="13" height="12" fill="#2B3A7C"/></svg>',
+ fr:'<svg viewBox="0 0 30 22"><rect width="10" height="22" fill="#1F3F9E"/><rect x="10" width="10" height="22" fill="#fff"/><rect x="20" width="10" height="22" fill="#D8283C"/></svg>',
+ de:'<svg viewBox="0 0 30 22"><rect width="30" height="7.400" fill="#111"/><rect y="7.300" width="30" height="7.400" fill="#D8281C"/><rect y="14.600" width="30" height="7.400" fill="#F5C500"/></svg>',
+ jp:'<svg viewBox="0 0 30 22"><rect width="30" height="22" fill="#fff"/><circle cx="15" cy="11" r="6" fill="#D8283C"/></svg>',
+ br:'<svg viewBox="0 0 30 22"><rect width="30" height="22" fill="#1C9A48"/><path d="M15 3 27 11 15 19 3 11Z" fill="#F7D417"/><circle cx="15" cy="11" r="4.500" fill="#2B3A7C"/></svg>',
+ in:'<svg viewBox="0 0 30 22"><rect width="30" height="7.400" fill="#F0872B"/><rect y="7.300" width="30" height="7.400" fill="#fff"/><rect y="14.600" width="30" height="7.400" fill="#1C8A3E"/><circle cx="15" cy="11" r="2.500" fill="none" stroke="#2B3A7C" stroke-width="1"/></svg>'};
+const C=[['United States','US','us'],['France','FR','fr'],['Germany','DE','de'],['Japan','JP','jp'],['Brazil','BR','br'],['India','IN','in']];
+let sel=1;const $=id=>document.getElementById(id);
+function draw(){$('f').innerHTML=F[C[sel][2]];$('v').textContent=C[sel][0];$('hn').textContent='Shipping to '+C[sel][0];
+ $('p').innerHTML=C.map((c,i)=>'<button class="o" role="option" aria-selected="'+(i===sel)+'" data-i="'+i+'"><span class="fg">'+F[c[2]]+'</span>'+c[0]+'<code>'+c[1]+'</code><svg class="ck" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></button>').join('')}
+function set(o){$('p').classList.toggle('on',o);$('t').setAttribute('aria-expanded',o)}
+$('t').onclick=e=>{e.stopPropagation();set(!$('p').classList.contains('on'))};
+$('p').addEventListener('click',e=>{const o=e.target.closest('.o');if(o){sel=+o.dataset.i;draw();set(false);$('t').focus()}});
+document.addEventListener('click',e=>{if(!e.target.closest('.w'))set(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){set(false);$('t').focus()}const os=[...$('p').querySelectorAll('.o')];if(!$('p').classList.contains('on'))return;const i=os.indexOf(document.activeElement);if(e.key==='ArrowDown'){e.preventDefault();os[(i+1)%os.length].focus()}if(e.key==='ArrowUp'){e.preventDefault();os[(i-1+os.length)%os.length].focus()}});draw();
+</script></body></html>

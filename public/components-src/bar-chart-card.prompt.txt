@@ -1,0 +1,30 @@
+ROLE
+You are a senior data-visualisation designer and front-end engineer with 15+ years of experience. Build "Weekly Bar Chart": a weekly bar chart with a Revenue/Orders switch, animated bars, count-up total and per-bar tooltips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark card with indigo bars and a single teal peak bar; mono axis labels and a white tooltip.
+- Palette: #ECEEF6, #10121A, #1E2230, #667088, #7B849C, #7C8CFF
+- Type: Instrument Sans, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with metric label, big total with delta chip and a Revenue/Orders segmented control; seven bars with day labels and gridlines; footer with best day and daily average.
+
+INTERACTION & STATES
+- Switching metric rebuilds the bars (grow from zero), recounts the total and recomputes the best day and average.
+- Hover or keyboard focus on a bar brightens it and shows a tooltip; each bar has an aria-label.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

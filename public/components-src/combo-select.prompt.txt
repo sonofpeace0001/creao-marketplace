@@ -1,0 +1,29 @@
+ROLE
+You are a senior form-UX designer and front-end engineer with 15+ years of experience. Build "Assignee Combobox": an accessible combobox that filters teammates by typing and shows avatar, role and a check on the chosen one.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Crisp white field with an indigo focus ring and a floating list with avatar tiles.
+- Palette: #4F46E5, #181C30, #9AA0BC, #7A82A8, #8A91B0, #F2F3F8
+- Type: Public Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Label and input trigger with avatar and chevron; floating listbox with a section header and rows (avatar, name, role, check); helper text below.
+
+INTERACTION & STATES
+- Typing filters and highlights matches; arrow keys move; Enter selects; Escape closes; the helper text updates to the chosen person; outside click closes.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

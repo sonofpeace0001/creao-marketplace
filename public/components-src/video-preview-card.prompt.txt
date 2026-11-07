@@ -1,0 +1,29 @@
+ROLE
+You are a senior e-learning designer and front-end engineer with 15+ years of experience. Build "Course Video Card": a lesson card with an animated gradient thumbnail, equalizer bars, a play/pause toggle and progress sweep.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Friendly indigo-and-sky card with floating blurred shapes and bold Plus Jakarta type.
+- Palette: #4F46E5, #1A2140, #5E678A, #EEF2FF, #6C63FF, #38BDF8
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Thumbnail with Lesson tag, floating shapes, round play button and duration chip; a thin progress strip; body with module label, title, description and instructor row.
+
+INTERACTION & STATES
+- Hover drifts the shapes and shows equalizer bars; clicking toggles playing (aria-pressed), swaps the icon to pause and sweeps the progress strip over 4s.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

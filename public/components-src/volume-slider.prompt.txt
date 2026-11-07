@@ -1,0 +1,29 @@
+ROLE
+You are a senior audio-UI designer and front-end engineer with 15+ years of experience. Build "Player Controls": a music player card with a spinning record, volume slider, mute toggle and transport buttons.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Pastel gradient page with frosted card, conic-gradient album art and violet controls.
+- Palette: #2A1F40, #8B5CF6, #7C3AED, #FF8A5B, #F43F8E, #3D2F5C
+- Type: Nunito (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Album art with rotating vinyl; title and artist; volume row with mute button, gradient slider and percent; previous, play and next buttons.
+
+INTERACTION & STATES
+- Dragging updates the fill, percent and speaker icon level; the mute button stores and restores the previous volume (aria-pressed); the record rotates unless reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

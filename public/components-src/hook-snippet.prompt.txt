@@ -1,0 +1,30 @@
+ROLE
+You are a senior documentation designer and front-end engineer with 15+ years of experience. Build "Snippet Docs": a documentation snippet card with TypeScript/JavaScript tabs, GitHub-light syntax colours, copy and usage notes.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Crisp GitHub-docs light theme: white card, hairline borders, IBM Plex type and a coral tab underline.
+- Palette: #1F2328, #59636E, #D1D9E0, #F6F8FA, #0969DA, #8250DF
+- Type: IBM Plex Sans, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Tag, title (useLocalStorage) and description; a card with tab bar, copy button, code panel and a usage footer; a meta row (size, dependencies, version).
+
+INTERACTION & STATES
+- Tabs swap the TypeScript and JavaScript versions (role=tab, aria-selected).
+- Copy copies the visible code and confirms in green.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

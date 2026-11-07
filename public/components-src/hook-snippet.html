@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Snippet Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F6F8FA;color:#1F2328;font-family:'IBM Plex Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:36px 20px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:680px}
+.tag{display:inline-flex;gap:8px;align-items:center;font:500 12px 'IBM Plex Mono',monospace;color:#0969DA;background:#DDF4FF;padding:4px 10px;border-radius:99px}
+h1{font-size:30px;letter-spacing:-.03em;font-weight:700;margin:12px 0 6px}
+h1 code{font:500 27px 'IBM Plex Mono',monospace;color:#8250DF}
+p{color:#59636E;font-size:15.5px;line-height:1.6;max-width:520px}
+.card{margin-top:22px;background:#fff;border:1px solid #D1D9E0;border-radius:14px;overflow:hidden;box-shadow:0 1px 0 rgba(31,35,40,.04),0 16px 30px -22px rgba(31,35,40,.3)}
+.bar{display:flex;align-items:center;background:#F6F8FA;border-bottom:1px solid #D1D9E0;padding:0 6px 0 4px}
+.bar button.t{border:0;background:none;font:500 13px 'IBM Plex Sans';color:#59636E;padding:12px 14px;cursor:pointer;position:relative}
+.bar button.t[aria-selected=true]{color:#1F2328;font-weight:600}
+.bar button.t[aria-selected=true]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;background:#FD8C73;border-radius:2px}
+.bar button.t:focus-visible{outline:2px solid #0969DA;outline-offset:-2px;border-radius:6px}
+.cp{margin-left:auto;display:inline-flex;align-items:center;gap:7px;border:1px solid #D1D9E0;background:#fff;border-radius:8px;font:500 12.5px 'IBM Plex Sans';padding:6px 11px;cursor:pointer;color:#1F2328}
+.cp:hover{background:#F3F4F6}.cp.ok{color:#1A7F37;border-color:#82E29B;background:#DAFBE1}
+pre{font:400 13.5px/1.7 'IBM Plex Mono',monospace;padding:16px 20px;overflow:auto;background:#fff;color:#1F2328;display:none}
+pre.on{display:block}
+.k{color:#CF222E}.f{color:#8250DF}.s{color:#0A3069}.c{color:#6E7781;font-style:italic}.n{color:#0550AE}
+.use{padding:14px 20px;border-top:1px solid #D1D9E0;background:#F6F8FA;font:400 13px 'IBM Plex Mono',monospace;color:#59636E}
+.use b{color:#1F2328;font-weight:500}
+.meta{display:flex;gap:22px;margin-top:16px;font-size:13.5px;color:#59636E}.meta b{color:#1F2328}
+</style></head><body>
+<div class="w"><span class="tag">react · hooks</span><h1><code>useLocalStorage</code></h1><p>State that survives a refresh. Reads the stored value on first render and writes through on every update, with SSR-safe fallbacks.</p>
+<div class="card"><div class="bar" role="tablist"><button class="t" role="tab" aria-selected="true" data-t="ts">TypeScript</button><button class="t" role="tab" aria-selected="false" data-t="js">JavaScript</button><button class="cp" id="cp"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span id="ct">Copy</span></button></div>
+<pre class="on" id="ts"><span class="k">export function</span> <span class="f">useLocalStorage</span>&lt;T&gt;(key: <span class="n">string</span>, initial: T) {
+  <span class="k">const</span> [value, setValue] = <span class="f">useState</span>&lt;T&gt;(() =&gt; {
+    <span class="k">if</span> (<span class="k">typeof</span> window === <span class="s">'undefined'</span>) <span class="k">return</span> initial;
+    <span class="k">const</span> raw = localStorage.<span class="f">getItem</span>(key);
+    <span class="k">return</span> raw ? (<span class="n">JSON</span>.<span class="f">parse</span>(raw) <span class="k">as</span> T) : initial;
+  });
+  <span class="f">useEffect</span>(() =&gt; localStorage.<span class="f">setItem</span>(key, <span class="n">JSON</span>.<span class="f">stringify</span>(value)), [key, value]);
+  <span class="k">return</span> [value, setValue] <span class="k">as const</span>;
+}</pre>
+<pre id="js"><span class="k">export function</span> <span class="f">useLocalStorage</span>(key, initial) {
+  <span class="k">const</span> [value, setValue] = <span class="f">useState</span>(() =&gt; {
+    <span class="k">if</span> (<span class="k">typeof</span> window === <span class="s">'undefined'</span>) <span class="k">return</span> initial;
+    <span class="k">const</span> raw = localStorage.<span class="f">getItem</span>(key);
+    <span class="k">return</span> raw ? <span class="n">JSON</span>.<span class="f">parse</span>(raw) : initial;
+  });
+  <span class="f">useEffect</span>(() =&gt; localStorage.<span class="f">setItem</span>(key, <span class="n">JSON</span>.<span class="f">stringify</span>(value)), [key, value]);
+  <span class="k">return</span> [value, setValue];
+}</pre>
+<div class="use"><span class="c">// usage</span><br><b>const</b> [theme, setTheme] = <b>useLocalStorage</b>(<span class="s">'theme'</span>, <span class="s">'light'</span>);</div></div>
+<div class="meta"><span><b>0.4 kB</b> gzipped</span><span><b>0</b> dependencies</span><span><b>React 18+</b></span></div></div>
+<script>
+const tabs=[...document.querySelectorAll('.t')],cp=document.getElementById('cp'),ct=document.getElementById('ct');
+tabs.forEach(b=>b.addEventListener('click',()=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===b));document.querySelectorAll('pre').forEach(p=>p.classList.toggle('on',p.id===b.dataset.t))}));
+cp.onclick=()=>{const t=document.querySelector('pre.on').innerText;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.resolve()).catch(()=>{});cp.classList.add('ok');ct.textContent='Copied';setTimeout(()=>{cp.classList.remove('ok');ct.textContent='Copy'},1400)};
+</script></body></html>

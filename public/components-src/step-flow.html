@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Onboarding Wizard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#FFF1E6,#FFE3F0 60%,#EAE6FF);color:#2A1B3D;font-family:'Urbanist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:30px 18px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:700px;background:rgba(255,255,255,.82);backdrop-filter:blur(20px);border-radius:32px;padding:30px 32px 28px;box-shadow:0 40px 70px -40px rgba(80,30,90,.5),0 0 0 1px rgba(255,255,255,.9)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;font-size:13px;font-weight:700;color:#8C7AA3;letter-spacing:.04em}
+.bar{height:6px;border-radius:6px;background:#EFE6F7;overflow:hidden;margin-bottom:26px}.bar i{display:block;height:100%;width:25%;border-radius:6px;background:linear-gradient(90deg,#FF7A59,#E84393);transition:width .5s cubic-bezier(.3,1,.4,1)}
+.pills{display:flex;gap:8px;margin-bottom:26px}
+.pl{flex:1;display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:99px;font-size:13.5px;font-weight:700;color:#A294B8;background:#F6F0FB;transition:all .3s;white-space:nowrap;overflow:hidden}
+.pl b{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11.5px;background:#fff;color:#A294B8}
+.pl.on{background:#2A1B3D;color:#fff}.pl.on b{background:#FF7A59;color:#fff}
+.pl.ok{background:#FFE9E0;color:#C2410C}.pl.ok b{background:#FF7A59;color:#fff}
+.st h1{font-size:30px;font-weight:800;letter-spacing:-.04em}.st p{color:#7A6A92;font-size:16px;margin:6px 0 20px;line-height:1.5}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.o{border:2px solid #EEE4F6;border-radius:20px;padding:16px;text-align:left;background:#fff;cursor:pointer;font:inherit;color:inherit;transition:all .2s}
+.o:hover{border-color:#D9C6EC;transform:translateY(-2px)}.o[aria-pressed=true]{border-color:#FF7A59;background:#FFF6F1;box-shadow:0 0 0 4px rgba(255,122,89,.15)}
+.o b{display:block;font-size:16px;font-weight:700}.o span{font-size:13.5px;color:#8C7AA3;line-height:1.4;display:block;margin-top:3px}
+.o i{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--b);color:#fff;margin-bottom:12px}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:26px}
+.sk{border:0;background:none;font:700 14.5px 'Urbanist';color:#8C7AA3;cursor:pointer}.sk:hover{color:#2A1B3D}
+.nx{border:0;background:#2A1B3D;color:#fff;font:700 15.5px 'Urbanist';padding:14px 28px;border-radius:99px;cursor:pointer;transition:transform .15s}.nx:hover{transform:translateY(-1px)}
+.nx:focus-visible,.sk:focus-visible,.o:focus-visible{outline:2px solid #E84393;outline-offset:3px}
+@media(max-width:600px){.pl span{display:none}.opts{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="top"><span id="c">STEP 1 OF 4</span><span>Setup takes about 2 min</span></div><div class="bar"><i id="b"></i></div>
+<div class="pills" id="pl"></div><div class="st" id="s"></div>
+<div class="ft"><button class="sk" id="sk">Skip for now</button><button class="nx" id="nx">Continue →</button></div></div>
+<script>
+const N=['Role','Goals','Team','Launch'];
+const ic='<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">';
+const S=[['What best describes you?','We\'ll tailor your first board to match.',[['Founder','Running the whole show','#FF7A59',ic+'<path d="M12 3 4 7v5c0 5 3.400 8 8 9 4.600-1 8-4 8-9V7Z"/></svg>'],['Designer','Crafting product experiences','#E84393',ic+'<path d="M12 19l7-7-3-3-7 7v3ZM15 6l3 3"/></svg>'],['Engineer','Shipping features and fixes','#6C5CE7',ic+'<path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg>'],['Marketer','Launching and growing','#00B894',ic+'<path d="M3 11v2l15 6V5ZM18 9a3 3 0 0 1 0 6"/></svg>']]],['What are you aiming for?','Pick one — you can change it later.',[['Ship faster','Cut the time to release','#FF7A59',ic+'<path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg>'],['Stay aligned','One plan for everyone','#6C5CE7',ic+'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>'],['Hit deadlines','Never miss a handoff','#E84393',ic+'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'],['Report easily','Updates that write themselves','#00B894',ic+'<path d="M4 20V10M10 20V4M16 20v-7"/></svg>']]],['How big is your team?','So we can set sensible defaults.',[['Just me','Solo, for now','#FF7A59',ic+'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>'],['2–10','Small and scrappy','#6C5CE7',ic+'<circle cx="9" cy="8" r="3.500"/><path d="M3 20a6 6 0 0 1 12 0M17 4a3.500 3.500 0 0 1 0 7"/></svg>'],['11–50','Growing fast','#E84393',ic+'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.500"/><path d="M3 20a6 6 0 0 1 12 0M15 20a4.500 4.500 0 0 1 6 0"/></svg>'],['50+','Several squads','#00B894',ic+'<path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/></svg>']]],['You\'re all set','Your workspace is ready to go.',[]]];
+let i=0;const sel={};const pl=document.getElementById('pl'),s=document.getElementById('s'),b=document.getElementById('b');
+function r(){pl.innerHTML=N.map((n,k)=>'<div class="pl '+(k<i?'ok':k===i?'on':'')+'"><b>'+(k<i?'✓':k+1)+'</b><span>'+n+'</span></div>').join('');
+ const d=S[i];s.innerHTML='<h1>'+d[0]+'</h1><p>'+d[1]+'</p>'+(d[2].length?'<div class="opts">'+d[2].map((o,k)=>'<button class="o" aria-pressed="'+(sel[i]===k)+'" data-k="'+k+'"><i style="--b:'+o[2]+'">'+o[3]+'</i><b>'+o[0]+'</b><span>'+o[1]+'</span></button>').join('')+'</div>':'<div style="padding:26px 0;font-size:54px;font-weight:800;letter-spacing:-.05em;background:linear-gradient(90deg,#FF7A59,#E84393);-webkit-background-clip:text;background-clip:text;color:transparent">Let\'s ship.</div>');
+ s.querySelectorAll('.o').forEach(o=>o.onclick=()=>{sel[i]=+o.dataset.k;r()});
+ b.style.width=((i+1)/4*100)+'%';document.getElementById('c').textContent='STEP '+(i+1)+' OF 4';
+ document.getElementById('nx').textContent=i===3?'Open workspace':'Continue →';document.getElementById('sk').style.visibility=i===3?'hidden':'visible'}
+document.getElementById('nx').onclick=()=>{if(i<3){i++;r()}};document.getElementById('sk').onclick=()=>{if(i<3){i++;r()}};r();
+</script></body></html>

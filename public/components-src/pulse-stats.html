@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>KPI Strip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;700;900&family=Red+Hat+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080B10;color:#E8EDF5;font-family:'Red Hat Display',sans-serif;min-height:100vh;display:grid;place-items:center;padding:36px 20px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:980px}
+.h{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.h h1{font-size:15px;font-weight:700;letter-spacing:.02em;color:#9AA7BC}
+.h span{font:500 12px 'Red Hat Mono',monospace;color:#5A6880;display:flex;align-items:center;gap:8px}.h span i{width:7px;height:7px;border-radius:50%;background:#2DD4A0;box-shadow:0 0 8px #2DD4A0;animation:p 1.8s infinite}@keyframes p{50%{opacity:.3}}
+.g{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #1B2230;border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#0E131C,#0A0E15)}
+.c{position:relative;padding:26px 24px 20px;border-right:1px solid #1B2230;transition:background .3s}
+.c:last-child{border-right:0}.c:hover{background:rgba(255,255,255,.025)}
+.c small{font-size:12.5px;font-weight:700;color:#7C8AA1;letter-spacing:.06em;text-transform:uppercase}
+.n{font-size:clamp(36px,5vw,54px);font-weight:900;letter-spacing:-.05em;line-height:1;margin:12px 0 8px;background:linear-gradient(135deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.t{display:inline-flex;align-items:center;gap:5px;font:500 12px 'Red Hat Mono',monospace;padding:4px 9px;border-radius:99px}
+.up{color:#34D399;background:rgba(52,211,153,.12)}.dn{color:#FB7185;background:rgba(251,113,133,.12)}
+.sp{display:block;width:100%;height:44px;margin-top:16px}
+.sp path.l{fill:none;stroke:var(--a);stroke-width:2;stroke-linecap:round;stroke-dasharray:240;stroke-dashoffset:240;animation:d 1.6s .3s ease forwards}
+@keyframes d{to{stroke-dashoffset:0}}
+@media(max-width:760px){.g{grid-template-columns:1fr 1fr}.c:nth-child(2){border-right:0}.c:nth-child(-n+2){border-bottom:1px solid #1B2230}}
+@media(prefers-reduced-motion:reduce){.sp path.l{animation:none;stroke-dashoffset:0}.h span i{animation:none}}
+</style></head><body>
+<div class="w"><div class="h"><h1>Last 30 days</h1><span><i></i>Live · updated just now</span></div>
+<div class="g" id="g"></div></div>
+<script>
+const K=[['Active users',184200,'',12.4,1,'#00E0B8','#2D9CFF','M0 34 22 30 44 32 66 22 88 24 110 14 132 18 154 8 176 12 200 4'],['Revenue',2.84,'M',8.1,1,'#FFB020','#FF6A3D','M0 30 24 32 46 24 68 28 90 18 112 20 134 12 156 14 178 6 200 8'],['Churn',1.9,'%',0.6,0,'#FF5C8A','#B24BFF','M0 8 22 12 44 10 66 18 88 16 110 24 132 22 154 28 176 26 200 32'],['NPS',72,'',5,1,'#7C8CFF','#C084FC','M0 28 22 26 44 28 66 20 88 22 110 16 132 18 154 10 176 12 200 6']];
+const g=document.getElementById('g'),fm=(v,s)=>s==='M'?v.toFixed(2):s==='%'?v.toFixed(1):Math.round(v).toLocaleString();
+g.innerHTML=K.map((k,i)=>'<div class="c" style="--a:'+k[5]+';--b:'+k[6]+'"><small>'+k[0]+'</small><div class="n" data-i="'+i+'">0</div><span class="t '+(k[4]?'up':'dn')+'">'+(k[4]?'▲':'▼')+' '+k[3]+(k[2]==='M'||k[0]==='NPS'?'':'%')+' vs prior</span><svg class="sp" viewBox="0 0 200 40" preserveAspectRatio="none"><path class="l" d="'+k[7]+'"/></svg></div>').join('');
+const R=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('.n').forEach(el=>{const k=K[+el.dataset.i],pre=k[2]==='M'?'$':'',suf=k[2]==='M'?'M':k[2]==='%'?'%':'';
+ const t0=performance.now();(function f(t){const p=R?1:Math.min(1,(t-t0)/1400),e=1-Math.pow(1-p,3);el.textContent=pre+fm(k[1]*e,k[2])+suf;if(p<1)requestAnimationFrame(f)})(t0)});
+</script></body></html>

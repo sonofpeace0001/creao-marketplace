@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Roadmap Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F0FA;color:#1C1738;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:820px}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px;flex-wrap:wrap;gap:10px}.hd h1{font-size:26px;font-weight:800;letter-spacing:-.04em}.hd p{font-size:14px;color:#7D76A6;margin-top:3px}
+.lg{display:flex;gap:6px}.lg span{font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px;background:#fff;border:1px solid #E3DFF3;color:#6A63A0}
+.bd{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.col{background:#E9E6F6;border-radius:20px;padding:12px}.ch{display:flex;align-items:center;gap:8px;padding:6px 6px 12px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.ch i{width:9px;height:9px;border-radius:50%;background:var(--c)}.ch span{margin-left:auto;font-size:12px;background:#fff;border-radius:99px;padding:2px 9px;color:#6A63A0}
+.cd{background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(28,23,56,.08);transition:transform .2s,box-shadow .2s;cursor:default}.cd:hover{transform:translateY(-3px);box-shadow:0 12px 22px -10px rgba(28,23,56,.3)}
+.cd b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em;margin-bottom:5px}.cd p{font-size:13px;color:#7D76A6;line-height:1.45}
+.ft{display:flex;align-items:center;justify-content:space-between;margin-top:12px}.tg{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:99px}
+.vt{display:flex;align-items:center;gap:6px;border:1.5px solid #E3DFF3;background:#fff;border-radius:99px;padding:4px 10px 4px 8px;font:700 12px 'Plus Jakarta Sans';color:#6A63A0;cursor:pointer;transition:all .15s}.vt:hover{border-color:#6D4DF2;color:#6D4DF2}.vt[aria-pressed=true]{background:#6D4DF2;border-color:#6D4DF2;color:#fff}.vt:focus-visible{outline:2px solid #6D4DF2;outline-offset:2px}
+.pr{height:5px;border-radius:5px;background:#EEEBF8;margin-top:12px;overflow:hidden}.pr i{display:block;height:100%;background:var(--c);border-radius:5px}
+@media(max-width:680px){.bd{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Product roadmap</h1><p>What we are building next. Vote for what matters to you.</p></div><div class="lg"><span>Q4 2026</span><span>Q1 2027</span></div></div>
+<div class="bd" id="bd"></div></div>
+<script>
+const C=[['Shipping now','#10B981',[['Shared dashboards','Pin and share live charts with your whole team.','Analytics','#DDD6FE','#5B21B6',182,70],['Slack digest','Daily summaries delivered to any channel.','Integrations','#BAE6FD','#075985',96,40]]],['Up next','#6D4DF2',[['Role-based access','Granular permissions per workspace and project.','Security','#FBCFE8','#9D174D',241,0],['Mobile app','Native iOS and Android with offline support.','Platform','#BBF7D0','#166534',308,0]]],['Exploring','#F59E0B',[['AI report writer','Draft written insights straight from your data.','AI','#FDE68A','#92400E',417,0],['Custom domains','Host dashboards on your own domain.','Platform','#BBF7D0','#166534',74,0]]]];
+document.getElementById('bd').innerHTML=C.map(c=>'<section class="col" style="--c:'+c[1]+'"><div class="ch"><i></i>'+c[0]+'<span>'+c[2].length+'</span></div>'+c[2].map((x,i)=>'<article class="cd"><b>'+x[0]+'</b><p>'+x[1]+'</p>'+(x[6]?'<div class="pr"><i style="width:'+x[6]+'%"></i></div>':'')+'<div class="ft"><span class="tg" style="background:'+x[3]+';color:'+x[4]+'">'+x[2]+'</span><button class="vt" aria-pressed="false" data-n="'+x[5]+'" aria-label="Vote for '+x[0]+'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg><span>'+x[5]+'</span></button></div></article>').join('')+'</section>').join('');
+document.querySelectorAll('.vt').forEach(b=>b.onclick=()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);b.lastChild.textContent=+b.dataset.n+(on?1:0)});
+</script></body></html>

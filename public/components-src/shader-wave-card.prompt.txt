@@ -1,0 +1,29 @@
+ROLE
+You are a senior creative technologist and front-end engineer with 15+ years of experience. Build "Wave Field Card": a generative colour-field card whose light follows the cursor, with a glass pill and a white CTA.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Vivid teal, violet, magenta and amber light pools drifting under fine diagonal lines on near-black.
+- Palette: #00E0C6, #0A0B14, #06070D, #5B3DFF, #FF3D8B, #FFB020
+- Type: Syne, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Animated blurred gradient field, diagonal line texture, cursor-following highlight, glass 'Generative · live' pill, headline, description and a CTA.
+
+INTERACTION & STATES
+- The highlight tracks the pointer via --x/--y; the field drifts and rotates over 14s; CTA lifts on hover; animation off under reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

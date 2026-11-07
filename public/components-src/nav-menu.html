@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pill Navigation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(800px 500px at 50% -10%,#2B1B4A,transparent 60%),#0A0910;color:#F1EEFA;font-family:'Inter',sans-serif;min-height:100vh;padding:26px 16px;-webkit-font-smoothing:antialiased}
+.nv{position:relative;max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(16px);border-radius:99px;box-shadow:0 20px 50px -20px #000}
+.lg{font:500 23px 'Fraunces',serif;letter-spacing:-.03em;margin-right:6px}.lg em{font-weight:400;color:#C4A6FF}
+.ln{position:relative;display:flex;gap:2px;flex:1}
+.ln a{position:relative;z-index:1;color:#BDB4D6;text-decoration:none;font-size:14.5px;font-weight:500;padding:10px 16px;border-radius:99px;transition:color .2s}
+.ln a:hover,.ln a.on{color:#fff}.ln a:focus-visible{outline:2px solid #C4A6FF;outline-offset:-2px}
+.bg{position:absolute;z-index:0;top:0;bottom:0;border-radius:99px;background:rgba(255,255,255,.12);transition:left .3s cubic-bezier(.3,1.3,.4,1),width .3s cubic-bezier(.3,1.3,.4,1)}
+.ac{position:absolute;z-index:0;bottom:3px;height:3px;border-radius:3px;background:linear-gradient(90deg,#C4A6FF,#FF9BD0);transition:left .3s cubic-bezier(.3,1.3,.4,1),width .3s cubic-bezier(.3,1.3,.4,1)}
+.cta{background:#fff;color:#14101F;font-weight:600;font-size:14.5px;padding:11px 20px;border-radius:99px;text-decoration:none;transition:transform .2s}.cta:hover{transform:scale(1.04)}.cta:focus-visible{outline:2px solid #C4A6FF;outline-offset:3px}
+.pg{max-width:760px;margin:90px auto 0;text-align:center}.pg small{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#8D80B4;font-weight:600}
+.pg h1{font:500 clamp(40px,7vw,76px)/.98 'Fraunces',serif;letter-spacing:-.04em;margin-top:14px}.pg h1 em{font-weight:400;color:#C4A6FF}
+@media(max-width:620px){.ln a:nth-child(n+4){display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<nav class="nv" aria-label="Main"><span class="lg">Atelier<em>.</em></span><div class="ln" id="ln"><span class="bg" id="bg"></span><span class="ac" id="ac"></span><a href="#" class="on">Work</a><a href="#">Studio</a><a href="#">Journal</a><a href="#">Shop</a><a href="#">Contact</a></div><a class="cta" href="#">Start a project</a></nav>
+<div class="pg"><small>Independent design studio</small><h1>Objects with a <em>quiet</em> kind of confidence.</h1></div>
+<script>
+const ln=document.getElementById('ln'),bg=document.getElementById('bg'),ac=document.getElementById('ac'),L=[...ln.querySelectorAll('a')];let cur=L[0];
+function mv(el,h){const r=el.offsetLeft,w=el.offsetWidth;bg.style.left=r+'px';bg.style.width=w+'px';bg.style.opacity=h?1:0;ac.style.left=(cur.offsetLeft+cur.offsetWidth/2-12)+'px';ac.style.width='24px'}
+L.forEach(a=>{a.addEventListener('mouseenter',()=>mv(a,true));a.addEventListener('focus',()=>mv(a,true));a.addEventListener('click',e=>{e.preventDefault();L.forEach(x=>x.classList.toggle('on',x===a));cur=a;mv(a,true)})});
+ln.addEventListener('mouseleave',()=>mv(cur,false));ln.addEventListener('focusout',()=>mv(cur,false));
+const init=()=>mv(cur,false);document.fonts.ready.then(init);addEventListener('resize',init);init();
+</script></body></html>

@@ -1,0 +1,32 @@
+ROLE
+You are a senior product designer and front-end engineer (workspace apps) with 15+ years of experience. Build "Edge Rail Dock": a floating vertical dock rail with gradient tiles, side tooltips, an unread badge and an active-glow indicator.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight indigo with glassy rail and saturated gradient tiles; calm until you reach for it.
+- Palette: #17284A, #2A1346, #070912, #E8ECF8, #0B0E1A, #FF4D6D
+- Type: Hanken Grotesk (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Vertical glass rail with five tiles (Home, Projects, Inbox with badge, Analytics) and a divider before Settings.
+- Beside it, a short heading and paragraph describing the interaction.
+
+INTERACTION & STATES
+- Hover slides the tile 6px right, enlarges it and reveals a side label; focus shows the same.
+- Click sets the active tile (white glow bar) and clears the Inbox badge.
+- On narrow screens the rail becomes a bottom bar.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

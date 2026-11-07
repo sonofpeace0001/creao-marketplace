@@ -1,0 +1,31 @@
+ROLE
+You are a senior brand designer and front-end engineer (lifestyle and wellness sites) with 15+ years of experience. Build "Soft Focus Mesh": a calm pastel mesh gradient with grain and floating outline shapes behind a serif headline.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm, human and gentle: peach, lilac, mint and butter light pools on cream with multiplied grain.
+- Palette: #2A2230, #FBF4EE, #FFC9B5, #D9CCFF, #BFEBD9, #FFE6A8
+- Type: Fraunces, DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Four radial pastel pools blurred and slowly animating, a grain layer, two outline shapes.
+- Pill label, Fraunces display headline with an italic lilac word, short paragraph and a dark pill button.
+
+INTERACTION & STATES
+- Mesh drifts 22s alternate; shapes float on offset loops.
+- Button lifts 2px on hover; everything static under reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

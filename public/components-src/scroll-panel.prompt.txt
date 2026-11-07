@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer-tools designer and front-end engineer with 15+ years of experience. Build "Audit Log Panel": a dark audit-log panel with sticky date headers, a styled scrollbar, event icons and All/Deploys/Access filters.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Quiet graphite panel with mono timestamps, tinted event badges and a custom thin scrollbar.
+- Palette: #E6E8F0, #0A0B0F, #10121A, #1B1E2B, #232739, #1F2230
+- Type: Geist Mono, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with filter chips; scroll area grouped by day (Today, Yesterday, a date) with sticky headers; rows with time, coloured icon badge and rich message with inline code.
+
+INTERACTION & STATES
+- Filters hide non-matching rows (aria-pressed); date headers stay sticky while scrolling; the scrollbar is custom-styled.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

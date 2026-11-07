@@ -1,0 +1,30 @@
+ROLE
+You are a senior photo-product designer and front-end engineer with 15+ years of experience. Build "Gallery Card": a photo card with a CSS-drawn golden-hour landscape, like and save toggles with a live count, and an italic caption.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dusky plum card with a sunset gradient scene, glass overlay controls and an italic serif title.
+- Palette: #FF9A5C, #EFEAF5, #14111A, #262031, #B8456E, #1C1626
+- Type: Fraunces, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Illustrated landscape with sun, ridgelines and a 'Golden hour' badge; like and save buttons; caption, author row and like count.
+
+INTERACTION & STATES
+- Like toggles aria-pressed, fills the heart and increments/decrements the count.
+- Save toggles independently; both buttons scale on hover and show focus rings.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

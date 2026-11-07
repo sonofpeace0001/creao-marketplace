@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Checkout Steps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#16A34A;--ink:#10231A;--m:#6C7F74;--l:#DDE7E0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF4EF;color:var(--ink);font-family:'Rubik',sans-serif;min-height:100vh;display:grid;place-items:center;padding:34px 18px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:640px;background:#fff;border-radius:28px;padding:32px;box-shadow:0 30px 60px -36px rgba(16,35,26,.45),0 0 0 1px rgba(16,35,26,.06)}
+ol{display:flex;list-style:none;margin-bottom:30px}
+li{flex:1;display:flex;flex-direction:column;align-items:center;gap:9px;position:relative;font-size:13px;font-weight:500;color:var(--m);text-align:center}
+li::before{content:"";position:absolute;top:19px;left:calc(-50% + 22px);right:calc(50% + 22px);height:3px;background:var(--l);border-radius:3px}
+li::after{content:"";position:absolute;top:19px;left:calc(-50% + 22px);right:calc(50% + 22px);height:3px;background:var(--g);border-radius:3px;transform:scaleX(0);transform-origin:left;transition:transform .5s}
+li:first-child::before,li:first-child::after{display:none}
+li.done::after,li.now::after{transform:scaleX(1)}
+li i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid var(--l);font-style:normal;font-weight:600;color:var(--m);position:relative;z-index:1;transition:all .35s}
+li.done i{background:var(--g);border-color:var(--g);color:#fff}
+li.now i{border-color:var(--g);color:var(--g);box-shadow:0 0 0 6px rgba(22,163,74,.15)}
+li.now,li.done{color:var(--ink)}
+.p{min-height:150px}.p h2{font-size:22px;font-weight:600;letter-spacing:-.03em}.p p{color:var(--m);font-size:15px;margin:6px 0 18px;line-height:1.5}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:12px}.f label{font-size:12.5px;font-weight:500;color:var(--m);display:block;margin-bottom:6px}
+.f input{width:100%;border:1.5px solid var(--l);border-radius:12px;padding:12px 14px;font:400 15px 'Rubik';color:var(--ink);outline:0}.f input:focus{border-color:var(--g);box-shadow:0 0 0 4px rgba(22,163,74,.12)}
+.sum{border:1.5px dashed var(--l);border-radius:16px;padding:16px;display:grid;gap:9px;font-size:14.5px}.sum div{display:flex;justify-content:space-between}.sum b{font-weight:600}.sum .t{border-top:1px solid var(--l);padding-top:10px;font-size:16px}
+.ft{display:flex;justify-content:space-between;margin-top:26px}
+.b{border:0;font:600 15px 'Rubik';padding:13px 24px;border-radius:13px;cursor:pointer;transition:transform .15s}
+.bk{background:none;color:var(--m)}.bk:hover:not(:disabled){color:var(--ink)}.bk:disabled{opacity:.3;cursor:default}
+.nx{background:var(--g);color:#fff;box-shadow:0 10px 20px -10px rgba(22,163,74,.7)}.nx:hover{transform:translateY(-1px)}
+.b:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><ol id="o"><li><i>1</i>Cart</li><li><i>2</i>Details</li><li><i>3</i>Payment</li></ol>
+<div class="p" id="p" aria-live="polite"></div>
+<div class="ft"><button class="b bk" id="bk">Back</button><button class="b nx" id="nx">Continue</button></div></div>
+<script>
+const S=[['Review your cart','Three items from Field & Fern ready to ship.','<div class="sum"><div><span>Linen throw — Sage</span><b>$84.00</b></div><div><span>Ceramic planter ×2</span><b>$62.00</b></div><div class="t"><span>Subtotal</span><b>$146.00</b></div></div>'],['Where should we send it?','We deliver in 2–4 working days.','<div class="f"><div><label for="a">Full name</label><input id="a" value="Maya Okonkwo"></div><div><label for="b">Postcode</label><input id="b" value="E2 8AA"></div></div>'],['Confirm and pay','You won\'t be charged until you press Pay.','<div class="sum"><div><span>Subtotal</span><b>$146.00</b></div><div><span>Delivery</span><b>Free</b></div><div class="t"><span>Total today</span><b>$146.00</b></div></div>']];
+let s=0;const li=[...document.querySelectorAll('li')],p=document.getElementById('p'),bk=document.getElementById('bk'),nx=document.getElementById('nx');
+function r(){li.forEach((l,i)=>{l.className=i<s?'done':i===s?'now':'';l.querySelector('i').textContent=i<s?'✓':i+1});p.innerHTML='<h2>'+S[s][0]+'</h2><p>'+S[s][1]+'</p>'+S[s][2];bk.disabled=s===0;nx.textContent=s===2?'Pay $146.00':'Continue'}
+nx.onclick=()=>{if(s<2){s++;r()}else{nx.textContent='Paid — thank you';nx.disabled=true}};bk.onclick=()=>{if(s>0){s--;r()}};r();
+</script></body></html>

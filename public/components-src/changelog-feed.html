@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Changelog Feed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FAFAF9;color:#171717;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:600px}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:26px}.hd h1{font-size:30px;font-weight:700;letter-spacing:-.04em}.hd p{font-size:14.5px;color:#737373;margin-top:4px}
+.rs{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#171717;border:1px solid #E5E5E5;border-radius:99px;padding:8px 14px;background:#fff;text-decoration:none}.rs:hover{border-color:#171717}.rs:focus-visible{outline:2px solid #171717;outline-offset:2px}
+.fl{display:flex;gap:6px;margin-bottom:22px;flex-wrap:wrap}.fl button{border:1px solid #E5E5E5;background:#fff;border-radius:99px;padding:6px 13px;font:500 13px 'Geist';color:#737373;cursor:pointer}.fl button[aria-pressed=true]{background:#171717;color:#fff;border-color:#171717}.fl button:focus-visible{outline:2px solid #171717;outline-offset:2px}
+.tl{position:relative;padding-left:26px}.tl::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1.5px;background:#E5E5E5}
+.en{position:relative;padding-bottom:34px}.en:last-child{padding-bottom:0}.en[hidden]{display:none}.en::before{content:"";position:absolute;left:-26px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px solid var(--c)}
+.mt{display:flex;align-items:center;gap:10px;margin-bottom:8px}.mt time{font:400 13px 'Geist Mono',monospace;color:#737373}.vr{font:500 12px 'Geist Mono',monospace;background:#F0F0EF;border-radius:6px;padding:2px 8px}
+.tg{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:99px;background:color-mix(in srgb,var(--c) 14%,#fff);color:var(--c)}
+.en h2{font-size:20px;font-weight:700;letter-spacing:-.025em;margin-bottom:6px}.en p{font-size:15px;line-height:1.6;color:#525252}
+.en ul{margin:10px 0 0 18px;font-size:14.5px;color:#525252;line-height:1.7}
+.img{margin-top:14px;height:120px;border-radius:14px;background:linear-gradient(135deg,#FDE68A,#FDA4AF 55%,#C4B5FD);position:relative;overflow:hidden}.img::after{content:"";position:absolute;inset:18px 24px 0;border-radius:10px 10px 0 0;background:rgba(255,255,255,.85);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Changelog</h1><p>New features, fixes and improvements to Lattice.</p></div><a class="rs" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16M5 19h.01"/></svg>RSS</a></div>
+<div class="fl" id="fl" role="group" aria-label="Filter"><button aria-pressed="true" data-f="all">All</button><button aria-pressed="false" data-f="New">New</button><button aria-pressed="false" data-f="Improved">Improved</button><button aria-pressed="false" data-f="Fixed">Fixed</button></div>
+<div class="tl">
+<article class="en" data-t="New" style="--c:#16A34A"><div class="mt"><time>Nov 5, 2026</time><span class="vr">v2.8.0</span><span class="tg">New</span></div><h2>Shared views and saved filters</h2><p>Save any filter as a view and share it with your team, so everyone looks at the same slice of data.</p><div class="img" role="img" aria-label="Shared views preview"></div></article>
+<article class="en" data-t="Improved" style="--c:#2563EB"><div class="mt"><time>Oct 22, 2026</time><span class="vr">v2.7.4</span><span class="tg">Improved</span></div><h2>Faster search across large workspaces</h2><p>Search now returns results up to 3x faster and highlights the matching text.</p><ul><li>Indexing runs in the background</li><li>Typo-tolerant matching</li></ul></article>
+<article class="en" data-t="Fixed" style="--c:#D97706"><div class="mt"><time>Oct 9, 2026</time><span class="vr">v2.7.1</span><span class="tg">Fixed</span></div><h2>Export and timezone fixes</h2><p>CSV exports no longer drop the last row, and scheduled reports respect your timezone.</p></article>
+</div></div>
+<script>
+document.querySelectorAll('#fl button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#fl button').forEach(x=>x.setAttribute('aria-pressed',x===b));document.querySelectorAll('.en').forEach(e=>e.hidden=b.dataset.f!=='all'&&e.dataset.t!==b.dataset.f)});
+</script></body></html>

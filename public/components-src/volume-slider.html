@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Player Controls</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--v:70}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#FFE9E1,#F6E6FF 55%,#E1ECFF);color:#2A1F40;font-family:'Nunito',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:400px;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-radius:34px;padding:22px;box-shadow:0 40px 70px -40px rgba(80,40,140,.55),0 0 0 1px rgba(255,255,255,.9)}
+.al{position:relative;aspect-ratio:1;border-radius:26px;background:conic-gradient(from 210deg at 30% 70%,#FF8A5B,#F43F8E,#8B5CF6,#38BDF8,#FF8A5B);display:grid;place-items:center;overflow:hidden;box-shadow:0 22px 34px -18px rgba(139,92,246,.7)}
+.al::before{content:"";position:absolute;width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#2A1F40 0 22%,#3D2F5C 23% 24%,#2A1F40 25% 38%,#3D2F5C 39% 40%,#2A1F40 41%);box-shadow:0 0 0 8px rgba(255,255,255,.25);animation:sp 7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}.al::after{content:"";position:absolute;width:11%;aspect-ratio:1;border-radius:50%;background:#fff}
+.mt{text-align:center;margin:18px 0 16px}.mt b{display:block;font-size:20px;font-weight:800;letter-spacing:-.03em}.mt span{font-size:14px;color:#7A6A9A;font-weight:600}
+.vl{display:flex;align-items:center;gap:13px;padding:14px 16px;background:#F6F1FF;border-radius:20px}
+.mu{flex:none;width:42px;height:42px;border:0;border-radius:14px;background:#fff;color:#7C3AED;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 10px -4px rgba(124,58,237,.4);transition:all .2s}.mu:hover{transform:scale(1.07)}.mu:focus-visible{outline:3px solid #7C3AED;outline-offset:2px}.mu[aria-pressed=true]{background:#7C3AED;color:#fff}
+.sl{position:relative;flex:1;height:34px;display:flex;align-items:center}
+.tk{position:absolute;left:0;right:0;height:10px;border-radius:10px;background:#E4D9F7;overflow:hidden}.tk i{display:block;height:100%;width:calc(var(--v)*1%);border-radius:10px;background:linear-gradient(90deg,#8B5CF6,#F43F8E);transition:width .1s}
+input[type=range]{position:relative;width:100%;height:34px;margin:0;-webkit-appearance:none;appearance:none;background:none;outline:0;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 4px #8B5CF6,0 6px 12px rgba(80,40,140,.4);transition:transform .15s}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 4px #8B5CF6}
+input[type=range]:active::-webkit-slider-thumb{transform:scale(1.2)}input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px #8B5CF6,0 0 0 8px rgba(139,92,246,.35)}
+.pc{flex:none;min-width:44px;text-align:right;font-size:15px;font-weight:800;color:#7C3AED;font-variant-numeric:tabular-nums}
+.ct{display:flex;justify-content:center;gap:12px;margin-top:16px}.ct button{width:46px;height:46px;border:0;border-radius:50%;background:#F6F1FF;color:#4A3A6A;cursor:pointer;display:grid;place-items:center}.ct .pl{width:58px;height:58px;background:#2A1F40;color:#fff}.ct button:hover{transform:scale(1.07)}.ct button:focus-visible{outline:3px solid #7C3AED;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.al::before{animation:none}*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="al" aria-hidden="true"></div><div class="mt"><b>Golden Hour Drive</b><span>Neon Coast · Side B</span></div>
+<div class="vl"><button class="mu" id="m" aria-pressed="false" aria-label="Mute"><svg id="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.300" stroke-linecap="round" stroke-linejoin="round"></svg></button><div class="sl"><div class="tk"><i></i></div><input id="r" type="range" min="0" max="100" value="70" aria-label="Volume"></div><span class="pc" id="p">70%</span></div>
+<div class="ct"><button aria-label="Previous"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12Z"/></svg></button><button class="pl" aria-label="Play"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="margin-left:2px"><path d="M8 5.500v13a1 1 0 0 0 1.500.860l10.500-6.500a1 1 0 0 0 0-1.720L9.500 4.640A1 1 0 0 0 8 5.500Z"/></svg></button><button aria-label="Next"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7Z"/></svg></button></div></div>
+<script>
+const r=document.getElementById('r'),m=document.getElementById('m'),ic=document.getElementById('ic');let last=70,muted=false;
+const S=v=>'<path d="M4 9v6h4l5 4V5L8 9Z"/>'+(v===0?'<path d="m17 9 5 6M22 9l-5 6"/>':v<34?'<path d="M16.500 9.500a3.500 3.500 0 0 1 0 5"/>':v<67?'<path d="M16.500 9.500a3.500 3.500 0 0 1 0 5M19 7a7 7 0 0 1 0 10"/>':'<path d="M16.500 9.500a3.500 3.500 0 0 1 0 5M19 7a7 7 0 0 1 0 10M21.500 4.500a10.500 10.500 0 0 1 0 15"/>');
+function set(v){document.documentElement.style.setProperty('--v',v);document.getElementById('p').textContent=v+'%';ic.innerHTML=S(+v);r.setAttribute('aria-valuetext',v+' percent')}
+r.addEventListener('input',()=>{muted=+r.value===0;m.setAttribute('aria-pressed',muted);if(+r.value>0)last=+r.value;set(+r.value)});
+m.onclick=()=>{muted=!muted;m.setAttribute('aria-pressed',muted);if(muted){last=+r.value||last;r.value=0}else r.value=last;set(+r.value)};set(70);
+</script></body></html>

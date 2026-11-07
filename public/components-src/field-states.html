@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Input States Spec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F3F7;color:#161A2C;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:720px;background:#fff;border-radius:28px;padding:28px;box-shadow:0 34px 60px -38px rgba(22,26,44,.45),0 0 0 1px rgba(22,26,44,.06)}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}.hd h1{font-size:22px;font-weight:800;letter-spacing:-.04em}.hd span{font:500 11.5px 'Geist Mono',monospace;letter-spacing:.12em;color:#8A90A8}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:22px 24px}
+.cell small{display:flex;align-items:center;gap:7px;font:500 11px 'Geist Mono',monospace;letter-spacing:.1em;color:#8A90A8;text-transform:uppercase;margin-bottom:9px}.cell small i{width:7px;height:7px;border-radius:50%;background:var(--c)}
+.f label{display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;margin-bottom:7px}.f label span{font-weight:500;color:#8A90A8}
+.in{position:relative;display:flex;align-items:center;background:#fff;border:1.5px solid #D9DDEA;border-radius:13px;transition:all .2s}
+.in input{flex:1;min-width:0;border:0;background:none;outline:0;padding:13px 14px;font:500 15px 'Hanken Grotesk';color:#161A2C}.in input::placeholder{color:#A4A9BD}
+.in .pf,.in .sf{padding:0 13px;font-size:14px;color:#8A90A8;font-weight:600}.in .pf{border-right:1px solid #E6E9F2}.in svg{margin-right:13px;flex:none}
+.f p{font-size:12.5px;margin-top:6px;color:#7A8099;display:flex;gap:6px;align-items:center;line-height:1.35}
+.f.focus .in{border-color:#4F5BFF;box-shadow:0 0 0 4px rgba(79,91,255,.15)}
+.f.error .in{border-color:#E5484D;box-shadow:0 0 0 4px rgba(229,72,77,.1)}.f.error p{color:#C8353A}.f.error svg{color:#E5484D}
+.f.ok .in{border-color:#22A06B}.f.ok p{color:#1E8A5C}.f.ok svg{color:#22A06B}
+.f.dis .in{background:#F4F5F9;border-color:#E3E6EF}.f.dis input{color:#A4A9BD;cursor:not-allowed}.f.dis label{color:#A4A9BD}
+.f:not(.dis) .in:hover:not(:focus-within){border-color:#B6BCD3}
+.in:focus-within{border-color:#4F5BFF;box-shadow:0 0 0 4px rgba(79,91,255,.15)}.f.error .in:focus-within{border-color:#E5484D}
+@media(max-width:620px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Input states</h1><span>SPEC · 06 VARIANTS</span></div>
+<div class="g">
+ <div class="cell" style="--c:#A4A9BD"><small><i></i>Default</small><div class="f"><label for="a">Full name <span>Optional</span></label><div class="in"><input id="a" placeholder="Ada Lovelace"></div><p>As it appears on your ID.</p></div></div>
+ <div class="cell" style="--c:#4F5BFF"><small><i></i>Focus</small><div class="f focus"><label for="b">Email</label><div class="in"><input id="b" placeholder="you@company.com" value="ada@"></div><p>We'll never share your address.</p></div></div>
+ <div class="cell" style="--c:#161A2C"><small><i></i>Filled · with affixes</small><div class="f"><label for="c">Website</label><div class="in"><span class="pf">https://</span><input id="c" value="northwind.co"><span class="sf">.com</span></div><p>Your public portfolio link.</p></div></div>
+ <div class="cell" style="--c:#E5484D"><small><i></i>Error</small><div class="f error"><label for="d">Phone</label><div class="in"><input id="d" value="555 12"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.500v.01"/></svg></div><p>Enter a full 10-digit number.</p></div></div>
+ <div class="cell" style="--c:#22A06B"><small><i></i>Success</small><div class="f ok"><label for="e">Username</label><div class="in"><input id="e" value="ada.lovelace"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></div><p>Great — that username is available.</p></div></div>
+ <div class="cell" style="--c:#D9DDEA"><small><i></i>Disabled</small><div class="f dis"><label for="g">Account ID</label><div class="in"><input id="g" value="ACC-48210-X" disabled></div><p>Contact support to change this.</p></div></div>
+</div></div></body></html>

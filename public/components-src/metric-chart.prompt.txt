@@ -1,0 +1,30 @@
+ROLE
+You are a senior analytics designer and front-end engineer with 15+ years of experience. Build "Traffic Line Chart": a smooth area chart with 7D/30D/90D ranges, a self-drawing line, a crosshair and a value tooltip.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep aubergine card with a teal-to-violet line and soft gradient area, set in Bricolage Grotesque with mono labels.
+- Palette: #120F1C, #F0EDFA, #8A81A8, #C084FC, #1A1030, #0A0910
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with label, large visitor count and a delta chip; range switch; SVG chart with dashed gridlines, line, area, crosshair and dot; x-axis labels.
+
+INTERACTION & STATES
+- Changing range regenerates the series, redraws the curve with a stroke-dashoffset animation and recounts the headline.
+- Pointer movement snaps a crosshair and dot to the nearest point and shows a tooltip with the value and day.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

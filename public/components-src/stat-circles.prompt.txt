@@ -1,0 +1,30 @@
+ROLE
+You are a senior product designer and front-end engineer (goal tracking) with 15+ years of experience. Build "Ring Stats": three animated progress rings with end-cap markers and a Q3/Q4 period switch that re-fills them.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft lavender dashboard card with Lexend type and bright two-tone rings.
+- Palette: #7A74A0, #F3F0FA, #1E1838, #FAF8FF, #ECE8F7, #9A94BA
+- Type: Lexend (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Card with title, subtitle and a segmented Q3/Q4 control; three rings (Revenue, Launches, NPS) each with a centred percentage, label and detail line.
+
+INTERACTION & STATES
+- Rings fill using an animated @property --p; the end cap rotates with it.
+- Switching period redraws and re-animates; each ring has an aria-label.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

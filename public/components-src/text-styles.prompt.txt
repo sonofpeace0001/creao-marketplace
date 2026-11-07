@@ -1,0 +1,31 @@
+ROLE
+You are a senior design-systems typographer and front-end engineer with 15+ years of experience. Build "Type Scale": a live typography specimen: display to code styles that all rescale from a single base-size slider.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark specimen sheet with amber labels, mono metadata and three typefaces in clear roles.
+- Palette: #111116, #FFB347, #0B0B0E, #ECECF1, #22222B, #7C7C8A
+- Type: Instrument Serif, Inter, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with title and a BASE slider (13–20px) with value readout.
+- Six rows (Display, Heading 1, Heading 2, Body, Caption, Code) each with role/font/multiplier metadata and a sample.
+
+INTERACTION & STATES
+- Dragging the slider updates --base so every size recalculates with calc().
+- Custom amber slider thumb with a visible focus halo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

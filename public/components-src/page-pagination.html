@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pill Pagination</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFEDE6;color:#1E2A22;font-family:'Karla',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:640px}
+.gd{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.cd{aspect-ratio:1/1.1;border-radius:20px;background:var(--g);display:flex;flex-direction:column;justify-content:flex-end;padding:14px;color:#fff;font-weight:700;font-size:15px;position:relative;overflow:hidden;animation:in .4s cubic-bezier(.3,1.4,.4,1)}
+@keyframes in{from{opacity:0;transform:scale(.94)}}
+.cd::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.35))}.cd span{position:relative;z-index:1}.cd small{display:block;font-weight:500;font-size:12px;opacity:.85;margin-top:1px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;border-radius:99px;padding:8px 10px;box-shadow:0 18px 30px -22px rgba(30,42,34,.5),0 0 0 1px rgba(30,42,34,.07)}
+.sz{display:flex;align-items:center;gap:8px;padding-left:12px;font-size:13.5px;color:#6A7A70;font-weight:600}
+.sz select{border:0;background:#F1F4F1;border-radius:99px;padding:8px 12px;font:700 13.5px 'Karla';color:#1E2A22;outline:0;cursor:pointer}.sz select:focus-visible{box-shadow:0 0 0 3px rgba(22,121,78,.25)}
+.pg{display:flex;align-items:center;gap:4px}
+.pg button{min-width:40px;height:40px;border:0;border-radius:99px;background:none;color:#4A5A50;font:700 14.5px 'Karla';cursor:pointer;display:grid;place-items:center;transition:all .2s}
+.pg button:hover:not(:disabled):not(.on){background:#EAF3EC;color:#16794E}.pg button:disabled{opacity:.3;cursor:not-allowed}.pg button:focus-visible{outline:2px solid #16794E;outline-offset:1px}
+.pg button.on{background:#16794E;color:#fff;box-shadow:0 8px 16px -8px rgba(22,121,78,.8)}
+.pg .el{width:26px;text-align:center;color:#9AAAA0;font-weight:700}
+.gt{display:flex;align-items:center;gap:8px;padding-right:12px;font-size:13.5px;color:#6A7A70;font-weight:600}.gt input{width:56px;border:0;background:#F1F4F1;border-radius:99px;padding:8px 10px;font:700 13.5px 'Karla';text-align:center;color:#1E2A22;outline:0}.gt input:focus{box-shadow:0 0 0 3px rgba(22,121,78,.25)}
+@media(max-width:560px){.sz,.gt{display:none}.bar{justify-content:center}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="gd" id="gd"></div>
+<div class="bar"><label class="sz">Show <select id="sz"><option>6</option><option selected>9</option><option>12</option></select></label><nav class="pg" id="pg" aria-label="Pagination"></nav><label class="gt">Go to <input id="go" inputmode="numeric" aria-label="Go to page"></label></div></div>
+<script>
+const T=84,G=['#0EA5A4,#0F766E','#F59E0B,#C2410C','#8B5CF6,#4338CA','#EC4899,#BE185D','#22C55E,#15803D','#3B82F6,#1D4ED8'],NM=['Alpine retreat','Coastal loft','Forest cabin','Desert studio','Lakeside villa','City penthouse'];
+let cur=2,sz=9;const $=id=>document.getElementById(id);
+function pages(c,t){const o=[1];let a=Math.max(2,c-1),b=Math.min(t-1,c+1);if(c<=3){a=2;b=4}if(c>=t-2){a=t-3;b=t-1}if(a>2)o.push('…');for(let i=a;i<=b;i++)o.push(i);if(b<t-1)o.push('…');o.push(t);return o}
+function draw(){const tp=Math.ceil(T/sz);cur=Math.max(1,Math.min(tp,cur));const s=(cur-1)*sz;
+ $('gd').innerHTML=Array.from({length:Math.min(sz,T-s)},(_,i)=>{const k=s+i;return '<div class="cd" style="--g:linear-gradient(150deg,'+G[k%6].replace(',',',').split(',').join(',')+')"><span>'+NM[k%6]+'<small>Stay #'+(k+1)+'</small></span></div>'}).join('');
+ $('pg').innerHTML='<button data-p="'+(cur-1)+'" '+(cur===1?'disabled':'')+' aria-label="Previous page"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>'+pages(cur,tp).map(p=>p==='…'?'<span class="el">…</span>':'<button class="'+(p===cur?'on':'')+'" data-p="'+p+'" '+(p===cur?'aria-current="page"':'')+'>'+p+'</button>').join('')+'<button data-p="'+(cur+1)+'" '+(cur===tp?'disabled':'')+' aria-label="Next page"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button>'}
+$('pg').addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(b&&!b.disabled){cur=+b.dataset.p;draw()}});$('sz').onchange=e=>{sz=+e.target.value;cur=1;draw()};
+$('go').addEventListener('keydown',e=>{if(e.key==='Enter'){const v=parseInt(e.target.value,10);if(v>0){cur=v;draw()}e.target.value=''}});draw();
+</script></body></html>

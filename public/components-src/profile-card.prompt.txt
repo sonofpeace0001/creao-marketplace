@@ -1,0 +1,29 @@
+ROLE
+You are a senior portfolio designer and front-end engineer with 15+ years of experience. Build "Creator Profile Card": a full profile card with gradient cover, serif name, stats, Work/Workshops/About tabs and a gradient portfolio grid.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm sunset cover on a cream page with Young Serif headings and a tidy 3×3 gallery.
+- Palette: #241E14, #BE185D, #F3EEE3, #8A7F6A, #EFE9DD, #F59E0B
+- Type: Young Serif, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Cover with circles; overlapping square avatar; Follow and Message buttons; name with verified badge, handle, bio; three-stat panel; tab bar; 3×3 work grid.
+
+INTERACTION & STATES
+- Tabs swap the gallery with a staggered entrance; Follow toggles to Following; buttons lift on hover and show focus rings.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

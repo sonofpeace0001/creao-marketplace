@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Spotlight CTA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Archivo+Narrow:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0605;min-height:100vh;display:grid;place-items:center;padding:32px;font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased}
+.band{--x:50%;--y:50%;position:relative;width:100%;max-width:980px;border-radius:30px;padding:72px 56px;overflow:hidden;text-align:center;background:#150C09;border:1px solid rgba(255,140,60,.18);isolation:isolate}
+.band::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(420px circle at var(--x) var(--y),rgba(255,106,26,.55),transparent 60%)}
+.band::after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(360px circle at var(--x) var(--y),#000,transparent 70%)}
+.k{font:500 13px 'Archivo Narrow';letter-spacing:.3em;text-transform:uppercase;color:#FF8A3D}
+h1{font-weight:900;font-size:clamp(42px,7vw,92px);line-height:.9;letter-spacing:-.055em;color:#FFF3EA;margin:18px 0 18px}
+h1 span{color:transparent;-webkit-text-stroke:2px #FF8A3D}
+p{color:#C9A794;font-size:18px;max-width:440px;margin:0 auto;line-height:1.5}
+.r{display:flex;justify-content:center;gap:14px;margin-top:34px;flex-wrap:wrap}
+.a{font:800 16px 'Archivo';color:#1A0B04;background:linear-gradient(180deg,#FFA45C,#FF6A1A);padding:17px 30px;border-radius:14px;text-decoration:none;box-shadow:0 18px 40px -12px rgba(255,106,26,.8),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .2s}
+.a:hover{transform:translateY(-3px) scale(1.02)}
+.o{font:700 16px 'Archivo';color:#FFE3D0;border:1.5px solid rgba(255,163,102,.4);padding:16px 28px;border-radius:14px;text-decoration:none;transition:background .2s}
+.o:hover{background:rgba(255,140,60,.12)}
+.f{margin-top:26px;font-size:13px;color:#8B6D5C}
+@media(max-width:600px){.band{padding:48px 24px}}
+</style></head><body>
+<div class="band" id="b">
+ <div class="k">Ready when you are</div>
+ <h1>Stop planning.<br><span>Start shipping.</span></h1>
+ <p>Your first deploy is five minutes away. No credit card, no sales call, no waiting.</p>
+ <div class="r"><a class="a" href="#">Deploy for free →</a><a class="o" href="#">Talk to an engineer</a></div>
+ <div class="f">Trusted by 18,000+ teams · SOC 2 Type II · 99.99% uptime</div>
+</div>
+<script>
+const b=document.getElementById('b');
+b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.setProperty('--x',(e.clientX-r.left)+'px');b.style.setProperty('--y',(e.clientY-r.top)+'px')});
+</script></body></html>

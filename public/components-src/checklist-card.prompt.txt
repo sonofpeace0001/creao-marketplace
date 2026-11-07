@@ -1,0 +1,29 @@
+ROLE
+You are a senior onboarding designer and front-end engineer (e-commerce) with 15+ years of experience. Build "Launch Checklist": a grouped setup checklist with a live progress ring, animated check marks and a Go live button that unlocks at 100%.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Fresh mint-and-ink card with an emerald progress ring and soft grouped rows.
+- Palette: #10B981, #14302A, #6A8078, #8DA39B, #C9DAD3, #E9F1EE
+- Type: Nunito Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with conic progress ring and summary; two groups (Product, Store) of three steps each with check, title, hint and status tag; footer with remaining count and a Go live button.
+
+INTERACTION & STATES
+- Click or Space/Enter toggles a step (role=checkbox); the ring animates via @property; the footer text updates; Go live enables only when every step is complete.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

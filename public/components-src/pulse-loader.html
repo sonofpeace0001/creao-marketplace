@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pulse Loaders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#06090F;color:#E6F0FF;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:640px}
+.t{background:#0C121C;border:1px solid #182234;border-radius:22px;padding:30px 12px 18px;display:flex;flex-direction:column;align-items:center;gap:26px;transition:border-color .2s}.t:hover{border-color:#2B4468}
+.st{height:64px;display:grid;place-items:center}.t b{font:500 11.5px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6C84A8;text-transform:uppercase}
+.p1{position:relative;width:54px;height:54px}.p1 i{position:absolute;inset:0;border-radius:50%;border:2px solid #38BDF8;animation:rp 2.2s cubic-bezier(.2,.6,.3,1) infinite}.p1 i:nth-child(2){animation-delay:.73s}.p1 i:nth-child(3){animation-delay:1.46s}.p1::after{content:"";position:absolute;inset:21px;border-radius:50%;background:#38BDF8;box-shadow:0 0 18px #38BDF8}
+@keyframes rp{0%{transform:scale(.25);opacity:.9}100%{transform:scale(1);opacity:0}}
+.p2{display:flex;gap:8px;align-items:center}.p2 i{width:12px;height:12px;border-radius:50%;background:#A78BFA;animation:bn 1.2s ease-in-out infinite}.p2 i:nth-child(2){animation-delay:.15s}.p2 i:nth-child(3){animation-delay:.3s}
+@keyframes bn{0%,70%,100%{transform:translateY(0) scale(.8);opacity:.45}35%{transform:translateY(-14px) scale(1.1);opacity:1}}
+.p3{display:flex;gap:5px;align-items:center;height:48px}.p3 i{width:6px;height:100%;border-radius:6px;background:linear-gradient(#34D399,#059669);animation:eq 1s ease-in-out infinite;transform-origin:center}.p3 i:nth-child(2){animation-delay:.12s}.p3 i:nth-child(3){animation-delay:.24s}.p3 i:nth-child(4){animation-delay:.36s}.p3 i:nth-child(5){animation-delay:.48s}
+@keyframes eq{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+.p4{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#FDBA74,#F97316);animation:hb 1.3s ease-in-out infinite;box-shadow:0 0 0 0 rgba(249,115,22,.5)}
+@keyframes hb{0%,100%{transform:scale(.8);box-shadow:0 0 0 0 rgba(249,115,22,.5)}30%{transform:scale(1);box-shadow:0 0 0 16px rgba(249,115,22,0)}45%{transform:scale(.9)}60%{transform:scale(1)}}
+.p5{position:relative;width:56px;height:56px}.p5 i{position:absolute;width:12px;height:12px;border-radius:50%;background:#F472B6;left:22px;top:22px;animation:orb 1.6s cubic-bezier(.6,0,.4,1) infinite}.p5 i:nth-child(2){animation-delay:-.4s;opacity:.75}.p5 i:nth-child(3){animation-delay:-.8s;opacity:.5}.p5 i:nth-child(4){animation-delay:-1.2s;opacity:.3}
+@keyframes orb{0%{transform:rotate(0) translateX(22px)}100%{transform:rotate(360deg) translateX(22px)}}
+.p6{width:90px;height:6px;border-radius:6px;background:#17233A;overflow:hidden;position:relative}.p6::after{content:"";position:absolute;inset:0;width:45%;border-radius:6px;background:linear-gradient(90deg,transparent,#38BDF8,#818CF8,transparent);animation:sw 1.4s ease-in-out infinite}
+@keyframes sw{0%{transform:translateX(-110%)}100%{transform:translateX(250%)}}
+@media(max-width:520px){.g{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:6s!important}}
+</style></head><body>
+<div class="g" role="list">
+<div class="t" role="listitem"><div class="st"><div class="p1" role="status" aria-label="Loading"><i></i><i></i><i></i></div></div><b>Sonar</b></div>
+<div class="t" role="listitem"><div class="st"><div class="p2" role="status" aria-label="Loading"><i></i><i></i><i></i></div></div><b>Bounce</b></div>
+<div class="t" role="listitem"><div class="st"><div class="p3" role="status" aria-label="Loading"><i></i><i></i><i></i><i></i><i></i></div></div><b>Equalizer</b></div>
+<div class="t" role="listitem"><div class="st"><div class="p4" role="status" aria-label="Loading"></div></div><b>Heartbeat</b></div>
+<div class="t" role="listitem"><div class="st"><div class="p5" role="status" aria-label="Loading"><i></i><i></i><i></i><i></i></div></div><b>Orbit</b></div>
+<div class="t" role="listitem"><div class="st"><div class="p6" role="status" aria-label="Loading"></div></div><b>Sweep</b></div>
+</div></body></html>

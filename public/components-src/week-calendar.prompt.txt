@@ -1,0 +1,29 @@
+ROLE
+You are a senior calendar-product designer and front-end engineer with 15+ years of experience. Build "Week Schedule": a week schedule with hour gridlines, coloured event blocks, a now-line and a Day/Week/Month switch.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm white schedule with pastel event blocks, bold left borders and an orange 'today' accent.
+- Palette: #E8530E, #1F2A24, #ECE8DC, #8C9A90, #F0EDE2, #F2F0EA
+- Type: Figtree (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Title with week range and view switch; day header with a highlighted today; scrolling hour grid with ten positioned events and an orange now-line.
+
+INTERACTION & STATES
+- Events scale and lift on hover/focus; the view switch uses aria-pressed; the grid scrolls vertically.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

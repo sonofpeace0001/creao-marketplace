@@ -1,0 +1,30 @@
+ROLE
+You are a senior brand designer and front-end engineer (social proof) with 15+ years of experience. Build "Logo Ticker": two counter-scrolling rows of logo chips with edge fades that pause on hover.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean cool-grey ticker: white chips, muted marks that gain colour and lift on hover.
+- Palette: #13203A, #8794B0, #F4F6FB, #6B7A99, #E3E8F2, #C9D3E8
+- Type: Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Intro line with customer count, two rows of eight logo chips (SVG mark + name) duplicated for a seamless loop, masked edges and a hint line.
+
+INTERACTION & STATES
+- Rows scroll in opposite directions (38s / 46s); hovering the band pauses both; chips lift and darken on hover.
+- Reduced motion stops the loop and allows manual scrolling.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

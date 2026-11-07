@@ -1,0 +1,31 @@
+ROLE
+You are a senior design-tools engineer with 15+ years of experience. Build "Angle Lab": six gradient swatches that all re-aim together from one angle slider.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: A clean light control panel: white card, mono readout and a custom-styled range slider.
+- Palette: #1A1826, #F2F1F6, #F5F4FA, #6B6880, #D8D6E6, #7C7990
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with title and a control pill (label, slider, degree readout).
+- 3×2 grid of swatches each with name and 'from → to' hex line.
+
+INTERACTION & STATES
+- Dragging the slider updates a shared --ang variable so every gradient rotates live; the readout shows degrees.
+- Slider thumb is custom-styled with a visible focus halo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.
