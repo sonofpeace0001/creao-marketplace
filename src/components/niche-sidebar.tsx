@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NICHE_SECTIONS, nichesBySection } from "@/lib/ui-component-niches";
+import { LANDING_PAGES_HREF, LANDING_PAGES_NICHE, NICHE_SECTIONS, nichesBySection } from "@/lib/ui-component-niches";
 
 function hrefFor(baseParams: Record<string, string | undefined>, niche: string | null) {
   const params = new URLSearchParams();
@@ -44,7 +44,7 @@ function SidebarList({ activeNiche, counts, totalCount, baseParams }: SidebarPro
               return (
                 <li key={name}>
                   <Link
-                    href={hrefFor(baseParams, name)}
+                    href={name === LANDING_PAGES_NICHE ? LANDING_PAGES_HREF : hrefFor(baseParams, name)}
                     className={`flex items-center justify-between rounded-lg px-3 py-1.5 text-sm transition-colors ${
                       isActive
                         ? "bg-surface-2 text-fg"

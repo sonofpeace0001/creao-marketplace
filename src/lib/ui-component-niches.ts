@@ -16,6 +16,11 @@ export const NICHE_SECTIONS: NicheSection[] = [
   "CREAO Exclusive",
 ];
 
+// Not a component niche: it lists the full landing pages (kind = 'page') and links to
+// the Landing Pages tab of the hub, so it sits alphabetically among the categories.
+export const LANDING_PAGES_NICHE = "Landing Pages";
+export const LANDING_PAGES_HREF = "/components?type=pages";
+
 const MARKETING_BLOCKS: string[] = [
   "Announcements",
   "ASCII Art",
@@ -33,6 +38,7 @@ const MARKETING_BLOCKS: string[] = [
   "Heroes",
   "Hooks",
   "Images",
+  LANDING_PAGES_NICHE,
   "Maps",
   "Marquees",
   "Navigation Menus",

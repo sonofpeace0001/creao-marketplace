@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { ItemGrid } from "@/components/item-grid";
 import { BrowseControls } from "@/components/browse-controls";
 import type { ItemCategory, ItemKind } from "@/lib/categories";
+import { UI_COMPONENT_NICHES } from "@/lib/ui-component-niches";
 
 export default async function BrowsePage({ searchParams }: PageProps<"/browse">) {
   const params = await searchParams;
@@ -42,7 +43,7 @@ export default async function BrowsePage({ searchParams }: PageProps<"/browse">)
       <p className="mt-4 text-sm text-muted">
         Looking for UI components?{" "}
         <Link href="/components" className="text-accent hover:underline">
-          Browse all 92 categories in the Components hub →
+          Browse all {UI_COMPONENT_NICHES.length} categories in the Components hub →
         </Link>
       </p>
       <div className="mt-8">
