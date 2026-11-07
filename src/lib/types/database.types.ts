@@ -32,6 +32,32 @@ export type Database = {
         }
         Relationships: []
       }
+      item_content: {
+        Row: {
+          item_id: string
+          prompt_text: string | null
+          source_html: string | null
+        }
+        Insert: {
+          item_id: string
+          prompt_text?: string | null
+          source_html?: string | null
+        }
+        Update: {
+          item_id?: string
+          prompt_text?: string | null
+          source_html?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "item_content_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: true
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       items: {
         Row: {
           category: Database["public"]["Enums"]["item_category"]
@@ -45,9 +71,7 @@ export type Database = {
           niche: string | null
           preview_url: string
           price_cents: number
-          prompt_text: string | null
           slug: string
-          source_html: string | null
           source_type: string
           source_url: string | null
           status: Database["public"]["Enums"]["item_status"]
@@ -70,9 +94,7 @@ export type Database = {
           niche?: string | null
           preview_url: string
           price_cents?: number
-          prompt_text?: string | null
           slug: string
-          source_html?: string | null
           source_type: string
           source_url?: string | null
           status?: Database["public"]["Enums"]["item_status"]
@@ -95,9 +117,7 @@ export type Database = {
           niche?: string | null
           preview_url?: string
           price_cents?: number
-          prompt_text?: string | null
           slug?: string
-          source_html?: string | null
           source_type?: string
           source_url?: string | null
           status?: Database["public"]["Enums"]["item_status"]

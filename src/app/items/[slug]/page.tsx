@@ -66,7 +66,14 @@ export default async function ItemDetailPage({ params, searchParams }: PageProps
   let promptText: string | null = null;
 
   if (hasAccess) {
-    sourceHtml = item.source_html;
+    // RLS on item_content already enforces access; hasAccess just avoids a pointless query.
+    const { data: content } = await supabase
+      .from("item_content")
+      .select("source_html, prompt_text")
+      .eq("item_id", item.id)
+      .maybeSingle();
+
+    sourceHtml = content?.source_html ?? null;
     if (!sourceHtml && item.source_url) {
       try {
         const res = await fetch(item.source_url);
@@ -74,8 +81,8 @@ export default async function ItemDetailPage({ params, searchParams }: PageProps
       } catch {}
     }
 
-    if (item.prompt_text) {
-      promptText = item.prompt_text;
+    if (content?.prompt_text) {
+      promptText = content.prompt_text;
     } else {
       const promptUrl = item.source_url ? promptUrlFor(item.source_url) : null;
       if (promptUrl) {

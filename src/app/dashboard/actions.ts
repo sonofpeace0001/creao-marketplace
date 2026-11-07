@@ -70,13 +70,21 @@ export async function createItem(
     theme,
     price_cents: Math.round(priceDollars * 100),
     source_type: "stored",
-    source_html: sourceHtml,
     preview_url: `/api/render/${itemId}`,
     thumbnail_url: thumbnailUrl,
     status: "published",
   });
 
   if (error) return { error: error.message };
+
+  const { error: contentError } = await supabase
+    .from("item_content")
+    .insert({ item_id: itemId, source_html: sourceHtml });
+
+  if (contentError) {
+    await supabase.from("items").delete().eq("id", itemId);
+    return { error: contentError.message };
+  }
 
   revalidatePath("/dashboard");
   redirect(`/items/${slug}`);
