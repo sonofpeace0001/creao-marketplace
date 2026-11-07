@@ -7,7 +7,7 @@ import { recordCompletedCheckout } from "@/lib/purchases";
 import { LivePreviewFrame } from "@/components/live-preview-frame";
 import { CodeViewer } from "@/components/code-viewer";
 import { PromptPanel } from "@/components/prompt-panel";
-import { PaywallCard } from "@/components/paywall-card";
+import { PaywallCard, PremiumPaywallCard } from "@/components/paywall-card";
 
 export default async function ItemDetailPage({ params, searchParams }: PageProps<"/items/[slug]">) {
   const { slug } = await params;
@@ -28,11 +28,24 @@ export default async function ItemDetailPage({ params, searchParams }: PageProps
   const { data: userData } = await supabase.auth.getUser();
   const user = userData.user;
 
-  const isFree = item.price_cents === 0;
+  const isFree = item.price_cents === 0 && !item.is_premium;
   const isOwner = user?.id === item.creator_id;
   let hasPurchased = false;
+  let hasSubscription = false;
 
-  if (!isFree && !isOwner && user) {
+  if (item.is_premium && user) {
+    const { data: sub } = await supabase
+      .from("subscriptions")
+      .select("status, current_period_end")
+      .eq("user_id", user.id)
+      .maybeSingle();
+    hasSubscription =
+      !!sub &&
+      ["active", "trialing"].includes(sub.status) &&
+      (!sub.current_period_end || new Date(sub.current_period_end) > new Date());
+  }
+
+  if (!isFree && !item.is_premium && !isOwner && user) {
     const { data: purchase } = await supabase
       .from("purchases")
       .select("id")
@@ -60,7 +73,10 @@ export default async function ItemDetailPage({ params, searchParams }: PageProps
     }
   }
 
-  const hasAccess = isFree || isOwner || hasPurchased;
+  const hasAccess = isFree || isOwner || hasPurchased || hasSubscription;
+  // A locked stored page can't be previewed live (its HTML is the product),
+  // so non-owners see the thumbnail until they have access.
+  const previewLocked = !hasAccess && item.source_type === "stored";
 
   let sourceHtml: string | null = null;
   let promptText: string | null = null;
@@ -103,19 +119,31 @@ export default async function ItemDetailPage({ params, searchParams }: PageProps
           {item.description && <p className="mt-2 max-w-2xl text-muted">{item.description}</p>}
         </div>
         <div className="text-right">
-          <p className="font-serif text-3xl">{formatPrice(item.price_cents, item.currency)}</p>
-          <a
-            href={item.preview_url}
-            target="_blank"
-            rel="noopener"
-            className="mt-2 inline-block rounded-lg bg-gradient-to-br from-accent to-accent-2 px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
-          >
-            Open full page ↗
-          </a>
+          <p className="font-serif text-3xl">
+            {item.is_premium ? "Premium" : formatPrice(item.price_cents, item.currency)}
+          </p>
+          {!previewLocked && (
+            <a
+              href={item.preview_url}
+              target="_blank"
+              rel="noopener"
+              className="mt-2 inline-block rounded-lg bg-gradient-to-br from-accent to-accent-2 px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+            >
+              Open full page ↗
+            </a>
+          )}
         </div>
       </div>
 
-      <LivePreviewFrame url={item.preview_url} title={item.title} />
+      {previewLocked ? (
+        <div className="relative mx-auto max-h-[640px] max-w-3xl overflow-hidden rounded-2xl border border-border bg-surface-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={item.thumbnail_url} alt={`${item.title} preview`} className="w-full object-cover object-top" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-bg to-transparent" />
+        </div>
+      ) : (
+        <LivePreviewFrame url={item.preview_url} title={item.title} />
+      )}
 
       {promptText && (
         <div className="mt-6">
@@ -126,6 +154,8 @@ export default async function ItemDetailPage({ params, searchParams }: PageProps
       <div className="mt-6">
         {hasAccess ? (
           sourceHtml && <CodeViewer code={sourceHtml} />
+        ) : item.is_premium ? (
+          <PremiumPaywallCard />
         ) : (
           <PaywallCard itemId={item.id} priceCents={item.price_cents} currency={item.currency} />
         )}

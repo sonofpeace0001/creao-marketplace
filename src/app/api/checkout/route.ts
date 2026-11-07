@@ -16,13 +16,16 @@ export async function POST(request: Request) {
 
   const { data: item } = await supabase
     .from("items")
-    .select("id, slug, title, price_cents, currency, creator_id, status")
+    .select("id, slug, title, price_cents, currency, creator_id, status, is_premium")
     .eq("id", itemId)
     .eq("status", "published")
     .maybeSingle();
 
   if (!item) {
     return NextResponse.json({ error: "Item not found" }, { status: 404 });
+  }
+  if (item.is_premium) {
+    return NextResponse.json({ error: "Premium pages are unlocked with a Premium subscription" }, { status: 400 });
   }
   if (item.price_cents <= 0) {
     return NextResponse.json({ error: "This item is free" }, { status: 400 });

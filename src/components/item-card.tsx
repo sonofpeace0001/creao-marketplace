@@ -34,7 +34,9 @@ export function ItemCard({ item }: { item: Tables<"items"> }) {
         <p className="mt-1 text-sm text-muted">{categoryLabel(item.category)}</p>
         <div className="mt-4 flex items-center justify-between text-sm">
           <span className="text-muted">{item.niche}</span>
-          <span className="font-medium">{formatPrice(item.price_cents, item.currency)}</span>
+          <span className={item.is_premium ? "font-medium text-accent" : "font-medium"}>
+            {item.is_premium ? "★ Premium" : formatPrice(item.price_cents, item.currency)}
+          </span>
         </div>
       </div>
     </Link>

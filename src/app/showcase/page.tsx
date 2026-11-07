@@ -7,7 +7,8 @@ export default async function ShowcasePage() {
     .from("items")
     .select("*")
     .eq("status", "published")
-    .eq("source_type", "external_url")
+    .eq("kind", "page")
+    .order("featured", { ascending: false })
     .order("title", { ascending: true });
 
   return (
@@ -16,8 +17,8 @@ export default async function ShowcasePage() {
         <h1 className="font-serif text-4xl">The CREAO Landing Page Pack</h1>
         <p className="mt-3 text-muted">
           100 production-ready landing pages across SaaS, local service, retail, real estate,
-          institutions, and portfolio &amp; creative niches — free to browse, copy, and deploy.
-          Built entirely with{" "}
+          institutions, and portfolio &amp; creative niches. 10 are free to copy and deploy; the
+          rest are unlocked with Premium ($10/month). Built entirely with{" "}
           <a href="https://agent.creao.ai/@Sonofpeace" target="_blank" rel="noopener" className="text-accent hover:underline">
             CREAO
           </a>

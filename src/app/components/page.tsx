@@ -27,6 +27,7 @@ export default async function ComponentsPage({ searchParams }: PageProps<"/compo
     .select("*")
     .eq("status", "published")
     .eq("kind", "component")
+    .order("featured", { ascending: false })
     .order("created_at", { ascending: false });
   if (niche) query = query.eq("niche", niche);
   if (q) query = query.or(`title.ilike.%${q}%,niche.ilike.%${q}%`);

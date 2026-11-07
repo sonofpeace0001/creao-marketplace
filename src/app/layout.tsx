@@ -51,7 +51,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <a href="https://agent.creao.ai/@Sonofpeace" className="text-accent hover:underline" target="_blank" rel="noopener">
               CREAO
             </a>
-            . <Link href="/showcase" className="hover:underline">The original 100-page pack</Link> is free to browse.
+            . <Link href="/showcase" className="hover:underline">The 100-page pack</Link>: 10 pages free, the rest with{" "}
+            <Link href="/premium" className="hover:underline">Premium</Link>.
           </p>
         </footer>
       </body>

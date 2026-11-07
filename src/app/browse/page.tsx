@@ -18,13 +18,14 @@ export default async function BrowsePage({ searchParams }: PageProps<"/browse">)
     .from("items")
     .select("*")
     .eq("status", "published")
+    .order("featured", { ascending: false })
     .order("created_at", { ascending: false });
 
   if (kind) query = query.eq("kind", kind);
   if (category) query = query.eq("category", category);
   if (theme) query = query.eq("theme", theme);
-  if (price === "free") query = query.eq("price_cents", 0);
-  if (price === "paid") query = query.gt("price_cents", 0);
+  if (price === "free") query = query.eq("price_cents", 0).eq("is_premium", false);
+  if (price === "paid") query = query.or("price_cents.gt.0,is_premium.eq.true");
   if (q) query = query.or(`title.ilike.%${q}%,niche.ilike.%${q}%`);
 
   const { data: items } = await query;

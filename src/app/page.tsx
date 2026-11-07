@@ -4,6 +4,15 @@ import { ItemGrid } from "@/components/item-grid";
 
 export default async function HomePage() {
   const supabase = await createClient();
+  const { data: premium } = await supabase
+    .from("items")
+    .select("*")
+    .eq("status", "published")
+    .eq("is_premium", true)
+    .eq("featured", true)
+    .order("created_at", { ascending: false })
+    .limit(3);
+
   const { data: featured } = await supabase
     .from("items")
     .select("*")
@@ -40,6 +49,20 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
+
+      {premium && premium.length > 0 && (
+        <section className="mx-auto max-w-6xl px-6 pt-4">
+          <div className="mb-8 flex items-end justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-wide text-accent">★ Premium</p>
+              <h2 className="font-serif text-3xl">Featured landing pages</h2>
+              <p className="mt-1 text-sm text-muted">One $10/month plan unlocks every premium page, source and prompt.</p>
+            </div>
+            <Link href="/premium" className="text-sm text-accent hover:underline">See Premium →</Link>
+          </div>
+          <ItemGrid items={premium} />
+        </section>
+      )}
 
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-8 flex items-end justify-between">

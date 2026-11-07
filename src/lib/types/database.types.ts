@@ -32,6 +32,41 @@ export type Database = {
         }
         Relationships: []
       }
+      subscriptions: {
+        Row: {
+          current_period_end: string | null
+          status: string
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          current_period_end?: string | null
+          status: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          current_period_end?: string | null
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       item_content: {
         Row: {
           item_id: string
@@ -65,7 +100,9 @@ export type Database = {
           creator_id: string
           currency: string
           description: string | null
+          featured: boolean
           id: string
+          is_premium: boolean
           kind: Database["public"]["Enums"]["item_kind"]
           layout_tag: string | null
           niche: string | null
@@ -88,7 +125,9 @@ export type Database = {
           creator_id: string
           currency?: string
           description?: string | null
+          featured?: boolean
           id?: string
+          is_premium?: boolean
           kind: Database["public"]["Enums"]["item_kind"]
           layout_tag?: string | null
           niche?: string | null
@@ -111,7 +150,9 @@ export type Database = {
           creator_id?: string
           currency?: string
           description?: string | null
+          featured?: boolean
           id?: string
+          is_premium?: boolean
           kind?: Database["public"]["Enums"]["item_kind"]
           layout_tag?: string | null
           niche?: string | null
