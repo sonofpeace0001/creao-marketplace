@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Launchpad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--text:#1F1A17;--muted:#8A817A;--line:rgba(31,26,23,.09)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Figtree',system-ui,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;display:grid;place-items:center;padding:40px 20px;background:radial-gradient(700px 480px at 12% 8%,#FFD9C2 0,transparent 60%),radial-gradient(760px 520px at 92% 90%,#C9DDF7 0,transparent 60%),radial-gradient(500px 400px at 80% 5%,#FFEBB8 0,transparent 60%),#F6EEE6}
+.box{width:100%;max-width:600px;background:rgba(255,255,255,.78);backdrop-filter:blur(30px) saturate(1.5);border:1px solid rgba(255,255,255,.9);border-radius:24px;box-shadow:0 40px 80px -30px rgba(80,50,30,.4),0 0 0 1px rgba(31,26,23,.06);overflow:hidden}
+.in{display:flex;align-items:center;gap:14px;padding:6px 22px;border-bottom:1px solid var(--line)}
+input{flex:1;background:none;border:0;outline:0;font:500 22px 'Figtree';color:var(--text);padding:20px 0}
+input::placeholder{color:#B5ABA2}
+.in svg{color:#B5ABA2}
+.body{padding:10px;max-height:420px;overflow:auto}
+.sec{font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--muted);padding:12px 12px 6px}
+.row{display:flex;align-items:center;gap:14px;padding:9px 12px;border-radius:14px;cursor:pointer}
+.ico{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 4px 10px -4px rgba(0,0,0,.3)}
+.txt{flex:1;min-width:0}.txt b{display:block;font-size:15.5px;font-weight:600}.txt span{font-size:13px;color:var(--muted)}
+.act{font-size:12px;color:var(--muted);display:none;align-items:center;gap:6px;font-weight:600}
+.row.on{background:rgba(31,26,23,.06)}.row.on .act{display:flex}
+.top{background:linear-gradient(135deg,#FFF1E6,#FFE8D6);border:1px solid rgba(255,138,76,.25)}
+.top.on{background:linear-gradient(135deg,#FFEBDB,#FFE0C8)}
+.top .ico{width:52px;height:52px;border-radius:15px}.top .txt b{font-size:18px}
+.calc{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;margin:4px 0}
+.calc .expr{color:var(--muted);font-size:17px;font-weight:500}.calc .res{font-size:34px;font-weight:700;letter-spacing:-.02em}
+.eq{color:#FF7A3D;margin-right:8px}
+kbd{font:600 11px 'Figtree';color:var(--muted);background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:2px 7px}
+.foot{display:flex;justify-content:space-between;padding:12px 20px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);background:rgba(255,255,255,.5)}
+.none{padding:34px;text-align:center;color:var(--muted)}
+mark{background:none;color:#E8590C;font-weight:700}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="in"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+  <input id="q" placeholder="Search apps, files, or calculate…" autocomplete="off" spellcheck="false" aria-label="Launcher search"></div>
+  <div class="body" id="body"></div>
+  <div class="foot"><span><kbd>↑</kbd> <kbd>↓</kbd> move &nbsp; <kbd>↵</kbd> open</span><span><kbd>⌘</kbd> <kbd>K</kbd> toggle</span></div>
+</div>
+<script>
+const S={n:'<path d="M5 4h11l3 3v13H5Z"/><path d="M8 11h8M8 15h6"/>',c:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',t:'<path d="m5 8 5 4-5 4M12 17h7"/>',m:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',f:'<path d="M4 6a2 2 0 0 1 2-2h4l2 3h6a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/>',x:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/>',p:'<rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/>'};
+const svg=p=>'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'+S[p]+'</svg>';
+const A=[['Notes','Application','n','#F5B72E'],['Calendar','Application','c','#F0563B'],['Terminal','Application','t','#1F1A17'],['Mail','Application','m','#3B82F6'],['Frames','Application','p','#8B5CF6']];
+const F=[['Q4 roadmap.pdf','~/Documents · 2 hours ago','x','#E85D5D'],['Invoices 2024','~/Finance · Yesterday','f','#4C9A6A'],['pitch-v7.key','~/Decks · Monday','x','#F08A3C']];
+const q=document.getElementById('q'),body=document.getElementById('body');let cur=0,list=[];
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function calc(s){if(!/^[\d\s+\-*/().%^]+$/.test(s)||!/[+\-*/%^]/.test(s))return null;try{const v=Function('"use strict";return ('+s.replace(/\^/g,'**')+')')();return Number.isFinite(v)?(Math.round(v*1e6)/1e6):null}catch(e){return null}}
+function hl(t,s){const i=s?t.toLowerCase().indexOf(s.toLowerCase()):-1;return i<0?esc(t):esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+s.length))+'</mark>'+esc(t.slice(i+s.length))}
+function render(){const s=q.value.trim();list=[];let h='';const r=calc(s);
+  if(r!==null){list.push('calc');h+='<div class="row calc on" data-i="0"><span class="expr">'+esc(s)+'</span><span class="res"><span class="eq">=</span>'+r.toLocaleString()+'</span></div>'}
+  const a=A.filter(x=>!s||x[0].toLowerCase().includes(s.toLowerCase())),f=F.filter(x=>!s||x[0].toLowerCase().includes(s.toLowerCase()));
+  if(a.length&&r===null){h+='<div class="sec">'+(s?'Applications':'Top hit')+'</div>'}
+  a.forEach((x,k)=>{const i=list.length;list.push(x);const top=!s&&k===0&&r===null||(s&&k===0&&r===null);h+='<div class="row'+(top?' top':'')+'" data-i="'+i+'"><span class="ico" style="background:'+x[3]+'">'+svg(x[2])+'</span><span class="txt"><b>'+hl(x[0],s)+'</b><span>'+x[1]+'</span></span><span class="act">Open <kbd>↵</kbd></span></div>';if(!s&&k===0)h+='<div class="sec">Applications</div>'});
+  if(f.length)h+='<div class="sec">'+(s?'Files':'Recent files')+'</div>';
+  f.forEach(x=>{const i=list.length;list.push(x);h+='<div class="row" data-i="'+i+'"><span class="ico" style="background:'+x[3]+'">'+svg(x[2])+'</span><span class="txt"><b>'+hl(x[0],s)+'</b><span>'+x[1]+'</span></span><span class="act">Open <kbd>↵</kbd></span></div>'});
+  if(!list.length)h='<div class="none">Nothing found for “'+esc(s)+'”</div>';
+  body.innerHTML=h;cur=Math.min(cur,list.length-1);mark()}
+function mark(){body.querySelectorAll('.row').forEach(r=>r.classList.toggle('on',+r.dataset.i===cur))}
+q.addEventListener('input',()=>{cur=0;render()});
+q.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();cur=(cur+1)%list.length;mark()}else if(e.key==='ArrowUp'){e.preventDefault();cur=(cur-1+list.length)%list.length;mark()}else if(e.key==='Enter'&&list[cur]==='calc'){navigator.clipboard&&navigator.clipboard.writeText(String(calc(q.value.trim())))}});
+body.addEventListener('mousemove',e=>{const r=e.target.closest('.row');if(r&&+r.dataset.i!==cur){cur=+r.dataset.i;mark()}});
+render();q.focus();
+</script>
+</body>
+</html>

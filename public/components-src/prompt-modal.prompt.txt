@@ -1,0 +1,30 @@
+ROLE
+You are a senior product designer and front-end engineer (15+ years, developer platforms and safety-critical UX). Build "Hold to Delete": a destructive-action dialog that makes accidents nearly impossible without being annoying.
+
+GOAL
+One self-contained HTML file with a two-step confirmation — type the resource name, then press and hold — that feels deliberate and premium.
+
+ART DIRECTION
+- Warm near-black #0B090A with a faint red glow at the top; panel gradient #1A1517 → #151113, 24px radius, 1px 8% white border, inset top highlight. A 3px hazard-stripe (red/black diagonal) runs along the top edge.
+- Danger red #F04438, warning amber #F5A623 for numbers, success green #32D583/#12B76A.
+- Type: Sora 400–700 for UI; JetBrains Mono for the resource name, counts and input.
+
+ANATOMY
+1. A 52px tinted red icon tile with a trash glyph and a faint outer ring.
+2. Title “Delete orion-api?” with the name in red mono; a calm two-sentence explanation (permanent, no undo, nobody can recover it).
+3. An impact table with three rows and amber mono values: Environments 14, Active API keys 6, Requests in the last 24h 2,310.
+4. Label “Type orion-api to confirm” + input that turns green with an animated check when it matches exactly.
+5. Row: Cancel and the hold button (locked “Hold to delete” with a padlock until the name matches).
+6. A one-line helper that changes with state.
+
+INTERACTION
+- Hold button: once armed, pressing (pointer or Space/Enter) fills a red gradient left-to-right over 1.2 seconds; releasing early drains it in 250ms and resets the label; pressing while locked shakes the button and focuses the input. Completing turns it green (“Project deleted”), disables the input and updates the helper.
+- Cancel clears the input and resets everything. role="alertdialog" with aria-labelledby/-describedby; the button exposes aria-disabled while locked.
+
+CONSTRAINTS
+- Single file, inline CSS and ~25 lines of JS, Google Fonts via <link>. Inline SVG only; no emoji. Use pointer events with touch-action: none so mobile press-and-hold works. Honour prefers-reduced-motion.
+
+ACCEPTANCE CHECKLIST
+- A normal click never deletes; only a full hold does.
+- Releasing at 90% cancels cleanly with no stuck state.
+- Works with keyboard hold as well as pointer.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial designer and motion-minded front-end engineer (15+ years, luxury and publishing brands). Build "Pull Quote": a single-quote spotlight that rotates through three customer quotes with a considered word-by-word reveal.
+
+GOAL
+One self-contained HTML file that makes one sentence feel like the most important thing on the page.
+
+ART DIRECTION
+- Warm black #0F0E0C with a soft radial lift #1D1A14 at the top, 8% overlay grain; ivory #F3EDE0 text; antique gold #C9A24B for emphasis and progress; muted #9A9283.
+- Type: Playfair Display italic at clamp(30px, 4.4vw, 54px), line-height 1.2, for the quote; Inter 600 at 12px with 0.24em tracking for the label and 13–15px for attribution. Emphasised words are gold, weight 500.
+- A giant outlined (stroke-only, 50% gold) opening quotation mark sits above the label and never overlaps text.
+
+ANATOMY
+- Label "What customers say" flanked by hairlines.
+- The quote, centred, wrapping to 3–4 lines on desktop.
+- Attribution: gold gradient monogram circle, bold name, muted role · company.
+- Controls: round previous/next buttons and three segmented progress bars; the active bar fills over 7 seconds and completed bars stay filled.
+
+INTERACTION
+- On each change, split the quote into words and reveal them with a 45ms stagger (fade, 14px rise, 6px blur → clear); the attribution cross-fades.
+- Auto-advances every 7s; pausing on hover freezes both the timer and the progress bar; leaving restarts the current quote. Arrow keys and the buttons navigate; the bars are buttons with labels.
+- With prefers-reduced-motion: no auto-advance and no animation, quote shown instantly.
+
+CONSTRAINTS
+- Single file, inline CSS and ~25 lines of JS, Google Fonts via <link>. Inline SVG only; no emoji. The quote container is aria-live polite.
+- Specific, believable quotes (name, title, company) — no filler.
+
+ACCEPTANCE CHECKLIST
+- Quote text wraps inside its container at 390px; no horizontal overflow at any step of the animation.
+- Focus ring is visible on every control.

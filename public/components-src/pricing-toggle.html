@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyline Plans</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1B3A;--blue:#1D6BFF;--teal:#00BFA6;--muted:#5B6B86;--line:#DCE6F5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--navy);-webkit-font-smoothing:antialiased;min-height:100vh;display:grid;place-items:center;padding:56px 24px;background:radial-gradient(900px 500px at 15% 0,#D5E8FF 0,transparent 60%),radial-gradient(800px 500px at 90% 100%,#CFF5EE 0,transparent 60%),#F5F9FF}
+.wrap{width:100%;max-width:860px;text-align:center}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--blue);background:#fff;border:1px solid var(--line);padding:7px 14px;border-radius:999px;box-shadow:0 4px 14px -6px rgba(29,107,255,.25)}
+h1{font-size:clamp(32px,4.6vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:18px 0 8px}
+.sub{color:var(--muted);font-size:17px}
+.tog{position:relative;display:inline-flex;margin:28px 0 36px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px;box-shadow:0 8px 24px -14px rgba(11,27,58,.25)}
+.tog button{position:relative;z-index:1;border:0;background:none;padding:11px 24px;font:700 14px 'Plus Jakarta Sans';color:var(--muted);cursor:pointer;transition:color .25s}
+.tog button[aria-pressed=true]{color:#fff}
+.tog .off{position:absolute;z-index:0;top:5px;bottom:5px;left:5px;width:var(--w,110px);border-radius:999px;background:linear-gradient(135deg,var(--blue),#4A8DFF);box-shadow:0 6px 16px -4px rgba(29,107,255,.5);transition:transform .38s cubic-bezier(.3,1.25,.4,1),width .38s cubic-bezier(.3,1.25,.4,1)}
+.tog b{font-size:11px;margin-left:6px;background:#E1FBF6;color:#00806F;padding:2px 7px;border-radius:99px}
+.tog button[aria-pressed=true] b{background:rgba(255,255,255,.22);color:#fff}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:22px;text-align:left}
+.plan{position:relative;background:#fff;border:1px solid var(--line);border-radius:28px;padding:32px;box-shadow:0 20px 40px -28px rgba(11,27,58,.35);transition:transform .3s}
+.plan:hover{transform:translateY(-5px)}
+.plan.pro{border:2px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,var(--blue),var(--teal)) border-box}
+.tagp{position:absolute;top:22px;right:22px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,var(--blue),var(--teal));padding:6px 12px;border-radius:99px}
+.n{font-size:15px;font-weight:700;color:var(--muted)}
+.p{display:flex;align-items:flex-end;gap:6px;margin:12px 0 4px;height:62px;overflow:hidden}
+.p .a{font-size:56px;font-weight:800;letter-spacing:-.05em;line-height:1;display:inline-block;animation:rise .4s cubic-bezier(.2,.9,.3,1)}
+@keyframes rise{from{transform:translateY(60%);opacity:0}}
+.p span{color:var(--muted);font-weight:600;font-size:14px;padding-bottom:7px}
+.bill{font-size:13px;color:var(--muted);height:20px}
+hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+ul{list-style:none;display:grid;gap:13px;font-size:15px;font-weight:500}
+li{display:flex;align-items:center;gap:12px}
+li i{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#E8F1FF;color:var(--blue)}
+.pro li i{background:#DDF8F2;color:#00907C}
+li.no{color:#9AA7BC}li.no i{background:#F0F3F8;color:#B5C0D1}
+.btn{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:26px;text-decoration:none;font-weight:700;font-size:15px;padding:15px;border-radius:16px;border:1.5px solid var(--line);color:var(--navy);transition:all .2s}
+.btn:hover{border-color:var(--navy)}
+.pro .btn{border:0;color:#fff;background:linear-gradient(135deg,var(--blue),#3C86FF);box-shadow:0 12px 24px -10px rgba(29,107,255,.6)}
+.pro .btn:hover{transform:translateY(-1px);box-shadow:0 16px 28px -10px rgba(29,107,255,.7)}
+.who{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:13px;color:var(--muted)}
+.av{display:flex}.av i{width:24px;height:24px;border-radius:50%;border:2px solid #fff;margin-left:-8px;font:700 9px 'Plus Jakarta Sans';display:grid;place-items:center;color:#fff;font-style:normal}.av i:first-child{margin-left:0}
+@media(max-width:700px){.duo{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg>Simple, transparent plans</span>
+  <h1>Pick a plan. Switch anytime.</h1>
+  <p class="sub">No setup fees, no contracts. Upgrade when your team outgrows the basics.</p>
+  <div class="tog" id="tog" role="group" aria-label="Billing period">
+    <span class="off" id="off"></span>
+    <button data-p="m" aria-pressed="true">Pay monthly</button>
+    <button data-p="y" aria-pressed="false">Pay yearly <b>−25%</b></button>
+  </div>
+  <div class="duo">
+    <article class="plan">
+      <div class="n">Starter</div>
+      <div class="p"><span class="a" data-m="12" data-y="9">$12</span><span>/ seat / mo</span></div>
+      <div class="bill" data-bill>Billed monthly</div>
+      <hr>
+      <ul>
+        <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Up to 10 projects</li>
+        <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Board, list &amp; calendar views</li>
+        <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Slack &amp; GitHub integrations</li>
+        <li class="no"><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M6 12h12"/></svg></i>Roadmaps &amp; timelines</li>
+        <li class="no"><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M6 12h12"/></svg></i>Advanced permissions</li>
+      </ul>
+      <a class="btn" href="#">Start with Starter</a>
+    </article>
+    <article class="plan pro">
+      <span class="tagp">Popular</span>
+      <div class="n">Scale</div>
+      <div class="p"><span class="a" data-m="28" data-y="21">$28</span><span>/ seat / mo</span></div>
+      <div class="bill" data-bill>Billed monthly</div>
+      <hr>
+      <ul>
+        <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Unlimited projects</li>
+        <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Roadmaps &amp; timelines</li>
+        <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Advanced permissions &amp; SSO</li>
+        <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Analytics &amp; workload reports</li>
+        <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></i>Priority support</li>
+      </ul>
+      <a class="btn" href="#">Start 14-day free trial <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="who"><div class="av"><i style="background:#1D6BFF">AM</i><i style="background:#00BFA6">DK</i><i style="background:#FF8A5B">LP</i></div>Chosen by 3,100+ teams</div>
+    </article>
+  </div>
+</div>
+<script>
+const tog=document.getElementById('tog'),off=document.getElementById('off'),btns=[...tog.querySelectorAll('button')];
+function place(){const b=btns.find(x=>x.getAttribute('aria-pressed')==='true');off.style.setProperty('--w',b.offsetWidth+'px');off.style.transform='translateX('+(b.offsetLeft-5)+'px)'}
+function set(mode){btns.forEach(b=>b.setAttribute('aria-pressed',b.dataset.p===mode));place();
+  document.querySelectorAll('.a').forEach(a=>{const v=a.dataset[mode];const n=a.cloneNode();n.textContent='$'+v;a.replaceWith(n)});
+  document.querySelectorAll('[data-bill]').forEach(b=>b.textContent=mode==='y'?'Billed yearly — you save 25%':'Billed monthly')}
+btns.forEach(b=>b.addEventListener('click',()=>set(b.dataset.p)));
+addEventListener('resize',place);document.fonts.ready.then(place);place();
+</script>
+</body>
+</html>

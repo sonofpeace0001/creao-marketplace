@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wall of Love</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#FBF7EF;--butter:#FFEFB8;--coral:#FF6A4D;--teal:#0E7C7B;--ink:#1D1B16;--muted:#6F6A5E;--line:rgba(29,27,22,.1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--cream);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;padding:64px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hd{text-align:center;max-width:620px}
+.stars{display:inline-flex;gap:3px;color:#F5A524}
+.rate{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;background:#fff;border:1px solid var(--line);padding:8px 14px;border-radius:99px}
+h1{font:700 clamp(36px,5vw,58px)/1 'Familjen Grotesk';letter-spacing:-.035em;margin:20px 0 10px}
+h1 u{text-decoration:none;background:linear-gradient(transparent 62%,var(--butter) 62%);padding:0 4px}
+.sub{color:var(--muted);font-size:17px}
+.wall{columns:3;column-gap:18px;width:100%;max-width:1060px;margin-top:44px}
+.c{break-inside:avoid;margin-bottom:18px;border-radius:22px;padding:22px;background:#fff;border:1px solid var(--line);transition:transform .3s cubic-bezier(.3,1.3,.4,1),box-shadow .3s}
+.c:hover{transform:translateY(-4px) rotate(-.6deg);box-shadow:0 22px 36px -22px rgba(29,27,22,.4)}
+.c:nth-child(even):hover{transform:translateY(-4px) rotate(.6deg)}
+.who{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:700 14px 'Familjen Grotesk';color:#fff;flex:none}
+.who b{display:block;font:600 15px 'Familjen Grotesk'}.who span{font-size:13px;color:var(--muted)}
+.c p{font-size:15.5px;line-height:1.5}
+.c p em{font-style:normal;background:var(--butter);padding:0 3px;border-radius:3px}
+.stat{background:var(--coral);color:#fff;border:0}
+.stat .n{font:700 76px/0.9 'Familjen Grotesk';letter-spacing:-.05em}
+.stat .l{font:600 18px 'Familjen Grotesk';margin:6px 0 16px;opacity:.95}
+.stat p{opacity:.92;font-size:14.5px}
+.stat .who{margin:16px 0 0}.stat .who span{color:rgba(255,255,255,.8)}.stat .av{background:rgba(0,0,0,.22)}
+.teal{background:var(--teal);color:#fff;border:0}.teal .who span{color:rgba(255,255,255,.75)}.teal .av{background:rgba(255,255,255,.2)}
+.teal p{font:600 22px/1.25 'Familjen Grotesk';letter-spacing:-.02em}
+.vid{padding:0;overflow:hidden}
+.th{position:relative;height:170px;background:linear-gradient(135deg,#FFB48A,#FF6A4D 55%,#C2410C);display:grid;place-items:center}
+.th::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.35),transparent 50%)}
+.play{position:relative;z-index:1;width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--coral);box-shadow:0 10px 24px rgba(0,0,0,.25);transition:transform .2s}
+.vid:hover .play{transform:scale(1.1)}
+.dur{position:absolute;z-index:1;right:12px;bottom:12px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:600;padding:3px 8px;border-radius:6px}
+.vid .in{padding:18px 22px 22px}
+.logo{font:700 16px 'Familjen Grotesk';letter-spacing:-.02em;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.logo i{width:16px;height:16px;border-radius:5px;background:var(--ink);display:block;transform:rotate(45deg) scale(.8)}
+.more{margin-top:12px;display:inline-flex;align-items:center;gap:8px;font:600 15px 'Familjen Grotesk';color:var(--ink);text-decoration:none;border-bottom:2px solid var(--coral);padding-bottom:3px}
+@media(max-width:900px){.wall{columns:2}}@media(max-width:600px){.wall{columns:1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="hd">
+  <span class="rate"><span class="stars"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.2 1.2-6.5L2.5 9.5l6.6-.9Z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.2 1.2-6.5L2.5 9.5l6.6-.9Z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.2 1.2-6.5L2.5 9.5l6.6-.9Z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.2 1.2-6.5L2.5 9.5l6.6-.9Z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.2 1.2-6.5L2.5 9.5l6.6-.9Z"/></svg></span>4.9 from 2,300 reviews</span>
+  <h1>Loved by <u>12,000</u> makers.</h1>
+  <p class="sub">Don't take our word for it — here's what the people shipping with Tidepool say.</p>
+</div>
+<div class="wall">
+  <article class="c"><div class="who"><span class="av" style="background:#0E7C7B">PN</span><div><b>Priya Nair</b><span>@priyabuilds · Indie hacker</span></div></div><p>Switched our whole launch workflow to Tidepool on a Friday. By Monday we had <em>shipped two features</em> and cancelled three other tools.</p></article>
+  <article class="c stat"><div class="n">3.2×</div><div class="l">faster launches</div><p>"We went from a six-week release cycle to shipping every other Tuesday. Nobody asks where things stand anymore."</p><div class="who"><span class="av">MR</span><div><b>Marcus Reid</b><span>VP Product, Lattice Labs</span></div></div></article>
+  <article class="c teal"><p>"It feels like it was designed by someone who has actually shipped software."</p><div class="who" style="margin:18px 0 0"><span class="av">EO</span><div><b>Elena Ortiz</b><span>Staff Engineer, Northwind</span></div></div></article>
+  <article class="c vid"><div class="th"><span class="play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg></span><span class="dur">2:14</span></div><div class="in"><div class="who" style="margin-bottom:8px"><span class="av" style="background:#FF6A4D">JA</span><div><b>Jonas Ahlberg</b><span>Founder, Fjord Studio</span></div></div><p>Watch how a 4-person studio runs 11 client projects without a single status meeting.</p></div></article>
+  <article class="c"><div class="logo"><i></i>Brightwave</div><p>"The roadmap view alone paid for the year. Our <em>investors now get a live link</em> instead of a monthly PDF — and they actually read it."</p><div class="who" style="margin:16px 0 0"><span class="av" style="background:#F5A524">SK</span><div><b>Sana Karim</b><span>COO, Brightwave</span></div></div></article>
+  <article class="c"><div class="who"><span class="av" style="background:#6D5BD0">DL</span><div><b>Dev Lal</b><span>@devlal · Product designer</span></div></div><p>Honestly didn't expect a project tool to make me <em>look forward to Mondays</em>. The keyboard shortcuts are chef's kiss.</p><a class="more" href="#">Read 214 more stories →</a></article>
+</div>
+</body>
+</html>

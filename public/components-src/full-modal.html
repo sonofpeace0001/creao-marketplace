@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Composer Modal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0F9D7A;--gd:#0B7C60;--ink:#0F1A17;--muted:#64736E;--line:#E1E8E5;--soft:#F4F7F6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh;display:grid;place-items:center;padding:28px 16px;background:#EEF2F1;position:relative;overflow:hidden}
+.app{position:absolute;inset:0;display:grid;grid-template-columns:220px 1fr}
+.sb{background:#fff;border-right:1px solid var(--line);padding:20px 14px;display:grid;gap:9px;align-content:start}
+.sb i{display:block;height:12px;border-radius:6px;background:#E6ECEA}.sb i:first-child{height:22px;width:55%;margin-bottom:10px;background:var(--g);opacity:.5}
+.mn{padding:26px 30px;display:grid;gap:14px;align-content:start}
+.mn .h{height:24px;width:30%;background:#DCE5E2;border-radius:8px}
+.mn .r{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.mn .r i{height:120px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.mn .b{height:180px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.ov{position:absolute;inset:0;background:rgba(10,24,20,.5);backdrop-filter:blur(3px);transition:opacity .25s}
+.modal{position:relative;width:100%;max-width:540px;background:#fff;border-radius:22px;box-shadow:0 40px 90px -20px rgba(8,30,24,.55),0 0 0 1px rgba(15,26,23,.06);transition:transform .3s cubic-bezier(.2,.9,.3,1),opacity .25s}
+.closed .modal,.closed .ov{opacity:0;pointer-events:none}.closed .modal{transform:translateY(16px) scale(.97)}
+.mh{display:flex;align-items:flex-start;justify-content:space-between;padding:24px 26px 6px}
+.mh h1{font-size:21px;font-weight:800;letter-spacing:-.02em}.mh p{font-size:14px;color:var(--muted);margin-top:3px}
+.x{width:34px;height:34px;border-radius:10px;border:0;background:var(--soft);color:var(--muted);cursor:pointer;display:grid;place-items:center;flex:none}.x:hover{background:#E8EEEC;color:var(--ink)}
+.bd{padding:14px 26px 4px;display:grid;gap:18px}
+label,.lb{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:#2A3A35}
+.f{display:grid;grid-template-columns:1fr 112px;gap:12px}
+input[type=text]{width:100%;font:500 15px 'Manrope';padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;outline:0;color:var(--ink);transition:border-color .15s,box-shadow .15s;background:#fff}
+input[type=text]:focus{border-color:var(--g);box-shadow:0 0 0 4px rgba(15,157,122,.14)}
+input.bad{border-color:#E5484D}
+#key{font-family:'Geist Mono',monospace;text-transform:uppercase;text-align:center;letter-spacing:.1em}
+.hint{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px}.hint .e{color:#E5484D}
+.sw{display:flex;gap:10px}
+.sw label{margin:0;width:30px;height:30px;border-radius:50%;cursor:pointer;position:relative;display:block;background:var(--c);transition:transform .15s}
+.sw label:hover{transform:scale(1.12)}
+.sw input{position:absolute;opacity:0}
+.sw input:checked+span{position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--c)}
+.sw input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+.tp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tp label{margin:0;cursor:pointer}.tp input{position:absolute;opacity:0}
+.tp .cd{display:block;border:1.5px solid var(--line);border-radius:14px;padding:10px;transition:all .15s;background:#fff}
+.tp .cd:hover{border-color:#B7C8C2}
+.tp input:checked+.cd{border-color:var(--g);background:#F1FBF8;box-shadow:0 0 0 3px rgba(15,157,122,.12)}
+.tp input:focus-visible+.cd{outline:2px solid var(--ink);outline-offset:2px}
+.tp svg{display:block;width:100%;height:46px;margin-bottom:8px}.tp b{font-size:13px;font-weight:700;display:block}.tp small{font-size:11.5px;color:var(--muted)}
+.seg{display:inline-grid;grid-template-columns:repeat(3,1fr);background:var(--soft);padding:4px;border-radius:12px;width:100%}
+.seg label{margin:0;text-align:center}.seg input{position:absolute;opacity:0}
+.seg span{display:block;padding:9px;border-radius:9px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s}
+.seg input:checked+span{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg input:focus-visible+span{outline:2px solid var(--g)}
+.ft{display:flex;align-items:center;justify-content:space-between;padding:20px 26px 24px;margin-top:6px;border-top:1px solid var(--line)}
+.ft .k{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+kbd{font:500 11px 'Geist Mono',monospace;background:var(--soft);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:2px 6px;color:var(--muted)}
+.bt{display:flex;gap:10px}
+.b1,.b2{font:700 14px 'Manrope';padding:12px 20px;border-radius:12px;cursor:pointer;border:0;transition:all .15s}
+.b1{background:none;color:var(--muted)}.b1:hover{background:var(--soft);color:var(--ink)}
+.b2{background:var(--g);color:#fff;box-shadow:0 8px 18px -8px rgba(15,157,122,.7)}.b2:hover:not(:disabled){background:var(--gd);transform:translateY(-1px)}
+.b2:disabled{background:#CBD7D3;box-shadow:none;cursor:not-allowed}
+.re{position:absolute;z-index:3;inset:0;display:none;place-items:center}.closed .re{display:grid}
+.re button{font:700 15px 'Manrope';background:var(--g);color:#fff;border:0;padding:14px 24px;border-radius:14px;cursor:pointer;box-shadow:0 12px 24px -10px rgba(15,157,122,.7)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,20px);opacity:0;background:var(--ink);color:#fff;font:600 14px 'Manrope';padding:12px 18px;border-radius:12px;transition:all .3s;z-index:9}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:600px){.sb{display:none}.app{grid-template-columns:1fr}.tp{grid-template-columns:1fr 1fr 1fr}.ft .k{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app" aria-hidden="true"><div class="sb"><i></i><i></i><i style="width:80%"></i><i style="width:65%"></i><i style="width:72%"></i></div><div class="mn"><div class="h"></div><div class="r"><i></i><i></i><i></i></div><div class="b"></div></div></div>
+<div class="ov" id="ov"></div>
+<div class="re"><button id="re">New project</button></div>
+<form class="modal" id="m" role="dialog" aria-modal="true" aria-labelledby="ttl" novalidate>
+  <div class="mh"><div><h1 id="ttl">Create a project</h1><p>Projects keep your tasks, files and discussion in one place.</p></div><button type="button" class="x" id="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="bd">
+    <div class="f">
+      <div><label for="name">Project name</label><input type="text" id="name" maxlength="40" placeholder="e.g. Website relaunch" autocomplete="off"><div class="hint"><span class="e" id="err"></span><span id="cnt">0 / 40</span></div></div>
+      <div><label for="key">Key</label><input type="text" id="key" maxlength="5" placeholder="WEB" autocomplete="off"><div class="hint"><span>Auto</span></div></div>
+    </div>
+    <div><span class="lb">Colour</span><div class="sw" role="radiogroup" aria-label="Project colour">
+      <label style="--c:#0F9D7A"><input type="radio" name="c" checked aria-label="Green"><span></span></label>
+      <label style="--c:#2B6CE5"><input type="radio" name="c" aria-label="Blue"><span></span></label>
+      <label style="--c:#E5484D"><input type="radio" name="c" aria-label="Red"><span></span></label>
+      <label style="--c:#F59E0B"><input type="radio" name="c" aria-label="Amber"><span></span></label>
+      <label style="--c:#8E4EC6"><input type="radio" name="c" aria-label="Violet"><span></span></label>
+      <label style="--c:#1F2937"><input type="radio" name="c" aria-label="Slate"><span></span></label></div></div>
+    <div><span class="lb">Start from</span><div class="tp">
+      <label><input type="radio" name="t" checked><span class="cd"><svg viewBox="0 0 90 46"><rect x="1" y="1" width="88" height="44" rx="6" fill="#fff" stroke="#D7E1DD"/><path d="M12 14h40M12 23h58M12 32h28" stroke="#C5D3CE" stroke-width="3" stroke-linecap="round"/></svg><b>Blank</b><small>Empty canvas</small></span></label>
+      <label><input type="radio" name="t"><span class="cd"><svg viewBox="0 0 90 46"><rect x="1" y="1" width="88" height="44" rx="6" fill="#fff" stroke="#D7E1DD"/><rect x="8" y="8" width="22" height="30" rx="3" fill="#E3F4EF"/><rect x="34" y="8" width="22" height="20" rx="3" fill="#E3F4EF"/><rect x="60" y="8" width="22" height="26" rx="3" fill="#E3F4EF"/></svg><b>Kanban</b><small>To do · Doing · Done</small></span></label>
+      <label><input type="radio" name="t"><span class="cd"><svg viewBox="0 0 90 46"><rect x="1" y="1" width="88" height="44" rx="6" fill="#fff" stroke="#D7E1DD"/><rect x="10" y="10" width="38" height="6" rx="3" fill="#0F9D7A"/><rect x="26" y="21" width="44" height="6" rx="3" fill="#7CCDB8"/><rect x="40" y="32" width="38" height="6" rx="3" fill="#B7E3D6"/></svg><b>Roadmap</b><small>Timeline view</small></span></label></div></div>
+    <div><span class="lb">Who can see it</span><div class="seg" role="radiogroup">
+      <label><input type="radio" name="v"><span>Private</span></label><label><input type="radio" name="v" checked><span>Team</span></label><label><input type="radio" name="v"><span>Public</span></label></div></div>
+  </div>
+  <div class="ft"><span class="k"><kbd>⌘</kbd><kbd>↵</kbd> to create</span><div class="bt"><button type="button" class="b1" id="cancel">Cancel</button><button type="submit" class="b2" id="go" disabled>Create project</button></div></div>
+</form>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const $=id=>document.getElementById(id),name=$('name'),key=$('key');let keyDirty=false;
+function derive(s){const w=s.trim().split(/\s+/).filter(Boolean);if(!w.length)return'';return(w.length>1?w.map(x=>x[0]).join(''):w[0].slice(0,3)).replace(/[^a-z0-9]/gi,'').toUpperCase().slice(0,5)}
+function check(){const v=name.value.trim();$('cnt').textContent=name.value.length+' / 40';
+  if(!keyDirty)key.value=derive(name.value);
+  const ok=v.length>=3&&key.value.length>=2;$('go').disabled=!ok;
+  const bad=name.value.length>0&&v.length<3;name.classList.toggle('bad',bad);$('err').textContent=bad?'At least 3 characters':''}
+name.addEventListener('input',check);key.addEventListener('input',()=>{keyDirty=true;key.value=key.value.toUpperCase();check()});
+function close(){document.body.classList.add('closed')}function open(){document.body.classList.remove('closed');name.focus()}
+$('x').onclick=close;$('cancel').onclick=close;$('re').onclick=open;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close();if((e.metaKey||e.ctrlKey)&&e.key==='Enter'&&!$('go').disabled)$('m').requestSubmit()});
+$('m').addEventListener('submit',e=>{e.preventDefault();if($('go').disabled)return;const t=$('toast');t.textContent='Created “'+name.value.trim()+'” ('+key.value+')';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);close()});
+name.focus();
+</script>
+</body>
+</html>

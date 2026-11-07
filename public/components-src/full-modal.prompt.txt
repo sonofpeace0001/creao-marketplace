@@ -1,0 +1,30 @@
+ROLE
+You are a senior product designer and front-end engineer (15+ years, B2B collaboration tools). Build "Composer Modal": a polished "Create a project" dialog with live validation and rich selection controls.
+
+GOAL
+One self-contained HTML file showing a production-grade form modal over a believable blurred app, with real state, validation and keyboard behaviour.
+
+ART DIRECTION
+- Backdrop: a faint app skeleton (sidebar + cards) under a dark green scrim rgba(10,24,20,.5) with 3px blur. Modal: white, 22px radius, 540px max, layered shadow.
+- Accent: emerald #0F9D7A (hover #0B7C60); ink #0F1A17; muted #64736E; borders #E1E8E5; soft fill #F4F7F6. No purple.
+- Type: Manrope 500–800 for UI; Geist Mono for the key field and key caps.
+
+ANATOMY
+1. Header: title, one-line description, 34px close button.
+2. Fields: Project name (3–40 chars, live counter, inline error "At least 3 characters") and a monospace Key field that auto-derives from the name (initials or first three letters, uppercased, max 5) until the user edits it.
+3. Colour: six swatches as a radio group, selected swatch shows a 2px ring.
+4. Start from: three radio cards (Blank, Kanban, Roadmap), each with a small inline-SVG preview, title and caption.
+5. Visibility: a three-segment control (Private / Team / Public).
+6. Footer: ⌘↵ hint, Cancel, and “Create project” (disabled until name ≥3 and key ≥2).
+
+INTERACTION
+- Focus lands in the name field on open. Escape or Cancel closes with a 250ms scale/fade; a “New project” button then reopens it. ⌘/Ctrl+Enter submits when valid. Submitting closes and shows a toast “Created “<name>” (KEY)”.
+- Radios are real inputs (visually hidden) with visible :focus-visible rings. Dialog has role="dialog", aria-modal and aria-labelledby.
+
+CONSTRAINTS
+- Single file, inline CSS and ~25 lines of JS, Google Fonts via <link>. Inline SVG only; no emoji. Honour prefers-reduced-motion; fits a 360px screen.
+
+ACCEPTANCE CHECKLIST
+- The submit button state always matches validity.
+- Editing the key stops auto-derivation; clearing the name does not wipe a hand-typed key.
+- Every control is reachable and operable by keyboard.

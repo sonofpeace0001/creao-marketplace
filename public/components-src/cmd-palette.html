@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotlight Palette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080B;--panel:rgba(22,24,31,.82);--line:rgba(255,255,255,.08);--text:#ECEEF3;--muted:#7D8494;--coral:#FF7A59;--sel:rgba(255,122,89,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:grid;place-items:center;padding:40px 20px;position:relative;overflow:hidden}
+.app{position:absolute;inset:0;display:grid;grid-template-columns:230px 1fr;opacity:.55;filter:blur(2px)}
+.side{border-right:1px solid var(--line);padding:22px 16px;display:grid;gap:10px;align-content:start}
+.side i{display:block;height:14px;border-radius:7px;background:rgba(255,255,255,.07)}
+.main{padding:28px 32px;display:grid;gap:16px;align-content:start}
+.main .h{height:26px;width:34%;border-radius:8px;background:rgba(255,255,255,.1)}
+.main .r{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.main .r i{height:110px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.main .b{height:210px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.shade{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(255,122,89,.1),transparent 55%),rgba(4,5,8,.62)}
+.pal{position:relative;width:100%;max-width:620px;background:var(--panel);backdrop-filter:blur(28px) saturate(1.4);border:1px solid var(--line);border-radius:18px;box-shadow:0 50px 100px -30px #000,0 0 0 1px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08);overflow:hidden}
+.in{display:flex;align-items:center;gap:12px;padding:0 18px;border-bottom:1px solid var(--line)}
+.in svg{color:var(--muted);flex:none}
+input{flex:1;background:none;border:0;outline:0;color:var(--text);font:400 17px 'Inter Tight';padding:19px 0}
+input::placeholder{color:#5f6676}
+kbd{font:500 11px 'JetBrains Mono',monospace;color:var(--muted);background:rgba(255,255,255,.06);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:3px 7px}
+.list{max-height:340px;overflow:auto;padding:8px}
+.list::-webkit-scrollbar{width:0}
+.g{font:500 11px 'Inter Tight';letter-spacing:.08em;text-transform:uppercase;color:#5f6676;padding:12px 12px 6px}
+.it{display:flex;align-items:center;gap:13px;padding:10px 12px;border-radius:10px;cursor:pointer;position:relative;color:#C9CEDA}
+.it .ic{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#aeb5c4}
+.it .t{flex:1;font-size:14.5px;font-weight:500}
+.it .s{font-size:12.5px;color:var(--muted)}
+.it .k{display:flex;gap:4px}
+.it.on{background:var(--sel);color:#fff}
+.it.on::before{content:"";position:absolute;left:0;top:9px;bottom:9px;width:3px;border-radius:3px;background:var(--coral)}
+.it.on .ic{color:var(--coral);border-color:rgba(255,122,89,.35);background:rgba(255,122,89,.1)}
+mark{background:none;color:var(--coral);font-weight:600}
+.foot{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);background:rgba(0,0,0,.2)}
+.foot span{display:inline-flex;align-items:center;gap:6px;margin-right:14px}
+.empty{padding:38px 20px;text-align:center;color:var(--muted);font-size:14px}
+.empty b{display:block;color:var(--text);font-size:15px;margin-bottom:4px}
+.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,20px);opacity:0;background:#fff;color:#0a0b0e;font:600 13.5px 'Inter Tight';padding:11px 18px;border-radius:12px;box-shadow:0 20px 40px -10px rgba(0,0,0,.6);transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:700px){.app{grid-template-columns:1fr}.side{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app" aria-hidden="true"><div class="side"><i style="width:60%"></i><i></i><i style="width:80%"></i><i style="width:70%"></i><i style="width:55%"></i></div><div class="main"><div class="h"></div><div class="r"><i></i><i></i><i></i></div><div class="b"></div></div></div>
+<div class="shade"></div>
+<div class="pal" role="dialog" aria-label="Command palette">
+  <div class="in">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" placeholder="Search commands, pages, people…" autocomplete="off" spellcheck="false" aria-label="Search commands" role="combobox" aria-expanded="true" aria-controls="list">
+    <kbd>esc</kbd>
+  </div>
+  <div class="list" id="list" role="listbox"></div>
+  <div class="foot"><div><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> run</span></div><span style="margin:0">Atlas · <b style="color:#ECEEF3;font-weight:500">⌘K</b></span></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const I={doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',moon:'<path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10Z"/>',home:'<path d="m3 11 9-8 9 8M5 10v10h14V10"/>',card:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/>',cog:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'};
+const D=[
+['Suggestions','New document','Create a blank doc','doc',['⌘','N']],
+['Suggestions','Invite teammate','Send a workspace invite','user',['⌘','I']],
+['Suggestions','Toggle dark mode','Switch the interface theme','moon',['⌘','D']],
+['Suggestions','Copy share link','Anyone with the link can view','link',['⇧','⌘','L']],
+['Navigation','Go to Dashboard','','home',['G','D']],
+['Navigation','Go to Billing','','card',['G','B']],
+['Navigation','Open Settings','','cog',['⌘',',']],
+['Recent','Q4 planning — draft','Edited 2h ago','clock',[]],
+['Recent','Brand guidelines v3','Edited yesterday','clock',[]]];
+const q=document.getElementById('q'),list=document.getElementById('list'),toast=document.getElementById('toast');let cur=0,rows=[];
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function mk(t,s){const i=t.toLowerCase().indexOf(s.toLowerCase());return i<0?esc(t):esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+s.length))+'</mark>'+esc(t.slice(i+s.length))}
+function render(){const s=q.value.trim();rows=D.filter(r=>!s||(r[1]+' '+r[2]).toLowerCase().includes(s.toLowerCase()));cur=Math.min(cur,Math.max(0,rows.length-1));
+  if(!rows.length){list.innerHTML='<div class="empty"><b>No results for “'+esc(s)+'”</b>Try “new”, “billing” or “dark”.</div>';return}
+  let h='',g='';rows.forEach((r,i)=>{if(r[0]!==g){g=r[0];h+='<div class="g">'+g+'</div>'}
+    h+='<div class="it'+(i===cur?' on':'')+'" role="option" data-i="'+i+'" aria-selected="'+(i===cur)+'"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+I[r[3]]+'</svg></span><span class="t">'+mk(r[1],s)+(r[2]?' <span class="s">— '+esc(r[2])+'</span>':'')+'</span><span class="k">'+r[4].map(k=>'<kbd>'+k+'</kbd>').join('')+'</span></div>'});
+  list.innerHTML=h;const on=list.querySelector('.on');on&&on.scrollIntoView({block:'nearest'})}
+function run(i){const r=rows[i];if(!r)return;toast.textContent='Ran: '+r[1];toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1600)}
+q.addEventListener('input',()=>{cur=0;render()});
+q.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();cur=(cur+1)%Math.max(1,rows.length);render()}
+  else if(e.key==='ArrowUp'){e.preventDefault();cur=(cur-1+rows.length)%Math.max(1,rows.length);render()}
+  else if(e.key==='Enter'){run(cur)}else if(e.key==='Escape'){q.value='';cur=0;render()}});
+list.addEventListener('mousemove',e=>{const it=e.target.closest('.it');if(it&&+it.dataset.i!==cur){cur=+it.dataset.i;list.querySelectorAll('.it').forEach((n,i)=>{});render()}});
+list.addEventListener('click',e=>{const it=e.target.closest('.it');if(it)run(+it.dataset.i)});
+render();q.focus();
+</script>
+</body>
+</html>

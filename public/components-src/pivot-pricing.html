@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledger Pricing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F6F1E7;--paper:#FFFDF8;--forest:#12372A;--sage:#436850;--lime:#C9E265;--ink:#1B1B18;--muted:#6B6A5E;--line:rgba(18,55,42,.14)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;padding:64px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+h1{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(36px,5vw,56px);line-height:1.04;text-align:center;margin:14px 0 12px;letter-spacing:-.015em}
+h1 em{color:var(--sage)}
+.sub{color:var(--muted);font-size:17px;text-align:center;max-width:460px;line-height:1.5}
+.tog{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;margin:30px 0 40px;background:#E9E2D1;border-radius:999px;padding:5px}
+.tog button{position:relative;z-index:1;border:0;background:none;padding:10px 26px;font:600 14px 'DM Sans';color:var(--forest);cursor:pointer;border-radius:999px;transition:color .25s;white-space:nowrap}
+.tog button[aria-pressed=true]{color:#fff}
+.thumb{position:absolute;top:5px;left:5px;width:calc(50% - 5px);height:calc(100% - 10px);background:var(--forest);border-radius:999px;transition:transform .35s cubic-bezier(.3,1.2,.4,1)}
+.tog[data-p=annual] .thumb{transform:translateX(100%)}
+.save{margin-left:8px;font-size:11px;background:var(--lime);color:var(--forest);padding:3px 8px;border-radius:99px;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;width:100%;max-width:1040px;align-items:stretch}
+.card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:30px 28px 28px;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 24px 40px -24px rgba(18,55,42,.35)}
+.card.hot{background:var(--forest);color:#F3F0E4;border-color:var(--forest);transform:translateY(-10px)}
+.card.hot:hover{transform:translateY(-14px)}
+.ribbon{position:absolute;top:-13px;left:28px;background:var(--lime);color:var(--forest);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:99px}
+.name{font-family:'DM Serif Display',serif;font-size:28px}
+.for{font-size:14px;color:var(--muted);margin-top:4px;min-height:21px}
+.hot .for{color:#B7C6BA}
+.price{display:flex;align-items:baseline;gap:8px;margin:22px 0 4px}
+.amt{font-family:'DM Serif Display',serif;font-size:60px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.per{font-size:14px;color:var(--muted)}.hot .per{color:#B7C6BA}
+.was{font-size:14px;color:var(--muted);text-decoration:line-through;height:20px;opacity:0;transition:opacity .25s}
+.annual .was{opacity:1}.hot .was{color:#B7C6BA}
+.seats{display:flex;align-items:center;justify-content:space-between;margin:14px 0 4px;padding:10px 12px;border:1px dashed var(--line);border-radius:12px;font-size:13px;color:var(--muted)}
+.seats div{display:flex;align-items:center;gap:12px;color:var(--ink);font-weight:700}
+.seats button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font:700 16px 'DM Sans';line-height:1;color:var(--forest)}
+.seats button:hover{background:var(--forest);color:#fff}
+ul{list-style:none;margin:22px 0 26px;display:grid;gap:12px;font-size:14.5px;flex:1}
+li{display:flex;gap:10px;align-items:flex-start;line-height:1.35}
+li svg{flex:none;margin-top:2px;color:var(--sage)}.hot li svg{color:var(--lime)}
+li.off{color:#a4a293;text-decoration:line-through}li.off svg{color:#c3c0b0}
+.cta{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:15px;padding:14px;border-radius:12px;border:1.5px solid var(--forest);color:var(--forest);transition:background .2s,color .2s}
+.cta:hover{background:var(--forest);color:#fff}
+.hot .cta{background:var(--lime);border-color:var(--lime);color:var(--forest)}.hot .cta:hover{background:#fff;border-color:#fff}
+.fine{margin-top:34px;font-size:13px;color:var(--muted)}
+@media(max-width:920px){.cards{grid-template-columns:1fr;max-width:420px}.card.hot{transform:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="eyebrow">Pricing</div>
+<h1>Pricing that grows <em>with your books.</em></h1>
+<p class="sub">Start free, upgrade when the numbers get serious. Every plan includes bank-grade encryption and unlimited receipts.</p>
+<div class="tog" id="tog" data-p="monthly" role="group" aria-label="Billing period">
+  <span class="thumb"></span>
+  <button data-p="monthly" aria-pressed="true">Monthly</button>
+  <button data-p="annual" aria-pressed="false">Annual <span class="save">2 months free</span></button>
+</div>
+<div class="cards" id="cards">
+  <article class="card">
+    <div class="name">Solo</div><div class="for">For freelancers filing their own taxes</div>
+    <div class="price"><span class="amt" data-m="0" data-a="0">$0</span><span class="per">/ month</span></div><div class="was">&nbsp;</div>
+    <ul>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>1 business, 1 bank connection</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Invoicing &amp; receipt capture</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Quarterly tax estimates</li>
+      <li class="off"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 12h12"/></svg>Multi-currency</li>
+    </ul>
+    <a class="cta" href="#">Start free</a>
+  </article>
+  <article class="card hot">
+    <span class="ribbon">Most chosen</span>
+    <div class="name">Studio</div><div class="for">For small teams with a bookkeeper</div>
+    <div class="price"><span class="amt" data-m="29" data-a="24">$29</span><span class="per">/ month</span></div><div class="was">$29</div>
+    <ul>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Unlimited bank connections</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Multi-currency &amp; auto-reconcile</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Invite your accountant free</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Priority support, 4h response</li>
+    </ul>
+    <a class="cta" href="#">Try Studio free for 14 days</a>
+  </article>
+  <article class="card">
+    <div class="name">Firm</div><div class="for">For practices managing client books</div>
+    <div class="price"><span class="amt" id="firm" data-m="79" data-a="66">$79</span><span class="per">/ month</span></div><div class="was">$79</div>
+    <div class="seats"><span>Team seats</span><div><button id="minus" aria-label="Fewer seats">−</button><span id="sn" aria-live="polite">5</span><button id="plus" aria-label="More seats">+</button></div></div>
+    <ul>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Everything in Studio</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Client portal &amp; approvals</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>SSO and audit log</li>
+    </ul>
+    <a class="cta" href="#">Talk to us</a>
+  </article>
+</div>
+<p class="fine">Prices in USD · Seats beyond five are $9/mo each · Cancel anytime</p>
+<script>
+const tog=document.getElementById('tog'),cards=document.getElementById('cards'),firm=document.getElementById('firm'),sn=document.getElementById('sn');
+let mode='monthly',seats=5;
+const price=el=>{const base=+el.dataset[mode==='annual'?'a':'m'];return el===firm?base+Math.max(0,seats-5)*(mode==='annual'?7:9):base};
+const tweens=new WeakMap();
+function show(el){const to=price(el),from=+el.textContent.replace(/\D/g,'')||0,t0=performance.now();cancelAnimationFrame(tweens.get(el));
+  const step=t=>{const k=Math.min(1,(t-t0)/380),e=1-Math.pow(1-k,3);el.textContent='$'+Math.round(from+(to-from)*e);if(k<1)tweens.set(el,requestAnimationFrame(step))};tweens.set(el,requestAnimationFrame(step))}
+function render(){cards.classList.toggle('annual',mode==='annual');cards.querySelectorAll('.amt').forEach(show);
+  cards.querySelectorAll('.per').forEach(p=>p.textContent=mode==='annual'?'/ month, billed yearly':'/ month')}
+tog.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.p;tog.dataset.p=mode;tog.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));render()}));
+document.getElementById('plus').onclick=()=>{seats=Math.min(50,seats+1);sn.textContent=seats;show(firm)};
+document.getElementById('minus').onclick=()=>{seats=Math.max(5,seats-1);sn.textContent=seats;show(firm)};
+</script>
+</body>
+</html>

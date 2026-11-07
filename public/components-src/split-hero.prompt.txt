@@ -1,0 +1,30 @@
+ROLE
+You are a senior editorial designer and front-end engineer (15+ years, print-to-web). Build "Dispatch Hero": a split hero for a fortnightly essay newsletter called The Dispatch.
+
+GOAL
+A hero that reads like the front page of a well-edited magazine, not a SaaS landing page. One self-contained HTML file with a working email signup state.
+
+ART DIRECTION
+- Paper #F1ECE2 with a faint multiply-blended grain; ink #14110F; vermilion accent #E5391F; olive #5C6B3C for kickers.
+- Type: Fraunces (variable, opsz 144) for display and body — headline weight 400 at clamp(46px, 6.4vw, 92px), -0.035em tracking, one italic 600 vermilion word ("care"); Space Mono uppercase 11.5px with 0.12em tracking for every label.
+- Structure: a 12-column feel (7/5 split) divided by a 1px ink rule; a double-rule masthead; square corners everywhere; no shadows except a hard 6px offset on focus.
+
+ANATOMY
+1. Masthead: wordmark left, "Nº 14 · Autumn Issue" centred, "Subscribe →" with a vermilion underline right.
+2. Left (7 cols): olive kicker with a leading rule; headline "Slow software for people who care about detail."; deck paragraph with a vermilion drop cap; an inline email field + ink "Join free" button in one 2px bordered bar; fine print "Free, fortnightly · 18,400 readers".
+3. Right (5 cols): "In this issue" label, italic subhead, and a numbered 5-item index (01–05, vermilion mono numbers, serif titles, reading time at right). A rotating circular "EST. 2019 · NEW YORK" stamp in vermilion sits at the top-right of the column without touching the masthead rule.
+
+INTERACTION
+- Index rows: on hover, nudge 12px right, add a faint vermilion wash and underline the title.
+- Form: validates on submit; invalid shows "That email looks off — try again" in vermilion and refocuses; valid swaps the form for a confirmation box ("You're on the list. Issue Nº 15 lands Thursday.").
+- Stamp rotates over 28s; disabled under prefers-reduced-motion.
+
+CONSTRAINTS
+- Single file, inline CSS + a few lines of JS, Google Fonts via <link>. Inline SVG only.
+- Responsive: single column under 900px; hide the centred masthead label and the stamp.
+- Real editorial copy, no lorem ipsum. Keyboard-accessible form with a label (aria-label is fine).
+
+ACCEPTANCE CHECKLIST
+- Headline never breaks mid-word; drop cap aligns to 3 lines.
+- The stamp and masthead never collide.
+- All interactive states are visible without a mouse.

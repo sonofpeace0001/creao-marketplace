@@ -14,7 +14,7 @@ export function previewAspect(kind: string): string {
 
 // Component thumbnails were re-rendered as tight crops under the same filenames, so tag the
 // URL to bypass browser/CDN caches of the old images. Bump COMPONENT_THUMB_VERSION on re-render.
-const COMPONENT_THUMB_VERSION = 2;
+const COMPONENT_THUMB_VERSION = 3;
 export function thumbnailSrc(item: { thumbnail_url: string; kind: string }): string {
   return item.kind === "component" ? `${item.thumbnail_url}?v=${COMPONENT_THUMB_VERSION}` : item.thumbnail_url;
 }

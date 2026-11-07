@@ -1,0 +1,24 @@
+ROLE
+You are a senior brand designer and front-end engineer (15+ years, social-proof and landing-page design). Build "Wall of Love": a masonry testimonial wall that mixes card types so it reads as real community voices, not three identical cards.
+
+GOAL
+One self-contained HTML file in pure CSS. It should feel warm, human and a little playful while still looking premium.
+
+ART DIRECTION
+- Cream #FBF7EF background, butter highlight #FFEFB8, coral #FF6A4D, teal #0E7C7B, ink #1D1B16.
+- Type: Familjen Grotesk 600–700 for names, numbers and headlines (tight tracking); Instrument Sans for body.
+- Shape: 22px radius, 1px warm borders. Cards lift 4px and tilt ±0.6° on hover (alternating direction). Highlights inside quotes use a butter marker background, not bold.
+
+ANATOMY
+1. Header: rating pill (five amber stars + "4.9 from 2,300 reviews"), headline "Loved by 12,000 makers." with "12,000" on a butter underline, one-line subhead.
+2. Three CSS columns (2 at ≤900px, 1 at ≤600px) of seven cards, varied on purpose: (a) tweet-style with monogram avatar, handle and a highlighted phrase; (b) a coral stat card with a 76px "3.2×" and a quote; (c) a teal pull-quote card in 22px display type; (d) a video card with a coral gradient thumbnail, white play button and duration chip; (e) a logo-wordmark card ("Brightwave") with a highlighted quote; (f) another tweet-style card ending in a "Read 214 more stories →" link with a coral underline.
+
+CONSTRAINTS
+- Single file, inline CSS only, Google Fonts via <link>. Inline SVG for stars and play icon; monogram avatars are CSS (no photos, no emoji).
+- Use break-inside: avoid so cards never split across columns. Honour prefers-reduced-motion.
+- Realistic, specific testimonials (names, roles, companies, concrete outcomes) — no filler praise.
+
+ACCEPTANCE CHECKLIST
+- No two adjacent cards share the same treatment.
+- Text on coral and teal cards meets AA contrast.
+- Layout holds at 1440px, 768px and 390px with no overflow.

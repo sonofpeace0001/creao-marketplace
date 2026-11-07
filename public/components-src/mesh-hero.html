@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nocturne Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#06070B;--panel:rgba(255,255,255,.045);--line:rgba(255,255,255,.09);--text:#F4F6FA;--muted:#8E96A8;--mint:#7CF5C4;--sky:#6EA8FF;--coral:#FF6B57}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden;position:relative;display:flex;flex-direction:column}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
+.o1{width:520px;height:520px;background:radial-gradient(circle,#1B7F6A,transparent 70%);top:-160px;left:-120px}
+.o2{width:560px;height:560px;background:radial-gradient(circle,#2B4FB8,transparent 70%);top:80px;right:-200px;animation-delay:-6s}
+.o3{width:380px;height:380px;background:radial-gradient(circle,#B8412F,transparent 70%);bottom:-120px;left:38%;animation-delay:-11s;opacity:.4}
+@keyframes drift{to{transform:translate(60px,40px) scale(1.12)}}
+.grid{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);opacity:.5}
+.grain{position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.wrap{position:relative;z-index:1;max-width:1180px;width:100%;margin:0 auto;padding:0 32px;flex:1;display:flex;flex-direction:column}
+nav{display:flex;align-items:center;gap:36px;padding:26px 0}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque';font-weight:800;font-size:21px;letter-spacing:-.02em}
+.logo i{width:24px;height:24px;border-radius:8px;background:conic-gradient(from 200deg,var(--mint),var(--sky),var(--coral),var(--mint));display:block}
+.links{display:flex;gap:28px;font-size:14px;color:var(--muted);margin-left:8px}
+.links a{color:inherit;text-decoration:none;transition:color .2s}.links a:hover{color:var(--text)}
+.sp{flex:1}
+.ghost{font-size:14px;color:var(--muted);text-decoration:none}
+.pill{font-size:14px;font-weight:600;color:#04120D;background:var(--mint);padding:10px 18px;border-radius:999px;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 0 0 0 rgba(124,245,196,.4)}
+.pill:hover{transform:translateY(-1px);box-shadow:0 0 0 6px rgba(124,245,196,.14)}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:24px 0 72px;flex:1}
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;color:#BFC6D6;border:1px solid var(--line);background:var(--panel);padding:7px 14px 7px 10px;border-radius:999px;backdrop-filter:blur(10px)}
+.chip b{display:inline-flex;align-items:center;gap:6px;color:var(--mint);font-weight:600}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(124,245,196,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(124,245,196,0)}100%{box-shadow:0 0 0 0 rgba(124,245,196,0)}}
+h1{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(44px,6.2vw,80px);line-height:.98;letter-spacing:-.045em;margin:26px 0 22px}
+h1 span{background:linear-gradient(95deg,var(--mint),var(--sky) 60%,#B6A6FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:18px;line-height:1.55;color:var(--muted);max-width:480px}
+.cta{display:flex;align-items:center;gap:22px;margin-top:34px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 15px 'DM Sans';color:#04120D;background:var(--mint);border:0;padding:15px 24px;border-radius:14px;cursor:pointer;transition:transform .2s}
+.btn svg{transition:transform .25s}.btn:hover svg{transform:translateX(4px)}.btn:hover{transform:translateY(-2px)}
+.demo{display:inline-flex;align-items:center;gap:12px;color:var(--text);font:500 15px 'DM Sans';background:none;border:0;cursor:pointer}
+.demo i{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;background:var(--panel);transition:border-color .2s,background .2s}
+.demo:hover i{border-color:var(--mint);background:rgba(124,245,196,.1)}
+.proof{display:flex;align-items:center;gap:14px;margin-top:40px;font-size:13px;color:var(--muted)}
+.stack{display:flex}.stack i{width:30px;height:30px;border-radius:50%;border:2px solid var(--ink);margin-left:-9px;display:grid;place-items:center;font:700 11px 'DM Sans';color:#06070B;font-style:normal}
+.stack i:first-child{margin-left:0}
+.panel{position:relative;border:1px solid var(--line);background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.025));backdrop-filter:blur(22px);border-radius:24px;padding:24px;box-shadow:0 40px 80px -30px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.1)}
+.ph{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
+.ph b{color:var(--text);font-weight:600;font-size:14px}
+.live{display:flex;align-items:center;gap:6px;color:var(--mint);font-weight:600;font-size:12px}
+.big{font-family:'Bricolage Grotesque';font-weight:800;font-size:44px;letter-spacing:-.04em;margin:18px 0 2px}
+.delta{font-size:13px;color:var(--mint);font-weight:600}
+svg.spark{width:100%;height:120px;margin:14px 0 6px;display:block}
+.line{fill:none;stroke:url(#g);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.2s .3s cubic-bezier(.4,0,.2,1) forwards}
+.area{fill:url(#a);opacity:0;animation:fade 1s 1.6s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}@keyframes fade{to{opacity:1}}
+.rows{display:grid;gap:10px;margin-top:14px}
+.row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;font-size:13px}
+.bar{grid-column:1/-1;height:6px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:6px;width:0;animation:grow 1.4s .9s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes grow{to{width:var(--w)}}
+.float{position:absolute;display:flex;align-items:center;gap:10px;font-size:12.5px;background:rgba(14,16,24,.85);border:1px solid var(--line);backdrop-filter:blur(14px);padding:10px 14px;border-radius:14px;box-shadow:0 20px 40px -16px rgba(0,0,0,.7)}
+.float{z-index:2}
+.f1{left:-34px;bottom:-24px;animation:bob 6s ease-in-out infinite}
+.f2{right:-18px;top:-22px;animation:bob 7s -2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.float .ic{width:28px;height:28px;border-radius:9px;display:grid;place-items:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:44px}.links{display:none}.f1,.f2{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.line{stroke-dashoffset:0}.area{opacity:1}.bar i{width:var(--w)}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="grid"></div><div class="grain"></div>
+<div class="wrap">
+  <nav>
+    <div class="logo"><i></i>Halcyon</div>
+    <div class="links"><a href="#">Product</a><a href="#">Customers</a><a href="#">Pricing</a><a href="#">Changelog</a></div>
+    <div class="sp"></div>
+    <a class="ghost" href="#">Sign in</a>
+    <a class="pill" href="#">Start free</a>
+  </nav>
+  <section class="hero">
+    <div>
+      <div class="chip"><b><span class="dot"></span>New</b>Live sync across every workspace</div>
+      <h1>Ship the product,<br><span>not the paperwork.</span></h1>
+      <p class="lead">Halcyon turns scattered specs, tickets and status updates into one living plan your whole team actually trusts.</p>
+      <div class="cta">
+        <button class="btn">Start building free <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button class="demo"><i><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg></i>Watch the 90s demo</button>
+      </div>
+      <div class="proof">
+        <div class="stack"><i style="background:#7CF5C4">AK</i><i style="background:#6EA8FF">MR</i><i style="background:#FFB4A8">JT</i><i style="background:#F5E27A">SL</i></div>
+        <span>Trusted by <b style="color:#F4F6FA">4,200+</b> product teams</span>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div class="float f2"><span class="ic" style="background:rgba(124,245,196,.14);color:#7CF5C4"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Release 4.2 shipped</div>
+      <div class="panel">
+        <div class="ph"><b>Sprint velocity</b><span class="live"><span class="dot"></span>Live</span></div>
+        <div class="big">94.2%</div><div class="delta">▲ 12.4% vs last sprint</div>
+        <svg class="spark" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#7CF5C4"/><stop offset="1" stop-color="#6EA8FF"/></linearGradient>
+          <linearGradient id="a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6EA8FF" stop-opacity=".28"/><stop offset="1" stop-color="#6EA8FF" stop-opacity="0"/></linearGradient></defs>
+          <path class="area" d="M0 96 C40 90 60 70 100 74 S160 40 200 48 S260 66 300 30 S370 14 400 10 V120 H0Z"/>
+          <path class="line" d="M0 96 C40 90 60 70 100 74 S160 40 200 48 S260 66 300 30 S370 14 400 10"/>
+        </svg>
+        <div class="rows">
+          <div class="row"><span>Design review</span><span style="color:var(--mint)">100%</span><div class="bar"><i style="--w:100%;background:var(--mint)"></i></div></div>
+          <div class="row"><span>API integration</span><span style="color:var(--sky)">78%</span><div class="bar"><i style="--w:78%;background:var(--sky)"></i></div></div>
+          <div class="row"><span>Launch checklist</span><span style="color:var(--coral)">41%</span><div class="bar"><i style="--w:41%;background:var(--coral)"></i></div></div>
+        </div>
+      </div>
+      <div class="float f1"><span class="ic" style="background:rgba(255,107,87,.15);color:#FF6B57"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>3 reviews due today</div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+ROLE
+You are a senior interface designer and front-end engineer (15+ years, OS-level and consumer productivity UI). Build "Launchpad": a warm, light quick launcher with app icons, recent files and an inline calculator.
+
+GOAL
+One self-contained HTML file that feels like a native launcher: instant filtering, a prominent top hit, and maths answers as you type.
+
+ART DIRECTION
+- Soft peach-and-sky wallpaper (#F6EEE6 base with radial washes #FFD9C2, #C9DDF7, #FFEBB8); panel rgba(255,255,255,.78) with 30px blur and a hairline white inner border; ink #1F1A17; muted #8A817A; orange highlight #FF7A3D.
+- Type: Figtree 500–700; the input is 22px.
+- Shape: 24px panel radius, 38px icon tiles with 11px radius, inset highlight and a soft drop shadow on each tile; each app has its own saturated colour (yellow, red, black, blue, violet).
+
+ANATOMY
+- Large search field with magnifier.
+- "Top hit" row (52px icon, 18px title, peach gradient background) followed by an Applications list (Notes, Calendar, Terminal, Mail, Frames) and Recent files (Q4 roadmap.pdf, Invoices 2024, pitch-v7.key) with path and recency.
+- Footer with ↑↓ move, ↵ open, ⌘K toggle key caps.
+
+INTERACTION
+- Typing filters apps and files and highlights the match in orange; empty state “Nothing found for …”.
+- If the query is a safe arithmetic expression (digits, + − * / ( ) . % ^ only, containing an operator), the first row becomes a calculator result: expression on the left, “= 438”-style answer at 34px on the right; Enter copies the answer to the clipboard.
+- Arrow keys move the selection with wrap-around; hover moves it too; the active row shows an “Open ↵” hint.
+
+CONSTRAINTS
+- Single file, inline CSS and ~30 lines of JS, Google Fonts via <link>. Inline SVG icons; no emoji. Never use eval on unchecked input — validate with a strict regex before evaluating, and escape text before injecting it into HTML.
+- Honour prefers-reduced-motion; works down to 360px.
+
+ACCEPTANCE CHECKLIST
+- “24*18+6” shows 438; “2^10” shows 1,024; “abc” shows no calculator row.
+- The top-hit row is always the first match.

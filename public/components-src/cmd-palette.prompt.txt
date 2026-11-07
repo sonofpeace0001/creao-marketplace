@@ -1,0 +1,29 @@
+ROLE
+You are a senior interaction designer and front-end engineer (15+ years, productivity and developer tools). Build "Spotlight Palette": a ⌘K command palette with real fuzzy-ish search and full keyboard control.
+
+GOAL
+One self-contained HTML file that behaves like a shipping product's palette: type to filter, arrows to move, Enter to run — over a convincing blurred app behind it.
+
+ART DIRECTION
+- Near-black #07080B; panel rgba(22,24,31,.82) with 28px backdrop blur, 1px 8% white border, 18px radius and a deep shadow; single accent coral #FF7A59 used only for selection and matched text.
+- Type: Inter Tight (UI, 17px input) + JetBrains Mono (key caps, 11px).
+- Background: an aria-hidden skeleton app (sidebar bars + three cards + a chart block) blurred 2px under a dark scrim with a faint coral radial glow.
+
+ANATOMY
+- Search row: magnifier icon, input, "esc" key cap.
+- Results list in three groups — Suggestions (New document ⌘N, Invite teammate ⌘I, Toggle dark mode ⌘D, Copy share link ⇧⌘L), Navigation (Go to Dashboard G D, Go to Billing G B, Open Settings ⌘,), Recent (two documents with edit times). Each row: 30px icon tile, bold title, muted secondary text, shortcut key caps right-aligned.
+- Footer: ↑↓ navigate, ↵ run, product name + ⌘K.
+
+INTERACTION
+- Typing filters rows by title and description and highlights the matched substring in coral; groups with no matches disappear. Empty state: “No results for ‘xyz’” with suggestions.
+- ArrowUp/Down wrap around; the active row gets a coral tint, a 3px left bar and tinted icon, and scrolls into view. Mouse hover moves the selection. Enter or click runs the command and shows a toast “Ran: <name>”. Escape clears the field.
+- Roles: combobox on the input, listbox/option on the results with aria-selected.
+
+CONSTRAINTS
+- Single file, inline CSS and ~35 lines of JS, Google Fonts via <link>. Inline SVG icons only; no emoji; escape user input before injecting it into HTML.
+- Responsive to 360px; honour prefers-reduced-motion.
+
+ACCEPTANCE CHECKLIST
+- No horizontal scroll and no layout shift when filtering.
+- Highlighting never breaks on special characters like < or &.
+- The selected row is always visible.

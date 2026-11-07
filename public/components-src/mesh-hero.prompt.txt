@@ -1,0 +1,30 @@
+ROLE
+You are a senior product designer and front-end engineer with 15+ years shipping SaaS marketing sites. Build "Nocturne Hero": a cinematic dark hero for a B2B planning tool called Halcyon.
+
+GOAL
+One self-contained HTML file. The hero must feel like a funded product's homepage — confident type, a believable product panel, and quiet motion — never a template.
+
+ART DIRECTION
+- Mood: late-night control room. Deep ink background #06070B, three blurred colour orbs (teal #1B7F6A, cobalt #2B4FB8, ember #B8412F) drifting slowly behind a masked 64px hairline grid and 7% film grain.
+- Accents: mint #7CF5C4, sky #6EA8FF, coral #FF6B57. No purple-to-pink gradients.
+- Type: Bricolage Grotesque 800 for the headline (tight -0.045em tracking, 0.98 line height, clamp(44px, 6.2vw, 80px)); DM Sans for everything else.
+- Shape: 14px control radius, 24px panel radius, 1px borders at 9% white, glass panels with backdrop blur.
+
+ANATOMY
+1. Nav: logo mark (conic gradient square) + wordmark, four text links, ghost "Sign in", mint pill "Start free".
+2. Left column: status chip with pulsing dot ("New — Live sync across every workspace"); two-line headline whose second line is a mint→sky→lavender gradient ("not the paperwork."); 18px lead paragraph, max 480px; primary mint button with an arrow that slides 4px on hover; secondary "Watch the 90s demo" with a round play button; proof row with four overlapping initials avatars and "Trusted by 4,200+ product teams".
+3. Right column: a glass "Sprint velocity" panel — big 94.2% metric with a mint delta, an SVG sparkline that draws itself over 2.2s then fades in its area fill, three labelled progress bars (mint / sky / coral) that grow in. Two floating glass chips ("Release 4.2 shipped", "3 reviews due today") bob gently and sit above the panel (z-index) without covering any text.
+
+MOTION
+- Orbs drift over 18s alternate. Sparkline draws with stroke-dashoffset; bars animate width. All animation off under prefers-reduced-motion (render final state).
+
+CONSTRAINTS
+- Single HTML file, inline CSS, no JS required. Google Fonts via <link>. Inline SVG icons only — no emoji, no stock imagery.
+- Responsive: stacks to one column under 900px, hides nav links and floating chips.
+- Real copy only, no lorem ipsum. Visible focus states on every link and button.
+
+ACCEPTANCE CHECKLIST
+- Headline has no orphaned word at 1440px and 390px.
+- Nothing overlaps text; floating chips never cover labels.
+- Contrast of body copy on the panel is at least 4.5:1.
+- Looks intentional with animations disabled.

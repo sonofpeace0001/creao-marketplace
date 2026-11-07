@@ -1,0 +1,30 @@
+ROLE
+You are a senior industrial-UI designer and front-end engineer (15+ years, pro audio and creative tools). Build "Console Toolbar": a hardware-style icon toolbar for a studio app.
+
+GOAL
+One self-contained HTML file with a toolbar of tactile icon buttons that behave like real transport and tool controls, plus a live timecode readout.
+
+ART DIRECTION
+- Background radial #151A22 → #0B0D10; panel #161A20 → #1D222A with a 1px #2A313B edge and inset top highlight; amber LED #FFB020, green #3DDC84, red #FF4D4D.
+- Type: IBM Plex Mono (labels, timecode 30px, 0.06em tracking) and IBM Plex Sans (tooltips).
+- Shape: 54px keys with 12px radius, a visible 3px "key travel" bottom edge, recessed LED strip beneath each icon. Group dividers are 2px grooves.
+
+ANATOMY
+- Three groups. Transport: Record, Play, Stop. Tools: Select, Razor, Snap-to-grid. View: Zoom out, Zoom in, Loop.
+- Each key has a tooltip showing its name and shortcut ("Record · R") that appears above on hover and focus.
+- Below the bar: amber timecode "00:12:48:03" and three status LEDs (REC red, PLAY green, SNAP amber).
+
+INTERACTION
+- Toggle keys use aria-pressed; pressed keys sink 3px and light their LED. Record's LED blinks.
+- Play starts a 30fps timecode counter; Stop resets it to zero and clears Play/Record. Space toggles play; R toggles record.
+- Select and Razor behave as a radio group (one active); Snap and Loop toggle independently.
+- Status LEDs mirror the real state of the corresponding keys.
+
+CONSTRAINTS
+- Single file, inline CSS and under 40 lines of JS, Google Fonts via <link>. Inline SVG icons (consistent 2px stroke). No emoji.
+- Toolbar has role="toolbar" and an aria-label; every key has an accessible name; visible focus ring in amber.
+- Respect prefers-reduced-motion (no blink).
+
+ACCEPTANCE CHECKLIST
+- Timecode never drifts or shows NaN; frames wrap at 30.
+- Keyboard-only users can operate every control and see every tooltip.

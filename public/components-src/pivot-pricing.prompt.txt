@@ -1,0 +1,31 @@
+ROLE
+You are a senior product designer and conversion-focused front-end engineer (15+ years, fintech and B2B SaaS pricing pages). Build "Ledger Pricing": a three-tier pricing section for an accounting product, with a working billing toggle and a seat stepper.
+
+GOAL
+One self-contained HTML file that makes the middle plan the obvious choice without tricks, and lets visitors see real price changes.
+
+ART DIRECTION
+- Warm, trustworthy, editorial: cream #F6F1E7, paper #FFFDF8, forest #12372A, sage #436850, lime accent #C9E265, ink #1B1B18.
+- Type: DM Serif Display for the headline, plan names and prices (price 60px, -0.03em); DM Sans for UI and copy.
+- Shape: 22px card radius, 1px forest-tinted borders, the featured card inverted to solid forest and lifted 10px.
+
+ANATOMY
+1. Eyebrow "Pricing", headline "Pricing that grows with your books." with the last three words italic sage, one-sentence subhead.
+2. Segmented billing toggle (Monthly / Annual) with a sliding forest thumb and a lime "2 months free" tag.
+3. Three cards: Solo ($0), Studio ($29 → $24/mo annual, "Most chosen" lime ribbon), Firm ($79 base with a team-seat stepper). Each has a one-line audience, a checklist (check icons; one unavailable item struck through with a dash), and a CTA — outlined for Solo/Firm, lime-filled on Studio.
+4. Fine print: currency, seat pricing, cancellation.
+
+INTERACTION
+- Toggling billing animates every price with a 380ms eased count, shows a struck-through monthly price, and changes the unit label to "/ month, billed yearly".
+- Firm's stepper (min 5, max 50) adds $9 per extra seat monthly ($7 annual) and re-animates the price.
+- Cards lift 4px on hover. Toggle buttons use aria-pressed; stepper buttons have aria-labels and the seat count is aria-live.
+
+CONSTRAINTS
+- Single file, inline CSS and ~20 lines of JS, Google Fonts via <link>. Inline SVG icons; no emoji.
+- Responsive: single column under 920px with the featured lift removed. Honour prefers-reduced-motion.
+- Real numbers and copy; no "Lorem" or "$XX".
+
+ACCEPTANCE CHECKLIST
+- Prices never show NaN or flicker through zero when toggling quickly.
+- The featured plan keeps AA contrast for all text on forest.
+- Annual savings are internally consistent across cards.

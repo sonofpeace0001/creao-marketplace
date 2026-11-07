@@ -1,0 +1,28 @@
+ROLE
+You are a senior product designer and front-end engineer (15+ years, PLG SaaS). Build "Skyline Plans": a compact two-plan comparison with a spring-loaded billing toggle for a project-management tool.
+
+GOAL
+A light, friendly pricing block for products with a self-serve funnel. One self-contained HTML file; the toggle and price swap must feel polished.
+
+ART DIRECTION
+- Airy sky: background #F5F9FF with soft radial washes of #D5E8FF (top-left) and #CFF5EE (bottom-right); navy #0B1B3A text; blue #1D6BFF; teal #00BFA6; borders #DCE6F5.
+- Type: Plus Jakarta Sans 500–800; the headline is 800 weight with -0.035em tracking; prices 56px at -0.05em.
+- Shape: 28px card radius, pill toggle, soft long shadows. The featured plan has a 2px blue→teal gradient border (padding-box / border-box trick), not a solid fill.
+
+ANATOMY
+1. Pill label "Simple, transparent plans", headline "Pick a plan. Switch anytime.", one-line subhead.
+2. Pill toggle "Pay monthly | Pay yearly −25%" with a gradient thumb that springs to the selected option and resizes to fit its label.
+3. Two cards. Starter ($12, $9 yearly): three included features and two unavailable ones with muted dash icons, an outlined CTA. Scale ($28, $21 yearly): five included features with teal check chips, a gradient "Popular" tag, a filled blue CTA with arrow, and a social-proof row (three avatars + "Chosen by 3,100+ teams").
+
+INTERACTION
+- Switching billing re-mounts each price with a 400ms rise-in animation and updates the helper line ("Billed monthly" ↔ "Billed yearly — you save 25%").
+- The toggle thumb re-measures on font load and on resize. Buttons use aria-pressed.
+
+CONSTRAINTS
+- Single file, inline CSS and ~12 lines of JS, Google Fonts via <link>. Inline SVG icons; no emoji.
+- Stacks to one column under 700px; honour prefers-reduced-motion.
+
+ACCEPTANCE CHECKLIST
+- Toggle thumb is perfectly aligned to the active label at every width.
+- Unavailable items are readable but clearly de-emphasised.
+- Both cards stay aligned at the top regardless of price height.

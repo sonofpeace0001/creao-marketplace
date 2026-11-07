@@ -1,0 +1,29 @@
+ROLE
+You are a senior interaction designer and front-end engineer (15+ years, design systems). Build "Pressline Buttons": a neo-brutalist button laboratory where every button feels physically pressable.
+
+GOAL
+One self-contained HTML file showcasing a complete button system with real, working states — not a static swatch sheet.
+
+ART DIRECTION
+- Concrete background #EDEAE3 with a 22px dot grid; ink #0E0E0E; signal yellow #FFD60A; hot pink #FF4F9A; cobalt #2B59FF; success green #18C37E.
+- Type: Space Grotesk 700 for UI and headings, Space Mono 700 uppercase with wide tracking for labels.
+- Shape: square corners, 3px ink borders, hard offset shadows (5px 5px 0 ink). The whole board sits on a 10px offset shadow.
+
+ANATOMY
+1. Board header: "Button lab" + a black tag "06 states" in yellow mono.
+2. Variants row: Primary (yellow), Secondary (white), Ink (black with a cobalt shadow), and a text link with a 3px underline and an arrow that slides on hover.
+3. Live states row: a Deploy button that cycles idle → loading ("Deploying" with three bouncing dots, 1.7s) → done (green, check icon, "Live — click to reset"); a split button "Publish" + caret opening a menu (Publish now ⌘P, Schedule… ⌘S, Save as draft ⌘D); a destructive pink button.
+4. Sizes, icon, disabled: S/M/L, a square icon button, and a disabled button with a diagonal-stripe fill.
+
+INTERACTION
+- Hover: translate(-2px,-2px) and grow the shadow by 2px. Active: translate to the shadow offset and drop the shadow to zero (button "presses" into the page). Focus-visible: 3px cobalt outline with 4px offset.
+- Menu: toggles on caret click, closes on outside click and Escape, aria-expanded kept in sync, items focusable.
+
+CONSTRAINTS
+- Single file, inline CSS and ~15 lines of JS, Google Fonts via <link>. Inline SVG icons only; no emoji.
+- Responsive down to 360px; honour prefers-reduced-motion (no transitions).
+
+ACCEPTANCE CHECKLIST
+- Every button is operable with the keyboard.
+- Disabled state is unmistakable and not clickable.
+- Press feedback is under 100ms.
