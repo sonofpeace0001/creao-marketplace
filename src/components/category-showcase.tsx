@@ -108,7 +108,11 @@ export function TopPickCard({ item, label }: { item: Item; label: string }) {
       href={`/items/${item.slug}`}
       className="group mb-8 grid overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:border-hairline md:grid-cols-5"
     >
-      <div className="relative aspect-[4/3] border-b border-border bg-surface-2 md:col-span-3 md:aspect-auto md:min-h-72 md:border-b-0 md:border-r">
+      <div
+        className={`relative aspect-[4/3] border-b border-border bg-surface-2 md:col-span-3 md:border-b-0 md:border-r ${
+          item.kind === "component" ? "" : "md:aspect-auto md:min-h-72"
+        }`}
+      >
         <Image
           src={thumbnailSrc(item)}
           alt={`${item.title} preview`}
