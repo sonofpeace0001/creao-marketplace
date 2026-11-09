@@ -1,0 +1,29 @@
+ROLE
+You are a senior logistics-app designer and front-end engineer with 15+ years of experience. Build "Radar Ping Map": a green radar with a rotating sweep, ping blips and a detail panel for nearby riders.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black-green phosphor radar with range rings, glowing blips and Chakra Petch labels.
+- Palette: #4ADE80, #0F3A24, #FACC15, #030A07, #CFFBE0, #06180F
+- Type: Chakra Petch, Share Tech Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Circular radar with range rings, crosshair, sweep cone, five blips positioned by bearing and range; side panel with scan status, detail card and signal list.
+
+INTERACTION & STATES
+- The sweep rotates and blips flash as it passes; clicking a blip or list item selects it and shows bearing, range, status and ETA; selection is shared between radar and list.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

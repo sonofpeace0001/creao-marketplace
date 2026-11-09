@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Avatar Quote Switcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F4F0FA;color:#1D1530;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{display:grid;grid-template-columns:260px 1fr;gap:34px;align-items:center;width:100%;max-width:820px;background:#fff;border-radius:30px;padding:34px;box-shadow:0 40px 70px -44px rgba(70,30,140,.5),0 0 0 1px rgba(29,21,48,.06)}
+.pt{position:relative;aspect-ratio:4/5}.pt .fr{position:absolute;inset:0;border-radius:24px;overflow:hidden;opacity:0;transform:scale(.92) rotate(var(--r));transition:all .55s cubic-bezier(.3,1.1,.4,1);background:var(--g)}.pt .fr.on{opacity:1;transform:none;z-index:2}
+.pt .fr::before{content:"";position:absolute;left:50%;top:30%;width:44%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:rgba(255,255,255,.9)}.pt .fr::after{content:"";position:absolute;left:14%;right:14%;top:58%;bottom:-6%;border-radius:80px 80px 0 0;background:rgba(255,255,255,.9)}
+.pt .sh{position:absolute;inset:0;border-radius:24px;background:var(--g);opacity:.4;transform:translate(14px,14px) rotate(4deg)}
+.tx{min-height:300px;display:flex;flex-direction:column}
+.tx q{display:block;font:500 clamp(22px,3.2vw,30px)/1.28 'Fraunces',serif;letter-spacing:-.02em;quotes:"“" "”";min-height:160px}
+.tx q span{display:inline-block;opacity:0;filter:blur(6px);transform:translateY(8px);animation:w .45s forwards;animation-delay:calc(var(--i)*35ms)}@keyframes w{to{opacity:1;filter:none;transform:none}}
+.nm{margin-top:14px}.nm b{display:block;font-size:17px;font-weight:600}.nm span{font-size:14px;color:#7A6E96}
+.sw{display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:22px}
+.sw button{position:relative;width:48px;height:48px;border-radius:50%;border:0;padding:0;cursor:pointer;background:var(--g);display:grid;place-items:center;color:#fff;font:700 14px 'Inter';opacity:.5;transform:scale(.85);transition:all .3s cubic-bezier(.3,1.4,.5,1);outline:3px solid transparent;outline-offset:3px}.sw button:hover{opacity:.85}.sw button[aria-pressed=true]{opacity:1;transform:scale(1);outline-color:var(--c)}.sw button:focus-visible{outline-color:#1D1530}
+.ar{margin-left:auto;display:flex;gap:8px}.ar button{width:44px;height:44px;border-radius:50%;border:1.5px solid #E2DAF2;background:#fff;color:#1D1530;cursor:pointer;display:grid;place-items:center;transition:all .2s}.ar button:hover{background:#1D1530;color:#fff}.ar button:focus-visible{outline:3px solid #7C3AED;outline-offset:3px}
+@media(max-width:700px){.c{grid-template-columns:1fr;padding:24px}.pt{max-width:200px;margin:0 auto}.tx q{min-height:0}}
+@media(prefers-reduced-motion:reduce){.tx q span{animation:none;opacity:1;filter:none;transform:none}*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="pt" id="pt"><div class="sh" id="sh"></div></div>
+<div class="tx"><q id="q" aria-live="polite"></q><div class="nm"><b id="nm"></b><span id="rl"></span></div><div class="sw"><div id="sw" role="group" aria-label="Choose a customer" style="display:flex;gap:8px"></div><div class="ar"><button id="pv" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button id="nx" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div></div></div>
+<script>
+const T=[['Priya Raman','Head of Operations, Northwind','We replaced three tools with one and our weekly planning meeting shrank from an hour to fifteen minutes.','linear-gradient(160deg,#C4A9FF,#7C3AED 60%,#3B1A8A)','#7C3AED',-4],['Marcus Reid','VP Product, Lumen','It is the first tool our engineers and our designers both asked to keep using after the trial ended.','linear-gradient(160deg,#9DD6FF,#2563EB 60%,#14307A)','#2563EB',3],['Elena Ortiz','Founder, Fjord Studio','Switching took one afternoon. Six months later I cannot imagine running the studio any other way.','linear-gradient(160deg,#9BF0C0,#059669 60%,#064E3B)','#059669',-3],['Tomas Berg','Design Lead, Helios','The attention to detail is rare. Every interaction feels considered, and my team notices.','linear-gradient(160deg,#FFC59A,#EA580C 60%,#7A2A06)','#EA580C',4]];
+const pt=document.getElementById('pt'),sw=document.getElementById('sw');let cur=0,auto=null;
+T.forEach((t,i)=>{const f=document.createElement('div');f.className='fr';f.style.cssText='--g:'+t[3]+';--r:'+t[5]+'deg';pt.appendChild(f);const b=document.createElement('button');b.style.cssText='--g:'+t[3]+';--c:'+t[4];b.textContent=t[0].split(' ').map(x=>x[0]).join('');b.setAttribute('aria-label',t[0]);b.setAttribute('aria-pressed','false');b.onclick=()=>{go(i);restart()};sw.appendChild(b)});
+const F=[...pt.querySelectorAll('.fr')],B=[...sw.children];
+function go(n){cur=(n+T.length)%T.length;const t=T[cur];F.forEach((f,i)=>f.classList.toggle('on',i===cur));B.forEach((b,i)=>b.setAttribute('aria-pressed',i===cur));document.getElementById('sh').style.setProperty('--g',t[3]);document.getElementById('q').innerHTML=t[2].split(' ').map((w,i)=>'<span style="--i:'+i+'">'+w+'&nbsp;</span>').join('');document.getElementById('nm').textContent=t[0];document.getElementById('rl').textContent=t[1]}
+function restart(){clearInterval(auto);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)auto=setInterval(()=>go(cur+1),6000)}
+document.getElementById('nx').onclick=()=>{go(cur+1);restart()};document.getElementById('pv').onclick=()=>{go(cur-1);restart()};go(0);restart();
+</script></body></html>

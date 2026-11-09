@@ -1,0 +1,29 @@
+ROLE
+You are a senior social-proof designer and front-end engineer with 15+ years of experience. Build "Video Testimonial Wall": a bento wall of video testimonial cards that animate to a playing state with a live waveform and a progress bar.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark stage with saturated gradient poster frames, flat portrait art and amber progress.
+- Palette: #FBBF24, #0E0F14, #F2F3F8, #34D399
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; featured large card and five smaller cards each with poster art, duration, play button, waveform, quote, author and progress bar.
+
+INTERACTION & STATES
+- Clicking a card toggles playing: the play icon fades to bouncing waveform bars and an eight second progress bar fills; only one card plays at a time.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

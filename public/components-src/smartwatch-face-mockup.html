@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Smartwatch Face Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 460px at 70% 40%,#1D2B55,transparent 70%),#080B16;color:#EEF2FF;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{width:100%;max-width:860px;display:grid;grid-template-columns:1fr auto;gap:50px;align-items:center}
+.tx small{font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#7DD3FC}.tx h1{font-size:clamp(34px,5vw,58px);font-weight:700;letter-spacing:-.05em;line-height:1;margin:12px 0 14px}.tx p{font-size:17px;line-height:1.6;color:#8FA0CC;max-width:34ch}
+.fc{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}.fc button{border:1px solid #27345F;background:#101831;color:#C9D6F8;border-radius:99px;padding:9px 18px;font:600 14px 'Outfit';cursor:pointer;transition:all .25s}.fc button[aria-pressed=true]{background:#38BDF8;border-color:#38BDF8;color:#06223A}.fc button:focus-visible{outline:2px solid #38BDF8;outline-offset:2px}
+.wc{position:relative;width:300px;height:380px;display:grid;place-items:center}
+.bd{position:absolute;left:50%;width:150px;height:84px;margin-left:-75px;background:linear-gradient(180deg,#22283F,#141828);z-index:0}.bd.t{top:0;border-radius:30px 30px 0 0}.bd.b{bottom:0;border-radius:0 0 30px 30px}
+.wt{position:relative;z-index:2;width:240px;height:290px;border-radius:64px;background:linear-gradient(145deg,#C8CCE0,#6E7390 60%,#3A3E55);padding:9px;box-shadow:0 40px 60px -20px #000,inset 0 2px 3px rgba(255,255,255,.6)}
+.cr{position:absolute;right:-14px;top:78px;width:18px;height:48px;border-radius:0 10px 10px 0;background:linear-gradient(90deg,#8A8EA8,#C6C9DC);box-shadow:0 4px 8px rgba(0,0,0,.5);transition:transform .25s}.cr.pr{transform:translateX(-3px)}
+.cr i{position:absolute;left:3px;right:3px;height:2px;background:rgba(0,0,0,.25);top:10px}.cr i:nth-child(2){top:18px}.cr i:nth-child(3){top:26px}.cr i:nth-child(4){top:34px}
+.bt2{position:absolute;right:-8px;top:150px;width:10px;height:30px;border-radius:0 6px 6px 0;background:#8A8EA8}
+.sc{position:relative;width:100%;height:100%;border-radius:56px;background:#000;overflow:hidden}
+.fa{position:absolute;inset:0;transition:opacity .5s,transform .5s cubic-bezier(.3,1.2,.5,1)}.fa.off{opacity:0;transform:scale(.9);pointer-events:none}
+/* analog */
+.an .tk{position:absolute;inset:14px}.an .tk i{position:absolute;left:50%;top:0;width:2px;height:8px;margin-left:-1px;background:#555B7A;transform-origin:50% calc(var(--r,126px));}.an .tk i.m{height:14px;width:3px;background:#E7EBFF}
+.an .hd{position:absolute;left:50%;top:50%;width:6px;border-radius:6px;background:#fff;transform-origin:50% 100%;margin-left:-3px}.an .hh{height:62px;margin-top:-62px}.an .mh{height:92px;margin-top:-92px;width:5px;margin-left:-2.5px}.an .sh{height:104px;margin-top:-104px;width:2px;margin-left:-1px;background:#F97316}
+.an .ct{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px;border-radius:50%;background:#F97316;box-shadow:0 0 0 3px #000}
+.an .cp{position:absolute;display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#0F1325;border:1px solid #20274A;font-size:11px;font-weight:600;text-align:center;line-height:1.1}.an .c1{left:36px;top:110px}.an .c2{right:36px;top:110px}.an .c3{left:50%;bottom:34px;margin-left:-28px}
+/* rings */
+.rg .tm{position:absolute;left:0;right:0;top:36px;text-align:center;font:600 46px 'Outfit';letter-spacing:-.04em}.rg .tm small{display:block;font-size:13px;font-weight:500;color:#8A93B8;letter-spacing:.04em;margin-top:-2px}
+.rg svg{position:absolute;left:50%;top:50%;width:170px;height:170px;margin:-60px 0 0 -85px;transform:rotate(-90deg)}.rg circle{fill:none;stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset 1s}.rg .t{opacity:.2}
+.rg .lg{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;gap:10px;font-size:11px;font-weight:600;color:#9AA3C8}.rg .lg i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;background:var(--c)}
+.wc .glr{position:absolute;inset:9px;border-radius:56px;z-index:3;background:linear-gradient(125deg,rgba(255,255,255,.14),transparent 35%);pointer-events:none}
+@media(max-width:760px){.c{grid-template-columns:1fr;justify-items:center;text-align:center}.fc{justify-content:center}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="tx"><small>Orbit Watch</small><h1>Time, in your style</h1><p>Two watch faces, live and interactive. Press the crown or pick a face to switch.</p><div class="fc"><button id="f1" aria-pressed="true">Analog</button><button id="f2" aria-pressed="false">Activity</button></div></div>
+<div class="wc"><div class="bd t"></div><div class="bd b"></div><div class="wt"><div class="cr" id="cr" role="button" tabindex="0" aria-label="Crown, switch face"><i></i><i></i><i></i><i></i></div><div class="bt2"></div><div class="sc">
+<div class="fa an" id="an"><div class="tk" id="tk"></div><div class="cp c1"><span>72<br>BPM</span></div><div class="cp c2"><span>NOV<br>9</span></div><div class="cp c3"><span>24&deg;</span></div><div class="hd hh" id="hh"></div><div class="hd mh" id="mh"></div><div class="hd sh" id="sh"></div><div class="ct"></div></div>
+<div class="fa rg off" id="rg"><div class="tm" id="dg">9:41<small>Monday 9 Nov</small></div><svg viewBox="0 0 170 170"><circle class="t" cx="85" cy="85" r="74" stroke="#FF3B6B"/><circle id="r1" cx="85" cy="85" r="74" stroke="#FF3B6B" stroke-dasharray="465" stroke-dashoffset="465"/><circle class="t" cx="85" cy="85" r="56" stroke="#A3FF3B"/><circle id="r2" cx="85" cy="85" r="56" stroke="#A3FF3B" stroke-dasharray="352" stroke-dashoffset="352"/><circle class="t" cx="85" cy="85" r="38" stroke="#3BD7FF"/><circle id="r3" cx="85" cy="85" r="38" stroke="#3BD7FF" stroke-dasharray="239" stroke-dashoffset="239"/></svg><div class="lg"><span><i style="--c:#FF3B6B"></i>Move</span><span><i style="--c:#A3FF3B"></i>Exercise</span><span><i style="--c:#3BD7FF"></i>Stand</span></div></div>
+</div><div class="glr"></div></div></div></div>
+<script>
+const tk=document.getElementById('tk');for(let i=0;i<60;i++){const e=document.createElement('i');if(i%5===0)e.className='m';e.style.transform='rotate('+(i*6)+'deg)';e.style.setProperty('--r','126px');tk.appendChild(e)}
+function hands(){const d=new Date(),s=d.getSeconds()+d.getMilliseconds()/1000,m=d.getMinutes()+s/60,h=(d.getHours()%12)+m/60;document.getElementById('sh').style.transform='rotate('+(s*6)+'deg)';document.getElementById('mh').style.transform='rotate('+(m*6)+'deg)';document.getElementById('hh').style.transform='rotate('+(h*30)+'deg)';requestAnimationFrame(hands)}hands();
+function ring(){[['r1',465,.78],['r2',352,.55],['r3',239,.9]].forEach(([id,l,p])=>{const e=document.getElementById(id);e.style.strokeDashoffset=l*(1-p)})}
+let f=1;function face(n){f=n;document.getElementById('an').classList.toggle('off',n!==1);document.getElementById('rg').classList.toggle('off',n!==2);document.getElementById('f1').setAttribute('aria-pressed',n===1);document.getElementById('f2').setAttribute('aria-pressed',n===2);if(n===2){['r1','r2','r3'].forEach(id=>document.getElementById(id).style.strokeDashoffset=id==='r1'?465:id==='r2'?352:239);setTimeout(ring,80)}}
+document.getElementById('f1').onclick=()=>face(1);document.getElementById('f2').onclick=()=>face(2);
+const cr=document.getElementById('cr');cr.onclick=()=>{cr.classList.add('pr');setTimeout(()=>cr.classList.remove('pr'),180);face(f===1?2:1)};cr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cr.click()}});
+ring();
+</script></body></html>

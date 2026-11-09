@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Slide to Confirm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#DCE1EC;color:#101426;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;user-select:none}
+.c{width:100%;max-width:420px;background:#fff;border-radius:34px;padding:26px;box-shadow:0 40px 70px -36px rgba(16,20,38,.5),0 0 0 1px rgba(16,20,38,.06)}
+.hd{display:flex;align-items:center;gap:12px;margin-bottom:20px}.hd i{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:grid;place-items:center;color:#fff}.hd b{display:block;font-size:17px;letter-spacing:-.03em}.hd span{font-size:13.5px;color:#7A7F9E}
+.am{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-top:1px solid #EEF0F6;border-bottom:1px solid #EEF0F6;margin-bottom:22px}.am span{color:#7A7F9E;font-size:14px}.am b{font-size:30px;font-weight:700;letter-spacing:-.05em}
+.sl{--x:0px;position:relative;height:64px;border-radius:32px;background:#EDEFFA;overflow:hidden;touch-action:none;outline:0;margin-bottom:12px}.sl:focus-visible{box-shadow:0 0 0 3px #101426}
+.sl .fl{position:absolute;left:0;top:0;bottom:0;width:calc(var(--x) + 64px);background:linear-gradient(90deg,#6366F1,#8B5CF6);border-radius:32px;transition:width .0s}
+.sl.rel .fl,.sl.rel .kn{transition:all .45s cubic-bezier(.3,1.4,.5,1)}
+.sl .tx{position:absolute;inset:0;display:grid;place-items:center;padding-left:56px;font:600 16px 'Inter Tight';letter-spacing:.01em;color:transparent;background:linear-gradient(100deg,#8A8FB5 30%,#101426 50%,#8A8FB5 70%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;animation:sh 2.4s linear infinite;opacity:calc(1 - var(--x)/160)}
+@keyframes sh{to{background-position:-200% 0}}
+.sl .kn{position:absolute;left:6px;top:6px;width:52px;height:52px;border-radius:50%;background:#fff;box-shadow:0 8px 16px -4px rgba(60,50,160,.55);display:grid;place-items:center;color:#6366F1;transform:translateX(var(--x));cursor:grab}.sl .kn:active{cursor:grabbing}
+.sl .ok{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font:700 17px 'Inter Tight';gap:8px;grid-auto-flow:column;opacity:0;transform:scale(.9);transition:all .4s .1s;pointer-events:none}
+.sl.dn .fl{width:100%}.sl.dn .kn{opacity:0}.sl.dn .tx{opacity:0}.sl.dn .ok{opacity:1;transform:none}.sl.dn{background:#16A34A}.sl.dn .fl{background:#16A34A}
+.fn{text-align:center;font-size:12.5px;color:#9499BA;height:18px}
+.rs{display:block;margin:14px auto 0;border:0;background:none;color:#6366F1;font:600 13.5px 'Inter Tight';cursor:pointer}.rs:focus-visible{outline:2px solid #6366F1;border-radius:4px}
+@media(prefers-reduced-motion:reduce){.sl .tx{animation:none}*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 6h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zM7 15h3"/></svg></i><div><b>Send payment</b><span>To Maya Rowe · Northwind Co.</span></div></div>
+<div class="am"><span>Amount</span><b>$1,280.00</b></div>
+<div class="sl" id="sl" tabindex="0" role="slider" aria-label="Slide to confirm payment" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fl"></div><div class="tx">Slide to pay</div><div class="kn" id="kn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="ok"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg>Payment sent</div></div>
+<div class="fn" id="fn">Drag the handle to the end. Arrow keys also work.</div><button class="rs" id="rs">Reset</button></div>
+<script>
+const sl=document.getElementById('sl'),kn=document.getElementById('kn');let x=0,dr=false,sx=0,max=0,done=false;
+function m(){max=sl.clientWidth-64}function set(v,rel){sl.classList.toggle('rel',!!rel);x=Math.max(0,Math.min(max,v));sl.style.setProperty('--x',x+'px');sl.setAttribute('aria-valuenow',Math.round(x/max*100))}
+function fin(){done=true;sl.classList.remove('rel');set(max);sl.classList.add('dn');document.getElementById('fn').textContent='Confirmed. Funds arrive in 1 to 2 minutes.'}
+kn.addEventListener('pointerdown',e=>{if(done)return;m();dr=true;sx=e.clientX-x;kn.setPointerCapture(e.pointerId);sl.classList.remove('rel')});kn.addEventListener('pointermove',e=>{if(dr)set(e.clientX-sx)});
+const up=()=>{if(!dr)return;dr=false;if(x>max*.88)fin();else set(0,true)};kn.addEventListener('pointerup',up);kn.addEventListener('pointercancel',up);
+sl.addEventListener('keydown',e=>{if(done)return;m();if(e.key==='ArrowRight'){set(x+max*.15);if(x>=max*.9)fin()}if(e.key==='ArrowLeft')set(x-max*.15,true);if(e.key==='Enter'&&x>0)fin()});
+document.getElementById('rs').onclick=()=>{done=false;sl.classList.remove('dn');set(0,true);document.getElementById('fn').textContent='Drag the handle to the end. Arrow keys also work.'};
+m();set(max*.42);requestAnimationFrame(()=>{m();set(max*.42)});addEventListener('resize',()=>{m();if(!done)set(0)});
+</script></body></html>

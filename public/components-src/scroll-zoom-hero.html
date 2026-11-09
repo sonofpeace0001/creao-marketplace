@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Scroll Zoom Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#DAD6CC;color:#1A1813;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.fr{position:relative;width:100%;max-width:860px;height:560px;border-radius:26px;overflow:hidden;background:#F4F0E6;box-shadow:0 40px 70px -40px rgba(60,40,10,.55),0 0 0 1px rgba(26,24,19,.08)}
+.sc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}.sc::-webkit-scrollbar{display:none}
+.tr{position:relative;height:1100px}
+.st{position:sticky;top:0;height:560px;display:grid;place-items:center;overflow:hidden}
+.hd{position:absolute;left:0;right:0;top:46px;text-align:center;padding:0 24px;transform:translateY(calc(var(--p)*-40px)) scale(calc(1 - var(--p)*.12));opacity:calc(1 - var(--p)*1.7);will-change:transform,opacity}
+.hd small{font-size:12.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#B4491C}.hd h1{font:700 clamp(36px,6vw,60px)/1.02 'Fraunces',serif;letter-spacing:-.03em;margin:12px 0 10px}.hd p{font-size:16px;color:#6E6654}
+.wn{position:absolute;left:50%;top:56%;width:calc(240px + var(--p)*(100% - 240px));height:calc(150px + var(--p)*430px);transform:translate(-50%,-50%);border-radius:calc(28px - var(--p)*28px);overflow:hidden;background:linear-gradient(160deg,#1E2A55,#0F1530);box-shadow:0 40px 70px -26px rgba(15,21,48,.7);will-change:width,height}
+.wn .sky{position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,#FDBA74,#F472B6 30%,transparent 62%),linear-gradient(180deg,#312E81,#7C3AED 55%,#F472B6)}
+.wn .mt{position:absolute;left:0;right:0;bottom:0;height:48%}.wn .mt svg{width:100%;height:100%;display:block}
+.wn .cp{position:absolute;left:0;right:0;bottom:calc(20px + var(--p)*10px);text-align:center;color:#fff;opacity:calc((var(--p) - .55)*2.4);transform:translateY(calc((1 - var(--p))*20px))}
+.wn .cp h2{font:700 clamp(28px,5vw,48px)/1.05 'Fraunces',serif;letter-spacing:-.03em}.wn .cp p{font-size:15px;opacity:.85;margin:8px 0 18px}.wn .cp a{display:inline-block;background:#fff;color:#1A1813;border-radius:99px;padding:12px 24px;font:600 14.5px 'Inter';text-decoration:none}
+.wn .play{position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px;border-radius:50%;background:rgba(255,255,255,.2);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;color:#fff;opacity:calc(1 - var(--p)*3)}
+.sh{position:absolute;left:0;right:0;bottom:16px;text-align:center;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#9A917B;opacity:calc(1 - var(--p)*4)}
+.sh i{display:block;width:1.5px;height:22px;margin:6px auto 0;background:#9A917B;animation:dr 1.6s ease-in-out infinite}@keyframes dr{50%{transform:scaleY(.4)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="fr" id="fr" style="--p:0.38"><div class="sc" id="sc"><div class="tr" id="tr"><div class="st">
+<div class="hd"><small>Expedition 07</small><h1>See the world from higher up</h1><p>Scroll to step through the window.</p></div>
+<div class="wn"><div class="sky"></div><div class="mt"><svg viewBox="0 0 800 260" preserveAspectRatio="none"><path d="M0 260V150L120 80 230 150 350 40 480 140 600 70 720 150 800 110V260Z" fill="#1B1450"/><path d="M0 260V200L150 140 280 205 420 130 560 205 700 150 800 195V260Z" fill="#0E0A33"/></svg></div><div class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><div class="cp"><h2>Reach the summit</h2><p>Guided climbs for every level, all year round.</p><a href="#">Plan my trip</a></div></div>
+<div class="sh">Scroll<i></i></div></div></div></div></div>
+<script>
+const sc=document.getElementById('sc'),fr=document.getElementById('fr');function upd(){const max=sc.scrollHeight-sc.clientHeight,p=max>0?Math.min(1,sc.scrollTop/(max*.85)):0;fr.style.setProperty('--p',p.toFixed(4))}
+sc.addEventListener('scroll',upd);function init(){sc.scrollTop=(sc.scrollHeight-sc.clientHeight)*.32;upd()}init();(document.fonts&&document.fonts.ready||Promise.resolve()).then(init);
+</script></body></html>

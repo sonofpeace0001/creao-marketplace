@@ -1,0 +1,29 @@
+ROLE
+You are a senior service-page designer and front-end engineer with 15+ years of experience. Build "Flip Reveal Cards": three colourful cards that flip in 3D on hover, tap or focus to reveal details, bullet points and a link.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper with bold gradient fronts, line art and clean white backs.
+- Palette: #1B1812, #EAE6DC, #7C7462, #5A5342
+- Type: Bricolage Grotesque, Hanken Grotesk (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; three buttons each with a gradient front, artwork, label and hint plus a white back with title, copy, list and link.
+
+INTERACTION & STATES
+- Hover, focus or click rotates the card 180 degrees with a spring curve and backface hiding; a hint arrow nudges on the front.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

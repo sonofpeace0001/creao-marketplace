@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Icon Morph Buttons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F4F1EA;color:#181816;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px;background:#fff;border:2px solid #181816;border-radius:26px;padding:26px;box-shadow:7px 7px 0 #181816}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}.hd h1{font-size:24px;font-weight:700;letter-spacing:-.04em}.hd span{font:400 12px 'Space Mono',monospace;color:#7A786C}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.t{display:flex;flex-direction:column;align-items:center;gap:10px}.t small{font:700 11px 'Space Mono',monospace;letter-spacing:.06em;color:#7A786C}
+.b{position:relative;width:78px;height:78px;border-radius:22px;border:2px solid #181816;background:var(--bg);color:#181816;cursor:pointer;display:grid;place-items:center;transition:transform .15s,box-shadow .15s,background .3s,color .3s;box-shadow:3px 3px 0 #181816}.b:active{transform:translate(3px,3px);box-shadow:0 0 0 #181816}.b:focus-visible{outline:3px solid #FF4B1F;outline-offset:3px}
+.b[aria-pressed=true]{background:var(--on);color:#fff}
+svg.i{width:32px;height:32px;overflow:visible}svg.i *{fill:none;stroke:currentColor;stroke-width:2.600;stroke-linecap:round;stroke-linejoin:round;transition:all .4s cubic-bezier(.3,1.4,.5,1);transform-box:fill-box;transform-origin:center}
+/* menu -> x */
+.m1 .a{transform:translateY(-8px)}.m1 .c{transform:translateY(8px)}.b[aria-pressed=true] .m1 .a{transform:translateY(0) rotate(45deg)}.b[aria-pressed=true] .m1 .c{transform:translateY(0) rotate(-45deg)}.b[aria-pressed=true] .m1 .bb{opacity:0;transform:scaleX(0)}
+/* play -> pause */
+.p1 .pl{opacity:1;transform:scale(1)}.p1 .ps{opacity:0;transform:scale(.4)}.b[aria-pressed=true] .p1 .pl{opacity:0;transform:scale(.4) rotate(-30deg)}.b[aria-pressed=true] .p1 .ps{opacity:1;transform:scale(1)}
+.p1 .pl,.p1 .ps{fill:currentColor}
+/* heart */
+.h1 path{fill:transparent}.b[aria-pressed=true] .h1 path{fill:currentColor;transform:scale(1.15)}
+.bs{position:absolute;inset:0;pointer-events:none}.bs i{position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;background:var(--on);opacity:0}
+/* sun -> moon */
+.s1 .sun{transform:scale(1)}.s1 .ray{opacity:1;transform:scale(1)}.s1 .mn{opacity:0;transform:scale(.4) rotate(-90deg)}
+.b[aria-pressed=true] .s1 .sun{transform:scale(.001);opacity:0}.b[aria-pressed=true] .s1 .ray{opacity:0;transform:scale(.3)}.b[aria-pressed=true] .s1 .mn{opacity:1;transform:none;fill:currentColor}
+/* bell */
+.bl .rg{transform-origin:50% 10%}.b[aria-pressed=true] .bl .rg{animation:rg .8s}@keyframes rg{20%{transform:rotate(18deg)}40%{transform:rotate(-16deg)}60%{transform:rotate(10deg)}80%{transform:rotate(-6deg)}}
+.b[aria-pressed=true] .bl .cl{fill:currentColor}
+/* volume */
+.v1 .w1,.v1 .w2{transition:all .3s}.b[aria-pressed=true] .v1 .w1,.b[aria-pressed=true] .v1 .w2{opacity:0;transform:scale(.3)}.v1 .x{opacity:0;transform:scale(.3)}.b[aria-pressed=true] .v1 .x{opacity:1;transform:none}
+/* copy -> check */
+.cp .ck{opacity:0;transform:scale(.3);stroke-dasharray:24;stroke-dashoffset:24}.b[aria-pressed=true] .cp .ck{opacity:1;transform:none;stroke-dashoffset:0}.b[aria-pressed=true] .cp .bk{opacity:0;transform:scale(.5)}
+/* lock */
+.lk .sh2{transform-origin:20% 100%;transform:translateY(0)}.b[aria-pressed=true] .lk .sh2{transform:translateY(-3px) rotate(-22deg)}
+@media(max-width:560px){.g{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Icons that move</h1><span>CLICK ANY BUTTON</span></div><div class="g" id="g">
+<div class="t"><button class="b" style="--bg:#FFD84D;--on:#181816" aria-pressed="true" aria-label="Menu"><svg class="i m1" viewBox="0 0 32 32"><path class="a" d="M6 16h20"/><path class="bb" d="M6 16h20"/><path class="c" d="M6 16h20"/></svg></button><small>MENU / CLOSE</small></div>
+<div class="t"><button class="b" style="--bg:#9BE8C0;--on:#181816" aria-pressed="false" aria-label="Play"><svg class="i p1" viewBox="0 0 32 32"><path class="pl" d="M10 6.500v19a1 1 0 0 0 1.500.860l15-9.500a1 1 0 0 0 0-1.720l-15-9.500A1 1 0 0 0 10 6.500Z"/><g class="ps"><rect x="8" y="6" width="5" height="20" rx="1.500" fill="currentColor"/><rect x="19" y="6" width="5" height="20" rx="1.500" fill="currentColor"/></g></svg></button><small>PLAY / PAUSE</small></div>
+<div class="t"><button class="b" style="--bg:#FFC7DD;--on:#E11D74" aria-pressed="false" aria-label="Like"><svg class="i h1" viewBox="0 0 32 32"><path d="M16 27S4 20 4 12.500A6.500 6.500 0 0 1 16 9a6.500 6.500 0 0 1 12 3.500C28 20 16 27 16 27Z"/></svg><span class="bs"></span></button><small>LIKE</small></div>
+<div class="t"><button class="b" style="--bg:#FFE9A8;--on:#181816" aria-pressed="false" aria-label="Dark mode"><svg class="i s1" viewBox="0 0 32 32"><circle class="sun" cx="16" cy="16" r="5.500" style="fill:currentColor"/><g class="ray"><path d="M16 4v3M16 25v3M4 16h3M25 16h3M7.500 7.500l2 2M22.500 22.500l2 2M7.500 24.500l2-2M22.500 9.500l2-2"/></g><path class="mn" d="M25 19.500A10 10 0 0 1 12.500 7a10 10 0 1 0 12.500 12.500Z"/></svg></button><small>SUN / MOON</small></div>
+<div class="t"><button class="b" style="--bg:#C9D8FF;--on:#2D4BDB" aria-pressed="false" aria-label="Notifications"><svg class="i bl" viewBox="0 0 32 32"><g class="rg"><path class="cl" d="M8 22V14a8 8 0 0 1 16 0v8l2 3H6z"/><path d="M13 28a3 3 0 0 0 6 0"/></g></svg></button><small>BELL</small></div>
+<div class="t"><button class="b" style="--bg:#E8D5FF;--on:#181816" aria-pressed="false" aria-label="Mute"><svg class="i v1" viewBox="0 0 32 32"><path d="M5 12v8h5l7 6V6l-7 6z"/><path class="w1" d="M21 12a5 5 0 0 1 0 8"/><path class="w2" d="M24 8.500a10 10 0 0 1 0 15"/><g class="x"><path d="M21 12l7 8M28 12l-7 8"/></g></svg></button><small>VOLUME / MUTE</small></div>
+<div class="t"><button class="b" style="--bg:#FFD2B8;--on:#16A34A" aria-pressed="false" aria-label="Copy"><svg class="i cp" viewBox="0 0 32 32"><g class="bk"><rect x="11" y="11" width="15" height="15" rx="3"/><path d="M7 21V8a3 3 0 0 1 3-3h13"/></g><path class="ck" d="m8 17 6 6 11-13"/></svg></button><small>COPY / DONE</small></div>
+<div class="t"><button class="b" style="--bg:#BFEFF7;--on:#181816" aria-pressed="false" aria-label="Lock"><svg class="i lk" viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="14" rx="3"/><path class="sh2" d="M10 14V10a6 6 0 0 1 12 0v4"/></svg></button><small>LOCK / UNLOCK</small></div></div></div>
+<script>
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('.b').forEach(b=>b.onclick=()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);const sp=b.querySelector('.bs');if(sp&&on&&!reduced){sp.innerHTML='';for(let i=0;i<10;i++){const d=document.createElement('i');sp.appendChild(d);const a=i/10*6.283,r=34+Math.random()*10;d.animate([{transform:'translate(-50%,-50%)',opacity:1},{transform:'translate(calc(-50% + '+Math.cos(a)*r+'px),calc(-50% + '+Math.sin(a)*r+'px)) scale(.4)',opacity:0}],{duration:600,easing:'ease-out'})}}});
+</script></body></html>

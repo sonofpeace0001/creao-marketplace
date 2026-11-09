@@ -1,0 +1,29 @@
+ROLE
+You are a senior analytics designer and front-end engineer with 15+ years of experience. Build "Stat Tiles Bento": a dark KPI bento mixing a big revenue figure, sparklines, bars, a goal ring, an avatar group and a source breakdown.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Charcoal tiles with mint, indigo, amber, pink and sky accents and mono deltas.
+- Palette: #8A93AE, #232938, #0C0E14, #EDF0F8, #6A7390, #161A26
+- Type: Manrope, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; six tiles of varying spans with metric labels, numbers, deltas and mini visuals.
+
+INTERACTION & STATES
+- Tiles lift and light their border in their accent colour on hover; mini charts are drawn from data with vector strokes.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

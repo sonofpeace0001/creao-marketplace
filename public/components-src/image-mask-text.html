@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Image Mask Text</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0A12;color:#F2F0FA;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 4vw;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{width:100%;max-width:1000px;text-align:center}
+.tp{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#7C78A0;margin-bottom:14px}
+.tx{--mx:50%;--my:50%;position:relative;font:400 clamp(90px,23vw,300px)/.88 'Anton',sans-serif;text-transform:uppercase;letter-spacing:.005em;color:transparent;background:
+  radial-gradient(circle at var(--mx) var(--my),#FFF6A8 0,transparent 24%),
+  radial-gradient(ellipse at 20% 30%,#FF3D81 0,transparent 55%),
+  radial-gradient(ellipse at 80% 20%,#7C3AED 0,transparent 55%),
+  radial-gradient(ellipse at 70% 90%,#06B6D4 0,transparent 55%),
+  radial-gradient(ellipse at 10% 90%,#F59E0B 0,transparent 55%),#1B1140;
+  background-size:200% 200%,160% 160%,160% 160%,160% 160%,160% 160%,100% 100%;-webkit-background-clip:text;background-clip:text;animation:pan 12s ease-in-out infinite alternate;user-select:none;cursor:default}
+@keyframes pan{0%{background-position:0 0,0% 0%,100% 0%,100% 100%,0% 100%,0 0}100%{background-position:0 0,100% 100%,0% 100%,0% 0%,100% 0%,0 0}}
+.tx::after{content:attr(data-t);position:absolute;left:0;right:0;top:0;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.35);pointer-events:none;mix-blend-mode:overlay}
+.sb{margin:24px auto 0;font-size:clamp(15px,2vw,19px);line-height:1.6;color:#A7A3CC;max-width:44ch}
+.bt{margin-top:24px;display:inline-flex;gap:12px}.bt a{padding:13px 26px;border-radius:99px;font:600 15px 'Space Grotesk';text-decoration:none}.bt .p{background:#F2F0FA;color:#0B0A12}.bt .g{border:1px solid #34305C;color:#D6D2F4}.bt a:focus-visible{outline:3px solid #A78BFA;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.tx{animation:none}}
+</style></head><body>
+<div class="c"><div class="tp">Summer 26 collection</div><h1 class="tx" id="tx" data-t="Colour Field">Colour<br>Field</h1><p class="sb">Letters filled with a living gradient that drifts on its own and brightens under your cursor.</p><div class="bt"><a class="p" href="#">Explore the work</a><a class="g" href="#">Download poster</a></div></div>
+<script>
+const tx=document.getElementById('tx');let real=false,t=0;function set(x,y){tx.style.setProperty('--mx',x+'%');tx.style.setProperty('--my',y+'%')}
+tx.addEventListener('pointermove',e=>{real=true;const r=tx.getBoundingClientRect();set((e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100)});tx.addEventListener('pointerleave',()=>real=false);
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;function f(){if(!real){t+=.012;set(50+Math.cos(t)*38,50+Math.sin(t*1.3)*34)}if(!reduce)requestAnimationFrame(f)}t=.9;set(50+Math.cos(t)*38,50+Math.sin(t*1.3)*34);f();
+</script></body></html>

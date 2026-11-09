@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Parallax Layers Scene</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#CFC8DA;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.fr{position:relative;width:100%;max-width:860px;height:560px;border-radius:26px;overflow:hidden;background:#1B1440;box-shadow:0 40px 70px -36px rgba(30,10,70,.7)}
+.sc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}.sc::-webkit-scrollbar{display:none}
+.tr{position:relative;height:1500px}
+.vp{position:sticky;top:0;height:560px;overflow:hidden}
+.ly{position:absolute;left:-4%;right:-4%;bottom:0;will-change:transform}.ly svg{display:block;width:100%;height:auto}
+.sky{position:absolute;inset:0;background:linear-gradient(180deg,#2B1B6B 0%,#8B3FA8 45%,#FF8A65 80%,#FFD18A 100%)}
+.sun{position:absolute;left:50%;top:44%;width:150px;height:150px;margin-left:-75px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FFF6C8,#FFC857 60%,#FF9A5C);box-shadow:0 0 120px 40px rgba(255,190,100,.55);will-change:transform}
+.st i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.8;animation:tw 3s ease-in-out infinite}@keyframes tw{50%{opacity:.2}}
+.tt{position:absolute;left:0;right:0;top:92px;text-align:center;padding:0 24px;will-change:transform,opacity}.tt small{font-size:13px;font-weight:600;letter-spacing:.36em;text-transform:uppercase;color:#FFE1C2}.tt h1{font:800 clamp(44px,8vw,86px)/.96 'Fraunces',serif;letter-spacing:-.03em;margin-top:12px;text-shadow:0 6px 40px rgba(40,10,70,.5)}.tt h1 em{font-style:italic;font-weight:500;color:#FFE9C9}
+.cp{position:absolute;left:0;right:0;bottom:30px;text-align:center;padding:0 20px;will-change:transform,opacity}.cp h2{font:600 28px/1.1 'Fraunces',serif}.cp p{font-size:15px;color:#FFE1C2;margin:6px 0 14px}.cp a{display:inline-block;background:#fff;color:#2B1B6B;border-radius:99px;padding:12px 26px;font:600 15px 'Inter';text-decoration:none}.cp a:focus-visible{outline:3px solid #FFC857;outline-offset:3px}
+.sh{position:absolute;left:0;right:0;bottom:16px;text-align:center;font-size:12px;letter-spacing:.24em;text-transform:uppercase;opacity:.75;will-change:opacity}.sh i{display:block;width:1.5px;height:20px;margin:6px auto 0;background:#fff;animation:dr 1.6s ease-in-out infinite}@keyframes dr{50%{transform:scaleY(.4)}}
+.pg{position:absolute;right:16px;top:50%;margin-top:-40px;display:flex;flex-direction:column;gap:6px}.pg i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .3s}.pg i.on{height:22px;border-radius:6px;background:#fff}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="fr"><div class="sc" id="sc"><div class="tr"><div class="vp" id="vp"><div class="sky"></div><div class="st" id="st"></div><div class="sun" id="sun"></div>
+<div class="ly" id="l1"><svg viewBox="0 0 1200 380" preserveAspectRatio="none"><path d="M0 380V250L120 170 220 230 340 120 480 220 600 150 720 230 860 140 1000 220 1100 180 1200 230V380Z" fill="#6B3A8A"/></svg></div>
+<div class="ly" id="l2"><svg viewBox="0 0 1200 320" preserveAspectRatio="none"><path d="M0 320V210L110 150 230 200 380 110 520 190 680 130 820 200 960 120 1100 190 1200 160V320Z" fill="#4A2670"/></svg></div>
+<div class="ly" id="l3"><svg viewBox="0 0 1200 260" preserveAspectRatio="none"><path d="M0 260V170L140 120 280 170 440 90 600 160 760 100 920 170 1060 110 1200 150V260Z" fill="#2E1850"/></svg></div>
+<div class="ly" id="l4"><svg viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0 200V120C100 90 180 140 300 110S520 70 640 110 880 140 1000 100 1140 90 1200 110V200Z" fill="#170C32"/><g fill="#0C0620"><path d="M80 200V130L100 90 120 130V200Z"/><path d="M150 200V150L168 112 186 150V200Z"/><path d="M980 200V120L1002 70 1024 120V200Z"/><path d="M1060 200V140L1080 100 1100 140V200Z"/></g></svg></div>
+<div class="tt" id="tt"><small>Journey to the north</small><h1>Rise above the <em>horizon</em></h1></div>
+<div class="cp" id="cp"><h2>Every layer moves at its own pace</h2><p>Scroll back up to watch the world settle.</p><a href="#">Plan the trip</a></div>
+<div class="sh" id="sh">Scroll<i></i></div><div class="pg" id="pg"><i></i><i></i><i></i></div></div></div></div></div>
+<script>
+const sc=document.getElementById('sc'),$=id=>document.getElementById(id);const st=$('st');for(let i=0;i<60;i++){const s=document.createElement('i');s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*45+'%;animation-delay:-'+Math.random()*3+'s';st.appendChild(s)}
+function upd(){const max=sc.scrollHeight-sc.clientHeight,p=max?sc.scrollTop/max:0;$('l1').style.transform='translateY('+(p*-80)+'px)';$('l2').style.transform='translateY('+(p*-150)+'px)';$('l3').style.transform='translateY('+(p*-240)+'px)';$('l4').style.transform='translateY('+(p*-340)+'px)';$('sun').style.transform='translateY('+(p*-120)+'px) scale('+(1+p*.5)+')';st.style.transform='translateY('+(p*-40)+'px)';$('tt').style.transform='translateY('+(p*-120)+'px)';$('tt').style.opacity=Math.max(0,1-p*2.2);$('cp').style.opacity=Math.max(0,Math.min(1,(p-.5)*3));$('cp').style.transform='translateY('+((1-Math.min(1,Math.max(0,(p-.5)*3)))*30)+'px)';$('sh').style.opacity=Math.max(0,.75-p*4);[...$('pg').children].forEach((d,i)=>d.classList.toggle('on',p<.34?i===0:p<.67?i===1:i===2))}
+sc.addEventListener('scroll',upd);function init(){sc.scrollTop=(sc.scrollHeight-sc.clientHeight)*.22;upd()}init();(document.fonts&&document.fonts.ready||Promise.resolve()).then(init);
+</script></body></html>

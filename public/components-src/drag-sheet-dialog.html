@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Drag-to-Dismiss Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#DCE3F2;color:#1B2340;font-family:'Nunito',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.ph{position:relative;width:min(360px,100%);height:600px;background:#F6F8FD;border-radius:44px;border:9px solid #1B2340;overflow:hidden;box-shadow:0 50px 70px -34px rgba(27,35,64,.7)}
+.ph::before{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);width:96px;height:24px;border-radius:14px;background:#1B2340;z-index:9}
+.bg{position:absolute;inset:0;padding:60px 22px 22px}.bg h1{font-size:28px;font-weight:800;letter-spacing:-.04em}.bg p{color:#7A86A6;font-weight:600;margin:4px 0 18px}
+.pr{display:flex;gap:12px;background:#fff;border-radius:20px;padding:12px;margin-bottom:10px;box-shadow:0 4px 12px -6px rgba(27,35,64,.25);cursor:pointer;border:0;width:100%;text-align:left;font:inherit;color:inherit;transition:transform .15s}.pr:active{transform:scale(.98)}.pr:focus-visible{outline:3px solid #5B6CFF}
+.pr i{width:64px;height:64px;border-radius:14px;background:var(--g);flex:none}.pr b{display:block;font-size:16px;font-weight:800;margin-top:4px}.pr span{font-size:13.5px;color:#7A86A6;font-weight:600}.pr em{display:block;font-style:normal;font-weight:800;color:#5B6CFF;margin-top:4px}
+.sc{position:absolute;inset:0;background:rgba(15,20,40,.45);opacity:0;pointer-events:none;transition:opacity .35s;z-index:5}.ph.op .sc{opacity:var(--o,1);pointer-events:auto}.ph.dg .sc{transition:none}
+.sh{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:30px 30px 0 0;padding:10px 22px 26px;transform:translateY(105%);transition:transform .45s cubic-bezier(.3,1.1,.4,1);z-index:6;box-shadow:0 -20px 40px -20px rgba(15,20,40,.4);touch-action:none}
+.ph.op .sh{transform:translateY(var(--y,0px))}.ph.dg .sh{transition:none}
+.gr{display:block;width:44px;height:5px;border-radius:5px;background:#D5DAE8;margin:0 auto 16px;cursor:grab;border:0;padding:0}
+.hero{height:140px;border-radius:22px;background:var(--g);margin-bottom:16px;position:relative;overflow:hidden}.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 20%,rgba(255,255,255,.5),transparent 50%)}
+.sh h2{font-size:23px;font-weight:800;letter-spacing:-.03em}.sh .r{display:flex;gap:6px;color:#F5A524;font-size:13px;margin:4px 0 8px;align-items:center}.sh .r span{color:#7A86A6;font-weight:700;font-size:13px;letter-spacing:0}
+.sh p{font-size:15px;line-height:1.55;color:#55608A;font-weight:500}
+.sz{display:flex;gap:8px;margin:14px 0}.sz button{flex:1;border:2px solid #E1E6F5;background:#fff;border-radius:14px;padding:11px;font:800 14px 'Nunito';cursor:pointer;color:#1B2340}.sz button[aria-pressed=true]{border-color:#5B6CFF;background:#F0F2FF;color:#5B6CFF}.sz button:focus-visible{outline:3px solid #5B6CFF;outline-offset:2px}
+.add{width:100%;border:0;background:#5B6CFF;color:#fff;border-radius:18px;padding:16px;font:800 16px 'Nunito';cursor:pointer;box-shadow:0 14px 24px -10px #5B6CFF}.add:focus-visible{outline:3px solid #1B2340;outline-offset:3px}
+.hn{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:12px;color:#9AA4C4;font-weight:700;z-index:1}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="ph" id="ph"><div class="bg"><h1>Coffee beans</h1><p>Freshly roasted this week</p>
+<button class="pr" data-i="0"><i style="--g:linear-gradient(135deg,#C98A5B,#6B3E22)"></i><div><b>Ethiopia Guji</b><span>Floral and blueberry</span><em>$18</em></div></button>
+<button class="pr" data-i="1"><i style="--g:linear-gradient(135deg,#D9A66B,#8A4F1E)"></i><div><b>Colombia Huila</b><span>Caramel and red apple</span><em>$16</em></div></button><button class="pr" data-i="2"><i style="--g:linear-gradient(135deg,#B07A55,#4E2A14)"></i><div><b>Sumatra Mandheling</b><span>Dark cocoa and cedar</span><em>$17</em></div></button><div class="hn">Tap a product, then drag the sheet down</div></div>
+<div class="sc" id="sc"></div>
+<div class="sh" id="sh" role="dialog" aria-modal="true" aria-labelledby="t"><button class="gr" id="gr" aria-label="Close sheet"></button><div class="hero" id="hr"></div><h2 id="t"></h2><div class="r">★★★★★<span id="rv"></span></div><p id="ds"></p>
+<div class="sz" role="group" aria-label="Size"><button aria-pressed="true">250 g</button><button aria-pressed="false">500 g</button><button aria-pressed="false">1 kg</button></div><button class="add" id="ad">Add to bag</button></div></div>
+<script>
+const P=[['Ethiopia Guji','Floral, blueberry and a sparkling citrus finish. Washed process from the Guji highlands.','128 reviews','linear-gradient(135deg,#C98A5B,#6B3E22)'],['Colombia Huila','Sweet caramel, red apple and a smooth, balanced body. Our best-selling everyday roast.','342 reviews','linear-gradient(135deg,#D9A66B,#8A4F1E)'],['Sumatra Mandheling','Heavy dark cocoa, cedar and spice with very low acidity. Perfect for milk drinks.','96 reviews','linear-gradient(135deg,#B07A55,#4E2A14)']];
+const ph=document.getElementById('ph'),sh=document.getElementById('sh');let dg=false,sy=0,dy=0,lastFocus=null;
+function open(i,b){lastFocus=b;const p=P[i];document.getElementById('t').textContent=p[0];document.getElementById('ds').textContent=p[1];document.getElementById('rv').textContent=p[2];document.getElementById('hr').style.setProperty('--g',p[3]);document.getElementById('hr').style.background=p[3];ph.classList.add('op');sh.style.setProperty('--y','0px');ph.style.setProperty('--o',1);setTimeout(()=>document.getElementById('gr').focus(),50)}
+function close(){ph.classList.remove('op');sh.style.setProperty('--y','0px');if(lastFocus)lastFocus.focus()}
+document.querySelectorAll('.pr').forEach((b,i)=>b.onclick=()=>open(i,b));document.getElementById('sc').onclick=close;document.getElementById('gr').onclick=close;document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ph.classList.contains('op'))close()});
+sh.addEventListener('pointerdown',e=>{if(e.target.closest('.sz,.add'))return;dg=true;sy=e.clientY;dy=0;ph.classList.add('dg');sh.setPointerCapture(e.pointerId)});
+sh.addEventListener('pointermove',e=>{if(!dg)return;dy=Math.max(0,e.clientY-sy);sh.style.setProperty('--y',dy+'px');ph.style.setProperty('--o',Math.max(0,1-dy/320))});
+function end(){if(!dg)return;dg=false;ph.classList.remove('dg');if(dy>120)close();else{sh.style.setProperty('--y','0px');ph.style.setProperty('--o',1)}}sh.addEventListener('pointerup',end);sh.addEventListener('pointercancel',end);
+document.querySelectorAll('.sz button').forEach(b=>b.onclick=()=>document.querySelectorAll('.sz button').forEach(z=>z.setAttribute('aria-pressed',z===b)));
+document.getElementById('ad').onclick=e=>{e.target.textContent='Added';setTimeout(()=>{e.target.textContent='Add to bag';close()},700)};
+setTimeout(()=>open(1,document.querySelectorAll('.pr')[1]),120);
+</script></body></html>

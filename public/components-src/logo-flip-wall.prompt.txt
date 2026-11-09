@@ -1,0 +1,29 @@
+ROLE
+You are a senior social-proof designer and front-end engineer with 15+ years of experience. Build "Logo Flip Wall": six client logo tiles that flip in 3D on hover or focus to reveal a result statistic.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Lavender page with white tiles and saturated coloured backs in Outfit.
+- Palette: #7C5CFA, #F5F3FF, #1E1B3A, #E7E2FB, #7A74A8
+- Type: Outfit (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading; 3x2 grid of flip cards with logo mark and name on the front and a large stat plus caption on the coloured back; hint line.
+
+INTERACTION & STATES
+- Cards rotate 180 degrees on hover, focus-visible and click toggle; each card has an aria-label with the stat; the grid becomes two columns on mobile.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Inline Validation Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEBF6;color:#17142E;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:480px;background:#fff;border-radius:28px;padding:32px;box-shadow:0 40px 70px -44px rgba(60,40,140,.5),0 0 0 1px rgba(23,20,46,.06)}
+.c h1{font-size:26px;font-weight:800;letter-spacing:-.045em}.c p.sb{font-size:15px;color:#6D688F;margin:6px 0 24px}
+.f{position:relative;margin-bottom:16px}
+.f input{width:100%;height:58px;border:2px solid #E3E1F2;border-radius:16px;padding:20px 48px 0 16px;font:500 16.5px 'Hanken Grotesk';color:#17142E;background:#fff;outline:0;transition:border-color .2s,box-shadow .2s}
+.f label{position:absolute;left:18px;top:19px;font-size:16px;color:#8F8AB0;pointer-events:none;transition:all .2s cubic-bezier(.3,1.2,.5,1);transform-origin:left}
+.f input:focus+label,.f input:not(:placeholder-shown)+label{top:9px;font-size:12px;font-weight:700;letter-spacing:.04em;color:#5B4FF0}
+.f input:focus{border-color:#5B4FF0;box-shadow:0 0 0 5px rgba(91,79,240,.12)}
+.f.ok input{border-color:#22C55E}.f.ok input:focus{box-shadow:0 0 0 5px rgba(34,197,94,.14)}.f.ok label{color:#16A34A!important}
+.f.bad input{border-color:#EF4444}.f.bad input:focus{box-shadow:0 0 0 5px rgba(239,68,68,.12)}.f.bad label{color:#DC2626!important}.f.bad{animation:sk .38s}
+@keyframes sk{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.f .st{position:absolute;right:14px;top:16px;width:26px;height:26px}.f .st svg{position:absolute;inset:0;opacity:0;transform:scale(.3) rotate(-30deg);transition:all .3s cubic-bezier(.3,1.8,.5,1)}.f.ok .st .ck,.f.bad .st .xx{opacity:1;transform:none}
+.f .st .ck path{stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .35s .1s}.f.ok .st .ck path{stroke-dashoffset:0}
+.f .msg{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}.f.bad .msg,.f.sh .msg{grid-template-rows:1fr}.f .msg>div{overflow:hidden;font-size:13px;color:#DC2626;font-weight:600;padding:0 4px}.f.bad .msg>div{padding-top:6px}
+.f .eye{position:absolute;right:14px;top:16px;width:26px;height:26px;border:0;background:none;color:#8F8AB0;cursor:pointer;display:grid;place-items:center;border-radius:8px}.f .eye:hover{color:#5B4FF0}.f .eye:focus-visible{outline:2px solid #5B4FF0}.f.pw .st{right:48px}.f.pw input{padding-right:84px}
+.rl{display:grid;gap:7px;margin:4px 0 18px;padding:14px 16px;background:#F7F6FD;border-radius:16px}.rl div{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;color:#8F8AB0;transition:color .25s}.rl i{position:relative;flex:none;width:18px;height:18px;border-radius:50%;border:2px solid #D3D0E8;transition:all .3s cubic-bezier(.3,1.6,.5,1)}.rl i svg{position:absolute;inset:0;margin:auto;opacity:0;transform:scale(.3);transition:all .3s cubic-bezier(.3,1.8,.5,1)}.rl div.ok{color:#17142E}.rl div.ok i{background:#22C55E;border-color:#22C55E}.rl div.ok i svg{opacity:1;transform:none}
+.mt{display:flex;gap:5px;margin:-6px 0 12px}.mt i{flex:1;height:5px;border-radius:5px;background:#E8E6F5;transition:background .3s}
+.go{width:100%;height:56px;border:0;border-radius:16px;background:#5B4FF0;color:#fff;font:700 16.5px 'Hanken Grotesk';cursor:pointer;box-shadow:0 16px 26px -14px #5B4FF0;transition:opacity .25s,transform .15s,background .25s}.go:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}.go:not(:disabled):hover{transform:translateY(-1px)}.go:focus-visible{outline:3px solid #17142E;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><h1>Create your account</h1><p class="sb">Real-time feedback as you type, no surprises on submit.</p>
+<form id="fm" novalidate>
+<div class="f" id="fe"><input id="e" type="email" placeholder=" " autocomplete="off"><label for="e">Work email</label><span class="st"><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg><svg class="xx" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div class="msg"><div id="em"></div></div></div>
+<div class="f" id="fu"><input id="u" placeholder=" " autocomplete="off"><label for="u">Username</label><span class="st"><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg><svg class="xx" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div class="msg"><div id="um"></div></div></div>
+<div class="f pw" id="fp"><input id="p" type="password" placeholder=" " autocomplete="off"><label for="p">Password</label><span class="st"><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg><svg class="xx" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><button type="button" class="eye" id="ey" aria-label="Show password"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+<div class="mt" id="mt"><i></i><i></i><i></i><i></i></div>
+<div class="rl" id="rl"></div><button class="go" id="go" disabled>Create account</button></form></div>
+<script>
+const $=id=>document.getElementById(id);const taken=['admin','root','ada'];
+const CK='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg>';
+const R=[['8 or more characters',v=>v.length>=8],['Upper and lower case',v=>/[a-z]/.test(v)&&/[A-Z]/.test(v)],['A number',v=>/\d/.test(v)],['A symbol',v=>/[^A-Za-z0-9]/.test(v)]];
+$('rl').innerHTML=R.map(r=>'<div><i>'+CK+'</i>'+r[0]+'</div>').join('');
+const st={e:false,u:false,p:false};
+function set(f,ok,msg,show){f.classList.toggle('ok',ok);f.classList.toggle('bad',!ok&&show);return ok}
+function vE(show){const v=$('e').value.trim(),ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);$('em').textContent=v?'That does not look like a valid email.':'Email is required.';st.e=set($('fe'),ok,'',show&&!ok);go()}
+function vU(show){const v=$('u').value.trim().toLowerCase();let ok=v.length>=3&&/^[a-z0-9_]+$/.test(v)&&!taken.includes(v);$('um').textContent=!v?'Pick a username.':v.length<3?'Use at least 3 characters.':!/^[a-z0-9_]+$/.test(v)?'Letters, numbers and underscores only.':'That username is taken.';st.u=set($('fu'),ok,'',show&&!ok);go()}
+function vP(){const v=$('p').value;let s=0;[...$('rl').children].forEach((d,i)=>{const ok=R[i][1](v);d.classList.toggle('ok',ok);if(ok)s++});[...$('mt').children].forEach((b,i)=>b.style.background=v&&i<s?['#EF4444','#F59E0B','#84CC16','#22C55E'][s-1]:'');st.p=s===4;$('fp').classList.toggle('ok',st.p);go()}
+function go(){$('go').disabled=!(st.e&&st.u&&st.p)}
+$('e').addEventListener('input',()=>vE(false));$('e').addEventListener('blur',()=>{if($('e').value)vE(true)});$('u').addEventListener('input',()=>vU(false));$('u').addEventListener('blur',()=>{if($('u').value)vU(true)});$('p').addEventListener('input',vP);
+$('ey').onclick=()=>{const p=$('p');p.type=p.type==='password'?'text':'password';$('ey').setAttribute('aria-label',p.type==='password'?'Show password':'Hide password')};
+$('fm').onsubmit=e=>{e.preventDefault()};
+$('e').value='ada@studio';vE(true);$('u').value='ada_l';vU(true);$('p').value='Analytic1';vP();$('u').value='ada_lovelace';vU(false);$('e').value='ada@studio.com';vE(false);
+</script></body></html>

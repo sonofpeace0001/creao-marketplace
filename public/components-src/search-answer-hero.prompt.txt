@@ -1,0 +1,29 @@
+ROLE
+You are a senior AI-product marketing designer and front-end engineer with 15+ years of experience. Build "Search Answer Hero": a hero built around an answer engine: a search box types real questions, then streams a cited answer with highlighted key phrases and source pills.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper with serif headline, burnt orange accents and a floating white search card.
+- Palette: #B4491C, #1A1812, #F6F3EC, #6B6451, #E7E0CF, #9A917A
+- Type: Newsreader, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Announcement pill; serif headline; search card with typed query and Ask button; streamed answer with highlights and sources; question chips.
+
+INTERACTION & STATES
+- Questions type character by character, the answer streams in with highlighted spans, source pills fade in, then it cycles; chips jump to a question.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

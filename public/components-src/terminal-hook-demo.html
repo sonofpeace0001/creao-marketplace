@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Terminal Hook Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#1B1530,#0E1626);color:#E6E8F2;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:760px;border-radius:16px;background:rgba(14,15,24,.88);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.1);box-shadow:0 50px 80px -30px #000,0 0 0 1px #000;overflow:hidden}
+.tb{display:flex;align-items:center;gap:8px;padding:13px 16px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07)}.tb i{width:12px;height:12px;border-radius:50%}.tb span{margin:0 auto;transform:translateX(-24px);font:500 12.5px 'JetBrains Mono',monospace;color:#8A8EA8}
+.tabs{display:flex;gap:2px;padding:8px 10px 0;background:rgba(255,255,255,.02)}.tabs button{border:0;background:none;color:#8A8EA8;font:500 12.5px 'JetBrains Mono',monospace;padding:8px 14px;border-radius:8px 8px 0 0;cursor:pointer}.tabs button[aria-selected=true]{background:rgba(255,255,255,.07);color:#fff}.tabs button:focus-visible{outline:2px solid #7C9CFF}
+pre{font:400 13.5px/1.75 'JetBrains Mono',monospace;padding:18px 20px;min-height:290px;white-space:pre-wrap;overflow:hidden;color:#C9CDE0}
+.k{color:#FF7AC6}.f{color:#82AAFF}.s{color:#9BE28B}.c{color:#5B6082}.n{color:#FFB86C}.p{color:#56E1D0}.d{color:#6C7197}
+.cur{display:inline-block;width:8px;height:16px;background:#82AAFF;vertical-align:-3px;animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:0}}
+.ft{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-top:1px solid rgba(255,255,255,.07);font-size:12.5px;color:#7C809C}
+.ft button{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#E6E8F2;border-radius:8px;padding:6px 12px;font:600 12.5px 'Inter';cursor:pointer}.ft button:hover{background:rgba(255,255,255,.1)}.ft button:focus-visible{outline:2px solid #7C9CFF}
+@media(prefers-reduced-motion:reduce){.cur{animation:none}}
+</style></head><body>
+<div class="w"><div class="tb"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span>~/app — zsh</span></div>
+<div class="tabs" role="tablist" aria-label="Examples"><button role="tab" aria-selected="true" data-i="0">useDebounce.ts</button><button role="tab" aria-selected="false" data-i="1">usage.tsx</button><button role="tab" aria-selected="false" data-i="2">install</button></div>
+<pre id="o" aria-live="polite"></pre><div class="ft"><span id="st">typing…</span><button id="rp">Replay</button></div></div>
+<script>
+const T=[
+`<span class="k">import</span> { useState, useEffect } <span class="k">from</span> <span class="s">"react"</span>;
+
+<span class="c">// Delay a fast-changing value until it settles</span>
+<span class="k">export function</span> <span class="f">useDebounce</span>&lt;T&gt;(value: T, delay = <span class="n">300</span>) {
+  <span class="k">const</span> [debounced, setDebounced] = <span class="f">useState</span>(value);
+
+  <span class="f">useEffect</span>(() =&gt; {
+    <span class="k">const</span> id = <span class="f">setTimeout</span>(() =&gt; <span class="f">setDebounced</span>(value), delay);
+    <span class="k">return</span> () =&gt; <span class="f">clearTimeout</span>(id);
+  }, [value, delay]);
+
+  <span class="k">return</span> debounced;
+}`,
+`<span class="k">const</span> [query, setQuery] = <span class="f">useState</span>(<span class="s">""</span>);
+<span class="k">const</span> search = <span class="f">useDebounce</span>(query, <span class="n">400</span>);
+
+<span class="f">useEffect</span>(() =&gt; {
+  <span class="k">if</span> (!search) <span class="k">return</span>;
+  <span class="f">fetch</span>(<span class="s">\`/api/search?q=\${search}\`</span>).<span class="f">then</span>(setResults);
+}, [search]);
+
+<span class="k">return</span> &lt;<span class="p">input</span> value={query} onChange={e =&gt; <span class="f">setQuery</span>(e.target.value)} /&gt;;`,
+`<span class="d">$</span> npm install <span class="s">@acme/hooks</span>
+<span class="d">added 1 package in 1.2s</span>
+
+<span class="d">$</span> npx acme-hooks add <span class="s">use-debounce</span>
+<span class="p">✔</span> Created <span class="s">src/hooks/useDebounce.ts</span>
+<span class="p">✔</span> Added types and tests
+
+<span class="d">Done in 0.8s.</span> Import it with:
+  <span class="k">import</span> { useDebounce } <span class="k">from</span> <span class="s">"@/hooks/useDebounce"</span>;`];
+const o=document.getElementById('o'),tabs=[...document.querySelectorAll('[role=tab]')],st=document.getElementById('st');let cur=0,timer=null;
+function strip(h){const d=document.createElement('div');d.innerHTML=h;return d}
+function type(i){clearInterval(timer);cur=i;tabs.forEach((t,k)=>t.setAttribute('aria-selected',k===i));st.textContent='typing…';
+ const html=T[i];let pos=0,out='';const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduced){o.innerHTML=html;st.textContent='done';return}
+ const toks=html.match(/<[^>]+>|&[a-z]+;|[\s\S]/g);o.innerHTML='<span class="cur"></span>';
+ timer=setInterval(()=>{for(let k=0;k<3&&pos<toks.length;k++){out+=toks[pos++]}
+  const div=document.createElement('div');div.innerHTML=out;o.innerHTML=div.innerHTML+'<span class="cur"></span>';
+  if(pos>=toks.length){clearInterval(timer);o.innerHTML=html+'<span class="cur"></span>';st.textContent='done'}},16)}
+tabs.forEach((t,i)=>t.onclick=()=>type(i));document.getElementById('rp').onclick=()=>type(cur);type(0);
+</script></body></html>

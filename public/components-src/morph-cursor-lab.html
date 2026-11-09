@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Morphing Cursor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3F1EA;color:#121212;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.st{position:relative;width:100%;max-width:860px;padding:40px;background:#FBFAF5;border-radius:28px;border:1px solid #E4E0D2;cursor:none;overflow:hidden}
+.st *{cursor:none}
+.hd{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8E8A7B;margin-bottom:34px}
+h1{font:700 clamp(32px,6vw,62px)/1 'Unbounded';letter-spacing:-.05em;margin-bottom:30px}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cd{aspect-ratio:4/5;border-radius:20px;background:var(--g);position:relative;overflow:hidden;border:0;color:#fff;text-align:left;padding:0;font:inherit}.cd::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 20%,rgba(255,255,255,.4),transparent 50%),linear-gradient(transparent 50%,rgba(0,0,0,.5))}
+.cd b{position:absolute;left:16px;bottom:16px;font:700 17px 'Unbounded';letter-spacing:-.04em}
+.lk{display:inline-block;margin-top:26px;font-weight:600;font-size:15px;border-bottom:2px solid #121212;padding-bottom:2px}
+.cr{position:fixed;left:0;top:0;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:99;transition:width .3s cubic-bezier(.3,1.4,.5,1),height .3s cubic-bezier(.3,1.4,.5,1),margin .3s cubic-bezier(.3,1.4,.5,1),background .2s,border-radius .3s;display:grid;place-items:center;font:700 13px 'Inter';color:#121212;letter-spacing:.04em}
+.cr.dot{width:6px;height:6px;margin:-3px 0 0 -3px}
+.cr.view{width:84px;height:84px;margin:-42px 0 0 -42px;mix-blend-mode:normal;background:#FF4B1F;color:#fff}
+.cr.link{width:56px;height:56px;margin:-28px 0 0 -28px}
+.cr.drag{width:70px;height:70px;margin:-35px 0 0 -35px;mix-blend-mode:normal;background:#121212;color:#fff}
+.cr span{opacity:0;transition:opacity .2s}.cr.view span,.cr.drag span{opacity:1}
+.ring{position:fixed;left:0;top:0;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:1.5px solid #121212;pointer-events:none;z-index:98;opacity:.5;transition:opacity .2s,transform .12s}
+.ring.hide{opacity:0}
+.hn{position:absolute;right:24px;bottom:18px;font-size:12.5px;color:#9E9A8B}
+@media(hover:none){.st,.st *{cursor:auto}.cr,.ring{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="st" id="st"><div class="hd"><span>Selected work</span><span>2024 / 26</span></div><h1>Hover to feel<br>the cursor.</h1>
+<div class="g"><button class="cd" data-c="view" style="--g:linear-gradient(160deg,#FFB48A,#E8402A 60%,#4A1020)"><b>Arc</b></button><button class="cd" data-c="view" style="--g:linear-gradient(160deg,#9DD6FF,#2563EB 60%,#14307A)"><b>Tide</b></button><button class="cd" data-c="drag" style="--g:linear-gradient(160deg,#9BF0C0,#059669 60%,#064E3B)"><b>Moss</b></button></div>
+<a class="lk" href="#" data-c="link">See all projects</a><span class="hn">Cards: View and Drag · Links: grow · Text: dot</span></div>
+<div class="ring" id="rg"></div><div class="cr" id="cr"><span id="cl"></span></div>
+<script>
+const cr=document.getElementById('cr'),rg=document.getElementById('rg'),st=document.getElementById('st'),cl=document.getElementById('cl');let x=0,y=0,rx=0,ry=0;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function set(e){x=e.clientX;y=e.clientY;cr.style.transform='translate('+x+'px,'+y+'px)'}
+function loop(){rx+=(x-rx)*.18;ry+=(y-ry)*.18;rg.style.transform='translate('+rx+'px,'+ry+'px)';requestAnimationFrame(loop)}
+st.addEventListener('pointermove',set);st.addEventListener('pointerenter',e=>{set(e);cr.style.opacity=1;rg.style.opacity=.5});st.addEventListener('pointerleave',()=>{cr.style.opacity=0;rg.style.opacity=0});
+function mode(m,t){cr.className='cr'+(m?' '+m:'');cl.textContent=t||'';rg.classList.toggle('hide',m==='view'||m==='drag')}
+st.addEventListener('pointerover',e=>{const t=e.target.closest('[data-c]');if(!t){mode(e.target.closest('h1')?'dot':'');return}const c=t.dataset.c;mode(c,c==='view'?'View':c==='drag'?'Drag':'')});
+loop();x=innerWidth*.5;y=300;
+setTimeout(()=>{const t=document.querySelector('.cd');const r=t.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2;cr.style.transform='translate('+x+'px,'+y+'px)';rx=x;ry=y;mode('view','View')},80);
+</script></body></html>

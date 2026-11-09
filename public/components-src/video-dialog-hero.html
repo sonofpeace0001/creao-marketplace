@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Video Dialog Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF0FF;color:#0F1330;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;text-align:center}
+.c small{display:inline-flex;gap:8px;align-items:center;font-size:12.5px;font-weight:700;color:#4B3FD6;background:#E2DFFF;padding:6px 14px;border-radius:99px}.c h1{font-size:clamp(30px,5.4vw,52px);line-height:1.02;letter-spacing:-.05em;font-weight:800;margin:16px 0 12px}.c>p{font-size:16.5px;color:#565C86;max-width:44ch;margin:0 auto 28px;line-height:1.55}
+.th{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;cursor:pointer;border:0;width:100%;padding:0;background:linear-gradient(135deg,#5B4BFF,#9B5CFF 50%,#F26BC0);box-shadow:0 50px 70px -36px rgba(75,63,214,.7),0 0 0 1px rgba(255,255,255,.4) inset;display:block}.th:focus-visible{outline:4px solid #0F1330;outline-offset:4px}
+.th .ui{position:absolute;inset:7% 6% 0;background:rgba(255,255,255,.92);border-radius:16px 16px 0 0;box-shadow:0 20px 40px rgba(0,0,0,.25);padding:14px;text-align:left}
+.th .ui i{display:block;height:9px;border-radius:5px;background:#E4E1FF;margin-bottom:9px}.th .ui .bars{display:flex;gap:8px;align-items:flex-end;height:90px;margin-top:14px}.th .ui .bars b{flex:1;border-radius:6px 6px 2px 2px;background:linear-gradient(#7C6CFF,#B38CFF)}
+.pl{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px;border-radius:50%;background:#fff;color:#4B3FD6;display:grid;place-items:center;box-shadow:0 20px 40px rgba(0,0,0,.35);transition:transform .25s cubic-bezier(.3,1.5,.5,1)}.th:hover .pl{transform:scale(1.12)}.pl::before{content:"";position:absolute;inset:-10px;border-radius:50%;border:2px solid rgba(255,255,255,.7);animation:pu 2s ease-out infinite}@keyframes pu{from{transform:scale(.9);opacity:1}to{transform:scale(1.5);opacity:0}}
+.th .dur{position:absolute;right:14px;bottom:12px;font:400 13px 'Fira Code',monospace;color:#fff;background:rgba(15,19,48,.6);backdrop-filter:blur(6px);padding:4px 9px;border-radius:8px}
+.md{position:fixed;inset:0;display:none;place-items:center;padding:20px;background:rgba(10,12,34,.72);backdrop-filter:blur(8px);z-index:20}.md.on{display:grid;animation:fi .25s ease}@keyframes fi{from{opacity:0}}
+.pw{position:relative;width:min(860px,100%);aspect-ratio:16/9;background:#05061A;border-radius:20px;overflow:hidden;box-shadow:0 60px 100px -20px #000;animation:zm .4s cubic-bezier(.3,1.3,.5,1)}@keyframes zm{from{transform:scale(.8);opacity:0}}
+.pw .scr{position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,#7C6CFF,transparent 55%),radial-gradient(circle at 75% 70%,#F26BC0,transparent 55%),#0B0C2A}
+.pw .tt{position:absolute;left:24px;top:20px;color:#fff;font-weight:700;font-size:15px}.pw .x{position:absolute;right:14px;top:14px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;cursor:pointer;display:grid;place-items:center}.pw .x:hover{background:rgba(255,255,255,.3)}.pw .x:focus-visible{outline:2px solid #fff}
+.pw .ct{position:absolute;left:0;right:0;bottom:0;padding:16px 20px;background:linear-gradient(transparent,rgba(5,6,26,.9));display:flex;align-items:center;gap:14px;color:#fff}.pw .ct button{width:38px;height:38px;border-radius:50%;border:0;background:#fff;color:#0B0C2A;cursor:pointer;display:grid;place-items:center}.pw .ct button:focus-visible{outline:2px solid #7C6CFF;outline-offset:2px}
+.pw .bar{flex:1;height:5px;border-radius:5px;background:rgba(255,255,255,.25);overflow:hidden}.pw .bar i{display:block;height:100%;width:0;background:#fff}.pw .ct span{font:400 12.5px 'Fira Code',monospace}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><small>Product tour · 2 min</small><h1>See it in action before you sign up.</h1><p>A two-minute walkthrough of how teams plan, track and ship in one place.</p>
+<button class="th" id="th" aria-haspopup="dialog" aria-label="Play product tour video"><div class="ui"><i style="width:40%"></i><i style="width:70%"></i><div class="bars"><b style="height:40%"></b><b style="height:65%"></b><b style="height:50%"></b><b style="height:85%"></b><b style="height:70%"></b><b style="height:100%"></b></div></div><span class="pl"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="margin-left:4px"><path d="M8 5.500v13a1 1 0 0 0 1.500.860l10.500-6.500a1 1 0 0 0 0-1.720L9.500 4.640A1 1 0 0 0 8 5.500Z"/></svg></span><span class="dur">2:04</span></button></div>
+<div class="md" id="md" role="dialog" aria-modal="true" aria-label="Product tour video"><div class="pw"><div class="scr"></div><div class="tt">Product tour</div><button class="x" id="x" aria-label="Close video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button><div class="ct"><button id="pp" aria-label="Pause"><svg id="pi" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg></button><div class="bar"><i id="pr"></i></div><span id="tm">0:00 / 2:04</span></div></div></div>
+<script>
+const md=document.getElementById('md'),th=document.getElementById('th');let t=0,pl=true,iv=null;const D=124,f=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function draw(){document.getElementById('pr').style.width=(t/D*100)+'%';document.getElementById('tm').textContent=f(t)+' / 2:04'}
+function run(){clearInterval(iv);iv=setInterval(()=>{if(pl){t=Math.min(D,t+.25);draw();if(t>=D){pl=false;ic()}}},250)}
+function ic(){document.getElementById('pi').innerHTML=pl?'<path d="M7 5h3v14H7zM14 5h3v14h-3z"/>':'<path d="M8 5.500v13a1 1 0 0 0 1.500.860l10.500-6.500a1 1 0 0 0 0-1.720L9.500 4.640A1 1 0 0 0 8 5.500Z"/>';document.getElementById('pp').setAttribute('aria-label',pl?'Pause':'Play')}
+function open(){md.classList.add('on');t=0;pl=true;ic();draw();run();document.getElementById('x').focus()}function close(){md.classList.remove('on');clearInterval(iv);th.focus()}
+th.onclick=open;document.getElementById('x').onclick=close;md.addEventListener('click',e=>{if(e.target===md)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&md.classList.contains('on'))close()});
+document.getElementById('pp').onclick=()=>{pl=!pl;if(t>=D){t=0;pl=true}ic()};
+</script></body></html>

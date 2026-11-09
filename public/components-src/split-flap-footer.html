@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Split-Flap Footer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9E6DF;color:#171717;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.f{width:100%;max-width:880px;background:#141414;color:#EDEBE5;border-radius:26px;padding:34px 34px 24px;box-shadow:0 40px 70px -40px #000}
+.bd{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px;perspective:600px}
+.row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px}
+.ch{position:relative;width:clamp(20px,4.4vw,38px);height:clamp(30px,6.4vw,54px);background:#222;border-radius:5px;font:700 clamp(16px,3.3vw,30px) 'Roboto Mono',monospace;color:#F4D35E;display:grid;place-items:center;box-shadow:inset 0 -1px 0 #000,inset 0 1px 0 #333;overflow:hidden}
+.ch::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;background:#0A0A0A;box-shadow:0 1px 0 #333}
+.ch.sp{background:none;box-shadow:none}.ch.sp::after{display:none}
+.ch span{display:block;transform-origin:50% 50%}.ch.fl span{animation:fl .08s linear}@keyframes fl{0%{transform:scaleY(.15);opacity:.5}100%{transform:scaleY(1);opacity:1}}
+.bar{display:flex;align-items:center;gap:10px;font:500 12.5px 'Roboto Mono',monospace;color:#8E8B82;margin:14px 0 30px}.bar i{width:8px;height:8px;border-radius:50%;background:#4ADE80;box-shadow:0 0 10px #4ADE80;animation:bl 2s infinite}@keyframes bl{50%{opacity:.35}}
+.cols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:24px;padding-top:26px;border-top:1px solid #2A2A2A}
+.cols b{display:block;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8E8B82;margin-bottom:14px}.cols a{display:block;color:#EDEBE5;text-decoration:none;font-size:14.5px;padding:5px 0;transition:color .15s,transform .15s}.cols a:hover{color:#F4D35E;transform:translateX(4px)}.cols a:focus-visible{outline:2px solid #F4D35E;outline-offset:3px;border-radius:3px}
+.br{font-size:22px;font-weight:700;letter-spacing:-.04em;margin-bottom:8px}.br+p{font-size:14px;color:#8E8B82;line-height:1.5;max-width:28ch}
+.cp{display:flex;justify-content:space-between;margin-top:30px;font-size:12.5px;color:#6B6862}
+@media(max-width:620px){.cols{grid-template-columns:1fr 1fr}.cols>div:first-child{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){.ch.fl span{animation:none}.bar i{animation:none}}
+</style></head><body>
+<footer class="f"><div class="bd" id="bd" role="img" aria-label="Status board: all systems operational"></div>
+<div class="bar"><i></i><span id="cl">LAST CHECK 00:00:00 UTC</span></div>
+<div class="cols"><div><div class="br">Meridian</div><p>Infrastructure for teams that ship every day.</p></div>
+<div><b>Product</b><a href="#">Features</a><a href="#">Pricing</a><a href="#">Changelog</a></div><div><b>Company</b><a href="#">About</a><a href="#">Careers</a><a href="#">Press</a></div><div><b>Resources</b><a href="#">Docs</a><a href="#">Status</a><a href="#">Security</a></div></div>
+<div class="cp"><span>&copy; 2026 Meridian Labs</span><span>Made in Lisbon</span></div></footer>
+<script>
+const bd=document.getElementById('bd');const CH=' ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const lines=['ALL SYSTEMS','OPERATIONAL'];
+const rows=lines.map(l=>{const r=document.createElement('div');r.className='row';bd.appendChild(r);return [...l].map(c=>{const e=document.createElement('div');e.className='ch'+(c===' '?' sp':'');e.innerHTML='<span>'+(c===' '?'':'A')+'</span>';r.appendChild(e);return {e,t:c,c:'A',s:e.firstChild}})});
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+rows.flat().forEach((x,i)=>{if(x.t===' ')return;if(reduced){x.s.textContent=x.t;return}
+ const to=CH.indexOf(x.t);let k=Math.max(1,to-6);const step=()=>{x.s.textContent=CH[k%CH.length];x.e.classList.remove('fl');void x.e.offsetWidth;x.e.classList.add('fl');if(CH[k%CH.length]===x.t)return;k++;setTimeout(step,45)};setTimeout(step,150+i*30)});
+function clk(){document.getElementById('cl').textContent='LAST CHECK '+new Date().toISOString().slice(11,19)+' UTC'}clk();setInterval(clk,1000);
+</script></body></html>

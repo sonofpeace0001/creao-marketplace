@@ -1,0 +1,29 @@
+ROLE
+You are a senior collaboration-UI designer and front-end engineer with 15+ years of experience. Build "Avatar Fan Group": an overlapping avatar group that fans apart on hover, lifts each face and shows a rich presence tooltip.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on lavender with gradient avatars, green presence dots and a dark tooltip.
+- Palette: #18123A, #5B3FE0, #EDEBFA, #7B72A8, #22C55E, #B3AAE0
+- Type: Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with reviewer count; row of five gradient avatars plus a +1 chip, overlapping; per-avatar tooltip with name, role and status; online count and invite button.
+
+INTERACTION & STATES
+- Hovering the group increases spacing; hovering or focusing an avatar scales and raises it and shows its tooltip; the demo tooltip is open until the pointer enters.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

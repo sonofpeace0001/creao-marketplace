@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Search Answer Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F6F3EC;color:#1A1812;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;text-align:center}
+.tg{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#6B6451;background:#fff;border:1px solid #E7E0CF;border-radius:99px;padding:6px 14px 6px 8px;margin-bottom:24px}.tg i{background:#1A1812;color:#fff;font:600 11px 'Inter';font-style:normal;border-radius:99px;padding:2px 8px}
+h1{font:500 clamp(40px,7vw,74px)/1.02 'Newsreader',serif;letter-spacing:-.03em}h1 em{font-style:italic;color:#B4491C}
+.sb{position:relative;margin:30px auto 0;max-width:640px;background:#fff;border-radius:24px;box-shadow:0 30px 60px -28px rgba(70,50,10,.45),0 0 0 1px rgba(26,24,18,.08);padding:8px;text-align:left}
+.in{display:flex;align-items:center;gap:12px;padding:14px 14px 14px 18px}.in svg{flex:none;color:#9A917A}.in .ty{flex:1;font-size:19px;font-weight:500;min-height:28px;white-space:nowrap;overflow:hidden}.in .ty::after{content:"";display:inline-block;width:2px;height:22px;background:#B4491C;vertical-align:-4px;margin-left:2px;animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:0}}
+.in button{border:0;background:#1A1812;color:#fff;border-radius:14px;padding:12px 20px;font:600 14.5px 'Inter';cursor:pointer;display:flex;align-items:center;gap:8px}.in button:focus-visible{outline:3px solid #B4491C;outline-offset:2px}
+.an{border-top:1px solid #EFE9DA;margin:0 6px;padding:16px 12px 10px;min-height:150px}
+.an .lb{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#B4491C;margin-bottom:8px}.an .lb i{width:7px;height:7px;border-radius:50%;background:#B4491C;animation:bl2 1.2s infinite}@keyframes bl2{50%{opacity:.3}}
+.an p{font-size:16.5px;line-height:1.6;color:#3A352A}.an p b{background:linear-gradient(transparent 60%,#FFE3B8 60%);font-weight:600}
+.so{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.so span{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:500;color:#6B6451;background:#F6F3EC;border:1px solid #EAE3D2;border-radius:99px;padding:5px 11px;opacity:0;transform:translateY(6px);transition:all .4s}.so span.on{opacity:1;transform:none}.so i{width:14px;height:14px;border-radius:4px;background:var(--c)}
+.ch{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px}.ch button{border:1px solid #E1DAC8;background:rgba(255,255,255,.7);border-radius:99px;padding:8px 15px;font:500 13.5px 'Inter';color:#5A5442;cursor:pointer}.ch button:hover{background:#fff;border-color:#B4491C;color:#B4491C}.ch button:focus-visible{outline:2px solid #B4491C}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><span class="tg"><i>New</i>Answers with sources, in seconds</span><h1>Ask anything about your <em>business</em></h1>
+<div class="sb"><div class="in"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><div class="ty" id="ty"></div><button>Ask<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+<div class="an"><div class="lb"><i></i>Answer</div><p id="ans"></p><div class="so" id="so"></div></div></div>
+<div class="ch" id="ch"></div></div>
+<script>
+const Q=[['Why did revenue dip in March?','Revenue fell <b>6.2% in March</b>, driven mostly by two enterprise renewals that slipped into April. Self-serve signups stayed <b>flat at 1,840</b>, so the gap is timing rather than demand.',[['Billing export','#6366F1'],['CRM pipeline','#10B981'],['Finance notes','#F59E0B']]],['Which customers are at risk of churn?','Five accounts show <b>declining weekly usage</b> and an open support ticket older than 14 days. Together they represent <b>$38k</b> in annual revenue.',[['Product usage','#0EA5E9'],['Support inbox','#EC4899']]],['Summarize last week for the board','Shipped the <b>new onboarding</b>, cut p95 latency by <b>31%</b>, and closed <b>12 of 14</b> roadmap items. Hiring is on track for two senior roles.',[['Weekly report','#8B5CF6'],['Roadmap','#10B981'],['Hiring tracker','#F59E0B']]]];
+const ty=document.getElementById('ty'),ans=document.getElementById('ans'),so=document.getElementById('so');let qi=0,tm=[];
+function clear(){tm.forEach(clearTimeout);tm=[]}
+function show(i,instant){clear();const q=Q[i];qi=i;so.innerHTML=q[2].map(s=>'<span><i style="--c:'+s[1]+';background:'+s[1]+'"></i>'+s[0]+'</span>').join('');
+ if(instant){ty.textContent=q[0];ans.innerHTML=q[1];so.querySelectorAll('span').forEach(s=>s.classList.add('on'));loop(i);return}
+ ty.textContent='';ans.innerHTML='';let k=0;(function t(){ty.textContent=q[0].slice(0,++k);if(k<q[0].length)tm.push(setTimeout(t,38));else tm.push(setTimeout(()=>stream(q),380))})()}
+function stream(q){let tmp=document.createElement('div');tmp.innerHTML=q[1];const txt=tmp.textContent;let n=0;(function s(){n+=3;let c=0,out='';const walk=(node)=>{node.childNodes.forEach(ch=>{if(c>=n)return;if(ch.nodeType===3){const take=Math.min(ch.length,n-c);out+=ch.data.slice(0,take).replace(/</g,'&lt;');c+=take}else{out+='<b>';walk(ch);out+='</b>'}})};walk(tmp);ans.innerHTML=out;if(n<txt.length)tm.push(setTimeout(s,16));else{so.querySelectorAll('span').forEach((e,i)=>tm.push(setTimeout(()=>e.classList.add('on'),i*160)));loop(qi)}})()}
+function loop(i){tm.push(setTimeout(()=>show((i+1)%Q.length),4200))}
+document.getElementById('ch').innerHTML=Q.map((q,i)=>'<button data-i="'+i+'">'+q[0]+'</button>').join('');document.querySelectorAll('#ch button').forEach(b=>b.onclick=()=>show(+b.dataset.i));
+show(0,true);
+</script></body></html>

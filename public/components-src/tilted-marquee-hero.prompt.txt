@@ -1,0 +1,29 @@
+ROLE
+You are a senior SaaS landing designer and front-end engineer with 15+ years of experience. Build "Tilted Marquee Hero": a split hero with a left headline and a right wall of product cards scrolling in opposite directions on a 3D tilted plane.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black stage with indigo to pink gradients and glassy dark cards.
+- Palette: #818CF8, #0B0C14, #23274A, #F1F2FA, #A5B4FC, #F472B6
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Eyebrow pill; gradient headline; copy; two buttons; stats row; four vertical card columns inside a perspective mask.
+
+INTERACTION & STATES
+- Columns scroll infinitely with alternating directions and speeds; the plane is rotated in 3D and masked top and bottom.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

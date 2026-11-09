@@ -1,0 +1,29 @@
+ROLE
+You are a senior design-system engineer with 15+ years of experience. Build "Marching Borders": four selectable cards outlined with animated marching-ants dashed borders that go solid when chosen.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm grey page with coloured dashed outlines, tinted selection fill and Archivo type.
+- Palette: #17181C, #FBFAF6, #6C6E78, #EDEBE4
+- Type: Archivo, Archivo Narrow (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading with selection status; 2x2 grid of cards, each with an SVG rect outline, icon tile, title, subtitle and check badge.
+
+INTERACTION & STATES
+- Dashes march via stroke-dashoffset and speed up on hover; clicking selects one card (aria-pressed), turns its border solid, tints it and pops a check; status text updates.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

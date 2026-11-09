@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>QR Handshake Sign In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E7EAF5;color:#14172E;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:800px;background:#fff;border-radius:32px;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;box-shadow:0 40px 70px -40px rgba(20,23,46,.5),0 0 0 1px rgba(20,23,46,.06)}
+.l{padding:38px}.l .lg{display:flex;align-items:center;gap:8px;font-weight:800;font-size:18px;letter-spacing:-.04em;margin-bottom:34px}.l .lg i{width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,#6366F1,#EC4899)}
+.l h1{font-size:28px;font-weight:800;letter-spacing:-.055em;line-height:1.05}.l p.sb{font-size:15px;color:#6B6F94;margin:8px 0 24px}
+.stp{display:grid;gap:14px;counter-reset:s}.stp div{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45;color:#3A3F6A}.stp div::before{counter-increment:s;content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:#EEF0FF;color:#4F46E5;display:grid;place-items:center;font:700 13px 'Plus Jakarta Sans'}
+.l .or{margin-top:28px;font-size:14px;color:#8A8FB2}.l .or a{color:#4F46E5;font-weight:700;text-decoration:none}.l .or a:focus-visible{outline:2px solid #4F46E5;border-radius:4px}
+.r{background:linear-gradient(160deg,#EEF0FF,#F6EEFF);display:grid;place-items:center;padding:30px}
+.qc{position:relative;width:240px;height:240px;background:#fff;border-radius:28px;padding:18px;box-shadow:0 30px 50px -24px rgba(79,70,229,.5)}
+.qc svg.q{width:100%;height:100%;display:block;transition:opacity .35s,filter .35s,transform .35s}.qc.rf svg.q{opacity:0;transform:scale(.94)}
+.qc .rg{position:absolute;inset:-9px;width:calc(100% + 18px);height:calc(100% + 18px);transform:rotate(-90deg);pointer-events:none}.qc .rg rect{fill:none;stroke:#E4E6F7;stroke-width:3}.qc .rg .p{stroke:#6366F1;stroke-linecap:round;stroke-dasharray:var(--l);stroke-dashoffset:var(--o,0)}
+.qc .lgo{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px;border-radius:14px;background:#fff;display:grid;place-items:center;box-shadow:0 0 0 5px #fff}.qc .lgo i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#6366F1,#EC4899)}
+.qc .sc{position:absolute;inset:0;border-radius:28px;background:rgba(255,255,255,.94);display:grid;place-items:center;text-align:center;opacity:0;pointer-events:none;transition:opacity .35s}.qc.dn .sc{opacity:1}.qc .sc div{display:grid;place-items:center;gap:8px}.qc .sc i{width:64px;height:64px;border-radius:50%;background:#16A34A;display:grid;place-items:center;transform:scale(0);transition:transform .5s .1s cubic-bezier(.3,1.7,.5,1)}.qc.dn .sc i{transform:scale(1)}.qc .sc b{font-size:17px;font-weight:800;letter-spacing:-.03em}.qc .sc span{font-size:13px;color:#6B6F94}
+.qc .scan{position:absolute;left:18px;right:18px;top:18px;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#6366F1,transparent);box-shadow:0 0 16px #6366F1;animation:sn 2.4s ease-in-out infinite}@keyframes sn{0%,100%{top:18px}50%{top:calc(100% - 21px)}}.qc.dn .scan{display:none}
+.tm{margin-top:20px;display:flex;align-items:center;gap:8px;font:500 13px 'Geist Mono',monospace;color:#6B6F94}.tm button{border:0;background:#fff;border-radius:99px;padding:7px 14px;font:600 12.5px 'Plus Jakarta Sans';color:#4F46E5;cursor:pointer;box-shadow:0 4px 10px -4px rgba(79,70,229,.4)}.tm button:focus-visible{outline:2px solid #4F46E5}
+@media(max-width:720px){.c{grid-template-columns:1fr}.r{order:-1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="l"><div class="lg"><i></i>Meridian</div><h1>Sign in with your phone</h1><p class="sb">No password to remember.</p><div class="stp"><div>Open the Meridian app on your phone</div><div>Tap the scan icon in the top right</div><div>Point your camera at this code</div></div><div class="or">Prefer another way? <a href="#">Use email</a></div></div>
+<div class="r"><div><div class="qc" id="qc"><svg class="rg" viewBox="0 0 258 258"><rect x="2" y="2" width="254" height="254" rx="34" id="rr"/><rect class="p" id="rp" x="2" y="2" width="254" height="254" rx="34"/></svg><svg class="q" id="q" viewBox="0 0 29 29" shape-rendering="crispEdges"></svg><div class="lgo"><i></i></div><div class="scan"></div><div class="sc"><div><i><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i><b>Phone connected</b><span>Signing you in...</span></div></div></div>
+<div class="tm"><span id="tl">Refreshes in 30s</span><button id="rf">Refresh now</button></div></div></div></div>
+<script>
+const N=29,q=document.getElementById('q'),qc=document.getElementById('qc'),rp=document.getElementById('rp');
+function gen(seed){let s=seed;const r=()=>(s=(s*16807)%2147483647)/2147483647;const g=Array.from({length:N},()=>Array(N).fill(0));const fin=(x,y)=>{for(let i=-1;i<8;i++)for(let j=-1;j<8;j++){const xx=x+i,yy=y+j;if(xx<0||yy<0||xx>=N||yy>=N)continue;const on=(i>=0&&i<7&&j>=0&&j<7)&&(i===0||i===6||j===0||j===6||(i>=2&&i<=4&&j>=2&&j<=4));g[yy][xx]=on?1:0;g[yy][xx]=(i===-1||j===-1||i===7||j===7)?0:g[yy][xx]}};
+ const res=new Set();for(let i=0;i<N;i++)for(let j=0;j<N;j++)g[j][i]=r()<.5?1:0;fin(0,0);fin(N-7,0);fin(0,N-7);for(let i=10;i<N-10;i++){g[6][i]=i%2?0:1;g[i][6]=i%2?0:1}for(let i=11;i<18;i++)for(let j=11;j<18;j++)g[j][i]=0;return g}
+function draw(seed){const g=gen(seed);let h='<rect width="29" height="29" fill="#fff"/>';for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(g[y][x])h+='<rect x="'+x+'" y="'+y+'" width="1.02" height="1.02" fill="#14172E"/>';q.innerHTML=h}
+const L=1000;rp.style.setProperty('--l',L);rp.style.strokeDasharray=L;let t=30,seed=7777,iv,dn=false;
+function tick(){t--;document.getElementById('tl').textContent='Refreshes in '+t+'s';rp.style.strokeDashoffset=L*(1-t/30);if(t<=0)refresh()}
+function refresh(){qc.classList.add('rf');setTimeout(()=>{seed=(seed*31+11)%99991;draw(seed);qc.classList.remove('rf')},350);t=30;document.getElementById('tl').textContent='Refreshes in 30s';rp.style.strokeDashoffset=0}
+document.getElementById('rf').onclick=()=>{if(dn){dn=false;qc.classList.remove('dn');iv=setInterval(tick,1000)}refresh()};
+draw(seed);rp.style.strokeDashoffset=L*(1-t/30)*0;iv=setInterval(tick,1000);rp.getBoundingClientRect();rp.style.strokeDashoffset=L*(1-.62);t=19;document.getElementById('tl').textContent='Refreshes in 19s';
+setTimeout(()=>{},0);
+</script></body></html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Radar Ping Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#030A07;color:#CFFBE0;font-family:'Chakra Petch',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{display:grid;grid-template-columns:1fr 250px;gap:22px;align-items:center;width:100%;max-width:820px;background:#050F0A;border:1px solid #0F3A24;border-radius:22px;padding:24px;box-shadow:0 0 0 1px #02130B,0 40px 70px -34px #000,0 0 80px -40px #22C55E}
+.rd{position:relative;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#06180F,#030A07 70%);border:1.5px solid #14663C;overflow:hidden;box-shadow:inset 0 0 40px rgba(34,197,94,.15)}
+.rd::before{content:"";position:absolute;inset:0;background:repeating-radial-gradient(circle,transparent 0 calc(16.66% - 1px),rgba(34,197,94,.28) calc(16.66% - 1px) 16.66%),linear-gradient(rgba(34,197,94,.22) 1px,transparent 1px) 0 50%/100% 100% no-repeat,linear-gradient(90deg,rgba(34,197,94,.22) 1px,transparent 1px) 50% 0/100% 100% no-repeat}
+.sw{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(34,197,94,0) 0deg,rgba(34,197,94,0) 270deg,rgba(34,197,94,.55) 360deg);animation:sw 4.5s linear infinite}@keyframes sw{to{transform:rotate(360deg)}}
+.bl{position:absolute;width:10px;height:10px;margin:-5px;border-radius:50%;background:#4ADE80;box-shadow:0 0 12px #4ADE80;cursor:pointer;border:0;padding:0;opacity:.25;animation:bp 4.5s linear infinite;animation-delay:var(--dl)}.bl.hot{background:#FACC15;box-shadow:0 0 12px #FACC15}
+@keyframes bp{0%{opacity:1;transform:scale(1.6)}35%{opacity:.7;transform:scale(1)}100%{opacity:.2}}
+.bl:focus-visible,.bl.sel{outline:2px solid #fff;outline-offset:4px;opacity:1;animation-play-state:paused}
+.ct{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:50%;background:#fff;box-shadow:0 0 14px #fff}
+.rg{position:absolute;font:400 10.5px 'Share Tech Mono',monospace;color:#2F8F58;left:calc(50% + 3px)}
+.pn h1{font-size:20px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}.pn h1 span{color:#4ADE80}.pn p{font:400 12.5px 'Share Tech Mono',monospace;color:#3FA06A;margin:4px 0 16px}
+.dt{background:#06180F;border:1px solid #0F3A24;border-radius:12px;padding:14px;font:400 13px/1.8 'Share Tech Mono',monospace;margin-bottom:12px;min-height:128px}.dt b{display:block;font:600 16px 'Chakra Petch';color:#fff;margin-bottom:4px}.dt span{color:#4ADE80}.dt .w{color:#FACC15}
+.ls{display:grid;gap:6px}.ls button{display:flex;justify-content:space-between;align-items:center;border:1px solid #0F3A24;background:#04100A;color:#CFFBE0;border-radius:9px;padding:8px 12px;font:500 13px 'Chakra Petch';cursor:pointer}.ls button:hover,.ls button.sel{border-color:#4ADE80;background:#0A2417}.ls button:focus-visible{outline:2px solid #fff}.ls button i{font:400 12px 'Share Tech Mono',monospace;color:#4ADE80;font-style:normal}
+@media(max-width:700px){.c{grid-template-columns:1fr}.rd{width:min(100%,360px);margin:0 auto}}
+@media(prefers-reduced-motion:reduce){.sw,.bl{animation:none}.bl{opacity:.9}}
+</style></head><body>
+<div class="c"><div class="rd" id="rd" role="group" aria-label="Radar with detected signals"><div class="sw"></div><div class="ct"></div><span class="rg" style="top:calc(50% - 16.66% * 1 - 14px)">1km</span><span class="rg" style="top:calc(50% - 33.3% - 14px)">2km</span><span class="rg" style="top:calc(50% - 50% + 4px)">3km</span></div>
+<div class="pn"><h1>Nearby <span>riders</span></h1><p id="cn">SCANNING… 0 SIGNALS</p><div class="dt" id="dt" aria-live="polite"><b>Select a blip</b>Tap a signal on the radar or in the list to see details.</div><div class="ls" id="ls"></div></div></div>
+<script>
+const R=[['Maya R.',62,.28,'Bike · 4 min away','ok'],['Delivery #1042',140,.5,'Scooter · 7 min away','hot'],['Tomas K.',212,.18,'Bike · 2 min away','ok'],['Priya S.',290,.62,'On foot · 9 min away','ok'],['Courier #877',330,.4,'Car · 5 min away','hot']];
+const rd=document.getElementById('rd'),ls=document.getElementById('ls'),dt=document.getElementById('dt');
+const B=R.map((r,i)=>{const b=document.createElement('button');b.className='bl'+(r[4]==='hot'?' hot':'');const a=r[1]*Math.PI/180,d=r[2]*50;b.style.left=(50+Math.sin(a)*d)+'%';b.style.top=(50-Math.cos(a)*d)+'%';b.style.setProperty('--dl',(-4.5+r[1]/360*4.5)+'s');b.setAttribute('aria-label',r[0]+', '+r[3]);rd.appendChild(b);return b});
+ls.innerHTML=R.map(r=>'<button><span>'+r[0]+'</span><i>'+(r[2]*3).toFixed(1)+' km</i></button>').join('');const L=[...ls.children];
+function sel(i){B.forEach((b,k)=>b.classList.toggle('sel',k===i));L.forEach((b,k)=>b.classList.toggle('sel',k===i));const r=R[i];dt.innerHTML='<b>'+r[0]+'</b><span>BEARING</span> '+r[1]+'° &nbsp;<span>RANGE</span> '+(r[2]*3).toFixed(1)+' km<br><span>STATUS</span> '+(r[4]==='hot'?'<span class="w">ACTIVE JOB</span>':'AVAILABLE')+'<br>'+r[3]}
+B.forEach((b,i)=>b.onclick=()=>sel(i));L.forEach((b,i)=>b.onclick=()=>sel(i));sel(1);
+let n=0;const iv=setInterval(()=>{n++;document.getElementById('cn').textContent=(n<5?'SCANNING… ':'LOCKED · ')+Math.min(n,5)+' SIGNALS';if(n>=5)clearInterval(iv)},400);
+</script></body></html>

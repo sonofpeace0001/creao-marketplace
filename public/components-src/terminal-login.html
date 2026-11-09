@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Terminal Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05080A;background-image:radial-gradient(circle at 50% 0%,#0E2A22,transparent 60%);color:#C8F5DE;font-family:'JetBrains Mono',monospace;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.tm{width:100%;max-width:640px;border-radius:16px;overflow:hidden;background:rgba(8,14,12,.92);border:1px solid #17352B;box-shadow:0 40px 80px -30px #000,0 0 60px -20px rgba(52,211,153,.35)}
+.bar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:#0C1613;border-bottom:1px solid #15302A}.bar i{width:11px;height:11px;border-radius:50%;background:#2A4A40}.bar i:nth-child(1){background:#FF5F57}.bar i:nth-child(2){background:#FEBC2E}.bar i:nth-child(3){background:#28C840}.bar span{margin-left:auto;font-size:12px;color:#5E8A7A}
+.bd{padding:18px 20px 22px;font-size:14.5px;line-height:1.75;min-height:340px;position:relative}
+.ln{white-space:pre-wrap;word-break:break-word}.dim{color:#5E8A7A}.ac{color:#34D399}.er{color:#FB7185}.wn{color:#FBBF24}.hi{color:#7DD3FC}
+.pr{display:flex;align-items:center}.pr .ps{color:#34D399;white-space:pre}.pr input{flex:1;border:0;background:none;color:#E4FFF2;font:500 14.5px 'JetBrains Mono',monospace;outline:0;caret-color:#34D399;min-width:0}.pr input.pw{letter-spacing:.15em}
+.cur{display:inline-block;width:9px;height:18px;background:#34D399;vertical-align:-3px;animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:0}}
+.bx{border:1px solid #1D4A3C;background:rgba(52,211,153,.06);border-radius:10px;padding:10px 14px;margin:8px 0;display:inline-block}
+.sp{display:inline-block;width:1ch;animation:sp .8s steps(8) infinite}@keyframes sp{0%{content:"|"}}
+.ft{position:absolute;right:20px;bottom:14px;font-size:11.5px;color:#3E6A5A}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="tm"><div class="bar"><i></i><i></i><i></i><span>ssh orbit@console.meridian.dev</span></div><div class="bd" id="bd"></div></div>
+<script>
+const bd=document.getElementById('bd');let busy=false;
+function line(h,c){const d=document.createElement('div');d.className='ln '+(c||'');d.innerHTML=h;bd.insertBefore(d,bd.querySelector('.pr'));return d}
+function type(el,txt,d,cb){let i=0;(function t(){el.textContent=txt.slice(0,++i);if(i<txt.length)setTimeout(t,d);else cb&&cb()})()}
+function prompt(label,pw,cb){const p=document.createElement('div');p.className='pr';p.innerHTML='<span class="ps">'+label+'</span><input'+(pw?' type="password" class="pw"':'')+' autocomplete="off" spellcheck="false" aria-label="'+label+'">';bd.appendChild(p);const i=p.querySelector('input');i.focus();i.addEventListener('keydown',e=>{if(e.key==='Enter'){const v=i.value;p.remove();line('<span class="ac">'+label+'</span>'+(pw?'*'.repeat(v.length||1):v.replace(/</g,'&lt;')));cb(v)}});return i}
+function run(demo){bd.innerHTML='';busy=true;line('Meridian Console v3.4.0  (linux-x64)','dim');line('Last login: Mon Nov 9 09:41 from 192.168.1.24','dim');line('');line('<span class="hi">Welcome to Meridian.</span> Authenticate to continue.');line('');
+ if(demo){line('<span class="ac">login: </span>orbit');line('<span class="ac">password: </span>**********');line('');line('<span class="wn">Verifying credentials...</span>');line('<span class="ac">OK</span> identity confirmed');line('<span class="ac">OK</span> device trusted');line('<span class="ac">OK</span> session key issued');line('');const b=document.createElement('div');b.className='bx';b.innerHTML='<span class="hi">Access granted</span> as orbit<br><span class="dim">role: admin  region: eu-west  last deploy: 4m ago</span>';bd.appendChild(b);const p=document.createElement('div');p.className='pr';p.innerHTML='<span class="ps">orbit@meridian:~$ </span><span class="cur"></span>';bd.appendChild(p);busy=false;return}
+ const u=prompt('login: ',false,()=>{prompt('password: ',true,pw=>{line('');const w=line('<span class="wn">Verifying credentials</span>');let k=0;const iv=setInterval(()=>{w.innerHTML='<span class="wn">Verifying credentials'+'.'.repeat(k%4)+'</span>';k++},250);setTimeout(()=>{clearInterval(iv);if(pw.length<4){w.innerHTML='<span class="er">Authentication failed.</span> Try again.';line('');prompt('login: ',false,arguments.callee)}else{w.innerHTML='<span class="ac">OK</span> identity confirmed';line('<span class="ac">OK</span> session key issued');const b=document.createElement('div');b.className='bx';b.innerHTML='<span class="hi">Access granted</span><br><span class="dim">Type run to restart the demo</span>';bd.insertBefore(b,null);const p=document.createElement('div');p.className='pr';p.innerHTML='<span class="ps">$ </span><input autocomplete="off" aria-label="command">';bd.appendChild(p);p.querySelector('input').addEventListener('keydown',e=>{if(e.key==='Enter'){if(p.querySelector('input').value.trim()==='run')run(false);else{p.querySelector('input').value=''}}});p.querySelector('input').focus()}},1400)})})}
+bd.addEventListener('click',()=>{const i=bd.querySelector('input');if(i)i.focus()});
+run(true);bd.insertAdjacentHTML('beforeend','<div class="ft">click to start over</div>');bd.addEventListener('dblclick',()=>run(false));
+</script></body></html>

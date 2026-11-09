@@ -1,0 +1,29 @@
+ROLE
+You are a senior enterprise landing page designer with 15+ years of experience. Build "Logo Spotlight Grid": a bordered logo grid where a cursor spotlight reveals each logo in full colour by masking a duplicate layer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark matrix of muted logos that light up in brand colours under a soft violet glow.
+- Palette: #7C8198, #1B1E2A, #A5B4FC, #0A0B10, #EEF0F8, #0E1017
+- Type: Sora, Fraunces, Space Grotesk, Playfair Display, DM Serif Display, Outfit, Syne, Instrument Serif, Bricolage Grotesque, Unbounded, Plus Jakarta Sans, Fredoka, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading; four by three grid of logo cells with base and revealed layers; caption link.
+
+INTERACTION & STATES
+- A radial mask follows the pointer or an idle orbit and reveals the colour layer inside each cell; a faint glow tracks the cursor.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

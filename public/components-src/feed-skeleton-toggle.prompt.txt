@@ -1,0 +1,29 @@
+ROLE
+You are a senior loading state designer with 15+ years of experience. Build "Feed Skeleton Toggle": social feed cards that show shimmering skeleton placeholders and cross-fade to real content with a staggered reveal.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Light grey page with white cards and a soft white sheen sweeping over pale blocks.
+- Palette: #12162B, #6A7099, #8A90B4, #ECEEF4, #6366F1, #E8EBF4
+- Type: Inter Tight (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with Loading and Loaded toggle; three feed cards each with skeleton and content layers; caption.
+
+INTERACTION & STATES
+- A shimmer gradient sweeps skeleton blocks; switching state cross-fades layers with a per-card delay; the demo auto alternates until used.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

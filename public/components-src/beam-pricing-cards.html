@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Border Beam Pricing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070709;color:#EDEDF0;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:860px}
+.hd{text-align:center;margin-bottom:34px}.hd h1{font-size:clamp(28px,5vw,42px);letter-spacing:-.05em;font-weight:600}.hd p{color:#8A8A95;margin-top:8px}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}
+.c{position:relative;border-radius:22px;padding:1px;background:#1D1D24}
+.c .in{height:100%;border-radius:21px;background:#0D0D11;padding:24px 22px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.c.pro{padding:2px;background:conic-gradient(from var(--a),#1D1D24 0 55%,#8B8FFF 75%,#E879F9 88%,#1D1D24 100%);animation:sp 5s linear infinite;--a:200deg}
+.c.pro::before{content:"";position:absolute;inset:-1px;border-radius:23px;background:conic-gradient(from var(--a),transparent 0 70%,rgba(139,143,255,.7) 82%,rgba(232,121,249,.6) 90%,transparent 100%);filter:blur(16px);opacity:.6;z-index:-1;animation:sp 5s linear infinite}
+@keyframes sp{to{--a:360deg}}
+.c.pro .in{background:radial-gradient(260px 200px at 50% 0,#1C1B3C,#0D0D11 70%)}
+.bd{position:absolute;right:16px;top:16px;font:500 11px 'Geist Mono',monospace;letter-spacing:.06em;color:#C7C9FF;background:rgba(139,143,255,.14);border:1px solid rgba(139,143,255,.3);padding:3px 9px;border-radius:99px}
+.c h2{font-size:15px;font-weight:600;color:#A5A5B3}.c.pro h2{color:#fff}
+.pr{display:flex;align-items:baseline;gap:6px;margin:14px 0 6px}.pr b{font-size:46px;font-weight:600;letter-spacing:-.06em}.pr span{font-size:14px;color:#8A8A95}
+.ds{font-size:14px;color:#8A8A95;line-height:1.5;margin-bottom:18px;min-height:42px}
+.btn{display:block;text-align:center;text-decoration:none;font-size:14.5px;font-weight:600;padding:12px;border-radius:12px;margin-bottom:20px;transition:transform .15s}.btn:hover{transform:translateY(-1px)}.btn:focus-visible{outline:2px solid #8B8FFF;outline-offset:3px}
+.b1{background:#17171D;border:1px solid #2A2A33;color:#EDEDF0}.b2{background:linear-gradient(135deg,#8B8FFF,#E879F9);color:#0A0A12;box-shadow:0 12px 26px -10px rgba(139,143,255,.8)}
+.c ul{list-style:none;display:grid;gap:11px;border-top:1px solid #1D1D24;padding-top:18px}.c li{display:flex;gap:10px;font-size:14px;color:#B7B7C4;align-items:flex-start}.c li svg{flex:none;margin-top:2px;color:#8B8FFF}
+@media(max-width:700px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.c.pro,.c.pro::before{animation:none}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Simple, honest pricing</h1><p>Start free. Upgrade when you outgrow it.</p></div>
+<div class="g" id="g"></div></div>
+<script>
+const ck='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg>';
+const P=[{n:'Hobby',p:'0',d:'For side projects and learning in public.',f:['3 projects','Community support','1 GB storage'],b:'Start for free',c:'b1'},{n:'Pro',p:'24',d:'For professionals who ship every week.',f:['Unlimited projects','Priority support','100 GB storage','Custom domains','Team analytics'],b:'Start 14-day trial',c:'b2',pro:1},{n:'Team',p:'79',d:'For teams that need control and scale.',f:['Everything in Pro','SSO and audit logs','Role-based access','1 TB storage'],b:'Talk to sales',c:'b1'}];
+document.getElementById('g').innerHTML=P.map(p=>'<div class="c'+(p.pro?' pro':'')+'"><div class="in">'+(p.pro?'<span class="bd">Most popular</span>':'')+'<h2>'+p.n+'</h2><div class="pr"><b>$'+p.p+'</b><span>/month</span></div><p class="ds">'+p.d+'</p><a class="btn '+p.c+'" href="#">'+p.b+'</a><ul>'+p.f.map(f=>'<li>'+ck+f+'</li>').join('')+'</ul></div></div>').join('');
+</script></body></html>

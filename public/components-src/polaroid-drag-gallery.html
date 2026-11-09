@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Polaroid Drag Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#CDB892;background-image:radial-gradient(#C3AC82 1.2px,transparent 1.2px);background-size:22px 22px;color:#2B2112;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:20px;overflow:hidden;-webkit-font-smoothing:antialiased;user-select:none}
+.bd{position:relative;width:100%;max-width:820px;height:520px;border-radius:20px;background:#E8DCC2;box-shadow:inset 0 0 0 10px #8A6A3D,inset 0 0 0 12px #B58D52,0 40px 60px -30px rgba(40,25,5,.6);overflow:hidden}
+.hd{position:absolute;left:36px;top:30px;z-index:1;pointer-events:none}.hd h1{font:700 40px 'Caveat';color:#4B3516}.hd p{font-size:13px;color:#7A6340}
+.pl{position:absolute;width:190px;background:#FDFBF5;padding:10px 10px 36px;box-shadow:0 14px 24px -8px rgba(40,25,5,.5),0 2px 4px rgba(40,25,5,.3);cursor:grab;touch-action:none;will-change:transform;transition:box-shadow .2s}
+.pl.dr{cursor:grabbing;box-shadow:0 34px 40px -12px rgba(40,25,5,.6),0 4px 8px rgba(40,25,5,.3)}
+.pl .im{width:100%;height:160px;overflow:hidden;background:#222;pointer-events:none}.pl .im svg{display:block;width:100%;height:100%}.pl .cp{position:absolute;left:0;right:0;bottom:6px;text-align:center;font:700 22px 'Caveat';color:#4B3516;pointer-events:none}
+.tp{position:absolute;left:50%;top:-10px;width:64px;height:22px;margin-left:-32px;background:rgba(236,220,150,.7);transform:rotate(-3deg);pointer-events:none}
+.rs{position:absolute;right:30px;bottom:26px;z-index:60;border:0;background:#4B3516;color:#FDFBF5;border-radius:99px;padding:9px 18px;font:600 13px 'Inter';cursor:pointer}.rs:focus-visible{outline:3px solid #fff}
+</style></head><body>
+<div class="bd" id="bd"><div class="hd"><h1>Summer in Lisbon</h1><p>Drag the photos around the table</p></div><button class="rs" id="rs">Shuffle</button></div>
+<script>
+function art(i){const P=[['#FDE68A','#F97316','#7C2D12'],['#BAE6FD','#38BDF8','#0C4A6E'],['#DDD6FE','#8B5CF6','#312E81'],['#BBF7D0','#22C55E','#14532D'],['#FBCFE8','#EC4899','#831843'],['#FED7AA','#FB923C','#7C2D12']][i%6],s=i%3;const sc=[`<circle cx="260" cy="90" r="46" fill="${P[1]}"/><path d="M0 220 Q100 140 200 200 T400 170 V300 H0Z" fill="${P[2]}" opacity=".85"/><path d="M0 250 Q120 200 240 240 T400 220 V300 H0Z" fill="${P[2]}"/>`,`<circle cx="120" cy="80" r="34" fill="#fff" opacity=".85"/><path d="M0 260 L90 130 L170 230 L260 90 L400 250 V300 H0Z" fill="${P[2]}" opacity=".9"/><path d="M0 290 L110 200 L220 280 L310 190 L400 280 V300 H0Z" fill="${P[1]}" opacity=".7"/>`,`<rect x="60" y="70" width="110" height="170" rx="55" fill="${P[1]}"/><rect x="190" y="110" width="150" height="130" rx="20" fill="${P[2]}" opacity=".9"/><circle cx="300" cy="70" r="28" fill="#fff" opacity=".8"/>`][s];return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g'+i+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+P[0]+'"/><stop offset="1" stop-color="'+P[1]+'" stop-opacity=".5"/></linearGradient></defs><rect width="400" height="300" fill="url(#g'+i+')"/>'+sc+'</svg>'}
+const C=['Alfama sunrise','Tram 28','Blue tiles','Pastel de nata','Sintra fog','Last light'];const bd=document.getElementById('bd');const P=[[40,150,-7],[170,110,5],[300,190,-3],[430,120,8],[560,200,-6],[250,280,4]];let z=10;const els=[];
+C.forEach((c,i)=>{const e=document.createElement('div');e.className='pl';e.innerHTML='<div class="tp"></div><div class="im">'+art(i)+'</div><div class="cp">'+c+'</div>';bd.appendChild(e);const o={e,x:P[i][0],y:P[i][1],r:P[i][2],vx:0,vy:0,z:++z};els.push(o);place(o);bind(o)});
+function place(o){o.e.style.zIndex=o.z;o.e.style.transform='translate('+o.x+'px,'+o.y+'px) rotate('+o.r+'deg)'}
+function bind(o){let dr=false,ox=0,oy=0,lx=0,ly=0,lt=0;o.e.addEventListener('pointerdown',e=>{dr=true;o.e.classList.add('dr');o.e.setPointerCapture(e.pointerId);o.z=++z;ox=e.clientX-o.x;oy=e.clientY-o.y;lx=e.clientX;ly=e.clientY;lt=performance.now();o.vx=o.vy=0;place(o)});
+ o.e.addEventListener('pointermove',e=>{if(!dr)return;const n=performance.now(),dt=Math.max(8,n-lt);o.vx=(e.clientX-lx)/dt*16;o.vy=(e.clientY-ly)/dt*16;lx=e.clientX;ly=e.clientY;lt=n;o.x=e.clientX-ox;o.y=e.clientY-oy;o.r+=(o.vx*.4-o.r*.02);place(o)});
+ const up=()=>{if(!dr)return;dr=false;o.e.classList.remove('dr');fling(o)};o.e.addEventListener('pointerup',up);o.e.addEventListener('pointercancel',up)}
+function fling(o){const W=bd.clientWidth-190,H=bd.clientHeight-220;function s(){o.x+=o.vx;o.y+=o.vy;o.vx*=.92;o.vy*=.92;o.r*=.96;if(o.x<0){o.x=0;o.vx*=-.5}if(o.x>W){o.x=W;o.vx*=-.5}if(o.y<0){o.y=0;o.vy*=-.5}if(o.y>H){o.y=H;o.vy*=-.5}place(o);if(Math.abs(o.vx)+Math.abs(o.vy)>.3)requestAnimationFrame(s)}s()}
+document.getElementById('rs').onclick=()=>els.forEach((o,i)=>{o.x=40+Math.random()*(bd.clientWidth-260);o.y=90+Math.random()*(bd.clientHeight-300);o.r=(Math.random()-.5)*16;o.e.style.transition='transform .5s cubic-bezier(.3,1.3,.5,1)';place(o);setTimeout(()=>o.e.style.transition='',520)});
+</script></body></html>

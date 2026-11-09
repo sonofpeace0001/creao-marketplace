@@ -1,0 +1,29 @@
+ROLE
+You are a senior social-feed designer and front-end engineer with 15+ years of experience. Build "Reaction Popover": a post with reaction chips and an add-reaction popover of springy icons that fly up when chosen.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White post card with a dark pill popover and coloured vector reactions (no emoji).
+- Palette: #5B5BF6, #161A35, #7B82AB, #F0F1F8, #F59E0B, #EF4444
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Author row; post copy and image; reaction chips with counts; add button; dark pill popover with five icon reactions and hover labels; comment count.
+
+INTERACTION & STATES
+- Opening the popover shows five SVG reactions that magnify on hover; choosing one toggles it, updates counts and launches a floating icon; chips are toggle buttons with aria-pressed.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

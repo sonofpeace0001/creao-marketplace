@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Aurora Text Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#07070B;color:#EDEBF7;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px}
+.st{position:relative;text-align:center;padding:54px 20px 44px;border:1px solid #1D1B2B;border-radius:28px;background:#0B0A12;overflow:hidden}
+.st::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 50% 100%,var(--g1),transparent 70%);opacity:.22;transition:background .6s}
+.st small{position:relative;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.2em;color:#7C7A92;text-transform:uppercase}
+.st h1{position:relative;font:800 clamp(38px,8.4vw,86px)/1 'Unbounded';letter-spacing:-.05em;margin:16px 0 0}
+.au{background:linear-gradient(100deg,var(--g1),var(--g2),var(--g3),var(--g1));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:fl 6s linear infinite;filter:drop-shadow(0 0 22px var(--glow));transition:filter .6s}
+@keyframes fl{to{background-position:300% 0}}
+.st p{position:relative;font-size:17px;color:#9A98B0;max-width:40ch;margin:18px auto 0;line-height:1.55}
+.sw{display:flex;justify-content:center;gap:12px;margin-top:22px}
+.sw button{position:relative;display:flex;align-items:center;gap:9px;border:1px solid #26233A;background:#10101A;color:#BDBBD2;border-radius:99px;padding:8px 16px 8px 9px;font:600 13.5px 'Manrope';cursor:pointer;transition:all .2s}
+.sw button i{width:22px;height:22px;border-radius:50%;background:var(--sw)}.sw button:hover{border-color:#44406A;color:#fff}.sw button[aria-pressed=true]{background:#1B1A2B;border-color:#7C6CFF;color:#fff}.sw button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.cs{margin-top:16px;background:#0B0A12;border:1px solid #1D1B2B;border-radius:16px;padding:14px 18px;font:500 13px/1.7 'JetBrains Mono',monospace;color:#8E8CA6;display:flex;justify-content:space-between;align-items:center;gap:12px}.cs code{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cs span{color:#B7A8FF}
+.cs button{border:1px solid #2A2740;background:#14131F;color:#CFCDE4;border-radius:9px;padding:7px 13px;font:600 12.5px 'Manrope';cursor:pointer;flex:none}.cs button:hover{background:#1D1B2E}.cs button:focus-visible{outline:2px solid #7C6CFF}
+@media(prefers-reduced-motion:reduce){.au{animation:none}}
+</style></head><body>
+<div class="c"><div class="st" id="st"><small>Aurora text</small><h1>Ship <span class="au">something</span><br>unforgettable</h1><p>Flowing gradient type with a soft glow that picks up the palette you choose.</p>
+<div class="sw" id="sw" role="group" aria-label="Palette"></div></div>
+<div class="cs"><code id="cd"></code><button id="cp">Copy CSS</button></div></div>
+<script>
+const P=[['Northern','#7CFFCB','#6C8CFF','#C86CFF','rgba(108,140,255,.45)'],['Ember','#FFD36B','#FF7A59','#FF3D81','rgba(255,122,89,.45)'],['Lagoon','#6BF2FF','#4D9DFF','#7DFFB6','rgba(77,157,255,.45)'],['Orchid','#FFA6F6','#B58CFF','#7CC4FF','rgba(181,140,255,.45)']];
+const sw=document.getElementById('sw'),st=document.getElementById('st'),cd=document.getElementById('cd');
+sw.innerHTML=P.map((p,i)=>'<button aria-pressed="'+(i===0)+'" aria-label="'+p[0]+' palette"><i style="--sw:linear-gradient(135deg,'+p[1]+','+p[3]+')"></i>'+p[0]+'</button>').join('');
+function set(i){const p=P[i];st.style.setProperty('--g1',p[1]);st.style.setProperty('--g2',p[2]);st.style.setProperty('--g3',p[3]);st.style.setProperty('--glow',p[4]);[...sw.children].forEach((b,k)=>b.setAttribute('aria-pressed',k===i));cd.innerHTML='<span>background</span>: linear-gradient(100deg, '+p[1]+', '+p[2]+', '+p[3]+');'}
+[...sw.children].forEach((b,i)=>b.onclick=()=>set(i));set(0);
+document.getElementById('cp').onclick=e=>{navigator.clipboard&&navigator.clipboard.writeText(cd.textContent).catch(()=>{});e.target.textContent='Copied';setTimeout(()=>e.target.textContent='Copy CSS',1400)};
+</script></body></html>

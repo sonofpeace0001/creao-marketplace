@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Parallax Track Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0F0F12;color:#F1EEE8;font-family:'Jost',sans-serif;min-height:100vh;display:grid;place-items:center;overflow:hidden;-webkit-font-smoothing:antialiased;user-select:none}
+.c{width:100%}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;padding:0 6vw 22px}.hd h1{font:400 clamp(34px,6vw,64px)/.95 'Italiana',serif;letter-spacing:-.01em}.hd span{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#7E7A70}
+.vw{overflow:hidden;cursor:grab;touch-action:pan-y}.vw.dr{cursor:grabbing}
+.tr{display:flex;gap:22px;padding:0 6vw;will-change:transform}
+.fm{position:relative;flex:none;width:clamp(200px,28vw,300px);height:clamp(300px,50vh,400px);overflow:hidden;border-radius:6px;background:#222}
+.fm:nth-child(even){margin-top:46px}
+.fm .im{position:absolute;top:0;bottom:0;left:-22%;width:144%;will-change:transform}.fm .im svg{display:block;width:100%;height:100%}
+.fm .lb{position:absolute;left:16px;right:16px;bottom:14px;display:flex;justify-content:space-between;align-items:flex-end;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5);pointer-events:none}.fm .lb b{font:400 22px 'Italiana',serif}.fm .lb span{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
+.pb{margin:26px 6vw 0;height:2px;background:#26262B;border-radius:2px}.pb i{display:block;height:100%;width:30%;background:#F1EEE8;border-radius:2px}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Quiet Places</h1><span>Drag to explore</span></div><div class="vw" id="vw"><div class="tr" id="tr"></div></div><div class="pb"><i id="pb"></i></div></div>
+<script>
+function art(i){const P=[['#F2D7A0','#C0562F','#3B1D12'],['#BFD8E6','#3E7CA6','#0D2A40'],['#D6C8EE','#7A5CC2','#24184A'],['#CDE7C2','#4E9A52','#12361A'],['#F2C5D2','#C74B72','#4A1226'],['#EAD3B0','#B8793A','#33200C'],['#BDE2E6','#2F9AA6','#0B3236']][i%7],s=i%4;const sc=[`<circle cx="300" cy="150" r="70" fill="${P[1]}"/><path d="M0 520 Q150 360 300 480 T600 430 V700 H0Z" fill="${P[2]}"/>`,`<path d="M0 560 L140 280 L250 470 L380 220 L600 540 V700 H0Z" fill="${P[2]}" opacity=".9"/><circle cx="170" cy="150" r="46" fill="#fff" opacity=".8"/>`,`<rect x="140" y="170" width="170" height="380" rx="85" fill="${P[1]}"/><rect x="320" y="300" width="170" height="250" rx="24" fill="${P[2]}" opacity=".9"/>`,`<g fill="none" stroke="${P[1]}" stroke-width="10"><path d="M0 420 Q150 340 300 420 T600 420"/><path d="M0 500 Q150 420 300 500 T600 500" opacity=".7"/><path d="M0 580 Q150 500 300 580 T600 580" opacity=".5"/></g><circle cx="430" cy="170" r="54" fill="${P[1]}"/>`][s];return '<svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="p'+i+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+P[0]+'"/><stop offset="1" stop-color="'+P[1]+'" stop-opacity=".45"/></linearGradient></defs><rect width="600" height="700" fill="url(#p'+i+')"/>'+sc+'</svg>'}
+const N=[['Tide pool','Oregon'],['Stone steps','Kyoto'],['Dusk field','Provence'],['Salt flats','Bolivia'],['Cedar mist','Hokkaido'],['Dune light','Namib'],['Still water','Como']];const tr=document.getElementById('tr'),vw=document.getElementById('vw');
+N.forEach((n,i)=>{const f=document.createElement('div');f.className='fm';f.innerHTML='<div class="im">'+art(i)+'</div><div class="lb"><b>'+n[0]+'</b><span>'+n[1]+'</span></div>';tr.appendChild(f)});
+let x=0,tx=0,mx=0,dr=false,sx=0,s0=0,vel=0;const fms=[...tr.children];
+function lim(){return Math.min(0,vw.clientWidth-tr.scrollWidth)}
+function draw(){x+=(tx-x)*.12;tr.style.transform='translateX('+x+'px)';const vc=vw.clientWidth/2;fms.forEach(f=>{const r=f.getBoundingClientRect(),c=r.left+r.width/2,d=(c-vc)/vc;f.firstChild.style.transform='translateX('+(-d*14)+'%)'});document.getElementById('pb').style.width=(30+70*(x/lim()||0))+'%';requestAnimationFrame(draw)}
+vw.addEventListener('pointerdown',e=>{dr=true;vw.classList.add('dr');sx=e.clientX;s0=tx;vw.setPointerCapture(e.pointerId)});
+vw.addEventListener('pointermove',e=>{if(!dr)return;tx=Math.max(lim(),Math.min(0,s0+(e.clientX-sx)))});
+const up=()=>{dr=false;vw.classList.remove('dr')};vw.addEventListener('pointerup',up);vw.addEventListener('pointercancel',up);
+vw.addEventListener('wheel',e=>{e.preventDefault();tx=Math.max(lim(),Math.min(0,tx-(Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY)))},{passive:false});
+function init(){tx=x=lim()*.22;draw()}init();
+</script></body></html>

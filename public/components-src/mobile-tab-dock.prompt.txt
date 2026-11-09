@@ -1,0 +1,29 @@
+ROLE
+You are a senior mobile-app designer and front-end engineer with 15+ years of experience. Build "Mobile Tab Dock": a phone mockup with a floating bottom tab bar whose active icon lifts into a moving coloured bubble.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft periwinkle phone screen with a white pill dock and a bubble that changes colour per tab.
+- Palette: #1B2440, #5B6CFF, #F6F8FD, #7A86A6, #DDE6F4, #98A2BE
+- Type: Nunito (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Phone frame with notch; four tab panels (Home, Search, Inbox, Profile) each with heading, hero stat and list; dock with sliding bubble, icons, labels and unread dot.
+
+INTERACTION & STATES
+- Tabs use roving tabindex and arrow keys; the bubble translates with a spring and recolours; the selected icon rises into it; panels fade in.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

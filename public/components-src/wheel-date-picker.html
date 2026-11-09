@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Wheel Date Picker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#E9ECF5,#F3EAF7);color:#14172B;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.sh{width:100%;max-width:400px;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-radius:32px;padding:20px 22px 24px;box-shadow:0 40px 80px -40px rgba(60,40,120,.55),0 0 0 1px rgba(255,255,255,.9)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.hd button{border:0;background:none;color:#4F46E5;font:600 16px 'Inter';cursor:pointer;padding:6px}.hd button:focus-visible{outline:2px solid #4F46E5;border-radius:6px}.hd b{font-size:16px;font-weight:700}
+.sel{text-align:center;font-size:13.5px;color:#6B7194;margin-bottom:10px;font-weight:500}.sel b{color:#14172B;font-weight:700}
+.wh{position:relative;display:grid;grid-template-columns:1.2fr .8fr 1fr;height:210px}
+.wh::before{content:"";position:absolute;left:0;right:0;top:50%;height:42px;margin-top:-21px;border-radius:14px;background:#EEF0FB;z-index:0}
+.wh::after{content:"";position:absolute;inset:0;background:linear-gradient(#fff 0,rgba(255,255,255,0) 32%,rgba(255,255,255,0) 68%,#fff 100%);pointer-events:none;z-index:3;border-radius:16px}
+.cl{position:relative;z-index:2;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;padding:84px 0;perspective:400px;outline:0}.cl::-webkit-scrollbar{display:none}
+.cl:focus-visible{outline:2px solid #4F46E5;border-radius:14px}
+.cl div{height:42px;display:grid;place-items:center;scroll-snap-align:center;font-size:19px;font-weight:600;color:#9AA0C0;transition:color .15s,transform .15s}.cl div.on{color:#14172B;font-weight:700}
+.ft{display:flex;gap:10px;margin-top:16px}.ft button{flex:1;border:0;border-radius:16px;padding:14px;font:700 15.5px 'Inter';cursor:pointer;transition:transform .15s}.ft button:active{transform:scale(.97)}.ft .a{background:#EEF0FB;color:#4F46E5}.ft .b{background:#4F46E5;color:#fff;box-shadow:0 12px 22px -10px #4F46E5}.ft button:focus-visible{outline:3px solid #14172B;outline-offset:2px}
+.ok{text-align:center;margin-top:12px;font-size:14px;font-weight:600;color:#16A34A;min-height:20px}
+</style></head><body>
+<div class="sh"><div class="hd"><button>Cancel</button><b>Pick a date</b><button id="dn">Done</button></div><p class="sel" id="sl"></p>
+<div class="wh"><div class="cl" id="m" role="listbox" aria-label="Month" tabindex="0"></div><div class="cl" id="d" role="listbox" aria-label="Day" tabindex="0"></div><div class="cl" id="y" role="listbox" aria-label="Year" tabindex="0"></div></div>
+<div class="ft"><button class="a" id="td">Today</button><button class="b" id="cf">Confirm</button></div><p class="ok" id="ok"></p></div>
+<script>
+const M=['January','February','March','April','May','June','July','August','September','October','November','December'];const Y0=2020;
+const cols={m:document.getElementById('m'),d:document.getElementById('d'),y:document.getElementById('y')};let st={m:10,d:12,y:2026};
+const dim=(m,y)=>new Date(y,m+1,0).getDate();
+function fill(c,items){c.innerHTML=items.map(t=>'<div role="option">'+t+'</div>').join('')}
+fill(cols.m,M);fill(cols.y,Array.from({length:14},(_,i)=>Y0+i));
+function days(){fill(cols.d,Array.from({length:dim(st.m,st.y)},(_,i)=>i+1))}
+function go(c,i,smooth){cols[c].scrollTo({top:i*42,behavior:smooth?'smooth':'auto'})}
+function mark(c){const e=cols[c],i=Math.round(e.scrollTop/42);[...e.children].forEach((x,k)=>x.classList.toggle('on',k===i));return i}
+function read(c){const i=mark(c);if(c==='m')st.m=i;if(c==='d')st.d=i+1;if(c==='y')st.y=Y0+i}
+function label(){const n=dim(st.m,st.y);if(st.d>n)st.d=n;const dt=new Date(st.y,st.m,st.d);document.getElementById('sl').innerHTML='<b>'+dt.toLocaleDateString('en-US',{weekday:'long'})+'</b>, '+M[st.m]+' '+st.d+', '+st.y}
+let t={};['m','d','y'].forEach(c=>cols[c].addEventListener('scroll',()=>{mark(c);clearTimeout(t[c]);t[c]=setTimeout(()=>{read(c);if(c!=='d'){const old=st.d;days();go('d',Math.min(old,dim(st.m,st.y))-1,false);mark('d')}label()},90)}));
+['m','d','y'].forEach(c=>cols[c].addEventListener('keydown',e=>{const i=Math.round(cols[c].scrollTop/42);if(e.key==='ArrowDown'){e.preventDefault();go(c,i+1,true)}if(e.key==='ArrowUp'){e.preventDefault();go(c,i-1,true)}}));
+days();go('m',st.m);go('d',st.d-1);go('y',st.y-Y0);['m','d','y'].forEach(mark);label();
+document.getElementById('td').onclick=()=>{st={m:10,d:9,y:2026};go('m',st.m,true);days();go('d',st.d-1);go('y',st.y-Y0,true);label()};
+const done=()=>{document.getElementById('ok').textContent='Selected '+M[st.m]+' '+st.d+', '+st.y};document.getElementById('cf').onclick=done;document.getElementById('dn').onclick=done;
+</script></body></html>

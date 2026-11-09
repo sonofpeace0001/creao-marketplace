@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Piano Keys Synth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 460px at 50% 0%,#3A2A5A,transparent 70%),#15101F;color:#F4EFFF;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;user-select:none}
+.c{width:100%;max-width:860px;text-align:center}
+.hd small{font-size:12.5px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#C4A8FF}.hd h1{font:italic 600 clamp(32px,5vw,48px)/1.05 'Fraunces',serif;margin:8px 0 6px}.hd p{color:#9A8DB8;font-size:15px;margin-bottom:28px}
+.rd{height:96px;display:flex;align-items:center;justify-content:center;gap:34px;margin-bottom:12px}
+.nt{font:600 64px/1 'Fraunces',serif;color:var(--c,#fff);text-shadow:0 0 40px var(--c,transparent);min-width:140px;transition:color .1s}.nt small{display:block;font:500 12px 'Inter';letter-spacing:.2em;text-transform:uppercase;color:#8A7CAA;text-shadow:none;margin-top:6px}
+.vz{display:flex;align-items:flex-end;gap:4px;height:70px}.vz i{width:6px;border-radius:4px;background:linear-gradient(180deg,#C4A8FF,#7C5CFF);height:8px;transition:height .12s}
+.pn{display:inline-block;padding:26px 26px 22px;border-radius:26px;background:linear-gradient(180deg,#2B2140,#1B1430);box-shadow:0 40px 60px -20px #000,inset 0 1px 0 rgba(255,255,255,.1),0 0 0 1px #3A2F58}
+.pn .lb{display:flex;justify-content:space-between;font:600 11px 'Inter';letter-spacing:.24em;text-transform:uppercase;color:#7C6EA0;margin-bottom:14px;padding:0 4px}
+.kb{position:relative;display:flex;height:220px}
+.w{position:relative;width:58px;height:100%;border:0;background:linear-gradient(180deg,#fff,#EDE8F8 92%,#CFC6E6);border-radius:0 0 12px 12px;margin:0 2px;cursor:pointer;box-shadow:0 8px 0 #A99BC9,0 12px 14px rgba(0,0,0,.4);display:flex;align-items:flex-end;justify-content:center;padding-bottom:14px;font:600 12.5px 'Inter';color:#8A7CAA;transition:transform .07s,box-shadow .07s,background .15s;outline:0}
+.w.dn,.w:active{transform:translateY(6px);box-shadow:0 2px 0 #A99BC9,0 4px 8px rgba(0,0,0,.4);background:linear-gradient(180deg,var(--c),#fff 80%)}
+.w:focus-visible{outline:3px solid #C4A8FF;outline-offset:2px}
+.b{position:absolute;top:0;width:36px;height:62%;border:0;background:linear-gradient(180deg,#2A2238,#0E0A18);border-radius:0 0 8px 8px;cursor:pointer;z-index:3;box-shadow:0 6px 0 #05030A,0 10px 12px rgba(0,0,0,.6),inset 0 -6px 8px rgba(255,255,255,.08);transition:transform .07s,box-shadow .07s;outline:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;font:600 10.5px 'Inter';color:#6A5E8A}
+.b.dn,.b:active{transform:translateY(5px);box-shadow:0 1px 0 #05030A,0 3px 6px rgba(0,0,0,.6);background:linear-gradient(180deg,var(--c),#1A1226);color:#fff}
+.b:focus-visible{outline:3px solid #C4A8FF}
+.ft{margin-top:22px;font-size:13px;color:#7C6EA0}.ft kbd{font:600 12px 'Inter';background:#241B3A;border-radius:6px;padding:2px 8px;color:#C9B8F2;margin:0 2px}
+@media(max-width:720px){.w{width:34px}.b{width:22px}.kb{height:170px}.pn{padding:16px}.nt{font-size:44px;min-width:100px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><small>Studio keys</small><h1>Play a little tune</h1><p>Click the keys or use your keyboard. Notes light up in colour as you play.</p></div>
+<div class="rd"><div class="vz" id="vz"></div><div class="nt" id="nt">C4<small>Note</small></div><div class="vz" id="vz2"></div></div>
+<div class="pn"><div class="lb"><span>Octave 4</span><span>Grand</span></div><div class="kb" id="kb"></div></div>
+<div class="ft">Keys <kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd><kbd>G</kbd><kbd>H</kbd><kbd>J</kbd><kbd>K</kbd> and <kbd>W</kbd><kbd>E</kbd><kbd>T</kbd><kbd>Y</kbd><kbd>U</kbd></div></div>
+<script>
+const W=[['C4','a'],['D4','s'],['E4','d'],['F4','f'],['G4','g'],['A4','h'],['B4','j'],['C5','k']];const B=[['C#4','w',0],['D#4','e',1],['F#4','t',3],['G#4','y',4],['A#4','u',5]];
+const COL={'C':'#FF6B9D','D':'#FFB84D','E':'#FFE066','F':'#7CE8A4','G':'#5CD6FF','A':'#9D8CFF','B':'#E58CFF'};
+const kb=document.getElementById('kb'),keys={};
+W.forEach(w=>{const b=document.createElement('button');b.className='w';b.style.setProperty('--c',COL[w[0][0]]);b.dataset.n=w[0];b.innerHTML='<span>'+w[1].toUpperCase()+'</span>';b.setAttribute('aria-label','Note '+w[0]);b.addEventListener('pointerdown',()=>play(w[0]));kb.appendChild(b);keys[w[1]]=b});
+B.forEach(b=>{const e=document.createElement('button');e.className='b';e.style.left=(58*(b[2]+1)+4*(b[2]+1)-18+(b[2]>=3?0:0))+'px';e.style.setProperty('--c',COL[b[0][0]]);e.dataset.n=b[0];e.innerHTML='<span>'+b[1].toUpperCase()+'</span>';e.setAttribute('aria-label','Note '+b[0]);e.addEventListener('pointerdown',()=>play(b[0]));kb.appendChild(e);keys[b[1]]=e});
+function pos(){const ws=[...kb.querySelectorAll('.w')];kb.querySelectorAll('.b').forEach((b,i)=>{const idx=B[i][2],r=ws[idx].getBoundingClientRect(),k=kb.getBoundingClientRect();b.style.left=(r.right-k.left-b.offsetWidth/2+1)+'px'})}pos();addEventListener('resize',pos);(document.fonts&&document.fonts.ready||Promise.resolve()).then(pos);
+const vz=document.getElementById('vz'),vz2=document.getElementById('vz2');for(let i=0;i<9;i++){vz.appendChild(document.createElement('i'));vz2.appendChild(document.createElement('i'))}
+let tm;function play(n){const c=COL[n[0]];document.getElementById('nt').style.setProperty('--c',c);document.getElementById('nt').firstChild.textContent=n;[...vz.children,...vz2.children].forEach((e,i)=>{e.style.height=(10+Math.random()*58)+'px'});clearTimeout(tm);tm=setTimeout(()=>{[...vz.children,...vz2.children].forEach(e=>e.style.height='8px')},400);
+ try{const A=window.__ac||(window.__ac=new (window.AudioContext||window.webkitAudioContext)()),f=440*Math.pow(2,({C:-9,D:-7,E:-5,F:-4,G:-2,A:0,B:2}[n[0]]+(n[1]==='#'?1:0)+((+n.slice(-1))-4)*12)/12),o=A.createOscillator(),g=A.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,A.currentTime);g.gain.exponentialRampToValueAtTime(.18,A.currentTime+.01);g.gain.exponentialRampToValueAtTime(.0001,A.currentTime+.9);o.connect(g).connect(A.destination);o.start();o.stop(A.currentTime+.95)}catch(e){}}
+addEventListener('keydown',e=>{const k=e.key.toLowerCase(),b=keys[k];if(!b||e.repeat)return;b.classList.add('dn');play(b.dataset.n)});addEventListener('keyup',e=>{const b=keys[e.key.toLowerCase()];if(b)b.classList.remove('dn')});
+document.getElementById('nt').style.setProperty('--c',COL.G);document.getElementById('nt').firstChild.textContent='G4';keys['g'].classList.add('dn');keys['u']&&0;[...vz.children,...vz2.children].forEach((e,i)=>e.style.height=(14+Math.abs(Math.sin(i*1.7))*52)+'px');
+</script></body></html>

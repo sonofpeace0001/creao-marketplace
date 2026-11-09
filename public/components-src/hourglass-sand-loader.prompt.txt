@@ -1,0 +1,29 @@
+ROLE
+You are a senior illustrative motion designer with 15+ years of experience. Build "Hourglass Sand Loader": an SVG hourglass where sand drains from top to bottom with a falling stream, then flips over to run again.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm brown glow with a golden glass, cap and sand and a serif headline.
+- Palette: #F2C879, #4A2A12, #1A0F08, #FBEFD9, #E8C48A, #C58B3C
+- Type: Fraunces, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Hourglass with clipped upper and lower sand; falling stream; headline; copy; countdown label.
+
+INTERACTION & STATES
+- Upper sand scales down while lower sand scales up in sync; a dashed stream animates; at the end the whole glass rotates 180 degrees to restart.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

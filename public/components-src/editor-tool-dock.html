@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Editor Tool Dock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1A1B1F;color:#ECEDF2;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cv{position:relative;width:100%;max-width:680px;height:420px;border-radius:22px;background:#232529;background-image:radial-gradient(#34373D 1px,transparent 1px);background-size:20px 20px;overflow:hidden;border:1px solid #2F3237;box-shadow:0 40px 70px -36px #000}
+.el{position:absolute;border-radius:14px}
+.e1{left:12%;top:16%;width:34%;height:30%;background:linear-gradient(135deg,#7C5CFA,#E04FD0)}.e2{left:52%;top:22%;width:28%;height:36%;background:#FFD43B;border-radius:50%}.e3{left:20%;top:54%;width:22%;height:16%;background:#2DD4BF;border-radius:10px;transform:rotate(-6deg)}
+.sl{position:absolute;outline:2px solid #5B8CFF;pointer-events:none;display:none}.sl i{position:absolute;width:9px;height:9px;background:#fff;border:1.5px solid #5B8CFF;border-radius:2px}.sl i:nth-child(1){left:-5px;top:-5px}.sl i:nth-child(2){right:-5px;top:-5px}.sl i:nth-child(3){left:-5px;bottom:-5px}.sl i:nth-child(4){right:-5px;bottom:-5px}
+.hint{position:absolute;top:14px;left:16px;font:500 12.5px 'Geist Mono',monospace;color:#7F838E}
+.dk{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:flex;align-items:center;gap:4px;background:rgba(18,19,22,.86);backdrop-filter:blur(14px);border:1px solid #3A3D44;border-radius:18px;padding:6px;box-shadow:0 20px 36px -12px rgba(0,0,0,.8)}
+.dk button{position:relative;width:46px;height:46px;border:0;border-radius:13px;background:none;color:#A9ADB8;cursor:pointer;display:grid;place-items:center;transition:all .2s cubic-bezier(.3,1.4,.5,1)}
+.dk button:hover{background:#2A2C32;color:#fff;transform:translateY(-4px) scale(1.12)}.dk button[aria-pressed=true]{background:#5B8CFF;color:#fff;box-shadow:0 8px 16px -6px #5B8CFF}.dk button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.dk button::after{content:attr(data-n) "  " attr(data-k);position:absolute;bottom:calc(100% + 14px);left:50%;transform:translate(-50%,6px);background:#fff;color:#16171B;font:600 12px 'Inter Tight';padding:5px 9px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:all .15s}
+.dk button:hover::after{opacity:1;transform:translate(-50%,0)}
+.dv{width:1px;height:26px;background:#3A3D44;margin:0 4px}
+.cl{display:flex;gap:5px;padding:0 6px}.cl b{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s}.cl b:hover{transform:scale(1.2)}.cl b.on{border-color:#fff}
+.cl b:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.zm{position:absolute;right:16px;top:14px;font:500 12.5px 'Geist Mono',monospace;color:#A9ADB8;background:#17181C;border:1px solid #2F3237;border-radius:8px;padding:4px 9px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cv" id="cv"><div class="hint" id="h">Select a shape, then pick a tool</div><div class="zm">100%</div>
+<div class="el e1" data-i="0"></div><div class="el e2" data-i="1"></div><div class="el e3" data-i="2"></div><div class="sl" id="sl"><i></i><i></i><i></i><i></i></div>
+<div class="dk" role="toolbar" aria-label="Editor tools" id="dk"></div></div>
+<script>
+const T=[['Select','V','M5 3l14 7-6 2-2 6z'],['Rectangle','R','M4 6h16v12H4z'],['Ellipse','O','M12 5a8 7 0 1 0 0 14 8 7 0 0 0 0-14z'],['Text','T','M5 6V4h14v2M12 4v16M9 20h6'],['Pen','P','M12 19l7-7-3-3-7 7zM16 9l2-2 3 3-2 2M5 21l3-1']];
+const C=['#7C5CFA','#FFD43B','#2DD4BF','#FB7185'];let tool=0;
+const dk=document.getElementById('dk');
+dk.innerHTML=T.map((t,i)=>'<button data-n="'+t[0]+'" data-k="'+t[1]+'" aria-pressed="'+(i===0)+'" aria-label="'+t[0]+' ('+t[1]+')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="'+t[2]+'"/></svg></button>').join('')+'<span class="dv"></span><div class="cl" role="group" aria-label="Fill colour">'+C.map((c,i)=>'<b tabindex="0" role="button" aria-label="Fill '+c+'" style="background:'+c+'" data-c="'+c+'"></b>').join('')+'</div>';
+const B=[...dk.querySelectorAll('button')],sl=document.getElementById('sl'),cv=document.getElementById('cv');let sel=null;
+function setT(i){tool=i;B.forEach((b,k)=>b.setAttribute('aria-pressed',k===i));document.getElementById('h').textContent=T[i][0]+' tool active'+(sel?'':' · click a shape')}
+B.forEach((b,i)=>b.onclick=()=>setT(i));
+cv.querySelectorAll('.el').forEach(e=>e.addEventListener('click',()=>{sel=e;const r=e.getBoundingClientRect(),p=cv.getBoundingClientRect();Object.assign(sl.style,{display:'block',left:r.left-p.left+'px',top:r.top-p.top+'px',width:r.width+'px',height:r.height+'px',borderRadius:getComputedStyle(e).borderRadius});document.getElementById('h').textContent='Shape selected · pick a colour'}));
+function paint(c){if(sel)sel.style.background=c}
+dk.querySelectorAll('.cl b').forEach(b=>{const f=()=>{dk.querySelectorAll('.cl b').forEach(x=>x.classList.toggle('on',x===b));paint(b.dataset.c)};b.onclick=f;b.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}}});
+addEventListener('keydown',e=>{const i=T.findIndex(t=>t[1].toLowerCase()===e.key.toLowerCase());if(i>-1&&!e.metaKey&&!e.ctrlKey)setT(i)});
+setTimeout(()=>cv.querySelector('.e1').click(),50);
+</script></body></html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Drag Reorder List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#10121A;color:#ECEFFA;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:480px;background:#171A26;border:1px solid #252A3D;border-radius:26px;padding:22px;box-shadow:0 40px 70px -40px #000}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}.hd h1{font-size:20px;font-weight:700;letter-spacing:-.03em}.hd span{font:400 12px 'Fragment Mono',monospace;color:#7C84A8}
+.ls{position:relative;list-style:none}
+.it{position:absolute;left:0;right:0;height:64px;display:flex;align-items:center;gap:14px;padding:0 14px;border-radius:18px;background:#1F2335;border:1px solid #2B3047;transition:transform .35s cubic-bezier(.3,1.2,.4,1),box-shadow .25s,background .2s;touch-action:none;user-select:none;cursor:grab}
+.it.dg{transition:box-shadow .2s,background .2s;z-index:10;cursor:grabbing;box-shadow:0 24px 40px -12px rgba(0,0,0,.7);background:#272C45;border-color:#6C7CFF;scale:1.03}
+.it:focus-visible{outline:2px solid #6C7CFF;outline-offset:2px}
+.hn{color:#5C6489;display:grid;place-items:center;width:20px;flex:none}
+.rk{flex:none;width:30px;height:30px;border-radius:10px;background:var(--c);display:grid;place-items:center;font:700 14px 'Outfit';color:#10121A}
+.tx{flex:1;min-width:0}.tx b{display:block;font-size:15.5px;font-weight:600}.tx span{font:400 12px 'Fragment Mono',monospace;color:#7C84A8}
+.pt{font:400 13px 'Fragment Mono',monospace;color:#9AA2C6}
+.ft{margin-top:14px;font-size:13px;color:#7C84A8;display:flex;justify-content:space-between}.ft button{border:0;background:none;color:#8B9BFF;font:600 13px 'Outfit';cursor:pointer}.ft button:focus-visible{outline:2px solid #6C7CFF;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Sprint priorities</h1><span id="sv">Order saved</span></div><ul class="ls" id="ls" role="list"></ul><div class="ft"><span>Drag the handle, or focus a row and press Alt + arrows</span><button id="rs">Reset</button></div></div>
+<script>
+const D=[['Fix checkout timeout','Bug · 3 pts','#F87171',3],['Redesign onboarding','Feature · 8 pts','#6C7CFF',8],['Add CSV export','Feature · 5 pts','#34D399',5],['Upgrade dependencies','Chore · 2 pts','#FBBF24',2],['Write launch docs','Docs · 3 pts','#C4B5FD',3]];
+let order=D.map((_,i)=>i);const H=64,G=10,ls=document.getElementById('ls');
+ls.style.height=(D.length*(H+G)-G)+'px';
+ls.innerHTML=D.map((d,i)=>'<li class="it" data-i="'+i+'" tabindex="0" aria-label="'+d[0]+'"><span class="hn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.600"/><circle cx="15" cy="6" r="1.600"/><circle cx="9" cy="12" r="1.600"/><circle cx="15" cy="12" r="1.600"/><circle cx="9" cy="18" r="1.600"/><circle cx="15" cy="18" r="1.600"/></svg></span><span class="rk" style="--c:'+d[2]+'"></span><div class="tx"><b>'+d[0]+'</b><span>'+d[1]+'</span></div><span class="pt">'+d[3]+'</span></li>').join('');
+const E=[...ls.children];
+function pos(skip){order.forEach((id,idx)=>{const e=E[id];if(e===skip)return;e.style.transform='translateY('+idx*(H+G)+'px)'});E.forEach(e=>{const idx=order.indexOf(+e.dataset.i);e.querySelector('.rk').textContent=idx+1})}
+function saved(){const s=document.getElementById('sv');s.textContent='Saving…';clearTimeout(saved.t);saved.t=setTimeout(()=>s.textContent='Order saved',500)}
+pos();
+E.forEach(e=>{let sy=0,base=0,dg=false;e.addEventListener('pointerdown',ev=>{dg=true;e.classList.add('dg');sy=ev.clientY;base=order.indexOf(+e.dataset.i)*(H+G);e.setPointerCapture(ev.pointerId)});
+ e.addEventListener('pointermove',ev=>{if(!dg)return;const y=Math.max(0,Math.min((D.length-1)*(H+G),base+ev.clientY-sy));e.style.transform='translateY('+y+'px)';const ni=Math.round(y/(H+G)),oi=order.indexOf(+e.dataset.i);if(ni!==oi){order.splice(oi,1);order.splice(ni,0,+e.dataset.i);pos(e)}});
+ const up=()=>{if(!dg)return;dg=false;e.classList.remove('dg');pos();saved()};e.addEventListener('pointerup',up);e.addEventListener('pointercancel',up);
+ e.addEventListener('keydown',ev=>{if(!ev.altKey)return;const oi=order.indexOf(+e.dataset.i);let ni=oi;if(ev.key==='ArrowUp')ni=Math.max(0,oi-1);if(ev.key==='ArrowDown')ni=Math.min(D.length-1,oi+1);if(ni!==oi){ev.preventDefault();order.splice(oi,1);order.splice(ni,0,+e.dataset.i);pos();saved()}})});
+document.getElementById('rs').onclick=()=>{order=D.map((_,i)=>i);pos();saved()};
+// demo: show card 2 lifted
+setTimeout(()=>{const e=E[1];e.classList.add('dg');e.style.transform='translateY('+(2*(H+G)-14)+'px)';order.splice(1,1);order.splice(2,0,1);pos(e);setTimeout(()=>{e.classList.remove('dg');pos()},1800)},120);
+</script></body></html>

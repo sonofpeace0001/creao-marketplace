@@ -1,0 +1,29 @@
+ROLE
+You are a senior agile-tool designer and front-end engineer with 15+ years of experience. Build "Kanban with WIP Limits": a flow board whose columns refuse work beyond a limit, glowing red and shaking, with cards that slide between lanes.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark board with coloured capacity meters and rose warning glow.
+- Palette: #7B849F, #2A3144, #232938, #7F2434, #F43F5E, #C8CEE6
+- Type: Outfit, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; three columns with name and limit counter; segmented capacity meter; cards with progress ring and move buttons; add card.
+
+INTERACTION & STATES
+- Move buttons slide cards between columns using FLIP; moving into a full column is blocked with a shake and toast; meters fill and turn red at the limit.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

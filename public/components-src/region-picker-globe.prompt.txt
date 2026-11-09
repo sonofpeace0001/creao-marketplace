@@ -1,0 +1,29 @@
+ROLE
+You are a senior cloud-console designer and front-end engineer with 15+ years of experience. Build "Region Picker Globe": a region selector paired with a globe that flies to the chosen location and shows its latency in a glass card.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White console card with indigo selection beside a deep navy dotted globe.
+- Palette: #4F46E5, #EEF1F7, #10142B, #6A6F94, #F6F7FC, #EEF0FA
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Region list with badges, names and latency chips; canvas globe with markers; glass info card with region, city and latency.
+
+INTERACTION & STATES
+- Choosing a region eases the globe's yaw and pitch to the target through shortest-path rotation and highlights its marker with a ripple; dragging takes manual control.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

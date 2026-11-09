@@ -1,0 +1,29 @@
+ROLE
+You are a senior retro-UI designer and front-end engineer with 15+ years of experience. Build "ASCII Receipt": a thermal-paper café receipt drawn in monospace with box rules, tip toggle and a PAID stamp.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm receipt paper with torn top and bottom edges, Courier Prime, slight tilt and a red stamp.
+- Palette: #1C1A15, #C9C2B2, #B91C1C, #FBF8EF, #BDB5A3
+- Type: Courier Prime (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Tilted paper sheet with scalloped edges; boxed shop name; address and order; four line items; subtotal, tax, optional tip and total; barcode text; Add tip and Pay now buttons; PAID stamp.
+
+INTERACTION & STATES
+- Add 15% tip recalculates the total and toggles to Remove tip; Pay now stamps PAID with a spring animation, changes the footer text and disables both buttons.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

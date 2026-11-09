@@ -1,0 +1,29 @@
+ROLE
+You are a senior upload-flow designer and front-end engineer with 15+ years of experience. Build "Drop Empty State": an empty state that is also a drop zone: marching dashed border, fanning file icons and an upload list that fills on drop.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White dropzone on lavender with three stacked file cards, a bobbing arrow and violet accents.
+- Palette: #6D4DF2, #181435, #F7F5FF, #E4E0F5, #8A84AE, #F2F0FA
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Dashed animated border; three file cards with an upload arrow; headline; copy with browse link; type chips; upload list with progress bars; template link.
+
+INTERACTION & STATES
+- Click or Enter opens the file picker; dragging over fans the file cards and changes the headline to Release to upload; dropping lists up to four files with progress bars.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

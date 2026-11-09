@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Plasma Field Shader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05030B;color:#F4EFFF;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{position:relative;width:100%;max-width:760px;aspect-ratio:16/10;border-radius:26px;overflow:hidden;box-shadow:0 0 0 1px #1F1536,0 50px 90px -40px #000,0 0 120px -50px #8B5CF6;cursor:crosshair}
+canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:auto;filter:saturate(1.15) contrast(1.05)}
+.ui{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:22px;pointer-events:none}
+.tp{display:flex;justify-content:space-between;font:500 12px 'Inter';letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.bt h1{font:700 clamp(26px,5.4vw,52px)/1 'Unbounded';letter-spacing:-.05em;text-shadow:0 4px 30px rgba(0,0,0,.5)}.bt p{font-size:15px;color:rgba(255,255,255,.82);margin-top:10px;max-width:38ch;line-height:1.5}
+.pr{position:absolute;right:20px;bottom:20px;display:flex;gap:8px;pointer-events:auto}.pr button{border:1px solid rgba(255,255,255,.3);background:rgba(10,6,24,.5);backdrop-filter:blur(10px);color:#fff;border-radius:99px;padding:8px 14px;font:600 12.5px 'Inter';cursor:pointer;transition:all .2s}.pr button:hover{background:rgba(255,255,255,.18)}.pr button[aria-pressed=true]{background:#fff;color:#14082E;border-color:#fff}.pr button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+</style></head><body>
+<div class="c" id="c"><canvas id="cv" role="img" aria-label="Animated plasma shader that bends toward the pointer"></canvas>
+<div class="ui"><div class="tp"><span>Shader / 02</span><span id="fp">60 fps</span></div><div class="bt"><h1>Plasma field</h1><p>A real-time colour field rendered per pixel and warped by your cursor.</p></div></div>
+<div class="pr" id="pr" role="group" aria-label="Palette"><button aria-pressed="true" data-p="0">Nebula</button><button aria-pressed="false" data-p="1">Solar</button><button aria-pressed="false" data-p="2">Deep sea</button></div></div>
+<script>
+const cv=document.getElementById('cv'),x=cv.getContext('2d');const S=3;let w,h,img,t=0,mx=.7,my=.35,tx=.7,ty=.35,pal=0,last=performance.now(),fr=0,ft=0;
+const PAL=[[[.5,.5,.5],[.5,.5,.5],[1,1,1],[.55,.2,.75]],[[.5,.5,.5],[.5,.45,.4],[1,1,.8],[.0,.15,.2]],[[.45,.55,.6],[.4,.45,.5],[1,1,1],[.0,.3,.55]]];
+function size(){const r=cv.getBoundingClientRect();w=Math.max(60,Math.floor(r.width/S/ (devicePixelRatio>1?1:1)));h=Math.max(40,Math.floor(r.height/S));cv.width=w;cv.height=h;img=x.createImageData(w,h)}
+function col(v){const p=PAL[pal],o=[];for(let i=0;i<3;i++){o[i]=p[0][i]+p[1][i]*Math.cos(6.28318*(p[2][i]*v+p[3][i]))}return o}
+function frame(n){const dt=(n-last)/1000;last=n;t+=dt*(matchMedia('(prefers-reduced-motion: reduce)').matches?0:1);mx+=(tx-mx)*.06;my+=(ty-my)*.06;const d=img.data;
+ for(let j=0;j<h;j++){for(let i=0;i<w;i++){const u=i/w*3.2,v=j/h*2.2;const dx=u-mx*3.2,dy=v-my*2.2,r=Math.sqrt(dx*dx+dy*dy);const warp=Math.exp(-r*1.4)*1.6;
+  let a=Math.sin(u*2+t*.9+warp)+Math.sin(v*3-t*.7)+Math.sin((u+v)*2.2+t*.5)+Math.sin(Math.sqrt((u-1.6)*(u-1.6)+(v-1.1)*(v-1.1))*4-t*1.2-warp*2);
+  const c=col(a*.25+.5+warp*.12);const k=(j*w+i)*4;d[k]=c[0]*255;d[k+1]=c[1]*255;d[k+2]=c[2]*255;d[k+3]=255}}
+ x.putImageData(img,0,0);fr++;ft+=dt;if(ft>.6){document.getElementById('fp').textContent=Math.round(fr/ft)+' fps';fr=0;ft=0}requestAnimationFrame(frame)}
+size();addEventListener('resize',size);
+document.getElementById('c').addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();tx=(e.clientX-r.left)/r.width;ty=(e.clientY-r.top)/r.height});
+document.querySelectorAll('#pr button').forEach(b=>b.onclick=()=>{pal=+b.dataset.p;document.querySelectorAll('#pr button').forEach(z=>z.setAttribute('aria-pressed',z===b))});
+requestAnimationFrame(frame);
+</script></body></html>

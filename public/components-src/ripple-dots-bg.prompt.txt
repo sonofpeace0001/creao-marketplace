@@ -1,0 +1,29 @@
+ROLE
+You are a senior interactive-background engineer and designer with 15+ years of experience. Build "Ripple Dot Matrix": a canvas dot matrix that swells around the cursor and sends coloured ripples outward on every click.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper page with grey dots that glow vermilion near the pointer and rings.
+- Palette: #1B1B1F, #F3F1EC, #FF4D2E, #55555E, #8A8A92
+- Type: Space Grotesk (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Full-bleed canvas grid of dots; centered pill label, headline, subcopy and CTA on frosted plates; hint line.
+
+INTERACTION & STATES
+- Dots scale and colour by distance to the pointer; pointerdown spawns an expanding ripple ring that fades over about 1.8 seconds; canvas resizes with DPR scaling; reduced motion draws static frames on input.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

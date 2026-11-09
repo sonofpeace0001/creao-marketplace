@@ -1,0 +1,29 @@
+ROLE
+You are a senior creative-developer and brand designer with 15+ years of experience. Build "Liquid Blob Gradient": a hero over metaball-style liquid colour blobs that merge via an SVG gooey filter and chase the cursor.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep black stage with magenta, violet, orange and teal liquids, film grain and Instrument Serif type.
+- Palette: #FF6AD5, #0B0A10, #F5F3FF, #C774E8, #14101F
+- Type: Instrument Serif, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Six large drifting circles inside an SVG goo filter (blur plus alpha threshold); a cursor-following hot blob; grain overlay; centered pill, serif headline, copy and white CTA.
+
+INTERACTION & STATES
+- Blobs drift on staggered CSS animations; a larger blob eases toward the pointer; the filter makes them fuse; reduced motion stops the drift.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

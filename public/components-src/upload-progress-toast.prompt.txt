@@ -1,0 +1,29 @@
+ROLE
+You are a senior product designer and front-end engineer with 15+ years of experience. Build "Upload Progress Toast": a dark toast showing upload progress in a ring that morphs into a drawn checkmark and a countdown bar on completion.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Ink toast over a pale app mock with blue progress turning green.
+- Palette: #2563EB, #16A34A, #DDE3EE, #101828, #60A5FA, #E8ECF3
+- Type: DM Sans, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Ring icon with file glyph and check; file name and size line; cancel button; countdown bar; replay button.
+
+INTERACTION & STATES
+- Progress advances with live size readout; on completion the ring turns green, the check draws in and a 4 second bar auto dismisses; Replay restarts.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

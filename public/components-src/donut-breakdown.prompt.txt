@@ -1,0 +1,29 @@
+ROLE
+You are a senior analytics designer and front-end engineer with 15+ years of experience. Build "Interactive Donut Breakdown": a donut chart of revenue by channel whose slices grow on hover and sync with a legend, centre total and bars.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on cool grey with saturated slice colours and Manrope numerals.
+- Palette: #101A33, #7A86A8, #EEF1F6, #16A34A, #F3F5FB, #4A567A
+- Type: Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- SVG donut built from stroked circles with dash animation; centre label, counting total and delta; legend rows with swatch, name, value and a proportional bar.
+
+INTERACTION & STATES
+- Hover or focus on a slice or legend row thickens that slice, dims the rest and swaps the centre to that channel's value and delta; slices draw in with staggered delays.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

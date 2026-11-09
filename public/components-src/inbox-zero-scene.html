@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Inbox Zero Scene</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,#CFE6F7,#F4F0E4 70%);color:#1D2A38;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{width:100%;max-width:520px;text-align:center}
+.sc{position:relative;width:100%;aspect-ratio:5/3.6;margin-bottom:6px}
+.sc svg{width:100%;height:100%;overflow:visible}
+.sun{animation:sun 8s ease-in-out infinite alternate;transform-origin:360px 70px}@keyframes sun{to{transform:translateY(8px) scale(1.04)}}
+.cl1{animation:dr 18s linear infinite}.cl2{animation:dr 26s linear infinite reverse}@keyframes dr{0%{transform:translateX(-30px)}50%{transform:translateX(30px)}100%{transform:translateX(-30px)}}
+.bd{animation:fl 5s ease-in-out infinite}.bd2{animation:fl 6.5s ease-in-out -2s infinite}@keyframes fl{50%{transform:translateY(-8px)}}
+.env{animation:ev 4s ease-in-out infinite;transform-origin:center}@keyframes ev{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+.sp{animation:tw 2.4s ease-in-out infinite}.sp:nth-of-type(2n){animation-delay:-1s}@keyframes tw{50%{opacity:.2;transform:scale(.6)}}
+h1{font:600 clamp(30px,6vw,42px)/1.05 'Fraunces',serif;letter-spacing:-.03em}h1 em{font-style:italic;font-weight:500;color:#2F7D5B}
+.c p{font-size:16px;line-height:1.55;color:#4F6072;max-width:36ch;margin:12px auto 22px}
+.st{display:flex;justify-content:center;gap:12px;margin-bottom:22px}.st div{background:rgba(255,255,255,.8);border:1px solid #E1E6E8;border-radius:16px;padding:12px 18px;min-width:104px}.st b{display:block;font:600 24px 'Fraunces',serif;letter-spacing:-.03em}.st span{font-size:12.5px;color:#6A7B8B;font-weight:500}
+.bt{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.bt button{border-radius:14px;padding:12px 20px;font:600 14.5px 'Inter';cursor:pointer;transition:transform .15s}.bt button:hover{transform:translateY(-2px)}.bt .p{background:#1D2A38;color:#fff;border:0}.bt .s{background:rgba(255,255,255,.85);border:1px solid #D5DCE0;color:#1D2A38}.bt button:focus-visible{outline:3px solid #2F7D5B;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="sc" aria-hidden="true"><svg viewBox="0 0 500 360"><defs><linearGradient id="h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FD0A8"/><stop offset="1" stop-color="#5FAE86"/></linearGradient><linearGradient id="h2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9E2C4"/><stop offset="1" stop-color="#86C9A0"/></linearGradient></defs>
+<g class="sun"><circle cx="360" cy="70" r="46" fill="#FFE29A"/><circle cx="360" cy="70" r="64" fill="#FFE29A" opacity=".35"/></g>
+<g class="cl1"><ellipse cx="110" cy="80" rx="48" ry="16" fill="#fff" opacity=".9"/><ellipse cx="140" cy="68" rx="32" ry="14" fill="#fff" opacity=".9"/></g><g class="cl2"><ellipse cx="270" cy="130" rx="40" ry="12" fill="#fff" opacity=".8"/><ellipse cx="295" cy="120" rx="26" ry="11" fill="#fff" opacity=".8"/></g>
+<path d="M0 250 Q90 190 190 240 T380 220 T500 240 V360 H0Z" fill="url(#h2)"/><path d="M0 290 Q120 240 240 285 T500 270 V360 H0Z" fill="url(#h)"/>
+<g class="bd"><path d="M60 150q12-12 24 0q12-12 24 0" fill="none" stroke="#2A3A4A" stroke-width="3" stroke-linecap="round"/></g><g class="bd2"><path d="M410 160q9-9 18 0q9-9 18 0" fill="none" stroke="#2A3A4A" stroke-width="3" stroke-linecap="round"/></g>
+<g class="env"><rect x="205" y="160" width="100" height="70" rx="10" fill="#fff" stroke="#1D2A38" stroke-width="3"/><path d="M205 172 255 205 305 172" fill="none" stroke="#1D2A38" stroke-width="3" stroke-linejoin="round"/><circle cx="300" cy="162" r="18" fill="#34D399" stroke="#fff" stroke-width="4"/><path d="m292 162 6 6 11-12" fill="none" stroke="#fff" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g fill="#F59E0B"><path class="sp" d="M150 200l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" style="transform-origin:150px 211px"/><path class="sp" d="M360 190l2.500 6 6 2.500-6 2.500-2.500 6-2.500-6-6-2.500 6-2.500z" style="transform-origin:360px 200px"/><path class="sp" d="M120 130l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" style="transform-origin:120px 137px"/></g></svg></div>
+<h1>You're all <em>caught up.</em></h1><p>Nothing needs your attention. Enjoy the quiet, or get ahead on tomorrow.</p>
+<div class="st"><div><b id="a">0</b><span>Cleared today</span></div><div><b id="b">0</b><span>Day streak</span></div><div><b id="c2">0m</b><span>Time saved</span></div></div>
+<div class="bt"><button class="p" id="p">Plan tomorrow</button><button class="s">View archive</button></div></div>
+<script>
+function cnt(id,to,s){const e=document.getElementById(id),t0=performance.now();const f=n=>{const p=Math.min(1,(n-t0)/1100);e.textContent=Math.round(to*(1-Math.pow(1-p,3)))+(s||'');if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+cnt('a',42);cnt('b',9);cnt('c2',37,'m');document.getElementById('p').onclick=e=>{e.target.textContent='Added 3 tasks';setTimeout(()=>e.target.textContent='Plan tomorrow',1400)};
+</script></body></html>

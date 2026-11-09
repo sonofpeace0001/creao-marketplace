@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Nested Pages Palette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--bg:#F4F1EA;--ac:#C2410C;--ink:#1D1913;background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;transition:background .5s;-webkit-font-smoothing:antialiased}
+.pl{width:100%;max-width:520px;background:#fff;border-radius:22px;box-shadow:0 40px 80px -36px rgba(40,20,0,.5),0 0 0 1px rgba(29,25,19,.08);overflow:hidden}
+.hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid #EFE9DD}
+.cr{display:flex;align-items:center;gap:6px}.ch{display:inline-flex;align-items:center;gap:6px;background:#F3EEE2;border:0;border-radius:8px;padding:5px 10px;font:700 12.5px 'Hanken Grotesk';color:#6B6048;cursor:pointer}.ch:hover{background:#EAE2D0}.ch:focus-visible{outline:2px solid var(--ac)}.ch.cu{background:var(--ac);color:#fff;cursor:default}
+.hd input{flex:1;min-width:120px;border:0;outline:0;background:none;font:500 16px 'Hanken Grotesk';color:var(--ink);padding:6px 4px}.hd input::placeholder{color:#B1A78F}
+.vp{position:relative;height:290px;overflow:hidden}
+.pg{position:absolute;inset:0;padding:8px;overflow-y:auto;transition:transform .4s cubic-bezier(.3,1,.4,1),opacity .3s}.pg.rt{transform:translateX(100%);opacity:0;pointer-events:none}.pg.lf{transform:translateX(-30%);opacity:0;pointer-events:none}
+.it{display:flex;align-items:center;gap:12px;width:100%;height:50px;border:0;background:none;border-radius:13px;padding:0 12px;font:600 15px 'Hanken Grotesk';color:var(--ink);cursor:pointer;text-align:left}.it:hover,.it:focus-visible{background:#F6F2E8;outline:0}.it:focus-visible{box-shadow:inset 0 0 0 2px var(--ac)}
+.it i{width:30px;height:30px;border-radius:9px;background:var(--b);display:grid;place-items:center;color:#fff;flex:none}.it .sw{width:22px;height:22px;border-radius:50%;background:var(--sw);box-shadow:0 0 0 2px #fff,0 0 0 3.500px var(--sw);margin:0 4px 0 4px}
+.it em{margin-left:auto;font-style:normal;color:#B1A78F;display:flex;align-items:center;gap:6px;font:500 12px 'Geist Mono',monospace}.it.sel em{color:var(--ac)}
+.ft{display:flex;gap:16px;padding:10px 16px;border-top:1px solid #EFE9DD;font-size:12px;color:#A2977D}.ft kbd{font:500 11px 'Geist Mono',monospace;background:#F3EEE2;border-radius:5px;padding:1px 6px;color:#6B6048}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="pl" role="dialog" aria-label="Command palette"><div class="hd"><div class="cr" id="cr"></div><input id="q" placeholder="Search..." aria-label="Search" autocomplete="off"></div><div class="vp" id="vp"></div><div class="ft"><span><kbd>Enter</kbd> open</span><span><kbd>Backspace</kbd> go back</span><span style="margin-left:auto">Theme changes live</span></div></div>
+<script>
+const P={root:{t:'Commands',items:[['Change theme','#7C3AED','M12 3v18M3 12h18',  'themes'],['Switch workspace','#0EA5E9','M3 7h18M3 12h18M3 17h18','ws'],['Open settings','#F97316','M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',null],['Share this page','#10B981','M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13',null]]},themes:{t:'Themes',items:[['Paper','#C2410C','#F4F1EA','#C2410C'],['Midnight','#818CF8','#12142A','#818CF8'],['Forest','#16A34A','#E8F1EA','#16A34A'],['Rose','#E11D48','#FCEBEE','#E11D48']]},ws:{t:'Workspaces',items:[['Northwind','#6366F1',null],['Fjord Studio','#10B981',null],['Helios Labs','#F59E0B',null]]}};
+let stack=['root','themes'],selTheme='Paper';const vp=document.getElementById('vp'),cr=document.getElementById('cr'),q=document.getElementById('q');
+Object.keys(P).forEach(k=>{const d=document.createElement('div');d.className='pg rt';d.id='pg_'+k;vp.appendChild(d)});
+function paintPage(k){const d=document.getElementById('pg_'+k);d.innerHTML=P[k].items.map((it,i)=>{if(k==='root')return '<button class="it" data-k="'+k+'" data-i="'+i+'"><i style="--b:'+it[1]+'"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="'+it[2]+'"/></svg></i>'+it[0]+(it[3]?'<em>&gt;</em>':'')+'</button>';if(k==='themes')return '<button class="it'+(it[0]===selTheme?' sel':'')+'" data-k="'+k+'" data-i="'+i+'"><span class="sw" style="--sw:'+it[1]+'"></span>'+it[0]+'<em>'+(it[0]===selTheme?'Active':'')+'</em></button>';return '<button class="it" data-k="'+k+'" data-i="'+i+'"><i style="--b:'+it[1]+'">'+it[0][0]+'</i>'+it[0]+'</button>'}).join('');
+ d.querySelectorAll('.it').forEach(b=>{b.onclick=()=>pick(b.dataset.k,+b.dataset.i);b.onmouseenter=()=>{if(k==='themes')prev(P.themes.items[+b.dataset.i])};b.onmouseleave=()=>{if(k==='themes')prev(P.themes.items.find(x=>x[0]===selTheme))}})}
+function prev(t){document.body.style.setProperty('--bg',t[2]);document.body.style.setProperty('--ac',t[3]);document.body.style.setProperty('--ink',t[2]==='#12142A'?'#1D1913':'#1D1913')}
+function pick(k,i){const it=P[k].items[i];if(k==='root'&&it[3]){stack.push(it[3]);show(true)}else if(k==='themes'){selTheme=it[0];prev(it);paintPage('themes')}}
+function show(fwd){Object.keys(P).forEach(k=>{paintPage(k);const d=document.getElementById('pg_'+k),idx=stack.indexOf(k);d.className='pg '+(k===stack[stack.length-1]?'':idx>=0?'lf':'rt')});cr.innerHTML=stack.map((k,i)=>'<button class="ch'+(i===stack.length-1?' cu':'')+'" data-i="'+i+'">'+P[k].t+'</button>'+(i<stack.length-1?'<span style="color:#B1A78F">/</span>':'')).join('');cr.querySelectorAll('.ch:not(.cu)').forEach(b=>b.onclick=()=>{stack=stack.slice(0,+b.dataset.i+1);show()})}
+q.addEventListener('keydown',e=>{if(e.key==='Backspace'&&!q.value&&stack.length>1){stack.pop();show()}});show();
+</script></body></html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Region Picker Globe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF1F7;color:#10142B;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px;background:#fff;border-radius:30px;padding:24px;display:grid;grid-template-columns:300px 1fr;gap:24px;box-shadow:0 40px 70px -44px rgba(16,20,43,.5),0 0 0 1px rgba(16,20,43,.06)}
+.ls h1{font-size:23px;font-weight:700;letter-spacing:-.045em}.ls p{font-size:14px;color:#6A6F94;margin:4px 0 16px}
+.rg{display:flex;flex-direction:column;gap:6px}.rg button{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;text-align:left;border:1.5px solid transparent;background:#F6F7FC;border-radius:16px;padding:10px 12px;cursor:pointer;font:inherit;color:inherit;transition:all .25s}.rg button:hover{background:#EEF0FA}.rg button[aria-pressed=true]{background:#fff;border-color:#4F46E5;box-shadow:0 14px 24px -14px rgba(79,70,229,.6)}.rg button:focus-visible{outline:2px solid #4F46E5;outline-offset:2px}
+.rg i{width:34px;height:34px;border-radius:11px;background:var(--g);display:grid;place-items:center;color:#fff;font:700 11px 'Geist Mono',monospace;font-style:normal}.rg b{display:block;font-size:14.5px;font-weight:600}.rg span{font-size:12.5px;color:#7C81A4}.rg em{font:500 12.5px 'Geist Mono',monospace;font-style:normal;color:#15803D;background:#DCFCE7;border-radius:99px;padding:2px 9px}
+.gv{position:relative;border-radius:24px;background:radial-gradient(circle at 50% 45%,#16276B,#070B22 72%);overflow:hidden;min-height:440px;touch-action:none;cursor:grab}.gv:active{cursor:grabbing}.gv canvas{position:absolute;inset:0;width:100%;height:100%}
+.cd{position:absolute;left:18px;bottom:18px;right:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;background:rgba(10,14,40,.7);backdrop-filter:blur(14px);border:1px solid rgba(140,170,255,.22);border-radius:18px;padding:14px 18px;color:#EAF0FF}
+.cd b{display:block;font-size:18px;font-weight:700;letter-spacing:-.03em}.cd span{font:500 12px 'Geist Mono',monospace;color:#8FA0D4}.cd .m{text-align:right}.cd .m b{font:600 26px 'Inter Tight';color:#6EE7B7}
+@media(max-width:760px){.c{grid-template-columns:1fr}.gv{min-height:380px}}
+</style></head><body>
+<div class="c"><div class="ls"><h1>Choose a region</h1><p>Pick where your data lives. The globe flies there.</p><div class="rg" id="rg"></div></div>
+<div class="gv" id="gv"><canvas id="cv"></canvas><div class="cd"><div><span id="rc">US-WEST</span><b id="rn"></b></div><div class="m"><span>latency</span><b id="rl"></b></div></div></div></div>
+<script>
+const POLY=[[[-168,66],[-140,70],[-95,72],[-80,63],[-62,58],[-55,48],[-67,44],[-76,35],[-81,25],[-97,26],[-105,22],[-117,32],[-125,42],[-130,55],[-150,60]],[[-80,10],[-60,10],[-50,0],[-35,-6],[-40,-22],[-55,-35],[-65,-55],[-72,-50],[-72,-20],[-80,-5]],[[-10,36],[-9,44],[-2,48],[5,52],[10,56],[20,60],[30,70],[40,66],[40,50],[28,41],[20,38],[10,40],[0,38]],[[-17,15],[-10,30],[10,36],[32,31],[43,12],[51,11],[40,-12],[35,-25],[20,-35],[12,-18],[9,0],[-8,5]],[[40,66],[70,73],[110,77],[150,68],[170,64],[140,50],[125,38],[122,28],[108,20],[100,8],[80,8],[72,20],[58,24],[48,30],[36,36],[28,41],[40,50]],[[114,-22],[130,-12],[142,-11],[153,-26],[148,-38],[135,-35],[115,-34]]];
+function inside(lon,lat){for(const p of POLY){let c=false;for(let i=0,j=p.length-1;i<p.length;j=i++){const [xi,yi]=p[i],[xj,yj]=p[j];if((yi>lat)!==(yj>lat)&&lon<(xj-xi)*(lat-yi)/(yj-yi)+xi)c=!c}if(c)return true}return false}
+const D=[],N=5600;for(let i=0;i<N;i++){const y=1-(i/(N-1))*2,th=Math.PI*(1+Math.sqrt(5))*i,lat=Math.asin(y)*180/Math.PI,lon=((th*180/Math.PI+540)%360)-180;if(inside(lon,lat))D.push([lon*Math.PI/180,lat*Math.PI/180])}
+const RG=[['US-WEST','Oregon, USA',-122,45.6,'#6366F1','OR',14],['US-EAST','Virginia, USA',-77.5,38.9,'#0EA5E9','VA',22],['EU-WEST','Dublin, Ireland',-6.2,53.3,'#10B981','IE',31],['AF-SOUTH','Lagos, Nigeria',3.4,6.5,'#F59E0B','NG',38],['AP-SOUTH','Mumbai, India',72.8,19,'#EC4899','IN',44],['AP-EAST','Tokyo, Japan',139.7,35.7,'#8B5CF6','JP',29]];
+let cur=0;const rg=document.getElementById('rg');
+RG.forEach((r,i)=>{const b=document.createElement('button');b.setAttribute('aria-pressed',i===cur);b.innerHTML='<i style="--g:'+r[4]+'">'+r[5]+'</i><div><b>'+r[0]+'</b><span>'+r[1]+'</span></div><em>'+r[6]+' ms</em>';b.onclick=()=>pick(i);rg.appendChild(b)});
+const cv=document.getElementById('cv'),x=cv.getContext('2d'),gv=document.getElementById('gv');let W=600,H=440,dpr=Math.min(2,devicePixelRatio||1);function size(){const r=gv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}size();addEventListener('resize',size);
+let yaw=0,pitch=.3,ty=0,tp=.3,drag=false,lx=0,ly=0,t=0,auto=false;
+function target(i){const r=RG[i];ty=-(r[2]*Math.PI/180);tp=r[3]*Math.PI/180*.7}
+function pick(i){cur=i;rg.querySelectorAll('button').forEach((b,k)=>b.setAttribute('aria-pressed',k===i));document.getElementById('rc').textContent=RG[i][0];document.getElementById('rn').textContent=RG[i][1];document.getElementById('rl').textContent=RG[i][6]+' ms';target(i);auto=true}
+function proj(lon,lat,R){const cl=Math.cos(lat);let X=cl*Math.sin(lon),Y=Math.sin(lat),Z=cl*Math.cos(lon);const cy=Math.cos(yaw),sy=Math.sin(yaw);let X1=X*cy+Z*sy,Z1=-X*sy+Z*cy;const cp=Math.cos(pitch),sp=Math.sin(pitch);return[X1*R,Y*cp*R-Z1*sp*R,Y*sp+Z1*cp]}
+function frame(){t+=.016;if(auto&&!drag){let dy=ty-yaw;dy=Math.atan2(Math.sin(dy),Math.cos(dy));yaw+=dy*.07;pitch+=(tp-pitch)*.07}
+ x.clearRect(0,0,W,H);const R=Math.min(W,H)*.34,cx=W/2,cy=H*.46;const g=x.createRadialGradient(cx-R*.3,cy-R*.35,R*.1,cx,cy,R*1.05);g.addColorStop(0,'#223A92');g.addColorStop(1,'#0B1440');x.fillStyle=g;x.beginPath();x.arc(cx,cy,R,0,6.283);x.fill();
+ x.strokeStyle='rgba(120,160,255,.12)';x.lineWidth=1;for(let la=-60;la<=60;la+=30){x.beginPath();let on=false;for(let lo=-180;lo<=180;lo+=6){const p=proj(lo*Math.PI/180,la*Math.PI/180,R);if(p[2]>0){on?x.lineTo(cx+p[0],cy-p[1]):x.moveTo(cx+p[0],cy-p[1]);on=true}else on=false}x.stroke()}
+ for(let lo=-180;lo<180;lo+=30){x.beginPath();let on=false;for(let la=-90;la<=90;la+=6){const p=proj(lo*Math.PI/180,la*Math.PI/180,R);if(p[2]>0){on?x.lineTo(cx+p[0],cy-p[1]):x.moveTo(cx+p[0],cy-p[1]);on=true}else on=false}x.stroke()}
+ for(const d of D){const p=proj(d[0],d[1],R);if(p[2]>0){x.fillStyle='rgba('+(120+p[2]*70|0)+','+(175+p[2]*55|0)+',255,'+(.25+p[2]*.65)+')';x.fillRect(cx+p[0]-1,cy-p[1]-1,2.2,2.2)}}
+ RG.forEach((r,i)=>{const p=proj(r[2]*Math.PI/180,r[3]*Math.PI/180,R);if(p[2]>0.02){const on=i===cur,pu=(t*1.4+i)%2;x.fillStyle=on?r[4]:'rgba(200,215,255,.7)';x.beginPath();x.arc(cx+p[0],cy-p[1],on?5.5:3,0,6.283);x.fill();if(on){x.strokeStyle=r[4];x.globalAlpha=Math.max(0,1-pu/2);x.lineWidth=2;x.beginPath();x.arc(cx+p[0],cy-p[1],6+pu*14,0,6.283);x.stroke();x.globalAlpha=1;x.strokeStyle='rgba(255,255,255,.9)';x.lineWidth=1.5;x.beginPath();x.arc(cx+p[0],cy-p[1],9,0,6.283);x.stroke()}}});
+ x.strokeStyle='rgba(120,170,255,.4)';x.lineWidth=1.5;x.beginPath();x.arc(cx,cy,R,0,6.283);x.stroke();
+ if(!matchMedia('(prefers-reduced-motion:reduce)').matches)requestAnimationFrame(frame)}
+gv.addEventListener('pointerdown',e=>{drag=true;auto=false;lx=e.clientX;ly=e.clientY;gv.setPointerCapture(e.pointerId)});gv.addEventListener('pointermove',e=>{if(!drag)return;yaw+=(e.clientX-lx)*.008;pitch=Math.max(-1,Math.min(1,pitch+(e.clientY-ly)*.006));lx=e.clientX;ly=e.clientY});gv.addEventListener('pointerup',()=>drag=false);gv.addEventListener('pointercancel',()=>drag=false);
+pick(2);yaw=ty;pitch=tp;frame();
+</script></body></html>

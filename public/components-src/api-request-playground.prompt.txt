@@ -1,0 +1,29 @@
+ROLE
+You are a senior API documentation designer with 15+ years of experience. Build "API Request Playground": a split request and response panel with a send button, progress bar and JSON that streams in with syntax colours and a status chip.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean white tool with indigo send button, mono headers and coloured JSON.
+- Palette: #4F46E5, #EDEFF7, #12162B, #15803D, #3A4066, #EAF7EE
+- Type: Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Method badge, URL bar and send button; request tabs with header list; response tabs with status, time and size; streamed JSON body.
+
+INTERACTION & STATES
+- Send shows a loading state and progress bar, then reveals the response chip and types the JSON with a caret and highlighting.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

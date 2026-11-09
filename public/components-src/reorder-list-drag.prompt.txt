@@ -1,0 +1,29 @@
+ROLE
+You are a senior productivity-app designer and front-end engineer with 15+ years of experience. Build "Drag Reorder List": a priorities list with drag handles, spring re-ordering, live rank numbers and an Alt plus arrow keyboard alternative.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark card with coloured rank tiles, a lifted active row and mono meta.
+- Palette: #7C84A8, #6C7CFF, #10121A, #ECEFFA, #171A26, #252A3D
+- Type: Outfit, Fragment Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with save status; absolutely positioned rows with handle, rank tile, title, meta and points; footer hint and Reset.
+
+INTERACTION & STATES
+- Dragging lifts a row and live-swaps neighbours with springy transforms; ranks renumber; Alt+Up and Alt+Down reorder from the keyboard; status shows Saving then Saved.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior travel-editorial designer and front-end engineer with 15+ years of experience. Build "Expandable Card Carousel": a draggable row of destination cards where tapping one expands it with story text and a CTA.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm grey page with tall gradient cards, Instrument Serif headline and rounded controls.
+- Palette: #16140F, #EFEDE8, #C2410C, #7A7466, #E1DED4
+- Type: Inter Tight, Instrument Serif (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; draggable track of six cards each with kicker, plus button, title and expandable body with copy and a pill link; previous and next buttons.
+
+INTERACTION & STATES
+- Dragging pans the track with a click guard; clicking a card expands it (width and grid rows animate) and scrolls it into view; arrows move the track; only one card is open.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

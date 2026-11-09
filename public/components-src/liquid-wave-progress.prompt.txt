@@ -1,0 +1,29 @@
+ROLE
+You are a senior health-app designer and front-end engineer with 15+ years of experience. Build "Liquid Wave Progress": a circular water tank whose animated double wave rises to the progress value, with floating bubbles and add or reset controls.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Pale sky gradient with a blue liquid fill, white glass tank and Outfit numerals.
+- Palette: #0C1B3A, #2563EB, #38BDF8, #3B4F7A, #E0F2FE, #EDE9FE
+- Type: Outfit (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Round tank with fill, two moving SVG waves, bubbles and centred percentage and litres; side panel with breakdown rows and +250 ml and Reset buttons.
+
+INTERACTION & STATES
+- Adding water raises the liquid level with an eased transition; waves translate continuously; role=progressbar updates aria-valuenow; reduced motion freezes the waves.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

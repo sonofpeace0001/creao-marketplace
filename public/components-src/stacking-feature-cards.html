@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Stacking Feature Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9E5DC;color:#1E1A12;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.fr{position:relative;width:100%;max-width:700px;height:520px;background:#F7F4EC;border-radius:26px;overflow:hidden;box-shadow:0 40px 70px -44px rgba(70,50,10,.5),0 0 0 1px rgba(30,26,18,.08)}
+.hd{position:absolute;left:0;right:0;top:0;z-index:20;padding:16px 26px 12px;background:linear-gradient(#F7F4EC 70%,transparent);display:flex;justify-content:space-between;align-items:center}.hd b{font:700 20px 'Fraunces',serif;letter-spacing:-.02em}.hd span{font-size:12.5px;color:#8E8570;font-weight:500}
+.sc{position:absolute;inset:0;overflow-y:auto;padding:70px 26px 40px;scrollbar-width:thin}
+.cd{position:sticky;top:calc(64px + var(--i)*22px);height:300px;margin-bottom:30px;border-radius:24px;padding:26px 28px;display:grid;grid-template-columns:1fr 150px;gap:18px;align-items:center;transform-origin:50% 0;transition:filter .15s;will-change:transform;box-shadow:0 20px 30px -18px rgba(30,26,18,.45)}
+.cd .n{font:600 13px 'Inter';letter-spacing:.14em;text-transform:uppercase;opacity:.65}.cd h2{font:700 clamp(26px,4vw,34px)/1.04 'Fraunces',serif;letter-spacing:-.03em;margin:10px 0 10px}.cd p{font-size:15.5px;line-height:1.55;opacity:.78;max-width:34ch}
+.cd .vz{height:150px;border-radius:20px;background:rgba(255,255,255,.22);display:grid;place-items:center}.cd .vz svg{opacity:.95}
+.c1{background:#FFE08A}.c2{background:#B8E6D0}.c3{background:#C9C4F5}.c4{background:#FFB8A6}
+.sp{height:280px}
+@media(max-width:560px){.cd{grid-template-columns:1fr}.cd .vz{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="fr"><div class="hd"><b>Why teams switch</b><span id="ct">Scroll</span></div>
+<div class="sc" id="sc">
+<div class="cd c1" style="--i:0"><div><div class="n">01 / Speed</div><h2>Pages that load before you blink</h2><p>Edge rendering and smart caching keep every route under 100 milliseconds.</p></div><div class="vz"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#1E1A12" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div></div>
+<div class="cd c2" style="--i:1"><div><div class="n">02 / Clarity</div><h2>One workspace, zero tab chaos</h2><p>Docs, tasks and chat live together so context never gets lost between tools.</p></div><div class="vz"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#1E1A12" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></div></div>
+<div class="cd c3" style="--i:2"><div><div class="n">03 / Control</div><h2>Permissions that make sense</h2><p>Granular roles, audit logs and approvals keep sensitive work in the right hands.</p></div><div class="vz"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#1E1A12" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div></div>
+<div class="cd c4" style="--i:3"><div><div class="n">04 / Growth</div><h2>Scale without rebuilding</h2><p>From the first ten users to ten million, the same foundation carries you.</p></div><div class="vz"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#1E1A12" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></div></div>
+<div class="sp"></div></div></div>
+<script>
+const sc=document.getElementById('sc'),cds=[...sc.querySelectorAll('.cd')];
+function upd(){const st=sc.scrollTop;cds.forEach((c,i)=>{const nx=cds[i+1];if(!nx){c.style.transform='';return}const dist=nx.offsetTop-c.offsetTop-st-(parseFloat(getComputedStyle(c).top)||0)+0;const range=340;const k=Math.max(0,Math.min(1,1-(nx.getBoundingClientRect().top-c.getBoundingClientRect().top)/range));const s=1-k*.06,f=1-k*.12;c.style.transform='scale('+s+')';c.style.filter='brightness('+(1-k*.1)+')'});const a=Math.min(4,Math.floor(st/330)+1);document.getElementById('ct').textContent=a+' of 4'}
+sc.addEventListener('scroll',upd);function init(){sc.scrollTop=420;upd()}init();(document.fonts&&document.fonts.ready||Promise.resolve()).then(init);
+</script></body></html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Radial Fan Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(500px 360px at 50% 100%,#2B1A5E,transparent 70%),#0B0916;color:#EEEBFF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.st{position:relative;width:100%;max-width:520px;height:460px;border-radius:30px;background:#12102A;border:1px solid #241F4A;overflow:hidden;box-shadow:0 40px 70px -40px #000}
+.hd{position:absolute;left:24px;top:22px}.hd h1{font-size:19px;font-weight:700;letter-spacing:-.03em}.hd p{font-size:13px;color:#8D86C4;margin-top:3px}
+.rd{position:absolute;left:50%;bottom:48px;width:0;height:0}
+.it{position:absolute;left:-26px;top:-26px;width:52px;height:52px;border-radius:50%;border:0;background:var(--c);color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 12px 22px -8px var(--c);transform:translate(0,0) scale(.2);opacity:0;transition:transform .5s cubic-bezier(.3,1.5,.5,1),opacity .25s;transition-delay:calc(var(--i)*35ms);pointer-events:none}
+.rd.op .it{transform:translate(var(--x),var(--y)) scale(1);opacity:1;pointer-events:auto}
+.it:hover,.it:focus-visible{z-index:3;scale:1.18}.it:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.it::after{content:attr(data-l);position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);font-size:12px;font-weight:600;white-space:nowrap;background:#1E1A40;border:1px solid #2F2960;padding:4px 10px;border-radius:99px;opacity:0;transition:opacity .15s;pointer-events:none}.it:hover::after,.it:focus-visible::after{opacity:1}
+.fb{position:absolute;left:-32px;top:-32px;width:64px;height:64px;border-radius:50%;border:0;background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 16px 28px -10px rgba(139,92,246,.9);z-index:4;transition:transform .4s cubic-bezier(.3,1.5,.5,1)}.rd.op .fb{transform:rotate(135deg)}.fb:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.arc{position:absolute;left:-190px;top:-190px;width:380px;height:380px;border-radius:50%;border:1.5px dashed #2F2960;opacity:0;transition:opacity .4s;pointer-events:none}.rd.op .arc{opacity:.8}
+.rs{position:absolute;right:24px;top:24px;text-align:right;font-size:13px;color:#8D86C4;min-width:140px}.rs b{display:block;font-size:15px;color:#fff;font-weight:600;min-height:20px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="st"><div class="hd"><h1>Quick create</h1><p>Open the radial menu</p></div><div class="rs"><span>Last action</span><b id="la">None yet</b></div>
+<div class="rd op" id="rd"><div class="arc"></div><div id="its"></div><button class="fb" id="fb" aria-expanded="true" aria-label="Toggle quick create menu"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div></div>
+<script>
+const A=[['Document','#F59E0B','M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5'],['Image','#10B981','M4 5h16v14H4zM8.500 11a1.500 1.500 0 1 0 0-3 1.500 1.500 0 0 0 0 3zM20 16l-5-5-8 8'],['Task','#3B82F6','M9 11l3 3 8-8M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9'],['Event','#EC4899','M4 6h16v14H4zM8 3v4M16 3v4M4 11h16'],['Chat','#8B5CF6','M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z']];
+const rd=document.getElementById('rd'),its=document.getElementById('its'),fb=document.getElementById('fb'),R=150;
+its.innerHTML=A.map((a,i)=>{const ang=Math.PI*(1-i/(A.length-1))*0.9+Math.PI*0.05,x=Math.cos(ang)*R,y=-Math.sin(ang)*R;return '<button class="it" style="--c:'+a[1]+';--x:'+x.toFixed(1)+'px;--y:'+y.toFixed(1)+'px;--i:'+i+'" data-l="'+a[0]+'" aria-label="New '+a[0]+'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="'+a[2]+'"/></svg></button>'}).join('');
+function tg(o){rd.classList.toggle('op',o);fb.setAttribute('aria-expanded',o)}
+fb.onclick=()=>tg(!rd.classList.contains('op'));its.querySelectorAll('.it').forEach(b=>b.onclick=()=>{document.getElementById('la').textContent='New '+b.dataset.l;tg(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){tg(false);fb.focus()}});
+</script></body></html>

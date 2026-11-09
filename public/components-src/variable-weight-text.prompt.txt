@@ -1,0 +1,29 @@
+ROLE
+You are a senior type designer and front-end engineer with 15+ years of experience. Build "Variable Weight Text": headline letters that swell in weight and width as the cursor approaches, using real variable font axes.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper page with ink black letters warming to orange as they thicken.
+- Palette: #15130E, #F3EFE6, #8B8470, #7D775F, #E85D04
+- Type: Roboto Flex, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Eyebrow; two lines of display text split into letters; thin to black legend.
+
+INTERACTION & STATES
+- Each letter measures its distance to the pointer and eases weight, width and colour through a smoothstep falloff; an idle sweep runs without input.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

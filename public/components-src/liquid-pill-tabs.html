@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Liquid Pill Tabs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 400px at 50% 0%,#2A1F5E,transparent 70%),#0B0A18;color:#F2EFFF;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:620px;text-align:center}
+.c h1{font-size:clamp(26px,5vw,36px);font-weight:700;letter-spacing:-.04em;margin-bottom:6px}.c p.sb{color:#9C98C8;font-size:15px;margin-bottom:28px}
+.bar{position:relative;display:inline-flex;padding:6px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px)}
+.goo{position:absolute;inset:6px;filter:url(#goo);pointer-events:none}
+.bl{position:absolute;top:0;height:100%;border-radius:99px;background:linear-gradient(135deg,#8B5CF6,#EC4899);box-shadow:0 0 30px -4px #A855F7}
+.b1{transition:left .5s cubic-bezier(.4,1.4,.5,1),width .5s cubic-bezier(.4,1.4,.5,1)}.b2{transition:left .5s .09s cubic-bezier(.4,1.4,.5,1),width .5s .09s cubic-bezier(.4,1.4,.5,1)}
+.bar button{position:relative;z-index:2;border:0;background:none;padding:12px 24px;border-radius:99px;font:600 15.5px 'Outfit';color:#A6A2D2;cursor:pointer;transition:color .3s}.bar button[aria-selected=true]{color:#fff}.bar button:hover{color:#fff}.bar button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.pn{position:relative;margin:30px auto 0;max-width:520px;min-height:130px}
+.pg{position:absolute;inset:0;opacity:0;transform:translateY(14px) scale(.98);filter:blur(6px);transition:all .45s cubic-bezier(.3,1,.4,1);pointer-events:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:22px 26px;text-align:left}.pg.on{opacity:1;transform:none;filter:none;pointer-events:auto}
+.pg b{display:block;font-size:20px;letter-spacing:-.03em;margin-bottom:6px}.pg span{font-size:15px;line-height:1.55;color:#B4B0DC}
+.mt{display:flex;gap:8px;margin-top:14px}.mt i{font-style:normal;font-size:12.5px;font-weight:600;padding:5px 12px;border-radius:99px;background:rgba(255,255,255,.08);color:#D8D4FF}
+@media(max-width:520px){.bar button{padding:10px 14px;font-size:14px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter></defs></svg>
+<div class="c"><h1>Pick a lane</h1><p class="sb">The highlight stretches like liquid between choices.</p>
+<div class="bar" id="bar" role="tablist"><div class="goo"><span class="bl b1" id="b1"></span><span class="bl b2" id="b2"></span></div></div>
+<div class="pn" id="pn"></div></div>
+<script>
+const T=[['Design','Craft interfaces that feel inevitable. Tokens, components and motion in one flow.',['Figma sync','Tokens','Motion']],['Build','Ship production code with typed components and zero config deploys.',['TypeScript','Edge','CI']],['Launch','Go live with analytics, A/B tests and a rollback button you never need.',['Analytics','Tests','Rollback']],['Grow','Turn visitors into customers with lifecycle emails and referral loops.',['Email','Referrals','Cohorts']]];
+const bar=document.getElementById('bar'),pn=document.getElementById('pn'),b1=document.getElementById('b1'),b2=document.getElementById('b2');let cur=-1;
+T.forEach((t,i)=>{const b=document.createElement('button');b.role='tab';b.textContent=t[0];b.onclick=()=>go(i);b.onkeydown=e=>{if(e.key==='ArrowRight')go((cur+1)%T.length,1);if(e.key==='ArrowLeft')go((cur+T.length-1)%T.length,1)};bar.appendChild(b);const p=document.createElement('div');p.className='pg';p.setAttribute('role','tabpanel');p.innerHTML='<b>'+t[0]+'</b><span>'+t[1]+'</span><div class="mt">'+t[2].map(x=>'<i>'+x+'</i>').join('')+'</div>';pn.appendChild(p)});
+function go(i,f){const bs=bar.querySelectorAll('button');bs.forEach((b,k)=>b.setAttribute('aria-selected',k===i));pn.querySelectorAll('.pg').forEach((p,k)=>p.classList.toggle('on',k===i));const b=bs[i],l=b.offsetLeft-6,w=b.offsetWidth;b1.style.left=l+'px';b1.style.width=w+'px';b2.style.left=l+'px';b2.style.width=w+'px';cur=i;if(f)b.focus()}
+function init(){[b1,b2].forEach(x=>x.style.transition='none');go(1);requestAnimationFrame(()=>requestAnimationFrame(()=>[b1,b2].forEach(x=>x.style.transition='')))}init();(document.fonts&&document.fonts.ready||Promise.resolve()).then(init);
+</script></body></html>

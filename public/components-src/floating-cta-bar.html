@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Floating CTA Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF2F8;color:#12203A;font-family:'Sora',sans-serif;min-height:100vh;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.pg{position:relative;max-width:700px;min-height:460px;margin:0 auto;background:#fff;border-radius:24px;padding:34px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(18,32,58,.5),0 0 0 1px rgba(18,32,58,.06)}
+.sk div{height:12px;border-radius:8px;background:#EDF1F8;margin-bottom:12px}.sk .h{width:60%;height:26px;background:#E1E8F4;margin-bottom:18px}.sk .a{width:94%}.sk .b{width:80%}.sk .c{width:88%}
+.cd{display:flex;gap:12px;margin-top:20px}.cd div{flex:1;height:90px;border-radius:14px;background:#F3F6FB}
+.bar{position:absolute;left:18px;right:18px;bottom:18px;display:flex;align-items:center;gap:16px;background:#12203A;color:#fff;border-radius:20px;padding:12px 12px 12px 20px;box-shadow:0 24px 44px -14px rgba(18,32,58,.7);animation:up .6s cubic-bezier(.2,1.1,.4,1) .2s both}
+@keyframes up{from{transform:translateY(130%);opacity:0}}.bar.out{animation:dn .35s forwards}@keyframes dn{to{transform:translateY(130%);opacity:0}}
+.tx{flex:1;min-width:0}.tx b{display:block;font-size:15px;font-weight:600}.tx span{font-size:13px;color:#9FB0CF}
+form{display:flex;background:rgba(255,255,255,.1);border-radius:14px;padding:4px;transition:background .2s}form:focus-within{background:rgba(255,255,255,.18)}
+input{width:190px;border:0;outline:0;background:none;color:#fff;font:500 14px 'Sora';padding:0 12px}input::placeholder{color:#8296BA}
+.go{border:0;border-radius:11px;background:#5EEAD4;color:#0B2A26;font:700 14px 'Sora';padding:11px 18px;cursor:pointer;white-space:nowrap;transition:transform .15s}.go:hover{transform:scale(1.04)}.go:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.x{flex:none;width:34px;height:34px;border:0;border-radius:10px;background:none;color:#8296BA;cursor:pointer;display:grid;place-items:center}.x:hover{background:rgba(255,255,255,.1);color:#fff}.x:focus-visible{outline:2px solid #5EEAD4}
+.ok{display:none;align-items:center;gap:10px;font-weight:600;font-size:15px;flex:1}.ok i{width:28px;height:28px;border-radius:50%;background:#5EEAD4;color:#0B2A26;display:grid;place-items:center}
+.bar.done .tx,.bar.done form{display:none}.bar.done .ok{display:flex}
+.rs{display:none;position:absolute;right:18px;bottom:18px;border:1.5px solid #D5DDEC;background:#fff;border-radius:99px;padding:9px 15px;font:600 13px 'Sora';cursor:pointer;color:#12203A}.rs.on{display:block}.rs:focus-visible{outline:2px solid #12203A;outline-offset:2px}
+@media(max-width:620px){.bar{flex-wrap:wrap}.tx{flex-basis:70%}form{width:100%;order:3}input{flex:1;width:auto}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="pg"><div class="sk"><div class="h"></div><div class="a"></div><div class="b"></div><div class="c"></div><div class="a"></div></div><div class="cd"><div></div><div></div><div></div></div>
+<div class="bar" id="bar" role="region" aria-label="Get the newsletter"><div class="tx"><b>Get the Friday brief</b><span>One practical idea a week. 12,000 readers.</span></div>
+<form id="f" novalidate><input id="e" type="email" placeholder="you@company.com" aria-label="Email address" autocomplete="off"><button class="go">Subscribe</button></form>
+<div class="ok" role="status"><i><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i>You are in. Check your inbox.</div>
+<button class="x" id="x" aria-label="Dismiss"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+<button class="rs" id="rs">Show bar</button></div>
+<script>
+const bar=document.getElementById('bar'),rs=document.getElementById('rs'),e=document.getElementById('e');
+document.getElementById('f').onsubmit=x=>{x.preventDefault();if(/^\S+@\S+\.\S+$/.test(e.value)){bar.classList.add('done');setTimeout(hide,2200)}else{e.focus();e.style.outline='2px solid #FB7185';setTimeout(()=>e.style.outline='',900)}};
+function hide(){bar.classList.add('out');setTimeout(()=>{bar.style.display='none';rs.classList.add('on')},330)}
+document.getElementById('x').onclick=hide;
+rs.onclick=()=>{rs.classList.remove('on');bar.classList.remove('out','done');bar.style.display='';bar.style.animation='none';void bar.offsetWidth;bar.style.animation='';e.value=''};
+</script></body></html>

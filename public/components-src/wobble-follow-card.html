@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Wobble Follow Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECE9F5;color:#16122B;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:860px;display:grid;grid-template-columns:2fr 1fr;gap:18px}
+.wc{--x:0px;--y:0px;--sx:0;--sy:0;position:relative;border-radius:30px;overflow:hidden;cursor:default;isolation:isolate;transform:translate(var(--x),var(--y)) scale(var(--s,1));transition:transform .2s ease-out,box-shadow .3s;box-shadow:calc(var(--sx)*-1px) calc(20px + var(--sy)*-1px) 50px -16px rgba(60,40,140,.55);min-height:340px;background:var(--bg)}
+.wc.rs{transition:transform .6s cubic-bezier(.3,1.5,.5,1),box-shadow .6s}
+.wc .art{position:absolute;inset:-6%;width:112%;height:112%;transform:translate(calc(var(--x)*-1.6),calc(var(--y)*-1.6)) scale(1.04);transition:transform .2s ease-out;z-index:-1}.wc.rs .art{transition:transform .6s cubic-bezier(.3,1.5,.5,1)}
+.wc .tx{position:absolute;left:30px;right:30px;bottom:28px;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.25)}.wc small{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.85}.wc h2{font-size:clamp(26px,3.6vw,38px);line-height:1.05;font-weight:800;letter-spacing:-.05em;margin:8px 0 8px}.wc p{font-size:15px;line-height:1.5;opacity:.9;max-width:34ch}
+.wc.sm{min-height:340px}.wc .bt{position:absolute;right:24px;top:24px;background:rgba(255,255,255,.22);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:99px;padding:8px 16px;font:600 13px 'Sora';z-index:2}
+.cl{display:grid;gap:18px;grid-template-rows:1fr 1fr}.cl .wc{min-height:0;height:100%}
+@media(max-width:720px){.c{grid-template-columns:1fr}.cl{grid-template-rows:none;grid-template-columns:1fr 1fr}.cl .wc{min-height:220px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="wc" id="w1" style="--bg:linear-gradient(150deg,#6D28D9,#EC4899)"><svg class="art" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice"><circle cx="440" cy="130" r="140" fill="#FDBA74" opacity=".85"/><circle cx="300" cy="260" r="200" fill="#F472B6" opacity=".5"/><path d="M0 330 Q150 250 300 320 T600 290 V400 H0Z" fill="#4C1D95" opacity=".85"/><path d="M0 380 Q150 320 300 370 T600 350 V400 H0Z" fill="#2E1065"/></svg><span class="bt">New</span><div class="tx"><small>Featured story</small><h2>The cards that follow your hand</h2><p>The surface leans toward your cursor while the artwork slides the other way for depth.</p></div></div>
+<div class="cl"><div class="wc" id="w2" style="--bg:linear-gradient(150deg,#0F766E,#22D3EE)"><svg class="art" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice"><circle cx="220" cy="60" r="60" fill="#A7F3D0" opacity=".7"/><path d="M0 150 Q80 90 160 140 T300 120 V200 H0Z" fill="#134E4A"/></svg><div class="tx" style="left:22px;right:22px;bottom:20px"><h2 style="font-size:22px">Calm interfaces</h2></div></div>
+<div class="wc" id="w3" style="--bg:linear-gradient(150deg,#B45309,#FBBF24)"><svg class="art" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice"><rect x="60" y="30" width="90" height="90" rx="45" fill="#FEF3C7" opacity=".8"/><rect x="130" y="70" width="110" height="80" rx="16" fill="#78350F" opacity=".75"/></svg><div class="tx" style="left:22px;right:22px;bottom:20px"><h2 style="font-size:22px">Warm by default</h2></div></div></div></div>
+<script>
+const ws=[...document.querySelectorAll('.wc')];let real=false,tt=0;
+function follow(w,px,py,rs){w.classList.toggle('rs',!!rs);const dx=(px-.5)*2,dy=(py-.5)*2;w.style.setProperty('--x',(dx*14)+'px');w.style.setProperty('--y',(dy*14)+'px');w.style.setProperty('--sx',dx*14);w.style.setProperty('--sy',dy*14);w.style.setProperty('--s',rs?1:1.015)}
+ws.forEach(w=>{w.addEventListener('pointermove',e=>{real=true;const r=w.getBoundingClientRect();follow(w,(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height,false)});w.addEventListener('pointerleave',()=>{follow(w,.5,.5,true)})});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;function f(){if(!real){tt+=.014;follow(ws[0],.5+Math.cos(tt)*.4,.5+Math.sin(tt*1.2)*.4,false)}if(!reduce)requestAnimationFrame(f)}
+tt=.6;follow(ws[0],.5+Math.cos(tt)*.4,.5+Math.sin(tt*1.2)*.4,false);f();
+</script></body></html>

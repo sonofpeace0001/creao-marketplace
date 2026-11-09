@@ -1,0 +1,29 @@
+ROLE
+You are a senior authentication designer and front-end engineer with 15+ years of experience. Build "OTP Code Input": a six-digit verification input with auto-advance, paste support, shake on error, success wave and a resend timer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Frosted white card on a lavender gradient with an indigo lock tile and mono digits.
+- Palette: #6366F1, #13183A, #10B981, #EF4444, #6B72A0, #E7EAFB
+- Type: Sora, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Icon tile; heading and email copy; six digit boxes with a separator; status message; Verify button; resend countdown; demo hint.
+
+INTERACTION & STATES
+- Typing moves focus forward, Backspace moves back, arrows navigate, paste fills all boxes; entering six digits validates; a wrong code shakes and clears; a correct code ripples green; the resend timer counts down.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

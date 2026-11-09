@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tag Input Chips</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EAF0F6;color:#10213A;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{position:relative;width:100%;max-width:560px;background:#fff;border-radius:26px;padding:28px;box-shadow:0 40px 70px -44px rgba(16,33,58,.5),0 0 0 1px rgba(16,33,58,.06)}
+.c h1{font-size:22px;font-weight:800;letter-spacing:-.04em}.c p.sb{font-size:14px;color:#6A7B95;margin:4px 0 18px}
+.bx{position:relative;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border:2px solid #DCE4EF;border-radius:18px;padding:10px;min-height:62px;transition:all .2s;cursor:text}.bx:focus-within{border-color:#2563EB;box-shadow:0 0 0 5px rgba(37,99,235,.12)}
+.tg{display:inline-flex;align-items:center;gap:6px;padding:6px 6px 6px 12px;border-radius:99px;font-size:14px;font-weight:700;background:var(--b);color:var(--f);animation:pop .35s cubic-bezier(.3,1.8,.5,1)}@keyframes pop{from{transform:scale(.4);opacity:0}}
+.tg.rm{animation:out .22s forwards}@keyframes out{to{transform:scale(.4);opacity:0}}
+.tg button{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;border:0;background:rgba(0,0,0,.1);color:inherit;cursor:pointer}.tg button:hover{background:rgba(0,0,0,.22)}.tg button:focus-visible{outline:2px solid currentColor}
+.bx input{flex:1;min-width:120px;border:0;outline:0;font:600 15px 'Plus Jakarta Sans';padding:6px 4px;color:#10213A;background:none}.bx input::placeholder{color:#A2B0C6}
+.sg{position:absolute;left:0;right:0;top:calc(100% + 8px);background:#fff;border:1px solid #DCE4EF;border-radius:16px;padding:6px;box-shadow:0 24px 40px -14px rgba(16,33,58,.3);display:none;z-index:4}.sg.op{display:block}
+.sg button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;padding:9px 10px;border-radius:11px;font:600 14px 'Plus Jakarta Sans';color:#10213A;cursor:pointer;text-align:left}.sg button:hover,.sg button.hi{background:#EEF4FF}.sg i{width:10px;height:10px;border-radius:50%;background:var(--b)}.sg em{margin-left:auto;font-style:normal;font-size:12px;color:#8A9AB4}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:16px}.ft span{font-size:13px;color:#8A9AB4}.rg{position:relative;width:34px;height:34px}.rg svg{transform:rotate(-90deg)}.rg circle{fill:none;stroke-width:4;stroke-linecap:round}.rg .tr{stroke:#E6ECF5}.rg .pg{stroke:#2563EB;transition:stroke-dasharray .3s,stroke .3s}.rg b{position:absolute;inset:0;display:grid;place-items:center;font-size:11.5px;font-weight:800}
+.qk{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.qk button{border:1.5px dashed #BFCCE0;background:none;border-radius:99px;padding:5px 12px;font:600 13px 'Plus Jakarta Sans';color:#5F7391;cursor:pointer}.qk button:hover{border-color:#2563EB;color:#2563EB}.qk button:focus-visible{outline:2px solid #2563EB}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><h1>Add topics</h1><p class="sb">Press Enter or comma to add. Backspace removes the last one.</p>
+<div class="bx" id="bx"><input id="in" placeholder="Add a tag" aria-label="Add a tag" autocomplete="off"><div class="sg" id="sg" role="listbox"></div></div>
+<div class="qk" id="qk"></div>
+<div class="ft"><span id="ct"></span><div class="rg"><svg width="34" height="34" viewBox="0 0 36 36"><circle class="tr" cx="18" cy="18" r="15"/><circle class="pg" id="pg" cx="18" cy="18" r="15" stroke-dasharray="0 100"/></svg><b id="rn"></b></div></div></div>
+<script>
+const P=[['#DBEAFE','#1E40AF'],['#DCFCE7','#166534'],['#FEF3C7','#92400E'],['#FCE7F3','#9D174D'],['#EDE9FE','#5B21B6'],['#CCFBF1','#115E59']],ALL=['Design','Engineering','Product','Marketing','Research','Analytics','Security','Mobile','Accessibility','Open source','Growth','Support'],MAX=6;
+let tags=['Design','Product','Analytics'];const $=id=>document.getElementById(id),bx=$('bx'),inp=$('in'),sg=$('sg');
+const col=t=>P[[...t].reduce((a,c)=>a+c.charCodeAt(0),0)%P.length];
+function draw(fresh){bx.querySelectorAll('.tg').forEach(e=>e.remove());tags.forEach(t=>{const c=col(t),e=document.createElement('span');e.className='tg';e.style.cssText='--b:'+c[0]+';--f:'+c[1];if(t!==fresh)e.style.animation='none';e.innerHTML=t+'<button aria-label="Remove '+t+'"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>';e.querySelector('button').onclick=ev=>{ev.stopPropagation();rem(t)};bx.insertBefore(e,inp)});
+ $('ct').textContent=tags.length+' of '+MAX+' topics';$('rn').textContent=MAX-tags.length;$('pg').setAttribute('stroke-dasharray',(tags.length/MAX*94.2)+' 100');$('pg').style.stroke=tags.length>=MAX?'#DC2626':'#2563EB';inp.disabled=tags.length>=MAX;inp.placeholder=tags.length>=MAX?'Limit reached':'Add a tag';
+ $('qk').innerHTML='';ALL.filter(a=>!tags.includes(a)).slice(0,5).forEach(a=>{const b=document.createElement('button');b.textContent='+ '+a;b.onclick=()=>add(a);$('qk').appendChild(b)})}
+function add(t){t=t.trim();if(!t||tags.length>=MAX||tags.some(x=>x.toLowerCase()===t.toLowerCase()))return;tags.push(t);inp.value='';sug();draw(t);inp.focus()}
+function rem(t){const el=[...bx.querySelectorAll('.tg')].find(e=>e.firstChild.textContent===t);if(el){el.classList.add('rm');setTimeout(()=>{tags=tags.filter(x=>x!==t);draw()},200)}}
+let hi=0;function sug(){const q=inp.value.trim().toLowerCase();const m=q?ALL.filter(a=>a.toLowerCase().includes(q)&&!tags.includes(a)):[];hi=0;if(!m.length){sg.classList.remove('op');return}sg.innerHTML=m.slice(0,5).map((a,i)=>'<button role="option" class="'+(i?'':'hi')+'" style="--b:'+col(a)[1]+'"><i></i>'+a+'<em>Suggested</em></button>').join('');sg.classList.add('op');sg.querySelectorAll('button').forEach(b=>b.onmousedown=e=>{e.preventDefault();add(b.textContent.replace('Suggested',''))})}
+inp.addEventListener('input',sug);inp.addEventListener('blur',()=>sg.classList.remove('op'));
+inp.addEventListener('keydown',e=>{const o=[...sg.querySelectorAll('button')];if(e.key==='Enter'||e.key===','){e.preventDefault();const s=sg.classList.contains('op')&&o[hi]?o[hi].textContent.replace('Suggested',''):inp.value;add(s)}else if(e.key==='Backspace'&&!inp.value&&tags.length)rem(tags[tags.length-1]);else if(e.key==='ArrowDown'&&o.length){e.preventDefault();hi=(hi+1)%o.length;o.forEach((b,i)=>b.classList.toggle('hi',i===hi))}});
+bx.onclick=()=>inp.focus();draw();
+</script></body></html>

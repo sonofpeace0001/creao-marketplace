@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Contact Giant Email</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FF4D2E;color:#14120E;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;-webkit-font-smoothing:antialiased}
+.tp{display:flex;justify-content:space-between;padding:34px 5vw 0;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+.mid{position:relative;padding:20px 0}
+.hl{padding:0 5vw;font-size:clamp(16px,2vw,22px);font-weight:500;max-width:30ch;line-height:1.4;margin-bottom:22px}
+.mq{position:relative;display:block;width:100%;border:0;background:none;cursor:copy;overflow:hidden;color:inherit;text-align:left;outline:0;padding:0;font:inherit}.mq:focus-visible{box-shadow:inset 0 0 0 4px #14120E}
+.tk{display:flex;width:max-content;padding-left:5vw;animation:mq 26s linear infinite;animation-play-state:paused}.mq:hover .tk,.mq.ok .tk,.mq:focus-visible .tk{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.tk span{display:flex;align-items:center;gap:.28em;font:400 clamp(90px,19vw,260px)/1 'Anton',sans-serif;text-transform:uppercase;white-space:nowrap;padding-right:.28em;transition:color .25s}
+.tk span::after{content:"";display:inline-block;width:.18em;height:.18em;border-radius:50%;background:currentColor;margin-left:.28em}
+.mq:hover .tk span{color:#fff}
+.tk .o{-webkit-text-stroke:2px #14120E;color:transparent}.mq:hover .tk .o{-webkit-text-stroke-color:#fff}
+.cp{position:absolute;left:5vw;bottom:-10px;background:#14120E;color:#fff;border-radius:99px;padding:12px 24px;font:700 15px 'Space Grotesk';display:flex;align-items:center;gap:10px;transform:translateY(60px);opacity:0;transition:all .35s cubic-bezier(.3,1.5,.5,1);pointer-events:none}.mq:hover .cp,.mq:focus-visible .cp{transform:none;opacity:1;bottom:20px}.mq.ok .cp{background:#16A34A;transform:none;opacity:1;bottom:20px}
+.bt{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;padding:0 5vw 34px}
+.so{display:flex;gap:10px;flex-wrap:wrap}.so a{border:2px solid #14120E;border-radius:99px;padding:10px 20px;font:600 14.5px 'Space Grotesk';color:#14120E;text-decoration:none;transition:all .2s}.so a:hover{background:#14120E;color:#FF4D2E}.so a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.ad{font-size:14.5px;line-height:1.55;font-weight:500;text-align:right}
+@media(prefers-reduced-motion:reduce){.tk{animation:none}}
+</style></head><body>
+<div class="tp"><span>Atlas Studio</span><span>Available for Q1</span></div>
+<div class="mid"><p class="hl">Got a project in mind? Click the email to copy it, then say hello.</p>
+<button class="mq" id="mq" aria-label="Copy email address hello@atlas.studio"><div class="tk" id="tk"></div><span class="cp" id="cp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span id="cl">Click to copy</span></span></button></div>
+<div class="bt"><div class="so"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Dribbble</a><a href="#">Read.cv</a></div><div class="ad">Rua das Flores 48<br>Lisbon, Portugal</div></div>
+<script>
+const tk=document.getElementById('tk');setTimeout(()=>{tk.style.animationPlayState=''},1600);let h='';for(let i=0;i<8;i++)h+='<span class="'+(i%2?'o':'')+'">hello@atlas.studio</span>';tk.innerHTML=h;
+const mq=document.getElementById('mq');mq.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText('hello@atlas.studio').catch(()=>{});mq.classList.add('ok');document.getElementById('cl').textContent='Copied to clipboard';setTimeout(()=>{mq.classList.remove('ok');document.getElementById('cl').textContent='Click to copy'},1800)};
+</script></body></html>

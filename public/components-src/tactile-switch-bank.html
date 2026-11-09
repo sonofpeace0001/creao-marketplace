@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tactile Switch Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1B1C20;background-image:radial-gradient(#26282E 1px,transparent 1px);background-size:16px 16px;color:#E9EBF1;font-family:'Barlow Condensed',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.pn{width:100%;max-width:600px;background:linear-gradient(180deg,#3A3D45,#2A2C33);border-radius:26px;padding:24px 26px 26px;border:1px solid #4A4E58;box-shadow:inset 0 2px 0 rgba(255,255,255,.12),inset 0 -8px 20px rgba(0,0,0,.35),0 40px 70px -30px #000;position:relative}
+.pn::before,.pn::after{content:"";position:absolute;top:14px;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#9A9EAB,#40434C);box-shadow:inset 0 0 0 2px #2A2C33}.pn::before{left:14px}.pn::after{right:14px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;padding:0 18px 16px;border-bottom:1px solid #1F2025;box-shadow:0 1px 0 rgba(255,255,255,.07)}.hd h1{font-size:22px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}.hd span{font:400 12.5px 'Share Tech Mono',monospace;color:#8A8E9B;letter-spacing:.1em}
+.bk{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:22px 6px 6px}
+.sl{display:flex;flex-direction:column;align-items:center;gap:12px}
+.led{width:12px;height:12px;border-radius:50%;background:#2A1A1A;box-shadow:inset 0 1px 2px rgba(0,0,0,.8),0 0 0 2px #1A1B1F;transition:all .25s}.on .led{background:var(--c);box-shadow:0 0 12px 2px var(--c),0 0 0 2px #1A1B1F}
+.sw{position:relative;width:62px;height:104px;border:0;padding:0;border-radius:14px;background:#17181C;box-shadow:inset 0 3px 8px rgba(0,0,0,.9),0 1px 0 rgba(255,255,255,.1);cursor:pointer;perspective:300px;outline:0}.sw:focus-visible{box-shadow:inset 0 3px 8px rgba(0,0,0,.9),0 0 0 3px #fff}
+.rk{position:absolute;inset:6px;border-radius:10px;background:linear-gradient(180deg,#8F939F,#5D606B 48%,#464953 52%,#6A6E7A);transform-origin:50% 50%;transform:rotateX(26deg);transition:transform .22s cubic-bezier(.4,1.6,.5,1);box-shadow:0 8px 10px -4px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.35)}
+.on .rk{transform:rotateX(-26deg)}
+.rk::before{content:"";position:absolute;left:10px;right:10px;top:50%;height:2px;margin-top:-1px;background:rgba(0,0,0,.4);border-radius:2px}
+.rk i{position:absolute;left:0;right:0;text-align:center;font:700 12px 'Barlow Condensed';letter-spacing:.14em;color:rgba(255,255,255,.55)}.rk i:first-child{top:14px}.rk i:last-child{bottom:14px;color:rgba(0,0,0,.55)}
+.on .rk{background:linear-gradient(180deg,#6A6E7A,#464953 48%,#5D606B 52%,#A4A8B4)}.on .rk i:first-child{color:var(--c);text-shadow:0 0 8px var(--c)}.rk i:last-child{color:rgba(0,0,0,.55)}.on .rk i:last-child{color:rgba(255,255,255,.2)}.nm{font-size:16px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#B4B8C6}.on .nm{color:#fff}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding:16px 18px 0;border-top:1px solid #1F2025;box-shadow:0 -1px 0 rgba(255,255,255,.07)}.ft span{font:400 13px 'Share Tech Mono',monospace;color:#8A8E9B;letter-spacing:.08em}.ft button{border:1px solid #555965;background:linear-gradient(180deg,#4A4D57,#33353C);color:#E1E4EE;border-radius:10px;padding:8px 18px;font:600 15px 'Barlow Condensed';letter-spacing:.16em;text-transform:uppercase;cursor:pointer;box-shadow:0 3px 0 #1B1C20}.ft button:active{transform:translateY(3px);box-shadow:none}.ft button:focus-visible{outline:2px solid #fff}
+@media(max-width:480px){.bk{grid-template-columns:1fr 1fr;row-gap:22px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="pn"><div class="hd"><h1>Control Bank</h1><span id="ct"></span></div><div class="bk" id="bk"></div><div class="ft"><span>MODEL CB-04</span><button id="al">All off</button></div></div>
+<script>
+const S=[['Wi-Fi','#4ADE80',1],['Bluetooth','#38BDF8',1],['Airplane','#FBBF24',0],['Focus','#C084FC',1]];const bk=document.getElementById('bk');
+S.forEach((s,i)=>{const d=document.createElement('div');d.className='sl'+(s[2]?' on':'');d.style.setProperty('--c',s[1]);d.innerHTML='<span class="led"></span><button class="sw" role="switch" aria-checked="'+!!s[2]+'" aria-label="'+s[0]+'"><div class="rk"><i>ON</i><i>OFF</i></div></button><span class="nm">'+s[0]+'</span>';const b=d.querySelector('button');b.onclick=()=>{const o=!d.classList.contains('on');d.classList.toggle('on',o);b.setAttribute('aria-checked',o);cnt()};bk.appendChild(d)});
+function cnt(){document.getElementById('ct').textContent=bk.querySelectorAll('.on').length+' / '+S.length+' ACTIVE'}cnt();
+document.getElementById('al').onclick=()=>{bk.querySelectorAll('.sl').forEach((d,i)=>setTimeout(()=>{d.classList.remove('on');d.querySelector('button').setAttribute('aria-checked','false');cnt()},i*90))};
+</script></body></html>

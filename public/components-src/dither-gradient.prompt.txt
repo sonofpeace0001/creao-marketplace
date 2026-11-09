@@ -1,0 +1,29 @@
+ROLE
+You are a senior retro-graphics engineer and designer with 15+ years of experience. Build "Dither Gradient Shader": an animated ordered-dither gradient on a pixel canvas with level and pixel-size controls and four duotone palettes.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Hard-outlined pixel frame with VT323 labels, Bayer dithering and duotone colour.
+- Palette: #EDEAE0, #0E0E10
+- Type: VT323, Space Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Pixelated canvas with title tag and readouts; Levels and Pixel sliders; four duotone palette swatches.
+
+INTERACTION & STATES
+- A 4x4 Bayer matrix quantises an animated field to the chosen levels; the pointer moves the focal point; sliders and swatches update live.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

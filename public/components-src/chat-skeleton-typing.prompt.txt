@@ -1,0 +1,29 @@
+ROLE
+You are a senior messaging designer with 15+ years of experience. Build "Chat Skeleton with Typing": a chat thread where placeholder bubbles shimmer, a typing indicator appears and each message resolves into real text in sequence.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Mint and lavender page with a clean white chat window and green outgoing bubbles.
+- Palette: #16A34A, #EEF1F0, #F1F4F3, #EEF2F1, #E4F4EC, #E6E9FF
+- Type: Nunito (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header skeleton avatar; message list with skeleton and resolved bubbles; typing dots; composer; replay.
+
+INTERACTION & STATES
+- Replay rebuilds the thread as skeletons then reveals each message after a typing delay and updates the header status to Online.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

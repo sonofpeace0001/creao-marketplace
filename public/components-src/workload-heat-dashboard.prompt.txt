@@ -1,0 +1,29 @@
+ROLE
+You are a senior resource-planning designer and front-end engineer with 15+ years of experience. Build "Workload Heat Dashboard": a team capacity heatmap of hours per person per week with overbooking markers, tooltips and a detail summary.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with indigo gradient cells turning rose when over capacity.
+- Palette: #15172F, #8A8FB0, #7A7FA0, #EDEEF6, #E11D48, #F5F6FC
+- Type: Plus Jakarta Sans, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header and heat legend; person rows with avatar and role; six week cells; overbooked dot; detail cards.
+
+INTERACTION & STATES
+- Cells scale on hover or focus, show a tooltip and update three detail cards with availability, average utilization and overbooked weeks.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior SaaS-pricing designer and front-end engineer with 15+ years of experience. Build "Border Beam Pricing": three pricing cards where the recommended plan has an animated rotating border beam and soft glow.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black page with hairline cards, an indigo-to-pink conic beam and gradient CTA.
+- Palette: #1D1D24, #8B8FFF, #8A8A95, #EDEDF0, #0D0D11, #E879F9
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading; three cards (Hobby, Pro, Team) with name, price, description, button and checklist; Pro badge and rotating beam border.
+
+INTERACTION & STATES
+- An @property angle animates a conic gradient around the Pro card with a blurred glow copy; buttons lift on hover; layout stacks on mobile; reduced motion freezes the beam.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

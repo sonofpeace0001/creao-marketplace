@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Scroll Reveal Sections</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#DAD6CE;color:#17150F;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.fr{position:relative;width:100%;max-width:860px;height:560px;border-radius:26px;overflow:hidden;background:#FBF9F3;box-shadow:0 40px 70px -36px rgba(60,50,20,.55),0 0 0 1px rgba(23,21,15,.08)}
+.sc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:0 48px 0 56px}.sc::-webkit-scrollbar{display:none}
+.rl{position:absolute;right:18px;top:50%;margin-top:-50px;z-index:5;display:flex;flex-direction:column;gap:9px}.rl i{width:8px;height:8px;border-radius:50%;background:#CFC8B4;transition:all .35s cubic-bezier(.3,1.6,.5,1)}.rl i.on{background:#C2410C;transform:scale(1.5)}
+.pr{position:absolute;left:0;top:0;bottom:0;width:4px;background:#EEE9DA;z-index:5}.pr i{display:block;width:100%;height:var(--p,0%);background:#C2410C;border-radius:0 0 4px 4px}
+section{min-height:540px;display:grid;align-content:center;padding:40px 0}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*120ms)}.in .rv{opacity:1;transform:none}
+.rv.cl{clip-path:inset(0 100% 0 0);transform:none}.in .rv.cl{clip-path:inset(0 0 0 0);transition:clip-path 1s cubic-bezier(.7,0,.2,1);transition-delay:calc(var(--d,0)*120ms)}
+small.ey{font:500 12.5px 'Geist Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#C2410C}
+h2{font:400 clamp(38px,6vw,60px)/1.02 'Instrument Serif',serif;letter-spacing:-.025em;margin:10px 0 14px}h2 em{font-style:italic;color:#C2410C}
+p{font-size:16.5px;line-height:1.65;color:#5A5444;max-width:46ch}
+.gd{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}.gd div{background:#fff;border:1px solid #EAE3D0;border-radius:18px;padding:18px}.gd b{display:block;font:400 42px 'Instrument Serif',serif;letter-spacing:-.02em;color:#17150F}.gd span{font-size:13.5px;color:#7A7460}
+.im{height:210px;border-radius:24px;background:linear-gradient(135deg,#F59E0B,#EC4899 60%,#7C3AED);position:relative;overflow:hidden;margin-top:24px}.im::before{content:"";position:absolute;left:-10%;right:-10%;bottom:-50px;height:130px;background:#2A1240;border-radius:50% 50% 0 0;opacity:.75}.im::after{content:"";position:absolute;right:40px;top:30px;width:60px;height:60px;border-radius:50%;background:#FEF3C7}
+.qt{font:italic 400 clamp(30px,4.6vw,46px)/1.15 'Instrument Serif',serif;max-width:20ch}.qt+.by{margin-top:16px;font-size:14px;color:#7A7460;display:flex;align-items:center;gap:10px}.by i{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444)}
+.cta{display:inline-flex;margin-top:22px;background:#17150F;color:#fff;border-radius:99px;padding:14px 28px;font:600 15px 'Inter';text-decoration:none}.cta:focus-visible{outline:3px solid #C2410C;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.rv{transition:none;opacity:1;transform:none;clip-path:none}}
+</style></head><body>
+<div class="fr"><div class="pr"><i id="pr"></i></div><div class="rl" id="rl"><i></i><i></i><i></i><i></i></div>
+<div class="sc" id="sc">
+<section data-i="0"><small class="ey rv" style="--d:0">Chapter one</small><h2 class="rv" style="--d:1">Elements arrive <em>when you do</em></h2><p class="rv" style="--d:2">Each block fades up as it enters the viewport, in a gentle staggered sequence that guides the eye down the page.</p></section>
+<section data-i="1"><small class="ey rv" style="--d:0">Chapter two</small><h2 class="rv" style="--d:1">Numbers that <em>count up</em></h2><div class="gd"><div class="rv" style="--d:2"><b data-n="248">0</b><span>Projects shipped</span></div><div class="rv" style="--d:3"><b data-n="96">0</b><span>Happy clients</span></div><div class="rv" style="--d:4"><b data-n="14">0</b><span>Years in business</span></div></div></section>
+<section data-i="2"><small class="ey rv" style="--d:0">Chapter three</small><h2 class="rv" style="--d:1">Images <em>unveil</em> themselves</h2><div class="im rv cl" style="--d:2"></div></section>
+<section data-i="3"><div class="qt rv" style="--d:0">Good design is mostly knowing when to hold still.</div><div class="by rv" style="--d:1"><i></i>Elena Voss, Creative Director</div><a class="cta rv" style="--d:2" href="#">Start a project</a></section>
+</div></div>
+<script>
+const sc=document.getElementById('sc'),secs=[...sc.querySelectorAll('section')],dots=[...document.getElementById('rl').children];
+function count(e){e.querySelectorAll('[data-n]').forEach(b=>{if(b.dataset.d)return;b.dataset.d=1;const to=+b.dataset.n,t0=performance.now();(function s(n){const k=Math.min(1,(n-t0)/1200),v=Math.round(to*(1-Math.pow(1-k,3)));b.textContent=v;if(k<1)requestAnimationFrame(s)})(t0)})}
+function upd(){const max=sc.scrollHeight-sc.clientHeight;document.getElementById('pr').style.setProperty('--p',(max?sc.scrollTop/max*100:0)+'%');let cur=0;secs.forEach((s,i)=>{const r=s.getBoundingClientRect(),m=sc.getBoundingClientRect();if(r.top<m.top+m.height*.7&&r.bottom>m.top+m.height*.3){cur=i}if(r.top<m.top+m.height*.75){if(!s.classList.contains('in')){s.classList.add('in');count(s)}}});dots.forEach((d,i)=>d.classList.toggle('on',i===cur))}
+sc.addEventListener('scroll',upd);secs[0].classList.add('in');
+function init(){secs.forEach(s=>s.classList.add('in'));secs.forEach(count);const t=sc.style.scrollBehavior;secs.forEach(s=>{s.querySelectorAll('.rv').forEach(r=>r.style.transitionDuration='0s')});sc.scrollTop=secs[1].offsetTop-30;upd();requestAnimationFrame(()=>requestAnimationFrame(()=>secs.forEach(s=>s.querySelectorAll('.rv').forEach(r=>r.style.transitionDuration='')))); secs[2].classList.remove('in');secs[3].classList.remove('in')}
+init();(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{sc.scrollTop=secs[1].offsetTop-30;upd()});
+</script></body></html>

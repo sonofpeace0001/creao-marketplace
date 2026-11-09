@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer-tools designer and front-end engineer with 15+ years of experience. Build "Type-to-Confirm Dialog": a destructive alert dialog that requires typing the project name, with a match progress bar, shake on error and success state.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark modal over a blurred settings page with a red danger accent and mono input.
+- Palette: #F87171, #34353F, #EDEEF2, #2C2D35, #23242B, #34D399
+- Type: Inter, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Danger icon; title; consequence copy; label with code-styled name; input with match progress bar; Cancel and Delete buttons; success confirmation.
+
+INTERACTION & STATES
+- Delete stays disabled until the text matches exactly; the bar fills as typed characters match; Enter on a mismatch shakes the dialog; Escape and backdrop close; role=alertdialog with focus on the input.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>What's New Slides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:rgba(30,25,60,.5);background-image:linear-gradient(160deg,#C9C2F2,#F2C9E4);color:#1B1740;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.md{width:100%;max-width:460px;background:#fff;border-radius:30px;overflow:hidden;box-shadow:0 50px 90px -40px rgba(40,20,100,.7)}
+.st{position:relative;height:232px;overflow:hidden}
+.sl{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:translateX(40px);transition:all .5s cubic-bezier(.3,1,.4,1);pointer-events:none}.sl.on{opacity:1;transform:none}.sl.pr{transform:translateX(-40px)}
+.s1{background:linear-gradient(135deg,#E3E0FF,#F5E6FF)}.s2{background:linear-gradient(135deg,#D6F5EA,#E3F0FF)}.s3{background:linear-gradient(135deg,#FFE9D1,#FFDDE8)}
+.tx{padding:24px 28px 8px}.tx small{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#6D4DF2}.tx h2{font-size:24px;font-weight:800;letter-spacing:-.04em;margin:6px 0 6px}.tx p{font-size:15px;line-height:1.55;color:#6A6790;min-height:70px}
+.ft{display:flex;align-items:center;padding:8px 28px 24px}.dt{display:flex;gap:6px}.dt button{width:8px;height:8px;border-radius:8px;border:0;background:#D8D4F0;cursor:pointer;padding:0;transition:all .4s cubic-bezier(.3,1.4,.5,1)}.dt button[aria-current=true]{width:26px;background:#6D4DF2}.dt button:focus-visible{outline:2px solid #1B1740;outline-offset:3px}
+.ac{margin-left:auto;display:flex;gap:8px}.ac button{border-radius:13px;padding:11px 20px;font:700 14.5px 'Plus Jakarta Sans';cursor:pointer}.sk{border:0;background:none;color:#8B87B2}.nx{border:0;background:#6D4DF2;color:#fff;box-shadow:0 12px 22px -10px #6D4DF2}.ac button:focus-visible{outline:3px solid #1B1740;outline-offset:2px}
+/* art 1 : theme toggle */
+.a1{display:flex;gap:12px;animation:th 4s infinite}.a1 .cd{width:96px;height:118px;border-radius:16px;background:#fff;padding:12px;box-shadow:0 14px 24px -10px rgba(60,40,140,.35);animation:cd 4s infinite}.a1 .cd i{display:block;height:8px;border-radius:5px;background:#E4E0FA;margin-bottom:8px;animation:ci 4s infinite}.a1 .cd i:nth-child(1){width:60%;background:#C5BBFF;animation:cj 4s infinite}
+.a1 .sw{position:absolute;top:18px;right:22px;width:46px;height:26px;border-radius:26px;background:#CFC8F5;animation:sw 4s infinite}.a1 .sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;animation:kn 4s infinite}
+@keyframes cd{0%,40%{background:#fff}55%,95%{background:#241D4A}100%{background:#fff}}@keyframes ci{0%,40%{background:#E4E0FA}55%,95%{background:#4A3F8A}100%{background:#E4E0FA}}@keyframes cj{0%,40%{background:#C5BBFF}55%,95%{background:#8D7BFF}100%{background:#C5BBFF}}@keyframes sw{0%,40%{background:#CFC8F5}55%,95%{background:#6D4DF2}100%{background:#CFC8F5}}@keyframes kn{0%,40%{transform:none}55%,95%{transform:translateX(20px)}100%{transform:none}}
+/* art 2 : palette */
+.a2{width:300px;background:#fff;border-radius:16px;box-shadow:0 18px 30px -12px rgba(20,80,100,.4);overflow:hidden}.a2 .in{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid #EDF2F2;font:600 14px 'Plus Jakarta Sans';color:#1B1740}.a2 .in svg{color:#9AA9AC}.a2 .ty{overflow:hidden;white-space:nowrap;width:0;border-right:2px solid #6D4DF2;animation:tp 4s steps(10) infinite}@keyframes tp{0%{width:0}35%,90%{width:84px}100%{width:0}}
+.a2 .rs div{display:flex;align-items:center;gap:10px;padding:9px 14px;font-size:13.5px;font-weight:600;color:#4B6366}.a2 .rs div i{width:22px;height:22px;border-radius:7px;background:var(--b)}.a2 .rs div:first-child{background:#EEF3FF;color:#1B1740}
+/* art 3 : bars */
+.a3{display:flex;align-items:flex-end;gap:12px;height:132px;padding:18px 22px;background:#fff;border-radius:20px;box-shadow:0 18px 30px -12px rgba(160,60,60,.35)}.a3 i{width:26px;border-radius:8px 8px 4px 4px;background:var(--b);transform-origin:bottom;animation:br 3s ease-in-out infinite;animation-delay:calc(var(--i)*.12s)}@keyframes br{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="md" role="dialog" aria-label="What is new"><div class="st" id="st">
+<div class="sl s1"><div class="a1" style="position:relative;padding-right:60px"><div class="cd"><i></i><i></i><i></i><i style="width:80%"></i></div><div class="cd"><i></i><i></i><i style="width:70%"></i><i></i></div><span class="sw"></span></div></div>
+<div class="sl s2"><div class="a2"><div class="in"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><span class="ty">New project</span></div><div class="rs"><div><i style="--b:#A5B4FC"></i>New project</div><div><i style="--b:#6EE7B7"></i>New document</div><div><i style="--b:#FCA5A5"></i>New team</div></div></div></div>
+<div class="sl s3"><div class="a3"><i style="--b:#F97316;--i:0"></i><i style="--b:#FB7185;--i:1"></i><i style="--b:#A78BFA;--i:2"></i><i style="--b:#F97316;--i:3"></i><i style="--b:#FB7185;--i:4"></i><i style="--b:#A78BFA;--i:5"></i></div></div></div>
+<div class="tx"><small id="sm"></small><h2 id="h"></h2><p id="p"></p></div>
+<div class="ft"><div class="dt" id="dt"></div><div class="ac"><button class="sk" id="sk">Skip</button><button class="nx" id="nx">Next</button></div></div></div>
+<script>
+const S=[['Version 3.4','Dark mode, finally','Switch themes in one click. Your choice follows you across every device and every workspace.'],['Version 3.4','Command palette','Press Ctrl K to jump to any page, run any action or create anything without leaving the keyboard.'],['Version 3.4','Live analytics','Charts now update in real time, with comparison ranges and saved views your whole team can share.']];
+let i=0;const sl=[...document.querySelectorAll('.sl')],dt=document.getElementById('dt');
+S.forEach((s,k)=>{const b=document.createElement('button');b.setAttribute('aria-label','Slide '+(k+1));b.onclick=()=>go(k);dt.appendChild(b)});
+function go(n){sl.forEach((e,k)=>{e.classList.toggle('on',k===n);e.classList.toggle('pr',k<n)});dt.querySelectorAll('button').forEach((b,k)=>b.setAttribute('aria-current',k===n));document.getElementById('sm').textContent=S[n][0];document.getElementById('h').textContent=S[n][1];document.getElementById('p').textContent=S[n][2];document.getElementById('nx').textContent=n===S.length-1?'Get started':'Next';i=n}
+document.getElementById('nx').onclick=()=>{if(i<S.length-1)go(i+1);else go(0)};document.getElementById('sk').onclick=()=>go(S.length-1);go(1);
+</script></body></html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI Composer Chat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F6F5F1;color:#1C1B18;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px;height:560px;background:#fff;border-radius:26px;box-shadow:0 40px 70px -44px rgba(28,27,24,.5),0 0 0 1px rgba(28,27,24,.07);display:flex;flex-direction:column;overflow:hidden}
+.ms{flex:1;overflow-y:auto;padding:26px 24px 8px;display:flex;flex-direction:column;gap:18px;scroll-behavior:smooth}
+.u{align-self:flex-end;max-width:78%;background:#F0EEE7;border-radius:20px 20px 6px 20px;padding:12px 16px;font-size:15px;line-height:1.5}
+.a{display:flex;gap:12px}.a .av{flex:none;width:30px;height:30px;border-radius:50%;background:conic-gradient(from 200deg,#D97757,#E8B86B,#D97757);display:grid;place-items:center;margin-top:2px}.a .av::after{content:"";width:10px;height:10px;border-radius:50%;background:#fff}
+.a .bd{flex:1;font-size:15px;line-height:1.65;color:#2E2C27}.a .bd p+p,.a .bd ul{margin-top:10px}.a .bd ul{padding-left:20px}.a .bd li{margin:4px 0}.a .bd code{font:500 13px 'Geist Mono',monospace;background:#F3F1EA;padding:2px 6px;border-radius:5px}
+.th{display:flex;align-items:center;gap:8px;font-size:13.5px;color:#8A877D;margin-bottom:8px}.th .sp{width:14px;height:14px;border-radius:50%;border:2px solid #E2DFD4;border-top-color:#D97757;animation:r .8s linear infinite}@keyframes r{to{transform:rotate(360deg)}}
+.th.dn .sp{animation:none;border-color:#6AA07A;background:#6AA07A;position:relative}.th.dn .sp::after{content:"";position:absolute;left:3px;top:0;width:3px;height:7px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:rotate(45deg)}
+.cur{display:inline-block;width:7px;height:15px;background:#D97757;border-radius:2px;vertical-align:-2px;animation:bl 1s steps(2) infinite;margin-left:2px}@keyframes bl{50%{opacity:0}}
+.cp{padding:12px 16px 16px}
+.bx{border:1.5px solid #E4E1D6;border-radius:22px;background:#FDFCF9;padding:12px 12px 10px;transition:all .2s}.bx:focus-within{border-color:#D97757;box-shadow:0 0 0 4px rgba(217,119,87,.12)}
+.bx textarea{width:100%;border:0;outline:0;background:none;resize:none;font:400 15.5px/1.5 'Inter';color:#1C1B18;height:48px;padding:4px 6px}.bx textarea::placeholder{color:#A8A599}
+.tl{display:flex;align-items:center;gap:8px}.tl button{display:flex;align-items:center;gap:6px;border:0;background:none;color:#7A776C;font:500 13px 'Inter';padding:7px 10px;border-radius:10px;cursor:pointer}.tl button:hover{background:#F0EEE7;color:#1C1B18}.tl button:focus-visible{outline:2px solid #D97757}
+.tl .mo{margin-left:auto}.tl .sd{width:36px;height:36px;border-radius:12px;background:#D97757;color:#fff;padding:0;justify-content:center}.tl .sd:hover{background:#C4633F;color:#fff}.tl .sd:disabled{background:#E8E5DA;color:#fff;cursor:default}
+.ch{display:flex;gap:8px;flex-wrap:wrap;padding:0 24px 10px}.ch button{border:1px solid #E4E1D6;background:#fff;color:#55524A;border-radius:99px;padding:7px 13px;font:500 13px 'Inter';cursor:pointer;transition:all .15s}.ch button:hover{border-color:#D97757;color:#C4633F}.ch button:focus-visible{outline:2px solid #D97757;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.ms{scroll-behavior:auto}}
+</style></head><body>
+<div class="c"><div class="ms" id="ms" aria-live="polite"></div><div class="ch" id="ch"></div>
+<form class="cp" id="f"><div class="bx"><textarea id="t" placeholder="Ask anything…" aria-label="Message"></textarea><div class="tl"><button type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="m21 12-8.600 8.600a5.500 5.500 0 0 1-7.800-7.800L13.200 4.200a3.700 3.700 0 0 1 5.200 5.200L9.800 18a1.800 1.800 0 0 1-2.600-2.600L15 7.600"/></svg>Attach</button><button type="button" class="mo">Sonnet <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><button class="sd" id="sd" aria-label="Send" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div></div></form></div>
+<script>
+const R={'Plan a launch week':['Reading your calendar','Drafting a schedule'],'default':['Thinking','Drafting a reply']};
+const A={'Plan a launch week':'<p>Here is a calm five-day plan:</p><ul><li><b>Mon:</b> freeze scope and write the announcement</li><li><b>Tue:</b> record the demo and prep <code>support macros</code></li><li><b>Wed:</b> soft launch to your waiting list</li><li><b>Thu:</b> public launch and monitor feedback</li><li><b>Fri:</b> fix, thank people and publish a recap</li></ul>','Summarise this doc':'<p>The document argues for shipping smaller releases more often. Three key points:</p><ul><li>Small batches reduce risk</li><li>Feedback loops shorten</li><li>Teams stay motivated</li></ul>','Write a friendly reply':'<p>Hi Sam, thanks so much for the kind note. We are glad it is working for your team, and we would love to hear what you would like to see next.</p>','default':'<p>Good question. Here is a short answer: start with the smallest version, learn from real use, then iterate. Happy to go deeper on any part.</p>'};
+const ms=document.getElementById('ms'),t=document.getElementById('t'),sd=document.getElementById('sd');let busy=false;
+function scroll(){ms.scrollTop=ms.scrollHeight}
+function send(q){if(busy||!q.trim())return;busy=true;const u=document.createElement('div');u.className='u';u.textContent=q;ms.appendChild(u);const a=document.createElement('div');a.className='a';a.innerHTML='<div class="av"></div><div class="bd"><div class="th"><span class="sp"></span><span class="tt"></span></div><div class="ans"></div></div>';ms.appendChild(a);scroll();
+ const steps=R[q]||R.default,tt=a.querySelector('.tt'),th=a.querySelector('.th'),ans=a.querySelector('.ans');tt.textContent=steps[0]+'…';
+ const rd=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ setTimeout(()=>tt.textContent=steps[1]+'…',rd?0:700);
+ setTimeout(()=>{th.classList.add('dn');tt.textContent='Thought for 2s';const html=A[q]||A.default;if(rd){ans.innerHTML=html;busy=false;scroll();return}
+  const tmp=document.createElement('div');tmp.innerHTML=html;const txt=[...html.matchAll(/<[^>]+>|[^<]+/g)].map(m=>m[0]);let i=0,out='';
+  const iv=setInterval(()=>{for(let k=0;k<4&&i<txt.length;k++){const tk=txt[i];if(tk[0]==='<'){out+=tk;i++}else{out+=tk.slice(0,Math.min(tk.length,4));txt[i]=tk.slice(4);if(!txt[i])i++}}ans.innerHTML=out+'<span class="cur"></span>';scroll();if(i>=txt.length){clearInterval(iv);ans.innerHTML=html;busy=false;scroll()}},30)},rd?0:1500)}
+const ch=document.getElementById('ch');['Plan a launch week','Summarise this doc','Write a friendly reply'].forEach(s=>{const b=document.createElement('button');b.textContent=s;b.onclick=()=>send(s);ch.appendChild(b)});
+t.oninput=()=>sd.disabled=!t.value.trim();t.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();document.getElementById('f').requestSubmit()}};
+document.getElementById('f').onsubmit=e=>{e.preventDefault();const v=t.value;t.value='';sd.disabled=true;send(v)};
+const u=document.createElement('div');u.className='u';u.textContent='Plan a launch week';ms.appendChild(u);const a=document.createElement('div');a.className='a';a.innerHTML='<div class="av"></div><div class="bd"><div class="th dn"><span class="sp"></span><span>Thought for 2s</span></div><div>'+A['Plan a launch week']+'</div></div>';ms.appendChild(a);
+</script></body></html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Giant Email Footer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EF4B2B;color:#1A0A05;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.f{position:relative;width:100%;max-width:900px;background:#1A0A05;color:#FFEFE3;border-radius:28px;padding:36px 36px 26px;overflow:hidden}
+.tp{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}.tp b{font:800 20px 'Bricolage Grotesque';letter-spacing:-.04em}.tp span{display:flex;align-items:center;gap:8px;font-size:13px;color:#C9AE9F}.tp i{width:8px;height:8px;border-radius:50%;background:#FFB84D;animation:bl 1.6s infinite}@keyframes bl{50%{opacity:.25}}
+.k{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C9AE9F;margin-bottom:6px}
+.em{position:relative;display:block;width:fit-content;max-width:100%;font:800 clamp(26px,7vw,74px)/1.02 'Bricolage Grotesque';letter-spacing:-.05em;color:#FFEFE3;text-decoration:none;cursor:pointer;overflow:hidden;padding-bottom:6px}
+.em span{display:inline-block;transition:transform .5s cubic-bezier(.2,.8,.2,1),color .3s;transition-delay:calc(var(--i)*14ms)}
+.em:hover span,.em:focus-visible span{transform:translateY(-6px);color:#FFB84D}
+.em::after{content:"";position:absolute;left:0;bottom:0;height:5px;width:100%;background:#FFB84D;transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.2,.8,.2,1)}.em:hover::after,.em:focus-visible::after{transform:scaleX(1);transform-origin:left}
+.em:focus-visible{outline:3px solid #FFB84D;outline-offset:4px;border-radius:4px}
+.cp{display:inline-flex;align-items:center;gap:8px;margin-top:16px;border:1.5px solid #4A322A;background:none;color:#FFEFE3;border-radius:99px;padding:9px 16px;font:600 13.5px 'DM Sans';cursor:pointer;transition:all .2s}.cp:hover{background:#FFEFE3;color:#1A0A05}.cp:focus-visible{outline:2px solid #FFB84D;outline-offset:3px}
+.mq{margin:34px -36px 0;border-top:1px solid #33201A;border-bottom:1px solid #33201A;padding:12px 0;overflow:hidden;white-space:nowrap}.mq div{display:inline-block;animation:mq 28s linear infinite;font:700 15px 'Bricolage Grotesque';letter-spacing:.04em;color:#C9AE9F}.mq b{color:#FFB84D;margin:0 18px}@keyframes mq{to{transform:translateX(-50%)}}
+.ln{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px;font-size:14px}.ln div{display:flex;gap:20px}.ln a{color:#FFEFE3;text-decoration:none;position:relative}.ln a:hover{color:#FFB84D}.ln a:focus-visible{outline:2px solid #FFB84D;outline-offset:3px;border-radius:3px}.ln span{color:#8C7266}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<footer class="f"><div class="tp"><b>Hollow &amp; Co.</b><span><i></i>Booking projects for January</span></div>
+<div class="k">Have an idea? Say hello</div><a class="em" id="em" href="mailto:hello@hollow.studio" aria-label="hello@hollow.studio"></a>
+<button class="cp" id="cp"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span id="ct">Copy email</span></button>
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
+<div class="ln"><div><a href="#">Instagram</a><a href="#">Dribbble</a><a href="#">LinkedIn</a><a href="#">Read.cv</a></div><span>&copy; 2026 · Back to top &uarr;</span></div></footer>
+<script>
+const e='hello@hollow.studio',em=document.getElementById('em');
+em.innerHTML=[...e].map((c,i)=>'<span style="--i:'+i+'" aria-hidden="true">'+c+'</span>').join('');
+document.getElementById('mq').innerHTML=('Brand identity<b>&bull;</b>Web design<b>&bull;</b>Motion<b>&bull;</b>Packaging<b>&bull;</b>Art direction<b>&bull;</b>').repeat(4);
+document.getElementById('cp').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(e).catch(()=>{});const t=document.getElementById('ct');t.textContent='Copied';setTimeout(()=>t.textContent='Copy email',1400)};
+</script></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior playful interface designer and front-end engineer with 15+ years of experience. Build "Fan Hover Deck": a deck of playing-card style cards that fans out when hovered and lifts the card under the pointer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Forest green felt background with jewel-toned cards and serif ranks.
+- Palette: #1B2A22, #2C4A3A, #14201A, #F4EFE3, #9DB5A6, #FFD166
+- Type: Fraunces, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; five stacked cards with rank, name, description and watermark shape; hint.
+
+INTERACTION & STATES
+- Cards rotate around a low pivot into a fan on deck hover; the hovered card lifts and rises above the rest with a deeper shadow.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

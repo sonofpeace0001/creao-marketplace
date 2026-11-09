@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Client Quote Tabs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E0F12;color:#EDEEF2;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:700px}
+.tl{display:flex;border-bottom:1px solid #26282F;margin-bottom:34px}.tl button{flex:1;position:relative;border:0;background:none;color:#6E7280;padding:16px 8px;font:700 17px 'Inter';letter-spacing:-.02em;cursor:pointer;transition:color .25s;display:flex;align-items:center;justify-content:center;gap:8px}.tl button:hover{color:#B4B8C8}.tl button[aria-selected=true]{color:var(--c)}.tl button:focus-visible{outline:2px solid #EDEEF2;outline-offset:-2px}
+.tl button i{width:10px;height:10px;border-radius:3px;background:currentColor}
+.bar{position:absolute;bottom:-1px;left:0;height:2px;width:calc(100%/4);background:var(--c);transition:transform .4s cubic-bezier(.5,0,.2,1),background .3s}
+.q{min-height:240px}.q[hidden]{display:none}.q.in{animation:fi .5s ease}@keyframes fi{from{opacity:0;transform:translateY(12px)}}
+blockquote{font:400 clamp(26px,4.4vw,38px)/1.2 'Instrument Serif',serif;letter-spacing:-.015em;margin-bottom:26px}blockquote em{color:var(--c)}
+.au{display:flex;align-items:center;gap:14px}.au i{width:46px;height:46px;border-radius:50%;background:var(--c);display:grid;place-items:center;font:700 15px 'Inter';color:#0E0F12;font-style:normal}.au b{display:block;font-size:15.5px;font-weight:600}.au span{font-size:14px;color:#8A8E9E}
+.st{margin-left:auto;text-align:right}.st b{font:700 28px 'Inter';letter-spacing:-.04em;color:var(--c)}.st span{display:block;font-size:12.5px}
+.tw{position:relative}
+@media(max-width:520px){.tl button{font-size:13px}.st{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c" id="c"><div class="tw"><div class="tl" role="tablist" aria-label="Customer stories" id="tl"></div><span class="bar" id="bar"></span></div><div id="pn"></div></div>
+<script>
+const D=[['Northwind','#8B7CFF','We stopped <em>chasing status updates</em> and started shipping. The whole team plans in one place now.','Priya Raman','Head of Ops','PR','3.2x','faster reporting'],['Lumen','#38BDF8','Onboarding used to take a week. Now new hires are <em>productive on day one</em>.','Marcus Reid','VP People','MR','-48%','support tickets'],['Fjord','#4ADE80','It paid for itself in the first quarter. <em>Nothing else comes close</em> for the price.','Elena Ortiz','Founder','EO','$1.4M','saved yearly'],['Helios','#FB923C','The calmest tool we use, and somehow the <em>most powerful</em>. Our designers love it.','Tomas Berg','Design Lead','TB','12 days','to launch']];
+const tl=document.getElementById('tl'),pn=document.getElementById('pn'),bar=document.getElementById('bar');
+tl.innerHTML=D.map((d,i)=>'<button role="tab" id="t'+i+'" aria-selected="'+(i===0)+'" tabindex="'+(i?-1:0)+'" style="--c:'+d[1]+'"><i></i>'+d[0]+'</button>').join('');
+pn.innerHTML=D.map((d,i)=>'<div class="q" role="tabpanel" aria-labelledby="t'+i+'" '+(i?'hidden':'')+' style="--c:'+d[1]+'"><blockquote>&ldquo;'+d[2]+'&rdquo;</blockquote><div class="au"><i>'+d[5]+'</i><div><b>'+d[3]+'</b><span>'+d[4]+', '+d[0]+'</span></div><div class="st"><b>'+d[6]+'</b><span style="color:#8A8E9E">'+d[7]+'</span></div></div></div>').join('');
+const T=[...tl.children],P=[...pn.children];
+function go(i,f){T.forEach((t,k)=>{t.setAttribute('aria-selected',k===i);t.tabIndex=k===i?0:-1;P[k].hidden=k!==i;P[k].classList.toggle('in',k===i)});bar.style.transform='translateX('+i*100+'%)';bar.style.setProperty('--c',D[i][1]);bar.style.background=D[i][1];if(f)T[i].focus()}
+T.forEach((t,i)=>{t.onclick=()=>go(i);t.onkeydown=e=>{let n=null;if(e.key==='ArrowRight')n=(i+1)%4;if(e.key==='ArrowLeft')n=(i+3)%4;if(n!==null){e.preventDefault();go(n,1)}}});go(0);
+</script></body></html>

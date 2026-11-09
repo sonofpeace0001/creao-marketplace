@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chat Thread Testimonials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#DFF5E8,#DCE8FF);color:#142033;font-family:'Nunito',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:880px;display:grid;grid-template-columns:1fr 380px;gap:44px;align-items:center}
+.tx small{font-size:12.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#16A34A}.tx h1{font-size:clamp(32px,5vw,50px);line-height:1.02;font-weight:800;letter-spacing:-.045em;margin:10px 0 14px}.tx p{font-size:17px;line-height:1.6;color:#4B5D72;max-width:36ch}
+.tx .st{display:flex;gap:26px;margin-top:26px}.tx .st b{display:block;font-size:30px;font-weight:800;letter-spacing:-.04em}.tx .st span{font-size:13px;color:#6B7C90}
+.ph{height:560px;background:#fff;border-radius:38px;border:8px solid #142033;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 40px 70px -30px rgba(20,32,51,.55)}
+.hd{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid #EEF1F5;background:#F8FAFC}.hd i{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#16A34A,#10B981);display:grid;place-items:center;color:#fff;font:800 13px 'Nunito';font-style:normal}.hd b{display:block;font-size:15px}.hd span{font-size:12px;color:#16A34A;font-weight:600}
+.ms{flex:1;overflow:hidden;padding:14px 14px 6px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;background:#fff}
+.g{display:flex;gap:8px;align-items:flex-end;animation:in .4s cubic-bezier(.3,1.4,.5,1)}@keyframes in{from{opacity:0;transform:translateY(14px) scale(.95)}}
+.g .av{flex:none;width:28px;height:28px;border-radius:50%;background:var(--g);display:grid;place-items:center;color:#fff;font:800 10px 'Nunito'}
+.g .bd{max-width:78%}.g .nm{font-size:11.5px;font-weight:700;color:#7C8CA0;margin:0 0 3px 6px}
+.g .b{padding:10px 14px;border-radius:20px 20px 20px 6px;background:#EEF2F7;font-size:14.5px;line-height:1.4;font-weight:600}
+.g .rx{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid #E3E8EF;border-radius:99px;padding:1px 7px 1px 5px;font-size:12px;font-weight:700;margin:-8px 0 0 12px;position:relative;box-shadow:0 2px 6px rgba(0,0,0,.08);animation:pop .4s .3s cubic-bezier(.3,2,.5,1) backwards}@keyframes pop{from{transform:scale(0)}}
+.me{justify-content:flex-end}.me .b{background:#16A34A;color:#fff;border-radius:20px 20px 6px 20px}
+.ty{display:flex;gap:4px;padding:12px 14px;background:#EEF2F7;border-radius:20px 20px 20px 6px;width:fit-content;margin-left:36px}.ty i{width:7px;height:7px;border-radius:50%;background:#9AA8BA;animation:t 1s infinite}.ty i:nth-child(2){animation-delay:.15s}.ty i:nth-child(3){animation-delay:.3s}@keyframes t{40%{transform:translateY(-5px);background:#16A34A}}
+.ft{display:flex;gap:8px;padding:10px 12px 14px;border-top:1px solid #EEF1F5}.ft div{flex:1;background:#F1F4F8;border-radius:99px;padding:10px 16px;font-size:14px;color:#9AA8BA}
+@media(max-width:820px){.c{grid-template-columns:1fr;justify-items:center;text-align:center}.tx p{margin-inline:auto}.tx .st{justify-content:center}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="c"><div class="tx"><small>Love notes</small><h1>Customers keep texting us this</h1><p>Real messages from real teams, in their own words. Lightly edited for typos only.</p><div class="st"><div><b>4.9</b><span>Average rating</span></div><div><b>12k</b><span>Teams onboarded</span></div></div></div>
+<div class="ph"><div class="hd"><i>CS</i><div><b>Customer Stories</b><span>online</span></div></div><div class="ms" id="ms"></div><div class="ft"><div>Message</div></div></div></div>
+<script>
+const M=[['Priya','PR','linear-gradient(135deg,#6366F1,#EC4899)','Okay I just have to say this. Setup took ten minutes.',''],['Marcus','MR','linear-gradient(135deg,#10B981,#0EA5E9)','Our whole team switched in a single afternoon',''],['Elena','EO','linear-gradient(135deg,#F59E0B,#EF4444)','Support answered at 2am. Two. A. M.',''],['Tomas','TB','linear-gradient(135deg,#8B5CF6,#06B6D4)','Cancelled three other subscriptions this week',''],['Nora','NQ','linear-gradient(135deg,#EC4899,#F97316)','Best tool we bought all year, no contest','']];
+const IC={heart:'M12 21s-7-4.500-9.500-9A5.500 5.500 0 0 1 12 6a5.500 5.500 0 0 1 9.500 6C19 16.500 12 21 12 21z'};
+const ms=document.getElementById('ms');let i=0,tm;
+function add(m,k){const g=document.createElement('div');g.className='g';g.innerHTML='<div class="av" style="--g:'+m[2]+'">'+m[1]+'</div><div class="bd"><div class="nm">'+m[0]+'</div><div class="b">'+m[3]+'</div>'+(k%2===0?'<span class="rx"><svg width="12" height="12" viewBox="0 0 24 24" fill="#EF4444"><path d="'+IC.heart+'"/></svg>'+(8+k*5)+'</span>':'')+'</div>';ms.appendChild(g);while(ms.children.length>6)ms.firstChild.remove()}
+function typing(){const t=document.createElement('div');t.className='ty';t.innerHTML='<i></i><i></i><i></i>';ms.appendChild(t);return t}
+function next(){const t=typing();tm=setTimeout(()=>{t.remove();add(M[i%M.length],i);i++;tm=setTimeout(next,1500)},1000)}
+for(let k=0;k<4;k++){add(M[k],k);i=k+1}
+next();
+</script></body></html>

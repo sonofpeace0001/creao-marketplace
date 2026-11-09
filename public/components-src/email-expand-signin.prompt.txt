@@ -1,0 +1,29 @@
+ROLE
+You are a senior conversion-focused auth designer and front-end engineer with 15+ years of experience. Build "Email Expand Sign In": a sign in with social buttons and an email option that expands in place, staggering in the fields and options.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper card with an ink and amber brand and clean outlined buttons.
+- Palette: #1B1912, #2563EB, #E4DFD0, #A39C84, #EAE7DF, #FFFDF8
+- Type: Figtree (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Brand mark; title; Google, Apple and GitHub buttons; divider; collapsible email panel with fields, remember me and forgot link; sign up link.
+
+INTERACTION & STATES
+- Clicking the email header animates the panel height with a grid transition; inputs fade up in sequence; chevron rotates.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

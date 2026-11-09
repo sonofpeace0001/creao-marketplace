@@ -1,0 +1,29 @@
+ROLE
+You are a senior playful onboarding designer and front-end engineer with 15+ years of experience. Build "Morphing Pill Stepper": a four-step wizard whose progress dots morph into a labelled pill with sliding step panels, in a neo-brutalist card.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Peach page, thick black outlines, offset shadows, orange active pill and yellow choices.
+- Palette: #2B1608, #FF5A1F, #FFE9D6, #7A5C44, #FFFAF4, #FFD84D
+- Type: Bricolage Grotesque, DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Row of four progress buttons that expand to show a label when active and turn solid with a check when done; stacked step panels (choices, name field, look, finish); Back and Continue.
+
+INTERACTION & STATES
+- The active dot widens with a spring transition; panels slide in and out; choice buttons use aria-pressed; completed steps are clickable.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

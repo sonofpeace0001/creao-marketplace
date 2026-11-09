@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Morph State Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9ECF5;color:#12152B;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px;background:#fff;border-radius:28px;padding:34px;box-shadow:0 40px 70px -44px rgba(18,21,43,.5),0 0 0 1px rgba(18,21,43,.06);text-align:center}
+.c h1{font-size:26px;font-weight:700;letter-spacing:-.045em}.c p{font-size:15px;color:#6A6F94;margin:6px 0 28px}
+.gr{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:end}
+.cl{display:flex;flex-direction:column;align-items:center;gap:12px}.cl small{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9499BA;font-weight:600}
+.mb{--bg:#4F46E5;position:relative;height:56px;width:var(--w,180px);border:0;border-radius:var(--r,16px);background:var(--bg);color:#fff;font:700 16px 'DM Sans';cursor:pointer;overflow:hidden;transition:width .45s cubic-bezier(.6,0,.2,1),border-radius .45s cubic-bezier(.6,0,.2,1),background .3s,transform .15s;box-shadow:0 16px 26px -14px var(--bg)}
+.mb:active{transform:scale(.96)}.mb:focus-visible{outline:3px solid #12152B;outline-offset:4px}
+.mb>span{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .25s,transform .35s cubic-bezier(.3,1.5,.5,1)}
+.mb .l{opacity:1}.mb .sp,.mb .ok,.mb .er{opacity:0;transform:scale(.4)}
+.mb.ld{--w:56px;--r:28px;pointer-events:none}.mb.ld .l{opacity:0;transform:scale(.6)}.mb.ld .sp{opacity:1;transform:none}
+.mb.ok2{--w:56px;--r:28px;--bg:#16A34A;pointer-events:none}.mb.ok2 .l,.mb.ok2 .sp{opacity:0}.mb.ok2 .ok{opacity:1;transform:none}
+.mb.er2{--bg:#DC2626;animation:sk .45s}.mb.er2 .l{opacity:0}.mb.er2 .er{opacity:1;transform:none}
+@keyframes sk{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.sp svg{animation:rot .8s linear infinite}@keyframes rot{to{transform:rotate(360deg)}}
+.ok svg path{stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .4s .15s}.mb.ok2 .ok svg path{stroke-dashoffset:0}
+.m2{--bg:#0F172A;--r:99px}.m3{--bg:#EC4899;--r:12px;--w:170px}
+.pr{position:absolute;left:0;bottom:0;height:4px;background:rgba(255,255,255,.7);width:0;transition:width 1.4s linear}.mb.ld .pr{width:100%}
+.dm{margin-top:28px;display:flex;gap:10px;justify-content:center}.dm button{border:1px solid #D9DCEF;background:#fff;border-radius:99px;padding:8px 16px;font:600 13px 'DM Sans';color:#4A4F78;cursor:pointer}.dm button:focus-visible{outline:2px solid #4F46E5}
+@media(max-width:560px){.gr{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><h1>State morph</h1><p>Idle, loading, success and error in one button.</p>
+<div class="gr"><div class="cl"><small>Save</small><button class="mb" data-o="ok"><span class="l">Save changes</span><span class="sp"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.200-8.600"/></svg></span><span class="ok"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span><span class="er">Failed. Retry</span><i class="pr"></i></button></div>
+<div class="cl"><small>Send</small><button class="mb m2" data-o="ok"><span class="l">Send message</span><span class="sp"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.200-8.600"/></svg></span><span class="ok"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span><span class="er">Failed. Retry</span><i class="pr"></i></button></div>
+<div class="cl"><small>Charge card</small><button class="mb m3" data-o="err"><span class="l">Pay $48.00</span><span class="sp"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.200-8.600"/></svg></span><span class="ok"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span><span class="er">Card declined</span><i class="pr"></i></button></div></div>
+<div class="dm"><button id="rs">Reset</button></div></div>
+<script>
+const bs=[...document.querySelectorAll('.mb')];
+function run(b){if(b.classList.contains('ld')||b.classList.contains('ok2'))return;b.classList.remove('er2');b.classList.add('ld');setTimeout(()=>{b.classList.remove('ld');b.classList.add(b.dataset.o==='ok'?'ok2':'er2');if(b.dataset.o!=='ok')setTimeout(()=>b.classList.remove('er2'),1800)},1500)}
+bs.forEach(b=>b.onclick=()=>run(b));document.getElementById('rs').onclick=()=>bs.forEach(b=>b.classList.remove('ld','ok2','er2'));
+bs[0].classList.add('ok2');
+</script></body></html>

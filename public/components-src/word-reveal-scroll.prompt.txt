@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial typographer and front-end engineer with 15+ years of experience. Build "Word Reveal Text": a manifesto paragraph whose words resolve from faint and blurred to solid as progress advances, with italic accent words.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream page with Instrument Serif at display size and terracotta italics.
+- Palette: #16130E, #C2410C, #F6F2EA, #8F8672, #E3DCCB
+- Type: Instrument Serif, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Label with progress bar; paragraph of word spans; progress slider and Play button.
+
+INTERACTION & STATES
+- Progress maps to the count of revealed words; each word transitions colour, blur and offset; Play animates progress; the slider scrubs; reduced motion removes blur and movement.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

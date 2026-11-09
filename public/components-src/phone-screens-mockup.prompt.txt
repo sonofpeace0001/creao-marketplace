@@ -1,0 +1,29 @@
+ROLE
+You are a senior product marketing designer with 15+ years of experience. Build "Phone Screens Mockup": a 3D tilting phone whose screens slide between overview, savings goal and support chat, driven by a tab list and auto play.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Lavender to pink stage with a black phone, vivid app screens and floating proof chips.
+- Palette: #7C3AED, #1A1533, #0E0E14, #E6E1F7, #F6E3EE, #6A6490
+- Type: Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Eyebrow, headline and copy; three feature tabs; phone with notch and a three screen carousel; page dots; floating badges.
+
+INTERACTION & STATES
+- Tabs and a timer slide the screen strip; the phone tilts toward the pointer and springs back on leave; floating chips bob continuously.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

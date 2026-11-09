@@ -1,0 +1,29 @@
+ROLE
+You are a senior pricing-page designer and front-end engineer with 15+ years of experience. Build "Matrix Pricing Table": a feature comparison pricing matrix with a spotlight column that follows hover, row highlighting and rolling prices on billing change.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on cool grey with indigo highlight column and mono values.
+- Palette: #12142B, #6366F1, #4A4F78, #8A8FB0, #F0F1F7, #ECEEF4
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with monthly or annual toggle; plan columns with price and buttons; grouped feature rows with checks, dashes and values.
+
+INTERACTION & STATES
+- Hovering a column or cell slides the highlight column and tints the row; toggling billing rolls each price digit.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Clip Reveal Feature Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDEAE2;color:#1B1812;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px}
+.hd{text-align:center;margin-bottom:26px}.hd h1{font:800 clamp(30px,5vw,46px)/1 'Syne';letter-spacing:-.04em}.hd p{color:#7C7462;font-size:16px;margin-top:10px}
+.gd{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cd{--x:50%;--y:50%;--r:0px;position:relative;height:340px;border-radius:26px;overflow:hidden;background:#fff;border:1.5px solid #DDD7C8;cursor:default;isolation:isolate}
+.cd .ly{position:absolute;inset:0;padding:26px;display:flex;flex-direction:column;justify-content:flex-end}
+.cd .base{background:#fff;color:#1B1812}.cd .rv{background:var(--bg);color:#fff;clip-path:circle(var(--r) at var(--x) var(--y));transition:clip-path .0s}
+.cd.sm .rv{transition:clip-path .55s cubic-bezier(.3,1,.4,1)}
+.cd .ic{position:absolute;left:26px;top:26px;width:52px;height:52px;border-radius:16px;display:grid;place-items:center}.base .ic{background:#F2EEE2;color:#6A614C}.rv .ic{background:rgba(255,255,255,.2);color:#fff}
+.cd h2{font:700 24px/1.05 'Syne';letter-spacing:-.03em;margin-bottom:8px}.cd p{font-size:15px;line-height:1.5;opacity:.75}
+.rv .art{position:absolute;right:-30px;top:-20px;width:230px;height:230px;opacity:.9}
+.cd .tag{position:absolute;right:22px;top:26px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A39A82}.rv .tag{color:rgba(255,255,255,.8)}
+.cd:focus-visible{outline:3px solid #1B1812;outline-offset:3px}
+@media(max-width:700px){.gd{grid-template-columns:1fr}.cd{height:240px}}
+@media(prefers-reduced-motion:reduce){.cd .rv{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Hover to reveal</h1><p>Each card hides its personality until your cursor arrives.</p></div>
+<div class="gd" id="gd">
+<div class="cd" tabindex="0" style="--bg:linear-gradient(150deg,#FF6B35,#F7C548)"><div class="ly base"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><span class="tag">01</span><h2>Instant deploys</h2><p>Push to main and your changes are live worldwide in seconds.</p></div><div class="ly rv"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><span class="tag">01</span><svg class="art" viewBox="0 0 230 230" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3"><circle cx="115" cy="115" r="30"/><circle cx="115" cy="115" r="60"/><circle cx="115" cy="115" r="92"/></svg><h2>Instant deploys</h2><p>Push to main and your changes are live worldwide in seconds.</p></div></div>
+<div class="cd" tabindex="0" style="--bg:linear-gradient(150deg,#6D28D9,#EC4899)"><div class="ly base"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.900M16 3.100a4 4 0 0 1 0 7.800"/></svg></div><span class="tag">02</span><h2>Team spaces</h2><p>Give every squad a home with roles, templates and shared assets.</p></div><div class="ly rv"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.900M16 3.100a4 4 0 0 1 0 7.800"/></svg></div><span class="tag">02</span><svg class="art" viewBox="0 0 230 230" fill="#fff" fill-opacity=".25"><circle cx="90" cy="100" r="46"/><circle cx="150" cy="130" r="56"/><circle cx="110" cy="60" r="28" fill-opacity=".4"/></svg><h2>Team spaces</h2><p>Give every squad a home with roles, templates and shared assets.</p></div></div>
+<div class="cd" tabindex="0" style="--bg:linear-gradient(150deg,#0F766E,#22D3EE)"><div class="ly base"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="tag">03</span><h2>Safe by default</h2><p>Encryption, audit trails and SSO come standard on every plan.</p></div><div class="ly rv"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="tag">03</span><svg class="art" viewBox="0 0 230 230" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3"><path d="M20 190 L110 40 L210 190Z"/><path d="M60 190 L110 100 L170 190Z"/></svg><h2>Safe by default</h2><p>Encryption, audit trails and SSO come standard on every plan.</p></div></div>
+</div></div>
+<script>
+const cds=[...document.querySelectorAll('.cd')];
+function setP(c,x,y,r){c.style.setProperty('--x',x+'px');c.style.setProperty('--y',y+'px');c.style.setProperty('--r',r+'px')}
+cds.forEach((c,i)=>{c.addEventListener('mouseenter',e=>{c.classList.remove('sm');const r=c.getBoundingClientRect();setP(c,e.clientX-r.left,e.clientY-r.top,0);void c.offsetWidth;c.classList.add('sm');setP(c,e.clientX-r.left,e.clientY-r.top,Math.hypot(r.width,r.height))});
+ c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',(e.clientX-r.left)+'px');c.style.setProperty('--y',(e.clientY-r.top)+'px')});
+ c.addEventListener('mouseleave',e=>{const r=c.getBoundingClientRect();c.classList.add('sm');setP(c,e.clientX-r.left,e.clientY-r.top,0)});
+ c.addEventListener('focus',()=>{const r=c.getBoundingClientRect();c.classList.add('sm');setP(c,r.width/2,r.height/2,Math.hypot(r.width,r.height))});c.addEventListener('blur',()=>{const r=c.getBoundingClientRect();setP(c,r.width/2,r.height/2,0)})});
+// demo state: card 2 revealed from a point near the top right
+(function(){const c=cds[1],r=c.getBoundingClientRect();c.classList.remove('sm');setP(c,r.width*.7,r.height*.3,Math.hypot(r.width,r.height)*.62)})();
+</script></body></html>

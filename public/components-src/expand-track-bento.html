@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Expand Track Bento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9E6DE;color:#1B1912;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px}
+.hd{text-align:center;margin-bottom:22px}.hd h1{font:800 clamp(28px,5vw,42px)/1 'Bricolage Grotesque';letter-spacing:-.05em}.hd p{color:#7C7662;font-size:16px;margin-top:8px}
+.gd{display:grid;grid-template-columns:var(--c1,1fr) var(--c2,1fr) var(--c3,1fr);grid-template-rows:var(--r1,1fr) var(--r2,1fr);gap:12px;height:440px;transition:grid-template-columns .6s cubic-bezier(.3,1,.4,1),grid-template-rows .6s cubic-bezier(.3,1,.4,1)}
+.tl{position:relative;border:0;border-radius:26px;overflow:hidden;cursor:pointer;text-align:left;color:#fff;background:var(--bg);padding:22px;display:flex;flex-direction:column;justify-content:flex-end;outline:0;min-width:0;min-height:0}
+.tl:focus-visible{box-shadow:0 0 0 4px #1B1912}
+.tl.a{grid-column:1/3;grid-row:1}.tl.b{grid-column:3;grid-row:1/3}.tl.c{grid-column:1;grid-row:2}.tl.d{grid-column:2;grid-row:2}
+.tl .art{position:absolute;inset:0;pointer-events:none}.tl .art svg{position:absolute;right:-30px;top:-30px;width:260px;height:260px;opacity:.55;transition:transform .8s cubic-bezier(.3,1,.4,1)}.tl.on .art svg{transform:scale(1.25) rotate(8deg)}
+.tl small{position:relative;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.8}
+.tl h2{position:relative;font:800 clamp(22px,3vw,30px)/1.02 'Bricolage Grotesque';letter-spacing:-.04em;margin:6px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl p{position:relative;font-size:15px;line-height:1.5;max-width:34ch;max-height:0;opacity:0;overflow:hidden;transition:all .5s .1s cubic-bezier(.3,1,.4,1)}.tl.on p{max-height:90px;opacity:.9;margin-top:8px}
+.tl .go{position:relative;align-self:flex-start;display:flex;align-items:center;gap:8px;margin-top:0;padding:0 16px;height:0;opacity:0;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.22);backdrop-filter:blur(8px);font-size:13.5px;font-weight:700;transition:all .45s .15s}.tl.on .go{height:36px;opacity:1;margin-top:14px}
+.tl .ix{position:absolute;left:22px;top:20px;font:800 15px 'Bricolage Grotesque';opacity:.7}
+@media(max-width:720px){.gd{display:flex;flex-direction:column;height:auto}.tl{min-height:130px}.tl p,.tl .go{max-height:none;height:auto;opacity:.9;margin-top:6px}.tl .go{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Hover to grow</h1><p>The grid tracks themselves resize to give the hovered tile room.</p></div>
+<div class="gd" id="gd">
+<button class="tl a on" style="--bg:linear-gradient(140deg,#6D28D9,#EC4899)"><span class="ix">01</span><div class="art"><svg viewBox="0 0 260 260" fill="none" stroke="#fff" stroke-width="4"><circle cx="130" cy="130" r="40"/><circle cx="130" cy="130" r="80"/><circle cx="130" cy="130" r="120"/></svg></div><small>Design</small><h2>Systems that scale</h2><p>Tokens, components and docs that stay in sync as your team and product grow.</p><span class="go">Explore<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+<button class="tl b" style="--bg:linear-gradient(160deg,#0F766E,#22D3EE)"><span class="ix">02</span><div class="art"><svg viewBox="0 0 260 260" fill="#fff"><rect x="40" y="40" width="70" height="70" rx="18"/><rect x="130" y="70" width="90" height="90" rx="22" fill-opacity=".6"/><rect x="60" y="140" width="80" height="80" rx="20" fill-opacity=".4"/></svg></div><small>Build</small><h2>Ship every day</h2><p>Preview deploys on every branch, with one click rollbacks when you need them.</p><span class="go">Explore<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+<button class="tl c" style="--bg:linear-gradient(140deg,#B45309,#F59E0B)"><span class="ix">03</span><div class="art"><svg viewBox="0 0 260 260" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"><path d="M20 200 L90 120 L140 160 L240 50"/></svg></div><small>Grow</small><h2>Measure what matters</h2><p>Funnels and cohorts without the setup.</p><span class="go">Explore<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+<button class="tl d" style="--bg:linear-gradient(140deg,#1D4ED8,#6366F1)"><span class="ix">04</span><div class="art"><svg viewBox="0 0 260 260" fill="#fff"><circle cx="100" cy="100" r="44"/><circle cx="170" cy="150" r="56" fill-opacity=".6"/></svg></div><small>Support</small><h2>Help that feels human</h2><p>Chat, docs and community in one place.</p><span class="go">Explore<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button></div></div>
+<script>
+const gd=document.getElementById('gd'),ts=[...gd.children];
+const L={a:['2fr','1fr','1fr','1.35fr','1fr'],b:['1fr','1fr','2fr','1fr','1fr'],c:['1.4fr','1fr','1fr','1fr','1.45fr'],d:['1fr','1.4fr','1fr','1fr','1.45fr']};
+function on(t){const k=t.classList.contains('a')?'a':t.classList.contains('b')?'b':t.classList.contains('c')?'c':'d';ts.forEach(x=>x.classList.toggle('on',x===t));
+ const cols={a:['1.6fr','1fr','1fr'],b:['1fr','1fr','1.7fr'],c:['1.5fr','1fr','1fr'],d:['1fr','1.5fr','1fr']}[k],rows={a:['1.5fr','1fr'],b:['1fr','1fr'],c:['1fr','1.5fr'],d:['1fr','1.5fr']}[k];
+ gd.style.setProperty('--c1',cols[0]);gd.style.setProperty('--c2',cols[1]);gd.style.setProperty('--c3',cols[2]);gd.style.setProperty('--r1',rows[0]);gd.style.setProperty('--r2',rows[1])}
+ts.forEach(t=>{t.addEventListener('mouseenter',()=>on(t));t.addEventListener('focus',()=>on(t));t.addEventListener('click',()=>on(t))});on(ts[0]);
+</script></body></html>

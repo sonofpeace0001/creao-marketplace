@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Code Diff Block</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E8EBF3;color:#151B2E;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;background:#0F1420;border-radius:22px;overflow:hidden;box-shadow:0 36px 70px -30px rgba(10,14,30,.7),0 0 0 1px #1D2536}
+.hd{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid #1B2335;background:#0B101A}.hd .fl{display:flex;align-items:center;gap:8px;font:500 13px 'Fira Code',monospace;color:#C5CEE8}.hd .fl svg{color:#7E8AAE}
+.hd .st{margin-left:auto;display:flex;gap:10px;font:500 12.5px 'Fira Code',monospace}.hd .st b{font-weight:500;color:#4ADE80}.hd .st i{font-style:normal;color:#F87171}
+.tg{display:flex;background:#141B2B;border-radius:9px;padding:3px;margin-left:8px}.tg button{border:0;background:none;color:#7E8AAE;padding:5px 12px;border-radius:7px;font:600 12px 'Inter';cursor:pointer}.tg button[aria-pressed=true]{background:#232D45;color:#fff}.tg button:focus-visible{outline:2px solid #58A6FF}
+.hk{display:flex;align-items:center;gap:10px;padding:8px 18px;background:#121A2B;border-bottom:1px solid #1B2335;font:400 12.5px 'Fira Code',monospace;color:#6C7AA3}
+.cd{padding:6px 0;font:400 13.5px/1.75 'Fira Code',monospace;overflow-x:auto}
+.ln{display:grid;grid-template-columns:44px 44px 22px 1fr;align-items:start;white-space:pre;position:relative;transition:background .2s}.ln:hover{background:rgba(255,255,255,.03)}
+.ln .a,.ln .b{text-align:right;padding-right:10px;color:#4A557A;user-select:none;font-size:12px}.ln .m{text-align:center;color:#6C7AA3;user-select:none}.ln .t{padding-right:20px;color:#C9D1E8}
+.ln.ad{background:rgba(46,160,67,.14);box-shadow:inset 3px 0 0 #2EA043}.ln.ad .m{color:#4ADE80}.ln.ad .b{color:#4ADE80}
+.ln.rm{background:rgba(248,81,73,.13);box-shadow:inset 3px 0 0 #F85149}.ln.rm .m{color:#F87171}.ln.rm .a{color:#F87171}.ln.rm .t{opacity:.85}
+.ln.ad.new{animation:slin .6s cubic-bezier(.3,1.2,.5,1) backwards;animation-delay:calc(var(--i)*70ms)}@keyframes slin{from{opacity:0;transform:translateX(-18px);background:rgba(46,160,67,.5)}}
+.ln.rm.old{animation:slout .6s cubic-bezier(.3,1,.5,1) backwards;animation-delay:calc(var(--i)*40ms)}@keyframes slout{from{opacity:1}to{opacity:.85}}
+.k{color:#FF7B72}.s{color:#A5D6FF}.f{color:#D2A8FF}.n{color:#79C0FF}.cm2{color:#6E7681;font-style:italic}.p2{color:#E6EDF3}
+.ft{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-top:1px solid #1B2335;background:#0B101A;font-size:13px;color:#8892B4}
+.ft .bt{display:flex;gap:8px}.ft button{border:1px solid #2A344E;background:#141B2B;color:#C5CEE8;border-radius:9px;padding:8px 16px;font:600 13px 'Inter';cursor:pointer}.ft button.p{background:#2EA043;border-color:#2EA043;color:#fff}.ft button:focus-visible{outline:2px solid #58A6FF;outline-offset:2px}
+.c .co{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px;font:400 12px 'Fira Code',monospace;color:#5E6B91;background:#101727;cursor:pointer;border:0;width:100%}.c .co:hover{color:#9FB0DC}
+</style></head><body>
+<div class="c"><div class="hd"><div class="fl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5"/></svg>src/lib/session.ts</div><div class="st"><b>+9</b><i>-5</i></div><div class="tg" id="tg"><button aria-pressed="true" data-m="u">Unified</button><button aria-pressed="false" data-m="a">After</button></div></div>
+<div class="hk"><span>@@ -14,11 +14,15 @@</span><span>export async function refreshSession</span></div>
+<div class="cd" id="cd"></div>
+<button class="co" id="co">Show 38 hidden lines</button>
+<div class="ft"><span>Reviewed by Ada and Grace · 2 approvals</span><div class="bt"><button id="rp">Replay</button><button class="p">Merge pull request</button></div></div></div>
+<script>
+const D=[['',' ','export async function refreshSession(token: string) {'],[' ',' ','  const res = await fetch("/api/session", {'],[' ',' ','    method: "POST",'],['-','r','    headers: { Authorization: token },'],['-','r','    body: JSON.stringify({ token }),'],['+','a','    headers: {'],['+','a','      Authorization: `Bearer ${token}`,'],['+','a','      "Content-Type": "application/json",'],['+','a','    },'],['+','a','    cache: "no-store",'],[' ',' ','  })'],['-','r','  if (!res.ok) return null'],['-','r','  return res.json()'],['+','a','  if (!res.ok) {'],['+','a','    throw new SessionError(res.status)'],['+','a','  }'],['+','a','  const data = await res.json()'],['+','a','  return { ...data, refreshedAt: Date.now() }'],[' ',' ','}']];
+function hl(t){let h=t.replace(/&/g,'&amp;').replace(/</g,'&lt;');h=h.replace(/(&quot;|"[^"]*")|(`[^`]*`)|\b(export|async|function|const|await|return|if|throw|new)\b|\b(fetch|refreshSession|SessionError|JSON|stringify|json|now)\b(?=\()|\b(\d+)\b/g,(m,q,tp,kw,fn,nm)=>{if(q||tp)return '<span class="s">'+m+'</span>';if(kw)return '<span class="k">'+m+'</span>';if(fn)return '<span class="f">'+m+'</span>';if(nm)return '<span class="n">'+m+'</span>';return m});return h}
+const cd=document.getElementById('cd');let mode='u';
+function draw(anim){cd.innerHTML='';let a=14,b=14,k=0;D.forEach((d,i)=>{if(mode==='a'&&d[1]==='r')return;const e=document.createElement('div');const cls=d[1]==='a'?'ad':d[1]==='r'?'rm':'';e.className='ln '+cls+(anim&&d[1]==='a'?' new':'')+(anim&&d[1]==='r'?' old':'');e.style.setProperty('--i',k++);const an=d[1]==='a'?'':a,bn=d[1]==='r'?'':b;if(d[1]!=='a')a++;if(d[1]!=='r')b++;e.innerHTML='<span class="a">'+an+'</span><span class="b">'+bn+'</span><span class="m">'+(d[0]===' '?'':d[0])+'</span><span class="t">'+hl(d[2])+'</span>';cd.appendChild(e)})}
+document.querySelectorAll('#tg button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;document.querySelectorAll('#tg button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw(true)});
+document.getElementById('rp').onclick=()=>draw(true);draw(false);
+</script></body></html>

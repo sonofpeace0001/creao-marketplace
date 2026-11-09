@@ -1,0 +1,29 @@
+ROLE
+You are a senior workspace-suite designer and front-end engineer with 15+ years of experience. Build "App Launcher Grid": a nine-dot launcher that opens a frosted panel of colourful app icons with search, staggered entrance and live filtering.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Lavender gradient stage with a frosted white panel and gradient app tiles.
+- Palette: #14172B, #5B5BF6, #F1F2FA, #7C82A8, #8A90B4, #DDE3F5
+- Type: Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Top bar with product name and grid button; popover with search field, section label, 3x3 app grid with icon tiles and labels, empty state and footer link.
+
+INTERACTION & STATES
+- The button toggles the popover with a spring scale; apps stagger in; typing filters apps and switches the label to Results; Escape or outside click closes and returns focus.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Matrix Pricing Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEEF4;color:#12142B;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:860px;background:#fff;border-radius:26px;padding:26px 26px 14px;box-shadow:0 40px 70px -44px rgba(18,20,43,.5),0 0 0 1px rgba(18,20,43,.06)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px}.hd h1{font-size:26px;font-weight:700;letter-spacing:-.045em}
+.tg{display:flex;background:#F0F1F8;border-radius:99px;padding:4px}.tg button{border:0;background:none;padding:8px 18px;border-radius:99px;font:600 13.5px 'Inter Tight';color:#6A6F94;cursor:pointer;display:flex;align-items:center;gap:7px}.tg button[aria-pressed=true]{background:#fff;color:#12142B;box-shadow:0 2px 8px rgba(18,20,43,.12)}.tg button:focus-visible{outline:2px solid #6366F1}.tg em{font-style:normal;font-size:11px;font-weight:700;background:#DCFCE7;color:#15803D;border-radius:99px;padding:1px 7px}
+.tb{position:relative;display:grid;grid-template-columns:1.5fr repeat(3,1fr)}
+.cl{position:absolute;top:0;bottom:0;border-radius:18px;background:linear-gradient(180deg,rgba(99,102,241,.1),rgba(99,102,241,.03));border:1.5px solid rgba(99,102,241,.35);pointer-events:none;transition:left .45s cubic-bezier(.3,1.3,.5,1),opacity .2s;z-index:0}
+.th{position:relative;z-index:1;padding:16px 10px 18px;text-align:center}.th:first-child{text-align:left}
+.th b{display:block;font-size:15px;font-weight:600;margin-bottom:6px;color:#4A4F78}.th .pr{display:flex;justify-content:center;align-items:baseline;gap:2px;font-size:34px;font-weight:700;letter-spacing:-.05em;height:42px;overflow:hidden}.th .pr small{font-size:13px;font-weight:500;color:#8A8FB0;letter-spacing:0;margin-left:3px}
+.dg{position:relative;width:.58em;height:42px;overflow:hidden}.dg div{position:absolute;left:0;right:0;transition:transform .5s cubic-bezier(.2,.9,.2,1)}.dg b{display:block;height:42px;line-height:42px;font-size:inherit;color:#12142B;margin:0;font-weight:700}
+.th .bt{display:block;margin:10px auto 0;border:1.5px solid #D9DCEF;background:#fff;border-radius:12px;padding:9px 0;width:84%;font:600 14px 'Inter Tight';cursor:pointer;color:#12142B}.th .bt.p{background:#12142B;border-color:#12142B;color:#fff}.th .bt:focus-visible{outline:2px solid #6366F1;outline-offset:2px}
+.pp{position:absolute;left:50%;top:-8px;transform:translateX(-50%);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#6366F1;color:#fff;border-radius:99px;padding:3px 10px;white-space:nowrap}
+.rw{display:contents}.rw>*{position:relative;z-index:1;padding:13px 10px;border-top:1px solid #F0F1F7;display:flex;align-items:center;justify-content:center;font-size:14.5px;font-weight:500;transition:background .15s}.rw>*:first-child{justify-content:flex-start;color:#4A4F78;padding-left:0}
+.rw.hv>*{background:rgba(99,102,241,.05)}.rw.hv>*:first-child{color:#12142B}
+.gh{grid-column:1/-1;position:relative;z-index:1;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8A8FB0;padding:18px 0 6px;border-top:1px solid #F0F1F7}
+.ck{width:22px;height:22px;border-radius:50%;background:#E0E7FF;display:grid;place-items:center;color:#4F46E5}.ds{width:12px;height:2px;border-radius:2px;background:#D5D8EA}.vl{font-family:'Geist Mono',monospace;font-size:13px;color:#12142B}
+@media(max-width:640px){.tb{grid-template-columns:1.2fr repeat(3,.9fr)}.th .pr{font-size:24px}.rw>*{font-size:12.5px;padding:11px 4px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Compare plans</h1><div class="tg" id="tg"><button aria-pressed="false" data-y="0">Monthly</button><button aria-pressed="true" data-y="1">Annual <em>-20%</em></button></div></div>
+<div class="tb" id="tb"><div class="cl" id="cl"></div></div></div>
+<script>
+const PL=[['Starter',0,0],['Pro',24,19],['Business',64,51]];const ROWS=[['Usage'],['Projects','3','Unlimited','Unlimited'],['Collaborators','1','10','50'],['Storage','2 GB','100 GB','1 TB'],['Features'],['Custom domains',0,1,1],['Version history','7 days','90 days','Unlimited'],['Priority support',0,1,1],['SSO and audit logs',0,0,1]];
+const tb=document.getElementById('tb'),cl=document.getElementById('cl');let yr=1;
+const CK='<span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span>';
+let h='<div class="th"></div>'+PL.map((p,i)=>'<div class="th">'+(i===1?'<span class="pp">Most popular</span>':'')+'<b>'+p[0]+'</b><div class="pr" id="pr'+i+'"></div><button class="bt'+(i===1?' p':'')+'">'+(i===0?'Start free':'Choose '+p[0])+'</button></div>').join('');
+ROWS.forEach(r=>{if(r.length===1){h+='<div class="gh">'+r[0]+'</div>';return}h+='<div class="rw"><div>'+r[0]+'</div>'+[1,2,3].map(k=>'<div>'+(r[k]===1?CK:r[k]===0?'<span class="ds"></span>':'<span class="vl">'+r[k]+'</span>')+'</div>').join('')+'</div>'});
+cl.insertAdjacentHTML('afterend',h);
+function pos(i){const th=tb.querySelectorAll('.th')[i+1];if(!th){cl.style.opacity=0;return}cl.style.opacity=1;cl.style.left=th.offsetLeft+'px';cl.style.width=th.offsetWidth+'px'}
+function odo(el,v){const s=String(v);let ds=[...el.querySelectorAll('.dg')];if(ds.length!==s.length){el.innerHTML='<span style="font-size:20px;margin-top:-2px;margin-right:1px;line-height:42px;font-weight:600">$</span>'+[...s].map(()=>'<div class="dg"><div>'+[...'0123456789'].map(n=>'<b>'+n+'</b>').join('')+'</div></div>').join('')+'<small>/mo</small>';ds=[...el.querySelectorAll('.dg')];ds.forEach(d=>d.firstChild.style.transition='none');requestAnimationFrame(()=>requestAnimationFrame(()=>ds.forEach(d=>d.firstChild.style.transition='')))}ds.forEach((d,i)=>d.firstChild.style.transform='translateY(-'+(+s[i]*42)+'px)')}
+function price(){PL.forEach((p,i)=>odo(document.getElementById('pr'+i),yr?p[2]:p[1]))}
+document.querySelectorAll('#tg button').forEach(b=>b.onclick=()=>{yr=+b.dataset.y;document.querySelectorAll('#tg button').forEach(x=>x.setAttribute('aria-pressed',x===b));price()});
+price();pos(1);
+tb.querySelectorAll('.th').forEach((t,i)=>{if(i>0){t.addEventListener('mouseenter',()=>pos(i-1))}});
+tb.querySelectorAll('.rw').forEach(r=>{r.querySelectorAll('div').forEach((c,i)=>{c.addEventListener('mouseenter',()=>{r.classList.add('hv');if(i>0)pos(i-1)});c.addEventListener('mouseleave',()=>r.classList.remove('hv'))})});
+tb.addEventListener('mouseleave',()=>pos(1));addEventListener('resize',()=>pos(1));(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{cl.style.transition='none';pos(1);requestAnimationFrame(()=>cl.style.transition='')});
+</script></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior cyberpunk visual designer with 15+ years of experience. Build "Glitch Text Hero": a cyberpunk headline with RGB split layers, sliced clip-path tears, skew jumps, scanlines and a hover surge.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black with CRT scanlines, vignette, cyan and magenta channels and mono type.
+- Palette: #00F0FF, #FF2E7E, #05060A, #F2F4FF, #8C93B5
+- Type: Rubik Glitch, Space Mono, Anton (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Signal eyebrow; condensed Anton headline with two pseudo layers; copy; two angular buttons.
+
+INTERACTION & STATES
+- Stepped keyframes move clipped red and cyan copies and skew the base text in bursts; hovering speeds the glitch up.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

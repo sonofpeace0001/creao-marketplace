@@ -1,0 +1,29 @@
+ROLE
+You are a senior creative-coding engineer and visual designer with 15+ years of experience. Build "Plasma Field Shader": a per-pixel plasma colour field rendered on canvas that warps toward the cursor, with three palettes and an fps readout.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep black frame around a saturated cosine-palette plasma with Unbounded type.
+- Palette: #05030B, #F4EFFF, #1F1536, #8B5CF6, #14082E
+- Type: Unbounded, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Low-resolution canvas upscaled smoothly; HUD with title and fps; palette pills (Nebula, Solar, Deep sea).
+
+INTERACTION & STATES
+- Each frame computes summed sine waves per pixel with a cursor-centred warp and a cosine palette; pointer position eases toward the cursor; palettes swap; reduced motion freezes time.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

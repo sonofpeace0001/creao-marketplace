@@ -1,0 +1,29 @@
+ROLE
+You are a senior tactile-interface designer and front-end engineer with 15+ years of experience. Build "Polaroid Drag Gallery": a corkboard of tilted polaroids you can drag, fling with momentum and shuffle.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm kraft table with a wooden frame, taped photos and handwritten captions.
+- Palette: #4B3516, #FDFBF5, #CDB892, #C3AC82, #2B2112, #E8DCC2
+- Type: Caveat, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Framed board with title; six polaroid cards with generated artwork, tape and caption; shuffle button.
+
+INTERACTION & STATES
+- Pointer dragging lifts the card above the pile; release flings it with decaying velocity and wall bounce while rotation settles; Shuffle springs cards to random positions.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

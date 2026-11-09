@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Link Preview Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFEBE1;color:#25211A;font-family:'Newsreader',serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{position:relative;width:100%;max-width:700px;background:#FBF8F1;border-radius:26px;padding:42px 40px;box-shadow:0 40px 70px -44px rgba(37,33,26,.55),0 0 0 1px rgba(37,33,26,.07)}
+.c small{font:600 12px 'Inter';letter-spacing:.14em;text-transform:uppercase;color:#B4531F}.c h1{font:600 clamp(26px,4.6vw,36px)/1.1 'Newsreader',serif;letter-spacing:-.02em;margin:8px 0 18px}
+.c p{font-size:20px;line-height:1.7;color:#3C372D}
+.lk{position:relative;color:#1D4ED8;text-decoration:underline;text-decoration-color:rgba(29,78,216,.35);text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:pointer;transition:text-decoration-color .2s}.lk:hover,.lk:focus-visible{text-decoration-color:#1D4ED8;outline:0}
+.lk:focus-visible{outline:2px solid #1D4ED8;outline-offset:3px;border-radius:3px}
+.pv{position:absolute;left:0;top:0;width:260px;border-radius:18px;background:#fff;box-shadow:0 30px 50px -16px rgba(37,33,26,.5),0 0 0 1px rgba(37,33,26,.08);overflow:hidden;pointer-events:none;opacity:0;transform:translateY(8px) scale(.94);transform-origin:bottom center;transition:opacity .22s,transform .3s cubic-bezier(.3,1.4,.5,1);z-index:9;font-family:'Inter',sans-serif}
+.pv.on{opacity:1;transform:none}
+.pv .im{height:130px;background:var(--g);position:relative}.pv .im::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 20%,rgba(255,255,255,.5),transparent 55%)}
+.pv .tx{padding:12px 14px 14px}.pv .dm{display:flex;align-items:center;gap:7px;font-size:12px;color:#7C7767;font-weight:600}.pv .dm i{width:14px;height:14px;border-radius:4px;background:var(--c)}.pv b{display:block;font-size:14.5px;font-weight:600;letter-spacing:-.01em;margin:6px 0 3px;color:#25211A}.pv span.d{font-size:12.5px;line-height:1.45;color:#6B665A;display:block}
+.pv::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:#fff;transform:translateX(-50%) rotate(45deg);display:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c" id="c"><small>Essay · 5 min read</small><h1>Why we stopped chasing every trend</h1>
+<p>Last year we replaced our roadmap with a single question. Inspired by <a class="lk" data-k="0" href="#" tabindex="0">the slow software movement</a>, we cut three features, wrote a <a class="lk" data-k="1" href="#">public changelog</a> and began shipping on a <a class="lk" data-k="2" href="#">four-day weekly rhythm</a>. The result was calmer teams and, somewhat to our surprise, <a class="lk" data-k="3" href="#">happier customers</a>.</p>
+<div class="pv" id="pv" role="tooltip"><div class="im" id="im"></div><div class="tx"><div class="dm"><i id="fv"></i><span id="dn"></span></div><b id="t"></b><span class="d" id="d"></span></div></div></div>
+<script>
+const K=[['slowsoftware.org','The Slow Software Manifesto','Eight principles for building tools that respect attention and time.','linear-gradient(135deg,#FFD9A8,#E8873A 60%,#8A3A12)','#E8873A'],['northwind.app/changelog','Changelog','Everything we shipped, fixed and removed. Updated every Friday.','linear-gradient(135deg,#B8D4FF,#3D6FE0 60%,#1B2F7A)','#3D6FE0'],['workweek.studio/4day','The four-day rhythm','How one small team plans, builds and reviews in four focused days.','linear-gradient(135deg,#C8F0D4,#2EA36A 60%,#0F4A33)','#2EA36A'],['northwind.app/stories','Customer stories','Honest notes from the people who use Northwind every single day.','linear-gradient(135deg,#F7C6E4,#C94F9A 60%,#5A1A48)','#C94F9A']];
+const c=document.getElementById('c'),pv=document.getElementById('pv');let cur=null;
+function show(a){const k=K[+a.dataset.k];document.getElementById('im').style.setProperty('--g',k[3]);document.getElementById('im').style.background=k[3];document.getElementById('fv').style.background=k[4];document.getElementById('dn').textContent=k[0];document.getElementById('t').textContent=k[1];document.getElementById('d').textContent=k[2];
+ const r=a.getBoundingClientRect(),p=c.getBoundingClientRect();let x=r.left-p.left+r.width/2-130;x=Math.max(10,Math.min(p.width-270,x));const h=pv.offsetHeight||230;pv.style.left=x+'px';pv.style.top=(r.top-p.top-h-12)+'px';pv.classList.add('on');cur=a}
+function hide(){pv.classList.remove('on');cur=null}
+c.querySelectorAll('.lk').forEach(a=>{a.addEventListener('pointerenter',()=>show(a));a.addEventListener('pointerleave',hide);a.addEventListener('focus',()=>show(a));a.addEventListener('blur',hide);a.addEventListener('click',e=>e.preventDefault())});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide()});
+setTimeout(()=>show(c.querySelectorAll('.lk')[1]),80);
+</script></body></html>

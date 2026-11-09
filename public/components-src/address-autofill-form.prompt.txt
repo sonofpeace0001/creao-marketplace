@@ -1,0 +1,29 @@
+ROLE
+You are a senior checkout UX designer and front-end engineer with 15+ years of experience. Build "Address Autofill Form": an address form where picking a suggestion types into city, state and ZIP in cascade while a map pin drops and ripples.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White form beside a soft blue illustrated map with a teal pin and glass address card.
+- Palette: #0E7490, #6A8294, #10202B, #DDE6EC, #CFFAFE, #E8EEF2
+- Type: Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Street input with suggestion list; optional unit; city, state and ZIP; save button; map with pin, ripple and address card.
+
+INTERACTION & STATES
+- Typing filters suggestions with highlighted matches and arrow key navigation; selection types the dependent fields with a flash highlight; the pin drops with a bounce.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

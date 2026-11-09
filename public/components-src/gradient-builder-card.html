@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Gradient Builder Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEDF3;color:#14162A;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;background:#fff;border-radius:28px;padding:20px;display:grid;grid-template-columns:1.1fr 1fr;gap:20px;box-shadow:0 40px 70px -44px rgba(20,22,42,.5),0 0 0 1px rgba(20,22,42,.06)}
+.pv{position:relative;border-radius:20px;min-height:340px;overflow:hidden;background:var(--g);transition:background .1s}
+.pv::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 15%,rgba(255,255,255,.28),transparent 50%);pointer-events:none}
+.pv .lb{position:absolute;left:18px;bottom:16px;right:18px;display:flex;justify-content:space-between;align-items:flex-end;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.3);z-index:2}.pv .lb b{font-size:26px;font-weight:700;letter-spacing:-.04em}.pv .lb span{font:500 12px 'JetBrains Mono',monospace;opacity:.9}
+.ct{display:flex;flex-direction:column;gap:16px;padding:6px 4px}
+.ct h1{font-size:21px;font-weight:700;letter-spacing:-.04em}.ct label{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#7A7E9C;margin-bottom:8px}
+.st{display:flex;gap:10px}.sw{position:relative;flex:1;height:50px;border-radius:14px;background:var(--c);border:3px solid #fff;box-shadow:0 0 0 1.5px #D9DBE8;cursor:pointer;transition:transform .15s}.sw:hover{transform:translateY(-2px)}.sw input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}.sw:focus-within{box-shadow:0 0 0 3px #14162A}
+.pr{display:flex;flex-wrap:wrap;gap:8px}.pr button{width:34px;height:34px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1.5px #D9DBE8;background:var(--g);cursor:pointer;transition:transform .15s}.pr button:hover{transform:scale(1.15)}.pr button:focus-visible{outline:2px solid #14162A;outline-offset:2px}
+.ag{display:flex;align-items:center;gap:14px}.dl{position:relative;flex:none;width:58px;height:58px;border-radius:50%;background:#F2F3F8;border:2px solid #E1E3EF;touch-action:none;cursor:grab}.dl i{position:absolute;left:50%;top:50%;width:3px;height:23px;margin:-23px 0 0 -1.5px;background:#14162A;border-radius:3px;transform-origin:50% 100%;transform:rotate(var(--a))}.dl i::before{content:"";position:absolute;left:-4px;top:-4px;width:11px;height:11px;border-radius:50%;background:#14162A}.dl:focus-visible{outline:2px solid #14162A;outline-offset:2px}
+.ag input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:linear-gradient(90deg,#14162A var(--p),#E1E3EF var(--p));outline:0}.ag input::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:4px solid #14162A}.ag b{font:500 14px 'JetBrains Mono',monospace;width:46px;text-align:right}
+.cs{background:#14162A;color:#C9CDF2;border-radius:14px;padding:14px 16px;font:400 12.5px/1.6 'JetBrains Mono',monospace;position:relative;word-break:break-all}.cs i{color:#9CA3FF;font-style:normal}.cs button{position:absolute;right:10px;top:10px;border:0;background:#262A4E;color:#fff;border-radius:8px;padding:5px 10px;font:600 11.5px 'Space Grotesk';cursor:pointer;transition:background .2s}.cs button.ok{background:#16A34A}.cs button:focus-visible{outline:2px solid #fff}
+@media(max-width:640px){.c{grid-template-columns:1fr}.pv{min-height:220px}}
+</style></head><body>
+<div class="c"><div class="pv" id="pv"><div class="lb"><b id="nm">Sunset Drift</b><span id="ang">135deg</span></div></div>
+<div class="ct"><h1>Gradient builder</h1><div><label>Colors</label><div class="st" id="st"></div></div><div><label>Presets</label><div class="pr" id="pr"></div></div><div><label>Angle</label><div class="ag"><div class="dl" id="dl" tabindex="0" role="slider" aria-label="Angle" aria-valuemin="0" aria-valuemax="360"><i></i></div><input type="range" id="rg" min="0" max="360" value="135" aria-label="Angle"><b id="av"></b></div></div><div class="cs" id="cs"><button id="cp">Copy</button></div></div></div>
+<script>
+let col=['#FF7A59','#F72585','#7209B7'],ang=135;const PR=[['Sunset Drift',['#FF7A59','#F72585','#7209B7']],['Ocean Glass',['#22D3EE','#3B82F6','#6366F1']],['Mint Fresh',['#A7F3D0','#34D399','#0EA5E9']],['Peach Fizz',['#FDE68A','#FB923C','#EC4899']],['Night Bloom',['#312E81','#7C3AED','#F472B6']]];
+const $=id=>document.getElementById(id);
+$('st').innerHTML=col.map((c,i)=>'<label class="sw" style="--c:'+c+'"><input type="color" value="'+c+'" data-i="'+i+'" aria-label="Color '+(i+1)+'"></label>').join('');
+$('pr').innerHTML=PR.map((p,i)=>'<button aria-label="'+p[0]+'" data-i="'+i+'" style="--g:linear-gradient(135deg,'+p[1].join(',')+')"></button>').join('');
+function css(){return 'linear-gradient('+Math.round(ang)+'deg, '+col.join(', ')+')'}
+function upd(nm){$('pv').style.setProperty('--g',css());$('ang').textContent=Math.round(ang)+'deg';if(nm)$('nm').textContent=nm;$('av').textContent=Math.round(ang)+'°';$('rg').value=ang;$('rg').style.setProperty('--p',(ang/360*100)+'%');$('dl').style.setProperty('--a',ang+'deg');$('dl').setAttribute('aria-valuenow',Math.round(ang));
+ $('cs').firstChild.nodeType===1&&0;const t='<i>background</i>: '+css()+';';[...$('cs').childNodes].forEach(n=>{if(n.nodeType===3)n.remove()});$('cs').insertAdjacentHTML('afterbegin',t);document.querySelectorAll('.sw').forEach((s,i)=>{s.style.setProperty('--c',col[i]);s.querySelector('input').value=col[i]})}
+document.querySelectorAll('.sw input').forEach(i=>i.addEventListener('input',()=>{col[+i.dataset.i]=i.value;upd('Custom mix')}));
+document.querySelectorAll('.pr button').forEach(b=>b.onclick=()=>{const p=PR[+b.dataset.i];col=p[1].slice();upd(p[0])});
+$('rg').addEventListener('input',()=>{ang=+$('rg').value;upd()});
+let dr=false;function da(e){const r=$('dl').getBoundingClientRect(),a=Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI+90;ang=(a+360)%360;upd()}
+$('dl').addEventListener('pointerdown',e=>{dr=true;$('dl').setPointerCapture(e.pointerId);da(e)});$('dl').addEventListener('pointermove',e=>{if(dr)da(e)});$('dl').addEventListener('pointerup',()=>dr=false);
+$('dl').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowUp'){ang=(ang+5)%360;upd()}if(e.key==='ArrowLeft'||e.key==='ArrowDown'){ang=(ang+355)%360;upd()}});
+$('cp').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText('background: '+css()+';').catch(()=>{});$('cp').classList.add('ok');$('cp').textContent='Copied';setTimeout(()=>{$('cp').classList.remove('ok');$('cp').textContent='Copy'},1500)};
+upd();
+</script></body></html>

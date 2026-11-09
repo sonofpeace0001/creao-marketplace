@@ -1,0 +1,29 @@
+ROLE
+You are a senior onboarding designer and front-end engineer with 15+ years of experience. Build "Deck Accordion": a deck of overlapping coloured cards that fan apart when one opens, with springy height animation.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Lavender page with saturated yellow, coral, mint and periwinkle cards stacked with negative margins.
+- Palette: #1A1234, #E9E4F7, #6A5E92
+- Type: Bricolage Grotesque, DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading; four overlapping accordion cards each with a number tile, title, chevron and an expandable body with copy and link.
+
+INTERACTION & STATES
+- Click toggles one card open (aria-expanded); the open card gets margin and lifts out of the stack while neighbours slide; hover lifts a card; grid-template-rows animates content height.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

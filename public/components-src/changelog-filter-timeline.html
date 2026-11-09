@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Changelog Filter Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F0EA;color:#1C1B18;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px;background:#FDFCF9;border-radius:26px;padding:30px 30px 14px;box-shadow:0 40px 70px -44px rgba(60,50,20,.5),0 0 0 1px rgba(28,27,24,.07)}
+.hd h1{font:700 32px 'Fraunces',serif;letter-spacing:-.03em}.hd p{color:#7C766A;font-size:14.5px;margin:4px 0 18px}
+.ft{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}.ft button{display:flex;align-items:center;gap:7px;border:1.5px solid #E7E2D5;background:#fff;border-radius:99px;padding:7px 14px;font:600 13.5px 'Inter';color:#5C574B;cursor:pointer;transition:all .2s}.ft button i{font:500 11.5px 'IBM Plex Mono',monospace;font-style:normal;color:#A39C8B}.ft button[aria-pressed=true]{background:#1C1B18;border-color:#1C1B18;color:#fff}.ft button[aria-pressed=true] i{color:#B9B3A3}.ft button:focus-visible{outline:3px solid #D9480F;outline-offset:2px}
+.tl{position:relative;padding-left:30px}.tl::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(#D9480F,#E7E2D5 30%)}
+.en{display:grid;grid-template-rows:1fr;transition:grid-template-rows .45s cubic-bezier(.3,1,.4,1),opacity .35s,margin .45s}.en.hide{grid-template-rows:0fr;opacity:0}.en>div{overflow:hidden}
+.in{position:relative;padding:0 0 26px}.in::before{content:"";position:absolute;left:-30px;top:6px;width:16px;height:16px;border-radius:50%;background:#FDFCF9;border:3px solid #CFC8B6}.en.lt .in::before{border-color:#D9480F;background:#D9480F;box-shadow:0 0 0 5px rgba(217,72,15,.18)}
+.mt{display:flex;align-items:center;gap:10px;margin-bottom:6px}.mt b{font:500 14px 'IBM Plex Mono',monospace;background:#F0ECE0;border-radius:7px;padding:3px 9px}.mt span{font-size:13px;color:#9A9382}.mt em{font-style:normal;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#D9480F}
+.in h2{font:600 20px 'Fraunces',serif;letter-spacing:-.02em;margin-bottom:10px}
+.it{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.5;color:#4A453A;margin-bottom:6px;transition:opacity .3s}.it.dim{opacity:.25}
+.tg{flex:none;min-width:68px;text-align:center;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:7px;margin-top:2px}.tg.n{background:#DCF5E5;color:#15803D}.tg.i{background:#DFEAFF;color:#1D4ED8}.tg.f{background:#FFE5D6;color:#B4400A}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Changelog</h1><p>Everything we shipped, newest first.</p></div>
+<div class="ft" id="ft" role="group" aria-label="Filter"></div><div class="tl" id="tl"></div></div>
+<script>
+const L=[['v3.4.0','Nov 4, 2026','Command palette and faster search',['n','Press Ctrl K to jump anywhere in the app'],['i','Search is 3x faster on large workspaces'],['f','Fixed a rare crash when pasting tables']],['v3.3.2','Oct 21, 2026','Reliability patch',['f','Exports no longer time out on large reports'],['f','Dark mode flash on first load removed']],['v3.3.0','Oct 7, 2026','Team roles and audit log',['n','Custom roles with granular permissions'],['n','Audit log with CSV export'],['i','Invite flow now supports bulk emails']],['v3.2.0','Sep 16, 2026','Smarter dashboards',['i','Charts remember zoom and filters'],['n','Shareable read-only dashboard links']]];
+const tags={n:'New',i:'Improved',f:'Fixed'};let cur='all';
+const ft=document.getElementById('ft'),tl=document.getElementById('tl');
+const cnt=k=>L.reduce((a,e)=>a+e.slice(3).filter(x=>k==='all'||x[0]===k).length,0);
+[['all','All'],['n','New'],['i','Improved'],['f','Fixed']].forEach(([k,t])=>{const b=document.createElement('button');b.innerHTML=t+' <i>'+cnt(k)+'</i>';b.setAttribute('aria-pressed',k===cur);b.onclick=()=>{cur=k;ft.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));apply()};ft.appendChild(b)});
+L.forEach((e,i)=>{const d=document.createElement('div');d.className='en'+(i===0?' lt':'');d.innerHTML='<div><div class="in"><div class="mt"><b>'+e[0]+'</b><span>'+e[1]+'</span>'+(i===0?'<em>Latest</em>':'')+'</div><h2>'+e[2]+'</h2>'+e.slice(3).map(x=>'<div class="it" data-k="'+x[0]+'"><span class="tg '+x[0]+'">'+tags[x[0]]+'</span><span>'+x[1]+'</span></div>').join('')+'</div></div>';tl.appendChild(d)});
+function apply(){tl.querySelectorAll('.en').forEach(en=>{const its=[...en.querySelectorAll('.it')];const m=its.filter(x=>cur==='all'||x.dataset.k===cur).length;its.forEach(x=>x.classList.toggle('dim',!(cur==='all'||x.dataset.k===cur)));en.classList.toggle('hide',m===0)})}
+</script></body></html>

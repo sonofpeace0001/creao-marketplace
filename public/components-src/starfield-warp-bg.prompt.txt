@@ -1,0 +1,29 @@
+ROLE
+You are a senior creative developer with 15+ years of experience. Build "Starfield Warp Background": a canvas starfield flying toward you with streaking trails that jump to warp speed while you hold the pointer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep space black with icy blue stars and a futuristic Orbitron headline.
+- Palette: #38BDF8, #02030A, #EAF1FF, #7DD3FC, #93C5FD, #9FB2D6
+- Type: Orbitron, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Full bleed canvas; vignette; centered eyebrow, gradient headline, copy and buttons; hold hint.
+
+INTERACTION & STATES
+- Stars are projected in 3D with motion trails; pointer position shifts the vanishing point; pressing accelerates to warp then eases back.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

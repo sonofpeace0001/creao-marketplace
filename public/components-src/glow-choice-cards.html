@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glow Choice Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08080B;color:#EDEDF1;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:700px}
+.hd{margin-bottom:22px}.hd h1{font-size:clamp(24px,4vw,32px);font-weight:600;letter-spacing:-.045em}.hd p{color:#8A8A96;margin-top:6px}
+.g{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.cd{position:relative;display:block;cursor:pointer;border-radius:18px;padding:1px;background:#1D1D24;transition:background .3s,transform .2s;--x:50%;--y:50%}
+.cd input{position:absolute;opacity:0}
+.cd .in{position:relative;display:flex;gap:14px;align-items:flex-start;border-radius:17px;background:#0F0F14;padding:18px;height:100%;overflow:hidden}
+.cd .in::before{content:"";position:absolute;inset:0;background:radial-gradient(200px circle at var(--x) var(--y),rgba(139,143,255,.14),transparent 70%);opacity:0;transition:opacity .25s}.cd:hover .in::before{opacity:1}
+.cd:hover{transform:translateY(-2px)}
+.ic{position:relative;z-index:1;flex:none;width:42px;height:42px;border-radius:12px;background:#17171E;border:1px solid #25252E;display:grid;place-items:center;color:#9A9AB0;transition:all .25s}
+.tx{position:relative;z-index:1;flex:1}.tx b{display:block;font-size:15px;font-weight:600;letter-spacing:-.015em}.tx span{display:block;font-size:13.5px;color:#8A8A96;line-height:1.45;margin-top:3px}.tx em{display:inline-block;margin-top:8px;font:500 11.5px 'Geist Mono',monospace;color:#6A6A78;font-style:normal}
+.ck{position:relative;z-index:1;flex:none;width:22px;height:22px;border-radius:7px;border:1.5px solid #34343F;display:grid;place-items:center;transition:all .25s cubic-bezier(.3,1.5,.5,1)}.ck svg{stroke:#0A0A12;stroke-width:3.500;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:22;stroke-dashoffset:22;transition:stroke-dashoffset .3s .05s}
+.cd:has(input:checked){background:conic-gradient(from 200deg at var(--x) var(--y),#8B8FFF,#E879F9,#22D3EE,#8B8FFF)}
+.cd:has(input:checked) .in{background:linear-gradient(160deg,#17172B,#0F0F14)}.cd:has(input:checked) .ic{background:linear-gradient(135deg,#8B8FFF,#E879F9);border-color:transparent;color:#0A0A12;box-shadow:0 8px 20px -6px rgba(139,143,255,.8)}
+.cd:has(input:checked) .ck{background:#fff;border-color:#fff;transform:scale(1.1)}.cd:has(input:checked) .ck svg{stroke-dashoffset:0}
+.cd:has(input:focus-visible){outline:2px solid #fff;outline-offset:3px}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:20px;font-size:14px;color:#8A8A96}.ft b{color:#fff}.ft button{border:0;background:#EDEDF1;color:#0A0A12;border-radius:12px;padding:11px 20px;font:600 14px 'Geist';cursor:pointer;transition:transform .15s}.ft button:hover:not(:disabled){transform:translateY(-1px)}.ft button:disabled{background:#26262E;color:#6A6A78;cursor:default}.ft button:focus-visible{outline:2px solid #8B8FFF;outline-offset:3px}
+@media(max-width:560px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Choose your add-ons</h1><p>Pick as many as you like. You can change them later.</p></div><div class="g" id="g"></div><div class="ft"><span><b id="n">2</b> selected · <b id="pr">$18</b>/mo</span><button id="go">Continue</button></div></div>
+<script>
+const I=[['Analytics','Funnels, cohorts and live dashboards.',8,'M3 3v18h18M7 14l4-4 4 4 5-6',1],['Automations','Trigger workflows from any event.',6,'M13 2 4 14h7l-1 8 9-12h-7z',0],['Audit logs','A tamper-proof record of changes.',10,'M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z',1],['Priority support','Replies within one hour, 24/7.',12,'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',0]];
+const g=document.getElementById('g');g.innerHTML=I.map((t,i)=>'<label class="cd"><input type="checkbox" '+(t[4]?'checked':'')+' data-p="'+t[2]+'"><div class="in"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="'+t[3]+'"/></svg></span><div class="tx"><b>'+t[0]+'</b><span>'+t[1]+'</span><em>+$'+t[2]+'/mo</em></div><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span></div></label>').join('');
+const B=[...g.querySelectorAll('input')];function upd(){const s=B.filter(b=>b.checked);document.getElementById('n').textContent=s.length;document.getElementById('pr').textContent='$'+s.reduce((a,b)=>a+ +b.dataset.p,0);document.getElementById('go').disabled=!s.length}
+B.forEach(b=>b.onchange=upd);g.querySelectorAll('.cd').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',(e.clientX-r.left)+'px');c.style.setProperty('--y',(e.clientY-r.top)+'px')}));upd();
+</script></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior carousel-UI designer and front-end engineer with 15+ years of experience. Build "Morphing Dot Pager": a slide pager whose active dot stretches into a self-filling progress pill, with arrows and keyboard support.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight stage with gradient slides, violet-to-pink progress fill and round arrow buttons.
+- Palette: #F0EDFF, #A78BFA, #0E0C1F, #17142F, #3A3470, #29244F
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Slide viewport with six gradient slides; previous and next buttons; row of dots where the active one widens into a pill; slide counter.
+
+INTERACTION & STATES
+- The active dot animates its width and a gradient fill over the slide duration, auto-advancing at the end; clicking a dot, arrows or arrow keys navigate; slides cross-slide; reduced motion disables auto-advance.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

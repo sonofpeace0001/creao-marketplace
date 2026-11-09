@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Metric Led Testimonials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg,#14233F);transition:background .6s;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px}
+.tb{display:flex;gap:6px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}.tb button{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);border-radius:99px;padding:9px 20px;font:600 14px 'Inter';cursor:pointer;transition:all .25s}.tb button:hover{background:rgba(255,255,255,.14)}.tb button[aria-pressed=true]{background:#fff;color:#14233F;border-color:#fff}.tb button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.st{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;min-height:340px}
+.mt{position:relative}.mt small{font-size:12.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ac,#7DD3FC)}
+.nm{display:flex;align-items:flex-start;font:400 clamp(110px,18vw,200px)/1 'Instrument Serif',serif;letter-spacing:-.04em;height:1em;overflow:hidden;margin:6px 0 0}
+.dg{position:relative;width:.46em;height:1em;overflow:hidden}.dg div{position:absolute;left:0;right:0;transition:transform .9s cubic-bezier(.2,.9,.2,1)}.dg b{display:block;height:1em;line-height:1em;font-weight:400}.sp{line-height:1em;padding:0 .02em}.un{font-size:.45em;line-height:1.6;margin-left:.05em;font-style:italic;color:var(--ac,#7DD3FC)}
+.mt p{font-size:17px;color:rgba(255,255,255,.7);margin-top:2px}
+.qt{position:relative;transition:opacity .4s,transform .4s}.qt.sw{opacity:0;transform:translateY(12px)}
+.qt q{display:block;font:italic 400 clamp(24px,3.4vw,34px)/1.22 'Instrument Serif',serif;quotes:none;letter-spacing:-.01em}.qt q::before{content:"\201C";color:var(--ac,#7DD3FC)}.qt q::after{content:"\201D";color:var(--ac,#7DD3FC)}
+.ps{display:flex;align-items:center;gap:12px;margin-top:22px}.ps i{width:46px;height:46px;border-radius:50%;background:var(--g);flex:none}.ps b{display:block;font-size:15.5px}.ps span{font-size:13.5px;color:rgba(255,255,255,.65)}
+.lg{margin-top:18px;display:inline-flex;align-items:center;gap:8px;font:600 14px 'Inter';letter-spacing:.04em;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:6px 14px}
+.pg{height:3px;border-radius:3px;background:rgba(255,255,255,.14);margin-top:34px;overflow:hidden}.pg i{display:block;height:100%;width:100%;background:var(--ac,#7DD3FC);transform-origin:left;transform:scaleX(0)}.pg i.run{animation:pr 6s linear forwards}@keyframes pr{to{transform:scaleX(1)}}
+@media(max-width:760px){.st{grid-template-columns:1fr;gap:10px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.pg i.run{animation:none}}
+</style></head><body>
+<div class="c"><div class="tb" id="tb" role="tablist"></div><div class="st"><div class="mt"><small id="lb"></small><div class="nm" id="nm" aria-live="polite"></div><p id="ds"></p></div><div class="qt" id="qt"><q id="q"></q><div class="ps"><i id="av"></i><div><b id="pn"></b><span id="pr"></span></div></div><div class="lg" id="co"></div></div></div><div class="pg"><i id="bar"></i></div></div>
+<script>
+const D=[{c:'Northwind',n:'3.4',u:'x',lb:'Faster delivery',ds:'increase in shipped releases per quarter',q:'We went from shipping every month to every week, and the team has never been calmer.',p:'Priya Raman',r:'VP Engineering',bg:'#14233F',ac:'#7DD3FC',g:'linear-gradient(135deg,#6366F1,#EC4899)'},{c:'Fjord Studio',n:'62',u:'%',lb:'Support savings',ds:'fewer tickets after rolling out the new help center',q:'The help center answers customers before they ever need to reach us. It is the best hire we never made.',p:'Marcus Reid',r:'Head of Support',bg:'#0F3B35',ac:'#6EE7B7',g:'linear-gradient(135deg,#10B981,#0EA5E9)'},{c:'Helios Labs',n:'12',u:'M',lb:'Revenue unlocked',ds:'in new annual contracts closed in the first year',q:'Procurement used to take months. With self-serve plans our enterprise customers sign in an afternoon.',p:'Elena Ortiz',r:'Chief Revenue Officer',bg:'#3A1D3F',ac:'#F9A8D4',g:'linear-gradient(135deg,#F59E0B,#EF4444)'}];
+const tb=document.getElementById('tb'),nm=document.getElementById('nm'),qt=document.getElementById('qt'),bar=document.getElementById('bar');let cur=0,tm;
+D.forEach((d,i)=>{const b=document.createElement('button');b.role='tab';b.textContent=d.c;b.onclick=()=>go(i);tb.appendChild(b)});
+function odo(s,u){const dg=[...s].filter(c=>/\d/.test(c)).length;let ds=[...nm.querySelectorAll('.dg')];if(ds.length!==dg||nm.dataset.s!==s){nm.dataset.s=s;nm.innerHTML=[...s].map(c=>/\d/.test(c)?'<div class="dg"><div>'+[...'0123456789'].map(n=>'<b>'+n+'</b>').join('')+'</div></div>':'<span class="sp">'+c+'</span>').join('')+'<span class="un">'+u+'</span>';ds=[...nm.querySelectorAll('.dg')];ds.forEach(d=>d.firstChild.style.transition='none');ds.forEach(d=>d.firstChild.style.transform='translateY(0)');void nm.offsetWidth;ds.forEach(d=>d.firstChild.style.transition='')}
+ const digs=[...s].filter(c=>/\d/.test(c));requestAnimationFrame(()=>requestAnimationFrame(()=>ds.forEach((d,i)=>d.firstChild.style.transform='translateY(-'+(+digs[i])+'em)')))}
+function go(i,first){cur=i;clearTimeout(tm);const d=D[i];tb.querySelectorAll('button').forEach((b,k)=>{b.setAttribute('aria-pressed',k===i);b.setAttribute('aria-selected',k===i)});document.body.style.setProperty('--bg',d.bg);document.documentElement.style.setProperty('--ac',d.ac);document.body.style.setProperty('--ac',d.ac);
+ const apply=()=>{document.getElementById('lb').textContent=d.lb;document.getElementById('ds').textContent=d.ds;document.getElementById('q').textContent=d.q;document.getElementById('pn').textContent=d.p;document.getElementById('pr').textContent=d.r+', '+d.c;document.getElementById('av').style.setProperty('--g',d.g);document.getElementById('co').textContent=d.c;odo(d.n,d.u);qt.classList.remove('sw')};
+ if(first){apply()}else{qt.classList.add('sw');setTimeout(apply,280)}
+ bar.classList.remove('run');void bar.offsetWidth;bar.classList.add('run');tm=setTimeout(()=>go((i+1)%D.length),6000)}
+function init(){go(0,true)}init();
+</script></body></html>

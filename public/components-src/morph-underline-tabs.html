@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Morph Underline Tabs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=Inter+Tight:wght@400;500;600&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFEBE2;color:#1B1A17;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:680px;background:#FBF9F4;border-radius:24px;padding:26px 28px 30px;box-shadow:0 40px 70px -44px rgba(60,48,20,.5),0 0 0 1px rgba(27,26,23,.08)}
+.hd small{font:500 12px 'Geist Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#9A917C}.hd h1{font:500 32px/1.1 'Newsreader',serif;letter-spacing:-.02em;margin:6px 0 20px}.hd h1 em{color:#C2410C}
+.tb{position:relative;display:flex;gap:4px;border-bottom:1px solid #E5DFD0;overflow-x:auto;scrollbar-width:none}
+.tb button{position:relative;z-index:2;border:0;background:none;padding:12px 16px;font:500 15px 'Inter Tight';color:#8C8470;cursor:pointer;white-space:nowrap;transition:color .2s}.tb button:hover{color:#1B1A17}.tb button[aria-selected=true]{color:#1B1A17;font-weight:600}.tb button:focus-visible{outline:2px solid #C2410C;outline-offset:-3px;border-radius:8px}
+.gh{position:absolute;z-index:1;top:6px;height:36px;border-radius:10px;background:rgba(194,65,12,.08);opacity:0;transition:left .25s cubic-bezier(.3,1.3,.5,1),width .25s,opacity .2s}
+.ul{position:absolute;z-index:3;bottom:-1px;height:3px;border-radius:3px;background:#C2410C;transition:left .45s cubic-bezier(.5,1.5,.4,1),width .45s cubic-bezier(.5,1.5,.4,1)}
+.pn{position:relative;overflow:hidden;min-height:190px;margin-top:22px}
+.pg{position:absolute;inset:0;opacity:0;transform:translateX(calc(var(--d,1)*34px));transition:all .4s cubic-bezier(.3,1,.4,1);pointer-events:none}.pg.on{opacity:1;transform:none;pointer-events:auto}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.st{background:#fff;border:1px solid #EAE4D4;border-radius:16px;padding:16px}.st span{font-size:12.5px;color:#9A917C}.st b{display:block;font:500 30px 'Newsreader',serif;letter-spacing:-.02em;margin:4px 0}.st i{font:500 12px 'Geist Mono',monospace;font-style:normal;color:#15803D}.st i.dn{color:#B91C1C}
+.pg p{margin-top:14px;font-size:14.5px;line-height:1.6;color:#6F6850;max-width:52ch}
+@media(max-width:560px){.sg{grid-template-columns:1fr}.c{padding:20px 16px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><small>Account</small><h1>Studio <em>settings</em></h1></div>
+<div class="tb" id="tb" role="tablist"><span class="gh" id="gh"></span><span class="ul" id="ul"></span></div>
+<div class="pn" id="pn"></div></div>
+<script>
+const T=[['Overview',[['Revenue','$48,210','+12.4%'],['Orders','1,284','+6.1%'],['Refunds','23','-8.0%',1]],'A calm summary of how the studio performed this month, refreshed every hour.'],['Activity',[['Sessions','92.4k','+18%'],['Bounce','31%','-4.2%',1],['Avg. time','3m 12s','+9%']],'Every visit, click and conversion in one timeline. Filter by source or campaign.'],['Billing',[['Plan','Studio','Annual'],['Next invoice','Dec 1','$228'],['Seats','12','3 free']],'Manage payment methods, download invoices and change your plan at any time.'],['Team',[['Members','12','+2'],['Admins','3','0'],['Pending','4','invited']],'Invite teammates and set roles. Admins can manage billing and publishing.'],['Security',[['2FA','Enabled','Everyone'],['Sessions','5','active'],['Alerts','0','this week']],'Review sign-ins, rotate API keys and require two factor for the whole team.']];
+const tb=document.getElementById('tb'),pn=document.getElementById('pn'),ul=document.getElementById('ul'),gh=document.getElementById('gh');let cur=0;
+T.forEach((t,i)=>{const b=document.createElement('button');b.role='tab';b.textContent=t[0];b.id='t'+i;b.setAttribute('aria-controls','p'+i);b.onclick=()=>go(i);b.onmouseenter=()=>{gh.style.left=b.offsetLeft+'px';gh.style.width=b.offsetWidth+'px';gh.style.opacity=1};b.onkeydown=e=>{if(e.key==='ArrowRight')go((cur+1)%T.length,1);if(e.key==='ArrowLeft')go((cur+T.length-1)%T.length,1)};tb.appendChild(b);
+ const p=document.createElement('div');p.className='pg';p.id='p'+i;p.role='tabpanel';p.setAttribute('aria-labelledby','t'+i);p.innerHTML='<div class="sg">'+t[1].map(s=>'<div class="st"><span>'+s[0]+'</span><b>'+s[1]+'</b><i class="'+(s[3]?'dn':'')+'">'+s[2]+'</i></div>').join('')+'</div><p>'+t[2]+'</p>';pn.appendChild(p)});
+tb.addEventListener('mouseleave',()=>gh.style.opacity=0);
+function go(i,f){const bs=tb.querySelectorAll('button');pn.querySelectorAll('.pg').forEach((p,k)=>{p.style.setProperty('--d',i>cur?1:-1);if(k!==i)p.classList.remove('on')});bs.forEach((b,k)=>b.setAttribute('aria-selected',k===i));const b=bs[i];ul.style.left=(b.offsetLeft+16)+'px';ul.style.width=(b.offsetWidth-32)+'px';if(i!==cur){pn.children[i+0]}requestAnimationFrame(()=>pn.querySelector('#p'+i).classList.add('on'));cur=i;if(f)b.focus()}
+const init=()=>{ul.style.transition='none';go(0);requestAnimationFrame(()=>ul.style.transition='')};init();(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{ul.style.transition='none';go(cur);requestAnimationFrame(()=>ul.style.transition='')});
+</script></body></html>

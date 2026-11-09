@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Nested Flyout Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E0F14;color:#E8EAF2;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.st{position:relative;width:100%;max-width:640px;height:440px;background:#14161D;border:1px solid #23262F;border-radius:24px;padding:22px}
+.tb{display:flex;justify-content:space-between;align-items:center}.tb h1{font-size:18px;font-weight:700;letter-spacing:-.03em}.tb span{font:500 12px 'Geist Mono',monospace;color:#6C7288}
+.bt{display:inline-flex;align-items:center;gap:8px;border:1px solid #2B2E3B;background:#1A1D27;color:#E8EAF2;border-radius:12px;padding:10px 14px;font:600 14px 'Inter Tight';cursor:pointer;margin-top:22px}.bt:hover{background:#222633}.bt:focus-visible{outline:2px solid #8B8FFF;outline-offset:2px}.bt[aria-expanded=true]{border-color:#8B8FFF}
+.mn{position:absolute;left:22px;top:118px;width:230px;background:#1A1D27;border:1px solid #2B2E3B;border-radius:16px;padding:6px;box-shadow:0 30px 50px -16px #000;opacity:0;transform:translateY(-6px) scale(.97);transform-origin:top left;pointer-events:none;transition:all .2s cubic-bezier(.3,1.2,.5,1);z-index:5}.mn.op{opacity:1;transform:none;pointer-events:auto}
+.it{position:relative}.it>button,.it>a{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;color:#D5D8E6;text-align:left;font:500 14px 'Inter Tight';padding:9px 10px;border-radius:10px;cursor:pointer;text-decoration:none}.it>button:hover,.it.on>button,.it>a:hover{background:#252938;color:#fff}.it>button:focus-visible,.it>a:focus-visible{outline:2px solid #8B8FFF;outline-offset:-2px}
+.it svg.i{color:#8E93AD;flex:none}.it .ch{margin-left:auto;color:#6C7288}.it kbd{margin-left:auto;font:500 11px 'Geist Mono',monospace;color:#6C7288}
+.sp{height:1px;background:#2B2E3B;margin:6px 4px}.dg{color:#F87171!important}
+.fl{position:absolute;left:calc(100% - 4px);top:-7px;width:210px;background:#1A1D27;border:1px solid #2B2E3B;border-radius:16px;padding:6px;box-shadow:0 30px 50px -16px #000;opacity:0;transform:translateX(-6px);pointer-events:none;transition:all .18s cubic-bezier(.3,1.2,.5,1);margin-left:8px}.it.on>.fl{opacity:1;transform:none;pointer-events:auto}
+.fl .fl{top:-7px}
+.sw{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.hn{position:absolute;right:22px;bottom:18px;font-size:12.5px;color:#6C7288}
+@media(max-width:620px){.fl{left:20px;top:100%;margin:4px 0 0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="st"><div class="tb"><h1>Northwind workspace</h1><span>v2.4</span></div>
+<button class="bt" id="bt" aria-haspopup="menu" aria-expanded="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>New<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="mn op" id="mn" role="menu"></div><div class="hn">Hover submenus, use arrow keys, Esc closes</div></div>
+<script>
+const I=(p)=>'<svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="'+p+'"/></svg>',CH='<svg class="ch" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>';
+const M=[{t:'Document',i:'M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5',k:'D'},{t:'Project',i:'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',s:[{t:'Blank project'},{t:'From template',s:[{t:'Website',c:'#6366F1'},{t:'Mobile app',c:'#10B981'},{t:'Marketing plan',c:'#F59E0B'},{t:'Browse all…'}]},{t:'Import from file'}]},{t:'Whiteboard',i:'M3 5h18v12H3zM8 21h8M12 17v4'},{sp:1},{t:'Invite teammates',i:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M19 8v6M22 11h-6',k:'I'},{t:'Share',i:'M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM8.600 13.500l6.800 4M15.400 6.500l-6.800 4',s:[{t:'Copy link'},{t:'Email invite'},{t:'Publish to web'}]},{sp:1},{t:'Move to trash',i:'M4 7h16M10 11v6M14 11v6M6 7l1 12h10l1-12M9 7V4h6v3',d:1}];
+function build(a,top){return a.map((m,idx)=>{if(m.sp)return '<div class="sp" role="separator"></div>';const sub=m.s?'<div class="fl" role="menu">'+build(m.s)+'</div>':'';return '<div class="it"><button role="menuitem" '+(m.s?'aria-haspopup="menu" aria-expanded="false"':'')+(m.d?' class="dg"':'')+'>'+(m.i?I(m.i):(m.c?'<span class="sw" style="--c:'+m.c+'"></span>':'<span style="width:16px"></span>'))+m.t+(m.s?CH:'')+(m.k?'<kbd>'+m.k+'</kbd>':'')+'</button>'+sub+'</div>'}).join('')}
+const mn=document.getElementById('mn'),bt=document.getElementById('bt');mn.innerHTML=build(M);
+function clear(el){el.querySelectorAll('.it.on').forEach(x=>x.classList.remove('on'))}
+function wire(){mn.querySelectorAll('.it').forEach(it=>{const b=it.querySelector(':scope>button');if(!it.querySelector(':scope>.fl')){it.addEventListener('pointerenter',()=>{[...it.parentElement.children].forEach(s=>{if(s!==it){s.classList.remove('on');s.querySelectorAll('.on').forEach(x=>x.classList.remove('on'))}})});return}
+ let t;it.addEventListener('pointerenter',()=>{clearTimeout(t);[...it.parentElement.children].forEach(s=>{if(s!==it){s.classList.remove('on');s.querySelectorAll('.on').forEach(x=>x.classList.remove('on'))}});it.classList.add('on');b.setAttribute('aria-expanded','true')});it.addEventListener('pointerleave',()=>{t=setTimeout(()=>{it.classList.remove('on');b.setAttribute('aria-expanded','false')},180)});
+ b.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='Enter'){e.preventDefault();it.classList.add('on');const f=it.querySelector(':scope>.fl button');f&&f.focus()}if(e.key==='ArrowLeft'){const p=it.parentElement.closest('.it');if(p){e.preventDefault();it.classList.remove('on');p.querySelector(':scope>button').focus()}}})})}
+wire();
+mn.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='ArrowUp'){const bs=[...e.target.closest('[role=menu]').querySelectorAll(':scope>.it>button')];const i=bs.indexOf(e.target);if(i>-1){e.preventDefault();bs[(i+(e.key==='ArrowDown'?1:bs.length-1))%bs.length].focus()}}if(e.key==='Escape'){mn.classList.remove('op');bt.setAttribute('aria-expanded','false');bt.focus()}});
+bt.onclick=()=>{const o=!mn.classList.contains('op');mn.classList.toggle('op',o);bt.setAttribute('aria-expanded',o);if(!o)clear(mn)};
+document.addEventListener('pointerdown',e=>{if(!mn.contains(e.target)&&!bt.contains(e.target)){mn.classList.remove('op');bt.setAttribute('aria-expanded','false');clear(mn)}});
+setTimeout(()=>{const p=mn.querySelectorAll(':scope>.it')[1];p.classList.add('on');const t=p.querySelectorAll('.it')[1];t.classList.add('on')},80);
+</script></body></html>

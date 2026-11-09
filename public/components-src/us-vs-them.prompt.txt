@@ -1,0 +1,29 @@
+ROLE
+You are a senior pricing-page designer and front-end engineer with 15+ years of experience. Build "Competitor Matrix": a feature matrix comparing your product against three alternatives with a highlighted column and tooltips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream page with an orange highlighted column, tinted check, cross and partial badges, Lexend type.
+- Palette: #E8590C, #2A1E12, #8C7355, #FFF8EF, #FFD8A8, #F4EBDD
+- Type: Lexend (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading; scrolling table with highlighted Best value column; four feature rows with sublabels; partial markers with tooltips; price per seat row.
+
+INTERACTION & STATES
+- Partial markers are focusable and reveal tooltips on hover and focus; the table scrolls horizontally on small screens.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

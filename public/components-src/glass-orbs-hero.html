@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glass Orbs Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{position:relative;background:linear-gradient(135deg,#EDE7FF 0%,#FFE6F0 50%,#E0F4FF 100%);color:#1A1536;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px;overflow:hidden;-webkit-font-smoothing:antialiased}
+.or{position:absolute;border-radius:50%;will-change:transform;pointer-events:none;background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95),rgba(255,255,255,.25) 28%,transparent 46%),radial-gradient(circle at 50% 50%,var(--a),var(--b));box-shadow:inset 0 -10px 24px rgba(255,255,255,.35),inset 0 8px 20px rgba(255,255,255,.55),0 30px 50px -16px var(--s)}
+.or::after{content:"";position:absolute;left:18%;top:10%;width:34%;height:22%;border-radius:50%;background:rgba(255,255,255,.7);filter:blur(5px);transform:rotate(-24deg)}
+.ct{position:relative;z-index:3;text-align:center;max-width:680px}
+.pl{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#5B3FD9;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);backdrop-filter:blur(10px);border-radius:99px;padding:7px 16px;margin-bottom:24px;box-shadow:0 10px 24px -12px rgba(91,63,217,.4)}
+h1{font-size:clamp(42px,8vw,92px);line-height:.96;font-weight:800;letter-spacing:-.065em}h1 span{background:linear-gradient(90deg,#7C3AED,#EC4899,#F59E0B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ct p{font-size:clamp(16px,2vw,19px);line-height:1.6;color:#5C5680;max-width:42ch;margin:20px auto 30px}
+.bt{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}.bt a{padding:15px 28px;border-radius:99px;font:700 15.5px 'Manrope';text-decoration:none}.bt .p{background:#1A1536;color:#fff;box-shadow:0 20px 34px -14px #1A1536}.bt .g{background:rgba(255,255,255,.7);border:1px solid #fff;color:#1A1536;backdrop-filter:blur(8px)}.bt a:focus-visible{outline:3px solid #7C3AED;outline-offset:3px}
+</style></head><body>
+<div class="or" data-d="1.8" style="--a:#C4B5FD;--b:#7C3AED;--s:rgba(124,58,237,.6);width:200px;height:200px;left:6%;top:12%"></div>
+<div class="or" data-d="1.1" style="--a:#FBCFE8;--b:#EC4899;--s:rgba(236,72,153,.55);width:130px;height:130px;right:9%;top:10%"></div>
+<div class="or" data-d="2.4" style="--a:#BAE6FD;--b:#0EA5E9;--s:rgba(14,165,233,.55);width:250px;height:250px;right:5%;bottom:8%"></div>
+<div class="or" data-d=".8" style="--a:#FDE68A;--b:#F59E0B;--s:rgba(245,158,11,.55);width:96px;height:96px;left:14%;bottom:14%"></div>
+<div class="or" data-d="1.4" style="--a:#A7F3D0;--b:#10B981;--s:rgba(16,185,129,.5);width:72px;height:72px;left:42%;top:7%"></div>
+<div class="ct"><span class="pl">Version 3 is here</span><h1>Make something <span>delightful</span></h1><p>Playful, polished interfaces that people want to touch. Move your mouse and the world follows.</p><div class="bt"><a class="p" href="#">Get started</a><a class="g" href="#">See examples</a></div></div>
+<script>
+const os=[...document.querySelectorAll('.or')];let mx=0,my=0,tx=0,ty=0,real=false,t=0;
+addEventListener('pointermove',e=>{real=true;tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function f(){t+=.012;if(!real){tx=Math.cos(t*.8)*.7;ty=Math.sin(t*1.1)*.7}mx+=(tx-mx)*.06;my+=(ty-my)*.06;os.forEach((o,i)=>{const d=+o.dataset.d,bob=Math.sin(t*1.6+i*1.7)*10;o.style.transform='translate('+(-mx*d*34)+'px,'+(-my*d*34+bob)+'px)'});if(!reduce)requestAnimationFrame(f)}
+t=.7;f();
+</script></body></html>

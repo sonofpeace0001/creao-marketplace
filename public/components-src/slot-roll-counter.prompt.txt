@@ -1,0 +1,29 @@
+ROLE
+You are a senior playful-metrics designer and front-end engineer with 15+ years of experience. Build "Slot Roll Counter": a chunky mechanical roller counter whose digit wheels spin to a new value, with a randomise button and add-a-thousand.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Yellow neo-brutalist card with black casing, cream digit tiles and Bowlby One numerals.
+- Palette: #16110A, #FFD84D, #FFFBEA, #F2E9C4, #5C5336, #FF5A36
+- Type: Bowlby One, Space Grotesk (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Label pill; black housing with six digit wheels and a comma separator; caption; Roll and +1,000 buttons; today and this-week stats.
+
+INTERACTION & STATES
+- Each wheel is a vertical strip translated to its digit with a staggered ease-out; Roll picks a random value and spins from the top; +1000 updates in place; aria-label tracks the value.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Group Spotlight Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08090C;color:#F0F2F8;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px}
+.hd{text-align:center;margin-bottom:28px}.hd h1{font-size:clamp(28px,5vw,44px);font-weight:700;letter-spacing:-.055em}.hd p{color:#7C8198;font-size:16px;margin-top:8px}
+.gd{--x:-999px;--y:-999px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative}
+.cd{position:relative;border-radius:22px;padding:1px;background:rgba(255,255,255,.07);overflow:hidden}
+.cd::before{content:"";position:absolute;inset:0;border-radius:22px;background:radial-gradient(320px circle at calc(var(--x) - var(--l)) calc(var(--y) - var(--t)),rgba(129,140,248,.9),rgba(236,72,153,.4) 40%,transparent 70%);opacity:var(--o,0);transition:opacity .3s}
+.cd .in{position:relative;height:210px;border-radius:21px;background:#0E1016;padding:22px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.cd .in::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at calc(var(--x) - var(--l) - 1px) calc(var(--y) - var(--t) - 1px),rgba(129,140,248,.16),transparent 65%);opacity:var(--o,0);transition:opacity .3s;pointer-events:none}
+.cd .in>*{position:relative}
+.cd .ic{width:44px;height:44px;border-radius:13px;background:#171A24;border:1px solid #232736;display:grid;place-items:center;color:#A5B4FC}
+.cd h2{font-size:18px;font-weight:600;letter-spacing:-.03em;margin-bottom:5px}.cd p{font-size:14px;line-height:1.5;color:#858BA3}
+.cd .tg{position:absolute;right:18px;top:18px;font-size:11.5px;font-weight:600;color:#8087A3;background:#151823;border:1px solid #22263A;border-radius:99px;padding:3px 10px}
+@media(max-width:700px){.gd{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.cd::before,.cd .in::before{transition:none}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>One light, many cards</h1><p>A single spotlight moves across the whole grid and lights each border as it passes.</p></div><div class="gd" id="gd"></div></div>
+<script>
+const I=['M13 2 4 14h7l-1 8 9-12h-7z','M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z','M3 3v18h18M7 14l4-4 4 4 5-6','M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z','M4 6h16v14H4zM8 3v4M16 3v4M4 11h16','M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8'];
+const T=[['Realtime sync','Edits appear for everyone the instant you make them.','New'],['Secure by design','Encryption at rest and in transit, with audit trails.',''],['Live analytics','Dashboards that update as events arrive.',''],['Threaded comments','Discuss work right where it happens.',''],['Smart scheduling','Plan around time zones without the spreadsheet.','Beta'],['Team spaces','Give every group a home with roles and templates.','']];
+const gd=document.getElementById('gd');T.forEach((t,i)=>{const e=document.createElement('div');e.className='cd';e.innerHTML='<div class="in">'+(t[2]?'<span class="tg">'+t[2]+'</span>':'')+'<div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="'+I[i]+'"/></svg></div><div><h2>'+t[0]+'</h2><p>'+t[1]+'</p></div></div>';gd.appendChild(e)});
+const cds=[...gd.children];let real=false,tt=0;
+function lay(){const g=gd.getBoundingClientRect();cds.forEach(c=>{const r=c.getBoundingClientRect();c.style.setProperty('--l',(r.left-g.left)+'px');c.style.setProperty('--t',(r.top-g.top)+'px')})}
+function set(x,y,o){gd.style.setProperty('--x',x+'px');gd.style.setProperty('--y',y+'px');gd.style.setProperty('--o',o);cds.forEach(c=>c.style.setProperty('--o',o))}
+lay();addEventListener('resize',lay);
+gd.addEventListener('pointermove',e=>{real=true;const r=gd.getBoundingClientRect();set(e.clientX-r.left,e.clientY-r.top,1)});gd.addEventListener('pointerleave',()=>{real=false});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function f(){if(!real){tt+=.012;const r=gd.getBoundingClientRect();set(r.width*(.5+Math.cos(tt)*.44),r.height*(.5+Math.sin(tt*1.3)*.42),1)}if(!reduce)requestAnimationFrame(f)}
+tt=.35;set(gd.getBoundingClientRect().width*.9,gd.getBoundingClientRect().height*.4,1);(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{lay();f()});
+</script></body></html>

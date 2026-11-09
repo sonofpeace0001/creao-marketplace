@@ -1,0 +1,29 @@
+ROLE
+You are a senior e-commerce product-page designer and front-end engineer with 15+ years of experience. Build "Lens Zoom Image": a product image with a circular magnifier lens that follows the pointer and a zoom-level slider.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm clay page with a generated speckled-glaze vase illustration and a white-ringed glass lens.
+- Palette: #B45309, #6C5E52, #EFE9E1, #2A211B, #C9783F, #E4D9CC
+- Type: Fraunces, Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Square SVG vase artwork; absolutely positioned lens clone scaled by Z; hint chip; product copy with spec pills and a zoom slider.
+
+INTERACTION & STATES
+- Pointer moves the lens and offsets the scaled clone so the magnified area matches; the lens pops in and out; the slider changes 2x to 6x; it auto-demos on load.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

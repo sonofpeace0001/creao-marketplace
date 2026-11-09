@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial landing page designer with 15+ years of experience. Build "Scroll Reveal Sections": long form sections whose content fades up in sequence, counters count up and an image unveils with a clip wipe, with a side progress rail.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream paper with serif headlines, orange accents and mono eyebrows.
+- Palette: #C2410C, #17150F, #7A7460, #F59E0B, #DAD6CE, #FBF9F3
+- Type: Instrument Serif, Inter, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Progress rail and dots; four sections with eyebrow, headline and copy; stat counters; clipped image; quote and CTA.
+
+INTERACTION & STATES
+- Sections gain an in-view class when scrolled into view; children transition with staggered delays; numbers animate to their targets; the rail tracks scroll.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

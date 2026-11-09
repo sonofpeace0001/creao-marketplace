@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Firefly Glow Field</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{position:relative;min-height:100vh;background:linear-gradient(180deg,#050A12 0%,#0B1A1F 60%,#102A26 100%);color:#E8F6EA;font-family:'Jost',sans-serif;display:grid;place-items:center;padding:24px;overflow:hidden;-webkit-font-smoothing:antialiased}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.tr{position:absolute;left:0;right:0;bottom:0;height:34%;pointer-events:none}.tr svg{width:100%;height:100%;display:block}
+.ct{position:relative;z-index:2;text-align:center;max-width:680px;pointer-events:none}
+.ct small{font-size:12.5px;font-weight:500;letter-spacing:.36em;text-transform:uppercase;color:#B8F7A8}
+.ct h1{font:500 clamp(48px,9vw,104px)/.96 'Cormorant Garamond',serif;letter-spacing:-.02em;margin:16px 0 18px;text-shadow:0 0 40px rgba(184,247,168,.25)}.ct h1 em{font-style:italic;color:#D9FFC9}
+.ct p{font-size:clamp(15px,2vw,18px);line-height:1.65;color:#9FC4A8;max-width:40ch;margin:0 auto 28px}
+.bt{display:inline-flex;gap:12px;pointer-events:auto}.bt a{padding:14px 28px;border-radius:99px;font:500 15px 'Jost';letter-spacing:.04em;text-decoration:none}.bt .p{background:linear-gradient(135deg,#D9FFC9,#8EEFA3);color:#052012;box-shadow:0 0 40px -6px #8EEFA3}.bt .g{border:1px solid rgba(184,247,168,.4);color:#D3F5D0;background:rgba(5,16,12,.4)}.bt a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.hint{position:absolute;bottom:16px;left:0;right:0;text-align:center;z-index:2;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#4E7A5E}
+</style></head><body>
+<canvas id="cv"></canvas>
+<div class="tr"><svg viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 300V220Q120 150 240 200T480 205T720 195T960 205T1200 190V300Z" fill="#06100C"/><path d="M0 300V255Q150 205 300 250T600 252T900 248T1200 240V300Z" fill="#030806"/></svg></div>
+<div class="ct"><small>Midsummer night</small><h1>Follow the <em>fireflies</em></h1><p>A field of soft lights that drift, pulse and gently gather around your cursor.</p><div class="bt"><a class="p" href="#">Enter the forest</a><a class="g" href="#">Learn more</a></div></div><div class="hint">Move your cursor to call them</div>
+<script>
+const cv=document.getElementById('cv'),x=cv.getContext('2d');let W,H,dpr=Math.min(2,devicePixelRatio||1);function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}size();addEventListener('resize',size);
+const N=70,F=[];for(let i=0;i<N;i++)F.push({x:Math.random()*W,y:H*.15+Math.random()*H*.7,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.4,ph:Math.random()*6.28,sp:.6+Math.random()*1.2,r:1.4+Math.random()*2.4,h:70+Math.random()*60});
+let mx=-999,my=-999,real=false,t=0;addEventListener('pointermove',e=>{real=true;mx=e.clientX;my=e.clientY});addEventListener('pointerleave',()=>real=false);
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function frame(){t+=.016;x.clearRect(0,0,W,H);let tx=mx,ty=my;if(!real){tx=W/2+Math.cos(t*.7)*W*.26;ty=H*.5+Math.sin(t*1.1)*H*.18}
+ F.forEach(f=>{f.vx+=Math.sin(t*f.sp+f.ph)*.012;f.vy+=Math.cos(t*f.sp*.8+f.ph)*.01;const dx=tx-f.x,dy=ty-f.y,d=Math.hypot(dx,dy);if(d<260&&d>1){f.vx+=dx/d*.018*(1-d/260);f.vy+=dy/d*.018*(1-d/260)}f.vx*=.985;f.vy*=.985;f.x+=f.vx;f.y+=f.vy;if(f.x<-20)f.x=W+20;if(f.x>W+20)f.x=-20;if(f.y<H*.08)f.vy+=.03;if(f.y>H*.86)f.vy-=.03;
+  const g=.5+.5*Math.sin(t*f.sp*2+f.ph),a=.25+g*.75,R=f.r*(5+g*9);const gr=x.createRadialGradient(f.x,f.y,0,f.x,f.y,R);gr.addColorStop(0,'hsla('+f.h+',95%,78%,'+a+')');gr.addColorStop(.35,'hsla('+f.h+',90%,60%,'+a*.35+')');gr.addColorStop(1,'hsla('+f.h+',90%,50%,0)');x.fillStyle=gr;x.beginPath();x.arc(f.x,f.y,R,0,6.283);x.fill();x.fillStyle='rgba(255,255,230,'+a+')';x.beginPath();x.arc(f.x,f.y,f.r*.8,0,6.283);x.fill()});
+ if(!reduce)requestAnimationFrame(frame)}
+for(let i=0;i<120;i++){t+=.016}frame();
+</script></body></html>

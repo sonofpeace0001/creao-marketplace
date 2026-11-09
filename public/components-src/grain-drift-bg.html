@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Grain Drift Background</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{position:relative;min-height:100vh;background:#0B0A10;color:#fff;font-family:'Inter',sans-serif;display:grid;place-items:center;padding:24px;overflow:hidden;-webkit-font-smoothing:antialiased}
+.bl{position:absolute;border-radius:50%;filter:blur(70px);mix-blend-mode:screen;will-change:transform;opacity:.85}
+.b1{width:56vmax;height:56vmax;left:-14vmax;top:-18vmax;background:#FF5B3A;animation:d1 22s ease-in-out infinite alternate}
+.b2{width:50vmax;height:50vmax;right:-16vmax;top:-6vmax;background:#7C3AED;animation:d2 26s ease-in-out infinite alternate}
+.b3{width:46vmax;height:46vmax;left:18vmax;bottom:-26vmax;background:#06B6D4;animation:d3 24s ease-in-out infinite alternate}
+.b4{width:30vmax;height:30vmax;right:6vmax;bottom:-10vmax;background:#F59E0B;animation:d4 20s ease-in-out infinite alternate;opacity:.7}
+@keyframes d1{to{transform:translate(16vmax,10vmax) scale(1.15)}}@keyframes d2{to{transform:translate(-14vmax,14vmax) scale(.9)}}@keyframes d3{to{transform:translate(12vmax,-12vmax) scale(1.2)}}@keyframes d4{to{transform:translate(-18vmax,-6vmax) scale(1.1)}}
+.gr{position:absolute;inset:-50%;width:200%;height:200%;opacity:.5;mix-blend-mode:overlay;pointer-events:none;animation:gn .9s steps(6) infinite}
+@keyframes gn{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.vg{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(8,6,16,.7));pointer-events:none}
+.ct{position:relative;z-index:2;text-align:center;max-width:720px}
+.ct small{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);margin-bottom:26px}.ct small i{width:7px;height:7px;border-radius:50%;background:#FDBA74;box-shadow:0 0 10px #FDBA74}
+.ct h1{font:400 clamp(48px,9vw,104px)/.95 'Instrument Serif',serif;letter-spacing:-.03em}.ct h1 em{font-style:italic}
+.ct p{font-size:clamp(15px,2vw,18px);line-height:1.6;color:rgba(255,255,255,.78);max-width:46ch;margin:22px auto 30px}
+.bt{display:inline-flex;gap:12px}.bt a{padding:14px 26px;border-radius:99px;font:600 15px 'Inter';text-decoration:none}.bt .p{background:#fff;color:#14101F}.bt .g{border:1px solid rgba(255,255,255,.35);color:#fff;backdrop-filter:blur(8px)}.bt a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.bl,.gr{animation:none}}
+</style></head><body>
+<div class="bl b1"></div><div class="bl b2"></div><div class="bl b3"></div><div class="bl b4"></div>
+<svg class="gr" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+<div class="vg"></div>
+<div class="ct"><small><i></i>Now in public beta</small><h1>Make it feel <em>alive</em></h1><p>Light that drifts, grain that breathes. A background that gives your hero real atmosphere without a single image file.</p><div class="bt"><a class="p" href="#">Start free</a><a class="g" href="#">See how it works</a></div></div>
+</body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior product-adoption designer and front-end engineer with 15+ years of experience. Build "Feature Hotspots Tour": a product UI mock with pulsing numbered hotspots that open tooltips, turn green as you explore them and track progress.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft periwinkle stage with an indigo pulsing beacon and a dark tooltip card.
+- Palette: #12163A, #4F46E5, #8A90B8, #ECEEF8, #818CF8, #16A34A
+- Type: Inter Tight (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Mock app (sidebar, KPI row, bar chart); four numbered beacon buttons; tooltip with title, copy, step count and Next button; progress caption below.
+
+INTERACTION & STATES
+- Clicking a beacon opens its tooltip positioned beside it; Next marks it done (green tick) and moves to the next; Done closes; Escape dismisses; the caption counts tips explored.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

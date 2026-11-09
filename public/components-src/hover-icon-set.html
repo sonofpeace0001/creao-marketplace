@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hover Animated Icon Set</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0C10;color:#E8EAF2;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:700px}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;gap:12px;flex-wrap:wrap}.hd h1{font-size:clamp(24px,4vw,32px);font-weight:700;letter-spacing:-.045em}.hd p{color:#7C8199;font-size:14px;margin-top:4px}
+.sc{display:flex;gap:8px;align-items:center;font:500 12px 'Geist Mono',monospace;color:#7C8199}.sc input{accent-color:#8B8FFF;width:100px}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ic{position:relative;aspect-ratio:1;border:1px solid #1F222C;background:#12141B;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;color:#B6BBD0;transition:all .25s;font:inherit}
+.ic:hover,.ic:focus-visible{background:#181B26;border-color:#2F3552;color:#fff;transform:translateY(-3px)}.ic:focus-visible{outline:2px solid #8B8FFF;outline-offset:2px}
+.ic span{font:500 12px 'Geist Mono',monospace;color:#6C7188;transition:color .2s}.ic:hover span{color:#A5A9C8}
+svg{width:34px;height:34px;overflow:visible}svg *{fill:none;stroke:currentColor;stroke-width:var(--sw,1.8);stroke-linecap:round;stroke-linejoin:round;transform-box:fill-box;transform-origin:center}
+/* download */
+.ic:hover .dl .ar,.ic:focus-visible .dl .ar{animation:dl 1s infinite}@keyframes dl{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+/* gear */
+.ic:hover .gr,.ic:focus-visible .gr{animation:sp 3s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+/* bell */
+.bl .rg{transform-origin:50% 10%}.ic:hover .bl .rg,.ic:focus-visible .bl .rg{animation:bl .9s}@keyframes bl{20%{transform:rotate(16deg)}40%{transform:rotate(-14deg)}60%{transform:rotate(9deg)}80%{transform:rotate(-5deg)}}
+/* heart */
+.ic:hover .ht path,.ic:focus-visible .ht path{animation:ht .9s infinite;fill:#F43F5E;stroke:#F43F5E}@keyframes ht{0%,100%{transform:scale(1)}20%{transform:scale(1.18)}40%{transform:scale(1)}60%{transform:scale(1.12)}}
+/* mail */
+.ml .fl{transform-origin:50% 0;transition:transform .35s}.ic:hover .ml .fl,.ic:focus-visible .ml .fl{transform:scaleY(-1)}
+/* search */
+.ic:hover .sr,.ic:focus-visible .sr{animation:sr 1.2s ease-in-out infinite}@keyframes sr{0%,100%{transform:translate(0,0)}25%{transform:translate(-2px,-2px)}75%{transform:translate(2px,2px)}}
+/* rocket */
+.ic:hover .rk,.ic:focus-visible .rk{animation:rk .9s ease-in infinite}@keyframes rk{0%{transform:translate(0,0)}40%{transform:translate(2px,-2px)}100%{transform:translate(8px,-9px);opacity:0}}
+.rk2{opacity:0;transition:opacity .2s}.ic:hover .rk2,.ic:focus-visible .rk2{opacity:1;animation:fm .3s steps(2) infinite}@keyframes fm{50%{transform:scaleY(1.4)}}
+/* refresh */
+.ic:hover .rf,.ic:focus-visible .rf{animation:sp 1s cubic-bezier(.5,0,.5,1) infinite}
+/* camera */
+.ic:hover .lns,.ic:focus-visible .lns{animation:ln 1s ease-in-out infinite}@keyframes ln{50%{transform:scale(1.3)}}
+/* trash */
+.tr .lid{transform-origin:20% 100%;transition:transform .3s}.ic:hover .tr .lid,.ic:focus-visible .tr .lid{transform:translateY(-3px) rotate(-20deg)}
+/* check */
+.ck path{stroke-dasharray:30;stroke-dashoffset:0}.ic:hover .ck path,.ic:focus-visible .ck path{animation:ck .8s infinite}@keyframes ck{0%{stroke-dashoffset:30}50%,100%{stroke-dashoffset:0}}
+/* share */
+.ic:hover .sh .dt,.ic:focus-visible .sh .dt{animation:pp .8s infinite}.sh .dt:nth-child(2){animation-delay:.15s!important}.sh .dt:nth-child(3){animation-delay:.3s!important}@keyframes pp{50%{transform:scale(1.5)}}
+/* wifi */
+.wf .w1,.wf .w2,.wf .w3{opacity:.35}.ic:hover .wf .w1,.ic:focus-visible .wf .w1{animation:wf 1.2s infinite}.ic:hover .wf .w2,.ic:focus-visible .wf .w2{animation:wf 1.2s .2s infinite}.ic:hover .wf .w3,.ic:focus-visible .wf .w3{animation:wf 1.2s .4s infinite}@keyframes wf{0%,100%{opacity:.25}40%{opacity:1}}
+@media(max-width:560px){.g{grid-template-columns:repeat(3,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Icons with a pulse</h1><p>Hover or focus any icon.</p></div><label class="sc">Stroke <input type="range" id="sw" min="1" max="3" step=".1" value="1.8" aria-label="Stroke weight"></label></div>
+<div class="g">
+<button class="ic" aria-label="Download"><svg class="dl" viewBox="0 0 32 32"><g class="ar"><path d="M16 5v14M10 14l6 6 6-6"/></g><path d="M5 24v2a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2v-2"/></svg><span>download</span></button>
+<button class="ic" aria-label="Settings"><svg viewBox="0 0 32 32"><g class="gr"><circle cx="16" cy="16" r="4"/><path d="M16 3v4M16 25v4M3 16h4M25 16h4M6.800 6.800l2.800 2.800M22.400 22.400l2.800 2.800M6.800 25.200l2.800-2.800M22.400 9.600l2.800-2.800"/></g></svg><span>settings</span></button>
+<button class="ic" aria-label="Notifications"><svg class="bl" viewBox="0 0 32 32"><g class="rg"><path d="M8 22V14a8 8 0 0 1 16 0v8l2 3H6z"/><path d="M13 28a3 3 0 0 0 6 0"/></g></svg><span>bell</span></button>
+<button class="ic" aria-label="Favourite"><svg class="ht" viewBox="0 0 32 32"><path d="M16 27S4 20 4 12.500A6.500 6.500 0 0 1 16 9a6.500 6.500 0 0 1 12 3.500C28 20 16 27 16 27Z"/></svg><span>heart</span></button>
+<button class="ic" aria-label="Mail"><svg class="ml" viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="17" rx="3"/><path class="fl" d="m4 11 12 8 12-8"/></svg><span>mail</span></button>
+<button class="ic" aria-label="Search"><svg viewBox="0 0 32 32"><g class="sr"><circle cx="14" cy="14" r="8"/><path d="m26 26-6.500-6.500"/></g></svg><span>search</span></button>
+<button class="ic" aria-label="Launch"><svg viewBox="0 0 32 32"><g class="rk"><path d="M16 4c5 3 8 8 8 14l-4 4h-8l-4-4c0-6 3-11 8-14z"/><circle cx="16" cy="13" r="2.500"/></g><path class="rk2" d="M13 25c0 3 3 5 3 5s3-2 3-5"/></svg><span>launch</span></button>
+<button class="ic" aria-label="Refresh"><svg viewBox="0 0 32 32"><g class="rf"><path d="M26 16a10 10 0 1 1-3-7.100M26 5v6h-6"/></g></svg><span>refresh</span></button>
+<button class="ic" aria-label="Camera"><svg viewBox="0 0 32 32"><path d="M4 11a2 2 0 0 1 2-2h4l2-3h8l2 3h4a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><circle class="lns" cx="16" cy="17" r="5"/></svg><span>camera</span></button>
+<button class="ic" aria-label="Delete"><svg class="tr" viewBox="0 0 32 32"><path class="lid" d="M5 9h22M12 9V6h8v3"/><path d="M8 9l1.500 17h13L24 9M13 14v8M19 14v8"/></svg><span>delete</span></button>
+<button class="ic" aria-label="Done"><svg class="ck" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="m10 16.500 4 4 8-9"/></svg><span>done</span></button>
+<button class="ic" aria-label="Connection"><svg class="wf" viewBox="0 0 32 32"><path class="w3" d="M3 12a19 19 0 0 1 26 0"/><path class="w2" d="M8 17a12 12 0 0 1 16 0"/><path class="w1" d="M12.500 21.500a6 6 0 0 1 7 0"/><circle cx="16" cy="26" r="1.200" style="fill:currentColor"/></svg><span>wifi</span></button>
+</div></div>
+<script>document.getElementById('sw').oninput=e=>document.documentElement.style.setProperty('--sw',e.target.value);</script></body></html>

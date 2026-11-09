@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Multi-Select Dropdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F1F3F9;color:#161A33;font-family:'Onest',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{position:relative;width:100%;max-width:440px;min-height:430px}
+.lb{display:block;font-size:14px;font-weight:700;margin-bottom:8px}
+.bx{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-height:52px;background:#fff;border:1.5px solid #DDE1F0;border-radius:16px;padding:7px 10px;cursor:text;transition:all .2s}.w.op .bx,.bx:focus-within{border-color:#5B5BF6;box-shadow:0 0 0 4px rgba(91,91,246,.13)}
+.tg{display:inline-flex;align-items:center;gap:6px;background:var(--b);color:var(--t);font-size:13.5px;font-weight:600;padding:5px 6px 5px 10px;border-radius:99px;animation:pop .25s cubic-bezier(.3,1.6,.5,1)}@keyframes pop{from{transform:scale(.6);opacity:0}}
+.tg button{all:unset;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;cursor:pointer;opacity:.6}.tg button:hover{opacity:1;background:rgba(0,0,0,.12)}.tg button:focus-visible{outline:2px solid currentColor}
+.bx input{flex:1;min-width:90px;border:0;outline:0;background:none;font:500 15px 'Onest';padding:6px 4px;color:#161A33}.bx input::placeholder{color:#A0A6C4}
+.ch{margin-left:auto;color:#7C84AB;transition:transform .25s}.w.op .ch{transform:rotate(180deg)}
+.pn{position:absolute;left:0;right:0;top:84px;background:#fff;border:1px solid #E1E5F3;border-radius:18px;box-shadow:0 30px 50px -20px rgba(22,26,51,.35);padding:8px;max-height:300px;overflow:auto;opacity:0;transform:translateY(-8px) scale(.98);transform-origin:top;pointer-events:none;transition:all .22s cubic-bezier(.3,1.2,.5,1);z-index:5}.w.op .pn{opacity:1;transform:none;pointer-events:auto}
+.pn h3{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8A91B4;padding:8px 10px 4px}
+.op2{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;text-align:left;padding:9px 10px;border-radius:12px;cursor:pointer;font:inherit;color:inherit;transition:background .12s}.op2:hover,.op2.hl{background:#F2F4FD}.op2:focus-visible{outline:2px solid #5B5BF6}
+.op2 .sw{width:30px;height:30px;border-radius:9px;background:var(--c);display:grid;place-items:center;color:#fff;font-weight:700;font-size:12px;flex:none}.op2 b{font-size:14.5px;font-weight:600;flex:1}.op2 small{display:block;font-weight:500;color:#8A91B4;font-size:12.5px}
+.op2 .ck{width:20px;height:20px;border-radius:6px;border:1.5px solid #CBD1E8;display:grid;place-items:center;flex:none;transition:all .15s}.op2[aria-selected=true] .ck{background:#5B5BF6;border-color:#5B5BF6}.op2 .ck svg{opacity:0;stroke:#fff;stroke-width:3.500;fill:none;stroke-linecap:round;stroke-linejoin:round}.op2[aria-selected=true] .ck svg{opacity:1}
+.em{padding:20px;text-align:center;color:#8A91B4;font-size:14px}
+.ft{position:sticky;bottom:-8px;display:flex;justify-content:space-between;align-items:center;margin:6px -8px -8px;padding:10px 14px;background:#FAFBFF;border-top:1px solid #EEF0F9;border-radius:0 0 18px 18px;font-size:13px;color:#7C84AB}.ft button{border:0;background:none;color:#5B5BF6;font:700 13px 'Onest';cursor:pointer}.ft button:focus-visible{outline:2px solid #5B5BF6;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w" id="w"><label class="lb" for="q">Assign teammates</label><div class="bx" id="bx"><span id="tags" style="display:contents"></span><input id="q" role="combobox" aria-expanded="false" aria-controls="pn" placeholder="Search people…" autocomplete="off"><svg class="ch" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+<div class="pn" id="pn" role="listbox" aria-multiselectable="true"></div></div>
+<script>
+const P=[['Priya Raman','Design Lead','#7C5CFA','#EDE9FE','#5B21B6'],['Marcus Reid','Product','#2563EB','#DBEAFE','#1D4ED8'],['Elena Ortiz','Engineering','#059669','#D1FAE5','#047857'],['Tomas Berg','Brand','#EA580C','#FFEDD5','#C2410C'],['Aiko Tanaka','Research','#DB2777','#FCE7F3','#BE185D'],['Sam Whitfield','Operations','#0891B2','#CFFAFE','#0E7490']];
+let sel=new Set([0,2]),hi=0,vis=[];const w=document.getElementById('w'),q=document.getElementById('q'),pn=document.getElementById('pn'),tags=document.getElementById('tags');
+function init(p){return p[0].split(' ').map(x=>x[0]).join('')}
+function render(){tags.innerHTML=[...sel].map(i=>'<span class="tg" style="--b:'+P[i][3]+';--t:'+P[i][4]+'">'+P[i][0]+'<button aria-label="Remove '+P[i][0]+'" data-r="'+i+'"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span>').join('');
+ const t=q.value.toLowerCase();vis=P.map((p,i)=>i).filter(i=>P[i][0].toLowerCase().includes(t)||P[i][1].toLowerCase().includes(t));
+ pn.innerHTML=vis.length?'<h3>Team ('+vis.length+')</h3>'+vis.map((i,k)=>'<button class="op2'+(k===hi?' hl':'')+'" role="option" aria-selected="'+sel.has(i)+'" data-i="'+i+'"><span class="sw" style="--c:'+P[i][2]+'">'+init(P[i])+'</span><b>'+P[i][0]+'<small>'+P[i][1]+'</small></b><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span></button>').join('')+'<div class="ft"><span>'+sel.size+' selected</span><button data-c="1">Clear all</button></div>':'<div class="em">No one matches "'+q.value+'"</div>'}
+function open(o){w.classList.toggle('op',o);q.setAttribute('aria-expanded',o)}
+pn.addEventListener('click',e=>{const b=e.target.closest('.op2');if(b){const i=+b.dataset.i;sel.has(i)?sel.delete(i):sel.add(i);render();q.focus()}if(e.target.closest('[data-c]')){sel.clear();render()}});
+tags.addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(b){sel.delete(+b.dataset.r);render()}});
+q.addEventListener('focus',()=>open(true));q.addEventListener('input',()=>{hi=0;render();open(true)});document.getElementById('bx').addEventListener('click',()=>{q.focus();open(true)});
+q.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();hi=Math.min(vis.length-1,hi+1);render()}if(e.key==='ArrowUp'){e.preventDefault();hi=Math.max(0,hi-1);render()}if(e.key==='Enter'&&vis.length){e.preventDefault();const i=vis[hi];sel.has(i)?sel.delete(i):sel.add(i);render()}if(e.key==='Backspace'&&!q.value&&sel.size){sel.delete([...sel].pop());render()}if(e.key==='Escape')open(false)});
+document.addEventListener('pointerdown',e=>{if(!w.contains(e.target))open(false)});render();open(true);
+</script></body></html>

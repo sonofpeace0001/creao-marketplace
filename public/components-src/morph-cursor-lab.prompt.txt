@@ -1,0 +1,29 @@
+ROLE
+You are a senior creative-developer and interaction designer with 15+ years of experience. Build "Morphing Cursor": a custom cursor that morphs into a View bubble over cards, a Drag puck, a grown ring on links and a dot on text.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream portfolio stage with blend-mode cursor, vermilion View bubble and Unbounded type.
+- Palette: #121212, #F3F1EA, #FBFAF5, #E4E0D2, #8E8A7B, #FF4B1F
+- Type: Unbounded, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Hover stage with heading, three gradient project cards and a link; fixed cursor dot with label and a trailing ring.
+
+INTERACTION & STATES
+- Cursor follows the pointer; data-c targets switch it between dot, link, view and drag states with spring size transitions; the trailing ring eases behind and hides on cards; disabled on touch.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

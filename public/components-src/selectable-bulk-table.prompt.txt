@@ -1,0 +1,29 @@
+ROLE
+You are a senior data-table designer and front-end engineer with 15+ years of experience. Build "Selectable Table with Bulk Bar": a customers table with animated checkboxes, indeterminate select-all and a floating bulk action bar that springs up.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with indigo selection tint, avatar initials and a dark floating action bar.
+- Palette: #14172B, #7B82A8, #4F46E5, #EEF0F8, #F2F3F7, #FAFAFD
+- Type: Inter, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with count, table with checkbox, customer, status, plan and MRR; floating bar with count, export, archive, delete and clear.
+
+INTERACTION & STATES
+- Selecting rows tints them and raises the bar; header checkbox goes indeterminate; delete removes rows; Escape clears.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

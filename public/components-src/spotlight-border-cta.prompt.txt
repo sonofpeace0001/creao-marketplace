@@ -1,0 +1,29 @@
+ROLE
+You are a senior conversion designer and front-end engineer with 15+ years of experience. Build "Spotlight Border CTA": a call to action card whose border and dotted surface light up under a cursor-following spotlight.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black card with indigo and pink spotlight, gradient headline and social proof.
+- Palette: #0D0E14, #818CF8, #F2F4FA, #A5B4FC, #08090D, #C7CBF5
+- Type: Geist (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Gradient border wrapper; pill; headline; copy; two buttons; avatar proof row.
+
+INTERACTION & STATES
+- A radial gradient border, inner glow and dot mask track the pointer; when idle a ghost light orbits the card.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

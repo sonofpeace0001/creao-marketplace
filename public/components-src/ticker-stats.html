@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Rolling Ticker Stats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3F4F7;color:#0F1424;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:780px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 40px 70px -44px rgba(15,20,36,.5),0 0 0 1px rgba(15,20,36,.06)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px}.hd h1{font-size:19px;font-weight:800;letter-spacing:-.03em}.hd p{font-size:13.5px;color:#7A8299;margin-top:2px}
+.sg{position:relative;display:flex;background:#F0F2F7;border-radius:12px;padding:3px}.sg i{position:absolute;top:3px;bottom:3px;left:3px;width:calc(33.33% - 2px);background:#fff;border-radius:9px;box-shadow:0 2px 6px rgba(15,20,36,.14);transition:transform .3s cubic-bezier(.4,1.3,.5,1)}.sg button{position:relative;z-index:1;border:0;background:none;padding:7px 16px;font:700 13px 'Manrope';color:#7A8299;cursor:pointer;border-radius:9px}.sg button[aria-pressed=true]{color:#0F1424}.sg button:focus-visible{outline:2px solid #4F46E5}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.k{position:relative;border-radius:20px;padding:18px 18px 14px;background:linear-gradient(160deg,var(--t),#fff 70%);border:1px solid var(--b);overflow:hidden}
+.k span.l{font-size:13px;font-weight:700;color:#5A6280;display:flex;align-items:center;gap:7px}.k span.l i{width:8px;height:8px;border-radius:3px;background:var(--c)}
+.n{display:flex;align-items:flex-end;height:50px;margin:10px 0 2px;font:800 42px/50px 'Manrope';letter-spacing:-.05em;overflow:hidden}.n .pre,.n .suf{font-size:26px;color:#5A6280;margin:0 2px 0 0;font-weight:700}.n .suf{margin:0 0 0 2px}.n .dg{display:inline-block;height:50px;overflow:hidden;position:relative}.n .dg div{display:flex;flex-direction:column;transition:transform 1.1s cubic-bezier(.2,.9,.2,1)}.n .dg span{height:50px;display:block;text-align:center}
+.dl{display:inline-flex;align-items:center;gap:5px;font:600 12.5px 'JetBrains Mono',monospace;padding:3px 8px;border-radius:7px}.up{background:#DCFCE7;color:#15803D}.dn{background:#FEE2E2;color:#B91C1C}
+svg.sp{display:block;width:100%;height:46px;margin-top:10px;overflow:visible}svg.sp path.ln{fill:none;stroke:var(--c);stroke-width:2.200;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.2s ease .2s}svg.sp path.ar{fill:var(--c);opacity:.1}
+@media(max-width:620px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Business pulse</h1><p>Live numbers for your workspace</p></div><div class="sg" role="group" aria-label="Period"><i id="th"></i><button aria-pressed="true" data-p="0">7 days</button><button aria-pressed="false" data-p="1">30 days</button><button aria-pressed="false" data-p="2">90 days</button></div></div><div class="g" id="g"></div></div>
+<script>
+const M=[{l:'Revenue',c:'#4F46E5',t:'#EEF0FF',b:'#E1E4FF',pre:'$',suf:'k',v:[48,182,534],d:[12.4,8.1,21.6],s:[[4,9,6,12,10,16,14],[6,8,12,10,15,13,18],[3,6,9,8,14,18,22]]},{l:'New customers',c:'#059669',t:'#E8FBF3',b:'#CFF3E4',pre:'',suf:'',v:[326,1284,3910],d:[6.2,9.7,14.2],s:[[8,7,10,9,13,12,15],[5,9,8,12,11,16,15],[4,7,10,12,15,17,21]]},{l:'Churn rate',c:'#E11D48',t:'#FFEEF2',b:'#FFD9E2',pre:'',suf:'%',v:[2.4,2.1,1.8],d:[-0.3,-0.5,-0.9],s:[[12,13,11,12,10,11,9],[14,13,12,12,10,9,9],[16,14,13,11,10,8,7]]}];
+const g=document.getElementById('g');let per=0;
+function digs(v){return String(v).split('')}
+function cardHtml(m,i){return '<div class="k" style="--c:'+m.c+';--t:'+m.t+';--b:'+m.b+'"><span class="l"><i></i>'+m.l+'</span><div class="n" id="n'+i+'"></div><span class="dl" id="d'+i+'"></span><svg class="sp" viewBox="0 0 100 46" preserveAspectRatio="none"><path class="ar" id="a'+i+'"/><path class="ln" id="p'+i+'"/></svg></div>'}
+g.innerHTML=M.map(cardHtml).join('');
+function spark(i,data){const mx=Math.max(...data),mn=Math.min(...data),pts=data.map((v,k)=>[k/(data.length-1)*100,40-(v-mn)/(mx-mn||1)*34]);const dd='M'+pts.map(p=>p.join(',')).join(' L');const p=document.getElementById('p'+i),a=document.getElementById('a'+i);p.setAttribute('d',dd);a.setAttribute('d',dd+' L100,46 L0,46Z');const len=p.getTotalLength();p.style.setProperty('--len',len);p.style.transition='none';p.style.strokeDashoffset=len;void p.getBoundingClientRect();p.style.transition='';requestAnimationFrame(()=>p.style.strokeDashoffset=0)}
+function setNum(i,m,animate){const val=m.v[per],txt=(Number.isInteger(val)?val.toLocaleString():String(val));const el=document.getElementById('n'+i);let h='<span class="pre">'+m.pre+'</span>';
+ for(const ch of txt){if(/\d/.test(ch)){h+='<span class="dg"><div style="transform:translateY(0)">'+[0,1,2,3,4,5,6,7,8,9].map(d=>'<span>'+d+'</span>').join('')+'</div></span>'}else h+='<span style="padding:0 1px">'+ch+'</span>'}
+ h+='<span class="suf">'+m.suf+'</span>';el.innerHTML=h;const cols=[...el.querySelectorAll('.dg div')];let k=0;for(const ch of txt)if(/\d/.test(ch)){const c=cols[k++];const to=+ch;setTimeout(()=>c.style.transform='translateY(-'+to*50+'px)',animate?60+k*90:0)}
+ const d=m.d[per];const e=document.getElementById('d'+i);e.className='dl '+((m.l==='Churn rate'?d<0:d>0)?'up':'dn');e.textContent=(d>0?'+':'')+d+(m.l==='Churn rate'?' pts':'%')+' vs prev'}
+function render(a){M.forEach((m,i)=>{setNum(i,m,a);spark(i,m.s[per])})}
+document.querySelectorAll('.sg button').forEach(b=>b.onclick=()=>{per=+b.dataset.p;document.querySelectorAll('.sg button').forEach(z=>z.setAttribute('aria-pressed',z===b));document.getElementById('th').style.transform='translateX('+per*100+'%)';render(true)});
+render(true);
+</script></body></html>

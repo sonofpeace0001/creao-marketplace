@@ -1,0 +1,29 @@
+ROLE
+You are a senior design-system engineer with 15+ years of experience. Build "Shine Badges": a set of premium badges: shimmering text, rotating conic border, gold glint, rainbow, version tag and live pulse.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black stage with luminous badges using Geist and mono labels.
+- Palette: #F43F5E, #EDEDF1, #C9C9D4, #8B8FFF, #2A2A33, #121217
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Announcement pill with shimmer text; AI badge with rotating border; Pro member gold badge with glint; version tag; rainbow limited badge; early-access counter; live-now pulse badge.
+
+INTERACTION & STATES
+- Shimmer moves through background-position; the border uses an @property angle animation; the glint sweeps periodically; the live dot pings; reduced motion stops all animation.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

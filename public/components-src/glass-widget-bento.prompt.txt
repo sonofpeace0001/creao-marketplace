@@ -1,0 +1,29 @@
+ROLE
+You are a senior OS-inspired interface designer and front-end engineer with 15+ years of experience. Build "Glass Widget Bento": an Apple style widget bento of frosted glass tiles over a vivid gradient: weather, music, rings, calendar, battery and quick toggles.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Saturated pink, blue and orange gradient behind blurred translucent tiles with white type.
+- Palette: #8A5BFF, #2A1B5C, #FFC93C, #FF6B9D, #5B8CFF, #FFB86B
+- Type: Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Weather tile with sun; music player with equalizer; activity rings; calendar list; battery; four toggle buttons.
+
+INTERACTION & STATES
+- Tiles scale with a spring on hover; equalizer bars bounce; the sun pulses; toggle buttons switch between glass and solid white.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

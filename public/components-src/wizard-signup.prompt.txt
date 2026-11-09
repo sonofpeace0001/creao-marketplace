@@ -1,0 +1,29 @@
+ROLE
+You are a senior onboarding designer and front-end engineer with 15+ years of experience. Build "Multi-step Signup Wizard": a three step sign up wizard with a progress rail, password strength meter, workspace slug generator and goal chips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Violet gradient step rail beside a white form panel on a lilac page.
+- Palette: #14173B, #6D4DF2, #34D399, #6D72A0, #4F46E5, #E3E8FF
+- Type: Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Gradient side rail with numbered steps; panels for account, workspace and goals; success state; back and continue controls.
+
+INTERACTION & STATES
+- Each step validates before advancing; the password meter and URL slug update live; steps slide in; finishing shows a welcome state.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Giant Type CTA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#C6F432;color:#0E1100;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{position:relative;width:100%;max-width:880px;text-align:center}
+.k{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border:2px solid #0E1100;border-radius:99px;padding:7px 15px}.k i{width:8px;height:8px;border-radius:50%;background:#0E1100;animation:bl 1.4s infinite}@keyframes bl{50%{opacity:.2}}
+h1{font:900 clamp(64px,17vw,190px)/.82 'Big Shoulders Display';letter-spacing:-.02em;text-transform:uppercase;margin:18px 0 16px}
+h1 span{display:block}h1 .o{-webkit-text-stroke:3px #0E1100;color:transparent}
+.sub{font-size:18px;font-weight:500;max-width:34ch;margin:0 auto 28px;line-height:1.5}
+.bw{display:inline-block;position:relative}
+.bt{position:relative;display:inline-flex;align-items:center;gap:12px;border:0;background:#0E1100;color:#C6F432;font:800 19px 'Manrope';padding:20px 34px;border-radius:99px;cursor:pointer;transition:transform .15s ease-out,box-shadow .2s;box-shadow:0 14px 0 -4px rgba(14,17,0,.25)}
+.bt:hover{box-shadow:0 18px 0 -4px rgba(14,17,0,.25)}.bt:focus-visible{outline:4px solid #fff;outline-offset:4px}
+.bt svg{transition:transform .3s}.bt:hover svg{transform:translateX(6px) rotate(-45deg)}
+.fn{margin-top:22px;font-size:14px;font-weight:600;opacity:.7}
+.mq{position:absolute;left:-10%;right:-10%;bottom:-10px;opacity:.12;font:900 110px/1 'Big Shoulders Display';white-space:nowrap;text-transform:uppercase;animation:mq 22s linear infinite;pointer-events:none}@keyframes mq{to{transform:translateX(-25%)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><span class="k"><i></i>Spots open · Spring cohort</span><h1><span>Make</span><span class="o">something</span><span>great</span></h1><p class="sub">Join 6,000 founders shipping their first product with a team that has your back.</p>
+<div class="bw" id="bw"><button class="bt" id="bt">Start building <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+<p class="fn">Free for 14 days. No credit card.</p></div><div class="mq" aria-hidden="true">Start now · Start now · Start now · Start now · Start now · Start now ·</div>
+<script>
+const bw=document.getElementById('bw'),bt=document.getElementById('bt');
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&matchMedia('(pointer:fine)').matches){bw.addEventListener('pointermove',e=>{const r=bw.getBoundingClientRect(),x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height/2);bt.style.transform='translate('+x*.22+'px,'+y*.3+'px)'});bw.addEventListener('pointerleave',()=>bt.style.transform='')}
+bt.onclick=()=>{bt.firstChild.textContent='Welcome aboard ';setTimeout(()=>bt.firstChild.textContent='Start building ',2000)};
+</script></body></html>

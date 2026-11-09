@@ -1,0 +1,29 @@
+ROLE
+You are a senior collaboration-product designer and front-end engineer with 15+ years of experience. Build "Live Activity Feed": a real-time team activity feed where new events slide in at the top, highlight as unread and offer a new-updates pill when scrolled.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on warm grey with coloured action badges on avatars and mono timestamps.
+- Palette: #18181B, #4F46E5, #F0F0EC, #16A34A, #A1A1AA, #F5F5F2
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with LIVE badge and Pause; new-updates pill; scrolling list of events with avatar plus action badge, bold actor, action and object chip, and time.
+
+INTERACTION & STATES
+- A timer adds an event every few seconds with a slide-in; unread rows are tinted with a dot; if scrolled down a pill counts new updates and scrolls to top; Pause stops the stream.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

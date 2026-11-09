@@ -1,0 +1,29 @@
+ROLE
+You are a senior navigation designer and front-end engineer with 15+ years of experience. Build "Dynamic Notch Nav": a floating dark notch navigation that morphs in size to reveal mega-menu panels with a sliding hover highlight.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black pill notch over a soft lavender page with coloured icon tiles.
+- Palette: #0B0C14, #A5B4FC, #E7E9F2, #0E1020, #D8DCFF, #7C6CFF
+- Type: Inter Tight (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Floating pill with logo, four links and a Sign up button; moving highlight; expandable panel with a 2x2 grid of icon links per menu.
+
+INTERACTION & STATES
+- Hovering Product or Company morphs the notch width and height with a spring and swaps panel content; the highlight tracks hover; Escape and pointer leave close it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Upload Progress Orbs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(500px 340px at 20% 0,#1E1650,transparent 70%),#08070F;color:#EEEBFF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;background:#100E1F;border:1px solid #221D44;border-radius:26px;padding:22px;box-shadow:0 40px 70px -40px #000}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.hd h1{font-size:18px;font-weight:700;letter-spacing:-.03em}.hd span{font:400 12.5px 'Fragment Mono',monospace;color:#8D86C4}
+.ls{display:grid;gap:10px}
+.f{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:18px;background:#16132B;border:1px solid #241F47;transition:border-color .3s,opacity .3s,transform .3s}.f.dn{border-color:#1F5A3E}.f.er{border-color:#6A2433}.f.rm{opacity:0;transform:translateX(24px)}
+.or{position:relative;flex:none;width:48px;height:48px}.or svg{width:100%;height:100%;transform:rotate(-90deg)}.or circle{fill:none;stroke-width:4}.or .t{stroke:#272150}.or .p{stroke:var(--c);stroke-linecap:round;stroke-dasharray:125.66;stroke-dashoffset:125.66;transition:stroke-dashoffset .25s linear;filter:drop-shadow(0 0 6px var(--c))}
+.or .ic{position:absolute;inset:0;display:grid;place-items:center;font:700 11px 'Sora';color:#fff}
+.f.dn .or .ic,.f.er .or .ic{font-size:0}.f.dn .or .ic::after{content:"";width:12px;height:7px;border:solid #4ADE80;border-width:0 0 2.500px 2.500px;transform:rotate(-45deg) translateY(-2px)}.f.er .or .ic::after{content:"!";font:800 18px 'Sora';color:#F87171}
+.f.dn .or .p{stroke:#4ADE80}.f.er .or .p{stroke:#F87171}
+.tx{flex:1;min-width:0}.tx b{display:block;font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tx span{font:400 12px 'Fragment Mono',monospace;color:#8D86C4}.f.dn .tx span{color:#4ADE80}.f.er .tx span{color:#F87171}
+.ac{display:flex;gap:4px}.ac button{width:32px;height:32px;border:0;border-radius:10px;background:none;color:#9A93D0;cursor:pointer;display:grid;place-items:center}.ac button:hover{background:#221D44;color:#fff}.ac button:focus-visible{outline:2px solid #A78BFA}
+.add{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:14px;border:1.5px dashed #3A3170;background:none;color:#B7B0F0;border-radius:16px;padding:14px;font:600 14px 'Sora';cursor:pointer;transition:all .2s}.add:hover{border-color:#A78BFA;color:#fff;background:#16132B}.add:focus-visible{outline:2px solid #A78BFA;outline-offset:2px}
+.sm{display:flex;justify-content:space-between;margin-top:14px;font:400 12.5px 'Fragment Mono',monospace;color:#8D86C4}.sm b{color:#EEEBFF;font-weight:400}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Uploading</h1><span id="sm0"></span></div><div class="ls" id="ls"></div><button class="add" id="ad"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add more files</button><div class="sm"><span>Speed <b id="sp">0 MB/s</b></span><span>ETA <b id="et">--</b></span></div></div>
+<script>
+const COL=['#A78BFA','#38BDF8','#F472B6','#FBBF24'];const FILES=[['brand-guidelines.pdf',48,.78,0],['launch-trailer.mp4',620,.46,0],['team-photo.jpg',9,1,0],['pricing-v3.fig',74,.18,0]];let id=0;
+const ls=document.getElementById('ls');const R=[];
+function mk(n,size,p0,fail){const el=document.createElement('div');el.className='f';const c=COL[id%COL.length];id++;el.style.setProperty('--c',c);el.innerHTML='<div class="or"><svg viewBox="0 0 48 48"><circle class="t" cx="24" cy="24" r="20"/><circle class="p" cx="24" cy="24" r="20"/></svg><span class="ic">0%</span></div><div class="tx"><b>'+n+'</b><span class="s"></span></div><div class="ac"><button class="pa" aria-label="Pause"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg></button><button class="x" aria-label="Cancel"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>';ls.appendChild(el);
+ const o={el,size,p:p0,paused:false,fail,done:p0>=1,rate:size/ (10+Math.random()*10)};R.push(o);el.querySelector('.pa').onclick=()=>{if(o.done)return;o.paused=!o.paused;el.querySelector('.pa').setAttribute('aria-label',o.paused?'Resume':'Pause');el.querySelector('.pa').innerHTML=o.paused?'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.500v13a1 1 0 0 0 1.500.860l10.500-6.500a1 1 0 0 0 0-1.720L9.500 4.640A1 1 0 0 0 8 5.500Z"/></svg>':'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>'};
+ el.querySelector('.x').onclick=()=>{el.classList.add('rm');o.done=true;o.gone=true;setTimeout(()=>el.remove(),300)};draw(o)}
+function draw(o){const e=o.el,pct=Math.min(100,Math.round(o.p*100));e.querySelector('.p').style.strokeDashoffset=125.66*(1-o.p);e.querySelector('.ic').textContent=o.p>=1?'':pct+'%';
+ if(o.p>=1&&!o.done2){o.done2=1;e.classList.add('dn');e.querySelector('.s').textContent=o.size+' MB · uploaded';e.querySelector('.ac').innerHTML='<button aria-label="Open file"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></button>'}
+ else if(o.p<1)e.querySelector('.s').textContent=(o.paused?'Paused · ':'')+Math.round(o.p*o.size)+' of '+o.size+' MB'}
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+FILES.forEach(f=>mk(...f));R.forEach(o=>{if(o.p>=1){o.done=false;draw(o)}});
+function tick(){let sp=0,left=0;R.forEach(o=>{if(o.done||o.paused||o.gone)return;const step=o.rate*.25*(.7+Math.random()*.6)/o.size;o.p=Math.min(1,o.p+step);sp+=o.rate;left+=(1-o.p)*o.size;draw(o);if(o.p>=1)o.done=true});
+ document.getElementById('sp').textContent=sp?sp.toFixed(1)+' MB/s':'0 MB/s';document.getElementById('et').textContent=sp?Math.ceil(left/sp)+'s':'Done';const act=R.filter(o=>!o.gone&&!o.done2).length;document.getElementById('sm0').textContent=act?act+' in progress':'All uploaded'}
+tick();if(!reduced)setInterval(tick,250);
+document.getElementById('ad').onclick=()=>{const n=['contract-signed.pdf','roadmap-q1.pptx','audio-notes.m4a'][id%3];mk(n,18+Math.round(Math.random()*40),0,0)};
+</script></body></html>

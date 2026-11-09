@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Scroll Scrub Cube</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0D18;color:#EAF0FF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.fr{position:relative;width:100%;max-width:860px;height:560px;border-radius:26px;overflow:hidden;background:radial-gradient(500px 360px at 70% 50%,#1B2766,#0A0D18 70%);box-shadow:0 40px 70px -36px #000,0 0 0 1px #1D2542}
+.sc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}.sc::-webkit-scrollbar{display:none}
+.tr{position:relative;height:2000px}
+.pin{position:sticky;top:0;height:560px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 40px;gap:20px}
+.tx{position:relative;height:260px}
+.sp{position:absolute;left:0;top:0;right:0;opacity:0;transform:translateY(24px);transition:all .5s cubic-bezier(.3,1,.4,1);pointer-events:none}.sp.on{opacity:1;transform:none}.sp.pr{opacity:0;transform:translateY(-24px)}
+.sp small{font:500 12.5px 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--c)}.sp h1{font-size:clamp(30px,4.4vw,48px);font-weight:800;letter-spacing:-.06em;line-height:1;margin:10px 0 12px}.sp p{font-size:16px;line-height:1.6;color:#8E9ACC;max-width:30ch}
+.sn{perspective:900px;display:grid;place-items:center;height:100%}
+.cu{--s:130px;position:relative;width:var(--s);height:var(--s);transform-style:preserve-3d;transform:rotateX(var(--rx,-24deg)) rotateY(var(--ry,38deg)) scale(var(--sc,1))}
+.fc{position:absolute;inset:0;border-radius:18px;border:1.5px solid rgba(255,255,255,.35);display:grid;place-items:center;backdrop-filter:blur(2px);box-shadow:inset 0 0 40px rgba(255,255,255,.12);font-size:36px}
+.fc svg{width:48px;height:48px;color:#fff;opacity:.95}
+.f1{transform:translateZ(65px);background:linear-gradient(135deg,rgba(99,102,241,.8),rgba(168,85,247,.8))}.f2{transform:rotateY(180deg) translateZ(65px);background:linear-gradient(135deg,rgba(236,72,153,.8),rgba(249,115,22,.8))}.f3{transform:rotateY(90deg) translateZ(65px);background:linear-gradient(135deg,rgba(16,185,129,.8),rgba(14,165,233,.8))}.f4{transform:rotateY(-90deg) translateZ(65px);background:linear-gradient(135deg,rgba(245,158,11,.8),rgba(239,68,68,.8))}.f5{transform:rotateX(90deg) translateZ(65px);background:linear-gradient(135deg,rgba(56,189,248,.8),rgba(99,102,241,.8))}.f6{transform:rotateX(-90deg) translateZ(65px);background:linear-gradient(135deg,rgba(167,139,250,.8),rgba(244,114,182,.8))}
+.sh{position:absolute;left:50%;bottom:-70px;width:150px;height:30px;margin-left:-75px;background:radial-gradient(ellipse,rgba(0,0,0,.6),transparent 70%);transform:rotateX(90deg) scale(var(--sc,1));filter:blur(4px)}
+.pg{position:absolute;left:40px;right:40px;bottom:28px;display:flex;align-items:center;gap:12px;font:500 12px 'JetBrains Mono',monospace;color:#6574B8;z-index:3}.pg .b{flex:1;height:3px;border-radius:3px;background:#1B2342;overflow:hidden}.pg .b i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#818CF8,#F472B6);transform-origin:left;transform:scaleX(var(--p,0))}
+@media(max-width:720px){.pin{grid-template-columns:1fr;padding:30px 24px}.sn{height:220px}.tx{height:220px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="fr"><div class="sc" id="sc"><div class="tr"><div class="pin"><div class="tx" id="tx"></div><div class="sn"><div style="position:relative"><div class="cu" id="cu"><div class="fc f1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div class="fc f2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="fc f3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 14l4-4 4 4 5-6"/></svg></div><div class="fc f4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/></svg></div><div class="fc f5"></div><div class="fc f6"></div></div><div class="sh"></div></div></div>
+<div class="pg"><span id="ct">01 / 04</span><div class="b"><i id="pb"></i></div><span>SCROLL</span></div></div></div></div></div>
+<script>
+const S=[['01 / Speed','Instant by design','Every interaction responds in under 100 milliseconds, on every device.','#818CF8'],['02 / Security','Locked down tight','Encryption, audit trails and role based access come built in.','#F472B6'],['03 / Insight','See what matters','Live dashboards turn raw events into decisions you can act on.','#34D399'],['04 / Teams','Built to collaborate','Share, comment and ship together without leaving the page.','#FBBF24']];
+const tx=document.getElementById('tx'),sc=document.getElementById('sc'),cu=document.getElementById('cu');S.forEach((s,i)=>{const d=document.createElement('div');d.className='sp';d.style.setProperty('--c',s[3]);d.innerHTML='<small>'+s[0]+'</small><h1>'+s[1]+'</h1><p>'+s[2]+'</p>';tx.appendChild(d)});
+const ang=[[-24,38],[-24,218],[-24,128],[-24,-52]];
+function upd(){const max=sc.scrollHeight-sc.clientHeight,p=max?sc.scrollTop/max:0;const f=p*(S.length-1),i=Math.min(S.length-1,Math.round(f));cu.style.setProperty('--ry',(38+p*360*1.5)+'deg');cu.style.setProperty('--rx',(-24+Math.sin(p*Math.PI*3)*26)+'deg');const sz=1+Math.sin(p*Math.PI)*.35;cu.style.setProperty('--sc',sz);cu.parentNode.querySelector('.sh').style.setProperty('--sc',sz);document.getElementById('pb').style.setProperty('--p',p);document.getElementById('ct').textContent='0'+(i+1)+' / 04';[...tx.children].forEach((d,k)=>{d.classList.toggle('on',k===i);d.classList.toggle('pr',k<i)})}
+sc.addEventListener('scroll',upd);function init(){sc.scrollTop=(sc.scrollHeight-sc.clientHeight)*.36;upd()}init();
+</script></body></html>

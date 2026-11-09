@@ -1,0 +1,29 @@
+ROLE
+You are a senior checkout designer and front-end engineer with 15+ years of experience. Build "Card Flip Payment Form": a payment form with a live credit card preview that formats numbers, detects brands, recolours and flips to show the CVC.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White checkout card beside an indigo to violet bank card with chip and glossy circles.
+- Palette: #12152E, #4F46E5, #6D7298, #E7EAF5, #9333EA, #FDE68A
+- Type: Sora, Share Tech Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- 3D card with front and back; masked inputs for number, name, expiry and CVC; pay button; security note.
+
+INTERACTION & STATES
+- Typing updates the card in real time with spaced digits; brand detection changes colours and logo; focusing CVC flips the card; pay shows a success state.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

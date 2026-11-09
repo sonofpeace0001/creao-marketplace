@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Link Hover Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F5F2EA;color:#17150F;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;background:#FCFAF4;border:1px solid #E6E0CE;border-radius:26px;padding:30px;box-shadow:0 40px 70px -44px rgba(23,21,15,.5)}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}.hd h1{font:400 clamp(28px,5vw,40px)/1 'Instrument Serif',serif;letter-spacing:-.03em}.hd span{font-size:12.5px;color:#8F8873;font-weight:500}
+.rw{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:20px;padding:20px 0;border-top:1px solid #ECE6D4}.rw:first-of-type{border-top:0}.rw small{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9A937C}
+.rw div{font:400 clamp(24px,4vw,34px)/1.1 'Instrument Serif',serif;letter-spacing:-.02em}
+a{color:inherit;text-decoration:none;cursor:pointer;position:relative;outline:0}a:focus-visible{outline:2px solid #C2410C;outline-offset:4px;border-radius:3px}
+/* 1 draw underline */
+.l1{background:linear-gradient(currentColor,currentColor) 0 100%/0 2px no-repeat;transition:background-size .45s cubic-bezier(.3,1,.4,1);padding-bottom:3px}.l1:hover,.l1:focus-visible{background-size:100% 2px}
+/* 2 slide-away underline */
+.l2{background:linear-gradient(#C2410C,#C2410C) 100% 100%/100% 2px no-repeat;transition:background-size .4s}.l2:hover,.l2:focus-visible{background-position:0 100%;background-size:0 2px;animation:sl .5s .0s forwards}@keyframes sl{50%{background-size:0 2px}}
+.l2{background:linear-gradient(#C2410C,#C2410C) 0 100%/100% 2px no-repeat}.l2:hover{background-size:0 2px;background-position:100% 100%}
+/* 3 highlight sweep */
+.l3{background:linear-gradient(#FFD84D,#FFD84D) 0 88%/0 .5em no-repeat;transition:background-size .4s cubic-bezier(.3,1,.4,1);padding:0 2px}.l3:hover,.l3:focus-visible{background-size:100% .5em}
+/* 4 arrow slide */
+.l4{display:inline-flex;align-items:center;gap:.25em}.l4 svg{width:.7em;height:.7em;transition:transform .35s cubic-bezier(.3,1.5,.5,1)}.l4:hover svg,.l4:focus-visible svg{transform:translateX(.3em) rotate(-45deg)}.l4 span{border-bottom:2px solid currentColor;transition:border-color .2s}.l4:hover span{border-color:#C2410C}.l4:hover{color:#C2410C}
+/* 5 roll text */
+.l5{display:inline-block;overflow:hidden;height:1.15em;vertical-align:bottom}.l5 span{display:block;transition:transform .45s cubic-bezier(.3,1,.4,1)}.l5 span::after{content:attr(data-t);display:block;color:#C2410C;font-style:italic}.l5:hover span,.l5:focus-visible span{transform:translateY(-100%)}
+/* 6 blur focus siblings */
+.gp{display:flex;gap:.6em;flex-wrap:wrap}.gp a{transition:opacity .3s,filter .3s}.gp:hover a:not(:hover){opacity:.28;filter:blur(1.5px)}.gp a:hover{font-style:italic;color:#C2410C}
+@media(max-width:560px){.rw{grid-template-columns:1fr;gap:6px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Links, considered</h1><span>Hover or focus each</span></div>
+<div class="rw"><small>Draw</small><div><a class="l1" href="#">Read the case study</a></div></div>
+<div class="rw"><small>Slide away</small><div><a class="l2" href="#">Meet the studio</a></div></div>
+<div class="rw"><small>Highlight</small><div><a class="l3" href="#">See selected work</a></div></div>
+<div class="rw"><small>Arrow</small><div><a class="l4" href="#"><span>Start a project</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+<div class="rw"><small>Roll</small><div><a class="l5" href="#"><span data-t="Say hello">Get in touch</span></a></div></div>
+<div class="rw"><small>Focus group</small><div class="gp"><a href="#">Brand</a><a href="#">Web</a><a href="#">Motion</a><a href="#">Print</a><a href="#">Type</a></div></div></div>
+</body></html>

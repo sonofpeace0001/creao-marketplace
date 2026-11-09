@@ -1,0 +1,29 @@
+ROLE
+You are a senior planning-tool designer and front-end engineer with 15+ years of experience. Build "Roadmap Gantt Timeline": a quarter roadmap Gantt with team-coloured progress bars, a Today marker and dashed dependency connectors.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark workspace with quarter grid, coloured bars and a red Today line.
+- Palette: #1E2330, #10131B, #1A1F2C, #C9CFE3, #F43F5E, #4A5272
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with legend; month columns; six initiative rows with progress bars; Today marker; dependency elbows; hover tooltip.
+
+INTERACTION & STATES
+- In-progress bars shimmer; hovering a bar shows a tooltip with team and completion; dependencies are drawn from measured bar positions.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

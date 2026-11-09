@@ -1,0 +1,29 @@
+ROLE
+You are a senior creative developer and interaction designer with 15+ years of experience. Build "Magnetic Tag Cloud": a cloud of selectable tags that physically repel from the cursor with spring motion, with an ambient ghost cursor idle state.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black field with neon outlined pills that fill when selected.
+- Palette: #0F1115, #EDEFF5, #8A90A5, #1A1D26, #12141A, #232733
+- Type: Space Grotesk (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Headline; field of fifteen tags in three sizes; selected counter and clear button.
+
+INTERACTION & STATES
+- Each tag runs a spring toward an offset pushed away from the pointer; click toggles selection with a glow; an idle ghost orbit shows the effect.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

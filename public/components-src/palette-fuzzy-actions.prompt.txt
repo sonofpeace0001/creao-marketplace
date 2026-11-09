@@ -1,0 +1,29 @@
+ROLE
+You are a senior productivity-tool designer and front-end engineer with 15+ years of experience. Build "Fuzzy Action Palette": a command palette with fuzzy character highlighting, a sliding selection pill and an AI answer fallback.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Frosted dark palette over indigo glow with soft violet selection.
+- Palette: #8791C8, #A78BFA, #262A4D, #7A83BB, #1F2242, #6A7399
+- Type: Inter, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Search input; grouped command list with icons and shortcut keycaps; selection pill; AI fallback panel; footer hints.
+
+INTERACTION & STATES
+- Fuzzy matching highlights matched letters; arrows move a sliding pill; when nothing matches an AI answer streams in with a cursor.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior AI-writing product designer and front-end engineer with 15+ years of experience. Build "AI Rewrite Textarea": a text area with tone chips and a Rewrite action that sweeps a shimmer then streams the new text with changed words highlighted.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark panel with a rotating violet and cyan conic border and a serif italic label.
+- Palette: #8B5CF6, #1D1F2B, #E4E6F2, #2A2D3D, #B2B7CE, #0C0D12
+- Type: Instrument Serif, Geist (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with word count; textarea; tone chips; undo and rewrite buttons.
+
+INTERACTION & STATES
+- Choosing a tone and pressing Rewrite plays a shimmer sweep, then streams the rewrite word by word with new words marked; Undo restores the original.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

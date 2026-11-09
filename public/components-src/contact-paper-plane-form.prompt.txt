@@ -1,0 +1,29 @@
+ROLE
+You are a senior playful product designer with 15+ years of experience. Build "Paper Plane Contact Form": a friendly contact form with topic chips, floating labels and a send button whose paper plane flies away before a success state.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Sky to lilac backdrop with a white card, violet accents and drifting clouds.
+- Palette: #6D5BFF, #16152E, #6D6C93, #E5E5F5, #16A34A, #DFF1FF
+- Type: Bricolage Grotesque, Hanken Grotesk (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Title; topic chips; name and email floating inputs; message textarea; attach button; send button with plane, trail and success layer.
+
+INTERACTION & STATES
+- Chips spring on selection; labels float; Send launches the plane along an arc with a dashed trail then morphs to a green Sent state and resets.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

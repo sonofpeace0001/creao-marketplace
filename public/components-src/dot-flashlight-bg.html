@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dot Flashlight Background</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{position:relative;min-height:100vh;background:#0A0B0F;color:#F0F2F8;font-family:'Geist',sans-serif;display:grid;place-items:center;padding:24px;overflow:hidden;-webkit-font-smoothing:antialiased}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ct{position:relative;z-index:2;text-align:center;max-width:680px;pointer-events:none}
+.ct small{display:inline-block;font:500 12px 'Geist Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#A3E635;border:1px solid rgba(163,230,53,.35);background:rgba(163,230,53,.08);border-radius:99px;padding:6px 14px;margin-bottom:24px}
+.ct h1{font-size:clamp(40px,7.5vw,84px);line-height:1;font-weight:700;letter-spacing:-.05em}.ct h1 span{background:linear-gradient(90deg,#A3E635,#22D3EE);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ct p{text-shadow:0 0 14px #0A0B0F,0 0 6px #0A0B0F,0 0 2px #0A0B0F;font-size:clamp(15px,2vw,18px);line-height:1.6;color:#A3A9BF;max-width:46ch;margin:20px auto 28px}
+.bt{display:inline-flex;gap:12px;pointer-events:auto}.bt a{padding:13px 24px;border-radius:12px;font:600 15px 'Geist';text-decoration:none}.bt .p{background:#F0F2F8;color:#0A0B0F}.bt .g{border:1px solid #2B2F3D;color:#D5D9E8;background:rgba(10,11,15,.7)}.bt a:focus-visible{outline:3px solid #A3E635;outline-offset:3px}
+</style></head><body>
+<canvas id="cv"></canvas>
+<div class="ct"><small>Interactive grid</small><h1>Follow the <span>light</span></h1><p>A field of dots that wakes up wherever your cursor goes. Quiet by default, alive on contact.</p><div class="bt"><a class="p" href="#">Get started</a><a class="g" href="#">Browse components</a></div></div>
+<script>
+const cv=document.getElementById('cv'),x=cv.getContext('2d');let W,H,dpr=Math.min(2,devicePixelRatio||1);const G=26;let px=-999,py=-999,real=false,t=1.2;
+function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}size();addEventListener('resize',size);
+addEventListener('pointermove',e=>{real=true;px=e.clientX;py=e.clientY});addEventListener('pointerleave',()=>{real=false});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function lerp(a,b,k){return a+(b-a)*k}
+let gx=W/2,gy=H/2;
+function frame(){t+=.012;x.clearRect(0,0,W,H);let lx,ly;if(real){lx=px;ly=py}else{lx=W/2+Math.cos(t)*W*.3;ly=H/2+Math.sin(t*1.3)*H*.26}gx=lerp(gx||lx,lx,.12);gy=lerp(gy||ly,ly,.12);
+ const R=170,cols=Math.ceil(W/G)+1,rows=Math.ceil(H/G)+1;
+ for(let i=0;i<cols;i++)for(let j=0;j<rows;j++){const dx=i*G-gx+G/2,dy=j*G-gy+G/2,d=Math.hypot(dx,dy);const k=d<R?Math.pow(1-d/R,1.6):0;const bx=i*G+G/2,by=j*G+G/2;const r=1.1+k*3.4;
+  if(k>0.02){const hue=84+k*110;x.fillStyle='hsla('+hue+',90%,'+(55+k*15)+'%,'+(.25+k*.75)+')';x.shadowColor='hsla('+hue+',90%,60%,.9)';x.shadowBlur=k*14}else{x.fillStyle='rgba(120,128,150,.28)';x.shadowBlur=0}
+  const ox=k?dx/(d||1)*k*5:0,oy=k?dy/(d||1)*k*5:0;x.beginPath();x.arc(bx+ox,by+oy,r,0,6.283);x.fill()}
+ x.shadowBlur=0;if(!reduce)requestAnimationFrame(frame)}
+frame();
+</script></body></html>

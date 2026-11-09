@@ -1,0 +1,29 @@
+ROLE
+You are a senior consent-flow designer and front-end engineer with 15+ years of experience. Build "Cookie Preferences Sheet": a mobile bottom sheet with category switches, expandable details and a drag handle that rubber-bands or dismisses.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White sheet over a dimmed page with a warm orange icon and navy actions.
+- Palette: #142033, #2563EB, #DDE3EC, #EBEFF5, #C7D2FE, #FBCFE8
+- Type: Figtree (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Scrim; sheet with handle, title, intro; four category rows with switch and details; accept all, reject optional and save buttons; reopen button.
+
+INTERACTION & STATES
+- Dragging the handle pulls the sheet down and dismisses past a threshold or springs back; rows expand; choices apply and the sheet slides away with a reopen button.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

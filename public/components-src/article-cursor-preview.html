@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Article Cursor Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E0E0C;color:#F1EEE6;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{position:relative;width:100%;max-width:760px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #2A2924;padding-bottom:14px;margin-bottom:6px}.hd h1{font:italic 400 40px 'Instrument Serif',serif;letter-spacing:-.01em}.hd span{font:400 12px 'Geist Mono',monospace;color:#7B7869;letter-spacing:.1em;text-transform:uppercase}
+.ls{position:relative}
+.rw{display:grid;grid-template-columns:44px 1fr auto auto;gap:16px;align-items:baseline;padding:20px 4px;border-bottom:1px solid #1F1E1A;text-decoration:none;color:inherit;cursor:pointer;transition:opacity .3s,padding .35s cubic-bezier(.3,1.2,.5,1);outline:0}
+.rw:focus-visible{box-shadow:0 0 0 2px #F1EEE6}
+.ls:hover .rw,.ls.demo .rw{opacity:.32}.ls .rw.on{opacity:1;padding-left:18px}
+.rw i{font:400 12px 'Geist Mono',monospace;color:#7B7869;font-style:normal}.rw h2{font:400 30px/1.1 'Instrument Serif',serif;letter-spacing:-.01em}.rw .tg{font:500 12px 'Geist Mono',monospace;color:#A39F8C;letter-spacing:.06em;text-transform:uppercase}.rw .mn{font:400 12px 'Geist Mono',monospace;color:#7B7869}
+.rw.on h2{font-style:italic}
+.pv{position:fixed;left:0;top:0;z-index:5;width:210px;height:260px;border-radius:14px;overflow:hidden;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.6) rotate(0deg);transition:opacity .25s,scale .3s;box-shadow:0 30px 50px -16px rgba(0,0,0,.8);will-change:transform}
+.pv.on{opacity:1}.pv svg{display:block;width:100%;height:100%}
+@media(max-width:600px){.rw{grid-template-columns:30px 1fr;row-gap:4px}.rw .tg,.rw .mn{grid-column:2}.rw h2{font-size:24px}.pv{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Journal</h1><span>2026 / selected writing</span></div><div class="ls" id="ls"></div></div>
+<div class="pv" id="pv"></div>
+<script>
+const A=[['The quiet return of serif type','Typography','7 min',['#F2C94C','#EB5757','#2D2A26']],['Motion that earns its place','Motion','9 min',['#56CCF2','#2F80ED','#10131A']],['Designing for the second glance','Craft','5 min',['#BB6BD9','#F2994A','#1A1320']],['Why we deleted the dashboard','Product','12 min',['#6FCF97','#219653','#0E1A13']],['Grids are a promise to the reader','Layout','6 min',['#F2994A','#F2C94C','#241A0E']]];
+const ls=document.getElementById('ls'),pv=document.getElementById('pv');let cur=-1;
+function art(c,i){const t=[`<circle cx="105" cy="120" r="70" fill="${c[1]}"/><circle cx="130" cy="150" r="52" fill="${c[0]}" opacity=".95"/>`,`<path d="M0 190 C60 120 110 240 210 150 L210 260 L0 260Z" fill="${c[1]}"/><path d="M0 220 C70 170 130 260 210 200 L210 260 L0 260Z" fill="${c[0]}" opacity=".9"/>`,`<rect x="40" y="50" width="130" height="130" rx="65" fill="${c[0]}"/><rect x="70" y="100" width="130" height="130" rx="30" fill="${c[1]}" opacity=".9"/>`,`<g fill="${c[1]}"><rect x="30" y="40" width="70" height="70"/><rect x="110" y="40" width="70" height="70" fill="${c[0]}"/><rect x="30" y="120" width="70" height="70" fill="${c[0]}"/><rect x="110" y="120" width="70" height="70"/></g>`,`<g stroke="${c[0]}" stroke-width="3" fill="none"><path d="M30 40V220M70 40V220M110 40V220M150 40V220M190 40V220"/></g><circle cx="110" cy="130" r="46" fill="${c[1]}"/>`];return '<svg viewBox="0 0 210 260"><rect width="210" height="260" fill="'+c[2]+'"/>'+t[i%t.length]+'</svg>'}
+A.forEach((a,i)=>{const r=document.createElement('a');r.className='rw';r.href='#';r.tabIndex=0;r.innerHTML='<i>0'+(i+1)+'</i><h2>'+a[0]+'</h2><span class="tg">'+a[1]+'</span><span class="mn">'+a[2]+'</span>';r.onclick=e=>e.preventDefault();r.addEventListener('mouseenter',()=>sel(i));r.addEventListener('focus',()=>sel(i));ls.appendChild(r)});
+function sel(i){cur=i;[...ls.children].forEach((r,k)=>r.classList.toggle('on',k===i));pv.innerHTML=art(A[i][3],i);pv.classList.add('on')}
+ls.addEventListener('mouseleave',()=>{if(real){cur=-1;[...ls.children].forEach(r=>r.classList.remove('on'));pv.classList.remove('on')}});
+let real=false,mx=0,my=0,x=0,y=0,vx=0,rot=0,t=0;addEventListener('pointermove',e=>{real=true;ls.classList.remove('demo');mx=e.clientX;my=e.clientY});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function tick(){if(!real){const r=ls.children[1].getBoundingClientRect();t+=.02;mx=r.left+r.width*(.55+Math.sin(t)*.12);my=r.top+r.height/2+Math.cos(t*1.4)*8;if(cur!==1)sel(1)}
+ const nx=x+(mx-x)*.14,ny=y+(my-y)*.14;vx=nx-x;x=nx;y=ny;rot+=(Math.max(-14,Math.min(14,vx*.8))-rot)*.15;pv.style.transform='translate('+(x+130)+'px,'+(y-10)+'px) translate(-50%,-50%) scale('+(pv.classList.contains('on')?1:.6)+') rotate('+rot+'deg)';requestAnimationFrame(tick)}
+ls.classList.add('demo');(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{const r=ls.children[1].getBoundingClientRect();x=mx=r.left+r.width*.55;y=my=r.top+r.height/2;sel(1);if(!reduce)tick();else{pv.style.transform='translate('+(x+130)+'px,'+(y-10)+'px) translate(-50%,-50%)'}});
+</script></body></html>

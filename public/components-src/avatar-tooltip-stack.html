@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Avatar Tooltip Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F5F1EA;color:#201A12;font-family:'Onest',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;background:#fff;border-radius:28px;padding:34px 30px 38px;text-align:center;box-shadow:0 40px 70px -44px rgba(70,50,20,.5),0 0 0 1px rgba(32,26,18,.07)}
+.c small{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#A29680}.c h1{font-size:28px;font-weight:800;letter-spacing:-.04em;margin:6px 0 4px}.c p{color:#7B705C;font-size:15px}
+.st{display:flex;justify-content:center;margin:74px 0 8px;padding-left:14px}
+.av{position:relative;margin-left:-14px;width:64px;height:64px;border-radius:50%;border:4px solid #fff;background:var(--g);display:grid;place-items:center;color:#fff;font:700 18px 'Onest';cursor:pointer;transition:transform .25s cubic-bezier(.3,1.6,.5,1),z-index 0s;z-index:1;box-shadow:0 8px 14px -6px rgba(0,0,0,.3);outline:0}
+.av:hover,.av.on,.av:focus-visible{transform:scale(1.14);z-index:20}.av:focus-visible{box-shadow:0 0 0 3px #201A12}
+.av svg{position:absolute;inset:0}
+.tp{position:absolute;left:50%;bottom:calc(100% + 12px);width:max-content;background:#201A12;color:#fff;border-radius:14px;padding:9px 14px;text-align:left;opacity:0;pointer-events:none;transform:translateX(calc(-50% + var(--x,0px))) translateY(10px) scale(.85) rotate(var(--r,0deg));transition:opacity .2s,transform .25s cubic-bezier(.3,1.5,.5,1);z-index:30;box-shadow:0 18px 26px -10px rgba(0,0,0,.5)}
+.av:hover .tp,.av.on .tp,.av:focus-visible .tp{opacity:1;transform:translateX(calc(-50% + var(--x,0px))) translateY(0) scale(1) rotate(var(--r,0deg))}
+.tp::after{content:"";position:absolute;left:calc(50% - var(--x,0px));bottom:-5px;width:11px;height:11px;margin-left:-5.500px;background:#201A12;transform:rotate(45deg);border-radius:2px}
+.tp b{display:block;font-size:14.5px;font-weight:700;white-space:nowrap}.tp span{display:block;font-size:12.5px;color:#C9BEA8;white-space:nowrap;font-weight:500}
+.tp::before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--c),transparent)}
+.ct{margin-top:24px;font-size:14px;color:#7B705C}.ct b{color:#201A12}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><small>Project Atlas</small><h1>Meet the crew</h1><p>Hover an avatar. The tooltip tilts with your cursor.</p><div class="st" id="st"></div><div class="ct"><b>6 people</b> are working on this right now</div></div>
+<script>
+const P=[['Ada Lovelace','Engineering lead','AL','#6366F1','#A5B4FC'],['Grace Hopper','Platform','GH','#10B981','#6EE7B7'],['Linus Berg','Design','LB','#F97316','#FDBA74'],['Priya Raman','Product','PR','#EC4899','#F9A8D4'],['Tomas Reid','Research','TR','#0EA5E9','#7DD3FC'],['Nora Quinn','Support','NQ','#8B5CF6','#C4B5FD']];
+const st=document.getElementById('st');
+P.forEach((p,i)=>{const a=document.createElement('div');a.className='av'+(i===2?' on':'');a.tabIndex=0;a.style.cssText='--g:linear-gradient(135deg,'+p[3]+','+p[4]+');--c:'+p[4];a.innerHTML=p[2]+'<div class="tp" role="tooltip"><b>'+p[0]+'</b><span>'+p[1]+'</span></div>';
+ a.addEventListener('mousemove',e=>{const r=a.getBoundingClientRect(),f=(e.clientX-r.left-r.width/2)/(r.width/2);a.style.setProperty('--x',(f*18)+'px');a.style.setProperty('--r',(f*7)+'deg')});a.addEventListener('mouseleave',()=>{a.style.setProperty('--x','0px');a.style.setProperty('--r','0deg')});st.appendChild(a)});
+st.addEventListener('mouseenter',()=>st.querySelectorAll('.on').forEach(e=>e.classList.remove('on')),true);
+</script></body></html>

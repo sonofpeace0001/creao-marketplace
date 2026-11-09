@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Gooey Search Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFE4EC;color:#2B0F1C;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px}
+.hd{text-align:center;margin-bottom:26px}.hd h1{font-size:clamp(26px,5vw,36px);font-weight:800;letter-spacing:-.05em}.hd p{color:#8A5A70;margin-top:6px}
+svg.d{position:absolute;width:0;height:0}
+.bar{position:relative;display:flex;align-items:center;justify-content:center;height:80px;filter:url(#g)}
+.pill{position:absolute;height:60px;background:#2B0F1C;border-radius:30px;transition:width .6s cubic-bezier(.3,1.2,.4,1),left .6s cubic-bezier(.3,1.2,.4,1);width:60px;left:calc(50% - 30px)}
+.blob{position:absolute;width:60px;height:60px;border-radius:50%;background:#2B0F1C;transition:left .65s cubic-bezier(.3,1.3,.4,1),top .5s cubic-bezier(.3,1.3,.4,1),transform .5s;left:calc(50% - 30px);top:10px}
+.c.op .pill{width:min(100%,520px);left:max(0px,calc(50% - 260px))}.c.op .blob.b2{left:calc(100% - 66px);top:10px}.c.op .blob.b1{left:calc(100% - 66px)}
+.ui{position:absolute;inset:0;display:flex;align-items:center;padding:0 12px;pointer-events:none}.ui>*{pointer-events:auto}
+.bt{position:relative;z-index:3;width:60px;height:60px;border:0;background:none;color:#FFE4EC;cursor:pointer;display:grid;place-items:center;border-radius:50%;flex:none;transition:transform .4s,margin .5s cubic-bezier(.3,1.2,.4,1),color .3s}
+.bt:focus-visible{outline:3px solid #fff;outline-offset:-6px}
+.c:not(.op) .ui{justify-content:center}.c.op .bt{margin-left:auto}.c:not(.op) .bt:hover{transform:scale(1.08)}
+.in{flex:1;min-width:0;border:0;outline:0;background:none;color:#FFE4EC;font:600 18px 'Manrope';padding:0 6px 0 18px;opacity:0;width:0;transition:opacity .3s,width .3s}.c.op .in{opacity:1;width:auto;transition-delay:.25s}.in::placeholder{color:rgba(255,228,236,.5)}
+.ui{z-index:3}.fl{filter:none}
+.rs{margin-top:18px;display:grid;gap:8px;opacity:0;transform:translateY(-10px);transition:all .45s cubic-bezier(.3,1.2,.4,1) .15s;pointer-events:none}.c.op .rs{opacity:1;transform:none;pointer-events:auto}
+.rs button{display:flex;align-items:center;gap:14px;width:100%;border:0;background:#fff;border-radius:20px;padding:12px 14px;text-align:left;cursor:pointer;font:inherit;color:inherit;box-shadow:0 10px 20px -12px rgba(190,40,100,.4);transition:transform .2s}.rs button:hover,.rs button.hl{transform:translateX(6px)}.rs button:focus-visible{outline:3px solid #2B0F1C}
+.rs i{width:42px;height:42px;border-radius:14px;background:var(--c);flex:none}.rs b{display:block;font-size:15px;font-weight:800}.rs span{font-size:13px;color:#8A5A70}.rs mark{background:#FFD1E2;color:inherit;border-radius:3px}
+.rs em{margin-left:auto;font-style:normal;font-weight:800;font-size:13px;color:#C2185B}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c" id="c"><div class="hd"><h1>Find your next favourite</h1><p>Click the orb. It melts into a search bar.</p></div>
+<svg class="d" aria-hidden="true"><defs><filter id="g"><feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter></defs></svg>
+<div style="position:relative;height:80px"><div class="bar" id="bar" aria-hidden="true"><div class="pill"></div><div class="blob b1"></div><div class="blob b2"></div></div>
+<div class="ui"><input class="in" id="q" placeholder="Search plants, pots and more…" aria-label="Search" autocomplete="off" tabindex="-1"><button class="bt" id="bt" aria-label="Open search" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round" id="ic"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg></button></div></div>
+<div class="rs" id="rs" role="listbox"></div></div>
+<script>
+const P=[['Monstera deliciosa','Large indoor plant','#16A34A','$38'],['Snake plant','Low light, hard to kill','#65A30D','$24'],['Terracotta pot','Hand-glazed, 20 cm','#EA580C','$16'],['Fiddle leaf fig','Statement tree','#059669','$54'],['Watering can','Brushed copper','#B45309','$29']];
+const c=document.getElementById('c'),q=document.getElementById('q'),bt=document.getElementById('bt'),rs=document.getElementById('rs'),ic=document.getElementById('ic');
+function list(){const t=q.value.toLowerCase();const m=P.filter(p=>p[0].toLowerCase().includes(t)||p[1].toLowerCase().includes(t));rs.innerHTML=m.length?m.map((p,i)=>'<button role="option" tabindex="'+(c.classList.contains('op')?0:-1)+'"><i style="--c:'+p[2]+'"></i><div><b>'+(t?p[0].replace(new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>'):p[0])+'</b><span>'+p[1]+'</span></div><em>'+p[3]+'</em></button>').join(''):'<button style="justify-content:center;color:#8A5A70" tabindex="-1">No results</button>'}
+function open(o){c.classList.toggle('op',o);bt.setAttribute('aria-expanded',o);bt.setAttribute('aria-label',o?'Clear and close search':'Open search');q.tabIndex=o?0:-1;ic.innerHTML=o?'<path d="M6 6l12 12M18 6 6 18"/>':'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/>';if(o){setTimeout(()=>q.focus(),350);list()}else{q.value=''}}
+bt.onclick=()=>open(!c.classList.contains('op'));q.addEventListener('input',list);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&c.classList.contains('op')){open(false);bt.focus()}});
+setTimeout(()=>{open(true);q.value='';list()},200);
+</script></body></html>

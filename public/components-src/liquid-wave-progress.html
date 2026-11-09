@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Liquid Wave Progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#E0F2FE,#EDE9FE);color:#0C1B3A;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px;background:rgba(255,255,255,.8);backdrop-filter:blur(14px);border-radius:32px;padding:30px;box-shadow:0 40px 70px -44px rgba(30,60,140,.55),0 0 0 1px rgba(255,255,255,.9);display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+.tk{position:relative;width:min(250px,100%);aspect-ratio:1;margin:0 auto;border-radius:50%;overflow:hidden;background:#fff;box-shadow:inset 0 0 0 8px #fff,0 0 0 2px #CFE0F7,0 20px 40px -14px rgba(30,60,140,.4)}
+.tk svg{position:absolute;left:0;width:200%;height:70%;bottom:var(--y,0%);transition:bottom .45s cubic-bezier(.3,.9,.3,1)}
+.wv1{animation:mv 5s linear infinite}.wv2{animation:mv 7s linear infinite reverse}@keyframes mv{to{transform:translateX(-50%)}}
+.tk .fl{position:absolute;left:0;right:0;bottom:0;height:calc(var(--y,0%) + 4%);background:linear-gradient(#38BDF8,#2563EB);transition:height .45s cubic-bezier(.3,.9,.3,1);margin-bottom:-1px}
+.tk .pc{position:absolute;inset:0;display:grid;place-content:center;text-align:center;z-index:3;mix-blend-mode:normal}.tk .pc b{font-size:58px;font-weight:800;letter-spacing:-.06em;line-height:1;color:#0C1B3A;text-shadow:0 0 14px rgba(255,255,255,.9)}.tk .pc span{font-size:14px;font-weight:600;color:#3B4F7A;text-shadow:0 0 10px #fff}
+.tk .bb{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);width:var(--s);height:var(--s);left:var(--x);bottom:-10%;animation:bu var(--d) ease-in infinite;animation-delay:var(--dl);z-index:1}@keyframes bu{to{transform:translateY(-260px);opacity:0}}
+.tx h1{font-size:25px;font-weight:800;letter-spacing:-.04em}.tx>p{font-size:14.5px;color:#5A6C95;margin:6px 0 18px;line-height:1.5}
+.ls{display:grid;gap:8px;margin-bottom:18px}.ls div{display:flex;justify-content:space-between;font-size:14px;font-weight:600;color:#3B4F7A;padding:10px 14px;background:#fff;border-radius:14px;border:1px solid #E1EBF8}.ls b{color:#0C1B3A}
+.ct{display:flex;gap:8px}.ct button{flex:1;border:0;border-radius:14px;padding:12px;font:700 14.5px 'Outfit';cursor:pointer;transition:transform .15s}.ct .a{background:linear-gradient(135deg,#38BDF8,#2563EB);color:#fff;box-shadow:0 12px 22px -10px #2563EB}.ct .b{background:#fff;border:1px solid #D5E2F5;color:#0C1B3A}.ct button:hover{transform:translateY(-2px)}.ct button:focus-visible{outline:3px solid #0C1B3A;outline-offset:2px}
+@media(max-width:620px){.c{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="tk" id="tk" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" aria-label="Daily water goal" style="--y:68%"><div class="fl" id="fl"></div>
+<svg class="wv1" viewBox="0 0 400 50" preserveAspectRatio="none" style="bottom:calc(var(--y) + 4% - 1px);opacity:.55"><path d="M0 25Q50 0 100 25T200 25T300 25T400 25V50H0z" fill="#38BDF8"/></svg>
+<svg class="wv2" viewBox="0 0 400 50" preserveAspectRatio="none" style="bottom:calc(var(--y) + 4% - 1px)"><path d="M0 25Q50 50 100 25T200 25T300 25T400 25V50H0z" fill="#2563EB" style="opacity:.9"/></svg>
+<span class="bb" style="--s:10px;--x:25%;--d:3.4s;--dl:0s"></span><span class="bb" style="--s:7px;--x:55%;--d:2.8s;--dl:.8s"></span><span class="bb" style="--s:12px;--x:75%;--d:4s;--dl:1.4s"></span><span class="bb" style="--s:6px;--x:40%;--d:3.1s;--dl:2s"></span>
+<div class="pc"><b id="pc">68%</b><span id="ml">1.7 of 2.5 L</span></div></div>
+<div class="tx"><h1>Stay hydrated</h1><p>You are on track to hit today's goal before 6 pm.</p><div class="ls"><div>Morning<b>0.6 L</b></div><div>Afternoon<b>0.8 L</b></div><div>Evening<b id="ev">0.3 L</b></div></div><div class="ct"><button class="a" id="ad">+ 250 ml</button><button class="b" id="rs">Reset</button></div></div></div>
+<script>
+let ml=1700;const G=2500,tk=document.getElementById('tk');
+function set(){const p=Math.min(100,ml/G*100);tk.style.setProperty('--y',(p*.92)+'%');tk.setAttribute('aria-valuenow',Math.round(p));document.getElementById('pc').textContent=Math.round(p)+'%';document.getElementById('ml').textContent=(ml/1000).toFixed(1)+' of 2.5 L';document.getElementById('ev').textContent=Math.max(0,(ml-1400)/1000).toFixed(1)+' L'}
+document.getElementById('ad').onclick=()=>{ml=Math.min(G,ml+250);set()};document.getElementById('rs').onclick=()=>{ml=0;set()};
+tk.style.setProperty('--y','0%');requestAnimationFrame(()=>requestAnimationFrame(set));
+</script></body></html>

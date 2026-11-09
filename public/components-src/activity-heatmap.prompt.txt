@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer-dashboard designer and front-end engineer with 15+ years of experience. Build "Activity Heatmap": a 26-week contribution-style heatmap of deploys with counting totals, streak and hover tooltips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: GitHub-dark card with green intensity cells and IBM Plex Mono figures.
+- Palette: #7D8798, #0D1117, #6A7484, #E6EDF3, #151B23, #262E3A
+- Type: Inter Tight, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with three counting stats; month labels; weekday labels; 26x7 grid of cells coloured by intensity; legend.
+
+INTERACTION & STATES
+- Cells pop in with a diagonal stagger; hover shows a tooltip with count and date; stats count up; the data is generated from a seeded generator.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

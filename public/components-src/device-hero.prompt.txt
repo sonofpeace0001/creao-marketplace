@@ -1,0 +1,29 @@
+ROLE
+You are a senior product-marketing designer and front-end engineer with 15+ years of experience. Build "Device Hero": a fintech hero with a 3D phone mockup that tilts toward the cursor and floating UI cards at different depths.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Airy periwinkle page with an indigo-to-violet app screen, depth shadows and Sora type.
+- Palette: #0F1636, #3B4FD1, #566089, #7A84AB, #DDE6FF, #F6F8FF
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Left: update pill, gradient headline, copy, App Store button, rating row. Right: perspective phone with animated bar chart and rows, plus three floating glass cards using translateZ.
+
+INTERACTION & STATES
+- Pointer position drives rotateX and rotateY on the phone; floating cards bob; bars animate; the tilt is disabled for coarse pointers and reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

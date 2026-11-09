@@ -1,0 +1,29 @@
+ROLE
+You are a senior layout interaction designer and front-end engineer with 15+ years of experience. Build "Resize Flip Bento": a neo-brutalist bento where clicking any tile cycles its size and the whole grid reflows with a FLIP layout animation.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream stage with butter, sky, pink, mint, orange and lilac tiles, thick outlines and hard shadows.
+- Palette: #2A2013, #2563EB, #F1ECE2, #8A7A5E
+- Type: Outfit (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with shuffle button; six metric tiles with size badges; extra copy and bars appear in larger sizes.
+
+INTERACTION & STATES
+- Click cycles 1x1, 2x1, 2x2 and 1x2; neighbours animate to their new boxes with scale and translate; Shuffle reorders tiles with the same effect.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

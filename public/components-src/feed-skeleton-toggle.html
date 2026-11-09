@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Feed Skeleton Toggle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEEF4;color:#12162B;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.hd h1{font-size:22px;font-weight:700;letter-spacing:-.045em}
+.tg{display:flex;background:#fff;border-radius:99px;padding:4px;box-shadow:0 0 0 1px rgba(18,22,43,.08)}.tg button{border:0;background:none;padding:8px 16px;border-radius:99px;font:600 13px 'Inter Tight';color:#6A7099;cursor:pointer}.tg button[aria-pressed=true]{background:#12162B;color:#fff}.tg button:focus-visible{outline:2px solid #6366F1;outline-offset:2px}
+.ls{display:grid;gap:12px}
+.cd{position:relative;background:#fff;border-radius:22px;padding:18px;box-shadow:0 1px 2px rgba(18,22,43,.06),0 0 0 1px rgba(18,22,43,.05)}
+.sk,.ct{transition:opacity .5s,transform .5s cubic-bezier(.3,1,.4,1)}
+.sk{position:relative}.ct{position:absolute;inset:18px;opacity:0;transform:translateY(10px)}
+.ld .sk{opacity:0;transform:scale(.98);pointer-events:none}.ld .ct{opacity:1;transform:none;transition-delay:calc(var(--i)*110ms)}.ld .sk{transition-delay:calc(var(--i)*110ms)}
+.ld{}
+.rw{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sh{position:relative;overflow:hidden;background:#E8EBF4;border-radius:8px}.sh::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.75) 50%,transparent 80%);transform:translateX(-100%);animation:sh 1.5s ease-in-out infinite}@keyframes sh{to{transform:translateX(100%)}}
+.av{width:44px;height:44px;border-radius:50%}.l1{height:12px;width:120px}.l2{height:10px;width:80px;margin-top:7px}.bd{height:11px;margin-bottom:9px}.bd.s{width:70%}.im{height:130px;border-radius:14px;margin:12px 0}.ac{display:flex;gap:10px}.ac span{width:70px;height:28px;border-radius:99px}
+.ct .rw b{display:block;font-size:15px}.ct .rw span.m{font-size:12.5px;color:#8A90B4}.ct .av2{width:44px;height:44px;border-radius:50%;background:var(--g)}
+.ct p{font-size:14.5px;line-height:1.55;color:#3E4468;margin-bottom:10px}
+.ct .im2{height:130px;border-radius:14px;background:var(--g2);margin:12px 0;position:relative;overflow:hidden}.ct .im2::before{content:"";position:absolute;left:-10%;right:-10%;bottom:-40px;height:90px;background:rgba(20,10,60,.35);border-radius:50% 50% 0 0}.ct .im2::after{content:"";position:absolute;right:30px;top:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.6)}
+.ct .ac span{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#6A7099;background:#F2F3FA;border-radius:99px;padding:6px 14px;width:auto;height:auto}
+.st{margin-top:14px;font-size:12.5px;color:#8A90B4;text-align:center}
+@media(prefers-reduced-motion:reduce){.sh::after{animation:none}*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Your feed</h1><div class="tg" id="tg"><button aria-pressed="true" data-l="0">Loading</button><button aria-pressed="false" data-l="1">Loaded</button></div></div><div class="ls" id="ls"></div><div class="st" id="st">Skeleton placeholders keep the layout stable while data loads.</div></div>
+<script>
+const P=[['Maya Rowe','2 hours ago','linear-gradient(135deg,#F59E0B,#EF4444)','linear-gradient(135deg,#FDBA74,#F472B6)','Shipped the new onboarding today. Completion is up 18% in the first cohort and support tickets are down.','24','6'],['Leo Park','5 hours ago','linear-gradient(135deg,#10B981,#0EA5E9)','linear-gradient(135deg,#6EE7B7,#38BDF8)','Notes from this morning design review: tighter spacing, one accent colour and fewer modals.','41','12'],['Nora Quinn','Yesterday','linear-gradient(135deg,#8B5CF6,#EC4899)','linear-gradient(135deg,#C4B5FD,#F9A8D4)','Our quarterly roadmap is live. Take a look and tell us what you would like to see next.','67','19']];
+const ls=document.getElementById('ls');P.forEach((p,i)=>{const e=document.createElement('div');e.className='cd';e.style.setProperty('--i',i);e.innerHTML='<div class="sk"><div class="rw"><div class="sh av"></div><div><div class="sh l1"></div><div class="sh l2"></div></div></div><div class="sh bd"></div><div class="sh bd"></div><div class="sh bd s"></div>'+(i<2?'<div class="sh im"></div>':'')+'<div class="ac"><span class="sh"></span><span class="sh"></span></div></div><div class="ct"><div class="rw"><div class="av2" style="--g:'+p[2]+'"></div><div><b>'+p[0]+'</b><span class="m">'+p[1]+'</span></div></div><p>'+p[4]+'</p>'+(i<2?'<div class="im2" style="--g2:'+p[3]+'"></div>':'')+'<div class="ac"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.500-9.500-9A5.500 5.500 0 0 1 12 6a5.500 5.500 0 0 1 9.500 6C19 16.500 12 21 12 21z"/></svg>'+p[5]+'</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+p[6]+'</span></div></div>';ls.appendChild(e)});
+function size(){ls.querySelectorAll('.cd').forEach(c=>{c.style.minHeight='';const sk=c.querySelector('.sk');c.style.minHeight=(sk.offsetHeight+36)+'px'})}size();
+function set(l){ls.querySelectorAll('.cd').forEach(c=>c.classList.toggle('ld',!!l));document.querySelectorAll('#tg button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.l===l))}
+document.querySelectorAll('#tg button').forEach(b=>b.onclick=()=>set(+b.dataset.l));
+set(0);let auto=setInterval(()=>{set(1);setTimeout(()=>set(0),3200)},6400);document.getElementById('tg').addEventListener('click',()=>clearInterval(auto));
+</script></body></html>

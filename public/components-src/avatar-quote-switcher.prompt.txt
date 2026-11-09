@@ -1,0 +1,29 @@
+ROLE
+You are a senior customer-story designer and front-end engineer with 15+ years of experience. Build "Avatar Quote Switcher": a testimonial with a stacked portrait, word-by-word blur-in quote and avatar picker with auto-advance.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on lavender with gradient portraits, Fraunces quotes and coloured avatar rings.
+- Palette: #1D1530, #F4F0FA, #7A6E96, #E2DAF2, #7C3AED
+- Type: Fraunces, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Stacked portrait frames with a shadow card; quote text split into words; name and role; avatar picker and previous and next buttons.
+
+INTERACTION & STATES
+- Selecting an avatar or arrow cross-fades the portrait with a spring and re-animates the quote word by word; auto-advances every six seconds and resets on interaction; reduced motion disables animation.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

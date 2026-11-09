@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glow Rail Accordion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#07080C;color:#E8EAF2;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{display:grid;grid-template-columns:1fr 1.2fr;gap:34px;width:100%;max-width:820px;align-items:center}
+.tx small{font:500 12px 'Geist Mono',monospace;letter-spacing:.16em;color:#6EE7F9;text-transform:uppercase}.tx h1{font-size:clamp(28px,4.6vw,44px);line-height:1.04;letter-spacing:-.05em;font-weight:700;margin:10px 0 12px}.tx p{color:#8B90A6;line-height:1.6;max-width:32ch}
+.ls{position:relative;padding-left:26px}
+.rl{position:absolute;left:5px;top:10px;bottom:10px;width:2px;background:#1B1E2B;border-radius:2px}.rl i{position:absolute;left:0;width:100%;border-radius:2px;background:linear-gradient(#6EE7F9,#8B5CF6);box-shadow:0 0 14px rgba(110,231,249,.8);transition:top .5s cubic-bezier(.3,1.1,.4,1),height .5s cubic-bezier(.3,1.1,.4,1)}
+.it{position:relative}.it::before{content:"";position:absolute;left:-25px;top:22px;width:10px;height:10px;border-radius:50%;background:#07080C;border:2px solid #2A2E40;transition:all .3s}.it.open::before{border-color:#6EE7F9;background:#6EE7F9;box-shadow:0 0 12px #6EE7F9}
+.q{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;border:0;background:none;color:#9AA0B8;text-align:left;font:600 17px 'Inter Tight';letter-spacing:-.015em;padding:16px 0;cursor:pointer;transition:color .25s}.q:hover{color:#fff}.it.open .q{color:#fff}.q:focus-visible{outline:2px solid #6EE7F9;outline-offset:2px;border-radius:6px}
+.q span{font:500 12px 'Geist Mono',monospace;color:#555B73;transition:color .25s}.it.open .q span{color:#6EE7F9}
+.a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.3,1,.4,1)}.it.open .a{grid-template-rows:1fr}.a>div{overflow:hidden}.a p{padding:0 0 18px;color:#8B90A6;font-size:15px;line-height:1.65;max-width:42ch}
+@media(max-width:700px){.c{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="tx"><small>Principles</small><h1>How we build, in four lines.</h1><p>The rules we keep coming back to when the roadmap gets noisy.</p></div>
+<div class="ls" id="ls"><div class="rl"><i id="i"></i></div></div></div>
+<script>
+const Q=[['Start small','01','Ship the smallest useful version first. Real feedback is worth ten planning meetings.'],['Default to quiet','02','Interrupt people only when it matters. Everything else can wait for the daily digest.'],['Make it reversible','03','Prefer decisions you can undo. Fast, small, reversible changes beat careful big ones.'],['Write it down','04','Decisions live in docs, not in heads. If it is not written, it did not happen.']];
+const ls=document.getElementById('ls');Q.forEach((q,i)=>ls.insertAdjacentHTML('beforeend','<div class="it'+(i===1?' open':'')+'"><button class="q" aria-expanded="'+(i===1)+'">'+q[0]+'<span>'+q[1]+'</span></button><div class="a"><div><p>'+q[2]+'</p></div></div></div>'));
+const I=[...ls.querySelectorAll('.it')],bar=document.getElementById('i');
+function rail(){const ls0=ls.getBoundingClientRect();const o=I.find(x=>x.classList.contains('open'));if(!o){bar.style.height='0';return}const r=o.getBoundingClientRect();bar.style.top=(r.top-ls0.top+4)+'px';bar.style.height=Math.max(14,r.height-8)+'px'}
+I.forEach(it=>it.querySelector('.q').onclick=()=>{const o=!it.classList.contains('open');I.forEach(x=>{x.classList.remove('open');x.querySelector('.q').setAttribute('aria-expanded','false')});if(o){it.classList.add('open');it.querySelector('.q').setAttribute('aria-expanded','true')}setTimeout(rail,10);setTimeout(rail,260);setTimeout(rail,520)});
+(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{rail();setTimeout(rail,500)});rail();addEventListener('resize',rail);
+</script></body></html>

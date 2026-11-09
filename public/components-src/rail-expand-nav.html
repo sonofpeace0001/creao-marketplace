@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Magnetic Top Nav</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2EEE6;color:#171410;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.fr{width:100%;max-width:860px;min-height:460px;background:#FBF8F1;border-radius:26px;overflow:hidden;box-shadow:0 40px 70px -44px rgba(23,20,16,.55),0 0 0 1px rgba(23,20,16,.07)}
+.nv{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:1px solid #E8E1D2;position:relative}
+.lg{font:800 22px 'Syne';letter-spacing:-.05em;display:flex;align-items:center;gap:8px}.lg i{width:22px;height:22px;border-radius:50% 50% 50% 4px;background:#FF5A1F;display:block}
+.ls{display:flex;gap:2px;list-style:none;position:relative}
+.ls button{position:relative;border:0;background:none;font:600 14.5px 'Manrope';color:#6B6458;padding:10px 16px;cursor:pointer;z-index:1;transition:color .2s;display:flex;align-items:center;gap:6px}.ls button:hover,.ls button[aria-expanded=true]{color:#171410}.ls button:focus-visible{outline:2px solid #FF5A1F;outline-offset:-2px;border-radius:10px}
+.ls svg{transition:transform .25s}.ls button[aria-expanded=true] svg{transform:rotate(180deg)}
+.ink{position:absolute;top:0;left:0;height:100%;border-radius:12px;background:#EFE8D8;z-index:0;opacity:0;transition:transform .35s cubic-bezier(.3,1.2,.4,1),width .35s cubic-bezier(.3,1.2,.4,1),opacity .2s}
+.cta{border:0;background:#171410;color:#FBF8F1;font:700 14px 'Manrope';padding:11px 20px;border-radius:99px;cursor:pointer;transition:transform .2s}.cta:hover{transform:scale(1.05)}.cta:focus-visible{outline:3px solid #FF5A1F;outline-offset:3px}
+.dd{position:absolute;left:28px;right:28px;top:100%;margin-top:10px;background:#fff;border:1px solid #E8E1D2;border-radius:20px;box-shadow:0 30px 50px -20px rgba(23,20,16,.4);padding:10px;display:grid;grid-template-columns:1.2fr 1fr;gap:10px;opacity:0;transform:translateY(-10px) scale(.98);pointer-events:none;transition:opacity .25s,transform .3s cubic-bezier(.3,1.2,.4,1);z-index:6;transform-origin:top}.dd.on{opacity:1;transform:none;pointer-events:auto}
+.dd .ft{border-radius:14px;padding:18px;background:linear-gradient(145deg,#FF8A5B,#FF5A1F 60%,#C2300A);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;min-height:170px;position:relative;overflow:hidden}.dd .ft::before{content:"";position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.2)}.dd .ft b{font:800 20px/1.1 'Syne';letter-spacing:-.03em}.dd .ft span{font-size:13px;opacity:.9;margin-top:6px;line-height:1.4}
+.dd a{display:block;padding:12px 14px;border-radius:12px;text-decoration:none;color:#171410;transition:background .15s}.dd a:hover{background:#F5F0E4}.dd a:focus-visible{outline:2px solid #FF5A1F}.dd a b{display:block;font-size:14.5px;font-weight:700}.dd a span{font-size:13px;color:#7A7260}
+.bd{padding:70px 28px}.bd h1{font:800 clamp(34px,6vw,64px)/.98 'Syne';letter-spacing:-.05em;max-width:12ch}.bd p{margin-top:16px;color:#6B6458;max-width:38ch;line-height:1.6;font-size:16px}
+@media(max-width:640px){.ls button{padding:10px 10px;font-size:13.5px}.dd{grid-template-columns:1fr}.dd .ft{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="fr"><nav class="nv" aria-label="Main"><div class="lg"><i></i>Parcel</div>
+<ul class="ls" id="ls"><span class="ink" id="ink"></span>
+<li><button data-d="1" aria-expanded="false" aria-haspopup="true">Solutions <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button></li>
+<li><button data-d="0">Pricing</button></li><li><button data-d="0">Customers</button></li><li><button data-d="0">Blog</button></li></ul><button class="cta">Get started</button>
+<div class="dd" id="dd" role="menu"><div class="ft"><b>Ship your next idea in a weekend.</b><span>Templates, workflows and a calm editor.</span></div><div><a href="#" role="menuitem"><b>For startups</b><span>Move fast without the mess</span></a><a href="#" role="menuitem"><b>For agencies</b><span>Client portals and approvals</span></a><a href="#" role="menuitem"><b>For creators</b><span>Sell and publish in one place</span></a></div></div></nav>
+<div class="bd"><h1>Simple tools for makers.</h1><p>The ink follows your pointer between links and the menu springs open beneath it.</p></div></div>
+<script>
+const ls=document.getElementById('ls'),ink=document.getElementById('ink'),dd=document.getElementById('dd');const B=[...ls.querySelectorAll('button')];let t=null;
+function mv(b){if(!b){ink.style.opacity=0;return}const r=b.getBoundingClientRect(),p=ls.getBoundingClientRect();ink.style.opacity=1;ink.style.width=r.width+'px';ink.style.transform='translateX('+(r.left-p.left)+'px)'}
+function open(b){clearTimeout(t);dd.classList.add('on');B.forEach(x=>x.hasAttribute('aria-haspopup')&&x.setAttribute('aria-expanded',x===b))}
+function close(){t=setTimeout(()=>{dd.classList.remove('on');B.forEach(x=>x.hasAttribute('aria-haspopup')&&x.setAttribute('aria-expanded','false'));mv(null)},140)}
+B.forEach(b=>{b.addEventListener('pointerenter',()=>{mv(b);if(b.dataset.d==='1')open(b);else{clearTimeout(t);dd.classList.remove('on')}});b.addEventListener('focus',()=>{mv(b);if(b.dataset.d==='1')open(b)});b.addEventListener('click',()=>{if(b.dataset.d==='1')dd.classList.contains('on')?close():open(b)})});
+document.querySelector('.nv').addEventListener('pointerleave',close);dd.addEventListener('pointerenter',()=>clearTimeout(t));document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>setTimeout(()=>{mv(B[0]);open(B[0])},120));
+</script></body></html>

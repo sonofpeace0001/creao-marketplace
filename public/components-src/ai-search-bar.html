@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI Search Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0C12;color:#E9EAF3;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:660px}
+.hd{text-align:center;margin-bottom:22px}.hd h1{font:italic 400 clamp(32px,6vw,48px)/1 'Newsreader',serif;letter-spacing:-.03em}.hd p{color:#8A8CA6;margin-top:8px;font-size:15px}
+.bx{position:relative;border-radius:22px;padding:1.5px;background:conic-gradient(from var(--a),#2A2C40 0 60%,#6C7CFF 78%,#E879F9 90%,#2A2C40);animation:sp 5s linear infinite}@keyframes sp{to{--a:360deg}}
+.bx .in{display:flex;align-items:center;gap:12px;background:#12141D;border-radius:21px;padding:8px 8px 8px 20px}
+.in svg{flex:none;color:#8A8CA6}.in input{flex:1;min-width:0;border:0;outline:0;background:none;color:#E9EAF3;font:500 17px 'Inter';padding:12px 0}.in input::placeholder{color:#6A6C86}
+.in .tg{display:flex;background:#1B1D2A;border-radius:12px;padding:3px;gap:2px}.tg button{border:0;background:none;color:#8A8CA6;font:600 13px 'Inter';padding:8px 12px;border-radius:9px;cursor:pointer}.tg button[aria-pressed=true]{background:#2A2D45;color:#fff}.tg button:focus-visible{outline:2px solid #A5A8FF}
+.in .go{border:0;width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#6C7CFF,#E879F9);color:#fff;cursor:pointer;display:grid;place-items:center;flex:none}.go:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.ch{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px;justify-content:center}.ch button{border:1px solid #23253A;background:#10121B;color:#B6B8D2;border-radius:99px;padding:7px 14px;font:500 13.5px 'Inter';cursor:pointer;transition:all .15s}.ch button:hover{border-color:#6C7CFF;color:#fff}.ch button:focus-visible{outline:2px solid #6C7CFF;outline-offset:2px}
+.an{background:linear-gradient(160deg,#151829,#10121B);border:1px solid #23253A;border-radius:22px;padding:20px 22px;min-height:190px}
+.an .h{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#A5A8FF;margin-bottom:10px}.an .h i{width:18px;height:18px;border-radius:6px;background:linear-gradient(135deg,#6C7CFF,#E879F9);display:block}
+.an p{font-size:16px;line-height:1.7;color:#CDCFE6;min-height:84px}.an p b{color:#fff;font-weight:600}.an .cur{display:inline-block;width:7px;height:16px;border-radius:2px;background:#A5A8FF;vertical-align:-3px;animation:bl 1s steps(2) infinite;margin-left:2px}@keyframes bl{50%{opacity:0}}
+.sr{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;opacity:0;transform:translateY(6px);transition:all .4s}.sr.on{opacity:1;transform:none}.sr a{display:flex;align-items:center;gap:8px;border:1px solid #23253A;background:#0E1018;border-radius:12px;padding:8px 12px;font-size:13px;color:#B6B8D2;text-decoration:none}.sr a:hover{border-color:#6C7CFF;color:#fff}.sr a:focus-visible{outline:2px solid #6C7CFF}.sr b{font:600 11px 'Inter';color:#A5A8FF;background:#1B1E36;border-radius:5px;padding:1px 6px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Ask the docs anything</h1><p>Search results, or a direct answer with sources.</p></div>
+<form class="bx" id="f"><div class="in"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><input id="q" value="How do I roll back a deploy?" aria-label="Search" autocomplete="off"><div class="tg" role="group" aria-label="Mode"><button type="button" aria-pressed="false">Search</button><button type="button" aria-pressed="true">Answer</button></div><button class="go" aria-label="Ask"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div></form>
+<div class="ch" id="ch"></div><div class="an" aria-live="polite"><div class="h"><i></i><span id="hl">AI answer</span></div><p id="an"></p><div class="sr" id="sr"></div></div></div>
+<script>
+const K={'roll':['Open <b>Deployments</b>, pick the last healthy build and press <b>Promote to production</b>. Traffic shifts in under 10 seconds with zero downtime. You can also run <b>deploy rollback</b> from the CLI.',[['Rollbacks','1'],['CLI reference','2'],['Zero-downtime deploys','3']]],'domain':['Go to <b>Settings, then Domains</b>, add your domain and create the CNAME record shown. Verification usually finishes within minutes and a free SSL certificate is issued automatically.',[['Custom domains','1'],['DNS records','2']]],'env':['Add secrets under <b>Settings, then Environment</b>. Variables are encrypted at rest and scoped to Production, Preview or Development.',[['Environment variables','1'],['Secrets','2']]],'default':['Here is what I found: start with the quickstart guide, then explore projects, deployments and domains in the sidebar. Ask me something more specific for a direct answer.',[['Quickstart','1'],['Projects','2']]]};
+const q=document.getElementById('q'),an=document.getElementById('an'),sr=document.getElementById('sr');let tm=null,mode=1;
+const ch=document.getElementById('ch');['How do I roll back a deploy?','Add a custom domain','Set environment variables'].forEach(s=>{const b=document.createElement('button');b.type='button';b.textContent=s;b.onclick=()=>{q.value=s;ask()};ch.appendChild(b)});
+function pick(t){t=t.toLowerCase();return t.includes('roll')||t.includes('deploy')?'roll':t.includes('domain')?'domain':t.includes('env')||t.includes('secret')?'env':'default'}
+function ask(){clearInterval(tm);const k=K[pick(q.value)];sr.classList.remove('on');sr.innerHTML=k[1].map(s=>'<a href="#"><b>'+s[1]+'</b>'+s[0]+'</a>').join('');document.getElementById('hl').textContent=mode?'AI answer':'Top results';const rd=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(rd){an.innerHTML=k[0];sr.classList.add('on');return}
+ const toks=k[0].match(/<[^>]+>|[^<]/g);let i=0,out='';an.innerHTML='<span class="cur"></span>';tm=setInterval(()=>{for(let n=0;n<3&&i<toks.length;n++)out+=toks[i++];an.innerHTML=out+'<span class="cur"></span>';if(i>=toks.length){clearInterval(tm);an.innerHTML=k[0];sr.classList.add('on')}},16)}
+document.getElementById('f').onsubmit=e=>{e.preventDefault();ask()};document.querySelectorAll('.tg button').forEach((b,i)=>b.onclick=()=>{mode=i;document.querySelectorAll('.tg button').forEach((z,k)=>z.setAttribute('aria-pressed',k===i));ask()});
+ask();
+</script></body></html>

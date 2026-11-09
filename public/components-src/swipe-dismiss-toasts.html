@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Swipe Dismiss Toasts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#FFE9D6,#FFD3E0 55%,#E3D4FF);color:#241A2E;font-family:'Figtree',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:420px;text-align:center}
+.c h1{font-size:28px;font-weight:800;letter-spacing:-.04em}.c p{color:#7A6A88;font-size:14.5px;margin:6px 0 24px}
+.stk{position:relative;height:130px;touch-action:pan-y}
+.t{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:14px 16px;text-align:left;box-shadow:0 18px 30px -14px rgba(60,20,80,.35),0 0 0 1px rgba(36,26,46,.06);cursor:grab;user-select:none;touch-action:pan-y;will-change:transform}
+.t:active{cursor:grabbing}
+.t i{flex:none;width:40px;height:40px;border-radius:13px;background:var(--g);display:grid;place-items:center;color:#fff}.t b{display:block;font-size:15px;font-weight:700}.t span{font-size:13.5px;color:#7A6A88}.t em{margin-left:auto;font-style:normal;font-size:12px;color:#A99AB8;white-space:nowrap}
+.hn{position:absolute;inset:0;border-radius:20px;display:flex;align-items:center;padding:0 22px;font-weight:800;color:#fff;opacity:0}
+.fl{font-size:13px;color:#8F7EA0;margin-top:10px}.fl b{color:#241A2E}
+.rs{margin-top:18px;border:0;background:#241A2E;color:#fff;border-radius:99px;padding:11px 22px;font:700 14px 'Figtree';cursor:pointer}.rs:focus-visible{outline:3px solid #7C3AED;outline-offset:3px}
+.em{position:absolute;inset:0;display:grid;place-items:center;color:#9C8BAE;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none}.em.on{opacity:1}
+.hint{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-size:13px;color:#8F7EA0}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><h1>Flick them away</h1><p>Drag a toast sideways. A fast flick dismisses it, a slow drag springs back.</p>
+<div class="stk" id="stk"><div class="em" id="em">All clear. Nothing new.</div></div>
+<div class="fl"><b id="cn">3</b> notifications</div><button class="rs" id="rs">Bring them back</button></div>
+<script>
+const D=[['Payment received','Invoice #2043 was paid in full.','2m','#10B981','M5 12.500 9.500 17 19 7'],['New comment','Ada replied on Homepage v3.','8m','#6366F1','M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'],['Deploy finished','Production is live in 14 seconds.','21m','#F97316','M13 2 4 14h7l-1 8 9-12h-7z']];
+const stk=document.getElementById('stk');let items=[];
+function mk(d,i){const e=document.createElement('div');e.className='t';e.tabIndex=0;e.setAttribute('role','status');e.innerHTML='<i style="--g:'+d[3]+'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="'+d[4]+'"/></svg></i><div><b>'+d[0]+'</b><span>'+d[1]+'</span></div><em>'+d[2]+'</em>';stk.appendChild(e);const o={e,dx:0,gone:false};items.push(o);bind(o);return o}
+function lay(){const live=items.filter(o=>!o.gone);live.forEach((o,k)=>{o.e.style.zIndex=10-k;o.y=k*14;o.s=1-k*.05;if(!o.drag)apply(o,true)});document.getElementById('cn').textContent=live.length;document.getElementById('em').classList.toggle('on',!live.length)}
+function apply(o,anim){o.e.style.transition=anim?'transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s':'none';o.e.style.transform='translate('+o.dx+'px,'+o.y+'px) scale('+o.s+') rotate('+(o.dx*.03)+'deg)';o.e.style.opacity=o.gone?0:(o.y>20&&!o.drag?1-o.y/160:1)}
+function bind(o){let sx=0,st=0,lx=0,lt=0,v=0;o.e.addEventListener('pointerdown',e=>{if(o.gone||items.filter(x=>!x.gone)[0]!==o)return;o.drag=true;sx=lx=e.clientX;st=lt=performance.now();v=0;o.e.setPointerCapture(e.pointerId)});
+ o.e.addEventListener('pointermove',e=>{if(!o.drag)return;const n=performance.now();v=(e.clientX-lx)/Math.max(1,n-lt);lx=e.clientX;lt=n;o.dx=e.clientX-sx;apply(o,false)});
+ const end=()=>{if(!o.drag)return;o.drag=false;if(Math.abs(v)>.6||Math.abs(o.dx)>140)dismiss(o,o.dx>=0?1:-1);else{o.dx=0;apply(o,true)}};o.e.addEventListener('pointerup',end);o.e.addEventListener('pointercancel',end);
+ o.e.addEventListener('keydown',e=>{if(e.key==='Delete'||e.key==='Backspace'||e.key==='Escape')dismiss(o,1)})}
+function dismiss(o,dir){o.gone=true;o.dx=dir*520;apply(o,true);lay();setTimeout(()=>{const l=items.filter(x=>!x.gone)[0];if(l)l.e.focus()},0)}
+document.getElementById('rs').onclick=()=>{items.forEach(o=>o.e.remove());items=[];D.forEach(mk);lay()};
+D.forEach(mk);lay();
+</script></body></html>

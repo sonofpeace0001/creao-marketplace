@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Shortcut Cheatsheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9ECF4;color:#12162B;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:820px;background:#fff;border-radius:28px;padding:28px;box-shadow:0 40px 70px -40px rgba(18,22,43,.5),0 0 0 1px rgba(18,22,43,.06)}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px;flex-wrap:wrap;gap:12px}.hd h1{font-size:26px;font-weight:700;letter-spacing:-.05em}.hd p{font-size:14px;color:#7A80A6;margin-top:3px}
+.sr{display:flex;align-items:center;gap:8px;background:#F2F4FA;border-radius:12px;padding:0 12px;height:40px;min-width:200px}.sr input{flex:1;border:0;background:none;outline:0;font:500 14px 'Inter Tight';color:#12162B}.sr svg{color:#8A90B4}.sr:focus-within{box-shadow:0 0 0 3px rgba(79,70,229,.2)}
+.live{display:flex;align-items:center;justify-content:center;gap:10px;height:76px;border:1.5px dashed #D5D9EC;border-radius:18px;margin-bottom:20px;background:#FAFBFF;color:#8A90B4;font-size:14.5px;transition:all .2s}.live.hit{border-color:#4F46E5;background:#EEF0FF;color:#12162B}
+.live .kk{display:flex;gap:6px}
+.gr{display:grid;grid-template-columns:1fr 1fr;gap:22px}.gr h3{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8A90B4;margin-bottom:10px}
+.sc{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:12px;font-size:14.5px;font-weight:500;transition:background .2s,transform .2s}.sc:hover{background:#F4F6FC}.sc.hit{background:#EEF0FF;transform:translateX(4px)}.sc.hide{display:none}
+.kk{display:flex;gap:5px}
+.k{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 9px;border-radius:8px;background:linear-gradient(180deg,#fff,#F0F2FA);border:1px solid #D5D9EC;border-bottom-width:3px;font:500 13px 'Geist Mono',monospace;color:#3A4066;transition:all .1s}
+.k.dn{transform:translateY(2px);border-bottom-width:1px;background:#4F46E5;border-color:#4F46E5;color:#fff;box-shadow:0 0 0 4px rgba(79,70,229,.2)}
+.ft{margin-top:18px;font-size:12.5px;color:#8A90B4;text-align:center}.ft kbd{font:500 12px 'Geist Mono',monospace;background:#F2F4FA;border-radius:6px;padding:2px 7px}
+@media(max-width:700px){.gr{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Keyboard shortcuts</h1><p>Press any combination below and watch the keys respond.</p></div><div class="sr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><input id="q" placeholder="Filter shortcuts" aria-label="Filter shortcuts"></div></div>
+<div class="live hit" id="lv"><span id="lt">Last pressed</span><div class="kk" id="lk"></div></div>
+<div class="gr" id="gr"></div><div class="ft">Tip: press <kbd>?</kbd> anywhere to open this sheet</div></div>
+<script>
+const G=[['General',[['Command palette',['Ctrl','K']],['Search',['/']],['Save',['Ctrl','S']],['Undo',['Ctrl','Z']],['Redo',['Ctrl','Shift','Z']]]],['Editing',[['Bold',['Ctrl','B']],['Italic',['Ctrl','I']],['Insert link',['Ctrl','L']],['Comment',['Ctrl','Alt','M']],['Duplicate line',['Ctrl','D']]]],['Navigation',[['Go to dashboard',['G','D']],['Go to settings',['G','S']],['Next item',['J']],['Previous item',['K']],['Toggle sidebar',['Ctrl','\\']]]],['Workspace',[['New project',['N','P']],['Switch workspace',['Ctrl','1']],['Invite teammate',['Shift','I']],['Open help',['?']],['Sign out',['Ctrl','Shift','Q']]]]];
+const gr=document.getElementById('gr');G.forEach(g=>{const d=document.createElement('div');d.innerHTML='<h3>'+g[0]+'</h3>'+g[1].map(s=>'<div class="sc" data-k="'+s[1].join('+').toLowerCase()+'"><span>'+s[0]+'</span><div class="kk">'+s[1].map(k=>'<span class="k" data-k="'+k.toLowerCase()+'">'+k+'</span>').join('')+'</div></div>').join('');gr.appendChild(d)});
+const norm=k=>({control:'ctrl',meta:'ctrl',' ':'space'}[k]||k);const down=new Set();
+function render(){const lk=document.getElementById('lk');const ks=[...down];lk.innerHTML=ks.map(k=>'<span class="k dn">'+(k==='ctrl'?'Ctrl':k.length===1?k.toUpperCase():k[0].toUpperCase()+k.slice(1))+'</span>').join('');document.querySelectorAll('.sc').forEach(s=>{const need=s.dataset.k.split('+');s.classList.toggle('hit',need.every(k=>down.has(k))&&need.length===down.size)});document.querySelectorAll('.sc .k').forEach(k=>k.classList.toggle('dn',down.has(k.dataset.k)));document.getElementById('lv').classList.toggle('hit',down.size>0);document.getElementById('lt').textContent=down.size?'Pressed':'Last pressed'}
+addEventListener('keydown',e=>{if(e.target.id==='q')return;const k=norm(e.key.toLowerCase());down.add(k);if(e.ctrlKey||e.metaKey)down.add('ctrl');if(e.shiftKey)down.add('shift');if(e.altKey)down.add('alt');if(['ctrl','shift','alt'].some(m=>down.has(m)&&k!==m)&&e.key.length===1)e.preventDefault();render()});
+addEventListener('keyup',e=>{const k=norm(e.key.toLowerCase());down.delete(k);if(!e.ctrlKey&&!e.metaKey)down.delete('ctrl');if(!e.shiftKey)down.delete('shift');if(!e.altKey)down.delete('alt');render()});addEventListener('blur',()=>{down.clear();render()});
+document.getElementById('q').addEventListener('input',e=>{const v=e.target.value.toLowerCase();document.querySelectorAll('.sc').forEach(s=>s.classList.toggle('hide',v&&!s.textContent.toLowerCase().includes(v)&&!s.dataset.k.includes(v)))});
+down.add('ctrl');down.add('k');render();
+</script></body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Type-to-Confirm Dialog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#17181C;color:#EDEEF2;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.st{position:relative;width:100%;max-width:640px;min-height:480px;border-radius:24px;overflow:hidden;background:#1F2025;border:1px solid #2C2D35;display:grid;place-items:center}
+.pg{position:absolute;inset:0;padding:30px;opacity:.5}.pg h1{font-size:22px;font-weight:700;letter-spacing:-.03em}.pg div{height:12px;border-radius:6px;background:#2C2D35;margin-top:14px;width:70%}.pg div:nth-child(3){width:50%}
+.bk{position:absolute;inset:0;background:rgba(8,8,12,.7);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}.st.op .bk{opacity:1;pointer-events:auto}
+.dl{position:relative;width:min(420px,calc(100% - 32px));background:#16171C;border:1px solid #34353F;border-radius:22px;padding:24px;box-shadow:0 40px 80px -20px #000;opacity:0;transform:translateY(20px) scale(.96);transition:all .35s cubic-bezier(.3,1.3,.5,1);pointer-events:none;z-index:2}
+.st.op .dl{opacity:1;transform:none;pointer-events:auto}.dl.shake{animation:sk .4s}@keyframes sk{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.ic{width:46px;height:46px;border-radius:14px;background:rgba(248,113,113,.14);border:1px solid rgba(248,113,113,.3);color:#F87171;display:grid;place-items:center;margin-bottom:14px}
+.dl h2{font-size:19px;font-weight:700;letter-spacing:-.025em}.dl p{font-size:14.5px;line-height:1.55;color:#9A9BA8;margin:8px 0 16px}.dl p b{color:#EDEEF2;font-weight:600}
+.dl code{font:500 13px 'Geist Mono',monospace;background:#23242B;border:1px solid #34353F;border-radius:6px;padding:2px 7px;color:#F87171}
+.dl label{display:block;font-size:13px;font-weight:600;color:#B6B7C2;margin-bottom:8px}.dl input{width:100%;background:#0F1014;border:1.5px solid #34353F;border-radius:12px;padding:12px 14px;font:500 15px 'Geist Mono',monospace;color:#EDEEF2;outline:0;transition:all .2s}.dl input:focus{border-color:#F87171;box-shadow:0 0 0 4px rgba(248,113,113,.14)}.dl input.ok{border-color:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.14)}
+.hs{height:5px;border-radius:5px;background:#26272F;margin-top:12px;overflow:hidden}.hs i{display:block;height:100%;width:0;border-radius:5px;background:#F87171;transition:width .15s,background .2s}.hs.ok i{background:#34D399}
+.ac{display:flex;gap:10px;margin-top:20px}.ac button{flex:1;border-radius:12px;padding:12px;font:600 14.5px 'Inter';cursor:pointer;transition:all .15s}.ac .c{background:#23242B;border:1px solid #34353F;color:#EDEEF2}.ac .c:hover{background:#2C2D35}.ac .d{background:#DC2626;border:0;color:#fff}.ac .d:disabled{background:#3A2326;color:#7C5A5E;cursor:not-allowed}.ac .d:hover:not(:disabled){background:#EF4444}.ac button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.opn{position:relative;z-index:1;border:1px solid #34353F;background:#23242B;color:#F87171;border-radius:12px;padding:12px 20px;font:600 14.5px 'Inter';cursor:pointer}.st.op .opn{visibility:hidden}.opn:focus-visible{outline:2px solid #F87171;outline-offset:3px}
+.done{display:none;text-align:center;padding:8px 0}.done i{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:rgba(52,211,153,.14);color:#34D399;margin:0 auto 12px}.dl.dn .f{display:none}.dl.dn .done{display:block}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="st" id="st"><div class="pg"><h1>Project settings</h1><div></div><div></div><div></div></div><button class="opn" id="op">Delete project</button><div class="bk" id="bk"></div>
+<div class="dl" id="dl" role="alertdialog" aria-modal="true" aria-labelledby="t" aria-describedby="d"><div class="f"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M10.300 3.900 1.800 18a2 2 0 0 0 1.700 3h17a2 2 0 0 0 1.700-3L13.700 3.900a2 2 0 0 0-3.400 0zM12 9v4M12 17h.01"/></svg></div>
+<h2 id="t">Delete "northwind-web"?</h2><p id="d">This permanently deletes the project, <b>214 deployments</b> and all environment variables. This action cannot be undone.</p>
+<label for="cf">Type <code>northwind-web</code> to confirm</label><input id="cf" autocomplete="off" spellcheck="false" placeholder="northwind-web"><div class="hs" id="hs"><i></i></div>
+<div class="ac"><button class="c" id="cn">Cancel</button><button class="d" id="dd" disabled>Delete project</button></div></div>
+<div class="done"><i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i><h2>Project deleted</h2><p>northwind-web was removed.</p></div></div></div>
+<script>
+const st=document.getElementById('st'),dl=document.getElementById('dl'),cf=document.getElementById('cf'),dd=document.getElementById('dd'),hs=document.getElementById('hs'),W='northwind-web';
+function open(){dl.classList.remove('dn');cf.value='';upd();st.classList.add('op');setTimeout(()=>cf.focus(),60)}function close(){st.classList.remove('op');document.getElementById('op').focus()}
+function upd(){const v=cf.value,ok=v===W;dd.disabled=!ok;cf.classList.toggle('ok',ok);hs.classList.toggle('ok',ok);let m=0;while(m<v.length&&v[m]===W[m])m++;hs.firstChild.style.width=(m/W.length*100)+'%'}
+cf.addEventListener('input',upd);cf.addEventListener('keydown',e=>{if(e.key==='Enter'){if(dd.disabled){dl.classList.remove('shake');void dl.offsetWidth;dl.classList.add('shake')}else dd.click()}});
+document.getElementById('op').onclick=open;document.getElementById('cn').onclick=close;document.getElementById('bk').onclick=close;document.addEventListener('keydown',e=>{if(e.key==='Escape'&&st.classList.contains('op'))close()});
+dd.onclick=()=>{dl.classList.add('dn');setTimeout(close,1400)};
+setTimeout(()=>{open();cf.value='northwind-';upd()},120);
+</script></body></html>

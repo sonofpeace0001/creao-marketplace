@@ -1,0 +1,29 @@
+ROLE
+You are a senior infrastructure-marketing designer and canvas engineer with 15+ years of experience. Build "Dotted World Map": a dotted world map with pulsing city markers, animated arcs with travelling light and hover tooltips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight navy card with slate dots, cyan primary regions and violet edge regions.
+- Palette: #7F8DB4, #0A0F1C, #070A12, #E6EBFA, #12204A, #17213D
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with title and two counting stats; canvas map built by point-in-polygon sampling of coarse continents; city pulses; quadratic arcs with moving glow; legend.
+
+INTERACTION & STATES
+- Hover on a city shows a tooltip with latency; arcs animate continuously; stats count up; canvas is DPR-aware and rebuilds on resize; reduced motion draws a static frame.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

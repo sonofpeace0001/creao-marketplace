@@ -1,0 +1,29 @@
+ROLE
+You are a senior cybersecurity interface designer with 15+ years of experience. Build "Radar Sweep Loader": a green phosphor radar with a rotating sweep that lights blips as it passes, plus live node, latency and threat counters.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black and neon green with a glowing radar dish and condensed uppercase type.
+- Palette: #34D399, #B6FFD6, #030A07, #06241A, #031009, #14573E
+- Type: Chakra Petch, Share Tech Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Radar dial with rings, axes, conic sweep, blips and centre; title; status line; three counters.
+
+INTERACTION & STATES
+- A conic gradient sweeps continuously; each blip pings with a timed delay as the beam crosses it; counters and messages update every 1.5 seconds.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

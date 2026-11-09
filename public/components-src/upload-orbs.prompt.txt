@@ -1,0 +1,29 @@
+ROLE
+You are a senior upload-experience designer and front-end engineer with 15+ years of experience. Build "Upload Progress Orbs": a multi-file upload queue with circular progress orbs, pause and cancel controls, speed and ETA, and an add-more button.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep indigo cards with glowing coloured rings and mono status text.
+- Palette: #8D86C4, #4ADE80, #F87171, #A78BFA, #EEEBFF, #221D44
+- Type: Sora, Fragment Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with in-progress count; file rows each with progress ring, name, size status and pause and cancel buttons; completed state with tick; add more button; speed and ETA footer.
+
+INTERACTION & STATES
+- A timer advances each ring at its own rate; Pause toggles per file; Cancel removes a row; finished files show a tick and an open button; speed and ETA aggregate across active uploads.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior notification designer and front-end engineer with 15+ years of experience. Build "Island Alerts": a dynamic-island style alert that morphs between a compact pill and an expanded card with actions.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black pill on a lavender stage with coloured status dots and Sora type.
+- Palette: #10132B, #06070F, #DDE4FF, #F3E6FF, #A5A9C4, #1E2038
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Floating island with status dot and title; expandable section with message and Primary and Secondary buttons; page card with four trigger chips.
+
+INTERACTION & STATES
+- Triggers measure the title and spring the island to the right width and height; simple alerts auto-dismiss after 3 seconds, actionable ones stay until a button is pressed; the island shrinks to a dot when hidden.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

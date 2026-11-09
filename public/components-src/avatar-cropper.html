@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Avatar Upload Cropper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFEAE0;color:#2A2218;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:680px;background:#FBF8F1;border-radius:28px;padding:26px;box-shadow:0 40px 70px -44px rgba(42,34,24,.55),0 0 0 1px rgba(42,34,24,.07);display:grid;grid-template-columns:1.3fr 1fr;gap:26px}
+.hd{grid-column:1/-1}.hd h1{font:600 26px 'Fraunces',serif;letter-spacing:-.03em}.hd p{color:#8A7D66;font-size:14.5px;margin-top:4px}
+.cv{position:relative;aspect-ratio:1;border-radius:20px;overflow:hidden;background:#222;touch-action:none;user-select:none}
+.img{position:absolute;inset:0;background:linear-gradient(180deg,#9FD0F2 0,#E9D2A8 52%,#6AA27A 52%,#3E7A58 100%)}
+.img::before{content:"";position:absolute;left:50%;top:34%;width:30%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:#F3C9A4;box-shadow:0 0 0 0 #000}.img::after{content:"";position:absolute;left:30%;right:30%;top:62%;bottom:-6%;border-radius:80px 80px 0 0;background:#D9534F}
+.sh{position:absolute;inset:0;background:rgba(15,12,8,.62);-webkit-mask:radial-gradient(circle at var(--x) var(--y),transparent calc(var(--r) - .5px),#000 var(--r));mask:radial-gradient(circle at var(--x) var(--y),transparent calc(var(--r) - .5px),#000 var(--r))}
+.cr{position:absolute;left:calc(var(--x) - var(--r));top:calc(var(--y) - var(--r));width:calc(var(--r)*2);height:calc(var(--r)*2);border-radius:50%;border:2px solid #fff;cursor:grab;box-shadow:0 0 0 1px rgba(0,0,0,.2)}.cr.dg{cursor:grabbing}
+.cr::before,.cr::after{content:"";position:absolute;background:rgba(255,255,255,.35)}.cr::before{left:33.3%;right:33.3%;top:0;bottom:0;border-left:1px solid rgba(255,255,255,.35);border-right:1px solid rgba(255,255,255,.35);background:none}.cr::after{top:33.3%;bottom:33.3%;left:0;right:0;border-top:1px solid rgba(255,255,255,.35);border-bottom:1px solid rgba(255,255,255,.35);background:none}
+.hn{position:absolute;right:calc(var(--x) - var(--r) * .15 - 12px);bottom:calc(100% - var(--y) - var(--r) * .15 - 12px);width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.4);cursor:nwse-resize;display:none}
+.pv{display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center}
+.pv .big{width:150px;height:150px;border-radius:50%;overflow:hidden;position:relative;box-shadow:0 14px 30px -10px rgba(42,34,24,.5),0 0 0 5px #fff}.pv .big canvas,.pv .sm canvas{width:100%;height:100%;display:block}
+.pv .row{display:flex;align-items:center;gap:12px}.pv .sm{width:48px;height:48px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px #fff,0 4px 10px rgba(42,34,24,.25)}.pv .sm2{width:32px;height:32px;border-radius:9px;overflow:hidden}.pv small{font-size:12.5px;color:#8A7D66;font-weight:500}
+.zm{grid-column:1/2;display:flex;align-items:center;gap:12px}.zm svg{color:#8A7D66;flex:none}.zm input{flex:1;accent-color:#C2410C}
+.ac{grid-column:2/3;display:flex;gap:10px}.ac button{flex:1;border-radius:14px;padding:13px;font:700 14.5px 'DM Sans';cursor:pointer;transition:transform .15s}.ac .a{background:#fff;border:1.5px solid #E1D7C2;color:#2A2218}.ac .b{background:#2A2218;border:0;color:#FBF8F1}.ac button:hover{transform:translateY(-2px)}.ac button:focus-visible{outline:3px solid #C2410C;outline-offset:2px}
+.ok{grid-column:1/-1;text-align:center;font-weight:700;color:#15803D;min-height:20px}
+@media(max-width:620px){.c{grid-template-columns:1fr}.zm,.ac{grid-column:1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Crop your photo</h1><p>Drag the circle to reposition, use the slider to zoom.</p></div>
+<div class="cv" id="cv"><div class="img" id="im"></div><div class="sh" id="sh"></div><div class="cr" id="cr" tabindex="0" role="slider" aria-label="Crop position. Use arrow keys to move"></div></div>
+<div class="pv"><div class="big"><canvas id="c1" width="150" height="150"></canvas></div><div class="row"><div class="sm"><canvas id="c2" width="48" height="48"></canvas></div><div class="sm2"><canvas id="c3" width="32" height="32"></canvas></div></div><small>Live preview</small></div>
+<label class="zm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500M8 11h6"/></svg><input type="range" id="zr" min="30" max="70" value="46" aria-label="Zoom"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500M8 11h6M11 8v6"/></svg></label>
+<div class="ac"><button class="a" id="rs">Reset</button><button class="b" id="sv">Save photo</button></div><div class="ok" id="ok"></div></div>
+<script>
+const cv=document.getElementById('cv'),cr=document.getElementById('cr'),sh=document.getElementById('sh');let W=0,x=.5,y=.42,r=.23,dg=false,ox=0,oy=0;
+function paint(){W=cv.clientWidth;const px=x*W,py=y*W,pr=r*W;[cv,cr,sh].forEach(e=>{e.style.setProperty('--x',px+'px');e.style.setProperty('--y',py+'px');e.style.setProperty('--r',pr+'px')});
+ [['c1',150],['c2',48],['c3',32]].forEach(([id,s])=>{const c=document.getElementById(id),g=c.getContext('2d');g.clearRect(0,0,s,s);g.save();g.beginPath();if(id==='c3')g.roundRect(0,0,s,s,9);else g.arc(s/2,s/2,s/2,0,6.283);g.clip();const k=s/(pr*2),sx=px-pr,sy=py-pr;g.scale(k,k);g.translate(-sx,-sy);
+  const gr=g.createLinearGradient(0,0,0,W);gr.addColorStop(0,'#9FD0F2');gr.addColorStop(.52,'#E9D2A8');gr.addColorStop(.521,'#6AA27A');gr.addColorStop(1,'#3E7A58');g.fillStyle=gr;g.fillRect(0,0,W,W);
+  g.fillStyle='#D9534F';g.beginPath();g.moveTo(W*.3,W*1.06);g.quadraticCurveTo(W*.3,W*.62,W*.5,W*.62);g.quadraticCurveTo(W*.7,W*.62,W*.7,W*1.06);g.fill();g.fillStyle='#F3C9A4';g.beginPath();g.arc(W*.5,W*.34+W*.15,W*.15,0,6.283);g.fill();g.restore()})}
+cr.addEventListener('pointerdown',e=>{dg=true;cr.classList.add('dg');ox=e.clientX;oy=e.clientY;cr.setPointerCapture(e.pointerId)});
+cr.addEventListener('pointermove',e=>{if(!dg)return;x=Math.max(r,Math.min(1-r,x+(e.clientX-ox)/W));y=Math.max(r,Math.min(1-r,y+(e.clientY-oy)/W));ox=e.clientX;oy=e.clientY;paint()});
+cr.addEventListener('pointerup',()=>{dg=false;cr.classList.remove('dg')});cr.addEventListener('keydown',e=>{const s=.02,m={ArrowLeft:[-s,0],ArrowRight:[s,0],ArrowUp:[0,-s],ArrowDown:[0,s]}[e.key];if(m){e.preventDefault();x=Math.max(r,Math.min(1-r,x+m[0]));y=Math.max(r,Math.min(1-r,y+m[1]));paint()}});
+document.getElementById('zr').oninput=e=>{r=+e.target.value/200;x=Math.max(r,Math.min(1-r,x));y=Math.max(r,Math.min(1-r,y));paint()};
+document.getElementById('rs').onclick=()=>{x=.5;y=.42;r=.23;document.getElementById('zr').value=46;document.getElementById('ok').textContent='';paint()};
+document.getElementById('sv').onclick=e=>{e.target.textContent='Saving…';setTimeout(()=>{e.target.textContent='Save photo';document.getElementById('ok').textContent='Profile photo updated'},700)};
+paint();addEventListener('resize',paint);
+</script></body></html>

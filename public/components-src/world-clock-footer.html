@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>World Clock Footer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEEF2;font-family:'Geist',sans-serif;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;-webkit-font-smoothing:antialiased}
+.ft{background:#0B0D12;color:#E9ECF4;padding:46px 6vw 26px}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:34px}.hd h2{font-size:clamp(26px,4vw,40px);font-weight:600;letter-spacing:-.05em;line-height:1.05;max-width:16ch}.hd h2 span{color:#7C86A6}
+.st{display:flex;align-items:center;gap:10px;font:500 13px 'Geist Mono',monospace;color:#9AA3C0;background:#12151D;border:1px solid #1F2433;border-radius:99px;padding:8px 16px}.st i{position:relative;width:9px;height:9px;border-radius:50%;background:#34D399}.st i::after{content:"";position:absolute;inset:0;border-radius:50%;background:#34D399;animation:pg 1.8s ease-out infinite}@keyframes pg{to{transform:scale(3.2);opacity:0}}
+.cl{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:34px}
+.cc{position:relative;background:#11141B;border:1px solid #1D2230;border-radius:20px;padding:16px 18px;overflow:hidden}.cc::before{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:var(--c);opacity:.12}
+.cc .cn{display:flex;align-items:center;justify-content:space-between;font-size:13.5px;font-weight:500;color:#AEB5CF}.cc .cn em{font:500 11px 'Geist Mono',monospace;font-style:normal;color:#6B7494}
+.cc .tm{font:500 30px 'Geist Mono',monospace;letter-spacing:-.04em;margin:8px 0 10px;display:flex;align-items:baseline;gap:4px}.cc .tm small{font-size:13px;color:#6B7494;letter-spacing:0}.cc .tm .cl2{animation:bk 1s steps(2) infinite}@keyframes bk{50%{opacity:.25}}
+.dy{display:flex;gap:3px}.dy i{flex:1;height:5px;border-radius:5px;background:#1F2433}.dy i.on{background:var(--c)}
+.bt{display:flex;flex-wrap:wrap;gap:30px 60px;justify-content:space-between;border-top:1px solid #1B1F2C;padding-top:22px}
+.bt .lk{display:flex;gap:26px;flex-wrap:wrap}.bt a{color:#B6BDD6;text-decoration:none;font-size:14.5px}.bt a:hover{color:#fff}.bt a:focus-visible{outline:2px solid #818CF8;outline-offset:3px;border-radius:4px}.bt small{font-size:13px;color:#5E678A}
+@media(max-width:820px){.cl{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.pg{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;padding:30px 6vw}.pg i{display:block;border-radius:8px;background:rgba(20,20,40,.08)}.pg i:nth-child(1){width:min(420px,70%);height:34px}.pg i:nth-child(2){width:min(560px,86%);height:12px}.pg i:nth-child(3){width:min(480px,76%);height:12px}.pg i:nth-child(4){width:130px;height:40px;border-radius:99px;margin-top:8px;background:rgba(20,20,40,.14)}</style></head><body>
+<div class="pg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<footer class="ft"><div class="hd"><h2>Always on, <span>somewhere on Earth.</span></h2><div class="st"><i></i>All systems operational</div></div>
+<div class="cl" id="cl"></div>
+<div class="bt"><div class="lk"><a href="#">Product</a><a href="#">Docs</a><a href="#">Status</a><a href="#">Careers</a><a href="#">Privacy</a></div><small>Remote-first team across 4 time zones</small></div></footer>
+<script>
+const Z=[['San Francisco','America/Los_Angeles','#818CF8'],['London','Europe/London','#34D399'],['Lagos','Africa/Lagos','#FBBF24'],['Tokyo','Asia/Tokyo','#F472B6']];const cl=document.getElementById('cl');
+Z.forEach((z,i)=>{const d=document.createElement('div');d.className='cc';d.style.setProperty('--c',z[2]);d.innerHTML='<div class="cn">'+z[0]+'<em id="a'+i+'"></em></div><div class="tm"><span id="h'+i+'"></span><span class="cl2">:</span><span id="m'+i+'"></span><small id="s'+i+'"></small></div><div class="dy" id="d'+i+'">'+Array.from({length:24},(_,k)=>'<i></i>').join('')+'</div>';cl.appendChild(d)});
+function tick(){const now=new Date();Z.forEach((z,i)=>{const p=new Intl.DateTimeFormat('en-GB',{timeZone:z[1],hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(now).reduce((a,x)=>(a[x.type]=x.value,a),{});const h=+p.hour;document.getElementById('h'+i).textContent=p.hour;document.getElementById('m'+i).textContent=p.minute;document.getElementById('s'+i).textContent=p.second;const open=h>=9&&h<18;document.getElementById('a'+i).textContent=open?'Online':'Away';document.getElementById('a'+i).style.color=open?'#34D399':'#6B7494';document.querySelectorAll('#d'+i+' i').forEach((e,k)=>e.classList.toggle('on',k===h||(k>=9&&k<18&&false)));document.querySelectorAll('#d'+i+' i').forEach((e,k)=>{e.style.opacity=(k>=9&&k<18)?1:.45;e.classList.toggle('on',k===h)})})}
+tick();setInterval(tick,1000);
+</script></body></html>

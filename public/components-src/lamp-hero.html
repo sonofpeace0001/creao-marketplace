@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lamp Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#040B0F;color:#E6F7F4;font-family:'Inter',sans-serif;min-height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased}
+.sc{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding-top:15vh;overflow:hidden;isolation:isolate}
+.lp{position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(900px,100%);height:340px;z-index:-1;pointer-events:none}
+.lp .cone{position:absolute;top:0;width:50%;height:100%;opacity:0;animation:cone 1.2s .2s ease-out forwards}
+.lp .l{right:50%;background:conic-gradient(from 70deg at center top,#22E3C5,transparent 38%);-webkit-mask:linear-gradient(to top,transparent,#000 40%),linear-gradient(to left,#000,transparent 85%);-webkit-mask-composite:source-in;mask:linear-gradient(to top,transparent,#000 40%),linear-gradient(to left,#000,transparent 85%);mask-composite:intersect}
+.lp .r{left:50%;background:conic-gradient(from 290deg at center top,transparent 62%,#22E3C5);-webkit-mask:linear-gradient(to top,transparent,#000 40%),linear-gradient(to right,#000,transparent 85%);-webkit-mask-composite:source-in;mask:linear-gradient(to top,transparent,#000 40%),linear-gradient(to right,#000,transparent 85%);mask-composite:intersect}
+@keyframes cone{from{opacity:0;transform:scaleX(.4)}to{opacity:.9;transform:none}}
+.lp .bar{position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:3px;background:#7CF5E2;box-shadow:0 0 30px 6px rgba(34,227,197,.7);border-radius:3px;animation:bar 1.2s .2s ease-out forwards}@keyframes bar{to{width:min(420px,70%)}}
+.lp .glow{position:absolute;top:-70px;left:50%;transform:translateX(-50%);width:min(420px,70%);height:140px;background:#22E3C5;filter:blur(70px);opacity:.0;border-radius:50%;animation:gl 1.2s .2s ease-out forwards}@keyframes gl{to{opacity:.45}}
+.bd{position:relative;z-index:1;margin-top:70px;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#7CF5E2;border:1px solid rgba(124,245,226,.3);background:rgba(34,227,197,.08);padding:7px 14px;border-radius:99px;backdrop-filter:blur(6px)}
+.bd i{width:6px;height:6px;border-radius:50%;background:#22E3C5;box-shadow:0 0 8px #22E3C5}
+h1{position:relative;font-size:clamp(40px,8vw,84px);line-height:1.02;letter-spacing:-.055em;font-weight:700;text-align:center;margin:20px 20px 0;background:linear-gradient(180deg,#fff 20%,#6E8E8A);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(24px);animation:up .9s .6s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+.sub{font-size:18px;color:#7E9895;max-width:44ch;text-align:center;line-height:1.55;margin:20px 20px 28px;opacity:0;animation:up .9s .8s cubic-bezier(.2,.8,.2,1) forwards}
+.bt{display:flex;gap:12px;opacity:0;animation:up .9s 1s cubic-bezier(.2,.8,.2,1) forwards;flex-wrap:wrap;justify-content:center}
+.bt a{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:13px 22px;border-radius:12px;text-decoration:none;transition:transform .15s}.bt a:hover{transform:translateY(-2px)}.bt a:focus-visible{outline:3px solid #7CF5E2;outline-offset:3px}
+.p{background:#22E3C5;color:#03211C;box-shadow:0 0 30px -4px rgba(34,227,197,.7)}.s{border:1px solid #1F3A38;color:#CFEDEA;background:rgba(255,255,255,.03)}
+.cd{display:flex;gap:30px;margin-top:40px;opacity:0;animation:up .9s 1.2s ease forwards;font-size:13.5px;color:#5F7B78}.cd b{color:#CFEDEA;font-weight:600}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important}}
+</style></head><body>
+<div class="sc"><div class="lp" aria-hidden="true"><div class="cone l"></div><div class="cone r"></div><div class="glow"></div><div class="bar"></div></div>
+<span class="bd"><i></i>Now in public beta</span><h1>Build faster with<br>light on your side.</h1><p class="sub">The developer platform that turns a good idea into a deployed product before the coffee gets cold.</p>
+<div class="bt"><a class="p" href="#">Start for free <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="s" href="#">Read the docs</a></div>
+<div class="cd"><span><b>12ms</b> median latency</span><span><b>99.99%</b> uptime</span><span><b>40k+</b> teams</span></div></div></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior learning-platform designer and front-end engineer with 15+ years of experience. Build "Video Chapters Player": a chaptered video player with a segmented timeline, hover preview thumbnails and a clickable chapter list.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Charcoal player card with gradient chapter scenes, white scrubber and mono timestamps.
+- Palette: #12141B, #23262F, #7C8196, #0A0B0F, #ECEEF5, #1A1D27
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Stage with chapter tag, title and big play button; control bar with segmented seek track, hover thumbnail and time; chapters sidebar with thumbnails.
+
+INTERACTION & STATES
+- Clicking a chapter jumps and plays; the seek bar supports pointer drag, hover preview and arrow keys (role=slider); scene and title change per chapter.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

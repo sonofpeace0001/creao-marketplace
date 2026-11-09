@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Starfield Warp Background</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{position:relative;min-height:100vh;background:#02030A;color:#EAF1FF;font-family:'Inter',sans-serif;display:grid;place-items:center;padding:24px;overflow:hidden;-webkit-font-smoothing:antialiased}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(2,3,10,.55) 0,transparent 55%),radial-gradient(ellipse at center,transparent 50%,rgba(2,3,10,.85));pointer-events:none}
+.ct{position:relative;z-index:2;text-align:center;max-width:760px;pointer-events:none}
+.ct small{font:500 12px 'Orbitron';letter-spacing:.34em;text-transform:uppercase;color:#7DD3FC}
+.ct h1{font:900 clamp(34px,7vw,76px)/1.02 'Orbitron';letter-spacing:-.01em;margin:16px 0 18px;background:linear-gradient(180deg,#fff,#93C5FD);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ct p{font-size:clamp(15px,2vw,18px);line-height:1.6;color:#9FB2D6;max-width:44ch;margin:0 auto 28px}
+.bt{display:inline-flex;gap:12px;pointer-events:auto}.bt a{padding:14px 28px;border-radius:12px;font:700 14px 'Orbitron';letter-spacing:.1em;text-transform:uppercase;text-decoration:none}.bt .p{background:linear-gradient(135deg,#38BDF8,#6366F1);color:#fff;box-shadow:0 0 36px -4px #38BDF8}.bt .g{border:1px solid rgba(147,197,253,.4);color:#BFDBFE;backdrop-filter:blur(6px)}.bt a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.hint{position:absolute;bottom:18px;left:0;right:0;text-align:center;font:500 11.5px 'Orbitron';letter-spacing:.24em;text-transform:uppercase;color:#4B5E86;z-index:2}
+</style></head><body>
+<canvas id="cv"></canvas><div class="vg"></div>
+<div class="ct"><small>Edge network</small><h1>Hyperspeed deployments</h1><p>Ship to every region in seconds. Hold your cursor down to engage warp.</p><div class="bt"><a class="p" href="#">Engage</a><a class="g" href="#">Docs</a></div></div><div class="hint">Press and hold anywhere</div>
+<script>
+const cv=document.getElementById('cv'),x=cv.getContext('2d');let W,H,dpr=Math.min(2,devicePixelRatio||1);const N=520;let S=[],spd=.012,tgt=.012,mx=0,my=0;
+function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+function mk(z){return{x:(Math.random()-.5)*2,y:(Math.random()-.5)*2,z:z==null?Math.random():1,pz:0}}
+size();addEventListener('resize',size);for(let i=0;i<N;i++){const s=mk();s.pz=s.z;S.push(s)}
+addEventListener('pointerdown',()=>tgt=.12);addEventListener('pointerup',()=>tgt=.012);addEventListener('pointerleave',()=>tgt=.012);
+addEventListener('pointermove',e=>{mx=(e.clientX/W-.5)*2;my=(e.clientY/H-.5)*2});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function frame(){spd+=(tgt-spd)*.06;x.fillStyle='rgba(2,3,10,'+(tgt>.05?.28:.5)+')';x.fillRect(0,0,W,H);const cx=W/2+mx*40,cy=H/2+my*30,f=Math.min(W,H)*.9;
+ S.forEach(s=>{s.pz=s.z;s.z-=spd;if(s.z<=.001){s.x=(Math.random()-.5)*2;s.y=(Math.random()-.5)*2;s.z=1;s.pz=1}
+  const sx=cx+s.x/s.z*f*.18,sy=cy+s.y/s.z*f*.18,px=cx+s.x/s.pz*f*.18,py=cy+s.y/s.pz*f*.18;const a=Math.min(1,(1-s.z)*1.6),r=Math.max(.4,(1-s.z)*2.2);
+  x.strokeStyle='rgba('+(150+Math.round((1-s.z)*100))+',200,255,'+a+')';x.lineWidth=r;x.beginPath();x.moveTo(px,py);x.lineTo(sx,sy);if(Math.hypot(sx-px,sy-py)<1.5){x.lineTo(sx+.6,sy+.6)}x.stroke()});
+ if(!reduce)requestAnimationFrame(frame)}
+for(let i=0;i<60;i++){spd=.012;S.forEach(s=>{s.z-=.012;if(s.z<=.001){s.z=1;s.x=(Math.random()-.5)*2;s.y=(Math.random()-.5)*2}})}
+frame();
+</script></body></html>

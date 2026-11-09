@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Toggle Style Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EAEAF3;color:#16162E;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:860px}
+.hd{text-align:center;margin-bottom:26px}.hd h1{font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-.05em}.hd p{color:#7A7AA0;font-size:16px;margin-top:6px}
+.gd{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cd{background:#fff;border-radius:24px;height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;box-shadow:0 1px 2px rgba(22,22,46,.06),0 0 0 1px rgba(22,22,46,.05);position:relative}.cd small{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9A9ABC;font-weight:600}
+.cd.dk{background:#14142B;color:#fff}.cd.dk small{color:#6A6A94}
+button.sw{border:0;padding:0;cursor:pointer;background:none;outline:0;position:relative}button.sw:focus-visible{outline:3px solid #6D5BFF;outline-offset:6px;border-radius:99px}
+/* 1 ios */
+.s1{width:70px;height:40px;border-radius:40px;background:#D4D4E4;transition:background .3s}.s1::after{content:"";position:absolute;top:3px;left:3px;width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.3);transition:transform .35s cubic-bezier(.3,1.6,.5,1),width .2s}.s1[aria-checked=true]{background:#34C759}.s1[aria-checked=true]::after{transform:translateX(30px)}.s1:active::after{width:42px}.s1[aria-checked=true]:active::after{transform:translateX(22px)}
+/* 2 neon */
+.s2{width:80px;height:38px;border-radius:10px;background:#0B0B1E;border:2px solid #3A3A68;transition:all .3s}.s2::after{content:"";position:absolute;top:4px;left:4px;width:26px;height:26px;border-radius:6px;background:#4A4A80;transition:all .3s cubic-bezier(.3,1.4,.5,1)}.s2[aria-checked=true]{border-color:#22D3EE;box-shadow:0 0 18px #22D3EE88,inset 0 0 14px #22D3EE44}.s2[aria-checked=true]::after{transform:translateX(42px);background:#22D3EE;box-shadow:0 0 16px #22D3EE}
+/* 3 skeuo */
+.s3{width:92px;height:44px;border-radius:8px;background:linear-gradient(180deg,#B9BAD2,#E8E8F4);box-shadow:inset 0 3px 8px rgba(0,0,0,.35),0 1px 0 #fff}.s3::after{content:"";position:absolute;top:3px;left:3px;width:44px;height:38px;border-radius:6px;background:linear-gradient(180deg,#fff,#D9D9EA);box-shadow:0 3px 6px rgba(0,0,0,.35),inset 0 -2px 0 rgba(0,0,0,.1);transition:transform .22s cubic-bezier(.4,1.5,.5,1)}.s3[aria-checked=true]::after{transform:translateX(42px)}.s3 i{position:absolute;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:#8A8AA8}.s3 i.a{left:16px}.s3 i.b{right:16px}.s3[aria-checked=true] i.b{background:#22C55E;box-shadow:0 0 8px #22C55E}
+/* 4 icon */
+.s4{width:84px;height:42px;border-radius:42px;background:#E9E5FF;transition:background .3s}.s4::after{content:"";position:absolute;top:4px;left:4px;width:34px;height:34px;border-radius:50%;background:#6D5BFF;transition:transform .4s cubic-bezier(.3,1.5,.5,1)}.s4[aria-checked=true]::after{transform:translateX(42px)}.s4 svg{position:absolute;top:50%;width:18px;height:18px;margin-top:-9px;z-index:2;transition:color .3s}.s4 .l{left:13px;color:#fff}.s4 .r{right:13px;color:#8F82D8}.s4[aria-checked=true] .l{color:#8F82D8}.s4[aria-checked=true] .r{color:#fff}
+/* 5 morph check */
+.s5{width:48px;height:48px;border-radius:14px;border:3px solid #CFCFE2;background:#fff;transition:all .3s cubic-bezier(.3,1.5,.5,1)}.s5 svg{position:absolute;inset:0;margin:auto;width:26px;height:26px;stroke:#fff;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;transition:stroke-dashoffset .35s .1s}.s5[aria-checked=true]{background:#6D5BFF;border-color:#6D5BFF;border-radius:50%;transform:scale(1.08)}.s5[aria-checked=true] svg{stroke-dashoffset:0}
+/* 6 pill label */
+.s6{display:flex;background:#EEEEF8;border-radius:99px;padding:4px;width:170px;height:46px}.s6 .p{position:absolute;top:4px;left:4px;width:calc(50% - 4px);height:38px;border-radius:99px;background:#16162E;transition:transform .4s cubic-bezier(.3,1.4,.5,1)}.s6[aria-checked=true] .p{transform:translateX(100%)}.s6 span{position:relative;z-index:1;flex:1;display:grid;place-items:center;font:600 14px 'Outfit';color:#7A7AA0;transition:color .3s}.s6[aria-checked=false] span:first-of-type,.s6[aria-checked=true] span:last-of-type{color:#fff}
+.st{font-size:13px;font-weight:600;color:#7A7AA0;height:16px}.cd.dk .st{color:#8A8AB8}
+@media(max-width:700px){.gd{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Six ways to switch</h1><p>Every toggle is a real switch with keyboard and screen reader support.</p></div>
+<div class="gd">
+<div class="cd"><button class="sw s1" role="switch" aria-checked="true" aria-label="Wi-Fi"></button><div class="st">On</div><small>Classic</small></div>
+<div class="cd dk"><button class="sw s2" role="switch" aria-checked="true" aria-label="Neon mode"></button><div class="st">On</div><small>Neon</small></div>
+<div class="cd"><button class="sw s3" role="switch" aria-checked="false" aria-label="Power"><i class="a"></i><i class="b"></i></button><div class="st">Off</div><small>Hardware</small></div>
+<div class="cd"><button class="sw s4" role="switch" aria-checked="true" aria-label="Theme"><svg class="l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.900 4.900l1.400 1.400M17.700 17.700l1.400 1.400M2 12h2M20 12h2M4.900 19.100l1.400-1.400M17.700 6.300l1.400-1.400"/></svg><svg class="r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.800A9 9 0 1 1 11.200 3a7 7 0 0 0 9.800 9.800z"/></svg></button><div class="st">Night</div><small>Icon</small></div>
+<div class="cd"><button class="sw s5" role="switch" aria-checked="true" aria-label="Agree"><svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg></button><div class="st">Checked</div><small>Morph</small></div>
+<div class="cd"><button class="sw s6" role="switch" aria-checked="false" aria-label="Billing"><span class="p"></span><span>Monthly</span><span>Annual</span></button><div class="st">Monthly</div><small>Labelled</small></div>
+</div></div>
+<script>
+const names=[['On','Off'],['On','Off'],['On','Off'],['Night','Day'],['Checked','Unchecked'],['Annual','Monthly']];
+document.querySelectorAll('.sw').forEach((s,i)=>{s.onclick=()=>{const on=s.getAttribute('aria-checked')!=='true';s.setAttribute('aria-checked',on);s.parentNode.querySelector('.st').textContent=names[i][on?0:1]}});
+</script></body></html>

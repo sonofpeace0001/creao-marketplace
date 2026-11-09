@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chat Skeleton Typing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#E4F4EC,#E6E9FF);color:#14201C;font-family:'Nunito',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:420px;height:600px;background:#fff;border-radius:30px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 40px 70px -40px rgba(20,40,60,.5),0 0 0 1px rgba(20,32,28,.06)}
+.hd{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid #EEF1F0}.hd .av{width:42px;height:42px;border-radius:50%;position:relative}.hd b{display:block;font-size:16px}.hd span{font-size:12.5px;color:#7C8C86}
+.sh{position:relative;overflow:hidden;background:#E9EEEC;border-radius:10px}.sh::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.85) 50%,transparent 80%);transform:translateX(-100%);animation:sh 1.5s ease-in-out infinite;animation-delay:var(--w,0s)}@keyframes sh{to{transform:translateX(100%)}}
+.ms{flex:1;padding:16px 16px 8px;display:flex;flex-direction:column;gap:10px;overflow:hidden;position:relative}
+.m{display:flex;gap:8px;align-items:flex-end;max-width:84%;position:relative}.m.me{align-self:flex-end;flex-direction:row-reverse}
+.m .a{flex:none;width:30px;height:30px;border-radius:50%}
+.m .sk{display:grid;gap:7px;padding:12px 14px;border-radius:20px 20px 20px 6px;background:#F1F4F3;min-width:200px}.m.me .sk{border-radius:20px 20px 6px 20px}.m .sk i{display:block;height:10px;border-radius:6px;background:#E1E7E5;position:relative;overflow:hidden}.m .sk i::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.9) 50%,transparent 80%);transform:translateX(-100%);animation:sh 1.5s ease-in-out infinite;animation-delay:var(--w,0s)}.m .sk i:nth-child(2){width:70%}.m .sk i:nth-child(3){width:45%}
+.m .rl{position:absolute;left:0;bottom:0;opacity:0;transition:opacity .45s;padding:11px 15px;border-radius:20px 20px 20px 6px;background:#EEF2F1;font-size:14.5px;line-height:1.4;font-weight:600;white-space:pre-wrap;max-width:100%}.m.me .rl{background:#16A34A;color:#fff;border-radius:20px 20px 6px 20px;left:auto;right:0}
+.m.ok .sk{opacity:0;transition:opacity .35s}.m.ok .rl{opacity:1;position:relative}.m .sk{transition:opacity .35s}.m.ok .sk{position:absolute;pointer-events:none}
+.m .rl{position:absolute}
+.ty{display:flex;gap:4px;align-self:flex-start;margin-left:38px;padding:12px 15px;background:#EEF2F1;border-radius:20px 20px 20px 6px;width:fit-content}.ty i{width:7px;height:7px;border-radius:50%;background:#98A8A2;animation:t 1s infinite}.ty i:nth-child(2){animation-delay:.15s}.ty i:nth-child(3){animation-delay:.3s}@keyframes t{40%{transform:translateY(-5px);background:#16A34A}}
+.ft{display:flex;gap:8px;padding:12px 14px 16px;border-top:1px solid #EEF1F0}.ft div{flex:1;background:#F1F4F3;border-radius:99px;padding:11px 16px;font-size:14px;color:#9AA8A2}.ft i{width:42px;height:42px;border-radius:50%;background:#16A34A;display:grid;place-items:center;color:#fff}
+.rp{position:absolute;right:12px;top:12px;border:0;background:#fff;border-radius:99px;padding:5px 12px;font:700 11.5px 'Nunito';color:#4A5E57;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12);z-index:5}.rp:focus-visible{outline:2px solid #16A34A}
+@media(prefers-reduced-motion:reduce){.sh::after,.m .sk i::after{animation:none}}
+</style></head><body>
+<div class="c"><div class="hd"><div class="av sh"></div><div><b>Lumi Assistant</b><span>Loading conversation...</span></div></div><div class="ms" id="ms"><button class="rp" id="rp">Replay</button></div><div class="ft"><div>Message</div><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></i></div></div>
+<script>
+const M=[['a','Hi! I am Lumi. I can help with orders, refunds and account questions.'],['me','Where is my order #3921?'],['a','It shipped yesterday and arrives Thursday.\nHere is your tracking link whenever you need it.'],['me','Perfect, thank you!']];
+const ms=document.getElementById('ms');let tm=[];function clr(){tm.forEach(clearTimeout);tm=[]}
+function build(){clr();[...ms.querySelectorAll('.m,.ty')].forEach(e=>e.remove());M.forEach((m,i)=>{const e=document.createElement('div');e.className='m '+(m[0]==='me'?'me':'');e.id='m'+i;e.innerHTML=(m[0]==='me'?'':'<span class="a sh" style="--w:'+(i*.1)+'s"></span>')+'<div style="position:relative"><div class="sk"><i style="--w:'+(i*.12)+'s"></i><i style="--w:'+(i*.12+.1)+'s"></i><i style="--w:'+(i*.12+.2)+'s"></i></div><div class="rl">'+m[1]+'</div></div>';ms.appendChild(e)})}
+function reveal(i){const e=document.getElementById('m'+i);if(!e)return;e.classList.add('ok');const sk=e.querySelector('.sk'),rl=e.querySelector('.rl');rl.style.position='relative';sk.style.display='none';e.querySelector('div').style.position='relative'}
+function play(){build();document.querySelector('.hd span').textContent='Loading conversation...';document.querySelector('.hd .av').className='av sh';let k=0;(function next(){if(k>=M.length){document.querySelector('.hd span').textContent='Online';return}const t=document.createElement('div');t.className='ty';t.innerHTML='<i></i><i></i><i></i>';if(M[k][0]==='a')ms.insertBefore(t,document.getElementById('m'+k).nextSibling);tm.push(setTimeout(()=>{t.remove();reveal(k);if(k===0){const av=document.querySelector('.hd .av');av.className='av';av.style.background='linear-gradient(135deg,#16A34A,#34D399)'}k++;tm.push(setTimeout(next,700))},1100))})()}
+document.getElementById('rp').onclick=()=>{const av=document.querySelector('.hd .av');av.style.background='';play()};
+build();[0,1,2].forEach(reveal);document.querySelector('.hd .av').className='av';document.querySelector('.hd .av').style.background='linear-gradient(135deg,#16A34A,#34D399)';document.querySelector('.hd span').textContent='Online';
+const t=document.createElement('div');t.className='ty';t.innerHTML='<i></i><i></i><i></i>';ms.insertBefore(t,document.getElementById('m3'));
+</script></body></html>

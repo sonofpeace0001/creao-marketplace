@@ -1,0 +1,29 @@
+ROLE
+You are a senior music interface designer with 15+ years of experience. Build "Piano Keys Synth": a playable octave of piano keys with coloured note glow, a note readout, equalizer bars and optional synth sound.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep aubergine stage with glossy white and black keys and a rainbow of note colours.
+- Palette: #C4A8FF, #8A7CAA, #7C6EA0, #A99BC9, #05030A, #3A2A5A
+- Type: Fraunces, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; note display with side meters; piano with eight white and five black keys; keyboard hint.
+
+INTERACTION & STATES
+- Click, touch or keys A to K and W to U press keys with depth, set the note and colour, jump the meters and play a triangle wave tone through Web Audio.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

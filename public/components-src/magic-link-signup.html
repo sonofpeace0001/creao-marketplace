@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Magic Link Signup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F1ECE0;color:#1F1B12;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{position:relative;width:100%;max-width:440px;background:#FFFDF7;border-radius:28px;padding:36px 32px 30px;box-shadow:0 1px 0 #fff inset,0 40px 70px -44px rgba(60,45,10,.55),0 0 0 1px rgba(31,27,18,.08);overflow:hidden}
+.st{transition:all .5s cubic-bezier(.3,1,.4,1)}.st[hidden]{display:none}
+.lg{display:flex;align-items:center;gap:8px;font:600 20px 'Fraunces',serif;letter-spacing:-.03em;margin-bottom:26px}.lg i{width:22px;height:22px;border-radius:50% 50% 50% 4px;background:#D9480F;display:block}
+h1{font:600 clamp(28px,6vw,34px)/1.05 'Fraunces',serif;letter-spacing:-.03em}h1 em{font-weight:500;color:#D9480F}.c p.sb{color:#6E6552;font-size:15px;line-height:1.55;margin:10px 0 22px}
+.f{margin-bottom:12px}.f label{display:block;font-size:13px;font-weight:600;margin-bottom:7px}.f input{width:100%;border:1.5px solid #E2D9C2;border-radius:14px;padding:14px 16px;font:500 16px 'Inter';background:#fff;color:#1F1B12;outline:0;transition:all .2s}.f input:focus{border-color:#D9480F;box-shadow:0 0 0 4px rgba(217,72,15,.13)}.f.bad input{border-color:#C92A2A}.f .er{display:none;font-size:12.5px;color:#C92A2A;margin-top:6px}.f.bad .er{display:block}
+.go{width:100%;border:0;border-radius:14px;padding:15px;font:700 15.5px 'Inter';background:#1F1B12;color:#FFFDF7;cursor:pointer;transition:transform .15s}.go:hover{transform:translateY(-1px)}.go:focus-visible{outline:3px solid #D9480F;outline-offset:3px}
+.dv{display:flex;align-items:center;gap:12px;margin:18px 0;font-size:12.5px;color:#A89E85}.dv::before,.dv::after{content:"";flex:1;height:1px;background:#EBE3CD}
+.ot{display:flex;gap:10px}.ot button{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid #E2D9C2;background:#fff;border-radius:14px;padding:12px;font:600 14px 'Inter';cursor:pointer;color:#1F1B12}.ot button:hover{border-color:#1F1B12}.ot button:focus-visible{outline:2px solid #D9480F;outline-offset:2px}
+.ft{margin-top:20px;font-size:12.5px;color:#A89E85;text-align:center}
+.en{position:relative;width:120px;height:96px;margin:6px auto 22px}.en .bk{position:absolute;inset:24px 0 0;border-radius:12px;background:#fff;border:2px solid #1F1B12}.en .fl{position:absolute;left:0;right:0;top:24px;height:48px;transform-origin:top;border-radius:12px 12px 0 0;background:#FFE8CC;border:2px solid #1F1B12;transition:transform .6s cubic-bezier(.3,1.2,.4,1);clip-path:polygon(0 0,100% 0,50% 100%)}
+.en .ld{position:absolute;left:14px;right:14px;top:30px;height:44px;border-radius:8px;background:#FFF3BF;border:2px solid #1F1B12;transform:translateY(0);transition:transform .7s .3s cubic-bezier(.3,1.4,.5,1);padding:8px}.en .ld i{display:block;height:4px;border-radius:3px;background:#1F1B12;opacity:.4;margin-bottom:5px}.en .ld i:nth-child(2){width:70%}
+.en .fr{position:absolute;inset:24px 0 0;border-radius:12px;border:2px solid #1F1B12;background:linear-gradient(135deg,#FFD8A8 50%,#FFC078);clip-path:polygon(0 100%,0 38%,50% 72%,100% 38%,100% 100%)}
+.sent .en .fl{transform:rotateX(180deg)}.sent .en .ld{transform:translateY(-34px)}
+.en::after{content:"";position:absolute;right:-8px;top:2px;width:24px;height:24px;border-radius:50%;background:#2F9E44;border:3px solid #FFFDF7;opacity:0;transform:scale(0);transition:all .4s .9s cubic-bezier(.3,1.7,.5,1)}.sent .en::after{opacity:1;transform:scale(1)}
+.ch{text-align:center}.ch h1{margin-bottom:8px}.ch p.sb{margin-bottom:18px}.ch p.sb b{color:#1F1B12}
+.ch .ap{display:flex;gap:10px;justify-content:center;margin-bottom:16px}.ch .ap a{display:flex;align-items:center;gap:8px;border:1.5px solid #E2D9C2;background:#fff;border-radius:12px;padding:10px 16px;font:600 14px 'Inter';color:#1F1B12;text-decoration:none}.ch .ap a:hover{border-color:#1F1B12}.ch .ap a:focus-visible{outline:2px solid #D9480F}
+.rs{font-size:13.5px;color:#6E6552}.rs button{border:0;background:none;color:#D9480F;font:700 13.5px 'Inter';cursor:pointer;padding:2px 4px;text-decoration:underline;text-underline-offset:3px}.rs button:disabled{color:#A89E85;text-decoration:none;cursor:default}.rs button:focus-visible{outline:2px solid #D9480F;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c" id="c"><div class="lg"><i></i>Tidewater</div>
+<div class="st" id="s1"><h1>Sign up without a <em>password.</em></h1><p class="sb">Enter your email and we will send you a link that signs you in instantly.</p>
+<form id="f" novalidate><div class="f" id="fe"><label for="e">Email address</label><input id="e" type="email" placeholder="you@company.com" autocomplete="off"><div class="er">Please enter a valid email.</div></div><button class="go">Email me a magic link</button></form>
+<div class="dv">or continue with</div><div class="ot"><button type="button">Google</button><button type="button">GitHub</button><button type="button">Passkey</button></div><div class="ft">By continuing you agree to our Terms and Privacy Policy.</div></div>
+<div class="st ch" id="s2" hidden><div class="en"><div class="bk"></div><div class="ld"><i></i><i></i></div><div class="fr"></div><div class="fl"></div></div><h1>Check your <em>inbox.</em></h1><p class="sb">We sent a sign-in link to <b id="em"></b>. It expires in 15 minutes.</p><div class="ap"><a href="#">Open Gmail</a><a href="#">Open Outlook</a></div><div class="rs"><span id="rt">Did not get it?</span> <button id="rb" disabled>Resend in 30s</button></div></div></div>
+<script>
+const c=document.getElementById('c'),e=document.getElementById('e');
+document.getElementById('f').onsubmit=x=>{x.preventDefault();if(!/^\S+@\S+\.\S+$/.test(e.value)){document.getElementById('fe').classList.add('bad');e.focus();return}document.getElementById('em').textContent=e.value;document.getElementById('s1').hidden=true;document.getElementById('s2').hidden=false;requestAnimationFrame(()=>requestAnimationFrame(()=>c.classList.add('sent')));let s=30;const b=document.getElementById('rb'),iv=setInterval(()=>{s--;if(s<=0){clearInterval(iv);b.disabled=false;b.textContent='Resend link'}else b.textContent='Resend in '+s+'s'},1000);b.onclick=()=>{b.disabled=true;b.textContent='Link sent again'}};
+e.addEventListener('input',()=>document.getElementById('fe').classList.remove('bad'));
+e.value='ada@studio.com';document.getElementById('f').requestSubmit();
+</script></body></html>

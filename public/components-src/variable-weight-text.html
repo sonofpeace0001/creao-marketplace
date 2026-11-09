@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Variable Weight Text</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3EFE6;color:#15130E;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 4vw;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{width:100%;max-width:980px;text-align:center}
+.tp{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#8B8470;margin-bottom:18px}
+.tx{font-family:'Roboto Flex',sans-serif;font-size:clamp(46px,10.5vw,128px);line-height:1;letter-spacing:-.02em;text-transform:none;user-select:none;cursor:default;font-variation-settings:'wght' 400,'wdth' 100}
+.tx span{display:inline-block;font-variation-settings:'wght' var(--w,300),'wdth' var(--d,90),'opsz' 60;color:hsl(calc(18 + var(--k,0)*28) 80% calc(14% + var(--k,0)*36%));transition:color .1s}
+.tx .sp{width:.28em}
+.l2{margin-top:6px;font-size:clamp(34px,7vw,88px)}
+.ft{margin-top:26px;font-size:15px;color:#7D775F;display:flex;gap:18px;justify-content:center;align-items:center;flex-wrap:wrap}.ft i{display:inline-block;width:46px;height:2px;border-radius:2px;background:linear-gradient(90deg,#15130E,#E85D04)}
+@media(prefers-reduced-motion:reduce){.tx span{transition:none}}
+</style></head><body>
+<div class="c"><div class="tp">Variable font axes react to your cursor</div><div class="tx" id="t1" aria-label="Weight in motion"></div><div class="tx l2" id="t2" aria-label="follows the pointer"></div><div class="ft"><span>thin</span><i></i><span>black</span></div></div>
+<script>
+const a=document.getElementById('t1'),b=document.getElementById('t2'),all=[];
+function build(el,txt){[...txt].forEach(ch=>{const s=document.createElement('span');if(ch===' '){s.className='sp';s.innerHTML='&nbsp;'}else s.textContent=ch;s.setAttribute('aria-hidden','true');el.appendChild(s);all.push({s,x:0,y:0})})}
+build(a,'Weight in motion');build(b,'follows the pointer');
+let px=null,py=null,real=false,t=0;addEventListener('pointermove',e=>{real=true;px=e.clientX;py=e.clientY});addEventListener('pointerleave',()=>real=false);
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function measure(){all.forEach(o=>{const r=o.s.getBoundingClientRect();o.x=r.left+r.width/2;o.y=r.top+r.height/2})}
+function frame(){t+=.012;let x=px,y=py;if(!real){const r1=a.getBoundingClientRect();x=r1.left+r1.width*(.5+Math.cos(t*.9)*.42);y=r1.top+r1.height*.9}
+ all.forEach(o=>{const d=Math.hypot(o.x-x,(o.y-y)*1.6),R=250,k=Math.max(0,1-d/R),e=k*k*(3-2*k);o.s.style.setProperty('--w',(150+e*800).toFixed(0));o.s.style.setProperty('--d',(70+e*70).toFixed(0));o.s.style.setProperty('--k',e.toFixed(3))});
+ if(!reduce)requestAnimationFrame(frame)}
+function init(){measure();if(!real)frame()}
+addEventListener('resize',measure);(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{measure();t=.55;if(!reduce)requestAnimationFrame(frame);else frame()});
+document.fonts&&0;
+</script></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior social-profile designer and front-end engineer with 15+ years of experience. Build "Profile Hero Cover": a social profile header with a parallax gradient cover, overlapping avatar, verified badge, counting stats and animated tabs over a work grid.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with a deep-indigo glowing cover, rounded-square avatar and Manrope type.
+- Palette: #12163A, #5B5BF6, #DCE0F2, #7B82AB, #E8EBF5, #1B1650
+- Type: Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Cover with blurred orbs and dot grid and an Edit cover button; avatar with online dot; name with badge; Follow, Message and More; bio; three counting stats; tab bar with sliding underline; gallery grid.
+
+INTERACTION & STATES
+- Pointer movement parallax-shifts the cover orbs; stats count up; Follow toggles; tabs move the underline and swap the staggered grid.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

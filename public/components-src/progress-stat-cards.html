@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Progress Stat Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0D1117;color:#E8EDF7;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:880px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;padding:0 4px}.hd h1{font-size:24px;font-weight:700;letter-spacing:-.04em}.hd span{font:500 12.5px 'JetBrains Mono',monospace;color:#6B7488}
+.gd{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cd{position:relative;background:linear-gradient(160deg,#161C26,#10151D);border:1px solid #232B39;border-radius:24px;padding:20px;overflow:hidden;transition:transform .3s cubic-bezier(.3,1.4,.5,1),border-color .3s}.cd:hover{transform:translateY(-4px);border-color:var(--c)}
+.cd::before{content:"";position:absolute;right:-50px;top:-50px;width:150px;height:150px;border-radius:50%;background:var(--c);opacity:.14;filter:blur(8px)}
+.cd .t{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;position:relative}.cd .t span{font-size:14px;font-weight:600;color:#9AA3B8}.cd .t i{width:32px;height:32px;border-radius:10px;background:color-mix(in srgb,var(--c) 22%,transparent);display:grid;place-items:center;color:var(--c)}
+.cd .v{display:flex;align-items:baseline;gap:6px;position:relative}.cd .v b{font:700 38px/1 'Outfit';letter-spacing:-.05em}.cd .v em{font:500 13px 'JetBrains Mono',monospace;font-style:normal;color:var(--c)}
+.cd .sp{height:54px;margin:14px -4px 8px;position:relative}.cd .sp svg{width:100%;height:100%;overflow:visible}.cd .sp .ln{fill:none;stroke:var(--c);stroke-width:2.500;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--l);stroke-dashoffset:0;filter:drop-shadow(0 4px 8px color-mix(in srgb,var(--c) 60%,transparent))}.cd .sp .ar{fill:url(#g)}
+.cd.an .sp .ln{animation:dr 1.4s cubic-bezier(.5,0,.2,1)}@keyframes dr{from{stroke-dashoffset:var(--l)}}
+.cd .pb{height:7px;border-radius:7px;background:#232B39;overflow:hidden;position:relative}.cd .pb i{display:block;height:100%;width:var(--p);border-radius:7px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 60%,#fff),var(--c))}.cd.an .pb i{animation:gw 1.2s cubic-bezier(.3,.9,.3,1)}@keyframes gw{from{width:0}}
+.cd .ft{display:flex;justify-content:space-between;font-size:12.5px;color:#6B7488;margin-top:8px;position:relative}
+.cd .rg{position:absolute;right:20px;top:60px;width:62px;height:62px}.cd .rg svg{transform:rotate(-90deg);width:100%;height:100%}.cd .rg circle{fill:none;stroke-width:6;stroke-linecap:round}.cd .rg .tr{stroke:#232B39}.cd .rg .vl{stroke:var(--c);stroke-dasharray:157;stroke-dashoffset:calc(157 - 157*var(--p2))}.cd.an .rg .vl{animation:rg 1.3s cubic-bezier(.3,.9,.3,1)}@keyframes rg{from{stroke-dashoffset:157}}.cd .rg b{position:absolute;inset:0;display:grid;place-items:center;font:600 13px 'Outfit'}
+@media(max-width:720px){.gd{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.cd,.cd *{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>This week</h1><span>LIVE</span></div><div class="gd" id="gd"></div></div>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs></svg>
+<script>
+const D=[['Revenue','$48.2k','+12.4%','#34D399','M5 12h14M12 5v14',[22,30,26,38,34,46,42,56,52,64],.72,'Goal $65k'],['Active users','2,931','+6.1%','#818CF8','M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8',[30,28,36,32,40,38,48,44,52,58],.58,'Goal 5,000'],['Conversion','3.8%','-0.4%','#F472B6','M3 3v18h18M7 14l4-4 4 4 5-6',[50,46,52,44,40,46,38,42,34,36],.46,'Goal 5.0%']];
+const gd=document.getElementById('gd');
+D.forEach(d=>{const w=300,h=54,max=Math.max(...d[5]),min=Math.min(...d[5]);const pts=d[5].map((v,i)=>[i/(d[5].length-1)*w,h-4-((v-min)/(max-min||1))*(h-10)]);const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');let L=0;for(let i=1;i<pts.length;i++)L+=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);
+ const e=document.createElement('div');e.className='cd';e.style.cssText='--c:'+d[3]+';--p:'+(d[6]*100)+'%;--p2:'+d[6];e.innerHTML='<div class="t"><span>'+d[0]+'</span><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="'+d[4]+'"/></svg></i></div><div class="v"><b>'+d[1]+'</b><em>'+d[2]+'</em></div><div class="sp"><svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><path class="ar" d="'+path+' L'+w+' '+h+' L0 '+h+'Z"/><path class="ln" style="--l:'+Math.ceil(L)+'" d="'+path+'" vector-effect="non-scaling-stroke"/></svg></div><div class="pb"><i></i></div><div class="ft"><span>'+Math.round(d[6]*100)+'% of goal</span><span>'+d[7]+'</span></div>';gd.appendChild(e);e.addEventListener('mouseenter',()=>{e.classList.remove('an');void e.offsetWidth;e.classList.add('an')})});
+</script></body></html>

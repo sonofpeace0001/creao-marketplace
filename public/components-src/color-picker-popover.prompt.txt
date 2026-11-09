@@ -1,0 +1,29 @@
+ROLE
+You are a senior design-tool UI engineer with 15+ years of experience. Build "Color Picker Popover": a swatch that opens a popover with a saturation field, hue slider, hex input and preset swatches, live-updating a brand preview.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with a vivid live-colour preview and a floating picker with a white-ring cursor.
+- Palette: #14172B, #7A80A4, #5B5BF6, #ECEEF4, #D5D9EC, #E0E3F1
+- Type: Inter, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Brand preview tile; swatch trigger with hex readout; popover with saturation-brightness area, hue bar, hex field and 16 presets.
+
+INTERACTION & STATES
+- Dragging the area and hue bar updates HSV and the preview in real time; typing a hex updates the pickers; presets set the colour; Escape or outside click closes; text colour adapts for contrast.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior wellbeing-app designer and front-end engineer with 15+ years of experience. Build "Mood Face Slider": a five step mood slider where an SVG face morphs its eyes, brows and mouth while the page colour shifts.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Neo-brutalist card with thick outlines and hard shadow on a page that changes colour with the mood.
+- Palette: #2B2008, #FF5A1F, #8B7A45, #FFF4D6, #F87171, #FBBF24
+- Type: Bricolage Grotesque, DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Check-in headline, morphing face, mood label, gradient slider with tick labels, factor chips and save button.
+
+INTERACTION & STATES
+- Moving the slider morphs the face paths, recolours face and page background and bumps the face; chips toggle; save confirms.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial web designer and front-end engineer with 15+ years of experience. Build "Smart Hide Navigation": a floating navbar that hides when scrolling down, returns when scrolling up and tracks sections with a progress bar.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper frosted bar with serif logo, burnt orange active underline and progress line.
+- Palette: #C2410C, #1B1A16, #E4E1D8, #FBF9F3, #7A7566, #EFEADC
+- Type: Inter Tight, Newsreader (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Floating frosted nav with logo, four links, CTA and progress bar; scrolling sections; status chip.
+
+INTERACTION & STATES
+- Scroll direction toggles the nav translate; the active link follows the section in view; the progress line scales with scroll; links smooth scroll.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

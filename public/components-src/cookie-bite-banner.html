@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Cookie Bite Banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFE9C9;background-image:radial-gradient(#F8D7A6 2px,transparent 2px);background-size:26px 26px;color:#4A2A12;font-family:'Nunito',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{position:relative;width:100%;max-width:620px;background:#FFF8EC;border:3px solid #4A2A12;border-radius:28px;padding:22px 26px;display:grid;grid-template-columns:130px 1fr;gap:22px;align-items:center;box-shadow:7px 7px 0 #4A2A12}
+.ck{position:relative;width:130px;height:130px}.ck svg{width:100%;height:100%;overflow:visible}
+.ck .bite{transform-origin:center;transition:transform .35s cubic-bezier(.3,1.8,.5,1)}
+.ck.b1 #m1,.ck.b2 #m1,.ck.b3 #m1{r:26}
+.ck.sh{animation:wob .5s}@keyframes wob{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.cr{position:absolute;width:7px;height:7px;border-radius:2px;background:#B8742E;opacity:0;pointer-events:none}.ck.b1 .cr,.ck.b2 .cr,.ck.b3 .cr{animation:fall 1s ease-in forwards}@keyframes fall{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--x),90px) rotate(240deg)}}
+.tx h1{font:700 26px/1.05 'Fredoka',sans-serif;letter-spacing:-.01em;margin-bottom:6px}.tx p{font-size:14.5px;line-height:1.5;color:#7A4E2A;margin-bottom:14px}
+.bt{display:flex;flex-wrap:wrap;gap:10px}.bt button{border:3px solid #4A2A12;border-radius:14px;padding:10px 18px;font:700 15px 'Fredoka';cursor:pointer;transition:transform .12s,box-shadow .12s;box-shadow:3px 3px 0 #4A2A12}.bt button:active{transform:translate(3px,3px);box-shadow:none}.bt .ac{background:#F59E0B;color:#2A1708}.bt .rj{background:#fff;color:#4A2A12}.bt .st{border:0;background:none;box-shadow:none;text-decoration:underline;text-underline-offset:3px;padding:10px 6px;color:#7A4E2A}.bt .st:active{transform:none}.bt button:focus-visible{outline:3px solid #2563EB;outline-offset:3px}
+.rs{position:absolute;right:16px;top:-14px;background:#4A2A12;color:#FFF8EC;border:0;border-radius:99px;padding:5px 12px;font:600 12px 'Fredoka';cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s}.c.dn .rs{opacity:1;pointer-events:auto}.rs:focus-visible{outline:3px solid #2563EB}
+.ms{position:absolute;inset:0;border-radius:24px;background:#FFF8EC;display:grid;place-items:center;text-align:center;opacity:0;pointer-events:none;transition:opacity .35s;padding:20px}.c.dn .ms{opacity:1}.ms b{font:700 24px 'Fredoka';display:block}.ms span{font-size:14.5px;color:#7A4E2A}
+@media(max-width:520px){.c{grid-template-columns:1fr;text-align:center}.ck{margin:0 auto}.bt{justify-content:center}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c" id="c"><div class="ck b1" id="ck"><svg viewBox="0 0 130 130"><defs><mask id="mk"><rect width="130" height="130" fill="#fff"/><circle id="m1" cx="108" cy="30" r="0" fill="#000" style="transition:r .3s cubic-bezier(.3,1.8,.5,1)"/><circle id="m2" cx="116" cy="58" r="0" fill="#000" style="transition:r .3s cubic-bezier(.3,1.8,.5,1)"/><circle id="m3" cx="92" cy="14" r="0" fill="#000" style="transition:r .3s cubic-bezier(.3,1.8,.5,1)"/></mask></defs><g mask="url(#mk)"><circle cx="65" cy="65" r="56" fill="#D99A4E" stroke="#4A2A12" stroke-width="4"/><circle cx="65" cy="65" r="46" fill="none" stroke="#C4812F" stroke-width="2" stroke-dasharray="3 7" stroke-linecap="round"/><g fill="#4A2A12"><ellipse cx="44" cy="46" rx="7" ry="6"/><ellipse cx="78" cy="38" rx="6" ry="5"/><ellipse cx="86" cy="76" rx="7.500" ry="6"/><ellipse cx="52" cy="84" rx="6.500" ry="6"/><ellipse cx="68" cy="62" rx="5" ry="4.500"/><ellipse cx="34" cy="70" rx="4.500" ry="4"/><ellipse cx="62" cy="98" rx="4" ry="3.500"/></g></g></svg>
+<i class="cr" style="left:96px;top:40px;--x:14px"></i><i class="cr" style="left:104px;top:60px;--x:22px;animation-delay:.1s"></i><i class="cr" style="left:90px;top:26px;--x:-6px;animation-delay:.2s"></i><i class="cr" style="left:100px;top:50px;--x:30px;animation-delay:.15s"></i></div>
+<div class="tx"><h1>Cookie time?</h1><p>We bake in a few cookies to keep the shop running and to learn what you love. Want to take a bite?</p><div class="bt"><button class="ac" id="ac">Accept all</button><button class="rj" id="rj">Only essentials</button><button class="st">Customize</button></div></div>
+<div class="ms" id="ms" role="status"><div><b id="mb"></b><span id="mt"></span></div></div><button class="rs" id="rs">Change my mind</button></div>
+<script>
+const c=document.getElementById('c'),ck=document.getElementById('ck');const R=['m1','m2','m3'].map(i=>document.getElementById(i));
+function bites(n){R.forEach((m,i)=>m.setAttribute('r',i<n?(i===0?26:i===1?20:16):0))}
+bites(1);ck.classList.add('b1');
+document.getElementById('ac').onclick=()=>{ck.className='ck b1';void ck.offsetWidth;ck.className='ck sh b3';bites(3);setTimeout(()=>{document.getElementById('mb').textContent='Yum. All cookies accepted.';document.getElementById('mt').textContent='Thanks, we will keep things tasty.';c.classList.add('dn')},900)};
+document.getElementById('rj').onclick=()=>{ck.className='ck sh';setTimeout(()=>{document.getElementById('mb').textContent='Just the essentials.';document.getElementById('mt').textContent='We will only use what is needed to run the site.';c.classList.add('dn')},500)};
+document.getElementById('rs').onclick=()=>{c.classList.remove('dn');ck.className='ck b1';bites(1)};
+</script></body></html>

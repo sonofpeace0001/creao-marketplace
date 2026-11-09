@@ -1,0 +1,29 @@
+ROLE
+You are a senior design-tool UI engineer with 15+ years of experience. Build "Editor Tool Dock": a floating design-editor toolbar with tool shortcuts, tooltips and fill colours that recolour the selected shape.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark dotted canvas with a frosted dock, blue active tool and keycap tooltips.
+- Palette: #5B8CFF, #2F3237, #3A3D44, #A9ADB8, #1A1B1F, #ECEDF2
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Canvas with three shapes and a selection box with handles; zoom chip and hint; bottom dock with five tools, divider and four colour swatches.
+
+INTERACTION & STATES
+- Click a tool or press its key (V R O T P) to activate; hover magnifies and shows a name-and-key tooltip; clicking a shape selects it; swatches recolour the selection.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

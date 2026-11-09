@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Avatar Fan Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDEBFA;color:#18123A;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:520px;background:#fff;border-radius:28px;padding:30px;box-shadow:0 40px 70px -44px rgba(60,30,160,.5),0 0 0 1px rgba(24,18,58,.06)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.hd h1{font-size:20px;font-weight:800;letter-spacing:-.03em}.hd span{font-size:13px;color:#7B72A8;font-weight:600}
+.gr{display:flex;align-items:center;height:170px;padding-top:80px;position:relative}
+.av{position:relative;width:58px;height:58px;border-radius:50%;margin-left:-14px;border:4px solid #fff;background:var(--g);display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px;cursor:pointer;transition:transform .35s cubic-bezier(.3,1.5,.5,1),margin .35s cubic-bezier(.3,1.2,.4,1);z-index:var(--z);padding:0;font-family:inherit}
+.av:first-child{margin-left:0}
+.gr:hover .av,.gr:focus-within .av{margin-left:6px}.gr:hover .av:first-child,.gr:focus-within .av:first-child{margin-left:0}
+.av:hover,.av:focus-visible{transform:translateY(-12px) scale(1.18);z-index:30}.av:focus-visible{outline:3px solid #18123A;outline-offset:2px}
+.av .pr{position:absolute;right:-1px;bottom:-1px;width:15px;height:15px;border-radius:50%;background:#22C55E;border:3px solid #fff}
+.av .tp{position:absolute;left:50%;bottom:calc(100% + 14px);transform:translate(-50%,8px) scale(.9);width:190px;background:#18123A;color:#fff;border-radius:16px;padding:12px 14px;text-align:left;opacity:0;pointer-events:none;transition:all .25s cubic-bezier(.3,1.3,.5,1);box-shadow:0 18px 30px -10px rgba(24,18,58,.6)}
+.av .tp::after{content:"";position:absolute;left:50%;top:100%;width:12px;height:12px;background:#18123A;transform:translate(-50%,-6px) rotate(45deg);border-radius:2px}
+.av:hover .tp,.av:focus-visible .tp,.av.demo .tp{opacity:1;transform:translate(-50%,0) scale(1)}.av.demo{transform:translateY(-12px) scale(1.18);z-index:30}.gr:hover .av.demo:not(:hover){transform:none;z-index:auto}.gr:hover .av.demo:not(:hover) .tp{opacity:0}.tp b{display:block;font-size:14.5px;font-weight:700}.tp span{font-size:12.5px;color:#B3AAE0;font-weight:500}.tp em{display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-style:normal;font-size:11.5px;color:#7EE0A8;font-weight:700}
+.more{position:relative;width:58px;height:58px;border-radius:50%;margin-left:-14px;border:4px solid #fff;background:#F1EEFF;color:#5B3FE0;font-weight:800;font-size:14px;display:grid;place-items:center;cursor:pointer;transition:margin .35s,transform .25s;font-family:inherit;padding:0;z-index:0}.gr:hover .more{margin-left:6px}.more:hover{background:#5B3FE0;color:#fff}.more:focus-visible{outline:3px solid #18123A;outline-offset:2px}
+.ft{display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:20px;border-top:1px solid #EFECFA;font-size:14px;color:#6B6290}.ft b{color:#18123A}
+.ft button{margin-left:auto;border:1.5px solid #E0DBF5;background:#fff;color:#18123A;border-radius:12px;padding:10px 16px;font:700 13.5px 'Manrope';cursor:pointer}.ft button:hover{background:#18123A;color:#fff}.ft button:focus-visible{outline:3px solid #5B3FE0;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Design review</h1><span>6 reviewers</span></div>
+<div class="gr" id="gr" role="group" aria-label="Reviewers"></div>
+<div class="ft"><span><b id="on">4</b> online now</span><button>Invite</button></div></div>
+<script>
+const P=[['Priya Raman','Design Lead','PR','linear-gradient(135deg,#8B5CF6,#5B3FE0)','Editing now'],['Marcus Reid','Product','MR','linear-gradient(135deg,#38BDF8,#2563EB)','Viewing'],['Elena Ortiz','Engineering','EO','linear-gradient(135deg,#34D399,#059669)','Commenting'],['Tomas Berg','Brand','TB','linear-gradient(135deg,#FB923C,#EA580C)','Viewing'],['Aiko Tanaka','Research','AT','linear-gradient(135deg,#F472B6,#DB2777)','Away']];
+const gr=document.getElementById('gr');gr.innerHTML=P.map((p,i)=>'<button class="av" style="--g:'+p[3]+';--z:'+(10-i)+'" aria-label="'+p[0]+', '+p[1]+', '+p[4]+'">'+p[2]+(p[4]!=='Away'?'<i class="pr"></i>':'')+'<span class="tp"><b>'+p[0]+'</b><span>'+p[1]+'</span><em>'+(p[4]!=='Away'?'● ':'')+p[4]+'</em></span></button>').join('')+'<button class="more" aria-label="1 more reviewer">+1</button>';
+document.querySelectorAll('.av')[1].classList.add('demo');
+</script></body></html>

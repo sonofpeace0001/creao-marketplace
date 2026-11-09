@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Draggable Quote Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#2B3A2E;color:#1F1B14;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.bd{position:relative;width:100%;max-width:820px;height:500px;border-radius:26px;background:radial-gradient(#34463A 1.2px,transparent 1.2px) 0 0/22px 22px,#2F4033;box-shadow:inset 0 0 0 10px #A9794A,inset 0 0 0 12px #8A5E35,0 40px 70px -36px #000;overflow:hidden;touch-action:none}
+.hd{position:absolute;left:50%;top:44px;transform:translateX(-50%);text-align:center;color:#F6EFD9;pointer-events:none;z-index:0}.hd small{font:700 12.5px 'DM Sans';letter-spacing:.2em;text-transform:uppercase;opacity:.7}.hd h1{font:700 clamp(34px,6vw,58px)/1 'Caveat';margin-top:4px}
+.nt{position:absolute;width:210px;padding:16px 16px 14px;background:var(--b);border-radius:4px;box-shadow:0 14px 22px -8px rgba(0,0,0,.55),0 2px 3px rgba(0,0,0,.3);transform:rotate(var(--r)) scale(1);cursor:grab;user-select:none;transition:box-shadow .2s,transform .2s;touch-action:none}
+.nt.dg{cursor:grabbing;box-shadow:0 30px 40px -12px rgba(0,0,0,.65);transform:rotate(0deg) scale(1.06);z-index:50}
+.nt::before{content:"";position:absolute;left:50%;top:-9px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#FF8A7A,#C0392B);box-shadow:0 3px 5px rgba(0,0,0,.4)}
+.nt p{font:700 21px/1.15 'Caveat';color:#2A2418;margin-bottom:10px}.nt .by{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:#4A4232}.nt .by i{width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.18);display:grid;place-items:center;font:700 10px 'DM Sans';font-style:normal;color:#fff}.nt .st{color:#C2410C;font-size:12px;letter-spacing:2px;margin-bottom:6px}
+.hn{position:absolute;left:0;right:0;bottom:22px;text-align:center;font-size:13px;color:rgba(246,239,217,.7);pointer-events:none}
+@media(max-width:620px){.nt{width:170px}.nt p{font-size:18px}.bd{height:560px}}
+</style></head><body>
+<div class="bd" id="bd"><div class="hd"><small>Pinned to the wall</small><h1>Kind words</h1></div><div class="hn">Drag the notes around</div></div>
+<script>
+const N=[['Best onboarding I have ever seen. Done in ten minutes.','Priya R.','#E8590C','#FFE58A',-5,6,20],['Finally, our whole team on the same page.','Marcus R.','#2563EB','#BFE3FF',4,38,12],['Support replied at 2am on a Sunday. Unreal.','Elena O.','#16A34A','#C6F2C9',-3,66,26],['Paid for itself in week one.','Tomas B.','#DB2777','#FFC9DD',6,14,52],['The calmest software we use.','Aiko T.','#7C3AED','#E2D2FF',-6,52,58],['Our designers cried a little. Happy tears.','Sam W.','#0891B2','#CFF5FA',3,76,62]];
+const bd=document.getElementById('bd');let z=10;
+N.forEach(n=>{const e=document.createElement('div');e.className='nt';e.style.cssText='--b:'+n[3]+';--r:'+n[4]+'deg;left:'+n[5]+'%;top:'+n[6]+'%;z-index:'+(++z);e.innerHTML='<div class="st">★★★★★</div><p>'+n[0]+'</p><div class="by"><i style="background:'+n[2]+'">'+n[1].slice(0,2)+'</i>'+n[1]+'</div>';e.tabIndex=0;e.setAttribute('role','group');e.setAttribute('aria-label','Quote from '+n[1]);bd.appendChild(e);
+ let sx,sy,ox,oy;e.addEventListener('pointerdown',ev=>{e.classList.add('dg');e.style.zIndex=++z;sx=ev.clientX;sy=ev.clientY;ox=e.offsetLeft;oy=e.offsetTop;e.setPointerCapture(ev.pointerId)});
+ e.addEventListener('pointermove',ev=>{if(!e.classList.contains('dg'))return;const W=bd.clientWidth-e.offsetWidth,H=bd.clientHeight-e.offsetHeight;e.style.left=Math.max(8,Math.min(W-8,ox+ev.clientX-sx))+'px';e.style.top=Math.max(8,Math.min(H-8,oy+ev.clientY-sy))+'px'});
+ const up=()=>e.classList.remove('dg');e.addEventListener('pointerup',up);e.addEventListener('pointercancel',up);
+ e.addEventListener('keydown',ev=>{const st=ev.shiftKey?30:10,m={ArrowLeft:[-st,0],ArrowRight:[st,0],ArrowUp:[0,-st],ArrowDown:[0,st]}[ev.key];if(m){ev.preventDefault();e.style.left=(e.offsetLeft+m[0])+'px';e.style.top=(e.offsetTop+m[1])+'px'}});
+});
+</script></body></html>

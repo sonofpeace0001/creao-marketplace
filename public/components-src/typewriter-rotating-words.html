@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Typewriter Rotating Words</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F7F4EC;color:#14120C;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 4vw;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:1000px;text-align:left}
+.tg{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#6B6551;background:#fff;border:1px solid #E8E1CE;border-radius:99px;padding:6px 14px;margin-bottom:26px}.tg i{width:7px;height:7px;border-radius:50%;background:#16A34A;box-shadow:0 0 0 3px rgba(22,163,74,.2)}
+h1{font:400 clamp(46px,9vw,118px)/1 'Instrument Serif',serif;letter-spacing:-.035em}
+h1 .ln{display:block}
+.w{position:relative;display:inline-block;font-style:italic;color:var(--c,#C2410C);white-space:nowrap;transition:color .3s}
+.w::after{content:"";display:inline-block;width:.05em;height:.78em;background:currentColor;margin-left:.04em;vertical-align:-.06em;animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:0}}
+.w.ty::after{animation:none;opacity:1}
+.sb{font-size:clamp(16px,2vw,20px);line-height:1.6;color:#6B6551;max-width:46ch;margin:26px 0 30px}
+.bt{display:flex;gap:12px;flex-wrap:wrap}.bt a{padding:15px 28px;border-radius:99px;font:600 16px 'Inter';text-decoration:none}.bt .p{background:#14120C;color:#fff}.bt .g{border:1.5px solid #D8D0BA;color:#14120C}.bt a:focus-visible{outline:3px solid #C2410C;outline-offset:3px}
+.dots{display:flex;gap:8px;margin-top:34px}.dots i{width:28px;height:4px;border-radius:4px;background:#E2DBC7;transition:all .35s}.dots i.on{width:48px;background:var(--c,#C2410C)}
+@media(prefers-reduced-motion:reduce){.w::after{animation:none}}
+</style></head><body>
+<div class="c"><span class="tg"><i></i>Now booking for spring</span><h1><span class="ln">We design</span><span class="ln"><span class="w" id="w"></span></span><span class="ln">for people.</span></h1><p class="sb">A small studio crafting brands, products and experiences that feel like they were always meant to exist.</p><div class="bt"><a class="p" href="#">Start a project</a><a class="g" href="#">See our work</a></div><div class="dots" id="dots"></div></div>
+<script>
+const W=[['brands','#C2410C'],['products','#4F46E5'],['interfaces','#0F766E'],['stories','#BE185D'],['futures','#B45309']];const w=document.getElementById('w'),dots=document.getElementById('dots');let wi=0;
+W.forEach(()=>dots.appendChild(document.createElement('i')));
+function dot(i){[...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));document.documentElement.style.setProperty('--c',W[i][1]);document.body.style.setProperty('--c',W[i][1])}
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function show(i,txt){w.textContent=txt}
+function cycle(){const t=W[wi][0];dot(wi);w.classList.add('ty');let i=0;(function typ(){w.textContent=t.slice(0,++i);if(i<t.length)setTimeout(typ,95);else{w.classList.remove('ty');setTimeout(del,1700)}})()}
+function del(){const t=W[wi][0];w.classList.add('ty');let i=t.length;(function d(){w.textContent=t.slice(0,--i);if(i>0)setTimeout(d,45);else{wi=(wi+1)%W.length;setTimeout(cycle,260)}})()}
+wi=1;dot(1);w.textContent=W[1][0];setTimeout(()=>{if(!reduce)del()},1700);
+</script></body></html>

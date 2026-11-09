@@ -1,0 +1,29 @@
+ROLE
+You are a senior portfolio presentation designer with 15+ years of experience. Build "Browser Stack Mockup": three browser windows layered in 3D perspective that stack tight or fan apart with a spring and follow the pointer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Peach to pink to lilac backdrop with rounded windows, traffic lights and colourful page content.
+- Palette: #1E1530, #7C3AED, #FFE9D6, #FFD6E4, #DCD6FF, #7C6A8F
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Three windows with tab bars and URLs; portfolio, analytics and landing page contents; stack and fan buttons.
+
+INTERACTION & STATES
+- Windows translate along Z and Y between stacked and fanned layouts; the plane rotates slightly with horizontal pointer movement.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

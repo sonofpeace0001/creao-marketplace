@@ -1,0 +1,29 @@
+ROLE
+You are a senior media gallery designer with 15+ years of experience. Build "Blur Up Gallery": a photo grid where blurred colour placeholders with a scanning line and progress counter resolve into sharp images.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black stage with warm serif title and softly blurred gradient placeholders developing into flat illustrations.
+- Palette: #0F0F12, #F2F0EA, #33333C, #17171C, #E8E5DC, #1B1B21
+- Type: Instrument Serif, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with reload button; seven tiles in mixed spans each with blurred layer, sharp layer, scan line, percent and caption.
+
+INTERACTION & STATES
+- Placeholders show a counter and moving scan line, then crossfade to the sharp image while scale and blur ease out; Reload restarts the sequence.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

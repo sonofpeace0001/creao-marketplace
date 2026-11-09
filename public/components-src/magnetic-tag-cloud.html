@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Magnetic Tag Cloud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0F1115;color:#EDEFF5;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:700px}
+.hd{text-align:center;margin-bottom:18px}.hd h1{font-size:clamp(26px,5vw,36px);font-weight:700;letter-spacing:-.04em}.hd p{color:#8A90A5;font-size:15px;margin-top:6px}
+.fd{position:relative;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-content:center;padding:34px 22px;min-height:300px;border-radius:28px;background:radial-gradient(circle at 50% 50%,#1A1D26,#12141A);border:1px solid #232733;overflow:hidden;touch-action:none}
+.tg{position:relative;border:1.5px solid var(--c);background:rgba(255,255,255,.02);color:#E4E7F3;border-radius:99px;padding:10px 20px;font:600 16px 'Space Grotesk';cursor:pointer;will-change:transform;transition:background .25s,color .25s,box-shadow .25s}.tg:hover{background:color-mix(in srgb,var(--c) 18%,transparent)}.tg[aria-pressed=true]{background:var(--c);color:#0F1115;box-shadow:0 0 28px -4px var(--c)}.tg:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.tg.l{font-size:21px;padding:12px 26px}.tg.s{font-size:13.5px;padding:8px 15px}
+.ghost{position:absolute;width:90px;height:90px;margin:-45px 0 0 -45px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.35),transparent 65%);pointer-events:none;left:0;top:0}
+.fo{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:14px;color:#8A90A5}.fo b{color:#EDEFF5}.fo button{border:1px solid #2C3140;background:none;color:#B7BCD0;border-radius:99px;padding:6px 14px;font:600 13px 'Space Grotesk';cursor:pointer}.fo button:hover{border-color:#6B7390;color:#fff}.fo button:focus-visible{outline:2px solid #fff}
+@media(prefers-reduced-motion:reduce){.tg{transition:none}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>What are you into?</h1><p>Tags shy away from your cursor. Catch the ones you like.</p></div>
+<div class="fd" id="fd"><div class="ghost" id="gh"></div></div>
+<div class="fo"><span><b id="n">3</b> selected</span><button id="cl">Clear</button></div></div>
+<script>
+const W=[['Typography','l','#A78BFA'],['Motion','','#F472B6'],['Branding','s','#60A5FA'],['3D','','#34D399'],['Illustration','l','#FBBF24'],['Web design','','#F87171'],['Photography','s','#22D3EE'],['Product','','#C084FC'],['Icons','s','#A3E635'],['Layout','','#FB923C'],['Color theory','s','#F472B6'],['Prototyping','l','#60A5FA'],['Games','','#34D399'],['Print','s','#FBBF24'],['AI art','','#A78BFA']];
+const fd=document.getElementById('fd'),els=[];let sel=new Set(['Motion','3D','Product']),px=null,py=null,real=false,t=0;
+W.forEach(w=>{const b=document.createElement('button');b.className='tg '+w[1];b.textContent=w[0];b.style.setProperty('--c',w[2]);b.setAttribute('aria-pressed',sel.has(w[0]));b.onclick=()=>{sel.has(w[0])?sel.delete(w[0]):sel.add(w[0]);b.setAttribute('aria-pressed',sel.has(w[0]));document.getElementById('n').textContent=sel.size};fd.appendChild(b);els.push({b,x:0,y:0,vx:0,vy:0})});
+document.getElementById('cl').onclick=()=>{sel.clear();els.forEach(e=>e.b.setAttribute('aria-pressed',false));document.getElementById('n').textContent=0};
+fd.addEventListener('pointermove',e=>{real=true;const r=fd.getBoundingClientRect();px=e.clientX-r.left;py=e.clientY-r.top});fd.addEventListener('pointerleave',()=>{real=false});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function tick(){t+=.012;const r=fd.getBoundingClientRect();let cx,cy;if(real){cx=px;cy=py}else{cx=r.width/2+Math.cos(t*1.3)*r.width*.28;cy=r.height/2+Math.sin(t*1.9)*r.height*.22}
+ const g=document.getElementById('gh');g.style.transform='translate('+cx+'px,'+cy+'px)';g.style.opacity=real?0:1;
+ els.forEach(e=>{const bx=e.b.offsetLeft+e.b.offsetWidth/2,by=e.b.offsetTop+e.b.offsetHeight/2,dx=bx+e.x-cx,dy=by+e.y-cy,d=Math.hypot(dx,dy)||1,R=120;let fx=0,fy=0;if(d<R){const f=(1-d/R)*(1-d/R)*70;fx=dx/d*f;fy=dy/d*f}
+  e.vx+=(fx-e.x)*.12;e.vy+=(fy-e.y)*.12;e.vx*=.72;e.vy*=.72;e.x+=e.vx;e.y+=e.vy;e.b.style.transform='translate('+e.x.toFixed(2)+'px,'+e.y.toFixed(2)+'px)'});
+ if(!reduce)requestAnimationFrame(tick)}
+(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{for(let i=0;i<40;i++){t+=.012}requestAnimationFrame(tick)});
+</script></body></html>

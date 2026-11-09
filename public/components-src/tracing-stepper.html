@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tracing Beam Stepper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080A12;color:#E9ECFA;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;background:#0D101C;border:1px solid #1B2036;border-radius:26px;padding:28px 28px 24px;box-shadow:0 40px 70px -40px #000}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px}.hd h1{font-size:22px;font-weight:700;letter-spacing:-.03em}.hd span{font:400 12.5px 'Fragment Mono',monospace;color:#7B84A8}
+.st{position:relative;padding-left:46px}
+.rl{position:absolute;left:15px;top:14px;bottom:14px;width:2px;background:#1B2036;border-radius:2px}.rl i{position:absolute;left:0;top:0;width:100%;height:var(--p,0%);background:linear-gradient(#22D3EE,#8B5CF6);border-radius:2px;box-shadow:0 0 14px rgba(139,92,246,.8);transition:height .6s cubic-bezier(.4,0,.2,1)}
+.sp{position:relative;padding-bottom:22px;cursor:pointer}.sp:last-child{padding-bottom:0}
+.nd{position:absolute;left:-46px;top:0;width:32px;height:32px;border-radius:50%;background:#0D101C;border:2px solid #252B48;display:grid;place-items:center;font:600 13px 'Outfit';color:#7B84A8;transition:all .35s;z-index:1}
+.sp.dn .nd{background:#22D3EE;border-color:#22D3EE;color:#04202A;box-shadow:0 0 0 5px rgba(34,211,238,.12)}.sp.cu .nd{border-color:#8B5CF6;color:#fff;box-shadow:0 0 0 5px rgba(139,92,246,.2),0 0 20px rgba(139,92,246,.5)}
+.nd svg{opacity:0;position:absolute;transform:scale(.4);transition:all .3s}.sp.dn .nd svg{opacity:1;transform:none}.sp.dn .nd span{opacity:0}
+.sp h2{font-size:16.5px;font-weight:600;letter-spacing:-.02em;padding-top:4px;color:#7B84A8;transition:color .3s}.sp.dn h2,.sp.cu h2{color:#fff}
+.bd{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.3,.9,.3,1)}.sp.cu .bd{grid-template-rows:1fr}.bd>div{overflow:hidden}
+.bd p{font-size:14.5px;line-height:1.6;color:#98A0C2;padding:6px 0 4px}.sm{font-size:13.5px;color:#7B84A8;padding-top:2px;display:none}.sp.dn:not(.cu) .sm{display:block}
+.fm{display:flex;gap:8px;margin-top:10px}.fm input{flex:1;min-width:0;background:#090B16;border:1px solid #232946;border-radius:10px;padding:10px 12px;font:400 14px 'Outfit';color:#E9ECFA;outline:0}.fm input:focus{border-color:#8B5CF6}
+.ac{display:flex;justify-content:space-between;margin-top:26px;padding-top:20px;border-top:1px solid #1B2036}.ac button{border:1px solid #2A3052;background:#12162A;color:#E9ECFA;border-radius:12px;padding:11px 20px;font:600 14px 'Outfit';cursor:pointer;transition:all .15s}.ac button:hover:not(:disabled){background:#1A2040}.ac button:disabled{opacity:.35;cursor:default}.ac .nx{background:linear-gradient(135deg,#22D3EE,#8B5CF6);border:0;color:#050711}.ac button:focus-visible{outline:2px solid #22D3EE;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Set up your workspace</h1><span id="pc">STEP 2 / 4</span></div>
+<div class="st" id="st"><div class="rl"><i id="rf"></i></div></div>
+<div class="ac"><button id="bk">Back</button><button class="nx" id="nx">Continue</button></div></div>
+<script>
+const S=[['Create your account','Signed in as ada@studio.com'],['Name your workspace','Pick a short name your team will recognise. You can change it any time.'],['Invite teammates','Add up to five people for free. They will get an email with a link.'],['Connect your tools','Link Slack, GitHub or Google Drive to bring your work in.']];
+const st=document.getElementById('st');let cur=1;
+S.forEach((s,i)=>{const d=document.createElement('div');d.className='sp';d.innerHTML='<div class="nd"><span>'+(i+1)+'</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></div><h2>'+s[0]+'</h2><div class="sm">'+s[1]+'</div><div class="bd"><div><p>'+s[1]+'</p>'+(i===1?'<div class="fm"><input value="Northwind HQ" aria-label="Workspace name"></div>':'')+(i===2?'<div class="fm"><input placeholder="teammate@company.com" aria-label="Invite email"></div>':'')+'</div></div>';d.onclick=()=>{if(i<=cur+0||i<cur)go(i)};st.appendChild(d)});
+const P=[...st.querySelectorAll('.sp')];
+function go(n){cur=Math.max(0,Math.min(S.length-1,n));P.forEach((p,i)=>{p.classList.toggle('dn',i<cur);p.classList.toggle('cu',i===cur)});document.getElementById('rf').parentElement.style.setProperty('--p',(cur/(S.length-1)*100)+'%');document.getElementById('pc').textContent='STEP '+(cur+1)+' / '+S.length;document.getElementById('bk').disabled=cur===0;document.getElementById('nx').textContent=cur===S.length-1?'Finish':'Continue'}
+document.getElementById('nx').onclick=()=>{if(cur===S.length-1){P.forEach(p=>{p.classList.add('dn');p.classList.remove('cu')});document.getElementById('rf').parentElement.style.setProperty('--p','100%');document.getElementById('pc').textContent='ALL DONE';document.getElementById('nx').textContent='Done';document.getElementById('nx').disabled=true}else go(cur+1)};
+document.getElementById('bk').onclick=()=>go(cur-1);go(1);
+</script></body></html>

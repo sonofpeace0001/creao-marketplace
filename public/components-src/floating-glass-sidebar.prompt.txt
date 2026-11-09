@@ -1,0 +1,29 @@
+ROLE
+You are a senior visual designer and front-end engineer with 15+ years of experience. Build "Floating Glass Sidebar": a frosted glass rail floating over a colourful gradient scene that expands from icons to labels with a springy width.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep purple scene with cyan and magenta light blobs behind a translucent glass rail.
+- Palette: #2A1560, #0A0716, #F1EDFF, #6D3BF0, #E0388A, #1BB7D6
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Glass rail with logo, five icon items with unread dot, collapse toggle; content area with greeting and glass cards.
+
+INTERACTION & STATES
+- Toggle animates width with a spring; labels fade in after; collapsed icons show tooltips; the content area shifts with the rail.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

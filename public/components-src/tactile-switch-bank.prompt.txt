@@ -1,0 +1,29 @@
+ROLE
+You are a senior industrial UI designer and front-end engineer with 15+ years of experience. Build "Tactile Switch Bank": skeuomorphic rocker switches on a metal panel with LED indicators, a tilt animation and an All off sequence.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Brushed dark metal panel with screws, condensed caps labels and glowing coloured LEDs.
+- Palette: #1B1C20, #2A2C33, #1F2025, #8A8E9B, #1A1B1F, #5D606B
+- Type: Barlow Condensed, Share Tech Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Panel with screws and header; four rocker switches with LEDs and labels; active count; All off button.
+
+INTERACTION & STATES
+- Rockers tilt in 3D with a springy curve and light their LED; All off switches each one off in sequence; counter updates.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

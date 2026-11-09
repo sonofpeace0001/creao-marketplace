@@ -1,0 +1,29 @@
+ROLE
+You are a senior brand designer and front-end engineer with 15+ years of experience. Build "Grain Drift Background": slow drifting colour blobs under animated film grain with a vignette, framing a serif hero.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep black with ember orange, violet, cyan and amber light and a cinematic grain.
+- Palette: #FDBA74, #0B0A10, #FF5B3A, #7C3AED, #06B6D4, #F59E0B
+- Type: Instrument Serif, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Four blurred screen-blended blobs; SVG turbulence grain layer; vignette; centered eyebrow, serif headline, copy and two buttons.
+
+INTERACTION & STATES
+- Blobs drift on long alternating keyframes; grain jitters in stepped frames; reduced motion freezes everything.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

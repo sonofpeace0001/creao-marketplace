@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NPS Scale Radio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3EEFF;color:#1E1236;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px;background:#fff;border-radius:32px;padding:32px;box-shadow:0 40px 70px -44px rgba(90,40,180,.5),0 0 0 1px rgba(30,18,54,.06);text-align:center}
+.fc{width:92px;height:92px;margin:0 auto 14px;border-radius:50%;background:var(--c);display:grid;place-items:center;transition:background .4s;box-shadow:0 18px 30px -12px var(--c)}.fc svg{width:56px;height:56px;overflow:visible}.fc svg *{transition:all .35s cubic-bezier(.3,1.4,.5,1)}
+h1{font:800 clamp(22px,4vw,28px)/1.1 'Bricolage Grotesque';letter-spacing:-.04em;margin-bottom:6px}.c>p{color:#7A6A9E;font-size:15px;margin-bottom:24px}
+.sc{display:grid;grid-template-columns:repeat(11,1fr);gap:6px;margin-bottom:8px}
+.sc label{position:relative;cursor:pointer}.sc input{position:absolute;opacity:0}.sc span{display:grid;place-items:center;aspect-ratio:1;border-radius:14px;font:800 clamp(13px,2.4vw,17px) 'Bricolage Grotesque';background:var(--b);color:var(--t);transition:transform .25s cubic-bezier(.3,1.6,.5,1),box-shadow .25s,background .25s,color .25s;border:2px solid transparent}
+.sc label:hover span{transform:translateY(-4px)}.sc input:checked+span{transform:translateY(-8px) scale(1.15);background:var(--c);color:#fff;box-shadow:0 14px 22px -8px var(--c)}.sc input:focus-visible+span{outline:3px solid #1E1236;outline-offset:2px}
+.sc label.in span{background:color-mix(in srgb,var(--c) 22%,#fff);color:var(--c)}
+.lg{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;color:#8A7AAE;margin-bottom:22px}
+.cm{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.3,1,.4,1)}.cm.op{grid-template-rows:1fr}.cm>div{overflow:hidden}.cm textarea{width:100%;height:84px;resize:none;border:2px solid #E6DFF5;border-radius:16px;padding:12px 14px;font:500 15px 'DM Sans';color:#1E1236;outline:0;margin-bottom:16px}.cm textarea:focus{border-color:var(--c)}
+.go{border:0;border-radius:16px;padding:14px 30px;font:800 16px 'Bricolage Grotesque';background:var(--c);color:#fff;cursor:pointer;transition:all .3s;box-shadow:0 14px 24px -10px var(--c)}.go:disabled{background:#D8D0EA;box-shadow:none;cursor:default}.go:focus-visible{outline:3px solid #1E1236;outline-offset:3px}
+@media(max-width:520px){.sc{grid-template-columns:repeat(6,1fr)}.c{padding:22px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c" id="c" style="--c:#8B5CF6"><div class="fc"><svg viewBox="0 0 56 56" fill="none" stroke="#fff" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="28" r="22" stroke-opacity=".35"/><circle id="e1" cx="20" cy="23" r="2.200" fill="#fff" stroke="none"/><circle id="e2" cx="36" cy="23" r="2.200" fill="#fff" stroke="none"/><path id="mo" d="M18 36q10 0 20 0"/></svg></div>
+<h1>How likely are you to recommend us?</h1><p id="sb">Choose a number from 0 to 10.</p>
+<div class="sc" id="sc" role="radiogroup" aria-label="Likelihood to recommend from 0 to 10"></div><div class="lg"><span>Not at all likely</span><span>Extremely likely</span></div>
+<div class="cm" id="cm"><div><textarea id="tx" placeholder="What is the main reason for your score?" aria-label="Reason for your score"></textarea></div></div><button class="go" id="go" disabled>Send feedback</button></div>
+<script>
+const col=n=>n<=6?'#EF4444':n<=8?'#F59E0B':'#10B981',bgc=n=>n<=6?'#FEE2E2':n<=8?'#FEF3C7':'#D1FAE5',sc=document.getElementById('sc'),c=document.getElementById('c');
+sc.innerHTML=Array.from({length:11},(_,i)=>'<label style="--c:'+col(i)+';--b:'+bgc(i)+';--t:'+col(i)+'"><input type="radio" name="n" value="'+i+'" aria-label="'+i+'"><span>'+i+'</span></label>').join('');
+const M=['M18 40q10-8 20 0','M18 40q10-6 20 0','M18 38q10-4 20 0','M18 37q10-2 20 0','M18 36q10 0 20 0','M18 35q10 3 20 0','M18 34q10 5 20 0','M18 33q10 7 20 0','M18 32q10 9 20 0','M17 31q11 12 22 0','M16 30q12 14 24 0'];
+const W=['Not a fan','Not a fan','Not a fan','Not a fan','Not a fan','Not a fan','Not a fan','Passive','Passive','Promoter','Promoter'];
+sc.querySelectorAll('input').forEach(r=>r.addEventListener('change',()=>{const n=+r.value;c.style.setProperty('--c',col(n));document.getElementById('mo').setAttribute('d',M[n]);document.getElementById('sb').textContent=n+' out of 10. '+(n>=9?'Wonderful, thank you!':n>=7?'Good, how can we improve?':'We are sorry. What went wrong?');document.getElementById('cm').classList.add('op');document.getElementById('go').disabled=false;
+ sc.querySelectorAll('label').forEach((l,i)=>l.classList.toggle('in',i<n&&true))}));
+document.getElementById('go').onclick=e=>{e.target.textContent='Thank you!';e.target.disabled=true};
+setTimeout(()=>{const r=sc.querySelectorAll('input')[9];r.checked=true;r.dispatchEvent(new Event('change'))},50);
+</script></body></html>

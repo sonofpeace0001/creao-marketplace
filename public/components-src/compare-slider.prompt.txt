@@ -1,0 +1,29 @@
+ROLE
+You are a senior product-marketing designer and front-end engineer with 15+ years of experience. Build "Before / After Slider": a draggable before-and-after comparison of a messy spreadsheet and a clean dashboard.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm beige spreadsheet pane against a cool blue dashboard pane with a dark round handle.
+- Palette: #6B6552, #16202E, #2B6BFF, #ECEFF4, #EEF6FF, #E8F0FF
+- Type: Poppins (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Two stacked panes (spreadsheet with errors, dashboard with KPI rows) clipped by a CSS variable; handle with grip button; Before and After labels; caption and live percentage.
+
+INTERACTION & STATES
+- Pointer drag or tap sets the split using pointer capture; the handle is a role=slider with arrow, Shift, Home and End keys; percent readout updates.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Funnel Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEEF4;color:#12142B;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:880px;background:#fff;border-radius:26px;padding:24px;box-shadow:0 40px 70px -44px rgba(18,20,43,.5),0 0 0 1px rgba(18,20,43,.06)}
+.hd{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px}.hd h1{font-size:22px;font-weight:700;letter-spacing:-.045em}.hd p{font-size:13.5px;color:#7A7F9E;margin-top:2px}
+.tb{display:flex;background:#F0F1F8;border-radius:12px;padding:3px}.tb button{border:0;background:none;padding:7px 14px;border-radius:9px;font:600 13px 'Inter Tight';color:#6A6F94;cursor:pointer}.tb button[aria-pressed=true]{background:#fff;color:#12142B;box-shadow:0 2px 6px rgba(18,20,43,.12)}.tb button:focus-visible{outline:2px solid #6366F1}
+.gd{display:grid;grid-template-columns:1.5fr 1fr;gap:26px;align-items:center}
+.fn{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.st{position:relative;width:var(--w);height:58px;border:0;padding:0;background:none;cursor:pointer;transition:width .8s cubic-bezier(.3,1.1,.4,1),transform .25s;outline:0}
+.st .sh{position:absolute;inset:0;background:var(--c);clip-path:polygon(0 0,100% 0,calc(100% - var(--t)) 100%,var(--t) 100%);border-radius:6px;transition:filter .25s,transform .25s}
+.st:hover .sh,.st.on .sh,.st:focus-visible .sh{filter:brightness(1.1) saturate(1.1);transform:scaleY(1.04)}.st:focus-visible{outline:2px solid #12142B;outline-offset:2px}
+.st .tx{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 calc(var(--t) + 16px);color:#fff;font-size:14.5px;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,.25)}.st .tx b{font:600 17px 'Inter Tight';letter-spacing:-.02em}
+.dr{font:500 11.5px 'Geist Mono',monospace;color:#EF4444;display:flex;align-items:center;gap:4px;height:18px}.dr svg{color:#EF4444}
+.dt{background:#F6F7FC;border-radius:20px;padding:20px;min-height:290px}
+.dt small{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8A8FB0}.dt h2{font-size:22px;font-weight:700;letter-spacing:-.04em;margin:6px 0 16px}
+.dt .kp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}.dt .kp div{background:#fff;border-radius:14px;padding:12px 14px}.dt .kp b{display:block;font:600 22px 'Inter Tight';letter-spacing:-.04em}.dt .kp span{font-size:12.5px;color:#7A7F9E}
+.dt .bar{height:8px;border-radius:8px;background:#E3E6F3;overflow:hidden;margin:6px 0 4px}.dt .bar i{display:block;height:100%;border-radius:8px;background:var(--c);transition:width .6s cubic-bezier(.3,1,.4,1)}.dt .lb{display:flex;justify-content:space-between;font-size:12.5px;color:#7A7F9E}
+.dt .tip{margin-top:16px;display:flex;gap:10px;font-size:13.5px;line-height:1.45;color:#4A4F78;background:#fff;border-radius:14px;padding:12px 14px}.dt .tip i{flex:none;width:8px;height:8px;border-radius:50%;background:#F59E0B;margin-top:6px}
+@media(max-width:720px){.gd{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Signup funnel</h1><p>From first visit to paying customer</p></div><div class="tb" id="tb"><button aria-pressed="false" data-r="0">7 days</button><button aria-pressed="true" data-r="1">30 days</button><button aria-pressed="false" data-r="2">90 days</button></div></div>
+<div class="gd"><div class="fn" id="fn"></div><div class="dt" id="dt"></div></div></div>
+<script>
+const S=['Visitors','Signups','Activated','Trial started','Paid'];const C=['#6366F1','#7C5CF3','#A855F7','#D946EF','#EC4899'];
+const DATA=[[8420,2630,1480,820,310],[34810,10420,6130,3270,1260],[96340,28900,16210,8540,3180]];let r=1,sel=2;
+const fn=document.getElementById('fn'),dt=document.getElementById('dt');
+function build(){fn.innerHTML='';S.forEach((s,i)=>{const b=document.createElement('button');b.className='st'+(i===sel?' on':'');b.style.setProperty('--c',C[i]);b.innerHTML='<span class="sh"></span><span class="tx"><span>'+s+'</span><b></b></span>';b.onclick=()=>{sel=i;upd()};b.onmouseenter=()=>{sel=i;upd()};b.onfocus=()=>{sel=i;upd()};fn.appendChild(b);if(i<S.length-1){const d=document.createElement('div');d.className='dr';d.id='dr'+i;fn.appendChild(d)}})}
+function upd(){const d=DATA[r],mx=d[0];[...fn.querySelectorAll('.st')].forEach((b,i)=>{const w=Math.max(.34,d[i]/mx*.78+.22);b.style.setProperty('--w',(w*100)+'%');const nw=i<S.length-1?Math.max(.34,d[i+1]/mx*.78+.22):w;b.style.setProperty('--t',((w-nw)/2*100/w*.9+4)+'%');b.querySelector('b').textContent=d[i].toLocaleString();b.classList.toggle('on',i===sel)});
+ for(let i=0;i<S.length-1;i++){const e=document.getElementById('dr'+i),p=(1-d[i+1]/d[i])*100;e.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>'+p.toFixed(1)+'% drop-off'}
+ const v=d[sel],pv=sel?d[sel-1]:v,tot=(v/mx*100);dt.innerHTML='<small>Stage '+(sel+1)+' of 5</small><h2>'+S[sel]+'</h2><div class="kp"><div><b>'+v.toLocaleString()+'</b><span>People</span></div><div><b>'+(sel?(v/pv*100).toFixed(1)+'%':'100%')+'</b><span>From previous</span></div></div><div class="lb"><span>Share of all visitors</span><b>'+tot.toFixed(1)+'%</b></div><div class="bar"><i style="--c:'+C[sel]+';width:'+Math.max(tot,2)+'%"></i></div><div class="tip"><i></i><span>'+(sel===0?'Top of funnel. Traffic grew 8% against the previous period.':sel===1?'Signup rate is steady. Test shorter forms to lift it further.':sel===2?'Activation is the biggest lever. Guided setup improved it by 12%.':sel===3?'Trials convert best when started within a day of signup.':'Paid conversion is up from last month. Annual plans lead growth.')+'</span></div>'}
+build();upd();
+document.querySelectorAll('#tb button').forEach(b=>b.onclick=()=>{r=+b.dataset.r;document.querySelectorAll('#tb button').forEach(x=>x.setAttribute('aria-pressed',x===b));upd()});
+</script></body></html>

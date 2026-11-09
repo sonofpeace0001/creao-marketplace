@@ -1,0 +1,29 @@
+ROLE
+You are a senior playful UI designer and front-end engineer with 15+ years of experience. Build "Day Night Toggle": a big switch where a sun slides into a moon over a sky that fades from day to a twinkling night with drifting clouds.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Sky blue switch with layered clouds and stars; the whole card re-themes with it.
+- Palette: #DCEBFA, #14233B, #5E7391, #0A1024, #141C38, #EEF1FF
+- Type: Poppins (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Switch with sun or moon knob, clouds and stars; theme label; preview skeleton cards.
+
+INTERACTION & STATES
+- Toggling slides the knob, crossfades the sky, drops the clouds, fades in twinkling stars and re-themes the card and page; switch role with aria-checked.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

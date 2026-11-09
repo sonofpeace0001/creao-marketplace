@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Workload Heat Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDEEF6;color:#15172F;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px;background:#fff;border-radius:26px;padding:24px;box-shadow:0 40px 70px -44px rgba(21,23,47,.5),0 0 0 1px rgba(21,23,47,.06)}
+.hd{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px}.hd h1{font-size:22px;font-weight:800;letter-spacing:-.045em}.hd p{font-size:13.5px;color:#7A7FA0;margin-top:2px}
+.lg{display:flex;align-items:center;gap:10px;font:500 12px 'Geist Mono',monospace;color:#7A7FA0}.lg .sc{display:flex;border-radius:7px;overflow:hidden}.lg .sc i{width:24px;height:12px}
+.tb{display:grid;grid-template-columns:170px repeat(6,1fr);gap:6px;align-items:center}
+.wk{font:600 12px 'Geist Mono',monospace;text-align:center;color:#8A8FB0;padding-bottom:6px;letter-spacing:.04em}
+.pr{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700}.pr i{width:32px;height:32px;border-radius:50%;background:var(--g);display:grid;place-items:center;color:#fff;font:700 11px 'Plus Jakarta Sans';font-style:normal;flex:none}.pr span{display:block;font-size:12px;color:#8A8FB0;font-weight:500}
+.ce{position:relative;height:46px;border:0;border-radius:12px;background:var(--bg);color:var(--fg);font:600 13px 'Geist Mono',monospace;cursor:pointer;transition:transform .2s cubic-bezier(.3,1.5,.5,1),box-shadow .2s;outline:0}.ce:hover,.ce:focus-visible,.ce.on{transform:scale(1.1);z-index:3;box-shadow:0 12px 22px -8px var(--bg)}.ce:focus-visible{outline:2px solid #15172F;outline-offset:2px}
+.ce.over::after{content:"";position:absolute;right:6px;top:6px;width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px #E11D48}
+.det{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.det div{background:#F5F6FC;border-radius:16px;padding:14px 16px}.det small{font-size:12px;font-weight:600;color:#8A8FB0}.det b{display:block;font-size:22px;font-weight:800;letter-spacing:-.04em;margin-top:2px}.det .t{font-size:13px;color:#5A5F82;margin-top:4px;font-weight:500}
+.tt{position:fixed;z-index:30;background:#15172F;color:#fff;border-radius:11px;padding:8px 12px;font-size:12.5px;pointer-events:none;opacity:0;transition:opacity .12s;white-space:nowrap}.tt.on{opacity:1}
+@media(max-width:700px){.tb{grid-template-columns:110px repeat(6,1fr);gap:4px}.pr span,.pr i{display:none}.det{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Team workload</h1><p>Hours booked per person, per week</p></div><div class="lg"><span>0h</span><div class="sc" id="sc"></div><span>50h</span></div></div>
+<div class="tb" id="tb"></div><div class="det" id="det"></div><div class="tt" id="tt"></div></div>
+<script>
+const P=[['Ada Lovelace','Engineering','AL','linear-gradient(135deg,#6366F1,#EC4899)',[32,38,44,46,40,30]],['Grace Hopper','Platform','GH','linear-gradient(135deg,#10B981,#0EA5E9)',[28,34,36,42,52,48]],['Linus Berg','Design','LB','linear-gradient(135deg,#F59E0B,#EF4444)',[18,24,26,30,22,16]],['Priya Raman','Product','PR','linear-gradient(135deg,#8B5CF6,#06B6D4)',[40,44,48,50,46,38]],['Tomas Reid','Research','TR','linear-gradient(135deg,#EC4899,#F97316)',[10,14,20,18,26,34]]];
+const WK=['W44','W45','W46','W47','W48','W49'];const CAP=40;
+function col(h){const t=Math.min(1,h/52);if(h>CAP)return ['#E11D48','#fff'];const stops=[[238,242,255],[165,180,252],[99,102,241]];const k=h/CAP;const a=k<.5?stops[0]:stops[1],b=k<.5?stops[1]:stops[2],f=k<.5?k*2:(k-.5)*2;const c=a.map((v,i)=>Math.round(v+(b[i]-v)*f));return ['rgb('+c+')',k>.55?'#fff':'#3B3F73']}
+document.getElementById('sc').innerHTML=[0,10,20,30,40,52].map(h=>'<i style="background:'+col(h)[0]+'"></i>').join('');
+const tb=document.getElementById('tb'),tt=document.getElementById('tt'),det=document.getElementById('det');
+tb.innerHTML='<div></div>'+WK.map(w=>'<div class="wk">'+w+'</div>').join('');
+P.forEach((p,i)=>{tb.insertAdjacentHTML('beforeend','<div class="pr"><i style="--g:'+p[3]+'">'+p[2]+'</i><div>'+p[0]+'<span>'+p[1]+'</span></div></div>');p[4].forEach((h,k)=>{const c=col(h),b=document.createElement('button');b.className='ce'+(h>CAP?' over':'');b.style.cssText='--bg:'+c[0]+';--fg:'+c[1];b.textContent=h+'h';b.dataset.p=i;b.dataset.k=k;b.setAttribute('aria-label',p[0]+' '+WK[k]+' '+h+' hours');b.onmouseenter=()=>show(i,k,b);b.onfocus=()=>show(i,k,b);b.onclick=()=>show(i,k,b);b.onmousemove=e=>{tt.style.left=(e.clientX+12)+'px';tt.style.top=(e.clientY-40)+'px'};b.onmouseleave=()=>tt.classList.remove('on');tb.appendChild(b)})});
+function show(i,k,b){document.querySelectorAll('.ce.on').forEach(x=>x.classList.remove('on'));b.classList.add('on');const p=P[i],h=p[4][k],pct=Math.round(h/CAP*100);tt.textContent=p[0]+' · '+WK[k]+' · '+h+'h ('+pct+'%)';tt.classList.add('on');
+ const tot=p[4].reduce((a,v)=>a+v,0),over=p[4].filter(v=>v>CAP).length;det.innerHTML='<div><small>'+p[0]+' · '+WK[k]+'</small><b>'+h+'h</b><div class="t">'+(h>CAP?(h-CAP)+'h over capacity':(CAP-h)+'h available')+'</div></div><div><small>6 week average</small><b>'+(tot/6).toFixed(1)+'h</b><div class="t">'+Math.round(tot/6/CAP*100)+'% utilization</div></div><div><small>Overbooked weeks</small><b>'+over+'</b><div class="t">'+(over?'Consider rebalancing':'Healthy load')+'</div></div>'}
+show(1,4,tb.querySelector('.ce[data-p="1"][data-k="4"]'));
+tb.addEventListener('mouseleave',()=>tt.classList.remove('on'));
+</script></body></html>

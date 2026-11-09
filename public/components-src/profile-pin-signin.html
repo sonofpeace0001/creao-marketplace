@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Profile PIN Sign In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#12101C;background-image:radial-gradient(circle at 50% 0%,#2A2050,transparent 60%);color:#F2EFFB;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{width:100%;max-width:760px;text-align:center;position:relative;min-height:520px}
+.v{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s,transform .6s cubic-bezier(.3,1,.4,1)}.v.off{opacity:0;pointer-events:none;transform:translateY(30px) scale(.96)}
+.v h1{font-size:clamp(28px,5vw,42px);font-weight:700;letter-spacing:-.05em;margin-bottom:34px}
+.pf{display:flex;gap:26px;justify-content:center;flex-wrap:wrap}
+.pb{border:0;background:none;color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:12px;font:inherit;outline:0;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}.pb:hover,.pb:focus-visible{transform:translateY(-6px)}
+.pb .av{position:relative;width:118px;height:118px;border-radius:26px;background:var(--g);display:grid;place-items:center;font-size:44px;font-weight:700;box-shadow:0 20px 34px -14px var(--s);transition:box-shadow .3s,outline-color .2s;outline:3px solid transparent;outline-offset:4px}.pb:hover .av,.pb:focus-visible .av{outline-color:#fff}
+.pb .av svg{width:56px;height:56px;opacity:.95}.pb span{font-size:17px;font-weight:600;color:#BDB6D8;transition:color .2s}.pb:hover span{color:#fff}
+.pb .lk{position:absolute;right:-8px;top:-8px;width:30px;height:30px;border-radius:50%;background:#12101C;border:2px solid #2A2542;display:grid;place-items:center;color:#BDB6D8}
+.pin{gap:0}
+.pin .av2{width:88px;height:88px;border-radius:22px;background:var(--g);display:grid;place-items:center;font-size:34px;font-weight:700;box-shadow:0 20px 34px -14px var(--s);margin-bottom:14px}.pin h2{font-size:22px;font-weight:700;letter-spacing:-.04em}.pin p{font-size:14.5px;color:#9A93BC;margin:4px 0 22px;height:20px}
+.dt{display:flex;gap:16px;margin-bottom:26px}.dt i{width:16px;height:16px;border-radius:50%;border:2px solid #4A4370;transition:all .25s cubic-bezier(.3,1.8,.5,1)}.dt i.f{background:#fff;border-color:#fff;transform:scale(1.15)}.dt.sk{animation:sk .45s}.dt.sk i{border-color:#F43F5E;background:#F43F5E}.dt.ok i{background:#4ADE80;border-color:#4ADE80;transform:scale(1.25)}@keyframes sk{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+.kp{display:grid;grid-template-columns:repeat(3,76px);gap:14px}.kp button{width:76px;height:76px;border-radius:50%;border:0;background:#211C38;color:#fff;font:600 28px 'Outfit';cursor:pointer;transition:transform .12s,background .2s;position:relative}.kp button:hover{background:#2D2750}.kp button:active{transform:scale(.88);background:#3A3268}.kp button:focus-visible{outline:3px solid #fff;outline-offset:2px}.kp button small{display:block;font-size:9.5px;letter-spacing:.2em;color:#8B84AE;font-weight:600;margin-top:-4px}.kp .n{background:none;font-size:15px;color:#9A93BC}.kp .n:hover{background:none;color:#fff}
+.bk{margin-top:22px;border:0;background:none;color:#9A93BC;font:600 14.5px 'Outfit';cursor:pointer}.bk:hover{color:#fff}.bk:focus-visible{outline:2px solid #fff;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="v" id="v1"><h1>Who is signing in?</h1><div class="pf" id="pf"></div></div><div class="v pin off" id="v2"><div class="av2" id="a2"></div><h2 id="n2"></h2><p id="m2">Enter your 4 digit PIN</p><div class="dt" id="dt"><i></i><i></i><i></i><i></i></div><div class="kp" id="kp"></div><button class="bk" id="bk">Choose a different profile</button></div></div>
+<script>
+const P=[['Maya','M','linear-gradient(135deg,#F59E0B,#EF4444)','rgba(239,68,68,.55)',1],['Leo','L','linear-gradient(135deg,#10B981,#0EA5E9)','rgba(14,165,233,.55)',1],['Ada','A','linear-gradient(135deg,#8B5CF6,#EC4899)','rgba(236,72,153,.55)',0],['Kids','','linear-gradient(135deg,#FACC15,#F97316)','rgba(249,115,22,.55)',0]];
+const LK='<span class="lk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>';
+const FACE='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.500 14.500a4.500 4.500 0 0 0 7 0M9 9.500h.01M15 9.500h.01"/></svg>';
+const $=id=>document.getElementById(id);let cur=0,pin='';const PIN='2468';
+$('pf').innerHTML=P.map((p,i)=>'<button class="pb" data-i="'+i+'" style="--g:'+p[2]+';--s:'+p[3]+'"><span class="av">'+(p[1]||FACE)+(p[4]?LK:'')+'</span><span>'+p[0]+'</span></button>').join('');
+$('kp').innerHTML=[1,2,3,4,5,6,7,8,9].map(n=>'<button data-k="'+n+'">'+n+'<small>'+['','ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ'][n-1]+'</small></button>').join('')+'<button class="n" data-k="x" aria-label="Clear">Clear</button><button data-k="0">0</button><button class="n" data-k="b" aria-label="Delete"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5H9l-6 7 6 7h12zM17 9l-6 6M11 9l6 6"/></svg></button>';
+function dots(){[...$('dt').children].forEach((d,i)=>d.classList.toggle('f',i<pin.length))}
+function sel(i){cur=i;const p=P[i];if(!p[4]){done();return}pin='';dots();$('dt').className='dt';$('a2').style.cssText='--g:'+p[2]+';--s:'+p[3];$('a2').innerHTML=p[1]||FACE;$('n2').textContent=p[0];$('m2').textContent='Enter your 4 digit PIN';$('v1').classList.add('off');$('v2').classList.remove('off')}
+function done(){$('v1').classList.add('off');$('v2').classList.remove('off');$('a2').style.cssText='--g:'+P[cur][2]+';--s:'+P[cur][3];$('a2').innerHTML=P[cur][1]||FACE;$('n2').textContent='Welcome back, '+P[cur][0];$('m2').textContent='Signing you in...';$('dt').className='dt ok';[...$('dt').children].forEach(d=>d.classList.add('f'));$('kp').style.opacity=.2;$('kp').style.pointerEvents='none';$('bk').style.opacity=0}
+function key(k){if($('dt').classList.contains('ok'))return;if(k==='x'){pin=''}else if(k==='b'){pin=pin.slice(0,-1)}else if(pin.length<4){pin+=k}dots();if(pin.length===4){if(pin===PIN){setTimeout(done,150)}else{$('dt').classList.add('sk');$('m2').textContent='Incorrect PIN. Try again.';setTimeout(()=>{pin='';$('dt').className='dt';dots()},500)}}}
+document.querySelectorAll('.pb').forEach(b=>b.onclick=()=>sel(+b.dataset.i));$('kp').onclick=e=>{const b=e.target.closest('button');if(b)key(b.dataset.k)};
+addEventListener('keydown',e=>{if($('v2').classList.contains('off'))return;if(/^\d$/.test(e.key))key(e.key);if(e.key==='Backspace')key('b')});
+$('bk').onclick=()=>{$('v2').classList.add('off');$('v1').classList.remove('off');$('kp').style.opacity=1;$('kp').style.pointerEvents='';$('bk').style.opacity=1};
+</script></body></html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>3D Review Columns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070709;color:#ECECF1;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;overflow:hidden;-webkit-font-smoothing:antialiased}
+.sc{position:relative;width:100%;height:100vh;display:grid;place-items:center;overflow:hidden}
+.pl{position:absolute;inset:-30% -10%;display:flex;gap:16px;justify-content:center;transform:translateZ(0) rotateX(22deg) rotateY(-10deg) rotateZ(18deg) scale(1.1);perspective:1000px}
+.col{display:flex;flex-direction:column;gap:16px;width:250px;animation:up var(--d) linear infinite}.col.rv{animation-direction:reverse}@keyframes up{to{transform:translateY(-50%)}}
+.cd{background:linear-gradient(160deg,#16161C,#101014);border:1px solid #23232C;border-radius:18px;padding:16px;flex:none}
+.cd .h{display:flex;align-items:center;gap:10px;margin-bottom:10px}.cd .h i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 12px 'Inter';font-style:normal;color:#fff}.cd .h b{display:block;font-size:13.5px}.cd .h span{font-size:12px;color:#7C7C8A}
+.cd p{font-size:13.5px;line-height:1.55;color:#B4B4C2}.st{color:#FBBF24;font-size:12px;letter-spacing:2px;margin-bottom:8px}
+.vg{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 25%,#070709 78%),linear-gradient(#070709,transparent 22%,transparent 78%,#070709);pointer-events:none}
+.ct{position:relative;text-align:center;padding:30px 36px;background:rgba(7,7,9,.62);backdrop-filter:blur(14px);border:1px solid #26262F;border-radius:26px;max-width:480px;box-shadow:0 40px 80px -30px #000}
+.ct small{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#FBBF24}.ct h1{font-size:clamp(28px,5vw,40px);line-height:1.05;letter-spacing:-.045em;font-weight:700;margin:10px 0}.ct p{font-size:15.5px;color:#A0A0AE;line-height:1.55}
+.ct .sc2{display:flex;justify-content:center;gap:24px;margin-top:18px}.ct .sc2 b{display:block;font-size:24px;letter-spacing:-.04em}.ct .sc2 span{font-size:12px;color:#7C7C8A}
+@media(prefers-reduced-motion:reduce){.col{animation:none}}
+</style></head><body>
+<div class="sc"><div class="pl" id="pl" aria-hidden="true"></div><div class="vg"></div>
+<div class="ct"><small>Loved by 40,000 teams</small><h1>Don't take our word for it.</h1><p>Real words from real customers, shipped on repeat.</p><div class="sc2"><div><b>4.9</b><span>Average rating</span></div><div><b>12k+</b><span>Reviews</span></div></div></div></div>
+<script>
+const R=[['Priya R.','Head of Ops','#7C5CFA','We cut reporting from two days to ten minutes. The team is hooked.'],['Marcus R.','VP Product','#0EA5E9','Finally, one place where the whole company agrees on the plan.'],['Elena O.','Founder','#10B981','Support is unreal. They answered at 2am on a Sunday.'],['Tomas B.','Design Lead','#F97316','The calmest software we use, and the most powerful.'],['Aiko T.','CTO','#EC4899','Migration took one afternoon. Zero downtime, zero drama.'],['Sam W.','Operations','#6366F1','It paid for itself in the first quarter. Easy decision.'],['Leila K.','Marketing','#14B8A6','Our campaigns ship twice as fast now. Honestly a game changer.'],['Noah P.','Engineer','#EAB308','The API is a joy. Documentation that actually helps.']];
+const pl=document.getElementById('pl');
+for(let c=0;c<5;c++){const col=document.createElement('div');col.className='col'+(c%2?' rv':'');col.style.setProperty('--d',(38+c*7)+'s');
+ const cards=[...R,...R].map((_,i)=>R[(i+c*2)%R.length]);const h=cards.map(r=>'<div class="cd"><div class="st">★★★★★</div><div class="h"><i style="background:'+r[2]+'">'+r[0].slice(0,2)+'</i><div><b>'+r[0]+'</b><span>'+r[1]+'</span></div></div><p>'+r[3]+'</p></div>').join('');col.innerHTML=h+h;pl.appendChild(col)}
+</script></body></html>

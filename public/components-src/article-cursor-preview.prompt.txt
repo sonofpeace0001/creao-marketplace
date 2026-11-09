@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial and creative developer with 15+ years of experience. Build "Article List with Cursor Preview": an editorial article index where hovering a row dims the rest and a tilting image preview chases the cursor.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black page with large italic serif titles and mono metadata, bold flat illustration previews.
+- Palette: #7B7869, #F1EEE6, #0E0E0C, #2A2924, #1F1E1A, #A39F8C
+- Type: Instrument Serif, Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Journal header; five article rows with index, title, tag and read time; floating preview card.
+
+INTERACTION & STATES
+- The preview follows the pointer with easing and rotates with horizontal velocity; hovered row shifts and goes italic; focus works for keyboard.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

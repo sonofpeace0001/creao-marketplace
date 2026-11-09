@@ -1,0 +1,29 @@
+ROLE
+You are a senior typographic UI designer and front-end engineer with 15+ years of experience. Build "Text Roll Buttons": buttons and links whose label rolls away to reveal a twin line while an arrow swaps in.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black stage with white, indigo, outline, sunrise gradient and teal pills.
+- Palette: #F2F3F8, #818CF8, #0F1014, #80849C, #6366F1, #3A3D52
+- Type: Space Grotesk (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Five buttons with rolling label pair and optional double arrow; a row of underlined rolling links.
+
+INTERACTION & STATES
+- Hover or focus translates the label stack up by one line, slides the arrow across and wipes an underline on links.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

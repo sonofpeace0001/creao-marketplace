@@ -1,0 +1,29 @@
+ROLE
+You are a senior code review tooling designer with 15+ years of experience. Build "Code Diff Block": a pull request style diff with line numbers, add and remove highlights, unified and after views and an animated apply.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark review panel with green and red hunks, syntax colours and approval footer.
+- Palette: #1B2335, #4ADE80, #F87171, #2EA043, #0B101A, #C5CEE8
+- Type: Inter, Fira Code (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- File header with stats and view toggle; hunk header; numbered diff lines; collapsed lines button; approval footer with merge button.
+
+INTERACTION & STATES
+- Switching to After hides removed lines; added lines slide in with a stagger and green flash; hovering a line highlights it; replay reruns the animation.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

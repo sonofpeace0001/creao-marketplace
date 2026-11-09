@@ -1,0 +1,29 @@
+ROLE
+You are a senior forms designer and front-end engineer with 15+ years of experience. Build "Tag Input Chips": a tag input with colour-coded chips that pop in and out, live suggestions, quick add pills and a progress ring limit.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on pale blue with pastel chips and a blue focus ring.
+- Palette: #2563EB, #10213A, #DCE4EF, #8A9AB4, #EAF0F6, #6A7B95
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Title and helper; chip field with inline input and suggestion list; quick add row; count and ring meter.
+
+INTERACTION & STATES
+- Enter or comma adds; Backspace removes the last; suggestions filter with arrow key navigation; ring fills and turns red at the limit.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

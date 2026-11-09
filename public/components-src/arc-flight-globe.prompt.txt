@@ -1,0 +1,29 @@
+ROLE
+You are a senior data-visualisation developer with 15+ years of experience. Build "Arc Flight Globe": a dotted canvas globe with glowing great-circle arcs, travelling light pulses and pinging city markers that you can drag to rotate.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight blue sphere with sky blue dotted continents and violet atmosphere glow.
+- Palette: #13235A, #050813, #EAF0FF, #7DD3FC, #38BDF8, #A78BFA
+- Type: Sora, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Intro column with stats; canvas globe with graticule, dotted land, arcs, city pings and drag hint.
+
+INTERACTION & STATES
+- Orthographic projection with auto rotation; dragging changes yaw and pitch; arcs lift above the surface with moving comet heads; markers pulse.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

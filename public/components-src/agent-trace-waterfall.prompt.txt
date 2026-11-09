@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer-tools designer and front-end engineer with 15+ years of experience. Build "Agent Trace Waterfall": an observability waterfall for an agent run with live-growing span bars, a moving now marker and ticking tokens and cost.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean white card with mono numerals and colour-coded LLM and tool spans.
+- Palette: #12141A, #9AA0B2, #EF4444, #EEF0F4, #EDEFF4, #8A90A3
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Run header with duration, tokens and cost; time axis; seven span rows with icon, name, kind and bar; expandable input and output panel.
+
+INTERACTION & STATES
+- A now marker advances and spans grow with a shimmer while running; stats tick up; clicking a row expands its input and output.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

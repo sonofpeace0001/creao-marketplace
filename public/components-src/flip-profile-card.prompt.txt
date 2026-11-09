@@ -1,0 +1,29 @@
+ROLE
+You are a senior portfolio designer and front-end engineer with 15+ years of experience. Build "Flip Profile Card": a tall profile card that flips in 3D from a bold portrait front to a back with bio, stats, skill bars and actions.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Sunset-gradient front with a white avatar disc and a midnight back with coral accents.
+- Palette: #E8316B, #FF8A5B, #F3EFFF, #2E2860, #241E50, #1B1530
+- Type: Syne, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Front: gradient, portrait disc, name, role, tags and flip hint. Back: about copy, three stat tiles, three skill bars, Follow and Message buttons.
+
+INTERACTION & STATES
+- Click or Enter flips the card with a 3D rotation and aria-pressed; skill bars fill after the flip; Follow toggles and Message confirms without flipping back.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

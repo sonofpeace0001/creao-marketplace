@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial designer and front-end engineer with 15+ years of experience. Build "Curtain Reveal Footer": a footer that sits beneath the page and is revealed like a curtain as the content card scrolls away.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream content card with rounded bottom over a burnt orange footer with serif headline.
+- Palette: #C2410C, #FFC799, #D9D4C8, #1D1A14, #7C2D12, #FFF4E8
+- Type: DM Serif Display, DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Fixed footer layer with headline, link groups and legal row; scrolling content card with stats; transparent spacer.
+
+INTERACTION & STATES
+- The footer is anchored behind the scroller; as the opaque content card scrolls up it uncovers the footer, with a shadow giving depth.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

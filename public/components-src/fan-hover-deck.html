@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Fan Hover Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1B2A22;background-image:radial-gradient(circle at 50% 40%,#2C4A3A,#14201A 70%);color:#F4EFE3;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;overflow:hidden;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;text-align:center}
+.c h1{font:700 clamp(28px,5vw,42px)/1 'Fraunces',serif;letter-spacing:-.03em}.c p{color:#9DB5A6;font-size:15.5px;margin:8px 0 50px}
+.dk{position:relative;height:300px;display:flex;justify-content:center;align-items:flex-end}
+.cd{position:absolute;bottom:0;left:50%;width:190px;height:270px;margin-left:-95px;border-radius:20px;background:var(--bg);color:#fff;padding:18px;text-align:left;cursor:pointer;border:2px solid rgba(255,255,255,.2);box-shadow:0 20px 34px -12px rgba(0,0,0,.6);transform-origin:50% 130%;transform:rotate(calc(var(--i)*var(--a,0deg))) translateY(calc(var(--lift,0px)*-1));transition:transform .55s cubic-bezier(.3,1.3,.5,1),box-shadow .3s;outline:0;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.dk:hover{--a:13deg}.dk.fan{--a:13deg}.cd:hover,.cd:focus-visible{--lift:36px;z-index:20;box-shadow:0 34px 50px -12px rgba(0,0,0,.7)}.cd:focus-visible{outline:3px solid #FFD166;outline-offset:3px}
+.dk .cd{--a:5deg}.dk:hover .cd,.dk.fan .cd{--a:13deg}
+.cd .rk{font:700 34px/1 'Fraunces',serif}.cd .st{font-size:46px}.cd .nm{font:700 17px/1.1 'Fraunces',serif;letter-spacing:-.01em}.cd .ds{font-size:12.5px;opacity:.85;margin-top:5px;line-height:1.4}
+.cd svg.bg{position:absolute;right:-20px;bottom:-20px;width:140px;height:140px;opacity:.28}
+.hint{margin-top:44px;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#6F8C7B}
+@media(max-width:620px){.cd{width:150px;height:220px;margin-left:-75px}.dk{height:250px}.dk:hover,.dk.fan,.dk:hover .cd,.dk.fan .cd{--a:10deg}}
+@media(prefers-reduced-motion:reduce){.cd{transition:none}}
+</style></head><body>
+<div class="c"><h1>Pick a card</h1><p>The deck fans out as you hover and lifts the card you point at.</p><div class="dk fan" id="dk"></div><div class="hint">Hover the deck</div></div>
+<script>
+const P=[['A','Ace of Oak','Strong foundations','#7C3AED','M20 110 L70 20 L120 110Z'],['K','King of Moss','Calm authority','#0F766E','M10 100 Q70 0 130 100Z'],['Q','Queen of Dawn','Bright ideas first','#DB2777','M70 10 L90 50 L130 55 L100 85 L110 130 L70 105 L30 130 L40 85 L10 55 L50 50Z'],['J','Jack of Tide','Quick and clever','#2563EB','M10 70 Q40 20 70 70 T130 70 V130 H10Z'],['10','Ten of Ember','Full of energy','#EA580C','M70 10 C20 60 20 100 70 130 C120 100 120 60 70 10Z']];
+const dk=document.getElementById('dk');P.forEach((p,i)=>{const e=document.createElement('button');e.className='cd';e.style.cssText='--i:'+(i-2)+';--bg:linear-gradient(160deg,'+p[3]+','+p[3]+'CC);z-index:'+i;e.innerHTML='<svg class="bg" viewBox="0 0 140 140"><path d="'+p[4]+'" fill="#fff"/></svg><span class="rk">'+p[0]+'</span><div><div class="nm">'+p[1]+'</div><div class="ds">'+p[2]+'</div></div>';e.setAttribute('aria-label',p[1]);dk.appendChild(e)});
+dk.addEventListener('mouseenter',()=>dk.classList.remove('fan'));
+</script></body></html>

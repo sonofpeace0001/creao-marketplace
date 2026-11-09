@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tapback Chat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#C9CFE0;color:#0B0B10;font-family:'Inter',-apple-system,sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.ph{width:100%;max-width:380px;height:580px;background:#fff;border-radius:44px;border:9px solid #0B0B10;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 70px -30px rgba(0,0,0,.6)}
+.hd{padding:16px 0 10px;text-align:center;background:rgba(246,246,248,.95);border-bottom:1px solid #E4E4EA}.hd i{display:block;width:44px;height:44px;margin:0 auto 4px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;font:700 15px 'Inter';font-style:normal;line-height:44px}.hd b{font-size:12.5px;font-weight:600}
+.ms{flex:1;padding:18px 14px 8px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;overflow:hidden}
+.w{position:relative;max-width:76%;display:flex;flex-direction:column}.w.me{align-self:flex-end;align-items:flex-end}.w.th{align-self:flex-start}
+.b{position:relative;padding:9px 14px;border-radius:19px;font-size:16px;line-height:1.3;cursor:pointer;transition:transform .15s;border:0;text-align:left;font-family:inherit;outline:0}.b:active{transform:scale(.97)}.b:focus-visible{box-shadow:0 0 0 3px #0A84FF55}
+.me .b{background:#0A84FF;color:#fff;border-bottom-right-radius:5px}.th .b{background:#E9E9EF;color:#0B0B10;border-bottom-left-radius:5px}
+.rc{position:absolute;top:-14px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:2.500px solid #fff;transform-origin:center;animation:pop .45s cubic-bezier(.3,2,.5,1)}.me .rc{left:-12px;background:#E9E9EF;color:#0B0B10}.th .rc{right:-12px;background:#0A84FF;color:#fff}@keyframes pop{from{transform:scale(0) rotate(-40deg)}}
+.rc svg{display:block}.rc b{font:800 9px 'Inter'}
+.tr{position:absolute;z-index:6;bottom:calc(100% + 8px);display:flex;gap:2px;padding:6px 8px;background:#fff;border-radius:99px;box-shadow:0 14px 30px -6px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.06);transform-origin:bottom;opacity:0;pointer-events:none;transform:scale(.4)}
+.me .tr{right:0}.th .tr{left:0}
+.w.open .tr{opacity:1;pointer-events:auto;transform:none;transition:all .25s cubic-bezier(.3,1.5,.5,1)}
+.tr button{width:36px;height:36px;border-radius:50%;border:0;background:none;display:grid;place-items:center;cursor:pointer;color:#6B6B76;opacity:0;transform:translateY(10px) scale(.5);transition:background .15s,color .15s}.w.open .tr button{opacity:1;transform:none;transition:all .3s cubic-bezier(.3,1.8,.5,1) calc(var(--i)*35ms)}.tr button:hover{background:#EEF0F6;color:#0A84FF;transform:scale(1.25)}.tr button:focus-visible{outline:2px solid #0A84FF}.tr button.on{background:#0A84FF;color:#fff}
+.rd{align-self:flex-end;font-size:11px;font-weight:600;color:#8A8A94;margin:2px 4px 0}
+.tp{align-self:flex-start;display:flex;gap:4px;background:#E9E9EF;border-radius:19px;border-bottom-left-radius:5px;padding:13px 15px}.tp i{width:8px;height:8px;border-radius:50%;background:#9A9AA6;animation:t 1.2s infinite}.tp i:nth-child(2){animation-delay:.2s}.tp i:nth-child(3){animation-delay:.4s}@keyframes t{40%{transform:translateY(-4px);opacity:.5}}
+.ft{display:flex;gap:8px;padding:10px 12px 16px}.ft div{flex:1;border:1px solid #D8D8E0;border-radius:99px;padding:9px 16px;font-size:15px;color:#A0A0AA}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="ph"><div class="hd"><i>JM</i><b>Jonas Mueller</b></div><div class="ms" id="ms"></div><div class="ft"><div>iMessage</div></div></div>
+<script>
+const R=[['heart','M12 21s-7-4.500-9.500-9A5.500 5.500 0 0 1 12 6a5.500 5.500 0 0 1 9.500 6C19 16.500 12 21 12 21z'],['up','M7 22V11l5-9a2 2 0 0 1 2 2v5h5.500a2 2 0 0 1 2 2.300l-1.500 8A2 2 0 0 1 18 22z M2 11h5v11H2z'],['down','M17 2v11l-5 9a2 2 0 0 1-2-2v-5H4.500a2 2 0 0 1-2-2.300l1.500-8A2 2 0 0 1 6 2z M22 13h-5V2h5z'],['ha','HA'],['bang','!!'],['q','?']];
+const M=[['th','Did the new onboarding ship?'],['me','Went live an hour ago'],['th','Amazing. Conversion is already up 12%'],['me','Told you the checklist would work']];
+const ms=document.getElementById('ms');
+function ic(k){const r=R.find(x=>x[0]===k);return r[1].length<4?'<b>'+r[1]+'</b>':'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="'+r[1]+'"/></svg>'}
+M.forEach((m,i)=>{const w=document.createElement('div');w.className='w '+m[0]+(i===0?' open':'');w.innerHTML='<div class="tr" role="menu">'+R.map((r,j)=>'<button style="--i:'+j+'" data-k="'+r[0]+'" aria-label="'+r[0]+'">'+(r[1].length<4?'<b style="font:800 13px Inter">'+r[1]+'</b>':'<svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="'+r[1]+'"/></svg>')+'</button>').join('')+'</div><button class="b">'+m[1]+'</button>';ms.appendChild(w);
+ const b=w.querySelector('.b');b.onclick=e=>{e.stopPropagation();document.querySelectorAll('.w.open').forEach(x=>x!==w&&x.classList.remove('open'));w.classList.toggle('open')};
+ w.querySelectorAll('.tr button').forEach(x=>x.onclick=e=>{e.stopPropagation();const k=x.dataset.k;w.querySelector('.rc')?.remove();if(w.dataset.r===k){w.dataset.r='';w.classList.remove('open');return}w.dataset.r=k;w.querySelectorAll('.tr button').forEach(y=>y.classList.toggle('on',y===x));const c=document.createElement('span');c.className='rc';c.innerHTML=ic(k);w.querySelector('.b').appendChild(c);w.classList.remove('open')});
+ if(i===2){w.dataset.r='heart';const c=document.createElement('span');c.className='rc';c.style.animation='none';c.innerHTML=ic('heart');b.appendChild(c)}});
+const rd=document.createElement('div');rd.className='rd';rd.textContent='Read 10:42';ms.appendChild(rd);const tp=document.createElement('div');tp.className='tp';tp.innerHTML='<i></i><i></i><i></i>';ms.appendChild(tp);
+document.addEventListener('click',()=>document.querySelectorAll('.w.open').forEach(x=>x.classList.remove('open')));
+</script></body></html>

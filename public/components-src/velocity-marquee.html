@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Velocity Marquee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F0EA;color:#101010;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;overflow:hidden;-webkit-font-smoothing:antialiased}
+.st{width:100%;overflow:hidden;padding:24px 0}
+.tp{display:flex;justify-content:space-between;align-items:center;padding:0 5vw 28px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.tp span:last-child{display:flex;align-items:center;gap:10px}.sp{display:inline-block;width:90px;height:6px;border-radius:6px;background:#D9D5C9;overflow:hidden;position:relative}.sp i{position:absolute;left:0;top:0;bottom:0;width:20%;background:#101010;border-radius:6px;transition:width .15s}
+.row{display:flex;white-space:nowrap;will-change:transform;margin-bottom:6px}.row div{display:flex;align-items:center;flex:none}
+.row span{font:400 clamp(70px,16vw,190px)/1.05 'Anton';text-transform:uppercase;letter-spacing:.01em;padding-right:.3em}
+.row.o span{-webkit-text-stroke:2.5px #101010;color:transparent}.row.f span{color:#101010}
+.row.c span{color:#FF4B1F}
+.dot{display:inline-block;width:.38em;height:.38em;border-radius:50%;background:#FF4B1F;margin-right:.3em;flex:none}
+.ft{text-align:center;margin-top:24px;font-size:13.5px;color:#7A766A;font-weight:500}
+</style></head><body>
+<div class="st"><div class="tp"><span>Selected work 2024 &mdash; 2026</span><span>Scroll or wheel to speed up <span class="sp"><i id="sp"></i></span></span></div>
+<div class="row f" id="r1"></div><div class="row o" id="r2"></div><div class="row c" id="r3"></div><div class="ft">Speed responds to scroll velocity and reverses with direction.</div></div>
+<script>
+const W=['Brand','Motion','Web','Product','Type'],mk=(id,words)=>{const r=document.getElementById(id);const html=words.map(w=>'<span>'+w+'</span><i class="dot"></i>').join('');r.innerHTML='<div>'+html+'</div><div>'+html+'</div><div>'+html+'</div><div>'+html+'</div>';return r};
+const rows=[[mk('r1',W),-1,60],[mk('r2',[...W].reverse()),1,45],[mk('r3',['Make','Things','People','Love']),-1,75]];
+let v=0,dir=1,pos=rows.map(()=>0),last=performance.now();const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function onWheel(e){v=Math.min(18,v+Math.abs(e.deltaY)*.02);dir=e.deltaY>0?1:-1}
+addEventListener('wheel',onWheel,{passive:true});let ty=0;addEventListener('touchstart',e=>ty=e.touches[0].clientY,{passive:true});addEventListener('touchmove',e=>{const d=ty-e.touches[0].clientY;ty=e.touches[0].clientY;v=Math.min(18,v+Math.abs(d)*.08);dir=d>0?1:-1},{passive:true});
+function tick(n){const dt=Math.min(.05,(n-last)/1000);last=n;v*=.94;rows.forEach((r,i)=>{const w=r[0].firstChild.getBoundingClientRect().width;pos[i]+=r[1]*(r[2]+v*r[2]*.5*dir)*dt*(reduced?0:1);if(pos[i]<=-w)pos[i]+=w;if(pos[i]>0)pos[i]-=w;r[0].style.transform='translateX('+pos[i]+'px)'});document.getElementById('sp').style.width=(20+Math.min(80,v*5))+'%';requestAnimationFrame(tick)}
+requestAnimationFrame(tick);
+</script></body></html>

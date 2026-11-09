@@ -1,0 +1,29 @@
+ROLE
+You are a senior AI-product designer and front-end engineer with 15+ years of experience. Build "AI Composer Chat": a warm AI assistant chat with thinking steps, streaming markdown replies, suggestion chips and a composer with model picker.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Paper-white card with a terracotta accent, orb avatar and Inter type.
+- Palette: #D97757, #1C1B18, #F0EEE7, #6AA07A, #E4E1D6, #C4633F
+- Type: Inter, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Scrolling message log with user bubble and assistant reply (thinking row, list, code chip); suggestion chips; composer with textarea, attach, model selector and send button.
+
+INTERACTION & STATES
+- Enter sends; assistant shows a spinner with changing step text, collapses to Thought for 2s, then streams the reply with a blinking cursor; chips send canned prompts; Shift+Enter inserts a newline.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

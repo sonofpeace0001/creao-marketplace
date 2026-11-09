@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Split Letter Wave</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E0B1A;color:#F4F0FF;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 4vw;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{width:100%;max-width:1000px;text-align:center}
+small{font-size:13px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#A78BFA}
+h1{font:800 clamp(52px,11vw,150px)/.95 'Syne',sans-serif;letter-spacing:-.04em;margin:18px 0 10px;cursor:default}
+h1 .wd{display:inline-block;white-space:nowrap;margin:0 .12em}
+h1 .ch{display:inline-block;transform:translateY(var(--y,0px)) scaleY(var(--sy,1));color:hsl(calc(var(--h,270)*1deg) 90% calc(66% + var(--l,0)*1%));will-change:transform}
+p{font-size:clamp(15px,2vw,19px);color:#9E96C4;max-width:42ch;margin:12px auto 0;line-height:1.6}
+.hint{margin-top:30px;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#5E5782}
+@media(prefers-reduced-motion:reduce){h1 .ch{transform:none!important}}
+</style></head><body>
+<div class="c"><small>Motion type</small><h1 id="h" aria-label="Ride the wave"></h1><p>Every letter rides a travelling wave. Hover to throw a ripple across the headline.</p><div class="hint">Move your cursor over the text</div></div>
+<script>
+const h=document.getElementById('h'),ch=[];
+'Ride the wave'.split(' ').forEach((w,wi)=>{const s=document.createElement('span');s.className='wd';s.setAttribute('aria-hidden','true');[...w].forEach(c=>{const e=document.createElement('span');e.className='ch';e.textContent=c;s.appendChild(e);ch.push({e,x:0})});h.appendChild(s);if(wi<2)h.appendChild(document.createTextNode(' '))});
+let t=0,mx=null,real=false,amp=0,rip=0,rx=0;
+function pos(){ch.forEach(o=>{const r=o.e.getBoundingClientRect();o.x=r.left+r.width/2})}
+h.addEventListener('pointermove',e=>{real=true;if(mx==null||Math.abs(e.clientX-mx)>8)rip=1;mx=e.clientX;rx=mx});h.addEventListener('pointerleave',()=>{real=false;mx=null});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function f(){t+=.045;rip*=.985;ch.forEach((o,i)=>{const w=Math.sin(t+i*.55),y=w*14;let ex=0;if(rx!=null&&mx!=null){const d=Math.abs(o.x-rx);ex=Math.max(0,1-d/260)*Math.sin(t*3-d*.03)*22*Math.min(1,rip+.4)}o.e.style.setProperty('--y',(y+ex).toFixed(1)+'px');o.e.style.setProperty('--sy',(1+Math.abs(w)*.06).toFixed(3));o.e.style.setProperty('--h',(250+(w*.5+.5)*80+i*6)%360);o.e.style.setProperty('--l',Math.round(w*8))});if(!reduce)requestAnimationFrame(f)}
+(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{pos();t=2.2;f()});addEventListener('resize',pos);pos();
+</script></body></html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Conic Border Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#090A10;color:#EEF0FA;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+.c{width:100%;max-width:860px}
+.hd{text-align:center;margin-bottom:26px}.hd h1{font-size:clamp(28px,5vw,42px);font-weight:700;letter-spacing:-.05em}.hd p{color:#7E86A6;font-size:15px;margin-top:8px}
+.gd{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.bx{position:relative;border-radius:22px;padding:2px;background:var(--bd);overflow:hidden;isolation:isolate}
+.bx .in{position:relative;height:210px;border-radius:20px;background:#0E1018;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;z-index:1}
+.bx .in::before{content:"";position:absolute;inset:0;border-radius:20px;background:radial-gradient(160px circle at 50% 0%,var(--g),transparent 70%);opacity:.18}
+.bx small{font:500 11px 'Geist Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}.bx h2{font-size:19px;font-weight:600;letter-spacing:-.03em;margin:6px 0 5px}.bx p{font-size:13.5px;line-height:1.5;color:#8A92B2}
+.b1{--bd:conic-gradient(from var(--a),transparent 0 62%,#818CF8 80%,#F0ABFC 90%,transparent);--g:#818CF8;animation:sp 3.4s linear infinite}
+.b2{--bd:conic-gradient(from var(--a),#22D3EE,#6366F1,#EC4899,#F59E0B,#22D3EE);--g:#22D3EE;animation:sp 6s linear infinite}
+.b3{--bd:linear-gradient(var(--a),#34D399,transparent 40%,#FBBF24);--g:#34D399;animation:sp 5s linear infinite}
+.b4{--bd:conic-gradient(from var(--a),#F43F5E 0 12%,transparent 12% 25%,#F43F5E 25% 37%,transparent 37% 50%,#F43F5E 50% 62%,transparent 62% 75%,#F43F5E 75% 87%,transparent 87%);--g:#F43F5E;animation:sp 8s linear infinite}
+.b5{--bd:conic-gradient(from var(--a),#8B5CF6,#06B6D4,#8B5CF6);--g:#8B5CF6;animation:sp 4s linear infinite;filter:drop-shadow(0 0 16px rgba(139,92,246,.55))}
+.b6{--bd:conic-gradient(from var(--a),transparent 0 45%,#FBBF24 55%,transparent 65%),conic-gradient(from calc(var(--a)*-1),transparent 0 45%,#F472B6 55%,transparent 65%);--g:#FBBF24;animation:sp 4.6s linear infinite}
+@keyframes sp{to{--a:360deg}}
+@media(max-width:700px){.gd{grid-template-columns:1fr 1fr}}@media(max-width:460px){.gd{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.bx{animation:none}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Borders that move</h1><p>Six ways to animate a gradient border with one custom property.</p></div>
+<div class="gd">
+<div class="bx b1"><div class="in"><small>01 · Comet</small><h2>Single sweep</h2><p>A bright head chases its own tail around the card.</p></div></div>
+<div class="bx b2"><div class="in"><small>02 · Spectrum</small><h2>Full rotation</h2><p>Every colour rides the edge in a continuous ring.</p></div></div>
+<div class="bx b3"><div class="in"><small>03 · Beam</small><h2>Linear sweep</h2><p>A diagonal band slides across both edges.</p></div></div>
+<div class="bx b4"><div class="in"><small>04 · Dashes</small><h2>Rotating dashes</h2><p>Segmented stripes march clockwise like a marquee.</p></div></div>
+<div class="bx b5"><div class="in"><small>05 · Glow</small><h2>Neon halo</h2><p>The ring casts a soft glow into the surrounding page.</p></div></div>
+<div class="bx b6"><div class="in"><small>06 · Dual</small><h2>Counter rotate</h2><p>Two comets circle in opposite directions.</p></div></div>
+</div></div></body></html>

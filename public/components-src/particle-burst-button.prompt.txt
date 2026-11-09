@@ -1,0 +1,29 @@
+ROLE
+You are a senior delight-focused designer and front-end engineer with 15+ years of experience. Build "Particle Burst Button": playful neo-brutalist reaction buttons that throw a burst of confetti particles from the button when clicked.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Peach to pink backdrop with thick outlines, hard shadows and Fredoka type.
+- Palette: #2A1633, #FFF3D6, #FFE0EC, #8A6A8F, #2563EB, #FF4D6D
+- Type: Fredoka (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Like with counter; Favorite with counter; Celebrate; particle layer.
+
+INTERACTION & STATES
+- Click toggles the state, bounces the icon, updates the count and spawns coloured particles with velocity, drag, gravity and fade.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

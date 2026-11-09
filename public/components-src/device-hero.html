@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Device Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 400px at 75% 40%,#DDE6FF,transparent 70%),#F6F8FF;color:#0F1636;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.w{display:grid;grid-template-columns:1.05fr 1fr;gap:20px;align-items:center;width:100%;max-width:900px}
+.tx .pl{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:#3B4FD1;background:#E6EBFF;padding:6px 12px 6px 8px;border-radius:99px}.tx .pl i{background:#3B4FD1;color:#fff;font-style:normal;font-size:10.5px;padding:2px 7px;border-radius:99px;font-weight:700}
+.tx h1{font-size:clamp(32px,5vw,54px);line-height:1.02;letter-spacing:-.05em;font-weight:800;margin:16px 0 14px}.tx h1 span{background:linear-gradient(90deg,#3B4FD1,#9B5CFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tx p{font-size:16.5px;line-height:1.6;color:#566089;max-width:34ch;margin-bottom:24px}
+.bt{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.bt a{display:inline-flex;align-items:center;gap:9px;background:#0F1636;color:#fff;text-decoration:none;font-weight:600;font-size:14.5px;padding:14px 20px;border-radius:14px;box-shadow:0 14px 24px -12px rgba(15,22,54,.7);transition:transform .15s}.bt a:hover{transform:translateY(-2px)}.bt a:focus-visible{outline:3px solid #3B4FD1;outline-offset:3px}
+.bt span{font-size:13px;color:#7A84AB}.rt{display:flex;align-items:center;gap:10px;margin-top:26px;font-size:13.5px;color:#566089}.rt b{color:#0F1636}.rt .st{color:#F5A524;letter-spacing:2px}
+.sg{position:relative;perspective:1100px;display:grid;place-items:center;min-height:440px}
+.ph{position:relative;width:230px;height:460px;border-radius:40px;background:#0F1636;padding:9px;box-shadow:0 50px 70px -30px rgba(15,22,54,.65),0 0 0 2px #2A3258 inset;transform-style:preserve-3d;transform:rotateY(var(--ry,-14deg)) rotateX(var(--rx,6deg));transition:transform .25s ease-out}
+.ph::before{content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);width:76px;height:20px;background:#0F1636;border-radius:12px;z-index:4}
+.sc{position:relative;width:100%;height:100%;border-radius:32px;background:linear-gradient(170deg,#4F5FF0,#7B4DFF 55%,#B05CFF);overflow:hidden;padding:48px 18px 18px;color:#fff}
+.sc small{font-size:12px;opacity:.8;font-weight:500}.sc b{display:block;font-size:34px;font-weight:800;letter-spacing:-.05em;margin:2px 0 14px}
+.sc .bars{display:flex;align-items:flex-end;gap:7px;height:96px;margin-bottom:16px}.sc .bars i{flex:1;border-radius:7px 7px 3px 3px;background:rgba(255,255,255,.35);animation:gr 2.8s ease-in-out infinite alternate}.sc .bars i:nth-child(odd){background:rgba(255,255,255,.85)}
+@keyframes gr{from{transform:scaleY(.6);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
+.sc .row{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);border-radius:14px;padding:10px 12px;margin-bottom:8px;font-size:12.5px;font-weight:600}.sc .row i{width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.9)}.sc .row em{margin-left:auto;font-style:normal;opacity:.85}
+.fc{position:absolute;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 22px 34px -14px rgba(15,22,54,.4),0 0 0 1px rgba(15,22,54,.05);transform:translateZ(var(--z));font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:10px;animation:bob 5s ease-in-out infinite}
+.fc i{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;color:#fff}.fc small{display:block;font-size:11px;color:#7A84AB;font-weight:500}
+.f1{left:-30px;top:90px;--z:70px}.f2{right:-34px;top:200px;--z:90px;animation-delay:-2s}.f3{left:-18px;bottom:60px;--z:50px;animation-delay:-3.5s}
+@keyframes bob{50%{margin-top:-10px}}
+@media(max-width:700px){.w{grid-template-columns:1fr;text-align:center}.tx p{margin-left:auto;margin-right:auto}.bt,.rt{justify-content:center}.f1{left:0}.f2{right:0}.f3{left:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="tx"><span class="pl"><i>New</i>Version 4 is live</span><h1>Your money,<br><span>finally in focus.</span></h1><p>Track spending, save automatically and see where every dollar goes, in one beautifully simple app.</p>
+<div class="bt"><a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17 12.500c0-2.300 1.900-3.400 2-3.500-1.100-1.600-2.800-1.800-3.400-1.800-1.400-.1-2.800.9-3.500.9s-1.800-.9-3-.8A4.500 4.500 0 0 0 5.300 9.600c-1.600 2.800-.4 7 1.200 9.300.8 1.100 1.700 2.400 2.900 2.300 1.200 0 1.600-.7 3-.7s1.800.7 3 .7 2-1.100 2.800-2.200a10 10 0 0 0 1.300-2.600c0 0-2.500-1-2.500-3.900z"/></svg>Download on iOS</a><span>Free to start</span></div>
+<div class="rt"><span class="st">★★★★★</span><span><b>4.9</b> from 18,400 ratings</span></div></div>
+<div class="sg" id="sg"><div class="ph" id="ph"><div class="sc"><small>Total balance</small><b>$24,860</b><div class="bars"><i style="height:40%"></i><i style="height:62%;animation-delay:-.4s"></i><i style="height:48%;animation-delay:-.8s"></i><i style="height:80%;animation-delay:-1.2s"></i><i style="height:58%;animation-delay:-1.6s"></i><i style="height:92%;animation-delay:-2s"></i><i style="height:70%;animation-delay:-2.4s"></i></div><div class="row"><i></i>Groceries<em>-$84</em></div><div class="row"><i></i>Salary<em>+$4,200</em></div></div>
+<div class="fc f1"><i style="background:#10B981"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i><div>Goal reached<small>Vacation fund</small></div></div>
+<div class="fc f2"><i style="background:#F59E0B"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.500a3.500 3.500 0 0 0 0 7h5a3.500 3.500 0 0 1 0 7H6"/></svg></i><div>Saved $320<small>This month</small></div></div>
+<div class="fc f3"><i style="background:#6366F1"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/></svg></i><div>+12.4%<small>Net worth</small></div></div></div></div></div>
+<script>
+const sg=document.getElementById('sg'),ph=document.getElementById('ph');
+if(matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.addEventListener('pointermove',e=>{const r=sg.getBoundingClientRect(),x=(e.clientX-(r.left+r.width/2))/r.width,y=(e.clientY-(r.top+r.height/2))/r.height;ph.style.setProperty('--ry',(-14+x*26)+'deg');ph.style.setProperty('--rx',(6-y*18)+'deg')})}
+</script></body></html>

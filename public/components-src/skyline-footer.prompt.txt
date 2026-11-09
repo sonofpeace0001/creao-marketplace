@@ -1,0 +1,29 @@
+ROLE
+You are a senior illustration-led designer and front-end engineer with 15+ years of experience. Build "Skyline Footer": a night city skyline with twinkling windows, stars and a glowing moon above a clean link footer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Indigo to magenta dusk sky with violet buildings and warm yellow windows.
+- Palette: #FFD76A, #7A6DB0, #E7E5F2, #1B1448, #3B1F6B, #8A3A7E
+- Type: Poppins (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Sky with moon and stars; SVG skyline with generated windows; footer with logo, copy and three link columns; legal row.
+
+INTERACTION & STATES
+- Windows flicker on randomised durations and delays; stars twinkle; links shift colour on hover.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

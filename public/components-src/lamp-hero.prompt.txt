@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer-platform designer and front-end engineer with 15+ years of experience. Build "Lamp Hero": a Linear-style hero lit by a conic-gradient lamp beam with a glowing bar, staged headline and stats.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black-teal stage with a cyan lamp cone, white-to-grey gradient headline and mint CTA.
+- Palette: #22E3C5, #7CF5E2, #CFEDEA, #040B0F, #E6F7F4, #6E8E8A
+- Type: Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Two masked conic cones and a glowing bar at the top; beta badge; headline; subcopy; primary and secondary buttons; three stats.
+
+INTERACTION & STATES
+- On load the beams widen, the bar extends and the glow fades in, then the text rises in a staggered sequence; reduced motion shows the final state immediately.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

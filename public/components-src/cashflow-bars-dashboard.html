@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Cashflow Bars Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFEDE6;color:#1B1A15;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px;background:#FFFEFA;border-radius:28px;padding:26px;box-shadow:0 40px 70px -44px rgba(70,60,20,.5),0 0 0 1px rgba(27,26,21,.07)}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:18px}.hd small{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8E8870}.hd h1{font:400 38px/1 'Instrument Serif',serif;letter-spacing:-.02em;margin-top:4px}.hd h1 em{font-style:italic;color:#0F766E}
+.lg{display:flex;gap:16px;font-size:13px;color:#6B6650}.lg span{display:flex;align-items:center;gap:7px}.lg i{width:10px;height:10px;border-radius:3px}
+.gd{display:grid;grid-template-columns:1fr 250px;gap:22px}
+.pl{position:relative;height:290px}
+.pl .gl{position:absolute;left:34px;right:0;top:0;bottom:30px;display:flex;flex-direction:column;justify-content:space-between}.pl .gl i{display:block;border-top:1px dashed #E8E3D2;position:relative}.pl .gl i b{position:absolute;left:-34px;top:-8px;font:500 11px 'Inter';color:#A29B82}
+.bs{position:absolute;left:34px;right:0;top:0;bottom:30px;display:flex;align-items:flex-end;gap:10px}
+.bg{position:relative;flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center;gap:4px;cursor:pointer;border-radius:10px;transition:background .2s}.bg:hover,.bg.on{background:#F6F2E4}
+.bg .b{width:42%;border-radius:7px 7px 2px 2px;transform-origin:bottom;transform:scaleY(1);transition:transform .8s cubic-bezier(.2,.9,.2,1),filter .2s}.bg.gr .b{transform:scaleY(0)}
+.bg .i{background:linear-gradient(180deg,#14B8A6,#0F766E);height:var(--a)}.bg .o{background:linear-gradient(180deg,#FCA5A5,#F87171);height:var(--b)}
+.bg:hover .b,.bg.on .b{filter:brightness(1.08)}
+.bg .m{position:absolute;bottom:-26px;font-size:12px;color:#8E8870;font-weight:500}.bg.on .m{color:#1B1A15;font-weight:700}
+.tp{position:absolute;z-index:5;background:#1B1A15;color:#fff;border-radius:14px;padding:11px 14px;font-size:13px;min-width:140px;pointer-events:none;transform:translate(-50%,-100%);margin-top:-10px;opacity:0;transition:left .25s cubic-bezier(.3,1.3,.5,1),top .25s,opacity .2s;box-shadow:0 14px 24px -10px rgba(0,0,0,.5)}.tp.on{opacity:1}.tp b{display:block;font-size:13.5px;margin-bottom:5px}.tp div{display:flex;justify-content:space-between;gap:16px;color:#C9C4B0}.tp div em{font-style:normal;color:#fff;font-weight:600}.tp .nt{border-top:1px solid #3A3830;margin-top:5px;padding-top:5px}
+.sd{display:flex;flex-direction:column;gap:12px}
+.ac{background:linear-gradient(150deg,#0F766E,#134E4A);color:#fff;border-radius:22px;padding:18px 20px}.ac small{font-size:12px;opacity:.75}.ac b{display:block;font:400 40px/1.05 'Instrument Serif',serif;letter-spacing:-.01em;margin:4px 0 8px}.ac span{font-size:13px;opacity:.85}
+.mn{background:#F6F2E4;border-radius:18px;padding:14px 16px}.mn div{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0}.mn div+div{border-top:1px solid #E8E1CC}.mn b{font-weight:600}.mn .pos{color:#0F766E}.mn .neg{color:#DC2626}
+@media(max-width:760px){.gd{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><small>Cashflow</small><h1>Money in, money <em>out</em></h1></div><div class="lg"><span><i style="background:#0F766E"></i>Income</span><span><i style="background:#F87171"></i>Expenses</span></div></div>
+<div class="gd"><div class="pl" id="pl"><div class="gl" id="gl"></div><div class="bs" id="bs"></div><div class="tp" id="tp"></div></div>
+<div class="sd"><div class="ac"><small>Net this month</small><b id="nt">$0</b><span id="nd"></span></div><div class="mn" id="mn"></div></div></div></div>
+<script>
+const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],I=[18.2,21.5,19.8,24.4,26.1,23.7,29.3,31.2],O=[14.1,15.9,17.2,16.5,18.8,20.4,19.1,21.6];
+const mx=36,bs=document.getElementById('bs'),tp=document.getElementById('tp'),pl=document.getElementById('pl');
+document.getElementById('gl').innerHTML=[36,27,18,9,0].map(v=>'<i><b>$'+v+'k</b></i>').join('');
+M.forEach((m,i)=>{const g=document.createElement('div');g.className='bg gr';g.style.cssText='--a:'+(I[i]/mx*100)+'%;--b:'+(O[i]/mx*100)+'%';g.innerHTML='<div class="b i"></div><div class="b o"></div><span class="m">'+m+'</span>';g.dataset.i=i;g.tabIndex=0;g.addEventListener('mouseenter',()=>sel(i));g.addEventListener('focus',()=>sel(i));g.addEventListener('click',()=>sel(i));bs.appendChild(g)});
+const gs=[...bs.children];
+function sel(i){gs.forEach((g,k)=>g.classList.toggle('on',k===i));const g=gs[i],r=g.getBoundingClientRect(),p=pl.getBoundingClientRect();tp.style.left=(r.left-p.left+r.width/2)+'px';tp.style.top=(r.top-p.top+(r.height-Math.max(I[i],O[i])/mx*r.height))+'px';const net=I[i]-O[i];tp.innerHTML='<b>'+M[i]+' 2026</b><div><span>Income</span><em>$'+I[i].toFixed(1)+'k</em></div><div><span>Expenses</span><em>$'+O[i].toFixed(1)+'k</em></div><div class="nt"><span>Net</span><em>'+(net>=0?'+':'')+'$'+net.toFixed(1)+'k</em></div>';tp.classList.add('on');document.getElementById('nt').textContent=(net>=0?'+':'')+'$'+net.toFixed(1)+'k';const pm=i?(net-(I[i-1]-O[i-1])):0;document.getElementById('nd').textContent=i?(pm>=0?'Up':'Down')+' $'+Math.abs(pm).toFixed(1)+'k from '+M[i-1]:'First month on record';document.getElementById('mn').innerHTML=[['Savings rate',Math.round(net/I[i]*100)+'%','pos'],['Largest expense','Payroll','' ],['Runway',(Math.round(24+net*1.4))+' months','pos'],['Burn',(O[i]).toFixed(1)+'k / mo','neg']].map(r=>'<div><span>'+r[0]+'</span><b class="'+r[2]+'">'+r[1]+'</b></div>').join('')}
+function init(){gs.forEach((g,k)=>{g.style.transitionDelay='';g.querySelectorAll('.b').forEach(b=>b.style.transition='none')});gs.forEach(g=>g.classList.remove('gr'));requestAnimationFrame(()=>requestAnimationFrame(()=>{gs.forEach(g=>g.querySelectorAll('.b').forEach(b=>b.style.transition=''));sel(6)}))}
+init();(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>sel(6));addEventListener('resize',()=>sel(+(gs.findIndex(g=>g.classList.contains('on')))||6));
+</script></body></html>

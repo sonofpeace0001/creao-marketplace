@@ -1,0 +1,29 @@
+ROLE
+You are a senior customer-support product designer and front-end engineer with 15+ years of experience. Build "Bot to Human Handoff Chat": a support chat that starts with a bot and morphs its header into a human agent when the customer asks for a person.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft mint and lilac with violet bot identity turning green for the human.
+- Palette: #6D5BFA, #14201C, #EEF1F0, #5B45E8, #0E7A4D, #FAFBFA
+- Type: Nunito Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with avatar, name, status and tag; message list; system joined pill; quick reply chips; composer.
+
+INTERACTION & STATES
+- Quick replies post user messages, show typing dots and answer; the handoff swaps avatar, name, tag and tint and posts a joined notice; Replay restarts.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

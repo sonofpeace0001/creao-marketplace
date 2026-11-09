@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Snowfall Wind</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,500&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{position:relative;min-height:100vh;background:linear-gradient(180deg,#1B2B4B 0%,#31507A 55%,#7FA3C9 100%);color:#fff;font-family:'Karla',sans-serif;display:grid;place-items:center;padding:24px;overflow:hidden;-webkit-font-smoothing:antialiased}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hl{position:absolute;left:0;right:0;bottom:0;height:30%;pointer-events:none}.hl svg{width:100%;height:100%;display:block}
+.ct{position:relative;z-index:2;text-align:center;max-width:680px}
+.ct small{font-size:13px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:#CFE6FF}
+.ct h1{font:600 clamp(46px,9vw,100px)/.98 'Playfair Display',serif;letter-spacing:-.025em;margin:16px 0 16px;text-shadow:0 8px 40px rgba(10,20,50,.45)}.ct h1 em{font-style:italic;font-weight:500;color:#E6F3FF}
+.ct p{font-size:clamp(15px,2vw,19px);line-height:1.65;color:#D3E4F7;max-width:40ch;margin:0 auto 26px}
+.bt{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}.bt a{padding:14px 28px;border-radius:99px;font:700 15px 'Karla';text-decoration:none}.bt .p{background:#fff;color:#1B2B4B;box-shadow:0 18px 30px -14px rgba(0,0,0,.5)}.bt .g{border:1.5px solid rgba(255,255,255,.55);color:#fff;background:rgba(255,255,255,.08);backdrop-filter:blur(6px)}.bt a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.cl{position:absolute;right:64px;top:20px;z-index:3;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);border-radius:18px;padding:12px 16px;font-size:13px;min-width:190px}.cl label{display:flex;justify-content:space-between;margin-bottom:6px;font-weight:700;letter-spacing:.04em}.cl input{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:rgba(255,255,255,.3);outline:0}.cl input::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35)}.cl input:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(255,255,255,.5)}.cl+.cl{top:92px}
+</style></head><body>
+<canvas id="cv"></canvas>
+<div class="hl"><svg viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 300V160C140 120 260 190 400 150S660 90 800 140 1040 170 1200 120V300Z" fill="#F4F9FF"/><path d="M0 300V220C160 190 300 240 460 210S760 170 900 210 1100 230 1200 200V300Z" fill="#DCEAF8"/></svg></div>
+<div class="cl"><label for="dn">Snow <span id="dv">180</span></label><input id="dn" type="range" min="40" max="400" value="180"></div><div class="cl"><label for="wd">Wind <span id="wv">0</span></label><input id="wd" type="range" min="-100" max="100" value="22"></div>
+<div class="ct"><small>Winter edition</small><h1>A quiet <em>snowfall</em></h1><p>Layered flakes fall at different depths. Steer the wind with the slider or by moving your mouse sideways.</p><div class="bt"><a class="p" href="#">Book a cabin</a><a class="g" href="#">View the forecast</a></div></div>
+<script>
+const cv=document.getElementById('cv'),x=cv.getContext('2d');let W,H,dpr=Math.min(2,devicePixelRatio||1);function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}size();addEventListener('resize',size);
+let F=[],wind=.22,tw=.22,real=false,t=0;const dn=document.getElementById('dn'),wd=document.getElementById('wd');
+function mk(r){return{x:Math.random()*W*1.2-W*.1,y:r?Math.random()*H:-10,z:Math.random(),ph:Math.random()*6.28}}
+function fill(){const n=+dn.value;while(F.length<n)F.push(mk(true));F.length=n;document.getElementById('dv').textContent=n}
+dn.oninput=fill;wd.oninput=()=>{tw=wd.value/100;real=true;document.getElementById('wv').textContent=wd.value};fill();document.getElementById('wv').textContent=22;
+addEventListener('pointermove',e=>{if(real&&document.activeElement===wd)return;tw=(e.clientX/W-.5)*1.2;wd.value=Math.round(tw*100);document.getElementById('wv').textContent=wd.value});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function frame(){t+=.016;wind+=(tw-wind)*.04;x.clearRect(0,0,W,H);F.forEach(f=>{const s=.6+f.z*2.6;f.y+=(.5+f.z*1.6)*(reduce?.2:1);f.x+=wind*(.8+f.z*2.2)+Math.sin(t*1.2+f.ph)*.35*f.z;if(f.y>H+10||f.x>W+20||f.x<-30){f.y=-10;f.x=Math.random()*W*1.2-W*.1}const a=.35+f.z*.6;x.fillStyle='rgba(255,255,255,'+a+')';x.shadowColor='rgba(255,255,255,.6)';x.shadowBlur=f.z*5;x.beginPath();x.arc(f.x,f.y,s,0,6.283);x.fill()});x.shadowBlur=0;requestAnimationFrame(frame)}
+for(let i=0;i<30;i++){F.forEach(f=>{f.y+=.5+f.z*1.6})}frame();
+</script></body></html>

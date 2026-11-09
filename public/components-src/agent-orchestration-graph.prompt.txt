@@ -1,0 +1,29 @@
+ROLE
+You are a senior AI-infrastructure designer and front-end engineer with 15+ years of experience. Build "Agent Orchestration Graph": a multi-agent run graph where beams of light travel along the edges between Planner, Researcher, Coder and Reviewer while an event log streams.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black grid canvas with indigo to cyan beams and glowing active nodes.
+- Palette: #1C2130, #34D399, #E6E9F5, #7C86A6, #5B6486, #080A10
+- Type: Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Run header with live badge; four agent nodes with icon, name and status; curved edges with travelling dots; event log column.
+
+INTERACTION & STATES
+- A scripted run advances nodes through idle, working and done; edges light up and animate a moving dot while either end is working; the log appends timestamped events.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

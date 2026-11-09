@@ -1,0 +1,29 @@
+ROLE
+You are a senior button-system designer and front-end engineer with 15+ years of experience. Build "Liquid Fill Buttons": outline and solid pill buttons where a wavy liquid surface rises through the button on hover and inverts the label colour.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream page with ink outlines and saturated orange, navy, teal and violet fills.
+- Palette: #18160F, #0B3D91, #7C3AED, #F2EFE8, #7C7766, #FF5B2E
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading; five buttons in pill and rounded square shapes; each with a wave SVG layer inside the label.
+
+INTERACTION & STATES
+- Hover or focus raises a looping animated wave and flood layer to fill the button while the text colour flips; press scales down.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

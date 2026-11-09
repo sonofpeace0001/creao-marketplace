@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ASCII Receipt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#C9C2B2;color:#1C1A15;font-family:'Courier Prime',monospace;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(#BDB5A3 1px,transparent 1px);background-size:14px 14px}
+.w{filter:drop-shadow(0 22px 24px rgba(40,30,10,.35))}
+.r{position:relative;width:min(380px,92vw);background:#FBF8EF;padding:30px 26px 26px;transform:rotate(-1.2deg)}
+.r::before,.r::after{content:"";position:absolute;left:0;right:0;height:10px;background:radial-gradient(circle at 6px 10px,#C9C2B2 5px,transparent 5.5px) 0 0/12px 10px repeat-x}.r::before{top:-9px;transform:scaleY(-1);background:radial-gradient(circle at 6px 10px,#C9C2B2 5px,transparent 5.5px) 0 0/12px 10px repeat-x}.r::after{bottom:-9px}
+pre{font:400 14px/1.55 'Courier Prime',monospace;white-space:pre;overflow:hidden}
+.b{font-weight:700}.c{text-align:center;display:block}
+.bt{display:flex;gap:8px;margin-top:16px}.bt button{flex:1;border:1.5px solid #1C1A15;background:transparent;color:#1C1A15;padding:9px;font:700 13px 'Courier Prime';cursor:pointer;letter-spacing:.06em;text-transform:uppercase}.bt button:hover{background:#1C1A15;color:#FBF8EF}.bt button:focus-visible{outline:2px solid #B91C1C;outline-offset:2px}
+.st{position:absolute;right:20px;bottom:76px;font:700 22px 'Courier Prime';letter-spacing:.14em;color:#B91C1C;border:3px solid #B91C1C;padding:4px 12px;transform:rotate(-12deg) scale(2);opacity:0;transition:all .3s cubic-bezier(.3,1.5,.5,1)}.r.paid .st{opacity:.8;transform:rotate(-12deg) scale(1)}
+@media(max-width:400px){pre{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="r" id="r"><pre id="p"></pre><div class="st">PAID</div><div class="bt"><button id="tip">Add 15% tip</button><button id="pay">Pay now</button></div></div></div>
+<script>
+const W=32,L=(a,b)=>a+' '.repeat(Math.max(1,W-a.length-b.length))+b,C=s=>' '.repeat(Math.floor((W-s.length)/2))+s,H='='.repeat(W),D='-'.repeat(W);
+const I=[['2x Flat white',9.00],['1x Almond croissant',4.50],['1x Cold brew',5.25],['1x Sourdough toast',7.00]];
+let tip=0,paid=false;
+function r(){const sub=I.reduce((s,x)=>s+x[1],0),tax=+(sub*.08).toFixed(2),tot=sub+tax+tip;
+ const lines=[C('+------------------------+'),C('|     MARBLE & MILK      |'),C('+------------------------+'),C('142 Orchard St, Brooklyn'),C('Order #0847  ·  Nov 7  09:41'),H,...I.map(x=>L(x[0],'$'+x[1].toFixed(2))),D,L('Subtotal','$'+sub.toFixed(2)),L('Tax (8%)','$'+tax.toFixed(2)),tip?L('Tip (15%)','$'+tip.toFixed(2)):'',H,'<span class="b">'+L('TOTAL','$'+tot.toFixed(2))+'</span>',H,C(paid?'*** PAID  THANK YOU ***':'Thank you for visiting!'),'',C('||| ||||| || ||| |||| ||'),C('0847 2611 0934')].filter(l=>l!=='' || true);
+ document.getElementById('p').innerHTML=lines.join('\n')}
+document.getElementById('tip').onclick=e=>{if(paid)return;const sub=I.reduce((s,x)=>s+x[1],0);tip=tip?0:+(sub*.15).toFixed(2);e.target.textContent=tip?'Remove tip':'Add 15% tip';r()};
+document.getElementById('pay').onclick=e=>{paid=true;document.getElementById('r').classList.add('paid');e.target.disabled=true;e.target.textContent='Paid';document.getElementById('tip').disabled=true;r()};r();
+</script></body></html>

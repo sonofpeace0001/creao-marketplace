@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DNA Helix Loader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(500px 360px at 50% 40%,#12304A,transparent 70%),#060E18;color:#E4F2FF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{text-align:center;width:100%;max-width:520px}
+.hx{position:relative;display:flex;justify-content:center;gap:9px;height:210px;align-items:center;margin-bottom:26px}
+.hx .p{position:relative;width:10px;height:200px}
+.hx .p i.d{position:absolute;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%}
+.hx .p i.a{background:#38BDF8;box-shadow:0 0 14px #38BDF8;animation:a 2.4s ease-in-out infinite;animation-delay:calc(var(--i)*-.12s)}
+.hx .p i.b{background:#F472B6;box-shadow:0 0 14px #F472B6;animation:b 2.4s ease-in-out infinite;animation-delay:calc(var(--i)*-.12s)}
+.hx .p i.l{position:absolute;left:50%;top:50%;width:2px;margin-left:-1px;height:var(--h);background:linear-gradient(#38BDF8,#F472B6);opacity:.35;transform:translateY(-50%);animation:l 2.4s ease-in-out infinite;animation-delay:calc(var(--i)*-.12s)}
+@keyframes a{0%,100%{top:8px;transform:scale(1);opacity:1}25%{transform:scale(1.35);opacity:1}50%{top:182px;transform:scale(.6);opacity:.5}75%{transform:scale(.8);opacity:.7}}
+@keyframes b{0%,100%{top:182px;transform:scale(.6);opacity:.5}25%{transform:scale(.8);opacity:.7}50%{top:8px;transform:scale(1);opacity:1}75%{transform:scale(1.35);opacity:1}}
+@keyframes l{0%,100%{height:174px;opacity:.12}50%{height:174px;opacity:.12}25%{opacity:.4}75%{opacity:.4}}
+.c h1{font-size:22px;font-weight:700;letter-spacing:-.04em}.c p{font:500 13px 'JetBrains Mono',monospace;color:#6B96BA;margin-top:10px;height:20px}
+.pb{width:220px;height:4px;border-radius:4px;background:#12263A;margin:20px auto 0;overflow:hidden}.pb i{display:block;height:100%;width:40%;border-radius:4px;background:linear-gradient(90deg,#38BDF8,#F472B6);animation:pb 2.4s ease-in-out infinite}@keyframes pb{0%{margin-left:-40%}100%{margin-left:100%}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:8s!important}}
+</style></head><body>
+<div class="c"><div class="hx" id="hx" aria-hidden="true"></div><h1>Sequencing your data</h1><p id="ms">Reading base pairs...</p><div class="pb"><i></i></div></div>
+<script>
+const hx=document.getElementById('hx');for(let i=0;i<18;i++){const p=document.createElement('div');p.className='p';p.style.setProperty('--i',i);p.innerHTML='<i class="l"></i><i class="d a"></i><i class="d b"></i>';hx.appendChild(p)}
+const M=['Reading base pairs...','Aligning sequences...','Calling variants...','Annotating genes...'];let k=0;setInterval(()=>{k=(k+1)%M.length;document.getElementById('ms').textContent=M[k]},1800);
+</script></body></html>

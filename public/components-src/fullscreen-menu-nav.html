@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Fullscreen Menu Nav</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#CFD3E0;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.ph{position:relative;width:100%;max-width:390px;height:620px;border-radius:44px;border:9px solid #101114;background:#F5F1E8;overflow:hidden;box-shadow:0 40px 70px -30px rgba(0,0,0,.6)}
+.bar{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:20px 22px}
+.lg{font:400 28px 'Bebas Neue';letter-spacing:.04em;color:#101114;transition:color .4s .1s}.op .lg{color:#F5F1E8}
+.hb{position:relative;width:46px;height:46px;border:0;border-radius:50%;background:#101114;cursor:pointer;transition:background .4s}.op .hb{background:#F5F1E8}.hb:focus-visible{outline:3px solid #FF5B2E;outline-offset:3px}
+.hb i{position:absolute;left:14px;right:14px;height:2px;border-radius:2px;background:#F5F1E8;transition:transform .45s cubic-bezier(.6,0,.2,1),background .3s,top .45s}.hb i:nth-child(1){top:18px}.hb i:nth-child(2){top:26px}.op .hb i{background:#101114}.op .hb i:nth-child(1){top:22px;transform:rotate(45deg)}.op .hb i:nth-child(2){top:22px;transform:rotate(-45deg)}
+.pg{padding:110px 24px 24px}.pg small{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FF5B2E}.pg h1{font:400 74px/.9 'Bebas Neue';letter-spacing:.01em;margin:10px 0 14px;color:#101114}.pg p{font-size:15px;line-height:1.6;color:#6A6559}.pg .im{height:150px;border-radius:22px;background:linear-gradient(135deg,#FF5B2E,#FFB703);margin-top:22px}
+.ov{position:absolute;inset:0;z-index:20;background:#101114;clip-path:circle(0px at calc(100% - 45px) 43px);transition:clip-path .7s cubic-bezier(.7,0,.2,1);padding:110px 28px 28px;display:flex;flex-direction:column}
+.op .ov{clip-path:circle(150% at calc(100% - 45px) 43px)}
+.ov nav{display:flex;flex-direction:column;gap:2px}
+.ov a{display:block;overflow:hidden;text-decoration:none;color:#F5F1E8}.ov a span{display:flex;align-items:baseline;gap:12px;font:400 56px/1.06 'Bebas Neue';letter-spacing:.02em;transform:translateY(105%);transition:transform .6s cubic-bezier(.2,.8,.2,1),color .2s}.ov a em{font:600 12px 'Manrope';font-style:normal;color:#FF5B2E;letter-spacing:.1em;transform:translateY(-14px)}
+.op .ov a span{transform:none;transition-delay:calc(.28s + var(--i)*.07s)}.ov a:hover span{color:#FF5B2E}.ov a:focus-visible{outline:2px solid #FF5B2E;outline-offset:2px}
+.ov .ft{margin-top:auto;display:flex;justify-content:space-between;font-size:13px;color:#8C877A;opacity:0;transition:opacity .4s}.op .ov .ft{opacity:1;transition-delay:.8s}.ov .ft a{color:#F5F1E8;font-size:13px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="ph" id="ph"><div class="bar"><div class="lg">STUDIO N</div><button class="hb" id="hb" aria-label="Menu" aria-expanded="false"><i></i><i></i></button></div>
+<div class="pg"><small>Independent design</small><h1>We make<br>things<br>move.</h1><p>A small studio crafting brands, products and motion for people who care about detail.</p><div class="im"></div></div>
+<div class="ov" aria-hidden="true"><nav><a href="#"><span style="--i:0"><em>01</em>Work</span></a><a href="#"><span style="--i:1"><em>02</em>Studio</span></a><a href="#"><span style="--i:2"><em>03</em>Journal</span></a><a href="#"><span style="--i:3"><em>04</em>Contact</span></a></nav><div class="ft"><span>hello@studio-n.co</span><span><a href="#">IG</a> &nbsp; <a href="#">TW</a> &nbsp; <a href="#">LI</a></span></div></div></div>
+<script>
+const ph=document.getElementById('ph'),hb=document.getElementById('hb');function set(o){ph.classList.toggle('op',o);hb.setAttribute('aria-expanded',o);ph.querySelector('.ov').setAttribute('aria-hidden',!o)}
+hb.onclick=()=>set(!ph.classList.contains('op'));addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});ph.querySelectorAll('.ov a').forEach(a=>a.onclick=e=>{e.preventDefault();set(false)});
+ph.classList.add('op');ph.querySelectorAll('.ov a span').forEach(s=>s.style.transition='none');ph.querySelector('.ov').style.transition='none';requestAnimationFrame(()=>requestAnimationFrame(()=>{ph.querySelectorAll('.ov a span').forEach(s=>s.style.transition='');ph.querySelector('.ov').style.transition=''}));set(true);
+</script></body></html>

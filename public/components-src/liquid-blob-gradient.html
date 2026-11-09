@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Liquid Blob Gradient</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0A10;color:#F5F3FF;font-family:'Inter',sans-serif;min-height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased}
+.sc{position:relative;min-height:100vh;display:grid;place-items:center;overflow:hidden;isolation:isolate}
+svg.d{position:absolute;width:0;height:0}
+.bl{position:absolute;inset:0;filter:url(#goo) blur(2px);z-index:-1}
+.bl i{position:absolute;border-radius:50%;background:var(--c);width:var(--s);height:var(--s);left:var(--x);top:var(--y);margin:calc(var(--s)/-2);animation:fl var(--d) ease-in-out infinite alternate;will-change:transform}
+@keyframes fl{0%{transform:translate(0,0) scale(1)}50%{transform:translate(var(--dx),var(--dy)) scale(1.15)}100%{transform:translate(calc(var(--dx)*-.6),calc(var(--dy)*.8)) scale(.9)}}
+.cur{position:absolute;width:210px;height:210px;margin:-105px 0 0 -105px;border-radius:50%;background:radial-gradient(circle,#FF6AD5,#C774E8 50%,transparent 72%);left:0;top:0;transition:transform .35s cubic-bezier(.2,.8,.2,1);transform:translate(var(--mx,50vw),var(--my,40vh))}
+.gr{position:absolute;inset:0;opacity:.28;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.ct{position:relative;text-align:center;padding:0 20px}
+.ct small{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;border:1px solid rgba(255,255,255,.3);border-radius:99px;backdrop-filter:blur(8px);background:rgba(255,255,255,.08)}
+.ct h1{font:400 clamp(46px,10vw,110px)/.96 'Instrument Serif',serif;letter-spacing:-.035em;margin:20px 0 16px}.ct h1 em{font-style:italic}
+.ct p{font-size:17px;max-width:38ch;margin:0 auto 26px;line-height:1.55;color:rgba(245,243,255,.82)}
+.ct button{border:0;background:#fff;color:#14101F;font:600 15px 'Inter';padding:15px 26px;border-radius:99px;cursor:pointer;transition:transform .2s}.ct button:hover{transform:scale(1.05)}.ct button:focus-visible{outline:3px solid #FF6AD5;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.bl i{animation:none}.cur{transition:none}}
+</style></head><body>
+<div class="sc" id="sc"><svg class="d" aria-hidden="true"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="28" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10"/></filter></defs></svg>
+<div class="bl" id="bl" aria-hidden="true"><div class="cur" id="cur"></div></div><div class="gr" aria-hidden="true"></div>
+<div class="ct"><small>Spring collection</small><h1>Colour that <em>moves</em><br>with you.</h1><p>A living gradient built from liquid blobs that merge, split and chase your cursor.</p><button>Explore the palette</button></div></div>
+<script>
+const bl=document.getElementById('bl'),C=['#5B3DF5','#FF4FA3','#FF9A3D','#2DD4BF','#7C5CFA','#F472B6'];
+C.forEach((c,i)=>{const b=document.createElement('i');b.style.cssText='--c:'+c+';--s:'+(260+i*34)+'px;--x:'+(12+i*16)+'%;--y:'+(20+(i%3)*28)+'%;--dx:'+((i%2?1:-1)*(60+i*14))+'px;--dy:'+((i%3?1:-1)*(50+i*10))+'px;--d:'+(9+i*2)+'s;animation-delay:-'+i*1.7+'s';bl.insertBefore(b,document.getElementById('cur'))});
+const sc=document.getElementById('sc'),cur=document.getElementById('cur');
+sc.addEventListener('pointermove',e=>{const r=sc.getBoundingClientRect();cur.style.setProperty('--mx',(e.clientX-r.left)+'px');cur.style.setProperty('--my',(e.clientY-r.top)+'px')});
+cur.style.setProperty('--mx',(sc.clientWidth*.64)+'px');cur.style.setProperty('--my',(sc.clientHeight*.4)+'px');
+</script></body></html>

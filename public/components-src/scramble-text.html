@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Scramble Text</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050806;color:#D7F5DE;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;border:1px solid #14301E;border-radius:22px;background:linear-gradient(#07100A,#050806);padding:34px 34px 28px;position:relative;overflow:hidden;box-shadow:0 40px 70px -40px #000,0 0 80px -50px #22C55E}
+.c::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(transparent 0 3px,rgba(34,197,94,.04) 3px 4px);pointer-events:none}
+.tg{font:700 12px 'Space Mono',monospace;letter-spacing:.18em;color:#4ADE80;display:flex;align-items:center;gap:8px;margin-bottom:18px}.tg i{width:7px;height:7px;border-radius:50%;background:#4ADE80;box-shadow:0 0 10px #4ADE80;animation:bl 1.4s infinite}@keyframes bl{50%{opacity:.25}}
+.hd{font:700 clamp(32px,6.6vw,66px)/1.02 'Space Grotesk';letter-spacing:-.05em;min-height:2.1em;word-break:break-word}.hd .sc{color:#4ADE80;text-shadow:0 0 16px rgba(74,222,128,.6)}.hd .fx{color:#fff}
+.lg{margin-top:16px;font:400 14px/1.7 'Space Mono',monospace;color:#6FA982;min-height:70px}.lg span{display:block}
+.cs{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}.cs button{border:1px solid #1C4129;background:#08140C;color:#BDEBC8;border-radius:8px;padding:9px 14px;font:700 12.5px 'Space Mono',monospace;cursor:pointer;letter-spacing:.04em;transition:all .15s}.cs button:hover{background:#4ADE80;color:#04120A}.cs button:focus-visible{outline:2px solid #fff;outline-offset:2px}.cs button[aria-pressed=true]{border-color:#4ADE80;color:#4ADE80}
+.sp{margin-left:auto;display:flex;align-items:center;gap:10px;font:400 12px 'Space Mono',monospace;color:#6FA982}.sp input{accent-color:#4ADE80;width:100px}
+</style></head><body>
+<div class="c"><div class="tg"><i></i>DECRYPTING TRANSMISSION</div><h1 class="hd" id="hd" aria-live="polite"></h1><div class="lg" id="lg"></div>
+<div class="cs" id="cs"></div></div>
+<script>
+const W=['Ship faster than fear.','Design is how it works.','Make the quiet loud.','Build in public. Learn in private.'],G='!<>-_\\/[]{}=+*^?#ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+const hd=document.getElementById('hd'),lg=document.getElementById('lg'),cs=document.getElementById('cs');let cur=0,raf=null,speed=1;
+cs.innerHTML=W.map((w,i)=>'<button aria-pressed="'+(i===0)+'">'+('0'+(i+1))+' / '+w.split(' ')[0].toUpperCase()+'</button>').join('')+'<label class="sp">Speed <input type="range" id="sp" min="1" max="4" value="2" aria-label="Scramble speed"></label>';
+function scr(text){cancelAnimationFrame(raf);const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced){hd.textContent=text;return}
+ const q=[...text].map((c,i)=>({c,s:Math.floor(Math.random()*12)+i*2/speed,e:0,r:''}));q.forEach(o=>o.e=o.s+Math.floor(Math.random()*18)+8);let f=0,log=[];
+ const up=()=>{let out='',done=0;q.forEach(o=>{if(f>=o.e){done++;out+='<span>'+o.c+'</span>'}else if(f>=o.s){if(!o.r||Math.random()<.28)o.r=G[Math.floor(Math.random()*G.length)];out+='<span class="sc">'+o.r+'</span>'}else out+='<span class="fx" style="opacity:.0">'+o.c+'</span>'});
+  hd.innerHTML=out;if(f%6===0){log.unshift('> '+Math.round(done/q.length*100)+'% decoded · key '+Math.random().toString(16).slice(2,8));log=log.slice(0,3);lg.innerHTML=log.map(l=>'<span>'+l+'</span>').join('')}
+  if(done===q.length){lg.innerHTML='<span>> 100% decoded · checksum ok</span>'+lg.innerHTML.split('</span>').slice(0,2).join('</span>')+'</span>';return}f+=speed;raf=requestAnimationFrame(up)};up()}
+function go(i){cur=i;[...cs.querySelectorAll('button')].forEach((b,k)=>b.setAttribute('aria-pressed',k===i));scr(W[i])}
+[...cs.querySelectorAll('button')].forEach((b,i)=>b.onclick=()=>go(i));document.getElementById('sp').oninput=e=>speed=+e.target.value/2;
+hd.addEventListener('pointerenter',()=>scr(W[cur]));go(0);
+</script></body></html>

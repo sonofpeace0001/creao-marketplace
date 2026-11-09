@@ -1,0 +1,29 @@
+ROLE
+You are a senior empty-state illustrator and front-end engineer with 15+ years of experience. Build "Inbox Zero Scene": a calm illustrated all-caught-up empty state with drifting clouds, floating envelope, birds, sparkles and counting stats.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Sky-to-sand gradient with green hills, a floating envelope with a tick and Fraunces headline.
+- Palette: #1D2A38, #2F7D5B, #CFE6F7, #F4F0E4, #4F6072, #E1E6E8
+- Type: Fraunces, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Layered SVG scene (sun, clouds, hills, birds, envelope, sparkles); headline; copy; three stat tiles; Plan tomorrow and View archive buttons.
+
+INTERACTION & STATES
+- Clouds drift, the envelope bobs, sparkles twinkle and the sun breathes with CSS animation; stats count up; Plan tomorrow gives button feedback; reduced motion freezes the scene.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

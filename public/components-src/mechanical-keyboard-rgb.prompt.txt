@@ -1,0 +1,29 @@
+ROLE
+You are a senior hardware product designer and front-end engineer with 15+ years of experience. Build "Mechanical Keyboard RGB": a full glowing mechanical keyboard whose keycaps depress on click or real keypress with a rolling RGB wave and typed output.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark case with per-key rainbow hues, conic underglow and chunky keycaps.
+- Palette: #A78BFA, #0B0A16, #2A1456, #07060F, #EDEAFF, #0B0A14
+- Type: Chakra Petch, Share Tech Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Typing screen; five rows of keycaps with legends; underglow border; RGB and clear buttons.
+
+INTERACTION & STATES
+- Keys physically press with shadow and glow; physical keyboard events light the matching key and type into the screen; hue animates across the board.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

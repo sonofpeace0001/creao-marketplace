@@ -1,0 +1,29 @@
+ROLE
+You are a senior typographic designer and front-end engineer with 15+ years of experience. Build "Outline Fill Text": giant outlined words that fill with colour by a clipped wipe from the left, bottom or right on hover.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black stage with condensed Anton outlines and bold flat fills in amber, orange, violet and mint.
+- Palette: #F4F1EA, #7A7870, #0D0D10, #26262B, #FFB703
+- Type: Anton, Space Grotesk (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header labels; four stacked display words each with an outline layer and a clipped fill layer; index numbers.
+
+INTERACTION & STATES
+- Hover or focus reveals each fill through a clip-path inset animation with a different direction per word; index fades in.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

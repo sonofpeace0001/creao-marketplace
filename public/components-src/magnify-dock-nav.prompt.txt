@@ -1,0 +1,29 @@
+ROLE
+You are a senior desktop-inspired UI designer and front-end engineer with 15+ years of experience. Build "Magnifying Dock Nav": a glass dock whose icons swell by proximity to the cursor with a tooltip and an active dot.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Sunset gradient wallpaper with a frosted dock and glossy gradient icon tiles.
+- Palette: #6D5BD0, #C65BCF, #FF8A65
+- Type: DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Headline; frosted dock with six icons and a divider; tooltip; active dot.
+
+INTERACTION & STATES
+- Icon size is computed from pointer distance with a smooth cosine falloff and spring easing; tooltips appear on the nearest icon; click sets active.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

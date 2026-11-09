@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sliding Radio Tiles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0D;color:#ECECF1;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:620px}
+.hd{margin-bottom:20px}.hd h1{font-size:clamp(24px,4vw,32px);font-weight:600;letter-spacing:-.045em}.hd p{color:#8A8A98;margin-top:6px}
+.g{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:8px;background:#121217;border:1px solid #1F1F27;border-radius:24px}
+.hl{position:absolute;top:8px;bottom:8px;left:8px;width:calc((100% - 16px - 20px)/3);border-radius:18px;background:linear-gradient(160deg,#1E1E3A,#17172B);border:1px solid #6366F1;box-shadow:0 0 0 4px rgba(99,102,241,.12),0 20px 30px -14px rgba(99,102,241,.6);transition:transform .5s cubic-bezier(.3,1.25,.4,1);transform:translateX(calc(var(--i)*(100% + 10px)))}
+.hl::after{content:"";position:absolute;inset:-1px;border-radius:19px;background:radial-gradient(120px circle at 50% 0,rgba(165,168,255,.5),transparent 70%);opacity:.6;pointer-events:none;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px}
+.o{position:relative;display:block;cursor:pointer;border-radius:18px;padding:18px 16px;z-index:1}.o input{position:absolute;opacity:0}
+.o:focus-within{outline:2px solid #A5A8FF;outline-offset:2px}.o .ic{width:38px;height:38px;border-radius:12px;background:#1B1B23;display:grid;place-items:center;color:#8A8A98;margin-bottom:14px;transition:all .3s}
+.o b{display:block;font-size:15px;font-weight:600;letter-spacing:-.02em}.o span{display:block;font-size:13px;color:#8A8A98;margin-top:3px;line-height:1.4}.o em{display:block;font:500 12px 'Geist Mono',monospace;color:#6A6A78;margin-top:10px;font-style:normal;transition:color .3s}
+.o:has(input:checked) .ic{background:linear-gradient(135deg,#6366F1,#A855F7);color:#fff;box-shadow:0 8px 18px -6px #6366F1}.o:has(input:checked) em{color:#C7C9FF}
+.o:hover .ic{color:#fff}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:18px;font-size:14px;color:#8A8A98}.ft b{color:#fff;font-weight:600}.ft button{border:0;background:#ECECF1;color:#0A0A0D;border-radius:12px;padding:11px 20px;font:600 14px 'Geist';cursor:pointer}.ft button:focus-visible{outline:2px solid #A5A8FF;outline-offset:3px}
+@media(max-width:560px){.g{grid-template-columns:1fr}.hl{display:none}.o:has(input:checked){background:#17172B;box-shadow:inset 0 0 0 1px #6366F1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Choose a deployment region</h1><p>The highlight glides between options as you choose.</p></div>
+<div class="g" id="g" role="radiogroup" aria-label="Deployment region" style="--i:1"><div class="hl"></div>
+<label class="o"><input type="radio" name="r" value="0"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><b>Global edge</b><span>Served from 280 locations worldwide.</span><em>~18 ms</em></label>
+<label class="o"><input type="radio" name="r" value="1" checked><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12zM12 12.500a2.500 2.500 0 1 0 0-5 2.500 2.500 0 0 0 0 5z"/></svg></div><b>Single region</b><span>Keep all data in one place you choose.</span><em>~42 ms</em></label>
+<label class="o"><input type="radio" name="r" value="2"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/></svg></div><b>Private cloud</b><span>Dedicated infrastructure for compliance.</span><em>~60 ms</em></label></div>
+<div class="ft"><span>Selected: <b id="s">Single region</b></span><button>Continue</button></div></div>
+<script>
+const g=document.getElementById('g'),N=['Global edge','Single region','Private cloud'];
+g.querySelectorAll('input').forEach(r=>r.addEventListener('change',()=>{g.style.setProperty('--i',r.value);document.getElementById('s').textContent=N[+r.value]}));
+</script></body></html>

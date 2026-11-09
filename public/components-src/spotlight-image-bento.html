@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Spotlight Image Bento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0F0F11;color:#F3F0EA;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}.hd h1{font:italic 400 clamp(34px,6vw,54px)/1 'Instrument Serif',serif;letter-spacing:-.01em}.hd span{font-size:13px;color:#7B7871}
+.gd{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:10px}
+.tl{position:relative;border-radius:20px;overflow:hidden;cursor:pointer;background:#222;transition:opacity .4s,filter .4s,transform .5s cubic-bezier(.3,1.3,.5,1);outline:0;border:0;padding:0;color:inherit;text-align:left}
+.tl.w2{grid-column:span 2}.tl.h2{grid-row:span 2}
+.gd:hover .tl:not(:hover),.gd.dm .tl:not(.on){opacity:.55;filter:saturate(.6) blur(.5px)}
+.tl:hover,.tl.on,.tl:focus-visible{transform:scale(1.02);z-index:3}.tl:focus-visible{box-shadow:0 0 0 3px #fff}
+.tl svg.im{position:absolute;inset:0;width:100%;height:100%;transition:transform .9s cubic-bezier(.3,1,.4,1)}.tl:hover svg.im,.tl.on svg.im{transform:scale(1.1)}
+.tl::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,8,10,.75))}
+.tl .tx{position:absolute;left:16px;right:16px;bottom:14px;z-index:2;transform:translateY(8px);opacity:.9;transition:all .4s}.tl:hover .tx,.tl.on .tx{transform:none;opacity:1}
+.tl small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.75}.tl h2{font:400 24px/1.05 'Instrument Serif',serif;margin-top:3px}
+.tl .ar{position:absolute;right:14px;top:14px;z-index:2;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;opacity:0;transform:scale(.6) rotate(-45deg);transition:all .4s cubic-bezier(.3,1.6,.5,1)}.tl:hover .ar,.tl.on .ar{opacity:1;transform:none}
+@media(max-width:700px){.gd{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Selected works</h1><span>Hover to focus a project</span></div><div class="gd" id="gd"></div></div>
+<script>
+function art(i){const P=[['#FDE68A','#F97316','#7C2D12'],['#BAE6FD','#38BDF8','#0C4A6E'],['#DDD6FE','#8B5CF6','#312E81'],['#BBF7D0','#22C55E','#14532D'],['#FBCFE8','#EC4899','#831843'],['#FED7AA','#FB923C','#7C2D12'],['#A5F3FC','#06B6D4','#134E4A']][i%7],s=i%4;const sc=[`<circle cx="300" cy="100" r="60" fill="${P[1]}"/><path d="M0 230 Q130 150 260 215 T520 190 V300 H0Z" fill="${P[2]}"/>`,`<path d="M0 300 L120 130 L220 250 L330 90 L520 270 V300 H0Z" fill="${P[2]}" opacity=".92"/><circle cx="110" cy="70" r="30" fill="#fff" opacity=".85"/>`,`<rect x="80" y="70" width="130" height="190" rx="65" fill="${P[1]}"/><rect x="220" y="140" width="190" height="120" rx="24" fill="${P[2]}" opacity=".9"/>`,`<g fill="none" stroke="${P[1]}" stroke-width="12"><path d="M0 180 Q130 120 260 180 T520 180"/><path d="M0 240 Q130 180 260 240 T520 240" opacity=".7"/></g><circle cx="390" cy="80" r="46" fill="${P[1]}"/>`][s];return '<svg class="im" viewBox="0 0 520 300" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g'+i+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+P[0]+'"/><stop offset="1" stop-color="'+P[1]+'" stop-opacity=".55"/></linearGradient></defs><rect width="520" height="300" fill="url(#g'+i+')"/>'+sc+'</svg>'}
+const T=[['Brand','Harbour Coffee','w2 h2'],['Web','Northwind',''],['Motion','Orbit Reel','h2'],['Print','Salt Journal',''],['Product','Lumen App','w2'],['Identity','Fjord Studio','']];
+const gd=document.getElementById('gd');T.forEach((t,i)=>{const b=document.createElement('button');b.className='tl '+t[2];b.setAttribute('aria-label',t[1]);b.innerHTML=art(i)+'<span class="ar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span><div class="tx"><small>'+t[0]+'</small><h2>'+t[1]+'</h2></div>';gd.appendChild(b)});
+const ts=[...gd.children];ts[4].classList.add('on');gd.classList.add('dm');
+gd.addEventListener('mouseenter',()=>{gd.classList.remove('dm');ts.forEach(t=>t.classList.remove('on'))});
+</script></body></html>

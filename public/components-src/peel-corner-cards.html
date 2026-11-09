@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Peel Corner Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Karla:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#D8CFBD;background-image:radial-gradient(#CDC3AE 1.2px,transparent 1.2px);background-size:22px 22px;color:#2A2113;font-family:'Karla',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:860px;text-align:center}
+h1{font:700 clamp(28px,5vw,42px)/1 'Fraunces',serif;letter-spacing:-.03em}p.sb{color:#7B6F58;font-size:16px;margin:8px 0 34px}
+.gd{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.cd{--p:0;position:relative;height:290px;border-radius:6px;text-align:left;cursor:pointer;border:0;padding:0;background:none;font:inherit;color:inherit;outline:0;filter:drop-shadow(0 18px 20px rgba(60,45,15,.35))}
+.cd:hover,.cd.on,.cd:focus-visible{--p:1}.cd:focus-visible .pg{outline:3px solid #2A2113;outline-offset:3px}
+.pg{position:absolute;inset:0;background:var(--c);padding:22px;display:flex;flex-direction:column;justify-content:space-between;clip-path:polygon(0 0,100% 0,100% calc(100% - var(--k,64px)),calc(100% - var(--k,64px)) 100%,0 100%);transition:clip-path .45s cubic-bezier(.3,1.2,.5,1)}
+.cd:hover .pg,.cd.on .pg,.cd:focus-visible .pg{--k:130px}
+.pg::after{content:"";position:absolute;right:0;bottom:0;width:var(--k,64px);height:var(--k,64px);background:linear-gradient(135deg,rgba(0,0,0,.14) 0 49%,#FFFDF5 50% 100%);box-shadow:-4px -4px 10px rgba(0,0,0,.18);border-radius:0 0 0 0;transition:all .45s cubic-bezier(.3,1.2,.5,1)}
+.pg::after{clip-path:polygon(0 0,100% 100%,0 100%);transform-origin:right bottom}
+.pg h2{font:700 25px/1.05 'Fraunces',serif;letter-spacing:-.025em}.pg small{font:700 12px 'Karla';letter-spacing:.14em;text-transform:uppercase;opacity:.7}.pg p{font-size:14.5px;line-height:1.5;opacity:.85;max-width:22ch}
+.un{position:absolute;right:16px;bottom:14px;width:78px;text-align:center;font:700 19px 'Caveat';color:#2A2113;transform:rotate(-8deg);opacity:calc(var(--p)*1);transition:opacity .3s .15s;z-index:-1}
+.cd .bk{position:absolute;inset:0;z-index:-1;border-radius:6px;background:repeating-linear-gradient(135deg,#FFFDF5 0 8px,#F5EFDC 8px 16px)}
+.cd .bk span{position:absolute;right:14px;bottom:12px;font:700 20px 'Caveat';color:#B4491C;transform:rotate(-8deg)}
+@media(max-width:700px){.gd{grid-template-columns:1fr}.cd{height:230px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><h1>Peel to reveal</h1><p class="sb">Hover a card and its corner curls back to show the offer underneath.</p><div class="gd" id="gd"></div></div>
+<script>
+const T=[['#FFD166','Spring sale','Warm weather essentials',"20% off"],['#EF8354','New arrivals','Fresh this week from the studio','Free ship'],['#8ECAE6','Members only','Early access to every drop','Join now']];
+const gd=document.getElementById('gd');T.forEach((t,i)=>{const b=document.createElement('button');b.className='cd'+(i===1?' on':'');b.style.setProperty('--c',t[0]);b.setAttribute('aria-label',t[1]+', reveals '+t[3]);b.innerHTML='<div class="bk"><span>'+t[3]+'</span></div><div class="pg"><small>0'+(i+1)+'</small><div><h2>'+t[1]+'</h2><p>'+t[2]+'</p></div></div>';gd.appendChild(b)});
+gd.addEventListener('mouseover',()=>gd.querySelectorAll('.on').forEach(x=>{if(!x.matches(':hover'))x.classList.remove('on')}));
+</script></body></html>

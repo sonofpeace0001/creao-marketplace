@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Shine Badges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08080B;color:#EDEDF1;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px;display:grid;gap:30px;text-align:center}
+.c h1{font-size:clamp(24px,4vw,32px);letter-spacing:-.045em;font-weight:600}.c>p{color:#8A8A96;margin-top:-18px}
+.rw{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center}
+.b1{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:#C9C9D4;padding:7px 14px;border-radius:99px;background:#121217;border:1px solid #23232B;position:relative;overflow:hidden;cursor:pointer;transition:transform .2s;text-decoration:none}.b1:hover{transform:translateY(-2px)}.b1:focus-visible{outline:2px solid #8B8FFF;outline-offset:3px}
+.b1 span.sh{background:linear-gradient(110deg,#6C6C7A 30%,#fff 50%,#6C6C7A 70%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 2.6s linear infinite}@keyframes sh{from{background-position:150% 0}to{background-position:-50% 0}}
+.b1 i{width:6px;height:6px;border-radius:50%;background:#4ADE80;box-shadow:0 0 8px #4ADE80}
+.b2{position:relative;display:inline-flex;font-size:13.5px;font-weight:600;color:#fff;padding:2px;border-radius:99px;background:conic-gradient(from var(--a),#2A2A33 0 60%,#8B8FFF 80%,#E879F9 92%,#2A2A33);animation:sp 3.4s linear infinite}@keyframes sp{to{--a:360deg}}
+.b2 span{display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:99px;background:#0D0D12}
+.b3{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#0A0A12;padding:7px 14px;border-radius:99px;background:linear-gradient(135deg,#FDE68A,#F59E0B);position:relative;overflow:hidden;box-shadow:0 8px 22px -8px rgba(245,158,11,.7)}
+.b3::after{content:"";position:absolute;top:0;bottom:0;width:36px;left:-50px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-20deg);animation:gl 3s ease-in-out infinite}@keyframes gl{0%,40%{left:-50px}100%{left:130%}}
+.b4{display:inline-flex;align-items:center;gap:7px;font:500 12px 'Geist Mono',monospace;letter-spacing:.06em;color:#7CF5E2;padding:6px 12px;border-radius:8px;background:rgba(34,227,197,.08);border:1px solid rgba(34,227,197,.28)}.b4 em{font-style:normal;color:#EDEDF1;background:rgba(255,255,255,.1);padding:1px 6px;border-radius:5px}
+.b5{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:7px 14px;border-radius:99px;background:linear-gradient(90deg,#F43F5E,#F97316,#FACC15,#22C55E,#3B82F6,#A855F7,#F43F5E);background-size:300% 100%;animation:rb 6s linear infinite;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}@keyframes rb{to{background-position:300% 0}}
+.b6{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:6px 6px 6px 14px;border-radius:99px;background:#121217;border:1px solid #23232B;color:#C9C9D4}.b6 b{font:500 12px 'Geist Mono',monospace;background:linear-gradient(135deg,#8B8FFF,#E879F9);color:#0A0A12;padding:3px 9px;border-radius:99px}
+.b7{position:relative;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:7px 14px;border-radius:99px;background:#16161C;border:1px solid #2A2A33;color:#EDEDF1}.b7 i{position:relative;width:8px;height:8px;border-radius:50%;background:#F43F5E}.b7 i::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #F43F5E;animation:pg 1.8s ease-out infinite}@keyframes pg{from{transform:scale(.6);opacity:1}to{transform:scale(1.8);opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.b1 span.sh{color:#C9C9D4;background:none}}
+</style></head><body>
+<div class="c"><h1>Badges with a pulse</h1><p>Shimmer, rotating borders, glints and live dots.</p>
+<div class="rw"><a class="b1" href="#"><i></i><span class="sh">Introducing Atlas 2.0</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A8A96" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><span class="b2"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4B5FD" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z"/></svg>AI powered</span></span></div>
+<div class="rw"><span class="b3"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.500 7 .9-5.200 4.800 1.400 7-6.200-3.500L5.800 21.200l1.400-7L2 9.400l7-.9z"/></svg>Pro member</span><span class="b4">v4.2 <em>NEW</em></span><span class="b5">Limited edition</span></div>
+<div class="rw"><span class="b6">Early access <b>3 spots</b></span><span class="b7"><i></i>Live now</span></div></div></body></html>

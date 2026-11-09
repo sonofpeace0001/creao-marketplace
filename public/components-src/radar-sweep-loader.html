@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Radar Sweep Loader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#030A07;color:#B6FFD6;font-family:'Chakra Petch',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{text-align:center;width:100%;max-width:520px}
+.rd{position:relative;width:260px;height:260px;margin:0 auto 24px;border-radius:50%;background:radial-gradient(circle,#06241A,#031009 70%);border:2px solid #14573E;box-shadow:0 0 50px -10px rgba(52,211,153,.5),inset 0 0 40px rgba(52,211,153,.12);overflow:hidden}
+.rd .rg{position:absolute;left:50%;top:50%;border:1px solid rgba(52,211,153,.28);border-radius:50%;transform:translate(-50%,-50%)}.rd .r1{width:80px;height:80px}.rd .r2{width:160px;height:160px}.rd .r3{width:240px;height:240px}
+.rd .ax{position:absolute;background:rgba(52,211,153,.2)}.rd .ax.h{left:0;right:0;top:50%;height:1px}.rd .ax.v{top:0;bottom:0;left:50%;width:1px}
+.rd .sw{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(52,211,153,0) 0deg,rgba(52,211,153,0) 250deg,rgba(52,211,153,.55) 358deg,rgba(125,255,190,.9) 360deg);animation:sw 3s linear infinite}@keyframes sw{to{transform:rotate(360deg)}}
+.rd .bl{position:absolute;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:#7DFFBE;box-shadow:0 0 12px #34D399;opacity:0;animation:bp 3s linear infinite;animation-delay:var(--d)}@keyframes bp{0%{opacity:0;transform:scale(.4)}4%{opacity:1;transform:scale(1.5)}30%{opacity:.7;transform:scale(1)}70%,100%{opacity:0}}
+.rd .ct{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:50%;background:#34D399;box-shadow:0 0 14px #34D399}
+.c h1{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}.c p{font:400 14px 'Share Tech Mono',monospace;color:#5FAE8A;margin-top:10px;height:20px;letter-spacing:.06em}
+.st{display:flex;gap:22px;justify-content:center;margin-top:20px;font:400 13px 'Share Tech Mono',monospace;color:#3F8A68}.st b{display:block;font-size:20px;color:#B6FFD6;font-weight:400}
+@media(prefers-reduced-motion:reduce){*{animation-duration:9s!important}}
+</style></head><body>
+<div class="c"><div class="rd" aria-hidden="true"><span class="rg r1"></span><span class="rg r2"></span><span class="rg r3"></span><span class="ax h"></span><span class="ax v"></span><div class="sw"></div><i class="bl" style="left:68%;top:26%;--d:-1.1s"></i><i class="bl" style="left:30%;top:36%;--d:-2.3s"></i><i class="bl" style="left:74%;top:68%;--d:-.3s"></i><i class="bl" style="left:38%;top:74%;--d:-1.8s"></i><i class="bl" style="left:56%;top:44%;--d:-2.7s"></i><span class="ct"></span></div>
+<h1>Scanning network</h1><p id="ms">Pinging nodes...</p><div class="st"><div><b id="n1">12</b>NODES</div><div><b id="n2">48ms</b>LATENCY</div><div><b id="n3">0</b>THREATS</div></div></div>
+<script>
+const M=['Pinging nodes...','Mapping topology...','Checking certificates...','Verifying integrity...'];let k=0,n=12;setInterval(()=>{k=(k+1)%M.length;document.getElementById('ms').textContent=M[k];n=Math.min(48,n+Math.floor(Math.random()*9)+2);document.getElementById('n1').textContent=n;document.getElementById('n2').textContent=(38+Math.floor(Math.random()*18))+'ms'},1500);
+</script></body></html>

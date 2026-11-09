@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial case-study designer and front-end engineer with 15+ years of experience. Build "Client Quote Tabs": customer-name tabs with a sliding coloured underline that switch between serif quotes and headline results.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black stage with Instrument Serif quotes and a different accent colour per customer.
+- Palette: #0E0F12, #EDEEF2, #26282F, #6E7280, #B4B8C8, #8A8E9E
+- Type: Instrument Serif, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Tablist of four customers each with a colour square; sliding underline bar; panels with italic-accented quote, avatar, name and role, and a big stat.
+
+INTERACTION & STATES
+- Clicking or arrow keys switch tabs (roving tabindex); the bar translates and recolours; panels fade up; stat hides on small screens.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Waitlist Queue Position</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0712;color:#F3EEFF;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{position:relative;width:100%;max-width:520px;border-radius:30px;padding:34px 30px 28px;background:radial-gradient(420px 260px at 85% -10%,rgba(168,85,247,.45),transparent 70%),radial-gradient(360px 240px at 0% 110%,rgba(236,72,153,.28),transparent 70%),#130E22;border:1px solid #2A2040;box-shadow:0 40px 80px -40px #000;text-align:center;overflow:hidden}
+.c small{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#B79CFF}
+.num{display:flex;justify-content:center;align-items:flex-end;margin:10px 0 6px;font:800 76px/1 'Bricolage Grotesque',sans-serif;letter-spacing:-.04em;height:76px;overflow:hidden}
+.num span{color:#B79CFF}.dg{position:relative;width:.62em;height:76px;overflow:hidden}.dg div{position:absolute;left:0;right:0;top:0}.an .dg div{transition:transform .9s cubic-bezier(.2,.9,.2,1)}.dg div b{display:block;height:76px;line-height:76px;font-weight:800}.cm{width:.3em;line-height:76px}
+.sb{color:#B8AED4;font-size:15.5px;margin-bottom:22px}.sb b{color:#fff}
+.q{display:grid;grid-template-columns:repeat(24,1fr);gap:6px;margin:0 auto 24px;max-width:420px}.q i{aspect-ratio:1;border-radius:50%;background:#2B2145}.q i.pa{background:#4B3A78}.q i.me{background:linear-gradient(135deg,#C084FC,#F472B6);box-shadow:0 0 0 3px #130E22,0 0 0 5px #C084FC;animation:pu 1.6s infinite}@keyframes pu{50%{transform:scale(1.25)}}
+.rf{background:rgba(255,255,255,.05);border:1px solid #2F2449;border-radius:20px;padding:16px;text-align:left}.rf h3{font-size:15px;font-weight:700}.rf p{font-size:13.5px;color:#A89EC8;margin:2px 0 12px}
+.cp{display:flex;gap:8px}.cp div{flex:1;min-width:0;background:#0C0818;border:1px solid #2F2449;border-radius:12px;padding:11px 14px;font:500 13.5px 'Manrope';color:#C9BEEA;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cp button{display:flex;align-items:center;gap:7px;border:0;border-radius:12px;padding:0 18px;font:700 14px 'Manrope';background:#fff;color:#1A1030;cursor:pointer;min-width:104px;justify-content:center;transition:background .25s,color .25s}.cp button.ok{background:#34D399;color:#04281C}.cp button:focus-visible{outline:3px solid #C084FC;outline-offset:2px}
+.pr{display:flex;align-items:center;gap:12px;margin-top:14px}.pp{display:flex;gap:6px;flex:1}.pp i{flex:1;height:8px;border-radius:8px;background:#2B2145;overflow:hidden;position:relative}.pp i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#C084FC,#F472B6);transform:scaleX(0);transform-origin:left;transition:transform .5s}.pp i.f::after{transform:none}.pr span{font-size:12.5px;font-weight:700;color:#B79CFF;white-space:nowrap}
+.sm{margin-top:12px;border:1px dashed #4B3A78;background:none;color:#C9BEEA;border-radius:12px;padding:10px;width:100%;font:600 13.5px 'Manrope';cursor:pointer}.sm:hover{border-color:#C084FC;color:#fff}.sm:focus-visible{outline:2px solid #C084FC}
+@media(max-width:480px){.num{font-size:56px;height:56px}.dg,.dg div b{height:56px;line-height:56px}.cm{line-height:56px}.dg{height:56px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="c"><small>You are on the list</small><div class="num" id="num" aria-live="polite"></div><p class="sb">You are ahead of <b id="ah"></b> people. Invite friends to move up.</p>
+<div class="q" id="q" aria-hidden="true"></div>
+<div class="rf"><h3>Jump the line</h3><p>Each friend who joins moves you up 170 spots.</p><div class="cp"><div id="lk">nova.app/join?ref=ana-7Q2K</div><button id="cb"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span>Copy link</span></button></div>
+<div class="pr"><div class="pp" id="pp"><i></i><i></i><i></i></div><span id="pc"></span></div>
+<button class="sm" id="sm">Simulate a friend joining</button></div></div>
+<script>
+let pos=1284,inv=1;const TOTAL=10000,STEP=170;
+const num=document.getElementById('num');function build(){const s=pos.toLocaleString('en-US');num.innerHTML='<span>#</span>';[...s].forEach(ch=>{if(ch===','){const c=document.createElement('div');c.className='cm';c.textContent=',';num.appendChild(c)}else{const d=document.createElement('div');d.className='dg';d.innerHTML='<div>'+[...'0123456789'].map(n=>'<b>'+n+'</b>').join('')+'</div>';d.dataset.v=ch;num.appendChild(d)}})}
+function roll(){const s=pos.toLocaleString('en-US').replace(/,/g,'');const ds=num.querySelectorAll('.dg');if(ds.length!==s.length){build();return roll()}const h=ds[0].offsetHeight;ds.forEach((d,i)=>{d.firstChild.style.transform='translateY(-'+(+s[i]*h)+'px)'})}
+function ui(){document.getElementById('ah').textContent=(TOTAL-pos).toLocaleString();document.getElementById('pc').textContent=inv+' of 3 invited';document.getElementById('pp').querySelectorAll('i').forEach((e,i)=>e.classList.toggle('f',i<inv));const q=document.getElementById('q');q.innerHTML='';for(let i=0;i<72;i++){const e=document.createElement('i');const m=Math.round(pos/TOTAL*71);if(i===m)e.className='me';else if(i<m)e.className='pa';q.appendChild(e)}}
+build();num.querySelectorAll('.dg div').forEach(d=>d.style.transition='none');roll();requestAnimationFrame(()=>requestAnimationFrame(()=>num.querySelectorAll('.dg div').forEach(d=>d.style.transition='')));ui();
+(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{num.querySelectorAll('.dg div').forEach(d=>d.style.transition='none');roll();requestAnimationFrame(()=>num.querySelectorAll('.dg div').forEach(d=>d.style.transition=''))});
+setTimeout(()=>num.classList.add('an'),900);
+document.getElementById('sm').onclick=()=>{if(inv>=3){inv=1;pos=1284}else{inv++;pos-=STEP}roll();ui()};
+const cb=document.getElementById('cb');cb.onclick=()=>{cb.classList.add('ok');cb.querySelector('span').textContent='Copied';setTimeout(()=>{cb.classList.remove('ok');cb.querySelector('span').textContent='Copy link'},1600)};
+</script></body></html>

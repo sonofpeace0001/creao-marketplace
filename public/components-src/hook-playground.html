@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hook Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F5F5F2;color:#18181B;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:820px;background:#fff;border-radius:22px;border:1px solid #E4E4E0;overflow:hidden;box-shadow:0 40px 70px -46px rgba(24,24,27,.45)}
+.pv{padding:26px;display:flex;flex-direction:column}.pv small{font:500 11.5px 'Geist Mono',monospace;letter-spacing:.14em;color:#8A8A84;text-transform:uppercase}.pv h1{font-size:22px;font-weight:700;letter-spacing:-.035em;margin:6px 0 4px}.pv p{font-size:14px;color:#6D6D68;line-height:1.5;margin-bottom:20px}
+.ig{background:#F7F7F4;border:1px solid #E7E7E2;border-radius:16px;padding:16px;margin-bottom:12px}.ig label{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;color:#55554F;margin-bottom:10px}.ig label span{font:500 12px 'Geist Mono',monospace;color:#8A8A84}
+input[type=text]{width:100%;border:1.5px solid #DADAD4;border-radius:11px;padding:11px 13px;font:500 15px 'Geist';outline:0;background:#fff}input[type=text]:focus{border-color:#18181B}
+input[type=range]{width:100%;accent-color:#18181B}
+.rs{display:grid;grid-template-columns:1fr 1fr;gap:10px}.rs div{background:#18181B;color:#fff;border-radius:14px;padding:13px 14px}.rs span{display:block;font:500 11px 'Geist Mono',monospace;letter-spacing:.1em;color:#9A9A94;text-transform:uppercase;margin-bottom:4px}.rs b{font:500 17px 'Geist Mono',monospace;word-break:break-all;display:block;min-height:24px}
+.rs div.fl b{color:#FDE047}.rs div.rd b{color:#86EFAC}
+.rs div{transition:transform .15s}.rs div.pulse{animation:pu .35s}@keyframes pu{50%{transform:scale(1.03)}}
+.tm{height:6px;border-radius:6px;background:#E7E7E2;overflow:hidden;margin-top:12px}.tm i{display:block;height:100%;width:0;background:#18181B;border-radius:6px}
+.cd{background:#111114;color:#D4D4D8;padding:22px 20px;font:400 12.5px/1.8 'Geist Mono',monospace;white-space:pre;overflow:auto}
+.cd b{display:block;font:500 11.5px 'Geist Mono',monospace;color:#6D6D78;letter-spacing:.1em;margin-bottom:10px}.k{color:#F472B6}.f{color:#7DD3FC}.s{color:#86EFAC}.n{color:#FDBA74}.cm{color:#5B5B66}.hl{display:inline-block;background:rgba(253,224,71,.16);box-shadow:-4px 0 0 rgba(253,224,71,.16),4px 0 0 rgba(253,224,71,.16);width:100%}
+@media(max-width:700px){.c{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="pv"><small>Live demo</small><h1>useDebounce</h1><p>Type fast. The debounced value only updates once you stop for the chosen delay.</p>
+<div class="ig"><label for="t">Input</label><input type="text" id="t" value="premium comp" autocomplete="off" aria-label="Input"></div>
+<div class="ig"><label for="d">Delay <span id="dv">500ms</span></label><input type="range" id="d" min="100" max="1500" step="50" value="500"><div class="tm" aria-hidden="true"><i id="tm"></i></div></div>
+<div class="rs"><div class="fl" id="a"><span>Live value</span><b id="av"></b></div><div class="rd" id="b"><span>Debounced</span><b id="bv"></b></div></div></div>
+<div class="cd"><b>useDebounce.ts</b><span class="k">export function</span> <span class="f">useDebounce</span>(value, delay) {
+  <span class="k">const</span> [v, setV] = <span class="f">useState</span>(value);
+<span class="hl">  <span class="f">useEffect</span>(() =&gt; {</span>
+<span class="hl">    <span class="k">const</span> id = <span class="f">setTimeout</span>(() =&gt; <span class="f">setV</span>(value), delay);</span>
+<span class="hl">    <span class="k">return</span> () =&gt; <span class="f">clearTimeout</span>(id);</span>
+<span class="hl">  }, [value, delay]);</span>
+  <span class="k">return</span> v;
+}
+
+<span class="cm">// Settles after <span class="n" id="cm">500</span>ms of quiet</span></div></div>
+<script>
+const t=document.getElementById('t'),d=document.getElementById('d'),tm=document.getElementById('tm');let id=null,raf=null;
+function pulse(e){e.classList.remove('pulse');void e.offsetWidth;e.classList.add('pulse')}
+function live(){document.getElementById('av').textContent=t.value||'(empty)';pulse(document.getElementById('a'));const dl=+d.value;clearTimeout(id);cancelAnimationFrame(raf);const s=performance.now();tm.style.width='0%';
+ const step=n=>{const p=Math.min(1,(n-s)/dl);tm.style.width=(p*100)+'%';if(p<1)raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step);
+ id=setTimeout(()=>{document.getElementById('bv').textContent=t.value||'(empty)';pulse(document.getElementById('b'));tm.style.width='100%'},dl)}
+t.addEventListener('input',live);d.addEventListener('input',()=>{document.getElementById('dv').textContent=d.value+'ms';document.getElementById('cm').textContent=d.value;live()});
+document.getElementById('av').textContent=t.value;document.getElementById('bv').textContent=t.value;tm.style.width='100%';
+</script></body></html>

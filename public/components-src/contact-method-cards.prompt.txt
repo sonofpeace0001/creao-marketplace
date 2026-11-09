@@ -1,0 +1,29 @@
+ROLE
+You are a senior support site designer with 15+ years of experience. Build "Contact Method Cards": three contact channel cards sharing a cursor spotlight, each with a response time chip and a copy button that morphs to a check.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black cards with indigo, green and pink spotlights and mono details.
+- Palette: #141722, #08090D, #EEF0F8, #A5B4FC, #7C8198, #0E1016
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; email, chat and phone cards each with icon, title, copy, response chip and copyable value.
+
+INTERACTION & STATES
+- A single spotlight lights card borders and surfaces across the group; copy buttons swap icon to a check and the label to Copied.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

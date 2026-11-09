@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Before / After Slider</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEFF4;color:#16202E;font-family:'Poppins',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:620px;background:#fff;border-radius:26px;padding:16px;box-shadow:0 40px 70px -44px rgba(22,32,46,.55),0 0 0 1px rgba(22,32,46,.06)}
+.cp{position:relative;aspect-ratio:16/10;border-radius:18px;overflow:hidden;user-select:none;touch-action:none;cursor:ew-resize}
+.pane{position:absolute;inset:0;padding:18px;display:flex;flex-direction:column;gap:10px}
+.af{background:linear-gradient(135deg,#EEF6FF,#E8F0FF)}.bf{background:#E7E3D6;clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.tb{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600}
+.af .tb{color:#2B4A8B}.bf .tb{color:#6B6552}.tb span{padding:4px 10px;border-radius:99px;background:rgba(0,0,0,.07)}
+.row{display:flex;gap:10px;align-items:center;border-radius:12px;padding:11px 13px}
+.af .row{background:#fff;box-shadow:0 6px 14px -8px rgba(43,74,139,.4)}.af .row i{width:30px;height:30px;border-radius:9px;display:block}
+.af .row b{font-size:13.5px;display:block}.af .row small{font-size:11.5px;color:#7A8BB0}.af .row em{margin-left:auto;font:600 13px 'Poppins';font-style:normal;color:#1F9D6A}
+.bf .row{background:#D9D3BE;border:1px dashed #B5AD90;color:#6B6552;font:500 12.5px 'Courier Prime','Courier New',monospace}
+.bf .row u{margin-left:auto;text-decoration:none;color:#A8412A}
+.h{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 0 14px rgba(0,0,0,.25)}
+.h button{position:absolute;top:50%;left:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:0;background:#16202E;color:#fff;cursor:ew-resize;display:grid;place-items:center;box-shadow:0 8px 18px rgba(0,0,0,.35);transition:transform .15s}.cp:active .h button{transform:scale(1.12)}.h button:focus-visible{outline:3px solid #5B8CFF;outline-offset:3px}
+.lb{position:absolute;bottom:12px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:99px;pointer-events:none}.lb.l{left:12px;background:#6B6552;color:#fff}.lb.r{right:12px;background:#2B6BFF;color:#fff}
+.ft{display:flex;justify-content:space-between;align-items:center;padding:16px 8px 6px}.ft b{font-size:17px;font-weight:600;letter-spacing:-.02em}.ft span{font-size:13.5px;color:#6A7689}.ft .pc{font-weight:700;color:#2B6BFF;font-size:15px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="cp" id="cp" style="--p:50%"><div class="pane af"><div class="tb"><span>Dashboard</span><span>Live</span></div>
+<div class="row"><i style="background:#5B8CFF"></i><div><b>Revenue</b><small>This week</small></div><em>+18.2%</em></div><div class="row"><i style="background:#F59E0B"></i><div><b>New customers</b><small>This week</small></div><em>+42</em></div><div class="row"><i style="background:#10B981"></i><div><b>Active projects</b><small>Right now</small></div><em>128</em></div></div>
+<div class="pane bf"><div class="tb"><span>report_final_v7.xls</span><span>Updated 3 days ago</span></div>
+<div class="row">rev_total = SUM(B2:B90) <u>#REF!</u></div><div class="row">new_cust = ???</div><div class="row">active = COUNTIF(F:F,"yes")</div></div>
+<div class="lb l">Before</div><div class="lb r">After</div>
+<div class="h"><button id="b" role="slider" aria-label="Compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7-5 5 5 5M15 7l5 5-5 5"/></svg></button></div></div>
+<div class="ft"><div><b>From spreadsheets to a live dashboard</b><span style="display:block">Drag to compare</span></div><span class="pc" id="pc">50%</span></div></div>
+<script>
+const cp=document.getElementById('cp'),b=document.getElementById('b');let v=50,drag=false;
+function set(p){v=Math.max(0,Math.min(100,p));cp.style.setProperty('--p',v+'%');b.setAttribute('aria-valuenow',Math.round(v));document.getElementById('pc').textContent=Math.round(v)+'%'}
+function pos(e){const r=cp.getBoundingClientRect();set((e.clientX-r.left)/r.width*100)}
+cp.addEventListener('pointerdown',e=>{drag=true;cp.setPointerCapture(e.pointerId);pos(e)});cp.addEventListener('pointermove',e=>{if(drag)pos(e)});cp.addEventListener('pointerup',()=>drag=false);
+b.addEventListener('keydown',e=>{const s=e.shiftKey?10:2;if(e.key==='ArrowLeft'){e.preventDefault();set(v-s)}if(e.key==='ArrowRight'){e.preventDefault();set(v+s)}if(e.key==='Home')set(0);if(e.key==='End')set(100)});
+set(50);
+</script></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior marketplace designer and front-end engineer with 15+ years of experience. Build "Rating Breakdown Reviews": a review summary with an aggregate score, clickable star distribution bars that filter reviews, verified badges and helpful votes.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper card with serif score, amber stars and soft cream separators.
+- Palette: #B4491C, #F59E0B, #8A8068, #6B6350, #FDEFD0, #E8DFCB
+- Type: Fraunces, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Large 4.8 score with stars; five distribution bars; review list with avatar, verified badge, stars, title, body, helpful button; show all toggle.
+
+INTERACTION & STATES
+- Distribution bars animate in and filter the list by star rating; helpful buttons toggle and update counts; Show all expands the list.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

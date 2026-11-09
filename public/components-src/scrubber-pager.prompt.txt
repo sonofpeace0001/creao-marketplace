@@ -1,0 +1,29 @@
+ROLE
+You are a senior data-listing designer and front-end engineer with 15+ years of experience. Build "Scrubber Pager": a pagination bar shaped like a timeline scrubber with a draggable knob, page bubble, tick marks, prev/next and go-to input.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with a black scrubber, mono page bubble and invoice rows.
+- Palette: #18181B, #8A8A92, #4F46E5, #E4E4DE, #F2F1EC, #F8F8F5
+- Type: Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with range text; five invoice rows; scrubber track with ticks, fill, knob and floating page label; Prev and Next buttons; Go to page input.
+
+INTERACTION & STATES
+- Dragging or clicking the track sets the page and re-renders rows; the knob is a role=slider with arrow, Home and End keys; Prev, Next and the numeric field also navigate.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

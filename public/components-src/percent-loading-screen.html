@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Percent Loading Screen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2EEE5;color:#14120E;font-family:'Space Grotesk',sans-serif;min-height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased}
+.ld{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:34px 5vw 30px}
+.tp{display:flex;justify-content:space-between;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#7C7662}
+.nm{position:relative;font:400 clamp(180px,38vw,460px)/.82 'Anton',sans-serif;letter-spacing:-.01em;display:flex;align-items:flex-end;color:#14120E;overflow:hidden;height:.86em}
+.nm span.pc{font-size:.32em;margin-bottom:.12em;color:#FF4D2E;margin-left:.04em}
+.dg{position:relative;width:.52em;height:.86em;overflow:hidden}.dg div{position:absolute;left:0;right:0;transition:transform .5s cubic-bezier(.2,.9,.2,1)}.dg b{display:block;height:.86em;line-height:.86em;font-weight:400;overflow:hidden;margin-bottom:.12em}
+.bt{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.msg{font-size:clamp(15px,2vw,19px);font-weight:500;height:26px;overflow:hidden;position:relative;min-width:240px}.msg span{display:block;transition:transform .5s cubic-bezier(.7,0,.2,1),opacity .4s}
+.bar{position:absolute;left:0;right:0;bottom:0;height:8px;background:#E2DCCD}.bar i{display:block;height:100%;width:var(--p,0%);background:#FF4D2E;transition:width .4s linear}
+.dots{display:flex;gap:6px}.dots i{width:9px;height:9px;border-radius:50%;background:#14120E;opacity:.18;animation:dt 1.2s ease-in-out infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}@keyframes dt{50%{opacity:1;transform:translateY(-4px)}}
+.rp{border:1.5px solid #14120E;background:none;border-radius:99px;padding:8px 18px;font:500 13px 'Space Grotesk';cursor:pointer}.rp:hover{background:#14120E;color:#F2EEE5}.rp:focus-visible{outline:3px solid #FF4D2E;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="ld"><div class="tp"><span>Atlas Studio</span><span id="tm">Loading portfolio</span></div>
+<div class="nm" id="nm" aria-live="polite" aria-label="Loading progress"></div>
+<div class="bt"><div><div class="msg" id="mg"><span>Warming up the render engine</span></div><div class="dots" style="margin-top:12px"><i></i><i></i><i></i></div></div><button class="rp" id="rp">Replay</button></div>
+<div class="bar"><i id="br"></i></div></div>
+<script>
+const M=['Warming up the render engine','Preparing 48 project images','Compiling typography','Setting the stage','Almost ready'];let v=64,mi=0,iv;
+const nm=document.getElementById('nm');
+function odo(n){const s=String(n).padStart(2,'0');let ds=[...nm.querySelectorAll('.dg')];if(ds.length!==s.length){nm.innerHTML=[...s].map(()=>'<div class="dg"><div>'+[...'0123456789'].map(d=>'<b>'+d+'</b>').join('')+'</div></div>').join('')+'<span class="pc">%</span>';ds=[...nm.querySelectorAll('.dg')];ds.forEach(d=>d.firstChild.style.transition='none');requestAnimationFrame(()=>requestAnimationFrame(()=>ds.forEach(d=>d.firstChild.style.transition='')))}ds.forEach((d,i)=>d.firstChild.style.transform='translateY(-'+(+s[i]*.98)+'em)')}
+function msg(i){const m=document.getElementById('mg'),o=m.firstChild,n=document.createElement('span');n.textContent=M[i];n.style.transform='translateY(100%)';n.style.opacity=0;m.appendChild(n);requestAnimationFrame(()=>requestAnimationFrame(()=>{o.style.transform='translateY(-100%)';o.style.opacity=0;n.style.transform='none';n.style.opacity=1;setTimeout(()=>o.remove(),520)}))}
+function set(n){v=n;odo(n===100?99:n);document.getElementById('br').parentNode.style.setProperty('--p',n+'%');document.getElementById('br').style.setProperty('--p',n+'%');const k=Math.min(M.length-1,Math.floor(n/22));if(k!==mi){mi=k;msg(k)}if(n>=100){document.getElementById('tm').textContent='Ready';clearInterval(iv)}}
+function run(from){clearInterval(iv);document.getElementById('tm').textContent='Loading portfolio';mi=Math.min(M.length-1,Math.floor(from/22));document.getElementById('mg').innerHTML='<span>'+M[mi]+'</span>';set(from);setTimeout(()=>{iv=setInterval(()=>{const n=Math.min(100,v+1+Math.floor(Math.random()*4));set(n)},260)},from>=60?2600:0)}
+document.getElementById('rp').onclick=()=>run(0);
+run(64);document.getElementById('br').style.transition='none';requestAnimationFrame(()=>document.getElementById('br').style.transition='');
+</script></body></html>

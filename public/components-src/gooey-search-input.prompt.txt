@@ -1,0 +1,29 @@
+ROLE
+You are a senior playful-UI designer and front-end engineer with 15+ years of experience. Build "Gooey Search Input": a search orb that melts into a wide input bar through an SVG gooey filter and reveals filtered, highlighted results.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Blush page with a plum liquid bar, white result cards and Manrope type.
+- Palette: #2B0F1C, #FFE4EC, #8A5A70, #FFD1E2, #C2185B
+- Type: Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading; SVG goo filter; morphing pill and blobs; search button with icon swap; input; result list with colour tiles, highlights and prices.
+
+INTERACTION & STATES
+- Clicking the orb expands the pill and blob via transitions under the goo filter and focuses the input; typing filters and highlights matches; Escape closes; the icon swaps to a close mark.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Magic Effects Bento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#07080C;color:#EEF0F8;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px}
+.hd{text-align:center;margin-bottom:24px}.hd h1{font-size:clamp(28px,5vw,44px);font-weight:700;letter-spacing:-.055em}.hd p{color:#7C8198;font-size:16px;margin-top:8px}
+.gd{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:210px;gap:12px}
+.tl{position:relative;border-radius:24px;background:#0E1016;border:1px solid #1F2330;overflow:hidden;padding:20px;display:flex;flex-direction:column;justify-content:flex-end}
+.tl.w2{grid-column:span 2}.tl.h2{grid-row:span 2}
+.tl h2{position:relative;font-size:18px;font-weight:600;letter-spacing:-.03em;margin-bottom:4px}.tl p{position:relative;font-size:13.5px;line-height:1.5;color:#858BA4;max-width:30ch}
+.vz{position:absolute;inset:0 0 70px}
+/* beam */
+.bm svg{width:100%;height:100%}.bm .n{position:absolute;width:44px;height:44px;border-radius:14px;background:#161A25;border:1px solid #262C3D;display:grid;place-items:center;color:#A5B4FC;transform:translate(-50%,-50%)}.bm .n.ct{width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,#6366F1,#A855F7);border:0;color:#fff;box-shadow:0 0 40px -4px #818CF8}
+.bm path{fill:none;stroke:#262C3D;stroke-width:2}.bm path.b{stroke:url(#bg);stroke-dasharray:40 260;animation:bm 3s linear infinite}@keyframes bm{to{stroke-dashoffset:-300}}
+/* marquee */
+.mq{display:flex;flex-direction:column;gap:10px;justify-content:center;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent)}.mq .r{display:flex;gap:10px;width:max-content;animation:mq 22s linear infinite}.mq .r:nth-child(2){animation-direction:reverse;animation-duration:26s}@keyframes mq{to{transform:translateX(-50%)}}
+.mq .ch{flex:none;display:flex;align-items:center;gap:8px;background:#151824;border:1px solid #232838;border-radius:99px;padding:8px 14px;font-size:13px;font-weight:500;color:#C3C8DE}.mq .ch i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+/* orbit */
+.ob .rn{position:absolute;left:50%;top:44%;border:1px dashed #2A3042;border-radius:50%;transform:translate(-50%,-50%)}.ob .rn.r1{width:110px;height:110px}.ob .rn.r2{width:190px;height:190px}.ob .core{position:absolute;left:50%;top:44%;width:38px;height:38px;margin:-19px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FDE68A,#F59E0B);box-shadow:0 0 40px #F59E0B}
+.ob .o{position:absolute;left:50%;top:44%;width:0;height:0;animation:ob var(--d) linear infinite}.ob .o i{position:absolute;left:var(--r);top:-14px;width:28px;height:28px;margin-left:-14px;border-radius:50%;background:var(--c);display:grid;place-items:center;box-shadow:0 0 18px -2px var(--c);animation:ob2 var(--d) linear infinite}@keyframes ob{to{transform:rotate(360deg)}}@keyframes ob2{to{transform:rotate(-360deg)}}
+/* globe-ish type */
+.tp .ky{position:absolute;left:20px;right:20px;top:24px;font:500 13px/2 'Geist Mono',monospace;color:#6B7390}.tp .ky b{color:#A5B4FC;font-weight:500}.tp .ky em{color:#34D399;font-style:normal}.tp .ky span.cr{display:inline-block;width:7px;height:14px;background:#A5B4FC;vertical-align:-2px;animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:0}}
+/* counter */
+.ct2 .num{position:absolute;left:20px;top:20px;font:700 72px/1 'Geist';letter-spacing:-.07em;background:linear-gradient(180deg,#fff,#6A7090);-webkit-background-clip:text;background-clip:text;color:transparent}.ct2 .nm small{display:block;font:500 12px 'Geist Mono',monospace;color:#6B7390;letter-spacing:.08em;margin-top:6px}
+@media(max-width:700px){.gd{grid-template-columns:1fr 1fr}.tl.w2{grid-column:span 2}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Tiny worlds in every tile</h1><p>A bento where each cell runs its own signature animation.</p></div>
+<div class="gd">
+<div class="tl w2 h2 bm"><div class="vz"><svg viewBox="0 0 600 340" preserveAspectRatio="xMidYMid meet" id="bsv"><defs><linearGradient id="bg"><stop offset="0" stop-color="#818CF8" stop-opacity="0"/><stop offset=".5" stop-color="#A5B4FC"/><stop offset="1" stop-color="#F0ABFC" stop-opacity="0"/></linearGradient></defs></svg><div id="bn"></div></div><h2>Connect everything</h2><p>Animated beams show data flowing between your tools and your workspace.</p></div>
+<div class="tl"><div class="vz mq"><div class="r" id="m1"></div><div class="r" id="m2"></div></div><h2>Always integrated</h2><p>Dozens of services, one stream.</p></div>
+<div class="tl ob"><div class="vz"><span class="rn r1"></span><span class="rn r2"></span><span class="core"></span><div class="o" style="--d:9s;--r:55px;--c:#818CF8"><i></i></div><div class="o" style="--d:14s;--r:95px;--c:#34D399"><i></i></div><div class="o" style="--d:20s;--r:95px;--c:#F472B6;animation-delay:-8s"><i style="animation-delay:-8s"></i></div></div><h2>In orbit</h2><p>Everything revolves around you.</p></div>
+<div class="tl w2 tp"><div class="vz ky"><div><b>$</b> npx create-app my-site</div><div><em>ok</em> template downloaded</div><div><em>ok</em> dependencies installed</div><div><b>$</b> npm run dev<span class="cr"></span></div></div><h2>Start in seconds</h2><p>One command from zero to a running site.</p></div>
+<div class="tl ct2"><div class="num">99.9<small style="font-size:30px;color:#6A7090;letter-spacing:0">%</small></div><div class="vz"></div><h2>Uptime</h2><p>Measured over the last 12 months.</p></div>
+</div></div>
+<script>
+const NS='http://www.w3.org/2000/svg',sv=document.getElementById('bsv'),bn=document.getElementById('bn');
+const nodes=[[110,60,'#'],[110,170,'@'],[110,280,'+'],[490,60,'%'],[490,170,'&'],[490,280,'*']];const ic=['M13 2 4 14h7l-1 8 9-12h-7z','M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z','M4 6h16v14H4zM8 3v4M16 3v4M4 11h16','M3 3v18h18M7 14l4-4 4 4 5-6','M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8','M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'];
+nodes.forEach((n,i)=>{const side=i<3?1:-1,d='M'+n[0]+' '+n[1]+' C'+(n[0]+side*120)+' '+n[1]+' '+(300-side*120)+' 170 300 170';[0,1].forEach(k=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',d);if(k){p.setAttribute('class','b');p.style.animationDelay='-'+(i*.5)+'s'}sv.appendChild(p)})});
+function pos(){const r=sv.getBoundingClientRect(),s=Math.min(r.width/600,r.height/340),ox=(r.width-600*s)/2,oy=(r.height-340*s)/2;const pt=(x,y)=>[ox+x*s,oy+y*s];bn.innerHTML='';nodes.forEach((n,i)=>{const p=pt(n[0],n[1]);bn.insertAdjacentHTML('beforeend','<div class="n" style="left:'+p[0]+'px;top:'+p[1]+'px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="'+ic[i]+'"/></svg></div>')});const c=pt(300,170);bn.insertAdjacentHTML('beforeend','<div class="n ct" style="left:'+c[0]+'px;top:'+c[1]+'px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.900 5.100L19 10l-5.100 1.900L12 17l-1.900-5.100L5 10l5.100-1.900z"/></svg></div>')}
+pos();addEventListener('resize',pos);
+const C=[['Slack','#E01E5A'],['GitHub','#8B5CF6'],['Stripe','#635BFF'],['Notion','#F59E0B'],['Linear','#6366F1'],['Figma','#F24E1E'],['Vercel','#E5E7EB'],['Zapier','#FF4A00']];
+function row(id,off){let h='';for(let k=0;k<2;k++)C.slice(off).concat(C.slice(0,off)).forEach(c=>h+='<span class="ch"><i style="--c:'+c[1]+'"></i>'+c[0]+'</span>');document.getElementById(id).innerHTML=h}row('m1',0);row('m2',4);
+</script></body></html>

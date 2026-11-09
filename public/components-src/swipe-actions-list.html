@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Swipe Actions List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#DCE3F2;color:#1B2340;font-family:'Nunito',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.ph{position:relative;width:min(360px,100%);height:580px;background:#F6F8FD;border-radius:44px;border:9px solid #1B2340;overflow:hidden;box-shadow:0 50px 70px -34px rgba(27,35,64,.7)}
+.ph::before{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);width:96px;height:24px;border-radius:14px;background:#1B2340;z-index:5}
+.in{padding:58px 0 0}.in h1{font-size:30px;font-weight:800;letter-spacing:-.04em;padding:0 22px}.in p{padding:2px 22px 14px;color:#7A86A6;font-weight:600;font-size:14px}
+.ls{list-style:none;background:#fff;margin:0 12px;border-radius:22px;overflow:hidden;box-shadow:0 4px 14px -8px rgba(27,35,64,.3)}
+.rw{position:relative;overflow:hidden;height:74px;transition:height .35s .12s,opacity .3s;border-bottom:1px solid #EEF1F8}.rw:last-child{border:0}.rw.rm{height:0;opacity:0;border:0}
+.ac{position:absolute;inset:0;display:flex;justify-content:space-between}.ac div{display:flex;align-items:stretch}.ac button{width:76px;border:0;color:#fff;font:800 12.5px 'Nunito';display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer}.ac button:focus-visible{outline:3px solid #1B2340;outline-offset:-3px}
+.ac .l button{background:#3B82F6}.ac .r .p{background:#F59E0B}.ac .r .d{background:#EF4444}
+.fg{position:absolute;inset:0;display:flex;align-items:center;gap:13px;padding:0 16px;background:#fff;transition:transform .35s cubic-bezier(.3,1.2,.4,1);touch-action:pan-y;cursor:grab;will-change:transform}.fg.dg{transition:none;cursor:grabbing}.fg:focus-visible{outline:2px solid #5B6CFF;outline-offset:-2px}
+.av{width:46px;height:46px;border-radius:50%;background:var(--g);display:grid;place-items:center;color:#fff;font-weight:800;flex:none;position:relative}.av.un::after{content:"";position:absolute;right:-1px;top:-1px;width:13px;height:13px;border-radius:50%;background:#3B82F6;border:3px solid #fff}
+.tx{flex:1;min-width:0}.tx b{display:flex;justify-content:space-between;font-size:15.5px;font-weight:800}.tx b span{font-size:12.5px;color:#9AA4C4;font-weight:700}.tx p{font-size:13.5px;color:#7A86A6;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0;margin-top:2px}
+.rw.un .tx b{color:#1B2340}.rw.pn .fg::before{content:"";position:absolute;right:12px;top:10px}
+.hn{position:absolute;left:0;right:0;bottom:18px;text-align:center;font-size:12.5px;font-weight:700;color:#9AA4C4}
+.tt{position:absolute;left:50%;bottom:56px;transform:translate(-50%,12px);background:#1B2340;color:#fff;font-weight:700;font-size:13.5px;padding:10px 16px;border-radius:99px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}.tt.on{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="ph"><div class="in"><h1>Messages</h1><p id="ct"></p><ul class="ls" id="ls"></ul></div><div class="hn">Swipe a row left or right</div><div class="tt" id="tt" role="status"></div></div>
+<script>
+const M=[['Priya Raman','Can you review the pricing deck?','9:41','linear-gradient(135deg,#8B5CF6,#5B3FE0)',1],['Marcus Reid','Lunch tomorrow at 12?','9:12','linear-gradient(135deg,#38BDF8,#2563EB)',1],['Billing','Your receipt for November is ready','Yesterday','linear-gradient(135deg,#34D399,#059669)',0],['Elena Ortiz','Shipped the fix, take a look','Yesterday','linear-gradient(135deg,#FB923C,#EA580C)',0],['Aiko Tanaka','Thanks for the intro!','Mon','linear-gradient(135deg,#F472B6,#DB2777)',0]];
+const ls=document.getElementById('ls');const ic={r:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v13H5.500L4 19zM8 9h8M8 12.500h5"/></svg>',p:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5M9 3h6l-1 6 3 3H7l3-3z"/></svg>',d:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12h10l1-12M9 7V4h6v3"/></svg>'};
+ls.innerHTML=M.map((m,i)=>'<li class="rw'+(m[4]?' un':'')+'"><div class="ac"><div class="l"><button data-a="read" aria-label="Mark as read">'+ic.r+'Read</button></div><div class="r"><button class="p" data-a="pin" aria-label="Pin">'+ic.p+'Pin</button><button class="d" data-a="del" aria-label="Delete">'+ic.d+'Delete</button></div></div><div class="fg" tabindex="0" aria-label="'+m[0]+': '+m[1]+'. Press Delete to remove."><span class="av'+(m[4]?' un':'')+'" style="--g:'+m[3]+'">'+m[0].split(' ').map(x=>x[0]).join('')+'</span><div class="tx"><b>'+m[0]+'<span>'+m[2]+'</span></b><p>'+m[1]+'</p></div></div></li>').join('');
+const tt=document.getElementById('tt');function toast(t){tt.textContent=t;tt.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>tt.classList.remove('on'),1600)}
+function cnt(){const u=ls.querySelectorAll('.rw.un:not(.rm)').length;document.getElementById('ct').textContent=u+' unread'}
+const W=76;
+ls.querySelectorAll('.rw').forEach(rw=>{const fg=rw.querySelector('.fg');let sx=0,x=0,base=0,dg=false;
+ const set=v=>{x=Math.max(-W*2,Math.min(W,v));fg.style.transform='translateX('+x+'px)'};const snap=()=>{if(x>W*.5)set(W);else if(x<-W*1.1)set(-W*2);else if(x<-W*.4)set(-W);else set(0)};
+ fg.addEventListener('pointerdown',e=>{dg=true;fg.classList.add('dg');sx=e.clientX;base=x;fg.setPointerCapture(e.pointerId)});fg.addEventListener('pointermove',e=>{if(dg)set(base+e.clientX-sx)});
+ const up=()=>{if(!dg)return;dg=false;fg.classList.remove('dg');snap()};fg.addEventListener('pointerup',up);fg.addEventListener('pointercancel',up);
+ fg.addEventListener('keydown',e=>{if(e.key==='Delete'||e.key==='Backspace')act('del');if(e.key==='ArrowLeft')set(-W*2);if(e.key==='ArrowRight')set(W);if(e.key==='Escape')set(0)});
+ function act(a){if(a==='read'){rw.classList.remove('un');rw.querySelector('.av').classList.remove('un');toast('Marked as read');set(0)}if(a==='pin'){toast('Pinned to top');ls.prepend(rw);set(0)}if(a==='del'){rw.classList.add('rm');toast('Conversation deleted');setTimeout(()=>{rw.remove();cnt()},450)}cnt()}
+ rw.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>act(b.dataset.a));rw._set=set});
+cnt();setTimeout(()=>ls.querySelectorAll('.rw')[1]._set(-W*2),120);
+</script></body></html>

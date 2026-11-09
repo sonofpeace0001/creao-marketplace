@@ -1,0 +1,29 @@
+ROLE
+You are a senior AI-product designer and front-end engineer with 15+ years of experience. Build "AI Answer Search Bar": a docs search bar with a rotating conic border that switches between search results and a streamed AI answer with source links.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight panel, serif italic headline and a violet rotating gradient border.
+- Palette: #6C7CFF, #A5A8FF, #8A8CA6, #E879F9, #23253A, #E9EAF3
+- Type: Inter, Newsreader (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Headline, search field with Search or Answer toggle, suggestion chips, answer card with label, streamed text and source links.
+
+INTERACTION & STATES
+- Submitting or picking a chip streams the answer character by character and reveals source pills; the toggle swaps between modes.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

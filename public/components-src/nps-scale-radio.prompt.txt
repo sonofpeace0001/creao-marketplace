@@ -1,0 +1,29 @@
+ROLE
+You are a senior feedback-product designer and front-end engineer with 15+ years of experience. Build "NPS Scale Radio": a 0 to 10 rating scale whose mascot face, colour and message change with the score, followed by a feedback box.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft lavender page, white card, red to green gradient scale and a friendly SVG face.
+- Palette: #1E1236, #F3EEFF, #7A6A9E, #8A7AAE, #E6DFF5, #D8D0EA
+- Type: Bricolage Grotesque, DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Face badge, question, eleven scale buttons with end labels, score sentence, textarea and submit button.
+
+INTERACTION & STATES
+- Choosing a score recolours the face and swaps its expression, updates the sentence, and enables the submit button; keyboard arrows move the score.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

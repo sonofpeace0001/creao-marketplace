@@ -1,0 +1,29 @@
+ROLE
+You are a senior product analytics designer and front-end engineer with 15+ years of experience. Build "Funnel Dashboard": a conversion funnel whose stages resize with each date range, with drop-off between steps and a detail panel for the hovered stage.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with an indigo to pink gradient funnel and tidy mono deltas.
+- Palette: #12142B, #7A7F9E, #EF4444, #ECEEF4, #F0F1F8, #6A6F94
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with range tabs; five trapezoid funnel stages with counts; drop-off rows; detail panel with KPIs, share bar and insight.
+
+INTERACTION & STATES
+- Switching the range animates every stage width and trapezoid slope; hovering or focusing a stage updates the detail panel.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial interaction designer with 15+ years of experience. Build "Link Hover Lab": six editorial link hover treatments: drawn underline, slide-away line, highlighter sweep, arrow slide, text roll and a focus-group blur.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream sheet with Instrument Serif links and small caps labels.
+- Palette: #C2410C, #FFD84D, #F5F2EA, #17150F, #FCFAF4, #E6E0CE
+- Type: Instrument Serif, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Rows pairing a label with a sample link for each technique; the last row dims sibling links when one is hovered.
+
+INTERACTION & STATES
+- Each link uses CSS only (background-size, translate, mask, opacity) on hover and focus-visible; all have visible focus outlines; reduced motion removes transitions.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

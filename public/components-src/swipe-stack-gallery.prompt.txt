@@ -1,0 +1,29 @@
+ROLE
+You are a senior photo-portfolio designer and front-end engineer with 15+ years of experience. Build "Swipe Photo Stack": a stack of polaroid-style travel photos you drag or flick away, with arrow buttons and keyboard control.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm sand page, Fraunces headline and layered cream photo cards with gradient landscapes.
+- Palette: #2B2218, #8A7B66, #E8E2D6, #C2410C, #6F6252
+- Type: Fraunces, Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Headline copy with prev/next buttons and counter; three-deep card stack with slight rotations, photo area, caption and country; hint line.
+
+INTERACTION & STATES
+- Pointer drag moves and tilts the top card; releasing beyond 90px flicks it off and rotates the stack; arrows and keyboard arrow keys navigate; stack layout is computed in script.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sale Ribbon Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1A0B2E;color:#FFF4E6;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(500px 360px at 80% 0,#5B1E8A,transparent 65%),radial-gradient(400px 300px at 0 100%,#7A1F4A,transparent 60%)}
+.c{position:relative;width:100%;max-width:440px;background:linear-gradient(160deg,#2B1250,#1F0C3A);border:1px solid #4A2A7A;border-radius:28px;padding:40px 30px 28px;overflow:hidden;box-shadow:0 50px 80px -34px #000}
+.rb{position:absolute;right:-52px;top:26px;width:210px;text-align:center;transform:rotate(40deg);background:linear-gradient(90deg,#FF3D71,#FF8A3D);color:#fff;font:400 18px 'Anton';letter-spacing:.14em;padding:8px 0;box-shadow:0 8px 18px rgba(0,0,0,.4)}
+.k{font-size:12.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#FFB86B}
+h1{font:400 clamp(54px,14vw,76px)/.92 'Anton';letter-spacing:.01em;margin:10px 0 6px;text-transform:uppercase;background:linear-gradient(180deg,#FFF4E6,#FFB86B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:16px;color:#C8B6E6;margin-bottom:22px;max-width:30ch;line-height:1.5}
+.tm{display:flex;gap:10px;margin-bottom:22px}.tm div{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 6px;text-align:center}.tm b{display:block;font:400 30px 'Anton';letter-spacing:.04em;font-variant-numeric:tabular-nums}.tm span{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#A58FCB}
+.cd{display:flex;align-items:center;gap:10px;background:#120626;border:1.5px dashed #FFB86B;border-radius:14px;padding:12px 14px;margin-bottom:18px}.cd span{font-size:13px;color:#C8B6E6;flex:1}.cd code{font:700 17px 'DM Sans';letter-spacing:.14em;color:#FFB86B}.cd button{border:0;background:#FFB86B;color:#1F0C3A;border-radius:9px;padding:8px 13px;font:700 13px 'DM Sans';cursor:pointer}.cd button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.go{width:100%;border:0;border-radius:16px;padding:16px;font:700 16px 'DM Sans';background:linear-gradient(90deg,#FF3D71,#FF8A3D);color:#fff;cursor:pointer;box-shadow:0 18px 30px -14px rgba(255,61,113,.9);transition:transform .15s}.go:hover{transform:translateY(-2px)}.go:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.fn{text-align:center;font-size:12.5px;color:#9C86C4;margin-top:14px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<article class="c"><div class="rb">LIMITED</div><div class="k">Black Friday</div><h1>40% off<br>everything</h1><p class="sub">Every template, plan and add-on. Today through Monday only.</p>
+<div class="tm" role="timer" aria-label="Time left"><div><b id="d">02</b><span>Days</span></div><div><b id="h">14</b><span>Hours</span></div><div><b id="m">36</b><span>Mins</span></div><div><b id="s">09</b><span>Secs</span></div></div>
+<div class="cd"><span>Use code</span><code>FRIDAY40</code><button id="cp">Copy</button></div>
+<button class="go">Shop the sale</button><p class="fn">Discount applies automatically at checkout.</p></article>
+<script>
+let T=((2*24+14)*60+36)*60+9;const p=n=>String(n).padStart(2,'0');
+function tick(){const d=Math.floor(T/86400),h=Math.floor(T%86400/3600),m=Math.floor(T%3600/60),s=T%60;document.getElementById('d').textContent=p(d);document.getElementById('h').textContent=p(h);document.getElementById('m').textContent=p(m);document.getElementById('s').textContent=p(s);if(T>0)T--}
+tick();setInterval(tick,1000);
+document.getElementById('cp').onclick=e=>{navigator.clipboard&&navigator.clipboard.writeText('FRIDAY40').catch(()=>{});e.target.textContent='Copied';setTimeout(()=>e.target.textContent='Copy',1400)};
+</script></body></html>

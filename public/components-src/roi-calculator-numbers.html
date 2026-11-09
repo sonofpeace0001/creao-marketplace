@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ROI Calculator Numbers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A1210;color:#E5F3EC;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{display:grid;grid-template-columns:1fr 1.1fr;width:100%;max-width:820px;background:#0F1A16;border:1px solid #1C3029;border-radius:28px;overflow:hidden;box-shadow:0 40px 80px -40px #000}
+.in{padding:30px}.in h1{font-size:24px;font-weight:800;letter-spacing:-.04em}.in>p{color:#7FA394;font-size:14.5px;margin:6px 0 24px;line-height:1.5}
+.f{margin-bottom:22px}.f label{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;color:#A8C7BA;margin-bottom:10px}.f label b{font:500 14px 'JetBrains Mono',monospace;color:#6EE7B7}
+.f input{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:linear-gradient(90deg,#34D399 var(--p),#1E332B var(--p));outline:0;cursor:pointer}
+.f input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(52,211,153,.3),0 4px 10px rgba(0,0,0,.5)}.f input::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:0}.f input:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px #0F1A16,0 0 0 7px #34D399}
+.rs{padding:30px;background:linear-gradient(160deg,#133D2F,#0E2A21);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.rs::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(52,211,153,.35),transparent 70%)}
+.rs small{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#7FD8B4;position:relative}
+.big{position:relative;display:flex;align-items:baseline;font-size:clamp(46px,8vw,72px);font-weight:800;letter-spacing:-.06em;line-height:1.05;margin:6px 0 4px;font-variant-numeric:tabular-nums}.big span{font-size:.45em;color:#7FD8B4;margin-right:2px;letter-spacing:0}
+.rs>p{position:relative;font-size:14px;color:#A8D9C3;margin-bottom:20px}
+.st{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px}.st div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px}.st b{display:block;font-size:24px;font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.st span{font-size:12.5px;color:#9FCDB8}
+.bar{position:relative;margin-top:16px}.bar .t{display:flex;justify-content:space-between;font-size:12.5px;color:#9FCDB8;margin-bottom:6px}.bar .tr{height:10px;border-radius:10px;background:rgba(0,0,0,.3);overflow:hidden}.bar .tr i{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,#34D399,#A7F3D0);width:0;transition:width .5s cubic-bezier(.3,1.1,.4,1);box-shadow:0 0 14px #34D399}
+.go{position:relative;margin-top:18px;border:0;background:#fff;color:#0E2A21;font:800 15px 'Manrope';padding:14px;border-radius:14px;cursor:pointer;transition:transform .15s}.go:hover{transform:translateY(-2px)}.go:focus-visible{outline:3px solid #34D399;outline-offset:3px}
+@media(max-width:700px){.c{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="in"><h1>What could you save?</h1><p>Move the sliders to match your team. We will estimate your yearly return.</p>
+<div class="f"><label for="a">Team size <b id="av"></b></label><input type="range" id="a" min="2" max="200" value="24"></div>
+<div class="f"><label for="b">Hours lost per person, weekly <b id="bv"></b></label><input type="range" id="b" min="1" max="15" value="5"></div>
+<div class="f"><label for="c">Average hourly cost <b id="cv"></b></label><input type="range" id="c" min="20" max="150" step="5" value="55"></div></div>
+<div class="rs"><small>Estimated yearly savings</small><div class="big" id="big" aria-live="polite"><span>$</span><b id="bn">0</b></div><p id="sub"></p>
+<div class="st"><div><b id="h">0</b><span>Hours reclaimed</span></div><div><b id="r">0x</b><span>Return on plan</span></div></div>
+<div class="bar"><div class="t"><span>Payback period</span><span id="pb"></span></div><div class="tr"><i id="bi"></i></div></div><button class="go">Start saving time</button></div></div>
+<script>
+const $=id=>document.getElementById(id);const PLAN=12,SAVE=.6;let shown={bn:0,h:0};
+function tween(k,to,fmt,el){const s=shown[k],t0=performance.now();const f=n=>{const p=Math.min(1,(n-t0)/450);shown[k]=s+(to-s)*(1-Math.pow(1-p,3));el.textContent=fmt(shown[k]);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+function calc(){const a=+$('a').value,b=+$('b').value,c=+$('c').value;['a','b','c'].forEach(i=>{const e=$(i);e.style.setProperty('--p',((e.value-e.min)/(e.max-e.min)*100)+'%')});
+ $('av').textContent=a+' people';$('bv').textContent=b+' hrs';$('cv').textContent='$'+c;
+ const hrs=Math.round(a*b*52*SAVE),save=hrs*c,cost=a*PLAN*12,roi=cost?save/cost:0;
+ tween('bn',save,v=>Math.round(v).toLocaleString(),$('bn'));tween('h',hrs,v=>Math.round(v).toLocaleString(),$('h'));$('r').textContent=roi.toFixed(1)+'x';$('sub').textContent='Based on saving '+Math.round(SAVE*100)+'% of lost time across '+a+' people.';
+ const months=Math.max(.1,cost/12/(save/12)*1);$('pb').textContent=months<1?'under 1 month':months.toFixed(1)+' months';$('bi').style.width=Math.max(8,Math.min(100,100-months*18))+'%'}
+['a','b','c'].forEach(i=>$(i).addEventListener('input',calc));calc();
+</script></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior music-app designer and front-end engineer with 15+ years of experience. Build "Coverflow Carousel": a 3D coverflow album carousel with perspective-tilted side covers, reflections, dots and swipe support.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight stage with gradient album covers, Syne titles and reflected floors.
+- Palette: #F2EFFA, #0B0A12, #1D1636, #9A92BE, #2F2850, #16122A
+- Type: Syne, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Perspective stage of seven covers (number, title, artist) with rotateY and translateZ per offset; title and artist readout; arrows and dot indicators.
+
+INTERACTION & STATES
+- Click a cover, arrows, arrow keys, swipe or horizontal wheel moves the centre; transforms transition with an ease-out; side covers dim and fade beyond three steps.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

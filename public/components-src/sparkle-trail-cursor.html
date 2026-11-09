@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sparkle Trail Cursor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{position:relative;min-height:100vh;background:radial-gradient(700px 500px at 50% 40%,#2A1250,#0C0720 70%);color:#FFF5FF;font-family:'Fredoka',sans-serif;display:grid;place-items:center;padding:24px;overflow:hidden;-webkit-font-smoothing:antialiased;cursor:none}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.ct{position:relative;z-index:2;text-align:center;max-width:680px}
+.ct small{font-size:13px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#FFD6F6}
+.ct h1{font-size:clamp(46px,9vw,100px);font-weight:700;line-height:1;letter-spacing:-.02em;margin:14px 0 14px;background:linear-gradient(90deg,#FFE29A,#FF8FD6,#9D8CFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ct p{font-size:clamp(16px,2vw,20px);line-height:1.6;color:#CDB8E8;max-width:38ch;margin:0 auto 26px}
+.bt{display:inline-flex;gap:12px}.bt a{padding:14px 28px;border-radius:99px;font:600 16px 'Fredoka';text-decoration:none;cursor:none}.bt .p{background:linear-gradient(135deg,#FFC857,#FF7AC8);color:#2A0F40;box-shadow:0 0 40px -6px #FF7AC8}.bt .g{border:2px solid rgba(255,214,246,.5);color:#FFE3F8}.bt a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.cs{position:fixed;left:0;top:0;width:18px;height:18px;margin:-9px;border-radius:50%;border:2px solid #FFE29A;z-index:5;pointer-events:none;mix-blend-mode:screen;transition:width .2s,height .2s,margin .2s,background .2s}.cs.bg{width:44px;height:44px;margin:-22px;background:rgba(255,226,154,.18)}
+.hint{position:absolute;bottom:20px;left:0;right:0;text-align:center;z-index:2;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#7A5FA0}
+@media(hover:none){body{cursor:auto}.cs{display:none}}
+@media(prefers-reduced-motion:reduce){.cs{transition:none}}
+</style></head><body>
+<canvas id="cv"></canvas><div class="cs" id="cs"></div>
+<div class="ct"><small>Magic cursor</small><h1>Make a wish</h1><p>Every move leaves a trail of stardust. Click anywhere for a burst of sparkles.</p><div class="bt"><a class="p" href="#">Start the magic</a><a class="g" href="#">Maybe later</a></div></div><div class="hint">Move and click</div>
+<script>
+const cv=document.getElementById('cv'),x=cv.getContext('2d'),cs=document.getElementById('cs');let W,H,dpr=Math.min(2,devicePixelRatio||1);function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}size();addEventListener('resize',size);
+const S=[];const COL=['#FFE29A','#FF8FD6','#9D8CFF','#8EF3FF','#FFFFFF'];let px=0,py=0,lx=null,ly=null,real=false,t=0,cx=0,cy=0;
+function star(c,r,rot){x.save();x.translate(c[0],c[1]);x.rotate(rot);x.beginPath();for(let i=0;i<8;i++){const a=i*Math.PI/4,rr=i%2?r*.28:r;x.lineTo(Math.cos(a)*rr,Math.sin(a)*rr)}x.closePath();x.fill();x.restore()}
+function emit(X,Y,n,burst){for(let i=0;i<n;i++){const a=Math.random()*6.283,sp=burst?2+Math.random()*5:Math.random()*1.1;S.push({x:X+(Math.random()-.5)*8,y:Y+(Math.random()-.5)*8,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-(burst?1:.2),r:burst?5+Math.random()*9:3+Math.random()*7,rot:Math.random()*6.28,vr:(Math.random()-.5)*.14,l:0,m:burst?60+Math.random()*30:40+Math.random()*30,c:COL[(Math.random()*COL.length)|0],g:burst?.06:.015})}}
+addEventListener('pointermove',e=>{real=true;px=e.clientX;py=e.clientY;cs.style.transform='translate('+px+'px,'+py+'px)';if(lx!=null){const d=Math.hypot(px-lx,py-ly);if(d>6)emit(px,py,Math.min(4,1+Math.floor(d/18)),false)}lx=px;ly=py});
+addEventListener('pointerdown',e=>{emit(e.clientX,e.clientY,34,true)});
+document.querySelectorAll('a').forEach(a=>{a.addEventListener('mouseenter',()=>cs.classList.add('bg'));a.addEventListener('mouseleave',()=>cs.classList.remove('bg'))});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function frame(){t+=.016;x.clearRect(0,0,W,H);if(!real){const ax=W/2+Math.cos(t*1.1)*W*.3,ay=H/2+Math.sin(t*1.7)*H*.22;px=ax;py=ay;cs.style.transform='translate('+ax+'px,'+ay+'px)';if(lx!=null){emit(ax,ay,2,false)}lx=ax;ly=ay}
+ x.globalCompositeOperation='lighter';for(let i=S.length-1;i>=0;i--){const s=S[i];s.l++;s.x+=s.vx;s.y+=s.vy;s.vy+=s.g;s.vx*=.985;s.rot+=s.vr;const k=1-s.l/s.m;if(k<=0){S.splice(i,1);continue}x.globalAlpha=Math.min(1,k*1.4);x.fillStyle=s.c;x.shadowColor=s.c;x.shadowBlur=10;star([s.x,s.y],s.r*(.4+k*.6),s.rot)}x.globalAlpha=1;x.shadowBlur=0;x.globalCompositeOperation='source-over';
+ if(!reduce)requestAnimationFrame(frame)}
+for(let i=0;i<70;i++){t+=.016;const ax=W/2+Math.cos(t*1.1)*W*.3,ay=H/2+Math.sin(t*1.7)*H*.22;emit(ax,ay,2,false);S.forEach(s=>{s.l++;s.x+=s.vx;s.y+=s.vy;s.vy+=s.g;s.vx*=.985;s.rot+=s.vr});lx=ax;ly=ay}
+frame();
+</script></body></html>

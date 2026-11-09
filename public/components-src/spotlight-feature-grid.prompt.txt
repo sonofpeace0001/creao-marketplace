@@ -1,0 +1,29 @@
+ROLE
+You are a senior product-marketing designer and front-end engineer with 15+ years of experience. Build "Spotlight Feature Grid": three feature cards whose borders and surfaces light up with a cursor-following radial spotlight.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black Linear-style cards with gradient headline, indigo glow, mono index numbers and Geist type.
+- Palette: #8B8FFF, #08090B, #EDEEF1, #8E92A3, #0F1014, #1B1D27
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Eyebrow and gradient headline; three cards each with a 1px glowing border, icon tile, index number, title, copy and a Learn more link that slides in on hover.
+
+INTERACTION & STATES
+- One pointermove listener sets --x and --y on every card so the glow tracks across the whole grid; links reveal on hover and focus; effect is always on in touch and reduced-motion contexts via the focus path.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

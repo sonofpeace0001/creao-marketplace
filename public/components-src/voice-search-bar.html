@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Voice Search Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#FFF1E6,#FFE3EE 55%,#EAE3FF);color:#2A1030;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;text-align:center}
+.c h1{font-size:clamp(28px,5vw,40px);font-weight:700;letter-spacing:-.045em}.c>p{color:#8A5E80;margin:6px 0 24px;font-size:16px}
+.bar{position:relative;display:flex;align-items:center;gap:10px;background:#fff;border-radius:99px;padding:8px 8px 8px 22px;box-shadow:0 20px 40px -20px rgba(180,60,120,.5),0 0 0 1px rgba(42,16,48,.06);transition:box-shadow .3s}.bar.ls{box-shadow:0 20px 50px -14px rgba(236,72,153,.7),0 0 0 2px #EC4899}
+.bar svg.s{flex:none;color:#B58AAA}.bar input{flex:1;min-width:0;border:0;outline:0;background:none;font:500 18px 'Outfit';color:#2A1030;padding:12px 0}.bar input::placeholder{color:#C4A3BB}
+.wv{display:none;flex:1;align-items:center;justify-content:center;gap:4px;height:48px}.bar.ls .wv{display:flex}.bar.ls input,.bar.ls svg.s{display:none}
+.wv i{width:5px;border-radius:5px;background:linear-gradient(#F472B6,#8B5CF6);height:10px;transition:height .09s}
+.mc{position:relative;flex:none;width:56px;height:56px;border:0;border-radius:50%;background:linear-gradient(135deg,#F472B6,#8B5CF6);color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 12px 22px -8px #EC4899;transition:transform .2s}.mc:hover{transform:scale(1.06)}.mc:focus-visible{outline:3px solid #2A1030;outline-offset:3px}
+.mc::before,.mc::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #EC4899;opacity:0}.bar.ls .mc::before{animation:rp 1.6s ease-out infinite}.bar.ls .mc::after{animation:rp 1.6s ease-out .8s infinite}@keyframes rp{from{transform:scale(1);opacity:.7}to{transform:scale(2.2);opacity:0}}
+.bar.ls .mc{background:#EF4444}
+.st{margin-top:16px;min-height:24px;font-size:15px;color:#8A5E80;font-weight:500}.st b{color:#2A1030}
+.rs{margin-top:18px;display:grid;gap:8px;text-align:left}.rs button{display:flex;align-items:center;gap:14px;background:#fff;border:0;border-radius:20px;padding:12px 14px;box-shadow:0 8px 20px -14px rgba(180,60,120,.5);cursor:pointer;font:inherit;color:inherit;animation:in .4s cubic-bezier(.3,1.3,.5,1) both;animation-delay:calc(var(--i)*70ms)}@keyframes in{from{opacity:0;transform:translateY(8px)}}.rs button:hover{transform:translateX(4px)}.rs button:focus-visible{outline:3px solid #8B5CF6}
+.rs i{width:46px;height:46px;border-radius:14px;background:var(--g);flex:none}.rs b{display:block;font-size:15.5px;font-weight:600}.rs span{font-size:13.5px;color:#8A5E80}.rs em{margin-left:auto;font-style:normal;font-weight:700;color:#BE185D}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><h1>Say what you are craving</h1><p>Tap the mic and speak, or just type.</p>
+<div class="bar" id="bar"><svg class="s" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><input id="q" placeholder="Search dishes, cuisines, restaurants" aria-label="Search" autocomplete="off"><div class="wv" id="wv" aria-hidden="true"></div>
+<button class="mc" id="mc" aria-pressed="false" aria-label="Start voice search"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button></div>
+<div class="st" id="st" aria-live="polite"></div><div class="rs" id="rs"></div></div>
+<script>
+const D=[['Spicy ramen','Tokyo Table · 0.4 mi','#F97316','linear-gradient(135deg,#FDBA74,#EA580C)'],['Margherita pizza','Fornello · 0.7 mi','#DC2626','linear-gradient(135deg,#FCA5A5,#DC2626)'],['Sushi platter','Umi · 1.1 mi','#0EA5E9','linear-gradient(135deg,#7DD3FC,#0284C7)'],['Veggie bowl','Green Fork · 0.3 mi','#16A34A','linear-gradient(135deg,#86EFAC,#16A34A)']];
+const bar=document.getElementById('bar'),wv=document.getElementById('wv'),mc=document.getElementById('mc'),q=document.getElementById('q'),st=document.getElementById('st');wv.innerHTML='<i></i>'.repeat(28);const B=[...wv.children];let lis=false,tm=null,wt=null;
+function results(t){const m=D.filter(d=>!t||d[0].toLowerCase().includes(t.toLowerCase())||d[1].toLowerCase().includes(t.toLowerCase()));document.getElementById('rs').innerHTML=(m.length?m:D.slice(0,2)).map((d,i)=>'<button style="--i:'+i+';--g:'+d[3]+'"><i></i><div><b>'+d[0]+'</b><span>'+d[1]+'</span></div><em>$$</em></button>').join('')}
+function listen(on){lis=on;bar.classList.toggle('ls',on);mc.setAttribute('aria-pressed',on);mc.setAttribute('aria-label',on?'Stop listening':'Start voice search');clearInterval(wt);clearTimeout(tm);
+ if(on){st.innerHTML='Listening…';const rd=matchMedia('(prefers-reduced-motion: reduce)').matches;wt=setInterval(()=>B.forEach((b,i)=>b.style.height=(8+Math.abs(Math.sin(performance.now()/180+i*.5))*Math.random()*38)+'px'),90);
+  const phrase='spicy ramen near me';let k=0;tm=setTimeout(function nx(){k++;st.innerHTML='Heard: <b>'+phrase.slice(0,k)+'</b>';if(k<phrase.length)tm=setTimeout(nx,rd?0:70);else tm=setTimeout(()=>{listen(false);q.value=phrase;st.innerHTML='Showing results for <b>'+phrase+'</b>';results('ramen')},500)},700)}else if(!q.value)st.textContent=''}
+mc.onclick=()=>listen(!lis);q.addEventListener('input',()=>{results(q.value);st.textContent=''});document.addEventListener('keydown',e=>{if(e.key==='Escape')listen(false)});
+results('');setTimeout(()=>listen(true),60);setTimeout(()=>{st.innerHTML='Heard: <b>spicy ra</b>'},400);
+</script></body></html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Kanban WIP Limits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E1117;color:#E9ECF5;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:820px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;padding:0 4px}.hd h1{font-size:22px;font-weight:700;letter-spacing:-.03em}.hd span{font-size:13px;color:#7B849F}
+.bd{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cl{background:#151922;border:1px solid #232938;border-radius:20px;padding:12px;transition:border-color .3s,box-shadow .3s}.cl.full{border-color:#7F2434;box-shadow:0 0 0 1px #7F2434,0 0 40px -12px rgba(244,63,94,.5)}.cl.sk{animation:sk .4s}
+@keyframes sk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.ch{display:flex;align-items:center;gap:8px;margin-bottom:8px}.ch b{font-size:14.5px;font-weight:600}.ch .lm{margin-left:auto;font:500 12px 'JetBrains Mono',monospace;color:#7B849F}.cl.full .lm{color:#FB7185}
+.mt{display:flex;gap:4px;margin-bottom:12px}.mt i{flex:1;height:5px;border-radius:5px;background:#232938;transition:background .3s}.mt i.f{background:var(--c)}.cl.full .mt i.f{background:#F43F5E}
+.cs{display:grid;gap:8px;min-height:40px;align-content:start}
+.cd{background:#1B202C;border:1px solid #2A3144;border-radius:13px;padding:11px 12px;display:flex;align-items:center;gap:10px;will-change:transform}
+.cd b{flex:1;font-size:14px;font-weight:500;line-height:1.3}
+.rg{position:relative;width:26px;height:26px;flex:none}.rg svg{transform:rotate(-90deg)}.rg circle{fill:none;stroke-width:3.500;stroke-linecap:round}.rg .tr{stroke:#2A3144}.rg .pg{stroke:var(--c)}.rg i{position:absolute;inset:0;display:grid;place-items:center;font:500 8px 'JetBrains Mono',monospace;font-style:normal;color:#9AA3BD}
+.mv{display:flex;gap:3px;opacity:0;transition:opacity .15s}.cd:hover .mv,.cd:focus-within .mv{opacity:1}.mv button{width:24px;height:24px;border:0;border-radius:7px;background:#2A3144;color:#C8CEE6;cursor:pointer;display:grid;place-items:center}.mv button:hover{background:#3A4360;color:#fff}.mv button:disabled{opacity:.25;cursor:default}.mv button:focus-visible{outline:2px solid #818CF8}
+.ad{margin-top:8px;width:100%;border:1px dashed #323A52;background:none;color:#7B849F;border-radius:12px;padding:9px;font:500 13.5px 'Outfit';cursor:pointer}.ad:hover{border-color:#5B6690;color:#C8CEE6}.ad:focus-visible{outline:2px solid #818CF8}
+.nt{position:fixed;left:50%;bottom:22px;transform:translate(-50%,40px);background:#F43F5E;color:#fff;border-radius:12px;padding:10px 16px;font-size:13.5px;font-weight:600;opacity:0;transition:all .3s cubic-bezier(.3,1.4,.5,1);z-index:9}.nt.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:640px){.bd{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Flow board</h1><span>Columns refuse work beyond their limit</span></div><div class="bd" id="bd"></div></div><div class="nt" id="nt"></div>
+<script>
+const C=[{n:'Backlog',c:'#94A3B8',l:99},{n:'Doing',c:'#818CF8',l:3},{n:'Review',c:'#34D399',l:2}];
+const D=[[['Pricing page copy',10],['Docs search',0],['Dark mode audit',0],['Email templates',20]],[['Checkout redesign',70],['API rate limits',45],['Onboarding video',20]],[['Webhook retries',90]]];
+const bd=document.getElementById('bd'),cols=[],nt=document.getElementById('nt');let uid=0;
+C.forEach((c,i)=>{const w=document.createElement('div');w.className='cl';w.style.setProperty('--c',c.c);w.innerHTML='<div class="ch"><b>'+c.n+'</b><span class="lm"></span></div><div class="mt"></div><div class="cs"></div>'+(i===0?'<button class="ad">+ Add card</button>':'');bd.appendChild(w);cols.push({w,cs:w.querySelector('.cs'),lm:w.querySelector('.lm'),mt:w.querySelector('.mt'),items:D[i].map(d=>({id:uid++,t:d[0],p:d[1]}))})});
+const CH='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">';
+function render(anim){const pos={};if(anim)document.querySelectorAll('.cd').forEach(e=>pos[e.dataset.id]=e.getBoundingClientRect());
+ cols.forEach((c,i)=>{c.cs.innerHTML='';c.items.forEach(it=>{const e=document.createElement('div');e.className='cd';e.dataset.id=it.id;e.innerHTML='<div class="rg" style="--c:'+C[i].c+'"><svg width="26" height="26" viewBox="0 0 28 28"><circle class="tr" cx="14" cy="14" r="11"/><circle class="pg" cx="14" cy="14" r="11" stroke-dasharray="'+(it.p/100*69.1)+' 100"/></svg><i>'+it.p+'</i></div><b>'+it.t+'</b><div class="mv"><button aria-label="Move left" '+(i===0?'disabled':'')+'>'+CH+'<path d="m15 6-6 6 6 6"/></svg></button><button aria-label="Move right" '+(i===2?'disabled':'')+'>'+CH+'<path d="m9 6 6 6-6 6"/></svg></button></div>';const bs=e.querySelectorAll('button');bs[0].onclick=()=>mv(it,i,-1);bs[1].onclick=()=>mv(it,i,1);c.cs.appendChild(e)});
+  const lim=C[i].l;c.lm.textContent=lim>50?c.items.length+' cards':c.items.length+' / '+lim;c.w.classList.toggle('full',lim<50&&c.items.length>=lim);c.mt.innerHTML=lim<50?Array.from({length:lim},(_,k)=>'<i class="'+(k<c.items.length?'f':'')+'"></i>').join(''):'';c.mt.style.display=lim<50?'flex':'none'});
+ if(anim)document.querySelectorAll('.cd').forEach(e=>{const o=pos[e.dataset.id];if(!o)return;const n=e.getBoundingClientRect(),dx=o.left-n.left,dy=o.top-n.top;if(!dx&&!dy)return;e.style.transition='none';e.style.transform='translate('+dx+'px,'+dy+'px)';requestAnimationFrame(()=>requestAnimationFrame(()=>{e.style.transition='transform .5s cubic-bezier(.3,1.3,.5,1)';e.style.transform=''}))})}
+function warn(i,msg){const w=cols[i].w;w.classList.remove('sk');void w.offsetWidth;w.classList.add('sk');nt.textContent=msg;nt.classList.add('on');clearTimeout(warn.t);warn.t=setTimeout(()=>nt.classList.remove('on'),1800)}
+function mv(it,i,d){const j=i+d,lim=C[j].l;if(cols[j].items.length>=lim){warn(j,C[j].n+' is at its limit of '+lim+'. Finish something first.');return}cols[i].items=cols[i].items.filter(x=>x!==it);cols[j].items.push(it);render(true)}
+document.querySelector('.ad').onclick=()=>{cols[0].items.push({id:uid++,t:'New task '+(uid),p:0});render(true)};
+render(false);
+</script></body></html>

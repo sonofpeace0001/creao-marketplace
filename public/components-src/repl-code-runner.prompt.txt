@@ -1,0 +1,29 @@
+ROLE
+You are a senior learning platform designer with 15+ years of experience. Build "REPL Code Runner": an editor with a Run button that scans each line with a highlight and then prints console output with a status indicator.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep navy editor with Material style syntax colours and a green run button.
+- Palette: #22C55E, #C5CBE8, #FBBF24, #6A7298, #0A0D16, #1D2238
+- Type: Inter, Fira Code (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Window chrome with file tab and Run button; code with line numbers; console header with status; output lines.
+
+INTERACTION & STATES
+- Run walks a highlight down executable lines, then prints console messages one by one and sets the status to Finished with timing.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

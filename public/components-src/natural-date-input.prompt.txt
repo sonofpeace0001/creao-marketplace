@@ -1,0 +1,29 @@
+ROLE
+You are a senior productivity-app designer and front-end engineer with 15+ years of experience. Build "Natural Language Date Input": a date field that understands plain phrases like next friday or in 3 days and shows a parsed date preview.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with a monochrome input and a lavender result card with a mini calendar tile.
+- Palette: #18181B, #71717A, #E4E4E7, #4F46E5, #F4F3EF, #FAFAF9
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading; input with calendar icon and Enter hint; result card with month-day tile, full date, relative text and tick; error state; suggestion chips.
+
+INTERACTION & STATES
+- A small parser handles today, tomorrow, weekdays, in N days or weeks or months, next week or month, end of month and Mon DD; results update as you type; chips fill the field.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

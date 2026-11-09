@@ -1,0 +1,29 @@
+ROLE
+You are a senior micro-interaction designer and front-end engineer with 15+ years of experience. Build "Morph State Button": buttons that shrink into a spinner, expand into a drawn success check or shake into an error state.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on soft lavender with indigo, ink and pink buttons.
+- Palette: #12152B, #4F46E5, #E9ECF5, #6A6F94, #9499BA, #16A34A
+- Type: DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Three buttons with idle label, spinner, check and error layers and a progress sliver; reset control.
+
+INTERACTION & STATES
+- Click morphs width and radius to a circle while loading, then to a green check or a red shake with an error label.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior growth designer and front-end engineer with 15+ years of experience. Build "Waitlist Queue Position": a waitlist status card with a slot-roll position counter, a dotted queue map and a referral meter that moves you up the line.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep violet card with pink and violet glow, huge rolling numerals and a dot grid queue.
+- Palette: #C084FC, #B79CFF, #130E22, #2B2145, #4B3A78, #F472B6
+- Type: Bricolage Grotesque, Manrope (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Eyebrow, rolling position number, ahead-of line, 72 dot queue with your dot ringed, referral link with copy button, three step progress and simulate button.
+
+INTERACTION & STATES
+- Digit columns roll to the new position; the queue dot moves; copy morphs to Copied; simulating a friend moves you up 170 spots and fills a progress pip.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

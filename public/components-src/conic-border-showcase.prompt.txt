@@ -1,0 +1,29 @@
+ROLE
+You are a senior CSS specialist and front-end engineer with 15+ years of experience. Build "Conic Border Showcase": six cards demonstrating animated gradient borders driven by a single registered angle property.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark panel cards with comet, spectrum, beam, dashed, neon and dual rotating borders.
+- Palette: #F43F5E, #22D3EE, #FBBF24, #8B5CF6, #818CF8, #34D399
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Headline; six bordered cards each with label, title and one line description.
+
+INTERACTION & STATES
+- An @property angle animates conic and linear gradient borders; the glow variant adds a drop shadow halo; reduced motion pauses them.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

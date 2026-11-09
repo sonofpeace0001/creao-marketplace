@@ -1,0 +1,29 @@
+ROLE
+You are a senior hardware-style 3D designer and front-end engineer with 15+ years of experience. Build "Laptop Lid Mockup": a laptop built in CSS 3D with a hinged lid that opens and closes, a dashboard screen and a tilt that follows the cursor.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark stage with a silver aluminium body, glossy glass sweep and an indigo analytics screen.
+- Palette: #818CF8, #0A0A0F, #14172E, #4F46E5, #2A2F4A, #0E1018
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Lid with bezel, notch, sidebar and dashboard UI; aluminium back face; base with notch; open and close button.
+
+INTERACTION & STATES
+- Open and Close rotate the lid on a bottom hinge with a long ease; hovering the stage rotates the whole laptop on the Y axis; a glass highlight sweeps.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior conversion designer and front-end engineer with 15+ years of experience. Build "Floating CTA Bar": a bottom floating newsletter bar with inline email field, validation, success state and a show-again pill.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Navy pill bar with mint button over a skeleton article page, Sora type.
+- Palette: #12203A, #5EEAD4, #8296BA, #0B2A26, #EEF2F8, #EDF1F8
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Page skeleton; bar with title and subtext, email field with Subscribe button, close button; success state; reopen pill.
+
+INTERACTION & STATES
+- Bar slides up on load; invalid email flashes the field outline; success shows a confirmation then hides the bar; close hides it and reveals a Show bar pill that restores it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

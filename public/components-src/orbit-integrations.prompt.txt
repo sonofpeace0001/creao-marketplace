@@ -1,0 +1,29 @@
+ROLE
+You are a senior integrations-page designer and front-end engineer with 15+ years of experience. Build "Orbiting Integrations": app icons orbiting a pulsing product logo on three dashed rings that pause on hover with name tooltips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Pale periwinkle page with white tiles, dashed rings and a glowing indigo-to-violet core.
+- Palette: #10193A, #4F6BFF, #EAF0FF, #F7F9FF, #5C6791, #C9D3F5
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Left column with eyebrow, headline, copy and CTA; right orbit scene with three concentric dashed rings, a pulsing centre mark and 15 coloured integration tiles counter-rotating so labels stay upright.
+
+INTERACTION & STATES
+- Rings rotate at different speeds and directions via CSS animation; hovering the scene pauses it; hovering a tile scales it and shows its name; reduced motion stops rotation.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

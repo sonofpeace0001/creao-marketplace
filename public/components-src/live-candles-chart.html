@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Live Candlestick Chart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0D12;color:#E6E9F0;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:820px;background:#10151D;border:1px solid #1F2733;border-radius:22px;padding:22px;box-shadow:0 40px 70px -40px #000}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:12px}.hd h1{font-size:20px;font-weight:700;letter-spacing:-.03em;display:flex;align-items:center;gap:10px}.hd h1 i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#7C5CFA,#22D3EE);display:block}.hd p{font:400 12px 'IBM Plex Mono',monospace;color:#6F7A8E;margin-top:4px}
+.px{text-align:right}.px b{display:block;font:500 28px 'IBM Plex Mono',monospace;letter-spacing:-.05em}.px span{font:500 13px 'IBM Plex Mono',monospace}.up{color:#34D399}.dn{color:#F87171}
+.tf{display:flex;gap:4px;margin-bottom:10px}.tf button{border:0;background:none;color:#7C879B;font:500 12.5px 'IBM Plex Mono',monospace;padding:6px 10px;border-radius:8px;cursor:pointer}.tf button[aria-pressed=true]{background:#1D2533;color:#fff}.tf button:focus-visible{outline:2px solid #7C5CFA}
+.cv{position:relative;height:300px}.cv canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
+.tt{position:absolute;pointer-events:none;background:#1A2230;border:1px solid #2A3548;border-radius:10px;padding:8px 10px;font:400 11.5px/1.6 'IBM Plex Mono',monospace;opacity:0;transition:opacity .1s;white-space:nowrap}
+.ft{display:flex;justify-content:space-between;margin-top:10px;font:400 11.5px 'IBM Plex Mono',monospace;color:#6F7A8E}.ft b{color:#34D399;font-weight:500}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1><i></i>NOVA / USD</h1><p>Spot · 5m candles · live</p></div><div class="px"><b id="pr">0.00</b><span id="ch">+0.00%</span></div></div>
+<div class="tf" role="group" aria-label="Timeframe"><button aria-pressed="false">1m</button><button aria-pressed="true">5m</button><button aria-pressed="false">1h</button><button aria-pressed="false">1d</button></div>
+<div class="cv" id="cv"><canvas id="c" role="img" aria-label="Live candlestick chart"></canvas><div class="tt" id="tt"></div></div>
+<div class="ft"><span>Vol <b id="vl">0</b></span><span id="hl">H — L —</span></div></div>
+<script>
+let seed=11;const rnd=()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646};
+let D=[],p=2.8;for(let i=0;i<60;i++){const o=p,c=o+(rnd()-.47)*.09,h=Math.max(o,c)+rnd()*.04,l=Math.min(o,c)-rnd()*.04;D.push({o,h,l,c,v:Math.round(200+rnd()*800)});p=c}
+const cv=document.getElementById('c'),x=cv.getContext('2d'),tt=document.getElementById('tt');let W,H,dpr,mx=-1,my=-1;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function size(){dpr=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+function draw(){x.clearRect(0,0,W,H);const pad=44,ph=H-70,vh=48,n=D.length,cw=(W-pad)/n;const hi=Math.max(...D.map(d=>d.h)),lo=Math.min(...D.map(d=>d.l)),rg=hi-lo||1;const Y=v=>10+(hi-v)/rg*(ph-10);
+ x.strokeStyle='#1B2330';x.lineWidth=1;x.fillStyle='#5E6A80';x.font='11px IBM Plex Mono, monospace';for(let i=0;i<=4;i++){const v=hi-rg*i/4,y=Y(v);x.beginPath();x.moveTo(0,y);x.lineTo(W-pad,y);x.stroke();x.fillText(v.toFixed(2),W-pad+6,y+4)}
+ const mv=Math.max(...D.map(d=>d.v));D.forEach((d,i)=>{const cx=i*cw+cw/2,up=d.c>=d.o,col=up?'#34D399':'#F87171';x.fillStyle=up?'rgba(52,211,153,.28)':'rgba(248,113,113,.28)';const bh=d.v/mv*vh;x.fillRect(cx-cw*.35,H-bh,cw*.7,bh);
+  x.strokeStyle=col;x.lineWidth=1.2;x.beginPath();x.moveTo(cx,Y(d.h));x.lineTo(cx,Y(d.l));x.stroke();x.fillStyle=col;const t=Y(Math.max(d.o,d.c)),b=Y(Math.min(d.o,d.c));x.fillRect(cx-cw*.34,t,cw*.68,Math.max(1.5,b-t))});
+ const last=D[n-1],ly=Y(last.c);x.setLineDash([4,4]);x.strokeStyle='#7C5CFA';x.beginPath();x.moveTo(0,ly);x.lineTo(W-pad,ly);x.stroke();x.setLineDash([]);x.fillStyle='#7C5CFA';x.fillRect(W-pad,ly-9,pad,18);x.fillStyle='#fff';x.fillText(last.c.toFixed(2),W-pad+5,ly+4);
+ if(mx>=0&&mx<W-pad){const i=Math.min(n-1,Math.floor(mx/cw)),d=D[i];x.strokeStyle='rgba(255,255,255,.3)';x.setLineDash([3,4]);x.beginPath();x.moveTo(i*cw+cw/2,0);x.lineTo(i*cw+cw/2,H);x.moveTo(0,my);x.lineTo(W-pad,my);x.stroke();x.setLineDash([]);
+  tt.style.opacity=1;tt.style.left=Math.min(W-170,i*cw+cw/2+14)+'px';tt.style.top='8px';tt.innerHTML='O '+d.o.toFixed(3)+'  H '+d.h.toFixed(3)+'<br>L '+d.l.toFixed(3)+'  C '+d.c.toFixed(3)+'<br>Vol '+d.v}else tt.style.opacity=0;
+ const f=D[0].o,ch=(last.c-f)/f*100;document.getElementById('pr').textContent=last.c.toFixed(3);const e=document.getElementById('ch');e.textContent=(ch>=0?'+':'')+ch.toFixed(2)+'%';e.className=ch>=0?'up':'dn';document.getElementById('vl').textContent=last.v.toLocaleString();document.getElementById('hl').textContent='H '+hi.toFixed(2)+'  L '+lo.toFixed(2)}
+function tick(){const l=D[D.length-1],nc=l.c+(rnd()-.48)*.03;l.c=nc;l.h=Math.max(l.h,nc);l.l=Math.min(l.l,nc);l.v+=Math.round(rnd()*30);if(rnd()<.18){D.push({o:nc,h:nc,l:nc,c:nc,v:60});D.shift()}draw()}
+cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;draw()});cv.addEventListener('pointerleave',()=>{mx=-1;draw()});
+document.querySelectorAll('.tf button').forEach(b=>b.onclick=()=>document.querySelectorAll('.tf button').forEach(z=>z.setAttribute('aria-pressed',z===b)));
+size();draw();addEventListener('resize',()=>{size();draw()});if(!reduced)setInterval(tick,700);
+</script></body></html>

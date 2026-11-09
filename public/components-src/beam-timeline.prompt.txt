@@ -1,0 +1,29 @@
+ROLE
+You are a senior company-story designer and front-end engineer with 15+ years of experience. Build "Tracing Beam Timeline": a scrollable company timeline with a glowing beam that traces progress and lights events as they come into focus.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black card with a cyan-violet-pink beam, glowing node and mono dates.
+- Palette: #0E0E12, #8B5CF6, #C4B5FD, #09090B, #EDEDF0, #1F1F26
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Scroll container with fade masks; vertical rail with fill and moving glow node; header; four events with date, title, copy and tag.
+
+INTERACTION & STATES
+- Scroll position drives the beam height and activates events past the midpoint; inactive events are dimmed and offset; rail height matches content.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior safety-focused UI designer and front-end engineer with 15+ years of experience. Build "Hold to Confirm Button": destructive and publish buttons that only fire after a deliberate press and hold, with a filling ring and background wipe.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark stage with a rose red delete button and an indigo publish button.
+- Palette: #14121C, #F4F2FB, #8C88A8, #F43F5E, #211E2E, #22C55E
+- Type: Manrope (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Two buttons with ring icon, label and sub-label; success check; reset control.
+
+INTERACTION & STATES
+- Holding fills a ring and left-to-right wash with live percentage; releasing early rewinds; completing turns green with a drawn check; keyboard hold supported.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

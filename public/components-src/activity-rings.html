@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Activity Rings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#F3F3F7;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px;background:#111114;border:1px solid #232328;border-radius:32px;padding:30px;display:grid;grid-template-columns:260px 1fr;gap:30px;align-items:center;box-shadow:0 40px 80px -40px rgba(0,0,0,.9)}
+.rg{position:relative;width:260px;height:260px;margin:0 auto}.rg svg{width:100%;height:100%;transform:rotate(-90deg)}
+.rg circle{fill:none;stroke-linecap:round}.rg .t{stroke:var(--c);opacity:.2}.rg .p{stroke:var(--c);stroke-dasharray:var(--l) 9999;stroke-dashoffset:0;transition:stroke-dasharray .5s cubic-bezier(.3,.9,.3,1);filter:drop-shadow(0 0 7px var(--c))}
+.rg .ct{position:absolute;inset:0;display:grid;place-content:center;text-align:center;pointer-events:none}.rg .ct b{font-size:38px;font-weight:800;letter-spacing:-.06em;font-variant-numeric:tabular-nums}.rg .ct span{font:400 12px 'Fragment Mono',monospace;color:#8A8A96;letter-spacing:.08em}
+.ls{display:grid;gap:10px}.ri{display:flex;align-items:center;gap:14px;border:0;background:none;color:inherit;text-align:left;padding:10px 12px;border-radius:18px;cursor:pointer;font:inherit;transition:background .2s}.ri:hover,.ri.on{background:#1B1B20}.ri:focus-visible{outline:2px solid var(--c)}
+.ri i{width:12px;height:42px;border-radius:6px;background:var(--c);box-shadow:0 0 14px var(--c);flex:none}.ri span{font-size:12.5px;font-weight:600;color:#8A8A96;letter-spacing:.06em;text-transform:uppercase;display:block}.ri b{font-size:21px;font-weight:700;letter-spacing:-.04em;color:var(--c);font-variant-numeric:tabular-nums}.ri b small{font-size:14px;color:#8A8A96;font-weight:500;letter-spacing:0}
+.ac{display:flex;gap:8px;margin-top:6px}.ac button{flex:1;border:1px solid #2A2A30;background:#17171B;color:#F3F3F7;border-radius:14px;padding:11px;font:600 13.5px 'Sora';cursor:pointer;transition:all .15s}.ac button:hover{background:#222228}.ac button:focus-visible{outline:2px solid #fff}
+@media(max-width:620px){.c{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="rg" id="rg" role="img" aria-label="Activity rings"><svg viewBox="0 0 260 260" id="sv"></svg><div class="ct"><b id="cb">0</b><span id="cl">TOTAL SCORE</span></div></div>
+<div><div class="ls" id="ls"></div><div class="ac"><button id="ad">Log workout</button><button id="rs">New day</button></div></div></div>
+<script>
+const R=[['Move','#FA114F',620,500,'kcal',112],['Exercise','#A6FF00',24,30,'min',90],['Stand','#00C7E6',9,12,'hrs',68]];
+const sv=document.getElementById('sv'),ls=document.getElementById('ls');let sel=-1;
+R.forEach((r,i)=>{const rad=r[5]*.98+(i===0?18:i===1?-4:-26);const rd=[112,86,60][i];const C=2*Math.PI*rd;r.rd=rd;r.C=C;sv.insertAdjacentHTML('beforeend','<g style="--c:'+r[1]+'"><circle class="t" cx="130" cy="130" r="'+rd+'" stroke-width="22"/><circle class="p" id="p'+i+'" cx="130" cy="130" r="'+rd+'" stroke-width="22" style="--l:0px"/></g>')});
+ls.innerHTML=R.map((r,i)=>'<button class="ri" style="--c:'+r[1]+'" data-i="'+i+'" aria-label="'+r[0]+' '+r[2]+' of '+r[3]+' '+r[4]+'"><i></i><div><span>'+r[0]+'</span><b id="v'+i+'">'+r[2]+'<small>/'+r[3]+' '+r[4]+'</small></b></div></button>').join('');
+function paint(){R.forEach((r,i)=>{const p=Math.min(1.5,r[2]/r[3]);document.getElementById('p'+i).style.setProperty('--l',Math.min(p,1)*r.C+'px');document.getElementById('v'+i).innerHTML=Math.round(r[2])+'<small>/'+r[3]+' '+r[4]+'</small>'});
+ const sc=Math.round(R.reduce((a,r)=>a+Math.min(1,r[2]/r[3]),0)/3*100);document.getElementById('cb').textContent=sel<0?sc+'%':Math.round(R[sel][2]/R[sel][3]*100)+'%';document.getElementById('cl').textContent=sel<0?'TOTAL SCORE':R[sel][0].toUpperCase();document.getElementById('rg').setAttribute('aria-label',R.map(r=>r[0]+' '+Math.round(r[2]/r[3]*100)+' percent').join(', '))}
+ls.querySelectorAll('.ri').forEach(b=>{const i=+b.dataset.i;const on=()=>{sel=i;ls.querySelectorAll('.ri').forEach((x,k)=>x.classList.toggle('on',k===i));paint()},off=()=>{sel=-1;ls.querySelectorAll('.ri').forEach(x=>x.classList.remove('on'));paint()};b.addEventListener('pointerenter',on);b.addEventListener('focus',on);b.addEventListener('pointerleave',off);b.addEventListener('blur',off)});
+document.getElementById('ad').onclick=()=>{R[0][2]+=90;R[1][2]+=8;R[2][2]=Math.min(R[2][3],R[2][2]+1);paint()};document.getElementById('rs').onclick=()=>{R[0][2]=0;R[1][2]=0;R[2][2]=0;paint()};
+paint();requestAnimationFrame(()=>requestAnimationFrame(paint));
+</script></body></html>

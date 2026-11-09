@@ -1,0 +1,29 @@
+ROLE
+You are a senior promotional designer and front-end engineer with 15+ years of experience. Build "Peel Corner Cards": sticky-note style cards whose lower-right corner peels back to reveal a hidden offer underneath.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Kraft desk with butter, coral and sky paper cards, handwritten offers and soft shadows.
+- Palette: #2A2113, #FFFDF5, #D8CFBD, #CDC3AE, #7B6F58, #F5EFDC
+- Type: Caveat, Karla, Fraunces (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; three cards with number, title, copy, curled corner and a striped back sheet with handwritten text.
+
+INTERACTION & STATES
+- Hover or focus enlarges the clip-path corner cut and a folded flap, uncovering the offer; the effect uses a bouncy easing.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

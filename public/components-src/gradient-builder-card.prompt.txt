@@ -1,0 +1,29 @@
+ROLE
+You are a senior design-tool designer and front-end engineer with 15+ years of experience. Build "Gradient Builder Card": a gradient generator with colour pickers, presets, a rotary angle knob and a live copyable CSS snippet.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean white tool card with a vivid live preview tile and a dark code block.
+- Palette: #14162A, #D9DBE8, #E1E3EF, #ECEDF3, #7A7E9C, #F2F3F8
+- Type: Space Grotesk, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Large preview with name and angle; three colour swatches; preset dots; angle knob with slider; CSS snippet with copy button.
+
+INTERACTION & STATES
+- Colours, presets and angle update the preview and CSS live; the knob can be dragged around its centre or used with arrow keys; copy morphs to Copied.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

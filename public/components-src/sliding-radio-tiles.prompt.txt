@@ -1,0 +1,29 @@
+ROLE
+You are a senior interaction designer and front-end engineer with 15+ years of experience. Build "Sliding Radio Tiles": a radio group of option tiles where a single glowing highlight slides and springs to whichever tile is chosen.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black panel with a violet glow highlight and hairline tile borders.
+- Palette: #8A8A98, #6366F1, #0A0A0D, #ECECF1, #17172B, #A5A8FF
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Three option tiles with icon, title, description and latency tag; one shared highlight element; selected-value readout and Continue button.
+
+INTERACTION & STATES
+- A CSS variable index drives the highlight position so it glides between tiles with a spring curve; arrow keys move selection; real radio inputs keep it accessible.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

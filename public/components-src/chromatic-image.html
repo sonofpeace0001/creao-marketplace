@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chromatic Image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050507;color:#F0F0F5;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:620px}
+.fr{position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:#0A0A0F;cursor:crosshair;perspective:900px;box-shadow:0 0 0 1px #1C1C26,0 40px 70px -30px #000}
+.ly{position:absolute;inset:0;transition:transform .12s ease-out}
+.ly svg{width:100%;height:100%;display:block}
+.r{mix-blend-mode:screen;transform:translate(calc(var(--dx,0px)*-1),calc(var(--dy,0px)*-1));filter:url(#fr)}.g{mix-blend-mode:screen;filter:url(#fg)}.b{mix-blend-mode:screen;transform:translate(var(--dx,0px),var(--dy,0px));filter:url(#fb)}
+.sc{position:absolute;inset:0;background:repeating-linear-gradient(transparent 0 3px,rgba(0,0,0,.18) 3px 4px);pointer-events:none;mix-blend-mode:multiply}
+.vg{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,transparent 55%,rgba(0,0,0,.6));pointer-events:none}
+.tg{position:absolute;left:16px;top:14px;font:700 12px 'Space Mono',monospace;letter-spacing:.16em;color:#fff;background:rgba(0,0,0,.5);padding:5px 9px;border:1px solid rgba(255,255,255,.3)}
+.rd{position:absolute;right:16px;top:14px;font:400 12px 'Space Mono',monospace;color:#9A9AB0}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:14px}.ft h1{font-size:21px;font-weight:700;letter-spacing:-.03em}.ft p{font:400 12.5px 'Space Mono',monospace;color:#7C7C92;margin-top:3px}
+.ft label{display:flex;align-items:center;gap:10px;font:400 12.5px 'Space Mono',monospace;color:#9A9AB0}.ft input{width:120px;accent-color:#FF2D7A}
+svg.d{position:absolute;width:0;height:0}
+@media(prefers-reduced-motion:reduce){.ly{transition:none}}
+</style></head><body>
+<div class="c"><div class="fr" id="fr" role="img" aria-label="Abstract neon portrait with chromatic aberration that reacts to the pointer">
+<svg class="d" aria-hidden="true"><defs><filter id="fr"><feColorMatrix values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/></filter><filter id="fg"><feColorMatrix values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"/></filter><filter id="fb"><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"/></filter></defs></svg>
+<div class="ly r" id="r"></div><div class="ly g" id="g"></div><div class="ly b" id="b"></div><div class="sc"></div><div class="vg"></div><div class="tg">SIGNAL / 04</div><div class="rd" id="rd">SHIFT 0.0px</div></div>
+<div class="ft"><div><h1>Afterimage</h1><p>Move across the frame to split the channels.</p></div><label>Strength <input type="range" id="st" min="0" max="30" value="14" aria-label="Aberration strength"></label></div></div>
+<script>
+const ART='<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="a" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#9AA"/><stop offset="1" stop-color="#112"/></radialGradient></defs><rect width="400" height="300" fill="#08080C"/><circle cx="200" cy="130" r="86" fill="url(#a)"/><path d="M90 300c0-70 50-100 110-100s110 30 110 100z" fill="#C9C9D6"/><circle cx="200" cy="120" r="60" fill="#E8E8F2"/><rect x="150" y="104" width="100" height="14" rx="7" fill="#08080C"/><g stroke="#fff" stroke-width="2" opacity=".7"><path d="M0 60h400M0 90h400M0 210h400M0 250h400" stroke-dasharray="2 14"/></g><circle cx="320" cy="60" r="22" fill="none" stroke="#fff" stroke-width="3"/><path d="M40 40l40 40M60 40l40 40" stroke="#fff" stroke-width="3"/></svg>';
+['r','g','b'].forEach(i=>document.getElementById(i).innerHTML=ART);
+const fr=document.getElementById('fr');let S=14;
+function set(x,y){const r=fr.getBoundingClientRect(),nx=(x/r.width-.5)*2,ny=(y/r.height-.5)*2;const dx=nx*S,dy=ny*S*.6;fr.style.setProperty('--dx',dx+'px');fr.style.setProperty('--dy',dy+'px');document.getElementById('rd').textContent='SHIFT '+Math.hypot(dx,dy).toFixed(1)+'px';document.querySelectorAll('.ly').forEach(l=>l.style.transform=l.classList.contains('g')?'':'')}
+fr.addEventListener('pointermove',e=>{const r=fr.getBoundingClientRect();set(e.clientX-r.left,e.clientY-r.top)});
+fr.addEventListener('pointerleave',()=>{fr.style.setProperty('--dx','0px');fr.style.setProperty('--dy','0px');document.getElementById('rd').textContent='SHIFT 0.0px'});
+document.getElementById('st').oninput=e=>S=+e.target.value;
+setTimeout(()=>{const r=fr.getBoundingClientRect();set(r.width*.82,r.height*.35)},60);
+</script></body></html>

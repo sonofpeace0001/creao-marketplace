@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Deck Accordion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9E4F7;color:#1A1234;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:560px}
+.hd{margin-bottom:22px}.hd h1{font:800 clamp(28px,5vw,40px)/1 'Bricolage Grotesque';letter-spacing:-.05em}.hd p{color:#6A5E92;margin-top:8px}
+.dk{position:relative}
+.cd{position:relative;display:block;width:100%;text-align:left;border:0;border-radius:24px;padding:20px 22px;background:var(--c);color:var(--t);cursor:pointer;margin-top:-26px;box-shadow:0 -10px 24px -14px rgba(26,18,52,.35);transition:margin .5s cubic-bezier(.3,1.2,.4,1),transform .5s cubic-bezier(.3,1.2,.4,1),box-shadow .3s;font:inherit}
+.cd:first-child{margin-top:0}.cd:focus-visible{outline:3px solid #1A1234;outline-offset:3px}
+.cd:hover{transform:translateY(-6px)}.cd.open{margin-top:6px;transform:none;box-shadow:0 24px 40px -18px rgba(26,18,52,.5)}.cd.open+.cd{margin-top:6px}
+.cd .t{display:flex;align-items:center;gap:12px}.cd .t i{width:34px;height:34px;border-radius:11px;background:rgba(255,255,255,.35);display:grid;place-items:center;flex:none;font:800 14px 'Bricolage Grotesque';font-style:normal}.cd .t b{font:700 20px 'Bricolage Grotesque';letter-spacing:-.03em;flex:1}
+.cd .t svg{transition:transform .4s}.cd.open .t svg{transform:rotate(180deg)}
+.cd .bd{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.3,1,.4,1)}.cd.open .bd{grid-template-rows:1fr}.cd .bd>div{overflow:hidden}.cd .bd p{padding-top:14px;font-size:15.5px;line-height:1.6;opacity:.9;max-width:44ch}
+.cd .bd a{display:inline-block;margin-top:12px;font-weight:700;font-size:14px;color:inherit;text-decoration:underline;text-underline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>How it works</h1><p>Four steps. Tap a card to fan the deck.</p></div><div class="dk" id="dk"></div></div>
+<script>
+const S=[['1','Create a space','Name it, pick a template and invite your team. A space holds everything for one project.','#FFD84D','#2A2000'],['2','Add your work','Drag in files, paste links or connect your tools. Everything stays organised automatically.','#FF8A6B','#3A0F05'],['3','Review together','Comment inline, assign follow-ups and approve with one click. No more email chains.','#8EE3C4','#06301F'],['4','Share and ship','Publish a live link or export a polished report. Updates sync everywhere instantly.','#9DB4FF','#0A1A4A']];
+const dk=document.getElementById('dk');dk.innerHTML=S.map((s,i)=>'<button class="cd'+(i===1?' open':'')+'" style="--c:'+s[3]+';--t:'+s[4]+';z-index:'+(i+1)+'" aria-expanded="'+(i===1)+'"><div class="t"><i>'+s[0]+'</i><b>'+s[1]+'</b><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div><div class="bd"><div><p>'+s[2]+'</p><a href="#">Learn more</a></div></div></button>').join('');
+const C=[...dk.children];C.forEach(c=>c.onclick=()=>{const o=!c.classList.contains('open');C.forEach(x=>{x.classList.remove('open');x.setAttribute('aria-expanded','false')});if(o){c.classList.add('open');c.setAttribute('aria-expanded','true')}});
+</script></body></html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Roadmap Vote Lanes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3EFE6;color:#221C10;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:860px}
+.hd{text-align:center;margin-bottom:20px}.hd h1{font:800 clamp(28px,5vw,40px) 'Bricolage Grotesque';letter-spacing:-.04em}.hd p{color:#7C7258;font-size:15px;margin-top:4px}
+.ln{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.lane{background:#EAE4D5;border-radius:22px;padding:12px}.lh{display:flex;align-items:center;gap:8px;padding:6px 8px 12px;font:800 15px 'Bricolage Grotesque';letter-spacing:-.02em}.lh i{width:10px;height:10px;border-radius:50%;background:var(--c)}.lh span{margin-left:auto;font:700 12px 'DM Sans';color:#8E8466}
+.cs{display:grid;gap:10px;position:relative}
+.cd{display:flex;gap:12px;background:#fff;border:2px solid #221C10;border-radius:16px;padding:12px 12px 12px 14px;box-shadow:3px 3px 0 #221C10;will-change:transform}
+.cd .tx{flex:1;min-width:0}.cd b{display:block;font-size:14.5px;font-weight:700;line-height:1.25}.cd span{display:inline-block;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8E8466}
+.vt{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;width:44px;border:2px solid #221C10;background:#fff;border-radius:12px;cursor:pointer;font:700 14px 'DM Sans';color:#221C10;gap:1px;padding:5px 0;transition:background .2s,transform .15s}.vt:hover{background:#FFF1B8}.vt:active{transform:scale(.92)}.vt.on{background:var(--c);color:#fff}.vt:focus-visible{outline:3px solid #221C10;outline-offset:2px}.vt svg{transition:transform .3s cubic-bezier(.3,2,.5,1)}.vt.on svg{transform:translateY(-2px) scale(1.2)}
+.vt em{font-style:normal;display:block;overflow:hidden;height:18px;line-height:18px}
+@media(max-width:680px){.ln{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Vote on what we build</h1><p>Cards climb as votes arrive. Your voice sets the order.</p></div><div class="ln" id="ln"></div></div>
+<script>
+const L=[['Now','#10B981',[['Offline mode','Mobile',48],['Bulk export','Data',31],['SAML single sign-on','Security',22]]],['Next','#F59E0B',[['Slack integration','Integrations',64],['Custom domains','Branding',40],['API v2','Platform',37]]],['Later','#8B5CF6',[['Public templates','Community',52],['AI summaries','AI',45],['Time tracking','Productivity',19]]]];
+const ln=document.getElementById('ln');const lanes=[];
+L.forEach((l,li)=>{const w=document.createElement('div');w.className='lane';w.style.setProperty('--c',l[1]);w.innerHTML='<div class="lh"><i></i>'+l[0]+'<span>'+l[2].length+' ideas</span></div><div class="cs"></div>';ln.appendChild(w);const cs=w.querySelector('.cs');const items=l[2].map(c=>({t:c[0],g:c[1],v:c[2],me:false}));items[li===1?1:0].v+=0;lanes.push({cs,items});render(lanes[li],false)});
+lanes[1].items[2].me=true;lanes[1].items[2].v++;render(lanes[1],false);
+function render(l,anim){const old=new Map();if(anim)[...l.cs.children].forEach(e=>old.set(e.dataset.t,e.getBoundingClientRect().top));l.items.sort((a,b)=>b.v-a.v);const frag=[];l.items.forEach(it=>{let e=[...l.cs.children].find(x=>x.dataset.t===it.t);if(!e){e=document.createElement('div');e.className='cd';e.dataset.t=it.t;e.innerHTML='<div class="tx"><b>'+it.t+'</b><span>'+it.g+'</span></div><button class="vt" aria-label="Upvote '+it.t+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg><em></em></button>';e.querySelector('button').onclick=()=>{it.me=!it.me;it.v+=it.me?1:-1;render(l,true)}}
+ e.querySelector('em').textContent=it.v;e.querySelector('.vt').classList.toggle('on',it.me);e.querySelector('.vt').setAttribute('aria-pressed',it.me);frag.push(e)});frag.forEach(e=>l.cs.appendChild(e));
+ if(anim)[...l.cs.children].forEach(e=>{const o=old.get(e.dataset.t);if(o==null)return;const d=o-e.getBoundingClientRect().top;if(!d)return;e.style.transition='none';e.style.transform='translateY('+d+'px)';requestAnimationFrame(()=>requestAnimationFrame(()=>{e.style.transition='transform .5s cubic-bezier(.3,1.3,.5,1)';e.style.transform=''}))})}
+</script></body></html>

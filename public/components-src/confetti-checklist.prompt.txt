@@ -1,0 +1,29 @@
+ROLE
+You are a senior delight-focused product designer and front-end engineer with 15+ years of experience. Build "Confetti Checklist": a launch checklist whose custom checkboxes draw a check mark, strike the label and burst confetti, with a bigger burst at 100 percent.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Blush page with a white card, raspberry checkboxes and pink progress.
+- Palette: #E11D74, #2B0F1C, #B98AA0, #FFF1F5, #FBE3EC, #FF7AB6
+- Type: Bricolage Grotesque, DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with count; progress bar; five task rows with custom checkbox, label and tag; completion message; reset link; fixed confetti layer.
+
+INTERACTION & STATES
+- Checking draws the SVG tick with a dash animation, strikes the label and fires particles via the Web Animations API; completing all fires a larger burst and shows a message; reduced motion skips particles.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior SaaS billing designer and front-end engineer with 15+ years of experience. Build "Plan Select with Live Preview": a custom select for choosing a plan that updates a live preview card with price and features beside it.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White cards on pale blue, with a saturated indigo preview card and soft shadows.
+- Palette: #7A74A6, #6D4DF2, #171335, #ECEBF8, #DDD9F0, #B8B1E6
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Select panel with option rows (swatch, name, caption, price), preview card with badge, price and feature checklist.
+
+INTERACTION & STATES
+- Selecting an option animates the preview price and feature list; the list is a proper listbox with keyboard support.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

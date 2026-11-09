@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lens Zoom Image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFE9E1;color:#2A211B;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{display:grid;grid-template-columns:1.1fr 1fr;gap:34px;align-items:center;width:100%;max-width:840px}
+.im{position:relative;aspect-ratio:1;border-radius:26px;overflow:hidden;cursor:none;box-shadow:0 40px 60px -30px rgba(42,33,27,.6);touch-action:none;background:#C9783F}
+.im .art{position:absolute;inset:0;transform-origin:0 0}
+svg.art{width:100%;height:100%;display:block}
+.lens{position:absolute;width:150px;height:150px;border-radius:50%;pointer-events:none;overflow:hidden;box-shadow:0 0 0 4px rgba(255,255,255,.9),0 18px 36px rgba(0,0,0,.45);opacity:0;transform:scale(.6);transition:opacity .2s,transform .25s cubic-bezier(.3,1.4,.5,1)}
+.im.on .lens{opacity:1;transform:scale(1)}.lens .art{width:var(--w);height:var(--h);transform-origin:0 0}
+.lens::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.4),transparent 40%);pointer-events:none}
+.hn{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:rgba(42,33,27,.78);color:#fff;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:99px;backdrop-filter:blur(6px);transition:opacity .3s}.im.on .hn{opacity:0}
+.tx small{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#B45309}.tx h1{font:500 clamp(30px,4.6vw,46px)/1.04 'Fraunces',serif;letter-spacing:-.03em;margin:10px 0 14px}.tx h1 em{color:#B45309}.tx p{font-size:15.5px;line-height:1.6;color:#6C5E52;margin-bottom:20px;max-width:34ch}
+.sp{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap}.sp span{font-size:13px;font-weight:600;padding:7px 13px;border-radius:99px;background:#fff;border:1px solid #E4D9CC}
+.zm{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;color:#6C5E52}.zm input{flex:1;max-width:200px;accent-color:#B45309}
+@media(max-width:700px){.w{grid-template-columns:1fr}.im{cursor:crosshair}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="im" id="im" role="img" aria-label="Hand-thrown ceramic vase with a speckled glaze. Move the pointer to magnify."><div class="art" id="a1"></div><div class="lens" id="ln"><div class="art" id="a2"></div></div><div class="hn">Hover to magnify the glaze</div></div>
+<div class="tx"><small>Ceramics · Edition of 40</small><h1>The <em>Ember</em> vase</h1><p>Hand-thrown stoneware with a speckled ash glaze. Look closely: no two pieces fire the same.</p><div class="sp"><span>H 28 cm</span><span>Stoneware</span><span>Food safe</span></div>
+<label class="zm">Lens zoom <input type="range" id="zr" min="2" max="6" step="0.5" value="3" aria-label="Lens zoom"> <span id="zv">3x</span></label></div></div>
+<script>
+const SVG='<svg class="art" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="bg" cx="30%" cy="25%"><stop offset="0" stop-color="#F3D2A2"/><stop offset="1" stop-color="#C9783F"/></radialGradient><linearGradient id="v" x1="0" x2="1"><stop offset="0" stop-color="#7C2D12"/><stop offset=".45" stop-color="#E2672D"/><stop offset="1" stop-color="#6B230F"/></linearGradient><filter id="sp"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 .92  0 0 0 0 .78  0 0 0 9 -4.4"/><feComposite in2="SourceGraphic" operator="in"/></filter></defs><rect width="400" height="400" fill="url(#bg)"/><ellipse cx="200" cy="352" rx="108" ry="14" fill="rgba(60,25,10,.35)"/><path id="vs" d="M150 70h100c4 0 6 6 2 12-14 22-8 38 24 70 36 36 50 66 38 108-8 28-34 44-114 44s-106-16-114-44c-12-42 2-72 38-108 32-32 38-48 24-70-4-6-2-12 2-12z" fill="url(#v)"/><path d="M150 70h100c4 0 6 6 2 12-14 22-8 38 24 70 36 36 50 66 38 108-8 28-34 44-114 44s-106-16-114-44c-12-42 2-72 38-108 32-32 38-48 24-70-4-6-2-12 2-12z" fill="#fff" filter="url(#sp)" opacity=".85"/><ellipse cx="170" cy="190" rx="22" ry="70" fill="rgba(255,255,255,.18)" transform="rotate(8 170 190)"/><ellipse cx="200" cy="72" rx="50" ry="8" fill="#3B1308"/></svg>';
+const im=document.getElementById('im'),ln=document.getElementById('ln'),a1=document.getElementById('a1'),a2=document.getElementById('a2');a1.innerHTML=SVG;a2.innerHTML=SVG;
+let Z=3;function size(){const r=im.getBoundingClientRect();a2.style.setProperty('--w',r.width*Z+'px');a2.style.setProperty('--h',r.height*Z+'px')}
+function move(x,y){const r=im.getBoundingClientRect(),L=150;const lx=Math.max(0,Math.min(r.width,x))-L/2,ly=Math.max(0,Math.min(r.height,y))-L/2;ln.style.left=lx+'px';ln.style.top=ly+'px';a2.style.transform='translate('+(-(x*Z-L/2))+'px,'+(-(y*Z-L/2))+'px)'}
+im.addEventListener('pointerenter',()=>{im.classList.add('on');size()});im.addEventListener('pointerleave',()=>im.classList.remove('on'));
+im.addEventListener('pointermove',e=>{const r=im.getBoundingClientRect();move(e.clientX-r.left,e.clientY-r.top)});
+document.getElementById('zr').oninput=e=>{Z=+e.target.value;document.getElementById('zv').textContent=Z+'x';size()};
+size();addEventListener('resize',size);
+setTimeout(()=>{im.classList.add('on');const r=im.getBoundingClientRect();move(r.width*.52,r.height*.46)},60);
+</script></body></html>

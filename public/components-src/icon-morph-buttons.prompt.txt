@@ -1,0 +1,29 @@
+ROLE
+You are a senior icon-motion designer and front-end engineer with 15+ years of experience. Build "Icon Morph Buttons": eight neo-brutalist toggle buttons whose icons morph: menu to close, play to pause, heart burst, sun to moon, bell ring, mute, copy to check and lock.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream card with thick outlines, offset shadow and saturated tinted buttons.
+- Palette: #181816, #7A786C, #F4F1EA, #FF4B1F
+- Type: Space Grotesk, Space Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Grid of eight toggle buttons with SVG icons built from transformable parts and mono captions.
+
+INTERACTION & STATES
+- Each button toggles aria-pressed; CSS transforms morph the icon parts with springy easing; the heart emits particles; the bell rings; reduced motion removes animation.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

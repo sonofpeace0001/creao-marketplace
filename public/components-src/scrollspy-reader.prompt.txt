@@ -1,0 +1,29 @@
+ROLE
+You are a senior long-form reading designer and front-end engineer with 15+ years of experience. Build "Scrollspy Reader": an article reader with a table of contents that tracks the section, a reading progress bar and a ring percentage.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper reader with Newsreader serif body, terracotta accents and a quiet contents rail.
+- Palette: #B4531F, #26231D, #ECE7DA, #8E8774, #E7E3DA, #FBF9F3
+- Type: Newsreader, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Left rail with contents links, active marker and a circular read percentage; scrolling article with sticky progress bar, headings, paragraphs and a pull quote.
+
+INTERACTION & STATES
+- Scroll updates the bar, ring and the active link by section offsets; clicking a link smooth-scrolls (instant under reduced motion); the rail hides on mobile.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

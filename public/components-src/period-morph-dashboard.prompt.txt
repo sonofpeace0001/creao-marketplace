@@ -1,0 +1,29 @@
+ROLE
+You are a senior SaaS dashboard designer and front-end engineer with 15+ years of experience. Build "Period Morph Dashboard": an app dashboard where changing the period morphs bar heights and rolls KPI numbers to their new values.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark slate shell with sidebar, mint bars and rounded KPI cards.
+- Palette: #34D399, #1B2230, #7F8AA3, #0B0E15, #E8ECF6, #1D2433
+- Type: DM Sans, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Sidebar; header with segmented period control; three KPI cards; daily revenue bar chart with hover values.
+
+INTERACTION & STATES
+- The segmented pill glides to the chosen period; KPI values tween with easing; bars grow or shrink to new heights and bar counts change smoothly.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

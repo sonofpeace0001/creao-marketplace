@@ -1,0 +1,29 @@
+ROLE
+You are a senior onboarding designer and front-end engineer with 15+ years of experience. Build "Conditional Fields Form": a form that reveals different fields for personal, business or student accounts with smooth height transitions.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on lavender with selectable type tiles in gradient icons and violet focus.
+- Palette: #6D4DF2, #1B1535, #6E6893, #E6E2F3, #8A84AD, #EDE9F7
+- Type: Bricolage Grotesque, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Account type tiles; three conditional field groups with inputs, select and toggles; continue button.
+
+INTERACTION & STATES
+- Choosing a type animates the matching group open and the others closed using grid row transitions; toggles spring; tiles lift and show a check.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,29 @@
+ROLE
+You are a senior playful social-proof designer and front-end engineer with 15+ years of experience. Build "Draggable Quote Cards": six sticky-note testimonials pinned to a corkboard that you can drag around or move with the keyboard.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Green felt board with wooden frame, pastel notes, handwritten Caveat quotes and push pins.
+- Palette: #2B3A2E, #1F1B14, #34463A, #2F4033, #A9794A, #8A5E35
+- Type: Caveat, DM Sans (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Framed board with title; six rotated notes each with pin, stars, handwritten quote and author avatar; hint line.
+
+INTERACTION & STATES
+- Pointer drag moves a note, raises it with a lifted shadow and straightens it; positions are clamped to the board; arrow keys nudge a focused note (Shift for larger steps).
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

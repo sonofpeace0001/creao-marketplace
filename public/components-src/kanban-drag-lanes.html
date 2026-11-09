@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Kanban Drag Lanes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E6E9F2;color:#12152A;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;user-select:none}
+.c{width:100%;max-width:820px}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding:0 4px}.hd h1{font-size:22px;font-weight:700;letter-spacing:-.03em}.hd span{font-size:13px;color:#7B82A6}
+.bd{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cl{background:#D9DDEB;border-radius:20px;padding:10px;min-height:340px;transition:background .2s}.cl.ov{background:#CCD2EA}
+.ch{display:flex;align-items:center;gap:8px;padding:6px 8px 12px;font-size:13.5px;font-weight:700}.ch i{width:9px;height:9px;border-radius:50%;background:var(--c)}.ch span{margin-left:auto;font:500 12px 'Geist Mono',monospace;color:#7B82A6;background:#E9ECF6;border-radius:99px;padding:1px 8px}
+.cs{display:grid;gap:8px;align-content:start;min-height:60px}
+.cd{position:relative;background:#fff;border-radius:14px;padding:13px 14px;box-shadow:0 1px 2px rgba(18,21,42,.08),0 0 0 1px rgba(18,21,42,.04);cursor:grab;touch-action:none;transition:transform .25s cubic-bezier(.3,1.3,.5,1),opacity .2s}
+.cd:hover{box-shadow:0 8px 16px -8px rgba(18,21,42,.3),0 0 0 1px rgba(18,21,42,.06)}.cd:focus-visible{outline:2px solid #6366F1}
+.cd b{display:block;font-size:14px;font-weight:600;line-height:1.3;margin-bottom:10px}.cd .m{display:flex;align-items:center;gap:8px}.cd .tg{font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:6px;background:var(--b);color:var(--f)}.cd .av{margin-left:auto;width:24px;height:24px;border-radius:50%;background:var(--g);display:grid;place-items:center;color:#fff;font:700 9.500px 'Inter Tight'}
+.cd.ph{opacity:0;}
+.fl{position:fixed;z-index:50;pointer-events:none;background:#fff;border-radius:14px;padding:13px 14px;box-shadow:0 30px 40px -12px rgba(18,21,42,.45),0 0 0 2px #6366F1;transform:rotate(4deg) scale(1.03);will-change:transform}
+.gp{height:78px;border-radius:14px;border:2px dashed #9AA2D6;background:rgba(99,102,241,.08)}
+@media(max-width:640px){.bd{grid-template-columns:1fr}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Sprint board</h1><span>Drag cards between columns</span></div><div class="bd" id="bd"></div></div>
+<script>
+const COL=[['To do','#94A3B8'],['In progress','#F59E0B'],['Done','#22C55E']];
+const T={a:['Design empty states','Design','#EDE9FE','#6D28D9','AR','#8B5CF6'],b:['Write onboarding emails','Content','#FEF3C7','#B45309','MK','#F59E0B'],c:['Migrate billing webhooks','Backend','#DBEAFE','#1D4ED8','JS','#3B82F6'],d:['Audit color contrast','A11y','#DCFCE7','#15803D','PL','#10B981'],e:['Fix Safari scroll bug','Bug','#FEE2E2','#B91C1C','TN','#EF4444'],f:['Release notes v3.4','Content','#FEF3C7','#B45309','MK','#F59E0B']};
+const D=[['a','b','c'],['d','e'],['f']];
+const bd=document.getElementById('bd'),cols=[];
+COL.forEach((c,i)=>{const w=document.createElement('div');w.className='cl';w.style.setProperty('--c',c[1]);w.innerHTML='<div class="ch"><i></i>'+c[0]+'<span></span></div><div class="cs"></div>';bd.appendChild(w);cols.push({w,cs:w.querySelector('.cs'),n:w.querySelector('.ch span')})});
+function card(id){const t=T[id],e=document.createElement('div');e.className='cd';e.dataset.id=id;e.tabIndex=0;e.innerHTML='<b>'+t[0]+'</b><div class="m"><span class="tg" style="--b:'+t[2]+';--f:'+t[3]+'">'+t[1]+'</span><span class="av" style="--g:'+t[5]+'">'+t[4]+'</span></div>';return e}
+D.forEach((l,i)=>l.forEach(id=>cols[i].cs.appendChild(card(id))));
+function cnt(){cols.forEach(c=>c.n.textContent=c.cs.querySelectorAll('.cd:not(.ph)').length)}cnt();
+let drag=null;
+bd.addEventListener('pointerdown',e=>{const el=e.target.closest('.cd');if(!el)return;const r=el.getBoundingClientRect();const fl=el.cloneNode(true);fl.className='fl';fl.style.width=r.width+'px';fl.style.left=r.left+'px';fl.style.top=r.top+'px';document.body.appendChild(fl);const gp=document.createElement('div');gp.className='gp';el.parentNode.insertBefore(gp,el);el.classList.add('ph');el.style.display='none';drag={el,fl,gp,ox:e.clientX-r.left,oy:e.clientY-r.top};el.setPointerCapture&&0;e.preventDefault()});
+addEventListener('pointermove',e=>{if(!drag)return;drag.fl.style.transform='translate('+(e.clientX-drag.ox-parseFloat(drag.fl.style.left))+'px,'+(e.clientY-drag.oy-parseFloat(drag.fl.style.top))+'px) rotate(4deg) scale(1.03)';
+ let tgt=null;cols.forEach(c=>{const r=c.w.getBoundingClientRect();const inside=e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top-20&&e.clientY<r.bottom+20;c.w.classList.toggle('ov',inside);if(inside)tgt=c});
+ if(tgt){const cards=[...tgt.cs.querySelectorAll('.cd')].filter(x=>x!==drag.el);let before=null;for(const c of cards){const r=c.getBoundingClientRect();if(e.clientY<r.top+r.height/2){before=c;break}}if(before)tgt.cs.insertBefore(drag.gp,before);else tgt.cs.appendChild(drag.gp)}});
+function end(){if(!drag)return;drag.gp.replaceWith(drag.el);drag.el.style.display='';drag.el.classList.remove('ph');drag.fl.remove();cols.forEach(c=>c.w.classList.remove('ov'));drag=null;cnt()}
+addEventListener('pointerup',end);addEventListener('pointercancel',end);
+bd.addEventListener('keydown',e=>{const el=e.target.closest('.cd');if(!el)return;const ci=cols.findIndex(c=>c.cs.contains(el));if(e.key==='ArrowRight'&&ci<2){cols[ci+1].cs.appendChild(el);el.focus();cnt()}if(e.key==='ArrowLeft'&&ci>0){cols[ci-1].cs.appendChild(el);el.focus();cnt()}});
+</script></body></html>

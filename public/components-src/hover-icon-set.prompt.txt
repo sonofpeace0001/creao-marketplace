@@ -1,0 +1,29 @@
+ROLE
+You are a senior icon-system designer and front-end engineer with 15+ years of experience. Build "Hover Animated Icon Set": twelve line icons that each play a purposeful animation on hover or focus, with a live stroke-weight slider.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black tiles with indigo accents and mono labels.
+- Palette: #7C8199, #8B8FFF, #F43F5E, #0B0C10, #E8EAF2, #1F222C
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with stroke slider; 4x3 grid of icon tiles (download, settings, bell, heart, mail, search, launch, refresh, camera, delete, done, wifi) with captions.
+
+INTERACTION & STATES
+- Hover or focus triggers a per-icon animation (bounce, spin, ring, beat, flip, wiggle, lift-off, rotate, pulse, lid open, draw, signal); the slider changes the shared stroke width variable.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

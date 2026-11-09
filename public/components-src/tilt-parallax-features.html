@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tilt Parallax Features</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(600px 400px at 50% 0%,#2E1F6B,transparent 70%),#0C0A1C;color:#F1EEFF;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{width:100%;max-width:900px}
+.hd{text-align:center;margin-bottom:34px}.hd h1{font-size:clamp(30px,5vw,48px);font-weight:800;letter-spacing:-.05em}.hd p{color:#9D98CC;font-size:17px;margin-top:8px}
+.gd{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;perspective:1100px}
+.cd{--rx:0deg;--ry:0deg;--mx:50%;--my:50%;position:relative;height:300px;border-radius:26px;background:linear-gradient(160deg,#1B1740,#120F2C);border:1px solid #2F2A62;transform:rotateX(var(--rx)) rotateY(var(--ry));transform-style:preserve-3d;transition:transform .2s ease-out,box-shadow .3s;outline:0}
+.cd.rs{transition:transform .6s cubic-bezier(.3,1.4,.5,1)}.cd:hover,.cd.dm{box-shadow:0 40px 60px -26px rgba(0,0,0,.8),0 0 50px -16px var(--c)}.cd:focus-visible{box-shadow:0 0 0 3px #fff}
+.cd::before{content:"";position:absolute;inset:0;border-radius:26px;background:radial-gradient(260px circle at var(--mx) var(--my),color-mix(in srgb,var(--c) 40%,transparent),transparent 70%);opacity:.7;pointer-events:none}
+.cd .bg{position:absolute;inset:0;overflow:hidden;border-radius:26px;transform:translateZ(0)}.cd .bg i{position:absolute;border-radius:50%;background:var(--c);opacity:.25;filter:blur(2px)}
+.cd .bg i:nth-child(1){width:150px;height:150px;right:-40px;top:-30px}.cd .bg i:nth-child(2){width:70px;height:70px;left:26px;top:96px;opacity:.15}.cd .bg i:nth-child(3){width:34px;height:34px;right:60px;top:150px;opacity:.35}
+.ic{position:absolute;left:26px;top:28px;width:70px;height:70px;border-radius:22px;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 40%,#fff));display:grid;place-items:center;color:#fff;box-shadow:0 20px 30px -10px var(--c);transform:translateZ(60px)}
+.tx{position:absolute;left:26px;right:26px;bottom:26px;transform:translateZ(36px)}.tx h2{font-size:23px;font-weight:700;letter-spacing:-.04em;margin-bottom:6px}.tx p{font-size:14.5px;line-height:1.5;color:#A6A1D6}
+.tg{position:absolute;right:22px;top:26px;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--c);transform:translateZ(30px)}
+@media(max-width:700px){.gd{grid-template-columns:1fr}.cd{height:220px}}
+@media(prefers-reduced-motion:reduce){.cd{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Depth you can feel</h1><p>Move your cursor across a card and watch the layers separate.</p></div>
+<div class="gd" id="gd">
+<div class="cd" tabindex="0" style="--c:#8B5CF6"><div class="bg"><i></i><i></i><i></i></div><span class="tg">Design</span><div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7zM18 13l-1.500-7.500L2 2l3.500 14.500L13 18zM2 2l7.600 7.600"/></svg></div><div class="tx"><h2>Pixel perfect</h2><p>Components that match your design tokens exactly.</p></div></div>
+<div class="cd" tabindex="0" style="--c:#06B6D4"><div class="bg"><i></i><i></i><i></i></div><span class="tg">Speed</span><div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div class="tx"><h2>Lightning fast</h2><p>Zero-runtime styles and tiny bundles, always.</p></div></div>
+<div class="cd" tabindex="0" style="--c:#F472B6"><div class="bg"><i></i><i></i><i></i></div><span class="tg">Access</span><div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div><div class="tx"><h2>Accessible</h2><p>Keyboard friendly and screen reader tested.</p></div></div>
+</div></div>
+<script>
+const cds=[...document.querySelectorAll('.cd')];function tilt(c,px,py){c.classList.remove('rs');c.style.setProperty('--ry',((px-.5)*20)+'deg');c.style.setProperty('--rx',((.5-py)*18)+'deg');c.style.setProperty('--mx',(px*100)+'%');c.style.setProperty('--my',(py*100)+'%')}
+cds.forEach(c=>{c.addEventListener('pointermove',e=>{c.classList.remove('dm');const r=c.getBoundingClientRect();tilt(c,(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height)});c.addEventListener('pointerleave',()=>{c.classList.add('rs');c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg');c.style.setProperty('--mx','50%');c.style.setProperty('--my','50%')});c.addEventListener('focus',()=>tilt(c,.7,.3));c.addEventListener('blur',()=>{c.classList.add('rs');c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')})});
+cds[1].classList.add('dm');tilt(cds[1],.72,.28);
+</script></body></html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Constellation Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{position:relative;min-height:100vh;background:radial-gradient(800px 500px at 50% 40%,#16205A,#080B1E 70%);color:#EEF1FF;font-family:'Sora',sans-serif;display:grid;place-items:center;padding:24px;overflow:hidden;-webkit-font-smoothing:antialiased}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ct{position:relative;z-index:2;text-align:center;max-width:720px;pointer-events:none}
+.ct small{font:500 12.5px 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#8EA2FF}
+.ct h1{font-size:clamp(40px,7.5vw,88px);font-weight:800;letter-spacing:-.06em;line-height:1;margin:16px 0 16px}.ct h1 span{background:linear-gradient(90deg,#8EA2FF,#E879F9);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ct p{font-size:clamp(15px,2vw,18px);line-height:1.6;color:#98A3D4;max-width:42ch;margin:0 auto 26px}
+.bt{display:inline-flex;gap:12px;pointer-events:auto}.bt a{padding:14px 26px;border-radius:14px;font:600 15px 'Sora';text-decoration:none}.bt .p{background:#fff;color:#0B1030}.bt .g{border:1px solid #34407F;color:#C5CEFF}.bt a:focus-visible{outline:3px solid #8EA2FF;outline-offset:3px}
+.st{position:absolute;left:24px;bottom:20px;z-index:2;display:flex;gap:18px;font:500 12px 'JetBrains Mono',monospace;color:#6574B8}.st b{color:#C5CEFF;font-weight:500}
+</style></head><body>
+<canvas id="cv"></canvas>
+<div class="ct"><small>Graph engine</small><h1>Everything is <span>connected</span></h1><p>Nodes drift and link up when they get close. Your cursor repels them and draws extra threads.</p><div class="bt"><a class="p" href="#">Explore the graph</a><a class="g" href="#">Read the docs</a></div></div>
+<div class="st"><span>nodes <b id="nn">0</b></span><span>links <b id="ll">0</b></span></div>
+<script>
+const cv=document.getElementById('cv'),x=cv.getContext('2d');let W,H,dpr=Math.min(2,devicePixelRatio||1);function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}size();addEventListener('resize',size);
+const N=Math.round(Math.min(110,Math.max(60,innerWidth/12))),P=[];for(let i=0;i<N;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:1.2+Math.random()*2,h:230+Math.random()*90});
+let mx=-999,my=-999,real=false,t=0;addEventListener('pointermove',e=>{real=true;mx=e.clientX;my=e.clientY});addEventListener('pointerleave',()=>{real=false;mx=my=-999});
+const LD=Math.min(150,W/7);document.getElementById('nn').textContent=N;
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function frame(){t+=.016;x.clearRect(0,0,W,H);let ax=mx,ay=my;if(!real){ax=W/2+Math.cos(t*.6)*W*.3;ay=H/2+Math.sin(t*.9)*H*.25}let links=0;
+ P.forEach(p=>{const dx=p.x-ax,dy=p.y-ay,d=Math.hypot(dx,dy);if(d<130&&d>1){p.vx+=dx/d*.05;p.vy+=dy/d*.05}p.vx*=.99;p.vy*=.99;const sp=Math.hypot(p.vx,p.vy);if(sp<.12){p.vx+=(Math.random()-.5)*.04;p.vy+=(Math.random()-.5)*.04}p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1});
+ for(let i=0;i<N;i++){for(let j=i+1;j<N;j++){const a=P[i],b=P[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<LD){links++;const al=(1-d/LD)*.55;const g=x.createLinearGradient(a.x,a.y,b.x,b.y);g.addColorStop(0,'hsla('+a.h+',90%,70%,'+al+')');g.addColorStop(1,'hsla('+b.h+',90%,70%,'+al+')');x.strokeStyle=g;x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}
+ P.forEach(p=>{const d=Math.hypot(p.x-ax,p.y-ay);if(d<200){links++;const al=(1-d/200)*.7;x.strokeStyle='rgba(232,200,255,'+al+')';x.lineWidth=1.2;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(ax,ay);x.stroke()}x.fillStyle='hsl('+p.h+',95%,76%)';x.shadowColor='hsl('+p.h+',95%,65%)';x.shadowBlur=10;x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill()});x.shadowBlur=0;
+ x.strokeStyle='rgba(232,200,255,.5)';x.lineWidth=1.5;x.beginPath();x.arc(ax,ay,10+Math.sin(t*3)*2,0,6.283);x.stroke();
+ document.getElementById('ll').textContent=links;if(!reduce)requestAnimationFrame(frame)}
+for(let i=0;i<200;i++){P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1})}t=1.4;frame();
+</script></body></html>

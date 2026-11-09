@@ -1,0 +1,29 @@
+ROLE
+You are a senior messaging designer and front-end engineer with 15+ years of experience. Build "Tapback Reactions Chat": a phone messaging thread where tapping a bubble opens a spring-loaded reaction tray and pins a badge to the message.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Native-feeling phone chat with blue and grey bubbles and a floating white tray.
+- Palette: #0A84FF, #0B0B10, #E9E9EF, #C9CFE0, #E4E4EA, #F59E0B
+- Type: Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Contact header; four bubbles with tails; reaction tray with six reactions; reaction badge; read receipt; typing indicator; composer.
+
+INTERACTION & STATES
+- Tap opens the tray with staggered pop-in icons; choosing one pops a badge on the bubble corner with a spring; tapping it again removes it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

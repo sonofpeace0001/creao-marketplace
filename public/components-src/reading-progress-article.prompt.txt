@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial designer and front-end engineer with 15+ years of experience. Build "Reading Progress Article": a long form article layout with a reading progress bar, a ring percentage and a live minutes left estimate.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper page with Playfair headlines, drop cap, pull quote and orange progress.
+- Palette: #E8590C, #201B14, #EEE7D8, #8F8670, #F59F00, #E9E4DA
+- Type: Playfair Display, Source Serif 4, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Sticky header with title, time left and ring; progress bar; headline, byline, drop cap paragraph, pull quote and subheads.
+
+INTERACTION & STATES
+- Scrolling fills the bar and ring and counts down the minutes left; the header blurs over content.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

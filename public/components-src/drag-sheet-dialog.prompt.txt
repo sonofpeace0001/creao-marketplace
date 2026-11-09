@@ -1,0 +1,29 @@
+ROLE
+You are a senior mobile-commerce designer and front-end engineer with 15+ years of experience. Build "Drag-to-Dismiss Sheet": a phone mockup with a product bottom sheet that you drag down to dismiss, with a fading scrim.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft blue stage with a white sheet, gradient product imagery, size chips and a violet CTA.
+- Palette: #5B6CFF, #1B2340, #7A86A6, #DCE3F2, #F6F8FD, #D5DAE8
+- Type: Nunito (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Phone frame with product list; scrim; bottom sheet with grabber, hero, title, rating, description, size toggles and Add to bag.
+
+INTERACTION & STATES
+- Tapping a product opens the sheet with a spring; pointer drag follows the finger and fades the scrim; releasing beyond 120px closes it, otherwise it springs back; Escape and scrim click close; focus returns to the trigger.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

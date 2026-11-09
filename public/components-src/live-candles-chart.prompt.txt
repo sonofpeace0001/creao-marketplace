@@ -1,0 +1,29 @@
+ROLE
+You are a senior fintech charting engineer and designer with 15+ years of experience. Build "Live Candlestick Chart": a canvas candlestick chart with live ticking candles, volume bars, price line, crosshair and OHLC tooltip.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Charcoal trading card with green and red candles, violet last-price tag and IBM Plex Mono figures.
+- Palette: #7C5CFA, #6F7A8E, #34D399, #0A0D12, #E6E9F0, #10151D
+- Type: Inter Tight, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with pair and big price with change; timeframe toggle; canvas with grid, candles, volume, dashed last-price line and axis labels; footer with volume and high-low.
+
+INTERACTION & STATES
+- A timer updates the last candle and occasionally opens a new one; pointermove draws a crosshair and an OHLC tooltip; canvas is DPR-aware and resizes; reduced motion stops ticking.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

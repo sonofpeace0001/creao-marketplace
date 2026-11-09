@@ -1,0 +1,29 @@
+ROLE
+You are a senior consumer pricing designer and front-end engineer with 15+ years of experience. Build "Credit Pack Pricing": a neo-brutalist credit shop where choosing a pack fills a jar with coins and updates totals, bonuses and cost per credit.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Butter yellow with thick outlines, hard offset shadows and a dark order panel.
+- Palette: #2B1B05, #FFF5DD, #FFD23F, #7A5F2E, #FFF1A6, #FFC107
+- Type: Outfit, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Pack list with coin badges, bonus tags and prices; order panel with coin jar, total, credit breakdown and checkout.
+
+INTERACTION & STATES
+- Selecting a pack drops a number of coins into the jar with staggered bounces and recalculates base, bonus and per-credit price.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

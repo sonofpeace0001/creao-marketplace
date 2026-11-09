@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Storage Treemap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDEFF5;color:#121936;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:780px;background:#fff;border-radius:26px;padding:24px;box-shadow:0 40px 70px -44px rgba(18,25,54,.5),0 0 0 1px rgba(18,25,54,.06)}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px;gap:12px;flex-wrap:wrap}.hd h1{font-size:21px;font-weight:800;letter-spacing:-.035em}.hd p{font-size:13.5px;color:#7A83A8;margin-top:2px}
+.bc{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;margin-bottom:12px;flex-wrap:wrap}.bc button{border:0;background:none;font:inherit;color:#5B67E8;cursor:pointer;padding:4px 8px;border-radius:8px}.bc button:hover{background:#EEF0FF}.bc button:last-child{color:#121936;cursor:default}.bc button:focus-visible{outline:2px solid #5B67E8}.bc i{color:#B5BBD6;font-style:normal}
+.tm{position:relative;height:340px;border-radius:18px;overflow:hidden;background:#F1F3FA}
+.bl{position:absolute;border:0;padding:0;border-radius:12px;overflow:hidden;cursor:pointer;color:#fff;text-align:left;background:var(--c);transition:left .5s cubic-bezier(.3,1,.4,1),top .5s cubic-bezier(.3,1,.4,1),width .5s cubic-bezier(.3,1,.4,1),height .5s cubic-bezier(.3,1,.4,1),opacity .3s,transform .2s;font:inherit;outline:0;animation:in .3s ease-out both;animation-delay:calc(var(--d) * .3)}@keyframes in{from{opacity:0;transform:scale(.88)}}
+.bl::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.28),transparent 55%)}
+.bl:hover,.bl:focus-visible{transform:scale(.985);z-index:2;box-shadow:0 0 0 3px #fff,0 0 0 5px var(--c)}
+.bl .t{position:absolute;left:12px;top:10px;right:10px}.bl b{display:block;font-size:14px;font-weight:800;letter-spacing:-.02em}.bl span{font:500 12px 'JetBrains Mono',monospace;opacity:.9}.bl.sm .t{left:6px;top:5px}.bl.sm b{font-size:11px}.bl.sm span{display:none}.bl.xs .t{display:none}
+.lg{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:13px;color:#7A83A8;font-weight:600}.lg b{color:#121936;font-weight:800}
+.pb{height:8px;border-radius:8px;background:#E7EAF6;margin-top:10px;overflow:hidden;display:flex}.pb i{display:block;height:100%}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Storage explorer</h1><p>Click a block to drill down</p></div></div><div class="bc" id="bc"></div><div class="tm" id="tm" role="group" aria-label="Storage treemap"></div>
+<div class="lg"><span>Used <b id="us"></b> of 500 GB</span><span id="nx">4 folders</span></div><div class="pb" id="pb"></div></div>
+<script>
+const COL=['#5B67E8','#E8576B','#F5A524','#10B981','#0EA5E9','#A855F7','#EC4899'];
+const D={n:'All files',c:[{n:'Videos',c:[{n:'Product demos',s:68},{n:'Webinars',s:42},{n:'Raw footage',s:96},{n:'Exports',s:24}]},{n:'Design',c:[{n:'Figma exports',s:38},{n:'Brand kit',s:14},{n:'Mockups',s:31},{n:'Icons',s:6}]},{n:'Documents',c:[{n:'Contracts',s:18},{n:'Reports',s:26},{n:'Slides',s:34}]},{n:'Backups',c:[{n:'Database',s:52},{n:'Media',s:30}]},{n:'Code',c:[{n:'Repos',s:22},{n:'Build cache',s:15}]},{n:'Other',s:21}]};
+function sum(n){return n.s!=null?n.s:n.c.reduce((a,x)=>a+sum(x),0)}
+function lay(items,x,y,w,h,out){if(items.length===1){out.push({...items[0],x,y,w,h});return}
+ const tot=items.reduce((a,i)=>a+i.v,0);let acc=0,k=1,best=1e12;for(let i=0;i<items.length-1;i++){acc+=items[i].v;const d=Math.abs(acc-(tot-acc));if(d<best){best=d;k=i+1}}
+ const a=items.slice(0,k),b=items.slice(k),av=a.reduce((s,i)=>s+i.v,0),r=av/tot;
+ if(w>=h){lay(a,x,y,w*r,h,out);lay(b,x+w*r,y,w*(1-r),h,out)}else{lay(a,x,y,w,h*r,out);lay(b,x,y+h*r,w,h*(1-r),out)}}
+let path=[];const tm=document.getElementById('tm');
+function node(){let n=D;path.forEach(i=>n=n.c[i]);return n}
+function render(){const n=node();const kids=n.c?n.c.map((c,i)=>({n:c.n,v:sum(c),i,leaf:c.s!=null,node:c})).sort((a,b)=>b.v-a.v):[];const W=tm.clientWidth,H=tm.clientHeight,g=3,out=[];if(kids.length)lay(kids,0,0,W,H,out);
+ tm.innerHTML=out.map((o,k)=>{const w=o.w-g,h=o.h-g,cls=w<90||h<60?(w<46||h<34?'xs':'sm'):'';return '<button class="bl '+cls+'" style="left:'+(o.x+g/2)+'px;top:'+(o.y+g/2)+'px;width:'+w+'px;height:'+h+'px;--c:'+COL[o.i%COL.length]+';--d:'+k*45+'ms;opacity:'+(o.leaf?.92:1)+'" data-i="'+o.i+'" aria-label="'+o.n+', '+o.v+' gigabytes"><span class="t"><b>'+o.n+'</b><span>'+o.v+' GB</span></span></button>'}).join('');
+ document.getElementById('bc').innerHTML=['All files',...path.map((p,i)=>{let m=D;for(let k=0;k<=i;k++)m=m.c[path[k]];return m.n})].map((t,i,a)=>'<button data-b="'+i+'" '+(i===a.length-1?'tabindex="-1"':'')+'>'+t+'</button>'+(i<a.length-1?'<i>/</i>':'')).join('');
+ document.getElementById('us').textContent=sum(n)+' GB';document.getElementById('nx').textContent=kids.length+' item'+(kids.length===1?'':'s');document.getElementById('pb').innerHTML=kids.map(k=>'<i style="width:'+(k.v/sum(n)*100)+'%;background:'+COL[k.i%COL.length]+'"></i>').join('')}
+tm.addEventListener('click',e=>{const b=e.target.closest('.bl');if(!b)return;const n=node().c[+b.dataset.i];if(n.c){path.push(+b.dataset.i);render()}});
+document.getElementById('bc').addEventListener('click',e=>{const b=e.target.closest('[data-b]');if(b){path=path.slice(0,+b.dataset.b);render()}});
+addEventListener('resize',render);render();
+</script></body></html>

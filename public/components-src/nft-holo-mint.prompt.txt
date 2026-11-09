@@ -1,0 +1,29 @@
+ROLE
+You are a senior creative developer and web3 designer with 15+ years of experience. Build "Holographic NFT Mint": a collectible card with a holographic foil that tracks the cursor in 3D, beside a mint progress panel.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black stage with a violet glow, iridescent conic foil and bold geometric artwork.
+- Palette: #FF5CA8, #A78BFA, #9A98C0, #8B5CF6, #EC4899, #07070D
+- Type: Unbounded, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- 3D card with artwork, label and foil layers; eyebrow, headline, copy; supply progress bar; quantity stepper and Mint button.
+
+INTERACTION & STATES
+- Pointer position drives rotateX and rotateY plus foil and glare highlights; an idle orbit moves the light; quantity stepper and mint confirm.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

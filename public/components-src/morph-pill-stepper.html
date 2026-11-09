@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Morphing Pill Stepper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFE9D6;color:#2B1608;font-family:'DM Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:520px;background:#FFFAF4;border:2px solid #2B1608;border-radius:28px;padding:26px;box-shadow:7px 7px 0 #2B1608}
+.pl{display:flex;gap:7px;margin-bottom:26px}.pl button{position:relative;height:36px;width:36px;flex:none;border:2px solid #2B1608;background:#fff;border-radius:99px;cursor:pointer;overflow:hidden;font:800 14px 'Bricolage Grotesque';color:#2B1608;transition:width .5s cubic-bezier(.3,1.2,.4,1),background .3s;display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;padding:0}
+.pl button .l{max-width:0;opacity:0;overflow:hidden;transition:max-width .5s,opacity .3s .1s}.pl button.on{width:150px;background:#FF5A1F;color:#fff}.pl button.on .l{max-width:110px;opacity:1}.pl button.dn{background:#2B1608;color:#FFE9D6}.pl button:focus-visible{outline:3px solid #2B1608;outline-offset:3px}
+.pl button .ck{display:none}.pl button.dn .n{display:none}.pl button.dn .ck{display:block}
+.pn{min-height:190px;position:relative;overflow:hidden}.sl{position:absolute;inset:0;opacity:0;transform:translateX(30px);transition:all .45s cubic-bezier(.3,1,.4,1);pointer-events:none}.sl.on{opacity:1;transform:none;pointer-events:auto}.sl.pv{transform:translateX(-30px)}
+.sl h1{font:800 28px/1.05 'Bricolage Grotesque';letter-spacing:-.04em;margin-bottom:8px}.sl p{font-size:15px;color:#7A5C44;line-height:1.55;margin-bottom:16px}
+.op{display:grid;grid-template-columns:1fr 1fr;gap:8px}.op button{border:2px solid #2B1608;background:#fff;border-radius:14px;padding:12px;font:700 14px 'DM Sans';cursor:pointer;text-align:left;transition:all .15s;color:#2B1608}.op button[aria-pressed=true]{background:#FFD84D;box-shadow:3px 3px 0 #2B1608;transform:translate(-1px,-1px)}.op button:focus-visible{outline:3px solid #FF5A1F;outline-offset:2px}.op small{display:block;font-weight:500;color:#7A5C44;margin-top:2px;font-size:12.5px}
+.in{width:100%;border:2px solid #2B1608;border-radius:14px;padding:13px 14px;font:600 15px 'DM Sans';background:#fff;outline:0;color:#2B1608}.in:focus{box-shadow:3px 3px 0 #2B1608}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:12px}.ft button{border:2px solid #2B1608;border-radius:14px;padding:12px 22px;font:800 15px 'Bricolage Grotesque';cursor:pointer;background:#fff;color:#2B1608;transition:transform .12s,box-shadow .12s;box-shadow:3px 3px 0 #2B1608}.ft button:active{transform:translate(3px,3px);box-shadow:0 0 0}.ft button:disabled{opacity:.35;box-shadow:none;cursor:default}.ft .nx{background:#FF5A1F;color:#fff}.ft button:focus-visible{outline:3px solid #2B1608;outline-offset:3px}
+@media(max-width:480px){.pl button.on{width:120px}.op{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="pl" id="pl" role="tablist" aria-label="Progress"></div>
+<div class="pn" id="pn"><section class="sl"><h1>What are you making?</h1><p>This helps us tailor templates and tips.</p><div class="op" id="o1"><button aria-pressed="true">Website<small>Landing pages, portfolios</small></button><button aria-pressed="false">Web app<small>Dashboards, tools</small></button><button aria-pressed="false">Shop<small>Products and checkout</small></button><button aria-pressed="false">Blog<small>Writing and newsletters</small></button></div></section>
+<section class="sl"><h1>Name your project</h1><p>Short and memorable works best. You can rename it later.</p><input class="in" value="Sunday Studio" aria-label="Project name"></section>
+<section class="sl"><h1>Pick a look</h1><p>Start with a vibe. Everything stays editable.</p><div class="op" id="o3"><button aria-pressed="true">Warm<small>Cream and orange</small></button><button aria-pressed="false">Cool<small>Blue and slate</small></button><button aria-pressed="false">Bold<small>High contrast</small></button><button aria-pressed="false">Soft<small>Pastel and rounded</small></button></div></section>
+<section class="sl"><h1>You are all set.</h1><p>Your project is ready. Jump in and make something great.</p></section></div>
+<div class="ft"><button id="bk">Back</button><button class="nx" id="nx">Continue</button></div></div>
+<script>
+const L=['What','Name','Look','Done'],pl=document.getElementById('pl'),S=[...document.querySelectorAll('.sl')];let cur=0;
+pl.innerHTML=L.map((l,i)=>'<button role="tab" aria-label="Step '+(i+1)+': '+l+'"><span class="n">'+(i+1)+'</span><svg class="ck" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg><span class="l">'+l+'</span></button>').join('');
+const B=[...pl.children];
+function go(n){cur=Math.max(0,Math.min(3,n));B.forEach((b,i)=>{b.classList.toggle('on',i===cur);b.classList.toggle('dn',i<cur);b.setAttribute('aria-selected',i===cur)});S.forEach((s,i)=>{s.classList.toggle('on',i===cur);s.classList.toggle('pv',i<cur)});document.getElementById('bk').disabled=cur===0;const nx=document.getElementById('nx');nx.textContent=cur===3?'Start':cur===2?'Finish':'Continue'}
+B.forEach((b,i)=>b.onclick=()=>{if(i<=cur)go(i)});document.getElementById('nx').onclick=()=>go(cur+1);document.getElementById('bk').onclick=()=>go(cur-1);
+['o1','o3'].forEach(id=>{const g=document.getElementById(id);[...g.children].forEach(b=>b.onclick=()=>[...g.children].forEach(x=>x.setAttribute('aria-pressed',x===b)))});
+go(1);
+</script></body></html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Logo Marquee Fade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700&family=Fraunces:wght@700&family=Space+Grotesk:wght@700&family=Playfair+Display:wght@700&family=DM+Serif+Display&family=Outfit:wght@700&family=Syne:wght@800&family=Instrument+Serif&family=Bricolage+Grotesque:wght@800&family=Unbounded:wght@600&family=Plus+Jakarta+Sans:wght@800&family=Fredoka:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F7F5EF;color:#18160F;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 0;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{width:100%;max-width:1100px}
+.hd{text-align:center;padding:0 20px;margin-bottom:38px}.hd small{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#8A8470}.hd h1{font:700 clamp(26px,4vw,38px)/1.15 'Sora';letter-spacing:-.045em;margin-top:10px}.hd h1 span{color:#8A8470}
+.mq{position:relative;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);margin-bottom:18px}
+.tk{display:flex;width:max-content;gap:20px;animation:mq 40s linear infinite}.mq.r .tk{animation-direction:reverse;animation-duration:46s}.mq:hover .tk{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(calc(-50% - 10px))}}
+.lg{flex:none;display:flex;align-items:center;gap:12px;height:76px;padding:0 34px;border-radius:20px;background:#fff;border:1px solid #ECE7D8;color:#6B6652;filter:grayscale(1);transition:all .35s cubic-bezier(.3,1.4,.5,1)}
+.lg:hover{filter:none;color:var(--c);border-color:var(--c);transform:translateY(-4px) scale(1.04);box-shadow:0 20px 30px -18px var(--c)}
+.lg svg{width:30px;height:30px;flex:none}.lg b{font-size:25px;letter-spacing:-.02em;line-height:1;white-space:nowrap}
+.st{display:flex;justify-content:center;gap:48px;margin-top:38px;flex-wrap:wrap}.st div{text-align:center}.st b{display:block;font:700 34px 'Sora';letter-spacing:-.05em}.st span{font-size:13.5px;color:#8A8470}
+@media(prefers-reduced-motion:reduce){.tk{animation:none}}
+</style></head><body>
+<div class="c"><div class="hd"><small>Trusted worldwide</small><h1>Powering teams at <span>2,400 companies</span></h1></div><div class="mq"><div class="tk" id="a"></div></div><div class="mq r"><div class="tk" id="b"></div></div>
+<div class="st"><div><b>2,400+</b><span>Teams onboarded</span></div><div><b>38</b><span>Countries</span></div><div><b>4.9</b><span>Average rating</span></div></div></div>
+<script>
+const ICO={circle:'<circle cx="12" cy="12" r="9" fill="currentColor"/>',tri:'<path d="M12 3 22 20H2z" fill="currentColor"/>',sun:'<circle cx="12" cy="12" r="5" fill="currentColor"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4M4.200 4.200l2.800 2.800M17 17l2.800 2.800M4.200 19.800 7 17M17 7l2.800-2.800" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',hex:'<path d="M12 2 21 7v10l-9 5-9-5V7z" fill="currentColor"/>',sq:'<rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor"/><rect x="8" y="8" width="8" height="8" rx="2" fill="#fff"/>',wave:'<path d="M2 14c3-6 5-6 8 0s5 6 8 0 3-4 4-4" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round"/>',bulb:'<path d="M12 2a7 7 0 0 0-4 12.700V18h8v-3.300A7 7 0 0 0 12 2zM9 21h6" fill="currentColor" stroke="currentColor" stroke-width="1.500" stroke-linejoin="round"/>',ring:'<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="19" cy="6" r="2.500" fill="currentColor"/>',diamond:'<path d="M12 2 22 12 12 22 2 12z" fill="currentColor"/>',cloud:'<path d="M7 18a5 5 0 1 1 1-9.900A6 6 0 0 1 19.500 11 3.500 3.500 0 0 1 18 18z" fill="currentColor"/>',bird:'<path d="M2 8c4 0 6 2 8 5 1-2 3-4 6-4l-2 3c3 0 5 1 6 3-3 0-4 1-5 2-1 4-5 6-9 5 3-1 4-3 4-5-4 0-7-3-8-9z" fill="currentColor"/>',leaf:'<path d="M20 4C9 4 4 9 4 16c0 2 .5 3 1 4 1-4 4-7 9-9-5 3-7 6-8 10 8 1 14-5 14-17z" fill="currentColor"/>'};
+const L=[['Northwind','circle','Sora','#2563EB'],['Fjord','tri','Fraunces','#0E7490'],['Helios','sun','Space Grotesk','#F59E0B'],['Pinecone','hex','Playfair Display','#15803D'],['Atlas','sq','DM Serif Display','#DC2626'],['Marlow','wave','Outfit','#7C3AED'],['Lumen','bulb','Syne','#CA8A04'],['Orbit','ring','Instrument Serif','#DB2777'],['Vertex','diamond','Bricolage Grotesque','#0F766E'],['Nimbus','cloud','Unbounded','#4F46E5'],['Kestrel','bird','Plus Jakarta Sans','#EA580C'],['Quill','leaf','Fredoka','#16A34A']];
+function row(id,off){const items=L.slice(off).concat(L.slice(0,off));let h='';for(let k=0;k<2;k++)items.forEach(l=>h+='<div class="lg" style="--c:'+l[3]+'"><svg viewBox="0 0 24 24">'+ICO[l[1]]+'</svg><b style="font-family:\''+l[2]+'\',sans-serif">'+l[0]+'</b></div>');document.getElementById(id).innerHTML=h}
+row('a',0);row('b',6);
+</script></body></html>

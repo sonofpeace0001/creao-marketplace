@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Isometric City Illustration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#E6F0FF,#F2E8FF);color:#14173A;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:940px;display:grid;grid-template-columns:.8fr 1.2fr;gap:20px;align-items:center}
+.tx small{font-size:12.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6366F1}.tx h1{font-size:clamp(32px,4.6vw,52px);font-weight:800;letter-spacing:-.06em;line-height:1;margin:12px 0 14px}.tx p{font-size:16.5px;line-height:1.6;color:#6A6F9A;max-width:30ch}
+.tx a{display:inline-flex;margin-top:22px;background:#14173A;color:#fff;border-radius:14px;padding:14px 26px;font:700 15px 'Sora';text-decoration:none}.tx a:focus-visible{outline:3px solid #6366F1;outline-offset:3px}
+.sc svg{width:100%;height:auto;overflow:visible;filter:drop-shadow(0 30px 30px rgba(60,60,140,.25))}
+.bd{transition:transform .5s cubic-bezier(.3,1.5,.5,1);cursor:pointer;outline:0}.bd:hover,.bd:focus-visible{transform:translateY(-14px)}.bd.fl{animation:bb 4s ease-in-out infinite}@keyframes bb{50%{transform:translateY(-6px)}}
+.w{fill:#FDE68A;animation:wn 3.4s ease-in-out infinite}@keyframes wn{0%,100%{opacity:1}45%{opacity:.25}60%{opacity:.9}}
+.car{animation:dr 8s linear infinite}@keyframes dr{0%{transform:translate(0,0)}100%{transform:translate(-190px,-95px)}}.car2{animation:dr2 10s linear infinite}@keyframes dr2{0%{transform:translate(0,0)}100%{transform:translate(190px,95px)}}
+.cl{animation:cl 14s linear infinite}@keyframes cl{from{transform:translateX(-40px)}to{transform:translateX(60px)}}
+.tip{position:absolute;pointer-events:none;background:#14173A;color:#fff;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:9px;opacity:0;transform:translate(-50%,-120%);transition:opacity .15s;white-space:nowrap}.tip.on{opacity:1}
+.sc{position:relative}
+@media(max-width:760px){.c{grid-template-columns:1fr;text-align:center}.tx p{margin-inline:auto}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="tx"><small>Smart cities</small><h1>A living city, drawn in blocks</h1><p>An isometric skyline with flickering windows, passing traffic and buildings that lift when you point at them.</p><a href="#">Explore the map</a></div>
+<div class="sc"><svg viewBox="0 0 560 400" id="sv"><defs><linearGradient id="gr" x1="0" x2="1"><stop offset="0" stop-color="#B8E6C8"/><stop offset="1" stop-color="#8CCFA6"/></linearGradient></defs>
+<g class="cl" opacity=".9"><ellipse cx="110" cy="50" rx="46" ry="14" fill="#fff"/><ellipse cx="140" cy="42" rx="30" ry="12" fill="#fff"/></g><g class="cl" style="animation-duration:20s" opacity=".8"><ellipse cx="440" cy="76" rx="40" ry="12" fill="#fff"/><ellipse cx="462" cy="68" rx="26" ry="10" fill="#fff"/></g>
+<path d="M280 380 L540 250 L280 120 L20 250Z" fill="url(#gr)"/><path d="M280 380 L540 250 L540 268 L280 398 L20 268 L20 250Z" fill="#6FB98E"/>
+<path d="M150 315 L410 185" stroke="#4B5170" stroke-width="22" stroke-linecap="round"/><path d="M150 185 L410 315" stroke="#4B5170" stroke-width="22" stroke-linecap="round"/><path d="M150 315 L410 185M150 185 L410 315" stroke="#fff" stroke-width="2" stroke-dasharray="10 12" opacity=".8"/>
+<g class="car"><path d="M410 185 l14 -7 l14 7 l-14 7z" fill="#EF4444" transform="translate(0,-6)"/></g><g class="car2"><path d="M150 185 l14 -7 l14 7 l-14 7z" fill="#F59E0B" transform="translate(0,-6)"/></g>
+<g class="bd fl" tabindex="0" data-n="Meridian Tower" style="animation-delay:-1s"><path d="M200 250 l45 -22 l0 -100 l-45 22z" fill="#6366F1"/><path d="M245 228 l45 22 l0 -100 l-45 -22z" fill="#4F46E5"/><path d="M200 150 l45 -22 l45 22 l-45 22z" fill="#A5B4FC"/><g><rect class="w" x="212" y="160" width="7" height="9" style="animation-delay:-.2s" transform="skewY(-26)"/><rect class="w" x="226" y="170" width="7" height="9" style="animation-delay:-1.2s" transform="skewY(-26)"/><rect class="w" x="212" y="186" width="7" height="9" style="animation-delay:-2s" transform="skewY(-26)"/><rect class="w" x="226" y="196" width="7" height="9" style="animation-delay:-.7s" transform="skewY(-26)"/></g></g>
+<g class="bd fl" tabindex="0" data-n="Harbour Mall" style="animation-delay:-2.2s"><path d="M310 270 l60 -30 l0 -50 l-60 30z" fill="#EC4899"/><path d="M370 240 l60 30 l0 -50 l-60 -30z" fill="#DB2777"/><path d="M310 220 l60 -30 l60 30 l-60 30z" fill="#F9A8D4"/></g>
+<g class="bd fl" tabindex="0" data-n="Fjord Library" style="animation-delay:-3s"><path d="M110 270 l40 -20 l0 -62 l-40 20z" fill="#14B8A6"/><path d="M150 250 l40 20 l0 -62 l-40 -20z" fill="#0F766E"/><path d="M110 208 l40 -20 l40 20 l-40 20z" fill="#99F6E4"/></g>
+<g class="bd fl" tabindex="0" data-n="Atlas Hotel" style="animation-delay:-.4s"><path d="M390 190 l36 -18 l0 -84 l-36 18z" fill="#F59E0B"/><path d="M426 172 l36 18 l0 -84 l-36 -18z" fill="#D97706"/><path d="M390 106 l36 -18 l36 18 l-36 18z" fill="#FDE68A"/></g>
+<g><circle cx="270" cy="290" r="14" fill="#34D399"/><rect x="267" y="290" width="6" height="16" fill="#92400E"/><circle cx="288" cy="296" r="10" fill="#4ADE80"/><rect x="286" y="296" width="4" height="12" fill="#92400E"/></g></svg><div class="tip" id="tp"></div></div></div>
+<script>
+const tp=document.getElementById('tp'),sc=document.querySelector('.sc');document.querySelectorAll('.bd').forEach(b=>{const show=e=>{const r=b.getBoundingClientRect(),p=sc.getBoundingClientRect();tp.textContent=b.dataset.n;tp.style.left=(r.left-p.left+r.width/2)+'px';tp.style.top=(r.top-p.top)+'px';tp.classList.add('on')};b.addEventListener('mouseenter',show);b.addEventListener('focus',show);b.addEventListener('mouseleave',()=>tp.classList.remove('on'));b.addEventListener('blur',()=>tp.classList.remove('on'))});
+</script></body></html>

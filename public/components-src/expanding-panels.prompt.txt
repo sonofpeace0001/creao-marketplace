@@ -1,0 +1,29 @@
+ROLE
+You are a senior travel-brand designer and front-end engineer with 15+ years of experience. Build "Expanding Panels": five gradient image panels in a row; hovering or tapping one expands it to reveal its story.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black stage with saturated landscape gradients, Syne display type and vertical collapsed labels.
+- Palette: #0C0C0F, #F4F2EE, #8A8892
+- Type: Syne, Inter (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; row of five buttons (flex) each with index, vertical name, arrow chip and an expandable detail block with kicker, title and copy.
+
+INTERACTION & STATES
+- Flex-grow animates the active panel to five times width; labels fade and details slide up; hover, focus and click all activate; stacks vertically on mobile.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

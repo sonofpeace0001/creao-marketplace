@@ -1,0 +1,29 @@
+ROLE
+You are a senior agent-UI designer and front-end engineer with 15+ years of experience. Build "AI Tool-Call Chat": a dark agent chat that shows expandable tool-call cards with code, a final answer and numbered source citations.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Charcoal chat surface with tinted tool icons, mono status labels and syntax-coloured SQL.
+- Palette: #7C9CFF, #23273A, #4ADE80, #0C0E15, #8A8FA8, #0A0B0F
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- User bubble; two tool-call cards (query_database, make_chart) with icon, status chip and collapsible code block; assistant answer with bold figures; citation chips; copy and retry buttons.
+
+INTERACTION & STATES
+- Tool headers toggle open with animated height and aria-expanded; blocks and the answer fade in sequentially; citation chips and action buttons have hover and focus states.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

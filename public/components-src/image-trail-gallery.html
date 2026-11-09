@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Image Trail Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{position:relative;background:#F2EFE8;color:#17150F;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;overflow:hidden;-webkit-font-smoothing:antialiased;user-select:none}
+.ct{position:relative;z-index:1;text-align:center;pointer-events:none;mix-blend-mode:difference;color:#fff}
+.ct small{font-size:12.5px;font-weight:600;letter-spacing:.3em;text-transform:uppercase}.ct h1{font:400 clamp(70px,16vw,200px)/.85 'Bebas Neue',sans-serif;letter-spacing:.01em;margin:10px 0}.ct p{font-size:15px;opacity:.85}
+.tl{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.im{position:absolute;left:0;top:0;width:150px;height:190px;border-radius:10px;overflow:hidden;box-shadow:0 18px 30px -12px rgba(0,0,0,.45);will-change:transform,opacity;transform-origin:center}.im svg{display:block;width:100%;height:100%}
+</style></head><body>
+<div class="tl" id="tl"></div>
+<div class="ct"><small>Selected works</small><h1>Move<br>Slowly</h1><p>Drag your cursor across the page</p></div>
+<script>
+function art(i){const P=[['#FFD6A5','#FF6B35','#3D1A0B'],['#B8E0F5','#2D8CC4','#0B2B44'],['#D9C8F5','#7B4FD1','#24124F'],['#C8F0CF','#2E9E4F','#0C3317'],['#FFC8DD','#E0407A','#4D0E26'],['#FDEBA5','#E8B01A','#4A3500'],['#BDF0EC','#17A89E','#07322F'],['#F5C6B8','#D9582B','#40170A']][i%8],s=i%4;const sc=[`<circle cx="75" cy="70" r="30" fill="${P[1]}"/><path d="M0 150 Q40 110 80 140 T150 120 V190 H0Z" fill="${P[2]}"/>`,`<path d="M0 170 L50 90 L90 140 L120 70 L150 150 V190 H0Z" fill="${P[2]}"/><circle cx="40" cy="45" r="16" fill="#fff" opacity=".8"/>`,`<rect x="30" y="50" width="50" height="110" rx="25" fill="${P[1]}"/><rect x="70" y="90" width="55" height="70" rx="12" fill="${P[2]}"/>`,`<g fill="none" stroke="${P[1]}" stroke-width="7"><path d="M0 110 Q38 80 75 110 T150 110"/><path d="M0 140 Q38 110 75 140 T150 140" opacity=".7"/></g><circle cx="105" cy="55" r="22" fill="${P[1]}"/>`][s];return '<svg viewBox="0 0 150 190" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="t'+i+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+P[0]+'"/><stop offset="1" stop-color="'+P[1]+'" stop-opacity=".5"/></linearGradient></defs><rect width="150" height="190" fill="url(#t'+i+')"/>'+sc+'</svg>'}
+const tl=document.getElementById('tl'),imgs=[];for(let i=0;i<8;i++){const e=document.createElement('div');e.className='im';e.innerHTML=art(i);e.style.opacity=0;tl.appendChild(e);imgs.push({e,t:-1})}
+let idx=0,lx=null,ly=null,acc=0,real=false,t0=0,time=.5;const gap=90;
+function drop(x,y,ang){const o=imgs[idx++%imgs.length];o.x=x;o.y=y;o.a=ang;o.t=time;o.e.style.opacity=1}
+function move(x,y){if(lx==null){lx=x;ly=y;return}const dx=x-lx,dy=y-ly,d=Math.hypot(dx,dy);acc+=d;if(acc>gap){drop(x,y,Math.max(-14,Math.min(14,dx*.25)));acc=0}lx=x;ly=y}
+addEventListener('pointermove',e=>{real=true;move(e.clientX,e.clientY)});
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function frame(){time+=1/60;imgs.forEach(o=>{if(o.t<0)return;const a=time-o.t,life=1.7,k=Math.min(1,a/life);const sc=a<.18?(.5+a/.18*.5):(1-k*.25);o.e.style.opacity=Math.max(0,1-Math.pow(k,2.2));o.e.style.transform='translate('+(o.x-75)+'px,'+(o.y-95-k*30)+'px) rotate('+o.a+'deg) scale('+sc+')'});
+ if(!real){const W=innerWidth,H=innerHeight,tt=time*1.15;move(W/2+Math.cos(tt)*W*.34+Math.sin(tt*2.3)*40,H/2+Math.sin(tt*1.4)*H*.26)}
+ if(!reduce)requestAnimationFrame(frame)}
+// prewarm a visible trail
+(function(){for(let s=0;s<200;s++){time+=1/60;const W=innerWidth,H=innerHeight,tt=time*1.15;move(W/2+Math.cos(tt)*W*.34+Math.sin(tt*2.3)*40,H/2+Math.sin(tt*1.4)*H*.26);imgs.forEach(o=>{if(o.t<0)return;const a=time-o.t,k=Math.min(1,a/1.7),sc=a<.18?(.5+a/.18*.5):(1-k*.25);o.e.style.opacity=Math.max(0,1-Math.pow(k,2.2));o.e.style.transform='translate('+(o.x-75)+'px,'+(o.y-95-k*30)+'px) rotate('+o.a+'deg) scale('+sc+')'})}})();
+frame();
+</script></body></html>

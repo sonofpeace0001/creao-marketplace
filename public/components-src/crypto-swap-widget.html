@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Crypto Swap Widget</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(500px 360px at 20% 10%,#2B1A6B,transparent 70%),radial-gradient(460px 340px at 90% 90%,#0B5C73,transparent 70%),#080A14;color:#EEF0FF;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:440px;background:rgba(18,20,38,.82);backdrop-filter:blur(20px);border:1px solid #2A2E52;border-radius:28px;padding:18px;box-shadow:0 40px 80px -30px #000}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:4px 6px 14px}.hd b{font-size:18px;font-weight:700}.hd .sl{display:flex;gap:4px;background:#0D0F1E;border-radius:10px;padding:3px}.hd .sl button{border:0;background:none;color:#8089B8;font:600 12px 'JetBrains Mono',monospace;padding:5px 9px;border-radius:8px;cursor:pointer}.hd .sl button[aria-pressed=true]{background:#2A2F5E;color:#fff}.hd .sl button:focus-visible{outline:2px solid #818CF8}
+.bx{background:#0F1122;border:1px solid #232749;border-radius:20px;padding:16px;transition:border-color .2s}.bx:focus-within{border-color:#6366F1}
+.bx .t{display:flex;justify-content:space-between;font-size:13px;color:#7F88B8;margin-bottom:8px}.bx .t button{border:0;background:none;color:#818CF8;font:600 12px 'Space Grotesk';cursor:pointer}
+.bx .r{display:flex;align-items:center;gap:12px}.bx input{flex:1;min-width:0;border:0;background:none;outline:0;color:#fff;font:600 32px 'Space Grotesk';letter-spacing:-.03em}.bx input::placeholder{color:#3A3F6E}
+.tk{display:flex;align-items:center;gap:8px;border:1px solid #2A2F5E;background:#181B35;color:#fff;border-radius:99px;padding:6px 12px 6px 6px;font:700 16px 'Space Grotesk';cursor:pointer;transition:all .2s}.tk:hover{border-color:#6366F1}.tk:focus-visible{outline:2px solid #818CF8}
+.tk i{width:28px;height:28px;border-radius:50%;background:var(--g);display:grid;place-items:center;color:#fff;font:700 13px 'Space Grotesk';font-style:normal}
+.bx .u{font:400 13px 'JetBrains Mono',monospace;color:#6B74A8;margin-top:6px}
+.fl{position:relative;height:0;display:grid;place-items:center;z-index:2}.fl button{width:42px;height:42px;border-radius:14px;border:4px solid #12142A;background:#232749;color:#C7CCFF;cursor:pointer;display:grid;place-items:center;transition:transform .5s cubic-bezier(.3,1.6,.5,1),background .2s}.fl button:hover{background:#3338A0;color:#fff}.fl button:focus-visible{outline:2px solid #818CF8}
+.fl button.sp{transform:rotate(180deg)}
+.sw{animation:sw .45s cubic-bezier(.3,1.3,.5,1)}@keyframes sw{0%{opacity:0;transform:translateY(-14px)}100%{opacity:1;transform:none}}
+.ds{margin:14px 4px 12px;display:grid;gap:8px;font-size:13.5px;color:#8F98C8}.ds div{display:flex;justify-content:space-between}.ds b{color:#EEF0FF;font-weight:600;font-family:'JetBrains Mono',monospace;font-size:13px}.ds .g{color:#4ADE80}
+.go{width:100%;border:0;border-radius:18px;padding:17px;font:700 17px 'Space Grotesk';color:#fff;background:linear-gradient(135deg,#6366F1,#22D3EE);cursor:pointer;box-shadow:0 16px 30px -12px #6366F1;transition:transform .15s}.go:hover{transform:translateY(-1px)}.go:focus-visible{outline:3px solid #fff;outline-offset:3px}.go.ld{background:#232749;box-shadow:none}
+</style></head><body>
+<div class="c"><div class="hd"><b>Swap</b><div class="sl" id="sl" role="group" aria-label="Slippage"><button aria-pressed="false">0.1%</button><button aria-pressed="true">0.5%</button><button aria-pressed="false">1%</button></div></div>
+<div class="bx"><div class="t"><span>You pay</span><span>Balance 4.20 <button id="mx">MAX</button></span></div><div class="r"><input id="a" inputmode="decimal" value="1.25" aria-label="Pay amount"><button class="tk" id="ta"></button></div><div class="u" id="ua"></div></div>
+<div class="fl"><button id="fp" aria-label="Flip tokens"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button></div>
+<div class="bx" style="margin-top:6px"><div class="t"><span>You receive</span><span id="bb"></span></div><div class="r"><input id="b" readonly aria-label="Receive amount" tabindex="-1"><button class="tk" id="tb"></button></div><div class="u" id="ub"></div></div>
+<div class="ds"><div><span>Rate</span><b id="rt"></b></div><div><span>Price impact</span><b class="g">0.03%</b></div><div><span>Network fee</span><b id="nf">$2.41</b></div></div>
+<button class="go" id="go">Swap</button></div>
+<script>
+const T={ETH:{p:3120,g:'linear-gradient(135deg,#627EEA,#8FA4F5)',s:'E'},USDC:{p:1,g:'linear-gradient(135deg,#2775CA,#4F9BEA)',s:'$'},SOL:{p:162,g:'linear-gradient(135deg,#9945FF,#14F195)',s:'S'}};
+let from='ETH',to='USDC';const $=id=>document.getElementById(id);
+function fmt(n,d){return n.toLocaleString('en-US',{maximumFractionDigits:d,minimumFractionDigits:Math.min(d,2)})}
+function tk(el,k){el.innerHTML='<i style="--g:'+T[k].g+'">'+T[k].s+'</i>'+k+' <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>'}
+function upd(anim){tk($('ta'),from);tk($('tb'),to);const a=parseFloat($('a').value)||0,r=T[from].p/T[to].p,o=a*r;$('b').value=a?fmt(o,to==='USDC'?2:5):'';$('ua').textContent='$'+fmt(a*T[from].p,2);$('ub').textContent='$'+fmt(o*T[to].p*.9997,2);$('rt').textContent='1 '+from+' = '+fmt(r,r>10?2:5)+' '+to;$('bb').textContent='Balance 0.00';if(anim){$('b').classList.remove('sw');void $('b').offsetWidth;$('b').classList.add('sw')}}
+function cycle(el,other,cb){const ks=Object.keys(T).filter(k=>k!==other);el.onclick=()=>{const i=ks.indexOf(el.__k);cb(ks[(i+1)%ks.length]);upd(true)}}
+$('ta').onclick=()=>{const ks=Object.keys(T).filter(k=>k!==to);from=ks[(ks.indexOf(from)+1)%ks.length];upd(true)};$('tb').onclick=()=>{const ks=Object.keys(T).filter(k=>k!==from);to=ks[(ks.indexOf(to)+1)%ks.length];upd(true)};
+$('fp').onclick=()=>{$('fp').classList.toggle('sp');const o=parseFloat($('b').value.replace(/,/g,''))||0;[from,to]=[to,from];$('a').value=o?(o>100?Math.round(o*100)/100:Math.round(o*1e4)/1e4):'1';upd(true)};
+$('a').addEventListener('input',()=>upd(false));$('mx').onclick=()=>{$('a').value=4.2;upd(false)};
+$('sl').querySelectorAll('button').forEach(b=>b.onclick=()=>$('sl').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)));
+$('go').onclick=()=>{const g=$('go');g.classList.add('ld');g.textContent='Confirm in wallet...';setTimeout(()=>{g.classList.remove('ld');g.textContent='Swap'},1800)};
+upd(false);
+</script></body></html>

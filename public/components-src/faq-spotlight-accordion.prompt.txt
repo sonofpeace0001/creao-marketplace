@@ -1,0 +1,29 @@
+ROLE
+You are a senior help-centre designer and front-end engineer with 15+ years of experience. Build "Spotlight FAQ Accordion": a dark single-open FAQ accordion with category filters, a cursor spotlight on each row and a morphing plus icon.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black Geist surface with soft indigo spotlight and rounded rows.
+- Palette: #8B8FFF, #0A0A0C, #EDEDF0, #8A8A94, #111114, #232328
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Centered heading; category pill filters; five accordion rows with a spotlight layer, morphing plus-minus button and height-animated answer; help link.
+
+INTERACTION & STATES
+- One row open at a time (aria-expanded); pointermove sets spotlight position per row; filter pills hide rows by topic; grid-template-rows animates the answer height.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

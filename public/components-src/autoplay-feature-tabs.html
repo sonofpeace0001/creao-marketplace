@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Autoplay Feature Tabs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3F4F8;color:#101223;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px;background:#fff;border-radius:28px;padding:34px;box-shadow:0 40px 70px -44px rgba(16,18,35,.5),0 0 0 1px rgba(16,18,35,.06)}
+.hd{margin-bottom:26px}.hd small{font:500 12px 'Geist Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#6366F1}.hd h1{font-size:clamp(28px,4vw,38px);font-weight:700;letter-spacing:-.05em;margin-top:6px}
+.gd{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:stretch}
+.ls{display:flex;flex-direction:column;gap:6px}
+.it{position:relative;text-align:left;border:0;background:none;border-radius:16px;padding:16px 18px;cursor:pointer;font:inherit;color:inherit;overflow:hidden;transition:background .25s}.it:hover{background:#F6F7FB}.it.on{background:#F1F2FF}.it:focus-visible{outline:2px solid #6366F1}
+.it b{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;letter-spacing:-.02em;color:#6A6F8C;transition:color .25s}.it.on b{color:#101223}.it b i{width:30px;height:30px;border-radius:9px;background:#EDEEF7;display:grid;place-items:center;color:#7A7F9E;transition:all .3s}.it.on b i{background:#6366F1;color:#fff}
+.it p{font-size:14px;line-height:1.5;color:#7A7F9E;max-height:0;opacity:0;overflow:hidden;margin:0 0 0 40px;transition:all .4s cubic-bezier(.3,1,.4,1)}.it.on p{max-height:70px;opacity:1;margin-top:6px}
+.it .pg{position:absolute;left:0;bottom:0;height:3px;width:100%;background:linear-gradient(90deg,#6366F1,#A78BFA);transform-origin:left;transform:scaleX(0)}.it.on .pg{animation:pg var(--t,5s) linear forwards}.it.on.ps .pg{animation-play-state:paused}@keyframes pg{to{transform:scaleX(1)}}
+.vw{position:relative;border-radius:22px;background:linear-gradient(150deg,#EEF0FF,#F6EEFF);overflow:hidden;min-height:340px}
+.sc{position:absolute;inset:0;padding:22px;opacity:0;transform:translateY(16px) scale(.98);transition:all .5s cubic-bezier(.3,1,.4,1);pointer-events:none}.sc.on{opacity:1;transform:none}
+.w{background:#fff;border-radius:16px;box-shadow:0 18px 30px -16px rgba(60,50,140,.35);padding:14px}
+.ln{height:9px;border-radius:5px;background:#E9EBF6;margin-bottom:8px}
+/* s1: analytics */
+.s1 .ch{display:flex;align-items:flex-end;gap:7px;height:120px;margin:10px 0 8px}.s1 .ch i{flex:1;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,#818CF8,#6366F1);height:var(--h)}.s1 .kp{display:flex;gap:10px;margin-bottom:10px}.s1 .kp div{flex:1;background:#fff;border-radius:14px;padding:12px;box-shadow:0 10px 20px -14px rgba(60,50,140,.4)}.s1 .kp b{display:block;font-size:22px;font-weight:700;letter-spacing:-.04em}.s1 .kp span{font-size:12px;color:#8A8FAE}
+/* s2: collab */
+.s2 .cm{display:flex;gap:10px;margin-bottom:10px}.s2 .cm i{flex:none;width:30px;height:30px;border-radius:50%;background:var(--g)}.s2 .cm div{flex:1;background:#fff;border-radius:6px 14px 14px 14px;padding:10px 12px;font-size:13px;line-height:1.4;color:#3C4163;box-shadow:0 10px 20px -14px rgba(60,50,140,.4)}.s2 .cm b{display:block;font-size:12px;margin-bottom:2px}
+.s2 .cur{position:absolute;right:46px;top:150px;display:flex;flex-direction:column;align-items:flex-start;animation:fl 4s ease-in-out infinite}.s2 .cur span{margin:2px 0 0 14px;background:#EC4899;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px}@keyframes fl{50%{transform:translate(-30px,18px)}}
+/* s3: automate */
+.s3 .fl{display:flex;flex-direction:column;align-items:center;gap:0}.s3 .nd{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 16px;font-size:14px;font-weight:600;box-shadow:0 10px 20px -14px rgba(60,50,140,.4);width:230px}.s3 .nd i{width:26px;height:26px;border-radius:8px;background:var(--b);flex:none}.s3 .cn{width:2px;height:26px;background:repeating-linear-gradient(180deg,#A5B4FC 0 4px,transparent 4px 8px);animation:dr 1s linear infinite}@keyframes dr{to{background-position:0 8px}}
+@media(max-width:760px){.gd{grid-template-columns:1fr}.vw{min-height:300px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><small>Platform</small><h1>Everything your team needs, one tab at a time</h1></div>
+<div class="gd"><div class="ls" id="ls"></div><div class="vw" id="vw">
+<div class="sc s1"><div class="kp"><div><b>$48.2k</b><span>Revenue</span></div><div><b>2,931</b><span>Orders</span></div></div><div class="w"><div class="ln" style="width:40%"></div><div class="ch"><i style="--h:38%"></i><i style="--h:56%"></i><i style="--h:44%"></i><i style="--h:72%"></i><i style="--h:60%"></i><i style="--h:88%"></i><i style="--h:68%"></i><i style="--h:96%"></i></div></div></div>
+<div class="sc s2"><div class="cm"><i style="--g:linear-gradient(135deg,#6366F1,#EC4899)"></i><div><b>Ada</b>Can we tighten the hero spacing?</div></div><div class="cm"><i style="--g:linear-gradient(135deg,#10B981,#0EA5E9)"></i><div><b>Leo</b>On it. Pushing a fix in a minute.</div></div><div class="cm"><i style="--g:linear-gradient(135deg,#F59E0B,#EF4444)"></i><div><b>Maya</b>Looks sharp. Approved.</div></div><div class="cur"><svg width="18" height="18" viewBox="0 0 24 24" fill="#EC4899"><path d="M4 3l16 7-7 2-2 7z"/></svg><span>Leo</span></div></div>
+<div class="sc s3 on"><div class="fl"><div class="nd"><i style="--b:#6366F1"></i>New signup</div><div class="cn"></div><div class="nd"><i style="--b:#10B981"></i>Send welcome email</div><div class="cn"></div><div class="nd"><i style="--b:#F59E0B"></i>Add to CRM</div><div class="cn"></div><div class="nd"><i style="--b:#EC4899"></i>Notify team in Slack</div></div></div></div></div></div>
+<script>
+const F=[['Live analytics','See revenue, orders and funnels update in real time.','M3 3v18h18M7 14l4-4 4 4 5-6'],['Built for collaboration','Comment, review and approve together without leaving the page.','M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'],['Automations that just run','Connect triggers to actions in a few clicks and skip the busywork.','M13 2 4 14h7l-1 8 9-12h-7z']];
+const T=5,ls=document.getElementById('ls'),sc=[...document.querySelectorAll('.sc')];let cur=2,tm;
+F.forEach((f,i)=>{const b=document.createElement('button');b.className='it';b.style.setProperty('--t',T+'s');b.innerHTML='<b><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="'+f[2]+'"/></svg></i>'+f[0]+'</b><p>'+f[1]+'</p><span class="pg"></span>';b.onclick=()=>go(i);ls.appendChild(b)});
+const its=[...ls.children];
+function go(i,init){cur=i;its.forEach((b,k)=>{b.classList.remove('on');void b.offsetWidth;b.classList.toggle('on',k===i)});sc.forEach((s,k)=>s.classList.toggle('on',k===i));clearTimeout(tm);if(init){its[i].querySelector('.pg').style.animationDelay='-'+(T*.45)+'s'}tm=setTimeout(()=>go((i+1)%F.length),T*1000*(init?.55:1))}
+go(2,true);
+ls.addEventListener('mouseenter',()=>{clearTimeout(tm);its.forEach(b=>b.classList.add('ps'))});ls.addEventListener('mouseleave',()=>{its.forEach(b=>b.classList.remove('ps'));go(cur)});
+</script></body></html>

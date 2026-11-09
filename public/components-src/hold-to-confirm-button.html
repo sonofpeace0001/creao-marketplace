@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hold to Confirm Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#14121C;color:#F4F2FB;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;user-select:none}
+.c{width:100%;max-width:560px;display:grid;gap:26px;justify-items:center;text-align:center}
+.c h1{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.045em}.c p{color:#8C88A8;font-size:15px;margin-top:-14px}
+.hb{--p:0;--c:#F43F5E;position:relative;display:flex;align-items:center;gap:14px;border:0;background:#211E2E;color:#fff;border-radius:22px;padding:14px 26px 14px 14px;font:700 17px 'Manrope';cursor:pointer;overflow:hidden;touch-action:none;box-shadow:0 18px 30px -16px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.08);transition:transform .15s,box-shadow .3s}
+.hb::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 70%,#000),var(--c));transform-origin:left;transform:scaleX(var(--p));transition:transform .08s linear}
+.hb.rel::before{transition:transform .35s cubic-bezier(.3,1,.4,1)}
+.hb:active,.hb.hl{transform:scale(.97)}.hb:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.hb .rg{position:relative;width:46px;height:46px;flex:none}.hb .rg svg{width:100%;height:100%;transform:rotate(-90deg)}.hb .rg circle{fill:none;stroke-width:4;stroke-linecap:round}.hb .rg .t{stroke:rgba(255,255,255,.18)}.hb .rg .v{stroke:#fff;stroke-dasharray:113;stroke-dashoffset:calc(113 - 113*var(--p))}
+.hb .rg .ic{position:absolute;inset:0;display:grid;place-items:center}.hb .rg .ic svg{width:20px;height:20px;transform:none}
+.hb .lb{position:relative;text-align:left;line-height:1.15}.hb .lb small{display:block;font:600 12px 'Manrope';color:rgba(255,255,255,.65);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+.hb.dn{--c:#22C55E;pointer-events:none}.hb.dn .rg .t,.hb.dn .rg .v{stroke:#fff}
+.hb .ok{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:scale(.3);transition:all .35s cubic-bezier(.3,1.8,.5,1)}.hb.dn .ok{opacity:1;transform:none}.hb.dn .ic{opacity:0}
+.rs{border:1px solid #38344E;background:none;color:#B2AECE;border-radius:99px;padding:8px 18px;font:600 13px 'Manrope';cursor:pointer}.rs:focus-visible{outline:2px solid #fff}
+.row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}.hb.sm{--c:#6366F1;padding:12px 22px 12px 12px;font-size:15px}.hb.sm .rg{width:38px;height:38px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><h1>Press and hold</h1><p>Destructive actions need a deliberate hold.</p>
+<div class="row"><button class="hb" id="b1" aria-label="Hold to delete project"><span class="rg"><svg viewBox="0 0 44 44"><circle class="t" cx="22" cy="22" r="18"/><circle class="v" cx="22" cy="22" r="18"/></svg><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg></span><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span></span><span class="lb">Hold to delete<small id="s1">Keep pressing</small></span></button>
+<button class="hb sm" id="b2" aria-label="Hold to publish"><span class="rg"><svg viewBox="0 0 44 44"><circle class="t" cx="22" cy="22" r="18"/><circle class="v" cx="22" cy="22" r="18"/></svg><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg></span><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span></span><span class="lb">Hold to publish<small>1 second</small></span></button></div>
+<button class="rs" id="rs">Reset demo</button></div>
+<script>
+function hold(b,ms,sub){let raf,t0,p=0,done=false;const set=v=>{p=v;b.style.setProperty('--p',v)};
+ const tick=n=>{p=Math.min(1,(n-t0)/ms);set(p);if(sub)sub.textContent=p<1?Math.round(p*100)+'%':'Deleted';if(p>=1){done=true;b.classList.add('dn');if(sub)sub.textContent='Project deleted';return}raf=requestAnimationFrame(tick)};
+ const start=e=>{if(done)return;e.preventDefault();b.classList.remove('rel');t0=performance.now()-p*ms;cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)};
+ const end=()=>{if(done)return;cancelAnimationFrame(raf);b.classList.add('rel');set(0);if(sub)sub.textContent='Keep pressing'};
+ b.addEventListener('pointerdown',start);addEventListener('pointerup',end);b.addEventListener('pointerleave',end);b.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat)start(e)});b.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')end()});
+ b.reset=()=>{done=false;b.classList.remove('dn');set(0);if(sub)sub.textContent='Keep pressing'};b.demo=v=>{b.classList.remove('rel');set(v);if(sub)sub.textContent=Math.round(v*100)+'%'}}
+const b1=document.getElementById('b1'),b2=document.getElementById('b2');hold(b1,1500,document.getElementById('s1'));hold(b2,1000);
+b1.demo(.62);b1.classList.add('hl');document.getElementById('rs').onclick=()=>{b1.reset();b2.reset();b1.classList.remove('hl')};
+</script></body></html>

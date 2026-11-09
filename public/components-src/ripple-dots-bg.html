@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ripple Dot Matrix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:#F3F1EC;color:#1B1B1F;font-family:'Space Grotesk',sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+.sc{position:relative;min-height:100vh;display:grid;place-items:center}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ct{position:relative;text-align:center;padding:0 20px;pointer-events:none}.ct>*{pointer-events:auto}
+.ct small{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;background:#1B1B1F;color:#F3F1EC;padding:7px 14px;border-radius:99px}
+.ct h1{font-size:clamp(38px,8vw,78px);line-height:1;letter-spacing:-.05em;font-weight:700;margin:20px 0 14px;background:rgba(243,241,236,.78);backdrop-filter:blur(3px);padding:6px 18px;border-radius:18px;display:inline-block}
+.ct p{font-size:17px;color:#55555E;max-width:40ch;margin:0 auto 24px;line-height:1.55;background:rgba(243,241,236,.78);backdrop-filter:blur(3px);padding:6px 12px;border-radius:10px}
+.ct button{border:0;background:#FF4D2E;color:#fff;font:700 15.5px 'Space Grotesk';padding:15px 28px;border-radius:14px;cursor:pointer;box-shadow:0 14px 26px -12px #FF4D2E;transition:transform .15s}.ct button:hover{transform:translateY(-2px)}.ct button:focus-visible{outline:3px solid #1B1B1F;outline-offset:3px}
+.hn{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:12.5px;color:#8A8A92;font-weight:500}
+</style></head><body>
+<div class="sc" id="sc"><canvas id="cv" aria-hidden="true"></canvas>
+<div class="ct"><small>Interactive backdrop</small><h1>Move. Click. Ripple.</h1><p>A living dot matrix that bends around your cursor and sends waves outward on every click.</p><button>Start a project</button></div><div class="hn">Move your pointer or tap anywhere</div></div>
+<script>
+const cv=document.getElementById('cv'),x=cv.getContext('2d');let W,H,dpr,cols,rows,gap=26,mx=-999,my=-999,R=[];
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function rs(){dpr=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);cols=Math.ceil(W/gap)+1;rows=Math.ceil(H/gap)+1}
+function draw(t){x.clearRect(0,0,W,H);const now=performance.now();R=R.filter(r=>now-r.t<1800);
+ for(let i=0;i<cols;i++)for(let j=0;j<rows;j++){const px=i*gap+gap/2,py=j*gap+gap/2;let s=1,k=0;
+  const dx=px-mx,dy=py-my,d=Math.hypot(dx,dy);if(d<130){k=1-d/130;s+=k*2.2}
+  for(const r of R){const age=(now-r.t)/1000,rad=age*420,dd=Math.abs(Math.hypot(px-r.x,py-r.y)-rad);if(dd<48){const f=(1-dd/48)*(1-age/1.8);s+=f*3;k=Math.max(k,f)}}
+  const hue=14+k*0;x.fillStyle=k>0.02?'rgb('+Math.round(27+(255-27)*k)+','+Math.round(27+(77-27)*k)+','+Math.round(31+(46-31)*k)+')':'#C9C6BD';
+  x.beginPath();x.arc(px,py,1.6*s,0,6.283);x.fill()}
+ if(!reduced)requestAnimationFrame(draw)}
+cv.parentElement.addEventListener('pointermove',e=>{const b=cv.getBoundingClientRect();mx=e.clientX-b.left;my=e.clientY-b.top;if(reduced)draw()});
+cv.parentElement.addEventListener('pointerleave',()=>{mx=my=-999});
+cv.parentElement.addEventListener('pointerdown',e=>{const b=cv.getBoundingClientRect();R.push({x:e.clientX-b.left,y:e.clientY-b.top,t:performance.now()});if(reduced)draw()});
+addEventListener('resize',()=>{rs();draw()});rs();setTimeout(()=>{R.push({x:W/2,y:H/2,t:performance.now()});},200);mx=W*.3;my=H*.4;draw();
+</script></body></html>

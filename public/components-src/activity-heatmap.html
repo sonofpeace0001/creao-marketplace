@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Activity Heatmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0D1117;color:#E6EDF3;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:800px;background:#151B23;border:1px solid #262E3A;border-radius:22px;padding:24px;box-shadow:0 40px 70px -40px #000}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:18px}.hd h1{font-size:20px;font-weight:700;letter-spacing:-.03em}.hd p{font-size:13.5px;color:#7D8798;margin-top:3px}
+.sm{display:flex;gap:22px}.sm div b{display:block;font:500 24px 'IBM Plex Mono',monospace;letter-spacing:-.05em}.sm div span{font-size:12px;color:#7D8798}
+.hm{display:grid;grid-template-columns:28px 1fr;gap:6px}.dy{display:grid;grid-template-rows:repeat(7,1fr);gap:4px;font:400 10.5px 'IBM Plex Mono',monospace;color:#6A7484;padding-top:18px}.dy span{display:flex;align-items:center}
+.mo{display:grid;grid-template-columns:repeat(26,1fr);font:400 11px 'IBM Plex Mono',monospace;color:#6A7484;height:18px}
+.gr{display:grid;grid-template-columns:repeat(26,1fr);grid-template-rows:repeat(7,1fr);grid-auto-flow:column;gap:4px;aspect-ratio:26/7.6}
+.gr i{border-radius:3px;background:var(--c);opacity:0;transform:scale(.4);animation:in .5s forwards;animation-delay:var(--d);transition:outline-color .1s;outline:2px solid transparent;outline-offset:1px;cursor:pointer}.gr i:hover,.gr i:focus-visible{outline-color:#fff}
+@keyframes in{to{opacity:1;transform:none}}
+.lg{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:12px;color:#7D8798;gap:12px;flex-wrap:wrap}.lg div{display:flex;align-items:center;gap:4px}.lg i{width:12px;height:12px;border-radius:3px;display:block}
+.tt{position:fixed;pointer-events:none;background:#fff;color:#0D1117;font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:8px;white-space:nowrap;opacity:0;transform:translate(-50%,-130%);transition:opacity .1s;z-index:9;box-shadow:0 10px 20px rgba(0,0,0,.4)}.tt small{display:block;font:400 11px 'IBM Plex Mono',monospace;color:#5A6474}
+@media(prefers-reduced-motion:reduce){.gr i{animation:none;opacity:1;transform:none}}
+</style></head><body>
+<div class="c"><div class="hd"><div><h1>Shipping activity</h1><p>Deploys per day across the last 26 weeks</p></div><div class="sm"><div><b id="s1">0</b><span>Total deploys</span></div><div><b id="s2">0</b><span>Day streak</span></div><div><b id="s3">0</b><span>Best day</span></div></div></div>
+<div class="hm"><div class="dy"><span></span><span>Mon</span><span></span><span>Wed</span><span></span><span>Fri</span><span></span></div><div><div class="mo" id="mo"></div><div class="gr" id="gr" role="grid" aria-label="Deploy activity heatmap"></div></div></div>
+<div class="lg"><span>Hover a day for details</span><div>Less <i style="background:#1B2430"></i><i style="background:#0E4429"></i><i style="background:#006D32"></i><i style="background:#26A641"></i><i style="background:#39D353"></i> More</div></div></div><div class="tt" id="tt"></div>
+<script>
+const COL=['#1B2430','#0E4429','#006D32','#26A641','#39D353'];let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646};
+const gr=document.getElementById('gr'),tt=document.getElementById('tt');const today=new Date(2026,10,8);const start=new Date(today);start.setDate(start.getDate()-26*7+1-((today.getDay()+6)%7));
+let total=0,best=0,streak=0,cur=0;const days=[];
+for(let w=0;w<26;w++)for(let d=0;d<7;d++){const dt=new Date(start);dt.setDate(start.getDate()+w*7+d);if(dt>today){days.push(null);continue}const wk=d>=5?.35:1;let v=Math.round(rnd()*rnd()*14*wk*(.5+w/26));if(rnd()<.12)v=0;days.push([dt,v]);total+=v;best=Math.max(best,v);if(v>0){cur++;streak=Math.max(streak,cur)}else cur=0}
+let streakNow=0;for(let i=days.length-1;i>=0;i--){if(!days[i])continue;if(days[i][1]>0)streakNow++;else break}
+gr.innerHTML=days.map((o,i)=>{if(!o)return '<i style="--c:transparent;animation:none;opacity:0"></i>';const lv=o[1]===0?0:o[1]<3?1:o[1]<6?2:o[1]<10?3:4;return '<i role="gridcell" tabindex="-1" style="--c:'+COL[lv]+';--d:'+(Math.floor(i/7)*22+(i%7)*8)+'ms" data-v="'+o[1]+'" data-t="'+o[0].toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+'"></i>'}).join('');
+const M=['Jun','Jul','Aug','Sep','Oct','Nov'];let mo='',lastM=-1;for(let w=0;w<26;w++){const dt=new Date(start);dt.setDate(start.getDate()+w*7);const m=dt.getMonth();mo+='<span>'+(m!==lastM?dt.toLocaleString('en-US',{month:'short'}):'')+'</span>';lastM=m}document.getElementById('mo').innerHTML=mo;
+function cnt(id,to){const e=document.getElementById(id),s=performance.now();const f=n=>{const p=Math.min(1,(n-s)/1200);e.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+cnt('s1',total);cnt('s2',Math.max(streakNow,streak>9?streak:streakNow));cnt('s3',best);
+gr.addEventListener('pointerover',e=>{const c=e.target.closest('i[data-t]');if(!c){tt.style.opacity=0;return}const r=c.getBoundingClientRect();tt.style.opacity=1;tt.style.left=(r.left+r.width/2)+'px';tt.style.top=r.top+'px';tt.innerHTML=c.dataset.v+' deploys<small>'+c.dataset.t+'</small>'});
+gr.addEventListener('pointerleave',()=>tt.style.opacity=0);
+setTimeout(()=>{const c=gr.querySelectorAll('i[data-t]')[120];if(c){const r=c.getBoundingClientRect();tt.style.opacity=1;tt.style.left=(r.left+r.width/2)+'px';tt.style.top=r.top+'px';tt.innerHTML=c.dataset.v+' deploys<small>'+c.dataset.t+'</small>'}},1400);
+</script></body></html>

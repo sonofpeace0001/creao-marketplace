@@ -1,0 +1,29 @@
+ROLE
+You are a senior analytics UI designer and front-end engineer with 15+ years of experience. Build "Progress Stat Cards": kPI cards with a drawing sparkline, goal progress bar and glow that replay their animation on hover.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark slate with mint, indigo and pink accent glows and mono deltas.
+- Palette: #232B39, #6B7488, #0D1117, #E8EDF7, #161C26, #10151D
+- Type: Outfit, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; three cards with icon chip, big value, delta, sparkline with area, goal bar and footer.
+
+INTERACTION & STATES
+- Hover lifts the card, tints its border and replays the line draw and bar fill; sparkline paths are measured for stroke dash animation.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

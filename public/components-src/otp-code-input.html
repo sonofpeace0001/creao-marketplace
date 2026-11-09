@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>OTP Code Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#E7EAFB,#F3E8FB);color:#13183A;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:460px;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-radius:30px;padding:34px 30px 28px;text-align:center;box-shadow:0 40px 70px -44px rgba(70,40,160,.55),0 0 0 1px rgba(255,255,255,.9)}
+.ic{width:56px;height:56px;border-radius:18px;margin:0 auto 18px;background:linear-gradient(135deg,#6366F1,#A855F7);display:grid;place-items:center;color:#fff;box-shadow:0 14px 24px -10px rgba(99,102,241,.7);transition:background .3s}.c.ok .ic{background:linear-gradient(135deg,#10B981,#34D399)}.c.bad .ic{background:linear-gradient(135deg,#EF4444,#F97316)}
+h1{font-size:23px;font-weight:700;letter-spacing:-.04em}.c>p{font-size:14.5px;color:#6B72A0;margin:6px 0 24px;line-height:1.5}.c>p b{color:#13183A}
+.ot{display:flex;justify-content:center;gap:9px;margin-bottom:8px}.ot input{width:50px;height:62px;text-align:center;border:2px solid #DADFF3;border-radius:16px;background:#fff;font:700 28px 'JetBrains Mono',monospace;color:#13183A;outline:0;caret-color:#6366F1;transition:all .2s cubic-bezier(.3,1.4,.5,1)}
+.ot input:focus{border-color:#6366F1;box-shadow:0 0 0 5px rgba(99,102,241,.16);transform:translateY(-3px)}.ot input.f{border-color:#B7BDEA;background:#F8F9FF}
+.ot.sep{margin:0}.ot .dash{align-self:center;width:12px;height:3px;border-radius:3px;background:#C2C8E6}
+.ot.ok input{border-color:#10B981;background:#ECFDF5;color:#047857;animation:pop .45s cubic-bezier(.3,1.5,.5,1) both;animation-delay:calc(var(--i)*60ms)}@keyframes pop{50%{transform:translateY(-8px) scale(1.06)}}
+.ot.bad{animation:sk .45s}.ot.bad input{border-color:#EF4444;background:#FEF2F2;color:#B91C1C}@keyframes sk{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+.ms{min-height:22px;font-size:13.5px;font-weight:600;margin:10px 0 18px}.ms.ok{color:#059669}.ms.bad{color:#DC2626}
+.go{width:100%;border:0;border-radius:16px;padding:15px;font:700 15.5px 'Sora';background:linear-gradient(135deg,#6366F1,#8B5CF6);color:#fff;cursor:pointer;box-shadow:0 14px 26px -12px rgba(99,102,241,.8);transition:transform .15s,opacity .2s}.go:hover:not(:disabled){transform:translateY(-1px)}.go:disabled{opacity:.45;cursor:default;box-shadow:none}.go:focus-visible{outline:3px solid #13183A;outline-offset:3px}
+.rs{margin-top:16px;font-size:13.5px;color:#6B72A0}.rs button{border:0;background:none;color:#6366F1;font:700 13.5px 'Sora';cursor:pointer;padding:2px 4px}.rs button:disabled{color:#A0A6C8;cursor:default}.rs button:focus-visible{outline:2px solid #6366F1;border-radius:4px}
+.hn{margin-top:14px;font-size:12px;color:#9AA0C4}
+@media(max-width:420px){.ot input{width:42px;height:54px;font-size:24px}.ot{gap:6px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c" id="c"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round" id="ii"><rect x="4" y="11" width="16" height="10" rx="2.500"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+<h1>Check your email</h1><p>We sent a 6-digit code to <b>ada@studio.com</b>. It expires in 10 minutes.</p>
+<div class="ot" id="ot" role="group" aria-label="One-time code"></div><div class="ms" id="ms" role="status" aria-live="polite"></div>
+<button class="go" id="go" disabled>Verify code</button><div class="rs"><span id="rt">Resend code in 0:28</span> <button id="rb" disabled>Resend</button></div><div class="hn">Demo code: 482913. You can paste it too.</div></div>
+<script>
+const CODE='482913',ot=document.getElementById('ot'),c=document.getElementById('c'),ms=document.getElementById('ms'),go=document.getElementById('go');
+ot.innerHTML=Array.from({length:6},(_,i)=>(i===3?'<span class="dash"></span>':'')+'<input inputmode="numeric" maxlength="1" autocomplete="'+(i?'off':'one-time-code')+'" aria-label="Digit '+(i+1)+'" style="--i:'+i+'">').join('');
+const I=[...ot.querySelectorAll('input')];
+function val(){return I.map(x=>x.value).join('')}
+function upd(){I.forEach(x=>x.classList.toggle('f',!!x.value));go.disabled=val().length<6;if(val().length===6)check()}
+function reset(){ot.classList.remove('bad','ok');c.classList.remove('bad','ok');ms.className='ms';ms.textContent=''}
+function check(){if(val()===CODE){ot.classList.add('ok');c.classList.add('ok');ms.className='ms ok';ms.textContent='Verified. Redirecting…';document.getElementById('ii').innerHTML='<path d="m5 12.500 4.500 4.500L19 7"/>';go.textContent='Verified'}else{ot.classList.remove('bad');void ot.offsetWidth;ot.classList.add('bad');c.classList.add('bad');ms.className='ms bad';ms.textContent='That code is not right. Try again.';setTimeout(()=>{I.forEach(x=>x.value='');upd();reset();I[0].focus()},900)}}
+I.forEach((x,i)=>{x.addEventListener('input',()=>{x.value=x.value.replace(/\D/g,'').slice(-1);reset();if(x.value&&i<5)I[i+1].focus();upd()});
+ x.addEventListener('keydown',e=>{if(e.key==='Backspace'&&!x.value&&i>0){I[i-1].focus();I[i-1].value='';upd()}if(e.key==='ArrowLeft'&&i>0)I[i-1].focus();if(e.key==='ArrowRight'&&i<5)I[i+1].focus()});
+ x.addEventListener('paste',e=>{e.preventDefault();const t=(e.clipboardData.getData('text')||'').replace(/\D/g,'').slice(0,6);t.split('').forEach((d,k)=>I[k].value=d);reset();I[Math.min(t.length,5)].focus();upd()});x.addEventListener('focus',()=>x.select())});
+go.onclick=check;let s=28;const rt=document.getElementById('rt'),rb=document.getElementById('rb');const iv=setInterval(()=>{s--;if(s<=0){clearInterval(iv);rt.textContent='Did not get it?';rb.disabled=false}else rt.textContent='Resend code in 0:'+String(s).padStart(2,'0')},1000);
+rb.onclick=()=>{rb.disabled=true;rt.textContent='Code sent again.'};
+'482'.split('').forEach((d,k)=>I[k].value=d);I[3].focus();upd();
+</script></body></html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Profile Hero Cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E8EBF5;color:#12163A;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:640px;background:#fff;border-radius:30px;overflow:hidden;box-shadow:0 40px 70px -44px rgba(18,22,58,.55),0 0 0 1px rgba(18,22,58,.07)}
+.cv{position:relative;height:190px;overflow:hidden;background:#1B1650}
+.cv i{position:absolute;border-radius:50%;filter:blur(2px);transition:transform .3s ease-out}
+.cv .a{width:300px;height:300px;left:-60px;top:-120px;background:radial-gradient(circle,#7C5CFA,transparent 68%)}.cv .b{width:280px;height:280px;right:-40px;top:-60px;background:radial-gradient(circle,#F472B6,transparent 68%)}.cv .d{width:220px;height:220px;left:38%;top:30px;background:radial-gradient(circle,#38BDF8,transparent 70%)}
+.cv::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.25) 1px,transparent 1.2px);background-size:18px 18px;mask-image:linear-gradient(transparent,#000 40%,transparent)}
+.cv button{position:absolute;right:16px;top:16px;z-index:3;border:0;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);color:#fff;border-radius:99px;padding:8px 14px;font:700 12.5px 'Manrope';cursor:pointer;display:flex;align-items:center;gap:6px}.cv button:hover{background:rgba(255,255,255,.32)}.cv button:focus-visible{outline:2px solid #fff}
+.hd{position:relative;padding:0 28px 24px}
+.av{position:relative;width:104px;height:104px;border-radius:32px;margin-top:-52px;background:linear-gradient(135deg,#F59E0B,#EF4444);border:6px solid #fff;display:grid;place-items:center;color:#fff;font:800 34px 'Manrope';box-shadow:0 14px 26px -10px rgba(18,22,58,.4);z-index:2;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}.av:hover{transform:rotate(-4deg) scale(1.05)}
+.av .on{position:absolute;right:-6px;bottom:-6px;width:24px;height:24px;border-radius:50%;background:#22C55E;border:4px solid #fff}
+.rw{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}.nm{margin-top:12px}.nm h1{display:flex;align-items:center;gap:8px;font-size:26px;font-weight:800;letter-spacing:-.045em}.nm h1 svg{color:#3B82F6}.nm span{font-size:14.5px;color:#6A71A0;font-weight:500}
+.ac{display:flex;gap:8px;margin-top:14px}.ac button{border-radius:14px;padding:11px 20px;font:800 14px 'Manrope';cursor:pointer;transition:all .2s}.ac .p{border:0;background:#12163A;color:#fff}.ac .p[aria-pressed=true]{background:#EEF0FC;color:#12163A}.ac .s{border:1.5px solid #DCE0F2;background:#fff;color:#12163A}.ac .i{border:1.5px solid #DCE0F2;background:#fff;width:44px;padding:0;display:grid;place-items:center;color:#12163A}.ac button:hover{transform:translateY(-2px)}.ac button:focus-visible{outline:3px solid #5B5BF6;outline-offset:2px}
+.bio{margin:14px 0 18px;font-size:15.5px;line-height:1.6;color:#3A4070;max-width:52ch}.bio a{color:#5B5BF6;font-weight:700;text-decoration:none}
+.st{display:flex;gap:26px;margin-bottom:18px}.st div b{display:block;font-size:22px;font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.st div span{font-size:13px;color:#7B82AB;font-weight:600}
+.tb{position:relative;display:flex;gap:4px;border-bottom:1px solid #ECEEF8;margin:0 -28px;padding:0 24px}.tb button{position:relative;border:0;background:none;padding:14px 12px;font:700 14.5px 'Manrope';color:#7B82AB;cursor:pointer;transition:color .2s}.tb button[aria-selected=true]{color:#12163A}.tb button:focus-visible{outline:2px solid #5B5BF6;outline-offset:-4px;border-radius:8px}.tb .ul{position:absolute;bottom:-1px;height:3px;border-radius:3px 3px 0 0;background:#5B5BF6;transition:left .35s cubic-bezier(.3,1.2,.4,1),width .35s cubic-bezier(.3,1.2,.4,1)}
+.gr{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.gr div{aspect-ratio:1;border-radius:16px;background:var(--g);animation:in .4s cubic-bezier(.3,1.2,.4,1) both;animation-delay:calc(var(--i)*40ms)}@keyframes in{from{opacity:0;transform:scale(.9)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="c" id="c"><div class="cv" id="cv"><i class="a"></i><i class="b"></i><i class="d"></i><button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3l2-3h6l2 3h3v13H4zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>Edit cover</button></div>
+<div class="hd"><div class="rw"><div><div class="av">MR<span class="on"></span></div><div class="nm"><h1>Maya Rowe <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.400 2.200 3.200-.4.800 3.100 2.800 1.700-1.100 3 1.100 3-2.800 1.700-.8 3.100-3.200-.4L12 22l-2.400-2.200-3.200.4-.8-3.100-2.800-1.700 1.100-3-1.100-3 2.800-1.700.8-3.100 3.200.4z"/><path d="m8.500 12 2.500 2.500 4.500-5" fill="none" stroke="#fff" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></svg></h1><span>@maya · Design lead at Northwind</span></div></div>
+<div class="ac"><button class="p" id="fl" aria-pressed="false">Follow</button><button class="s">Message</button><button class="i" aria-label="More options"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.800"/><circle cx="12" cy="12" r="1.800"/><circle cx="19" cy="12" r="1.800"/></svg></button></div></div>
+<p class="bio">Designing calm software for busy teams. Writing about craft at <a href="#">mayarowe.com</a>. Open to speaking in 2027.</p>
+<div class="st"><div><b id="s1">0</b><span>Followers</span></div><div><b id="s2">0</b><span>Following</span></div><div><b id="s3">0</b><span>Projects</span></div></div>
+<div class="tb" role="tablist" id="tb"><button role="tab" aria-selected="true">Work</button><button role="tab" aria-selected="false">Writing</button><button role="tab" aria-selected="false">Likes</button><span class="ul" id="ul"></span></div>
+<div class="gr" id="gr"></div></div></div>
+<script>
+const G=[['linear-gradient(135deg,#FDBA74,#F43F5E)'],['linear-gradient(135deg,#93C5FD,#6366F1)'],['linear-gradient(135deg,#86EFAC,#0EA5E9)'],['linear-gradient(135deg,#F9A8D4,#8B5CF6)'],['linear-gradient(135deg,#FDE68A,#F97316)'],['linear-gradient(135deg,#A5F3FC,#3B82F6)']];
+const SETS=[0,1,2].map(k=>G.map((g,i)=>G[(i+k*2)%6][0]));
+function paint(k){document.getElementById('gr').innerHTML=SETS[k].map((g,i)=>'<div style="--g:'+g+';--i:'+i+'"></div>').join('')}
+const tb=document.getElementById('tb'),B=[...tb.querySelectorAll('button')],ul=document.getElementById('ul');
+function sel(i){B.forEach((b,k)=>b.setAttribute('aria-selected',k===i));ul.style.left=B[i].offsetLeft+'px';ul.style.width=B[i].offsetWidth+'px';paint(i)}B.forEach((b,i)=>b.onclick=()=>sel(i));(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>sel(0));sel(0);
+function cnt(id,to){const e=document.getElementById(id),t0=performance.now();const f=n=>{const p=Math.min(1,(n-t0)/1000);e.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+cnt('s1',12480);cnt('s2',342);cnt('s3',58);
+const fl=document.getElementById('fl');fl.onclick=()=>{const on=fl.getAttribute('aria-pressed')!=='true';fl.setAttribute('aria-pressed',on);fl.textContent=on?'Following':'Follow'};
+const cv=document.getElementById('cv');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;cv.querySelectorAll('i').forEach((i,k)=>i.style.transform='translate('+x*(24+k*14)+'px,'+y*(16+k*10)+'px)')});
+</script></body></html>

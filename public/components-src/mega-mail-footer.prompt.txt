@@ -1,0 +1,29 @@
+ROLE
+You are a senior creative-studio designer and front-end engineer with 15+ years of experience. Build "Giant Email Footer": a studio footer with a huge email link whose letters hop on hover, a copy button and a scrolling services marquee.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Espresso card on a vermilion page with cream type and amber accents.
+- Palette: #FFB84D, #FFEFE3, #1A0A05, #C9AE9F, #33201A, #EF4B2B
+- Type: Bricolage Grotesque, DM Sans (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Brand and availability status; kicker; giant per-letter email link with sweeping underline; copy button; services marquee; social links and legal row.
+
+INTERACTION & STATES
+- Each email character is a span that lifts and recolours on hover with a staggered delay; the underline wipes in; Copy email writes to the clipboard and confirms; marquee loops until reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

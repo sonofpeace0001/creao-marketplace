@@ -1,0 +1,29 @@
+ROLE
+You are a senior storytelling designer and front-end engineer with 15+ years of experience. Build "Snap Story Scroller": a vertical scroll-snap story with full-height slides, a dot rail and slide-in captions.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep violet to teal slides with large numerals and a minimal dot navigator.
+- Palette: #05040C, #F2EEFF, #1F1A3A
+- Type: Unbounded, Manrope (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Scroll container with four snapped slides each with number, headline and copy; vertical dot rail; counter.
+
+INTERACTION & STATES
+- CSS scroll-snap-type y mandatory; IntersectionObserver marks the active slide, animating its caption and the dot; dots scroll to slides; arrow keys move between slides.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

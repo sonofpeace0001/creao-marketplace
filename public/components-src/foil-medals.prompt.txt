@@ -1,0 +1,29 @@
+ROLE
+You are a senior gamification designer and front-end engineer with 15+ years of experience. Build "Foil Achievement Badges": a grid of achievement medals with 3D tilt and a holographic foil sheen on unlocked ones, and locked ones greyed out.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep purple stage with metallic gradient medals, dashed inner ring and mono captions.
+- Palette: #A8A0D8, #FF7AD9, #2B2150, #0A0818, #F1EEFF, #A89CFF
+- Type: Sora, Fragment Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; 4x2 grid of cards with medal disc, icon, name and requirement; foil layer; lock icon on locked cards; progress bar with unlocked count.
+
+INTERACTION & STATES
+- Pointer drives rotateX and rotateY and a conic rainbow foil masked at the cursor; focus triggers the same effect; locked cards are desaturated and skip the foil.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

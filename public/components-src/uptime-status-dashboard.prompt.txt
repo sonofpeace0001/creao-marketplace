@@ -1,0 +1,29 @@
+ROLE
+You are a senior reliability tooling designer and front-end engineer with 15+ years of experience. Build "Uptime Status Dashboard": a status page dashboard with a live scrolling requests chart, 60 day uptime strips with tooltips and an incident feed.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black panels with mint live data, amber degraded and red outage markers.
+- Palette: #34D399, #6A7488, #0C1017, #1B2230, #9AA4BA, #161C28
+- Type: Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Status header with pulse; live canvas chart; incidents list; five services with 60 day uptime bars and percentages.
+
+INTERACTION & STATES
+- The chart scrolls every 700 ms with smooth curves; hovering uptime bars shows day and state; the updated timestamp counts up.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

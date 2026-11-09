@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Morphing Dot Pager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E0C1F;color:#F0EDFF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:520px;text-align:center}
+.vw{position:relative;height:320px;border-radius:30px;overflow:hidden;background:#17142F;border:1px solid #29244F;box-shadow:0 40px 70px -40px #000}
+.sl{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:30px;text-align:left;opacity:0;transform:translateX(40px);transition:all .55s cubic-bezier(.3,1,.4,1);background:var(--g)}
+.sl::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 15%,rgba(255,255,255,.35),transparent 50%),linear-gradient(transparent 35%,rgba(0,0,0,.5))}
+.sl.on{opacity:1;transform:none}.sl.pv{transform:translateX(-40px)}
+.sl small,.sl h2,.sl p{position:relative}.sl small{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.85}.sl h2{font-size:28px;font-weight:800;letter-spacing:-.045em;margin:6px 0}.sl p{font-size:15px;opacity:.92;max-width:34ch;line-height:1.5}
+.pg{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
+.ar{width:46px;height:46px;border-radius:50%;border:1px solid #2F2A5A;background:#17142F;color:#F0EDFF;cursor:pointer;display:grid;place-items:center;transition:all .2s}.ar:hover:not(:disabled){background:#F0EDFF;color:#0E0C1F}.ar:disabled{opacity:.35;cursor:default}.ar:focus-visible{outline:3px solid #A78BFA;outline-offset:3px}
+.ds{display:flex;gap:8px;align-items:center;height:20px}
+.dt{position:relative;height:10px;width:10px;border-radius:10px;border:0;padding:0;background:#3A3470;cursor:pointer;overflow:hidden;transition:width .5s cubic-bezier(.3,1.4,.5,1),background .3s}.dt:hover{background:#6A62B8}.dt:focus-visible{outline:2px solid #A78BFA;outline-offset:3px}
+.dt.on{width:44px;background:#3A3470}.dt.on::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#A78BFA,#F472B6);transform-origin:left;animation:fl var(--d,5s) linear forwards}@keyframes fl{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.dt.dn{background:#8B7FD8}
+.ct{margin-top:14px;font-size:13px;color:#8D86C4;font-weight:600}.ct b{color:#F0EDFF}
+@media(prefers-reduced-motion:reduce){.dt.on::after{animation:none}*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="vw" id="vw" aria-live="polite"></div>
+<div class="pg"><button class="ar" id="pv" aria-label="Previous slide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><div class="ds" id="ds" role="tablist" aria-label="Slides"></div><button class="ar" id="nx" aria-label="Next slide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div><div class="ct"><b id="n">2</b> of 6</div></div>
+<script>
+const S=[['Design','Craft the details','Interfaces that feel considered at every size.','linear-gradient(145deg,#A78BFA,#6D28D9 60%,#1E1B4B)'],['Build','Ship with confidence','Typed, tested and deployed in a single step.','linear-gradient(145deg,#F472B6,#BE185D 60%,#3B0A2A)'],['Launch','Go live on day one','Preview links, staged rollouts and instant rollbacks.','linear-gradient(145deg,#38BDF8,#0369A1 60%,#0C1E3A)'],['Measure','See what matters','Dashboards your whole team actually opens.','linear-gradient(145deg,#34D399,#047857 60%,#06281F)'],['Learn','Iterate faster','Turn feedback into the next release in hours.','linear-gradient(145deg,#FBBF24,#B45309 60%,#3A1D05)'],['Grow','Scale without drama','Infrastructure that keeps up while you sleep.','linear-gradient(145deg,#FB7185,#BE123C 60%,#3A0A18)']];
+const vw=document.getElementById('vw'),ds=document.getElementById('ds');let cur=1,tm=null;const DUR=5;
+vw.innerHTML=S.map(s=>'<section class="sl" style="--g:'+s[3]+'"><small>'+s[0]+'</small><h2>'+s[1]+'</h2><p>'+s[2]+'</p></section>').join('');ds.innerHTML=S.map((s,i)=>'<button class="dt" role="tab" aria-label="Slide '+(i+1)+': '+s[0]+'" style="--d:'+DUR+'s"></button>').join('');
+const E=[...vw.children],D=[...ds.children];
+function go(n){const old=cur;cur=Math.max(0,Math.min(S.length-1,n));E.forEach((e,i)=>{e.classList.toggle('on',i===cur);e.classList.toggle('pv',i<cur)});D.forEach((d,i)=>{d.classList.remove('on','dn');void d.offsetWidth;if(i===cur)d.classList.add('on');else if(i<cur)d.classList.add('dn');d.setAttribute('aria-selected',i===cur)});document.getElementById('n').textContent=cur+1;document.getElementById('pv').disabled=cur===0;document.getElementById('nx').disabled=cur===S.length-1;clearTimeout(tm);if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&cur<S.length-1)tm=setTimeout(()=>go(cur+1),DUR*1000)}
+D.forEach((d,i)=>d.onclick=()=>go(i));document.getElementById('nx').onclick=()=>go(cur+1);document.getElementById('pv').onclick=()=>go(cur-1);document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});go(1);
+</script></body></html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Horizontal Scroll Pin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#DCD7CA;color:#1C1810;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.fr{position:relative;width:100%;max-width:860px;height:560px;border-radius:26px;overflow:hidden;background:#F5F1E6;box-shadow:0 40px 70px -36px rgba(60,50,20,.6),0 0 0 1px rgba(28,24,16,.08)}
+.sc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}.sc::-webkit-scrollbar{display:none}
+.tr{position:relative;height:1900px}
+.pin{position:sticky;top:0;height:560px;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hd{position:absolute;left:34px;top:26px;right:34px;display:flex;justify-content:space-between;align-items:flex-end;z-index:3}.hd small{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C2410C}.hd h1{font:800 34px/1 'Bricolage Grotesque';letter-spacing:-.05em;margin-top:4px}.hd span{font:700 14px 'Bricolage Grotesque';font-variant-numeric:tabular-nums}
+.tk{display:flex;gap:22px;padding:0 34px;will-change:transform;margin-top:34px}
+.cd{flex:none;width:360px;height:330px;border-radius:28px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;background:var(--bg);color:var(--fg,#fff);position:relative;overflow:hidden;box-shadow:0 26px 40px -24px rgba(40,30,10,.6);transition:transform .3s}
+.cd::after{content:"";position:absolute;right:-60px;top:-60px;width:210px;height:210px;border-radius:50%;background:rgba(255,255,255,.14)}
+.cd .n{font:800 80px/.9 'Bricolage Grotesque';letter-spacing:-.07em;opacity:.9}.cd h2{font:800 28px/1.05 'Bricolage Grotesque';letter-spacing:-.045em;margin-bottom:8px}.cd p{font-size:15px;line-height:1.5;opacity:.88;max-width:28ch}
+.pb{position:absolute;left:34px;right:34px;bottom:30px;height:4px;border-radius:4px;background:rgba(28,24,16,.12);z-index:3;overflow:hidden}.pb i{display:block;height:100%;width:100%;background:#C2410C;border-radius:4px;transform-origin:left;transform:scaleX(var(--p,0))}
+.hi{position:absolute;right:34px;bottom:44px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#8E8668;z-index:3}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="fr"><div class="sc" id="sc"><div class="tr"><div class="pin"><div class="hd"><div><small>Our process</small><h1>Five steps, one direction</h1></div><span id="ct">01 / 05</span></div><div class="tk" id="tk"></div><div class="hi">Scroll down</div><div class="pb"><i id="pb"></i></div></div></div></div></div>
+<script>
+const S=[['01','Discover','We listen first, mapping goals, users and constraints before any pixels.','#C2410C'],['02','Define','Strategy and scope distilled into a plan everyone can rally behind.','#7C3AED'],['03','Design','Systems, screens and motion crafted together in tight review loops.','#0F766E'],['04','Build','Production code with accessibility, speed and testing from day one.','#BE185D'],['05','Launch','Ship with confidence, then measure, learn and keep improving.','#1D4ED8']];
+const tk=document.getElementById('tk'),sc=document.getElementById('sc');S.forEach(s=>{const c=document.createElement('div');c.className='cd';c.style.setProperty('--bg',s[3]);c.innerHTML='<div class="n">'+s[0]+'</div><div><h2>'+s[1]+'</h2><p>'+s[2]+'</p></div>';tk.appendChild(c)});
+function upd(){const max=sc.scrollHeight-sc.clientHeight,p=max?sc.scrollTop/max:0,tw=tk.scrollWidth-sc.clientWidth+34;tk.style.transform='translateX('+(-p*tw)+'px)';document.getElementById('pb').style.setProperty('--p',p);const k=Math.min(S.length,Math.floor(p*S.length)+1);document.getElementById('ct').textContent='0'+k+' / 05';[...tk.children].forEach((c,i)=>{const r=c.getBoundingClientRect(),m=sc.getBoundingClientRect(),cx=r.left+r.width/2-m.left-m.width/2,d=Math.min(1,Math.abs(cx)/m.width);c.style.transform='scale('+(1-d*.07)+') rotate('+(cx/m.width*-3)+'deg)'})}
+sc.addEventListener('scroll',upd);function init(){sc.scrollTop=(sc.scrollHeight-sc.clientHeight)*.34;upd()}init();(document.fonts&&document.fonts.ready||Promise.resolve()).then(init);addEventListener('resize',upd);
+</script></body></html>

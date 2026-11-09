@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Expanding Panels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0C0C0F;color:#F4F2EE;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:900px}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}.hd h1{font:800 clamp(26px,4vw,38px) 'Syne';letter-spacing:-.04em}.hd span{font-size:13.5px;color:#8A8892}
+.ps{display:flex;gap:10px;height:400px}
+.p{position:relative;flex:1;border-radius:22px;overflow:hidden;cursor:pointer;background:var(--g);transition:flex .6s cubic-bezier(.3,1,.4,1);border:0;color:inherit;text-align:left;font:inherit;min-width:0}
+.p.on{flex:5}.p:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.p::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.45),transparent 50%),radial-gradient(circle at 70% 100%,rgba(0,0,0,.45),transparent 60%)}
+.p::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.65))}
+.p .nm{position:absolute;left:50%;bottom:26px;transform:translateX(-50%) rotate(-90deg);transform-origin:left bottom;white-space:nowrap;font:700 18px 'Syne';letter-spacing:.02em;z-index:2;transition:opacity .3s}
+.p.on .nm{opacity:0}
+.p .dt{position:absolute;left:24px;right:24px;bottom:24px;z-index:2;opacity:0;transform:translateY(14px);transition:all .5s .15s}
+.p.on .dt{opacity:1;transform:none}
+.p .dt small{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75)}.p .dt h2{font:800 28px 'Syne';letter-spacing:-.03em;margin:4px 0 6px}.p .dt p{font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.88);max-width:34ch}
+.p .ix{position:absolute;left:20px;top:18px;z-index:2;font:700 13px 'Syne';letter-spacing:.1em;color:rgba(255,255,255,.85)}
+.p .ar{position:absolute;right:18px;top:16px;z-index:2;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);backdrop-filter:blur(8px);display:grid;place-items:center;opacity:0;transform:rotate(-45deg);transition:all .4s .2s}.p.on .ar{opacity:1;transform:none}
+@media(max-width:620px){.ps{flex-direction:column;height:520px}.p .nm{transform:none;left:20px;bottom:auto;top:50%;margin-top:-10px}.p.on .nm{opacity:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Worlds to wander</h1><span>Hover or tap to expand</span></div>
+<div class="ps" id="ps" role="list"></div></div>
+<script>
+const D=[['Desert','Namib','The oldest desert on Earth, where dunes glow orange at sunrise.','linear-gradient(160deg,#FFC785,#E86F3A 55%,#6B2A1B)'],['Glacier','Iceland','Blue caves and black-sand beaches, all within a day\'s drive.','linear-gradient(160deg,#B4F0FF,#3E9BE0 55%,#122B5A)'],['Rainforest','Borneo','Canopy walks above mist, with orangutans in the morning light.','linear-gradient(160deg,#B7F5A8,#2FA362 55%,#0E4030)'],['Archipelago','Maldives','Overwater villas, glassy lagoons and nothing on the calendar.','linear-gradient(160deg,#BDF7F0,#25B6C9 55%,#0B4E6B)'],['Highlands','Scotland','Moody peaks, ancient castles and a very good whisky.','linear-gradient(160deg,#E3D4FF,#8C6FD6 55%,#2B1F5C)']];
+const ps=document.getElementById('ps');
+ps.innerHTML=D.map((d,i)=>'<button class="p'+(i===1?' on':'')+'" role="listitem" style="--g:'+d[3]+'" aria-expanded="'+(i===1)+'"><span class="ix">0'+(i+1)+'</span><span class="ar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="nm">'+d[0]+'</span><span class="dt"><small>'+d[1]+'</small><h2>'+d[0]+'</h2><p>'+d[2]+'</p></span></button>').join('');
+const B=[...ps.children];
+function on(i){B.forEach((b,k)=>{b.classList.toggle('on',k===i);b.setAttribute('aria-expanded',k===i)})}
+B.forEach((b,i)=>{b.addEventListener('mouseenter',()=>{if(matchMedia('(hover:hover)').matches)on(i)});b.addEventListener('click',()=>on(i));b.addEventListener('focus',()=>on(i))});
+</script></body></html>

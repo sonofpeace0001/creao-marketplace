@@ -1,0 +1,29 @@
+ROLE
+You are a senior marketing-site designer and front-end engineer with 15+ years of experience. Build "Announcement Rotator": a multi-message announcement bar that rotates slides with tags, progress dashes, arrows and a dismiss button.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep forest bar with mint tags and a soft shimmer over a calm cream page.
+- Palette: #6EE7A0, #0F2A1D, #E8F5EC, #DDE5DA, #13241B, #F4F6F1
+- Type: Hanken Grotesk (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Dark bar with previous and next buttons, a clipped viewport of three slides (tag, message, link), per-slide progress dashes and a close button, above a page mock with headline.
+
+INTERACTION & STATES
+- Slides auto-advance every four seconds with a vertical slide transition; arrows go back and forward; hover pauses; the close button hides the bar; reduced motion disables auto-advance.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

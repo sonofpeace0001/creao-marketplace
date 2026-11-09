@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Interactive Donut Breakdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF1F6;color:#101A33;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;width:100%;max-width:760px;background:#fff;border-radius:28px;padding:32px;box-shadow:0 40px 70px -44px rgba(16,26,51,.5),0 0 0 1px rgba(16,26,51,.06)}
+.dn{position:relative;aspect-ratio:1;max-width:300px;margin:0 auto;width:100%}
+svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.sg{fill:none;stroke-linecap:butt;transition:stroke-width .3s cubic-bezier(.3,1.4,.5,1),opacity .3s,transform .3s;cursor:pointer;transform-origin:50% 50%;outline:0}
+.dn.has .sg:not(.on){opacity:.35}.sg.on{stroke-width:30}.sg:focus-visible{stroke:#101A33!important}
+.ct{position:absolute;inset:0;display:grid;place-content:center;text-align:center;pointer-events:none}.ct span{font-size:13px;font-weight:700;color:#7A86A8;letter-spacing:.06em;text-transform:uppercase}.ct b{font-size:38px;font-weight:800;letter-spacing:-.05em;line-height:1.1;font-variant-numeric:tabular-nums}.ct em{font-style:normal;font-size:13.5px;font-weight:700;color:#16A34A}
+.tx h1{font-size:22px;font-weight:800;letter-spacing:-.035em}.tx p{font-size:14px;color:#7A86A8;margin:4px 0 18px}
+.lg{display:grid;gap:6px}.lg button{display:grid;grid-template-columns:14px 1fr auto;gap:12px;align-items:center;border:0;background:none;padding:10px 12px;border-radius:14px;cursor:pointer;font:inherit;color:inherit;text-align:left;transition:background .15s}.lg button:hover,.lg button.on{background:#F3F5FB}.lg button:focus-visible{outline:2px solid #101A33}
+.lg i{width:12px;height:12px;border-radius:4px;background:var(--c)}.lg b{font-size:15px;font-weight:700}.lg span{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;color:#4A567A}
+.bar{height:6px;border-radius:6px;background:#EAEEF7;overflow:hidden;margin-top:6px;grid-column:2/4}.bar i{display:block;height:100%;border-radius:6px;width:0;transition:width .8s cubic-bezier(.2,.9,.2,1)}
+@media(max-width:640px){.c{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="dn" id="dn"><svg viewBox="0 0 120 120" id="sv" role="img" aria-label="Revenue by channel donut chart"></svg><div class="ct"><span id="cl">Total revenue</span><b id="cv">$0</b><em id="cd"></em></div></div>
+<div class="tx"><h1>Revenue by channel</h1><p>Last 30 days · hover or focus a slice</p><div class="lg" id="lg"></div></div></div>
+<script>
+const D=[['Direct',48200,'#4F46E5',12.4],['Organic search',31800,'#0EA5E9',8.1],['Paid ads',22400,'#F59E0B',-3.2],['Referrals',14900,'#10B981',21.7],['Email',8700,'#EC4899',5.6]];
+const T=D.reduce((s,d)=>s+d[1],0),R=44,C=2*Math.PI*R,sv=document.getElementById('sv'),lg=document.getElementById('lg'),dn=document.getElementById('dn');let off=0;
+D.forEach((d,i)=>{const len=d[1]/T*C,gap=1.6;const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('class','sg');c.setAttribute('cx',60);c.setAttribute('cy',60);c.setAttribute('r',R);c.setAttribute('stroke',d[2]);c.setAttribute('stroke-width',22);c.setAttribute('stroke-dasharray','0 '+C);c.setAttribute('stroke-dashoffset',-off);c.setAttribute('tabindex','0');c.setAttribute('aria-label',d[0]+' '+Math.round(d[1]/T*100)+' percent');sv.appendChild(c);
+ setTimeout(()=>c.setAttribute('stroke-dasharray',(len-gap)+' '+(C-len+gap)),120+i*110);off+=len;
+ lg.insertAdjacentHTML('beforeend','<button style="--c:'+d[2]+'"><i></i><b>'+d[0]+'</b><span>$'+d[1].toLocaleString()+'</span><div class="bar"><i style="background:'+d[2]+'" data-w="'+(d[1]/D[0][1]*100)+'"></i></div></button>')});
+const S=[...sv.children],L=[...lg.children];
+setTimeout(()=>L.forEach(b=>b.querySelector('.bar i').style.width=b.querySelector('.bar i').dataset.w+'%'),200);
+function cnt(to){const e=document.getElementById('cv'),s=performance.now();const f=n=>{const p=Math.min(1,(n-s)/900);e.textContent='$'+Math.round(to*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+function pick(i){S.forEach((s,k)=>s.classList.toggle('on',k===i));L.forEach((b,k)=>b.classList.toggle('on',k===i));dn.classList.toggle('has',i>=0);if(i<0){document.getElementById('cl').textContent='Total revenue';document.getElementById('cv').textContent='$'+T.toLocaleString();document.getElementById('cd').textContent=''}else{const d=D[i];document.getElementById('cl').textContent=d[0];document.getElementById('cv').textContent='$'+d[1].toLocaleString();const e=document.getElementById('cd');e.textContent=(d[3]>0?'+':'')+d[3]+'% vs prior';e.style.color=d[3]>0?'#16A34A':'#DC2626'}}
+S.forEach((s,i)=>{s.addEventListener('pointerenter',()=>pick(i));s.addEventListener('focus',()=>pick(i));s.addEventListener('pointerleave',()=>pick(-1));s.addEventListener('blur',()=>pick(-1))});L.forEach((b,i)=>{b.addEventListener('pointerenter',()=>pick(i));b.addEventListener('focus',()=>pick(i));b.addEventListener('pointerleave',()=>pick(-1));b.addEventListener('blur',()=>pick(-1))});
+cnt(T);setTimeout(()=>pick(1),1100);
+</script></body></html>

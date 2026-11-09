@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Flip Words 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9E5F5;color:#17132E;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 4vw;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:1000px;text-align:center}
+small{font-size:13px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#6D4DF2}
+h1{font:800 clamp(40px,8.4vw,108px)/1.12 'Bricolage Grotesque';letter-spacing:-.05em;margin:16px 0 8px}
+h1 .ln{display:block}
+.fw{position:relative;display:inline-block;perspective:900px;vertical-align:bottom}
+.fw .in{position:relative;display:block;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.6,0,.2,1),width .5s cubic-bezier(.3,1,.4,1);height:1.18em}
+.fw .f{position:absolute;left:0;top:0;white-space:nowrap;padding:0 .22em;border-radius:.22em;backface-visibility:hidden;-webkit-backface-visibility:hidden;color:#fff;background:var(--bg);height:1.12em;line-height:1.12em;box-shadow:0 .2em .4em -.1em var(--bg)}
+.fw .fr{transform:translateZ(0)}.fw .bk{transform:rotateX(180deg)}
+p{font-size:clamp(16px,2vw,20px);line-height:1.6;color:#6B6590;max-width:44ch;margin:20px auto 28px}
+.bt{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}.bt a{padding:15px 28px;border-radius:16px;font:700 16px 'Hanken Grotesk';text-decoration:none}.bt .p{background:#17132E;color:#fff;box-shadow:0 18px 28px -14px #17132E}.bt .g{background:#fff;color:#17132E}.bt a:focus-visible{outline:3px solid #6D4DF2;outline-offset:3px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:32px}.dots i{width:9px;height:9px;border-radius:50%;background:#C9C2E4;transition:all .3s}.dots i.on{background:#6D4DF2;transform:scale(1.4)}
+@media(prefers-reduced-motion:reduce){.fw .in{transition:none}}
+</style></head><body>
+<div class="c"><small>Built for teams</small><h1><span class="ln">Ship work that is</span><span class="ln"><span class="fw" id="fw"><span class="in" id="in"><span class="f fr" id="a"></span><span class="f bk" id="b"></span></span></span></span></h1><p>Words flip over on a hinge, swapping to the next idea with a satisfying turn.</p><div class="bt"><a class="p" href="#">Get started</a><a class="g" href="#">Book a demo</a></div><div class="dots" id="dots"></div></div>
+<script>
+const W=[['fast','#6D4DF2'],['beautiful','#EC4899'],['reliable','#0F9D8A'],['loved','#F59E0B'],['yours','#2563EB']];
+const a=document.getElementById('a'),b=document.getElementById('b'),inn=document.getElementById('in'),dots=document.getElementById('dots');let cur=0,rot=0,front=true;
+W.forEach(()=>dots.appendChild(document.createElement('i')));
+function set(el,i){el.textContent=W[i][0];el.style.setProperty('--bg',W[i][1])}
+function w(el){return el.getBoundingClientRect().width}
+function size(el){inn.style.width=Math.ceil(el.scrollWidth||w(el))+'px'}
+function dot(i){[...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i))}
+set(a,cur);set(b,(cur+1)%W.length);dot(cur);
+function measure(el){return Math.ceil(el.scrollWidth)}
+function fit(){inn.style.width=measure(front?a:b)+'px'}
+function flip(){const n=(cur+1)%W.length,next=front?b:a;set(next,n);const nw=measure(next);inn.style.width=Math.max(nw,measure(front?a:b))+'px';rot-=180;inn.style.transform='rotateX('+rot+'deg)';front=!front;cur=n;dot(cur);setTimeout(()=>{inn.style.width=nw+'px';const hid=front?b:a;set(hid,(cur+1)%W.length)},400)}
+function init(){fit()}init();(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{inn.style.transition='none';fit();requestAnimationFrame(()=>inn.style.transition='')});
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)setInterval(flip,2200);
+// the 'bk' face is rotated 180; when inn is rotated by odd multiples of 180 the back face shows
+</script></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior conversion designer and front-end engineer with 15+ years of experience. Build "Split Path CTA": two choice panels, self-serve and sales, where the hovered panel expands and reveals its details.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Pale lavender stage with a light indigo panel and a deep navy panel.
+- Palette: #6366F1, #161A3D, #12142B, #E7E9F2, #6A6F90, #EEF0FF
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Headline; two panels with icon, title, description, hidden bullet list and button.
+
+INTERACTION & STATES
+- Hover or focus grows a panel with a flex transition, scales its icon, grows a glow and fades in the bullets; the other panel compresses.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

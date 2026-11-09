@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Blob Friends Eyes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFE9B8;background-image:radial-gradient(#FFDB8A 2px,transparent 2px);background-size:26px 26px;color:#3A1D46;font-family:'Fredoka',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.c{width:100%;max-width:860px;text-align:center}
+h1{font-size:clamp(30px,5vw,46px);font-weight:700;letter-spacing:-.01em}p.sb{color:#9A6CA6;font-size:17px;margin:6px 0 30px}
+.st{position:relative;height:340px;display:flex;justify-content:center;align-items:flex-end;gap:22px}
+.bl{position:relative;width:var(--w);height:var(--h);background:var(--c);border:4px solid #3A1D46;border-radius:var(--r);box-shadow:inset -14px -16px 0 rgba(0,0,0,.12),6px 8px 0 #3A1D46;transform-origin:50% 100%;animation:bn var(--d) ease-in-out infinite;animation-delay:var(--dl);cursor:pointer;transition:filter .2s}
+.bl:hover{filter:brightness(1.06)}.bl.hp{animation:hop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bn{0%,100%{transform:scale(1,1)}50%{transform:scale(1.03,.96)}}@keyframes hop{0%{transform:translateY(0) scale(1.1,.85)}40%{transform:translateY(-60px) scale(.9,1.12)}100%{transform:translateY(0) scale(1)}}
+.ey{position:absolute;left:50%;top:var(--ey);display:flex;gap:var(--gp);transform:translateX(-50%)}
+.e{position:relative;width:var(--es);height:var(--es);border-radius:50%;background:#fff;border:3.500px solid #3A1D46;overflow:hidden;animation:bk 5s infinite;animation-delay:var(--dl)}.e i{position:absolute;left:50%;top:50%;width:46%;height:46%;margin:-23%;border-radius:50%;background:#3A1D46;transform:translate(var(--px,0px),var(--py,0px))}.e i::after{content:"";position:absolute;left:18%;top:14%;width:30%;height:30%;border-radius:50%;background:#fff}
+@keyframes bk{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.08)}}
+.mo{position:absolute;left:50%;top:var(--mo);width:var(--mw);height:calc(var(--mw)*.5);border:4px solid #3A1D46;border-top:0;border-radius:0 0 99px 99px;transform:translateX(-50%);background:var(--mc,transparent);transition:all .2s}.bl:hover .mo{height:calc(var(--mw)*.8);background:#7A1F4D}
+.ch{position:absolute;top:calc(var(--mo) - 4px);width:16px;height:10px;border-radius:50%;background:#FF7AA2;opacity:.7}.ch.l{left:calc(50% - var(--ey2))}.ch.r{left:calc(50% + var(--ey2) - 16px)}
+.ft{position:absolute;bottom:-10px;width:100%;height:14px;border-radius:50%;background:rgba(58,29,70,.18);filter:blur(4px);z-index:-1}
+.ar{position:absolute;top:-22px;width:6px;height:30px;background:#3A1D46;left:50%;margin-left:-3px;border-radius:3px}.ar::after{content:"";position:absolute;top:-10px;left:-6px;width:18px;height:18px;border-radius:50%;background:#FF4D6D;border:4px solid #3A1D46}
+.hn{position:absolute;top:-30px;width:34px;height:42px;background:var(--c);border:4px solid #3A1D46;border-radius:50% 50% 0 0;border-bottom:0}.hn.l{left:16%;transform:rotate(-16deg)}.hn.r{right:16%;transform:rotate(16deg)}
+.hint{margin-top:34px;font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#B493B8}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="c"><h1>Say hi to the crew</h1><p class="sb">Their eyes follow your cursor. Click one to make it hop.</p>
+<div class="st" id="st">
+<div class="bl" style="--w:150px;--h:210px;--r:48% 48% 40% 40%/55% 55% 45% 45%;--c:#8B5CF6;--d:3.4s;--dl:-.6s;--ey:70px;--gp:22px;--es:46px;--mo:136px;--mw:46px;--ey2:60px"><div class="ey"><span class="e"><i></i></span><span class="e"><i></i></span></div><span class="ch l"></span><span class="ch r"></span><div class="mo"></div><div class="ft"></div></div>
+<div class="bl" style="--w:190px;--h:260px;--r:50% 50% 38% 38%/60% 60% 40% 40%;--c:#FF6B9D;--d:4s;--dl:-1.8s;--ey:90px;--gp:30px;--es:56px;--mo:170px;--mw:60px;--ey2:78px"><div class="ey"><span class="e"><i></i></span><span class="e"><i></i></span></div><span class="ch l"></span><span class="ch r"></span><div class="mo"></div><div class="hn l"></div><div class="hn r"></div><div class="ft"></div></div>
+<div class="bl" style="--w:130px;--h:160px;--r:50%;--c:#2DD4BF;--d:3s;--dl:-.2s;--ey:56px;--gp:16px;--es:38px;--mo:104px;--mw:34px;--ey2:46px"><div class="ey"><span class="e"><i></i></span><span class="e"><i></i></span></div><span class="ch l"></span><span class="ch r"></span><div class="mo"></div><div class="ar"></div><div class="ft"></div></div>
+<div class="bl" style="--w:160px;--h:230px;--r:44% 44% 42% 42%/52% 52% 48% 48%;--c:#FFC93C;--d:3.7s;--dl:-1.2s;--ey:78px;--gp:24px;--es:48px;--mo:150px;--mw:50px;--ey2:66px"><div class="ey"><span class="e"><i></i></span><span class="e"><i></i></span></div><span class="ch l"></span><span class="ch r"></span><div class="mo"></div><div class="ft"></div></div>
+</div><div class="hint">Move your cursor around</div></div>
+<script>
+const bls=[...document.querySelectorAll('.bl')];let mx=null,my=null,t=0,real=false;addEventListener('pointermove',e=>{real=true;mx=e.clientX;my=e.clientY});
+bls.forEach(b=>b.addEventListener('click',()=>{b.classList.remove('hp');void b.offsetWidth;b.classList.add('hp');setTimeout(()=>b.classList.remove('hp'),700)}));
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function f(){t+=.016;let x=mx,y=my;if(!real){x=innerWidth/2+Math.cos(t*.8)*innerWidth*.38;y=innerHeight*.4+Math.sin(t*1.2)*innerHeight*.18}
+ bls.forEach(b=>{b.querySelectorAll('.e').forEach(e=>{const r=e.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,dx=x-cx,dy=y-cy,d=Math.hypot(dx,dy)||1,m=Math.min(d,200)/200,k=r.width*.2*m;const i=e.firstChild;i.style.setProperty('--px',(dx/d*k)+'px');i.style.setProperty('--py',(dy/d*k)+'px')})});
+ if(!reduce)requestAnimationFrame(f)}
+t=.7;f();
+</script></body></html>

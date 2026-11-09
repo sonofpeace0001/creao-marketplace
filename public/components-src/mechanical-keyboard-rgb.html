@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mechanical Keyboard RGB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 480px at 50% 80%,#2A1456,transparent 70%),#07060F;color:#EDEAFF;font-family:'Chakra Petch',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:860px;text-align:center}
+.sc{background:#0B0A14;border:1px solid #28244A;border-radius:18px;padding:18px 22px;text-align:left;margin-bottom:26px;font:400 22px/1.4 'Share Tech Mono',monospace;min-height:84px;box-shadow:inset 0 0 40px rgba(124,58,237,.12)}
+.sc small{display:block;font:500 11px 'Chakra Petch';letter-spacing:.2em;text-transform:uppercase;color:#7A71B8;margin-bottom:6px}.sc .t{word-break:break-all}.sc .cu{display:inline-block;width:11px;height:22px;background:#A78BFA;vertical-align:-4px;animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:0}}
+.kb{--u:var(--hue,270);display:inline-block;padding:22px;border-radius:26px;background:linear-gradient(160deg,#1C1A2E,#100F1E);border:1px solid #2C2850;box-shadow:0 40px 60px -20px #000,0 0 80px -20px hsla(var(--u),90%,60%,.55),inset 0 1px 0 rgba(255,255,255,.08);position:relative}
+.kb::after{content:"";position:absolute;inset:-2px;border-radius:28px;background:conic-gradient(from var(--a,0deg),hsl(var(--u),90%,60%),hsl(calc(var(--u) + 60),90%,60%),hsl(calc(var(--u) + 120),90%,60%),hsl(var(--u),90%,60%));z-index:-1;filter:blur(18px);opacity:.5;animation:sp 8s linear infinite}@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}@keyframes sp{to{--a:360deg}}
+.rw{display:flex;gap:7px;margin-bottom:7px;justify-content:center}.rw:last-child{margin-bottom:0}
+.ky{--h:calc(var(--u) + var(--i)*7);position:relative;width:var(--w,54px);height:54px;border:0;background:none;padding:0;cursor:pointer;outline:0;flex:none;transition:transform .08s}
+.ky .cp{position:absolute;inset:0 0 6px;border-radius:10px;background:linear-gradient(180deg,#2A2745,#1D1B33);border:1px solid #3A3664;color:hsl(var(--h),90%,76%);font:600 14.5px 'Chakra Petch';display:grid;place-items:center;box-shadow:0 6px 0 #0B0A16,0 0 14px -4px hsla(var(--h),90%,60%,.7),inset 0 1px 0 rgba(255,255,255,.14);transition:transform .08s,box-shadow .08s,background .15s}
+.ky .cp::before{content:"";position:absolute;left:8px;right:8px;top:6px;height:34%;border-radius:6px;background:linear-gradient(rgba(255,255,255,.12),transparent)}
+.ky:hover .cp{background:linear-gradient(180deg,#322E55,#242140)}
+.ky.dn .cp,.ky:active .cp{transform:translateY(5px);box-shadow:0 1px 0 #0B0A16,0 0 26px 2px hsla(var(--h),95%,62%,.95),inset 0 1px 0 rgba(255,255,255,.1);background:linear-gradient(180deg,hsl(var(--h),70%,30%),hsl(var(--h),70%,22%));color:#fff}
+.ky:focus-visible .cp{outline:2px solid #fff;outline-offset:2px}
+.ctl{display:flex;gap:10px;justify-content:center;margin-top:26px;flex-wrap:wrap}.ctl button{border:1px solid #302B58;background:#14122A;color:#CFC8F5;border-radius:10px;padding:10px 18px;font:600 13px 'Chakra Petch';letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.ctl button:hover{border-color:#7C5CFF}.ctl button:focus-visible{outline:2px solid #A78BFA}
+@media(max-width:760px){.ky{--w:calc((100vw - 120px)/14)!important;height:34px}.ky .cp{font-size:11px}.kb{padding:12px}.rw{gap:4px;margin-bottom:4px}}
+@media(prefers-reduced-motion:reduce){.kb::after{animation:none}}
+</style></head><body>
+<div class="c"><div class="sc"><small>Typing test</small><span class="t" id="t">type something on the keyboard</span><span class="cu"></span></div>
+<div class="kb" id="kb"></div>
+<div class="ctl"><button id="rg">RGB wave</button><button id="cl">Clear</button></div></div>
+<script>
+const R=[[['Esc'],['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['0'],['-'],['=',54],['Del',78]],[['Tab',80],['Q'],['W'],['E'],['R'],['T'],['Y'],['U'],['I'],['O'],['P'],['[ '],['] '],['\\',52]],[['Caps',94],['A'],['S'],['D'],['F'],['G'],['H'],['J'],['K'],['L'],[';'],["'"],['Enter',106]],[['Shift',118],['Z'],['X'],['C'],['V'],['B'],['N'],['M'],[','],['.'],['/'],['Shift',130]],[['Ctrl',70],['Alt',60],['Cmd',70],['Space',330],['Cmd',60],['Alt',60],['Ctrl',70]]];
+const kb=document.getElementById('kb'),ks={};let n=0;
+R.forEach(r=>{const row=document.createElement('div');row.className='rw';r.forEach(k=>{const b=document.createElement('button');b.className='ky';b.style.setProperty('--i',n++);if(k[1])b.style.setProperty('--w',k[1]+'px');b.innerHTML='<span class="cp">'+k[0].trim()+'</span>';b.dataset.k=k[0].trim().toLowerCase();b.addEventListener('pointerdown',()=>type(b.dataset.k));row.appendChild(b);(ks[b.dataset.k]=ks[b.dataset.k]||[]).push(b)});kb.appendChild(row)});
+const t=document.getElementById('t');let txt='';function type(k){if(k==='space')txt+=' ';else if(k==='del')txt=txt.slice(0,-1);else if(k==='enter')txt+=' / ';else if(k.length===1)txt+=k;else return;t.textContent=txt||'type something on the keyboard'}
+function flash(k){(ks[k]||[]).forEach(b=>{b.classList.add('dn');setTimeout(()=>b.classList.remove('dn'),110)})}
+addEventListener('keydown',e=>{let k=e.key.toLowerCase();if(k===' ')k='space';if(k==='backspace')k='del';if(k==='escape')k='esc';if(k==='control')k='ctrl';if(k==='meta')k='cmd';if(!ks[k])return;if(['space','tab'].includes(k))e.preventDefault();flash(k);if(!e.repeat)type(k)});
+let hue=270,wave=true;function loop(){if(wave){hue=(hue+.4)%360;kb.style.setProperty('--hue',hue)}requestAnimationFrame(loop)}
+document.getElementById('rg').onclick=()=>{wave=!wave;document.getElementById('rg').textContent=wave?'RGB wave':'RGB static'};document.getElementById('cl').onclick=()=>{txt='';t.textContent='type something on the keyboard'};
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)loop();
+txt='hello';t.textContent=txt;['h','e','l','l','o'].forEach((k,i)=>{});['l','o'].forEach(k=>(ks[k]||[]).forEach(b=>b.classList.add('dn')));
+</script></body></html>

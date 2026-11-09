@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Stat Tiles Bento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0C0E14;color:#EDF0F8;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:900px}
+.hd{margin-bottom:16px;display:flex;justify-content:space-between;align-items:baseline}.hd h1{font-size:26px;font-weight:800;letter-spacing:-.05em}.hd span{font:500 12.5px 'JetBrains Mono',monospace;color:#6A7390}
+.gd{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:12px}
+.tl{position:relative;border-radius:24px;padding:18px 20px;background:linear-gradient(160deg,#161A26,#10131C);border:1px solid #232938;overflow:hidden;transition:transform .35s cubic-bezier(.3,1.4,.5,1),border-color .3s}.tl:hover{transform:translateY(-4px);border-color:var(--c)}
+.tl.w2{grid-column:span 2}.tl.h2{grid-row:span 2}
+.tl small{font-size:13px;font-weight:600;color:#8A93AE}.tl .v{font:800 40px/1 'Manrope';letter-spacing:-.06em;margin-top:8px;font-variant-numeric:tabular-nums}.tl .v em{font:500 13px 'JetBrains Mono',monospace;font-style:normal;color:var(--c);margin-left:8px;letter-spacing:0}
+.tl.big .v{font-size:64px;margin-top:14px}
+.tl svg.sp{position:absolute;left:0;right:0;bottom:0;width:100%;height:70px}.tl svg.sp .a{fill:var(--c);opacity:.14}.tl svg.sp .l{fill:none;stroke:var(--c);stroke-width:2.500;stroke-linecap:round;stroke-linejoin:round}
+.tl .bs{position:absolute;left:20px;right:20px;bottom:18px;display:flex;align-items:flex-end;gap:6px;height:80px}.tl .bs i{flex:1;border-radius:5px 5px 2px 2px;background:var(--c);opacity:.85;height:var(--h)}
+.tl .rg{position:absolute;right:18px;bottom:16px;width:84px;height:84px}.tl .rg svg{transform:rotate(-90deg);width:100%;height:100%}.tl .rg circle{fill:none;stroke-width:9;stroke-linecap:round}.tl .rg .t{stroke:#232938}.tl .rg .p{stroke:var(--c);stroke-dasharray:226;stroke-dashoffset:calc(226 - 226*var(--p))}.tl .rg b{position:absolute;inset:0;display:grid;place-items:center;font:800 17px 'Manrope'}
+.tl .av{display:flex;margin-top:16px}.tl .av i{width:34px;height:34px;border-radius:50%;border:3px solid #131722;margin-left:-9px;background:var(--g)}.tl .av i:first-child{margin-left:0}.tl .av span{margin-left:10px;align-self:center;font-size:13px;color:#8A93AE}
+.tl .ls{margin-top:12px;display:grid;gap:8px}.tl .ls div{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}.tl .ls i{width:9px;height:9px;border-radius:50%;background:var(--k)}.tl .ls span{margin-left:auto;font:500 13px 'JetBrains Mono',monospace;color:#8A93AE}
+.tl .dn{position:absolute;right:16px;top:50%;margin-top:-46px;width:120px;height:120px}.tl .dn svg{transform:rotate(-90deg);width:100%;height:100%}
+@media(max-width:700px){.gd{grid-template-columns:1fr 1fr}.tl.big .v{font-size:44px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Q4 at a glance</h1><span>UPDATED 2 MIN AGO</span></div><div class="gd" id="gd"></div></div>
+<script>
+function sp(pts,c){const w=300,h=70,mx=Math.max(...pts),mn=Math.min(...pts);const P=pts.map((v,i)=>[i/(pts.length-1)*w,h-8-((v-mn)/(mx-mn||1))*(h-22)]);const d=P.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');return '<svg class="sp" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><path class="a" d="'+d+' L'+w+' '+h+' L0 '+h+'Z"/><path class="l" d="'+d+'" vector-effect="non-scaling-stroke"/></svg>'}
+const T=[['w2 h2 big','#34D399','Total revenue','$482,310','+18.2%',sp([20,28,24,36,32,44,40,52,48,64,58,72],'#34D399')],['','#818CF8','Active users','28.4k','+6%',sp([30,26,36,32,40,36,48,44,56,52],'#818CF8')],['','#F59E0B','Goal progress','','','<div class="rg"><svg viewBox="0 0 84 84"><circle class="t" cx="42" cy="42" r="36"/><circle class="p" cx="42" cy="42" r="36"/></svg><b>74%</b></div>','.74'],['w2','#F472B6','Orders per day','1,284','-2.1%','<div class="bs">'+[44,62,50,76,58,92,68,84,60,72,88,64].map(h=>'<i style="--h:'+h+'%"></i>').join('')+'</div>'],['','#38BDF8','Team','12','','<div class="av"><i style="--g:linear-gradient(135deg,#6366F1,#EC4899)"></i><i style="--g:linear-gradient(135deg,#10B981,#0EA5E9)"></i><i style="--g:linear-gradient(135deg,#F59E0B,#EF4444)"></i><i style="--g:linear-gradient(135deg,#8B5CF6,#06B6D4)"></i><span>+8</span></div>'],['w2','#A78BFA','Traffic sources','','','<div class="ls"><div><i style="--k:#818CF8"></i>Organic search<span>48%</span></div><div><i style="--k:#34D399"></i>Direct<span>27%</span></div><div><i style="--k:#F59E0B"></i>Referral<span>16%</span></div></div>']];
+const gd=document.getElementById('gd');T.forEach(t=>{const e=document.createElement('div');e.className='tl '+t[0];e.style.setProperty('--c',t[1]);if(t[6])e.style.setProperty('--p',t[6]);e.innerHTML='<small>'+t[2]+'</small>'+(t[3]?'<div class="v" data-t="'+t[3]+'">'+t[3]+(t[4]?'<em>'+t[4]+'</em>':'')+'</div>':'')+t[5];gd.appendChild(e)});
+</script></body></html>

@@ -1,0 +1,29 @@
+ROLE
+You are a senior conversational UI designer and front-end engineer with 15+ years of experience. Build "Chat Thread Testimonials": testimonials delivered as a group chat thread with typing indicators and reaction chips popping onto the bubbles.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Mint and sky gradient with a clean phone chat in green and grey bubbles.
+- Palette: #16A34A, #142033, #EEF1F5, #EEF2F7, #9AA8BA, #DFF5E8
+- Type: Nunito (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Intro column with stats; phone frame with header, message list, typing indicator and composer.
+
+INTERACTION & STATES
+- A typing indicator precedes each new customer message; bubbles spring in, reactions pop on every other one and the thread scrolls as it grows.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

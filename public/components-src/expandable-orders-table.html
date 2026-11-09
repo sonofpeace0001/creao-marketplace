@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Expandable Orders Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E1015;color:#E4E7F0;font-family:'IBM Plex Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:780px;background:#151821;border:1px solid #232733;border-radius:20px;overflow:hidden;box-shadow:0 40px 70px -40px #000}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid #232733}.hd h1{font-size:17px;font-weight:600}.hd span{font:400 12.5px 'IBM Plex Mono',monospace;color:#7A8199}
+.cl{display:grid;grid-template-columns:28px 1.2fr .9fr .8fr .7fr;gap:12px;padding:10px 22px;font:500 11.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#69708A;background:#12151D}
+.rw{border-bottom:1px solid #1D212C}.rw:last-child{border:0}
+.rh{display:grid;grid-template-columns:28px 1.2fr .9fr .8fr .7fr;gap:12px;align-items:center;width:100%;border:0;background:none;color:inherit;padding:14px 22px;cursor:pointer;text-align:left;font:inherit;transition:background .15s}.rh:hover{background:#191D28}.rh:focus-visible{outline:2px solid #7C8CFF;outline-offset:-2px}
+.rh .ch{color:#6A7190;transition:transform .25s}.rw.op .rh .ch{transform:rotate(90deg)}.rw.op .rh{background:#191D28}
+.rh b{font:500 14px 'IBM Plex Mono',monospace;color:#fff}.rh .cu{font-size:14px;color:#C5CAE0}.rh .am{font:500 14px 'IBM Plex Mono',monospace;text-align:right}
+.tg{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:99px;width:fit-content}.tg::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}.sh{background:rgba(74,222,128,.12);color:#4ADE80}.pr{background:rgba(250,204,21,.12);color:#FACC15}.rf{background:rgba(248,113,113,.12);color:#F87171}
+.dt{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.3,1,.4,1)}.rw.op .dt{grid-template-rows:1fr}.dt>div{overflow:hidden}
+.in{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;padding:6px 22px 20px 62px}
+.it{display:grid;gap:8px}.it div{display:flex;align-items:center;gap:12px;background:#10131B;border:1px solid #232733;border-radius:12px;padding:9px 12px;font-size:13.5px}.it i{width:34px;height:34px;border-radius:9px;background:var(--g);flex:none}.it span{margin-left:auto;font:500 13px 'IBM Plex Mono',monospace;color:#9AA1BC}
+.tl{position:relative;padding-left:22px}.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:#232733}.tl div{position:relative;font-size:13px;color:#8A91AB;padding-bottom:12px}.tl div::before{content:"";position:absolute;left:-22px;top:3px;width:12px;height:12px;border-radius:50%;background:#151821;border:2px solid #3A4060}.tl div.dn::before{background:#4ADE80;border-color:#4ADE80}.tl div b{display:block;color:#E4E7F0;font-weight:500}.tl div.dn{color:#8A91AB}
+.sp{display:flex;align-items:flex-end;gap:3px;height:34px;margin-top:6px}.sp i{width:6px;border-radius:2px 2px 0 0;background:#7C8CFF;opacity:.8}
+@media(max-width:620px){.cl{display:none}.rh{grid-template-columns:20px 1fr auto}.rh .cu,.rh .tg{display:none}.in{grid-template-columns:1fr;padding-left:22px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Recent orders</h1><span id="n"></span></div><div class="cl"><span></span><span>Order</span><span>Customer</span><span>Status</span><span style="text-align:right">Total</span></div><div id="ls"></div></div>
+<script>
+const O=[['#10482','Priya Raman','Shipped','sh',182.5,[['Studio headphones',129,'#6366F1'],['Carry case',29,'#10B981'],['Cable kit',24.5,'#F59E0B']],[['Order placed','Nov 3, 09:12',1],['Packed','Nov 3, 15:40',1],['Shipped','Nov 4, 08:05',1],['Delivered','Expected Nov 7',0]]],['#10481','Marcus Reid','Processing','pr',64,[['Desk mat',39,'#EC4899'],['Monitor light',25,'#0EA5E9']],[['Order placed','Nov 4, 11:30',1],['Packed','In progress',0],['Shipped','',0]]],['#10480','Elena Ortiz','Refunded','rf',240,[['Standing desk',240,'#8B5CF6']],[['Order placed','Nov 1, 16:02',1],['Delivered','Nov 3, 12:20',1],['Refunded','Nov 5, 10:00',1]]],['#10479','Tomas Berg','Shipped','sh',96.8,[['Keyboard',79,'#F97316'],['Wrist rest',17.8,'#14B8A6']],[['Order placed','Nov 2, 08:44',1],['Shipped','Nov 3, 13:15',1],['Delivered','Expected Nov 6',0]]]];
+const ls=document.getElementById('ls');document.getElementById('n').textContent=O.length+' orders';
+const CH='<svg class="ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>';
+ls.innerHTML=O.map((o,i)=>'<div class="rw'+(i===0?' op':'')+'"><button class="rh" aria-expanded="'+(i===0)+'">'+CH+'<b>'+o[0]+'</b><span class="cu">'+o[1]+'</span><span class="tg '+o[3]+'">'+o[2]+'</span><span class="am">$'+o[4].toFixed(2)+'</span></button><div class="dt"><div><div class="in"><div class="it">'+o[5].map(x=>'<div><i style="--g:'+x[2]+'"></i>'+x[0]+'<span>$'+x[1].toFixed(2)+'</span></div>').join('')+'</div><div class="tl">'+o[6].map(t=>'<div class="'+(t[2]?'dn':'')+'"><b>'+t[0]+'</b>'+t[1]+'</div>').join('')+'<div class="sp" aria-hidden="true">'+Array.from({length:14},(_,k)=>'<i style="height:'+(8+Math.abs(Math.sin(k*1.3+i))*24)+'px"></i>').join('')+'</div></div></div></div></div></div>').join('');
+ls.querySelectorAll('.rw').forEach(r=>r.querySelector('.rh').onclick=()=>{const o=!r.classList.contains('op');r.classList.toggle('op',o);r.querySelector('.rh').setAttribute('aria-expanded',o)});
+</script></body></html>

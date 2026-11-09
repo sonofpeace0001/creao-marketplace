@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ASCII Install Progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0F0A;color:#B8F5C0;font-family:'IBM Plex Mono',monospace;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.t{width:100%;max-width:560px;background:#0D140D;border:1px solid #1F3A22;border-radius:10px;padding:22px 22px 18px;box-shadow:0 0 0 1px #050805,0 30px 60px -30px #000,0 0 60px -30px #4ADE80;position:relative;overflow:hidden}
+.t::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(transparent 0 2px,rgba(0,0,0,.18) 2px 3px);pointer-events:none}
+pre{font:400 13.5px/1.7 'IBM Plex Mono',monospace;white-space:pre-wrap;color:#B8F5C0;min-height:290px}
+.d{color:#4F7A55}.g{color:#4ADE80}.y{color:#FACC15}.c{color:#67E8F9}.b{font-weight:700;color:#E6FFE9}
+.cur{display:inline-block;width:8px;height:15px;background:#4ADE80;vertical-align:-2px;animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:0}}
+.bt{position:relative;z-index:1;display:flex;gap:10px;margin-top:14px}.bt button{background:transparent;border:1px solid #2A5230;color:#B8F5C0;border-radius:6px;padding:8px 14px;font:500 12.5px 'IBM Plex Mono';cursor:pointer}.bt button:hover{background:#142414;border-color:#4ADE80}.bt button:focus-visible{outline:2px solid #4ADE80;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.cur{animation:none}}
+</style></head><body>
+<div class="t"><pre id="o" aria-live="polite"></pre><div class="bt"><button id="rp">Replay</button></div></div>
+<script>
+const o=document.getElementById('o');let tm=[];
+const W=18,bar=p=>{const f=Math.round(W*p/100);return '['+'#'.repeat(f)+'.'.repeat(W-f)+'] '+String(p).padStart(3)+'%'};
+function run(){tm.forEach(clearTimeout);tm=[];let h='<span class="d">$</span> <span class="b">npx create-fieldwork@latest</span>\n';o.innerHTML=h+'<span class="cur"></span>';
+ const steps=[['Resolving packages',40],['Downloading template',55],['Installing dependencies',90],['Linking project',30]];let at=500;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ steps.forEach((s,k)=>{let p=0;const lbl='<span class="c">['+(k+1)+'/'+steps.length+']</span> '+s[0].padEnd(24,' ');
+  const iv=reduced?100:s[1];const n=reduced?1:Math.ceil(100/(7+k*2));
+  const step=()=>{p=Math.min(100,p+(reduced?100:7+k*2));const line=lbl+bar(p)+(p===100?' <span class="g">ok</span>':'');
+   o.innerHTML=h+line+'<span class="cur"></span>';if(p<100)tm.push(setTimeout(step,iv));else{h+=line+'\n';if(k===steps.length-1)fin()}};
+  tm.push(setTimeout(step,at));at+=reduced?200:((100/(7+k*2))*iv+250)});
+ function fin(){tm.push(setTimeout(()=>{o.innerHTML=h+'\n<span class="g b">Success!</span> Created <span class="y">my-app</span> in 4.2s\n\n  <span class="d">cd</span> my-app\n  <span class="d">npm run</span> dev\n\n<span class="d">Ready on</span> <span class="c">http://localhost:3000</span> <span class="cur"></span>'},300))}}
+run();document.getElementById('rp').onclick=run;
+</script></body></html>

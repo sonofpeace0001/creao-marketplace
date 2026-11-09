@@ -1,0 +1,29 @@
+ROLE
+You are a senior mobile-mail designer and front-end engineer with 15+ years of experience. Build "Swipe Actions List": a messages list inside a phone mockup where rows swipe to reveal Read, Pin and Delete actions with snapping.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft blue stage and white rows with coloured action panels and Nunito type.
+- Palette: #1B2340, #7A86A6, #3B82F6, #9AA4C4, #DCE3F2, #F6F8FD
+- Type: Nunito (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Phone frame; header with unread count; five rows with avatar, name, preview and time; leading Read action and trailing Pin and Delete; toast.
+
+INTERACTION & STATES
+- Pointer drag moves the row over actions and snaps open or closed by threshold; actions mark read, pin to top or collapse and remove the row; Delete and arrow keys work on focus; toast confirms.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

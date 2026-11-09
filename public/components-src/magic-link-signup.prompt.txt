@@ -1,0 +1,29 @@
+ROLE
+You are a senior editorial product designer and front-end engineer with 15+ years of experience. Build "Magic Link Signup": a passwordless sign up that sends a magic link, with an animated envelope, resend countdown and mail app shortcuts.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream paper card, serif headline with orange italic accent and a hand-drawn style envelope.
+- Palette: #1F1B12, #D9480F, #FFFDF7, #E2D9C2, #A89E85, #6E6552
+- Type: Fraunces, Inter (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Logo, headline, email field with validation, magic link button, social options; confirmation state with envelope illustration, mail shortcuts and resend timer.
+
+INTERACTION & STATES
+- Valid email flips to the sent state where the envelope flap opens and a letter slides out; a 30 second resend countdown runs.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

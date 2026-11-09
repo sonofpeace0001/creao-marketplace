@@ -1,0 +1,29 @@
+ROLE
+You are a senior creative-tools designer and front-end engineer with 15+ years of experience. Build "Radial Fan Menu": a floating action button that fans five coloured actions out in an arc with staggered springs and labels.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight stage with a dashed arc, glowing gradient FAB and saturated action orbs.
+- Palette: #8D86C4, #2F2960, #2B1A5E, #0B0916, #EEEBFF, #12102A
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header and last-action readout; FAB at the bottom centre that rotates to a close cross; five round action buttons placed on a semicircle with hover labels.
+
+INTERACTION & STATES
+- The FAB toggles aria-expanded; items transition from the centre to arc positions with per-item delay; hover or focus scales an item and shows its label; choosing an action closes the menu.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

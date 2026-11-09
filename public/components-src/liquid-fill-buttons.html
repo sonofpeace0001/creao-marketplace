@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Liquid Fill Buttons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2EFE8;color:#18160F;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:760px;text-align:center}
+h1{font-size:clamp(26px,4.5vw,38px);font-weight:700;letter-spacing:-.05em}p.sb{color:#7C7766;font-size:15px;margin:8px 0 34px}
+.rw{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-bottom:22px}
+.bt{--c:#18160F;--f:#FF5B2E;position:relative;border:2px solid var(--c);background:transparent;color:var(--c);border-radius:99px;padding:18px 40px;font:600 17px 'Sora';cursor:pointer;overflow:hidden;isolation:isolate;transition:color .35s .1s,transform .15s}
+.bt .lq{position:absolute;left:-10%;width:120%;top:calc(100% + 30px);height:260%;z-index:-1;transition:top .7s cubic-bezier(.3,.9,.3,1)}
+.bt .lq svg{position:absolute;left:0;top:-24px;width:200%;height:26px;animation:wv 2.2s linear infinite}.bt .lq i{position:absolute;left:0;right:0;top:0;bottom:0;background:var(--f)}.bt .lq svg path{fill:var(--f)}
+@keyframes wv{to{transform:translateX(-50%)}}
+.bt:hover .lq,.bt.on .lq,.bt:focus-visible .lq{top:-40%}.bt:hover,.bt.on,.bt:focus-visible{color:var(--t,#fff)}.bt:active{transform:scale(.96)}.bt:focus-visible{outline:3px solid #2563EB;outline-offset:4px}
+.b2{--c:#0B3D91;--f:#0B3D91}.b3{--c:#0F766E;--f:#14B8A6;--t:#04211E}.b4{--c:#7C3AED;--f:#7C3AED}
+.sq{border-radius:16px}
+.bt.k{border-color:transparent;background:var(--c);color:#fff}.bt.k .lq i,.bt.k .lq svg path{fill:#fff;background:#fff}.bt.k:hover,.bt.k.on{color:var(--c)}
+.hint{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#A29C87;margin-top:26px}
+@media(prefers-reduced-motion:reduce){.bt .lq svg{animation:none}.bt .lq{transition:none}}
+</style></head><body>
+<div class="c"><h1>Liquid fill</h1><p class="sb">A wavy surface rises through each button on hover.</p>
+<div class="rw"><button class="bt on" id="b1">Get started</button><button class="bt b2">Learn more</button><button class="bt sq b3">Book a demo</button></div>
+<div class="rw"><button class="bt b4 k">Download</button><button class="bt sq b2 k">Subscribe</button></div><div class="hint">Hover or focus any button</div></div>
+<script>
+const W='<svg viewBox="0 0 200 26" preserveAspectRatio="none"><path d="M0 14 Q25 0 50 14 T100 14 T150 14 T200 14 V26 H0Z"/></svg>';
+document.querySelectorAll('.bt').forEach(b=>{b.insertAdjacentHTML('beforeend','<span class="lq" aria-hidden="true">'+W+'<i></i></span>')});
+document.querySelectorAll('.bt').forEach(b=>b.addEventListener('mouseenter',()=>document.getElementById('b1').classList.remove('on')));
+</script></body></html>

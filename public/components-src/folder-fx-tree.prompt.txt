@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer-tools designer and front-end engineer with 15+ years of experience. Build "Animated File Tree": an IDE-style file tree with animated folders, a sliding selection highlight, git status marks, filter and a synced code viewer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Graphite sidebar with amber folders, indigo selection pill and syntax-coloured code panel.
+- Palette: #21242F, #E4E7F2, #6C7390, #6C7CFF, #B6BBD0, #0C0D12
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Filter field; tree with folder chevrons, file-type coloured icons and git status letters; sliding highlight; editor pane with breadcrumb and highlighted code.
+
+INTERACTION & STATES
+- Folders expand with animated height and a rotating chevron; selecting a file slides the highlight and swaps the editor content; typing filters the tree and auto-expands matching folders.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

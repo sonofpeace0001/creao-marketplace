@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Blur Up Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0F0F12;color:#F2F0EA;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:880px}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px}.hd h1{font:italic 400 clamp(32px,5vw,46px)/1 'Instrument Serif',serif}.hd button{border:1px solid #33333C;background:#17171C;color:#E8E5DC;border-radius:99px;padding:9px 18px;font:600 13px 'Inter';cursor:pointer}.hd button:focus-visible{outline:2px solid #fff}
+.gd{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;grid-auto-flow:dense;gap:10px}
+.im{position:relative;border-radius:16px;overflow:hidden;background:#1B1B21}.im.w2{grid-column:span 2}.im.h2{grid-row:span 2}
+.im .ph{position:absolute;inset:0;filter:blur(24px) saturate(1.2);transform:scale(1.2);transition:opacity 1s}.im .fu{position:absolute;inset:0;opacity:0;transform:scale(1.06);filter:blur(10px);transition:opacity 1s cubic-bezier(.3,1,.4,1),transform 1.1s cubic-bezier(.3,1,.4,1),filter 1s}
+.im.ok .fu{opacity:1;transform:none;filter:none}.im.ok .ph{opacity:0}
+.im .sc{position:absolute;left:0;right:0;top:0;height:30%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.22),transparent);transform:translateY(-100%);animation:sc 1.8s ease-in-out infinite;animation-delay:var(--d)}.im.ok .sc{display:none}@keyframes sc{to{transform:translateY(340%)}}
+.im .bd{position:absolute;left:12px;bottom:10px;font-size:11.5px;font-weight:600;letter-spacing:.06em;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);border-radius:99px;padding:3px 10px;opacity:0;transition:opacity .5s .6s}.im.ok .bd{opacity:1}
+.im .pc{position:absolute;right:12px;top:10px;font:600 11.5px 'Inter';background:rgba(0,0,0,.45);border-radius:99px;padding:3px 9px;font-variant-numeric:tabular-nums}.im.ok .pc{display:none}
+.im svg{width:100%;height:100%;display:block}
+@media(max-width:700px){.gd{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){.im .sc{animation:none}*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Photos that develop</h1><button id="rp">Reload images</button></div><div class="gd" id="gd"></div></div>
+<script>
+function art(i,big){const P=[['#FDE68A','#F97316','#7C2D12'],['#BAE6FD','#38BDF8','#0C4A6E'],['#DDD6FE','#8B5CF6','#312E81'],['#BBF7D0','#22C55E','#14532D'],['#FBCFE8','#EC4899','#831843'],['#FED7AA','#FB923C','#7C2D12'],['#A5F3FC','#06B6D4','#134E4A']][i%7],s=i%4;const sc=[`<circle cx="300" cy="100" r="54" fill="${P[1]}"/><path d="M0 240 Q130 160 260 225 T520 200 V300 H0Z" fill="${P[2]}"/>`,`<path d="M0 300 L120 130 L220 250 L330 90 L520 270 V300 H0Z" fill="${P[2]}" opacity=".92"/><circle cx="120" cy="70" r="28" fill="#fff" opacity=".85"/>`,`<rect x="80" y="70" width="130" height="190" rx="65" fill="${P[1]}"/><rect x="220" y="140" width="190" height="120" rx="24" fill="${P[2]}" opacity=".9"/>`,`<g fill="none" stroke="${P[1]}" stroke-width="12"><path d="M0 190 Q130 130 260 190 T520 190"/><path d="M0 250 Q130 190 260 250 T520 250" opacity=".7"/></g><circle cx="390" cy="80" r="44" fill="${P[1]}"/>`][s];return '<svg viewBox="0 0 520 300" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="u'+i+big+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+P[0]+'"/><stop offset="1" stop-color="'+P[1]+'" stop-opacity=".55"/></linearGradient></defs><rect width="520" height="300" fill="url(#u'+i+big+')"/>'+sc+'</svg>'}
+const T=[['Dune light','w2 h2'],['Tide','' ],['Arch',''],['Meadow','h2'],['Salt flat','w2'],['Cedar',''],['Still water','']];
+const gd=document.getElementById('gd'),els=[];
+T.forEach((t,i)=>{const e=document.createElement('div');e.className='im '+t[1];e.style.setProperty('--d',(i*.2)+'s');e.innerHTML='<div class="ph">'+art(i,'p')+'</div><div class="fu">'+art(i,'f')+'</div><div class="sc"></div><span class="pc">0%</span><span class="bd">'+t[0]+'</span>';gd.appendChild(e);els.push(e)});
+const ph=els.map(e=>e.querySelector('.pc'));let tm=[];
+function load(instant){tm.forEach(clearTimeout);tm=[];els.forEach((e,i)=>{e.classList.remove('ok');ph[i].textContent='0%';if(instant){e.classList.add('ok');return}let p=0;const iv=setInterval(()=>{p=Math.min(100,p+4+Math.random()*9);ph[i].textContent=Math.round(p)+'%';if(p>=100)clearInterval(iv)},90+i*20);tm.push(setTimeout(()=>e.classList.add('ok'),1300+i*340+Math.random()*300))})}
+document.getElementById('rp').onclick=()=>load(false);
+// show mid-load state: first three developed, rest still blurred
+els.forEach((e,i)=>{if(i<3)e.classList.add('ok');else{ph[i].textContent=(30+i*9)+'%'}});
+setTimeout(()=>{els.forEach((e,i)=>{if(i>=3){tm.push(setTimeout(()=>e.classList.add('ok'),600+i*500))}})},3000);
+</script></body></html>

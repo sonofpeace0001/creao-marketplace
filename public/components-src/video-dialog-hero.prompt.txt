@@ -1,0 +1,29 @@
+ROLE
+You are a senior product-marketing designer and front-end engineer with 15+ years of experience. Build "Video Dialog Hero": a hero with a gradient app-mockup thumbnail and pulsing play button that opens a full video dialog with controls.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Lavender page with an indigo-to-pink thumbnail, white play puck and dark cinema dialog.
+- Palette: #7C6CFF, #0F1330, #4B3FD6, #F26BC0, #0B0C2A, #EEF0FF
+- Type: Plus Jakarta Sans, Fira Code (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Pill, headline and subcopy; thumbnail button with mock UI, pulsing play and duration; modal with simulated screen, title, close, play-pause and progress with time.
+
+INTERACTION & STATES
+- The thumbnail opens a modal dialog with focus on Close; playback simulates a timer; Escape and backdrop click close and return focus; Play and Pause toggle.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

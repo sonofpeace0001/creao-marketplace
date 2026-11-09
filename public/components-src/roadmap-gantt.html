@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Roadmap Gantt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0D12;color:#E8EBF4;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:860px;background:#10131B;border:1px solid #1E2330;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px -40px #000}
+.hd{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid #1E2330}.hd b{font-size:16px;font-weight:600}.hd .lg{margin-left:auto;display:flex;gap:14px;font-size:12.5px;color:#8189A3}.hd .lg span{display:flex;align-items:center;gap:6px}.hd .lg i{width:9px;height:9px;border-radius:3px;background:var(--c)}
+.gd{position:relative;display:grid;grid-template-columns:170px 1fr;overflow-x:auto}
+.mo{display:contents}.mh{grid-column:2;display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #1E2330;font:500 11.5px 'Geist Mono',monospace;color:#6B7390;letter-spacing:.06em;text-transform:uppercase}.mh div{padding:10px 0 10px 10px;border-left:1px solid #1A1F2C}
+.bd{grid-column:1/3;position:relative}
+.rw{display:grid;grid-template-columns:170px 1fr;height:50px;border-bottom:1px solid #161A25}
+.rn{display:flex;align-items:center;gap:8px;padding:0 16px;font-size:13.5px;font-weight:500;color:#C9CFE3;white-space:nowrap}.rn i{width:6px;height:6px;border-radius:50%;background:var(--c)}
+.tk{position:relative;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),#1A1F2C calc(25% - 1px) 25%)}
+.br{position:absolute;top:11px;height:28px;border-radius:9px;background:color-mix(in srgb,var(--c) 22%,#10131B);border:1px solid color-mix(in srgb,var(--c) 55%,transparent);overflow:hidden;cursor:pointer;transition:transform .15s,box-shadow .2s}.br:hover{transform:translateY(-1px);box-shadow:0 8px 18px -8px var(--c)}
+.br i{position:absolute;inset:0 auto 0 0;width:var(--p);background:var(--c);opacity:.9}.br.live i::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.4) 50%,transparent 70%);animation:sh 1.8s infinite}@keyframes sh{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.br span{position:absolute;left:10px;top:0;line-height:26px;font-size:12.5px;font-weight:600;color:#fff;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.td{position:absolute;top:0;bottom:0;width:2px;background:#F43F5E;z-index:4;pointer-events:none}.td::before{content:"Today";position:absolute;top:0;left:50%;transform:translateX(-50%);background:#F43F5E;color:#fff;font:600 10.5px 'Inter Tight';padding:2px 8px;border-radius:0 0 7px 7px}
+svg.dp{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible}svg.dp path{fill:none;stroke:#4A5272;stroke-width:1.500;stroke-dasharray:3 3}svg.dp circle{fill:#4A5272}
+.tt{position:fixed;z-index:20;background:#1B2030;border:1px solid #2A3146;border-radius:11px;padding:8px 12px;font-size:12.5px;color:#C9CFE3;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 14px 26px -10px #000}.tt b{display:block;color:#fff;font-size:13px}.tt.on{opacity:1}
+@media(max-width:640px){.gd{grid-template-columns:120px 1fr}.rw{grid-template-columns:120px 1fr}}
+@media(prefers-reduced-motion:reduce){.br.live i::after{animation:none}}
+</style></head><body>
+<div class="c"><div class="hd"><b>Product roadmap</b><div class="lg"><span><i style="--c:#818CF8"></i>Design</span><span><i style="--c:#34D399"></i>Eng</span><span><i style="--c:#FBBF24"></i>Growth</span></div></div>
+<div class="gd" id="gd"><div style="grid-column:1"></div><div class="mh"><div>Nov</div><div>Dec</div><div>Jan</div><div>Feb</div></div><div class="bd" id="bd"></div></div></div>
+<div class="tt" id="tt"></div>
+<script>
+const R=[['Design system v2','#818CF8',0,32,100,'Design'],['Onboarding revamp','#818CF8',20,40,70,'Design'],['Billing engine','#34D399',6,48,62,'Eng'],['Public API','#34D399',44,40,15,'Eng'],['Referral program','#FBBF24',30,32,40,'Growth'],['Mobile launch','#FBBF24',62,34,0,'Growth']];
+const DEPS=[[0,1],[2,3],[1,4],[3,5]];const bd=document.getElementById('bd'),tt=document.getElementById('tt');const bars=[];
+R.forEach((r,i)=>{const w=document.createElement('div');w.className='rw';w.innerHTML='<div class="rn"><i style="--c:'+r[1]+'"></i>'+r[0]+'</div><div class="tk"><div class="br'+(r[4]>0&&r[4]<100?' live':'')+'" style="--c:'+r[1]+';--p:'+r[4]+'%;left:'+r[2]+'%;width:'+r[3]+'%"><i></i><span>'+r[4]+'%</span></div></div>';bd.appendChild(w);const b=w.querySelector('.br');bars.push(b);
+ b.addEventListener('mousemove',e=>{tt.innerHTML='<b>'+r[0]+'</b>'+r[5]+' · '+r[4]+'% complete';tt.style.left=(e.clientX+14)+'px';tt.style.top=(e.clientY-52)+'px';tt.classList.add('on')});b.addEventListener('mouseleave',()=>tt.classList.remove('on'))});
+const td=document.createElement('div');td.className='td';bd.appendChild(td);const sv=document.createElementNS('http://www.w3.org/2000/svg','svg');sv.setAttribute('class','dp');bd.appendChild(sv);
+function lay(){const bb=bd.getBoundingClientRect(),tk=bd.querySelector('.tk').getBoundingClientRect();td.style.left=(tk.left-bb.left+tk.width*.36)+'px';let h='';DEPS.forEach(d=>{const a=bars[d[0]].getBoundingClientRect(),b=bars[d[1]].getBoundingClientRect();const x1=a.right-bb.left,y1=a.top+a.height/2-bb.top,x2=b.left-bb.left,y2=b.top+b.height/2-bb.top;const mx=Math.max(x1+14,Math.min(x2-14,(x1+x2)/2));h+='<path d="M'+x1+' '+y1+' H'+(x1+12)+' V'+y2+' H'+x2+'"/><circle cx="'+x2+'" cy="'+y2+'" r="3"/>'});sv.innerHTML=h}
+lay();addEventListener('resize',lay);(document.fonts&&document.fonts.ready||Promise.resolve()).then(lay);setTimeout(lay,300);
+</script></body></html>

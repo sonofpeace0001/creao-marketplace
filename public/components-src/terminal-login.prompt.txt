@@ -1,0 +1,29 @@
+ROLE
+You are a senior developer tools designer and front-end engineer with 15+ years of experience. Build "Terminal Login": a command line style sign in with a typed boot log, login and password prompts, progress dots and an access granted box.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black terminal window with green phosphor glow, mono type and traffic light bar.
+- Palette: #34D399, #5E8A7A, #05080A, #0E2A22, #C8F5DE, #17352B
+- Type: JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Window chrome with host; boot messages; interactive login and password prompts; verification lines; success box; shell prompt.
+
+INTERACTION & STATES
+- Prompts accept real input with masked password; verification animates dots; invalid short passwords fail and retry; double click restarts the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.
