@@ -3,6 +3,7 @@ import { Inter, Instrument_Serif } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { NavBar } from "@/components/nav-bar";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,10 +17,29 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
 });
 
+const DESCRIPTION =
+  "Browse, preview, and copy production-ready landing pages and components — every listing ships with the exact AI prompt that built it.";
+
 export const metadata: Metadata = {
-  title: "CREAO Marketplace — Full pages, not just components",
-  description:
-    "Browse, preview, and copy production-ready landing pages and components — every listing ships with the exact AI prompt that built it.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "CREAO Marketplace — Full pages, not just components",
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: "CREAO Marketplace — Full pages, not just components",
+    description: DESCRIPTION,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CREAO Marketplace — Full pages, not just components",
+    description: DESCRIPTION,
+  },
 };
 
 const themeInitScript = `

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
@@ -19,6 +20,38 @@ function tabClass(active: boolean) {
   return `rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
     active ? "bg-gradient-to-br from-accent to-accent-2 text-white" : "text-fg hover:bg-surface"
   }`;
+}
+
+export async function generateMetadata({ searchParams }: PageProps<"/components">): Promise<Metadata> {
+  const params = await searchParams;
+  const isPages = params.type === "pages";
+  const niche = !isPages && typeof params.niche === "string" && params.niche !== LANDING_PAGES_NICHE ? params.niche : undefined;
+  const category = isPages && typeof params.category === "string" ? PAGE_CATEGORIES.find((c) => c.key === params.category) : undefined;
+  const searching = typeof params.q === "string" && params.q.length > 0;
+
+  let title = "UI Components";
+  let description =
+    "Browse hundreds of production-ready UI components across 100+ categories, each with a live preview, full source and the exact AI prompt that built it.";
+  let canonical = "/components";
+  if (isPages) {
+    title = category ? `${category.label} landing pages` : "Landing pages";
+    description = category
+      ? `${category.description}. Full landing pages with live preview, source and prompt.`
+      : "Production-ready landing pages across SaaS, local service, retail, real estate, institutions and creative niches.";
+    canonical = category ? `/components?type=pages&category=${category.key}` : "/components?type=pages";
+  } else if (niche) {
+    title = `${niche} components`;
+    description = `Production-ready ${niche} UI components with live previews, copy-ready source and the AI prompt behind each one.`;
+    canonical = `/components?niche=${encodeURIComponent(niche)}`;
+  }
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    // Search result pages are thin and unbounded; keep them out of the index.
+    robots: searching ? { index: false, follow: true } : undefined,
+    openGraph: { title, description, url: canonical },
+  };
 }
 
 export default async function ComponentsPage({ searchParams }: PageProps<"/components">) {

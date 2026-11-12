@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { categoryLabel, promptUrlFor } from "@/lib/categories";
@@ -8,6 +9,40 @@ import { LivePreviewFrame } from "@/components/live-preview-frame";
 import { CodeViewer } from "@/components/code-viewer";
 import { PromptPanel } from "@/components/prompt-panel";
 import { PaywallCard, PremiumPaywallCard } from "@/components/paywall-card";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
+
+export async function generateMetadata({ params }: PageProps<"/items/[slug]">): Promise<Metadata> {
+  const { slug } = await params;
+  const supabase = await createClient();
+  const { data: item } = await supabase
+    .from("items")
+    .select("title, description, kind, niche, category, thumbnail_url")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .maybeSingle();
+  if (!item) return { title: "Not found", robots: { index: false } };
+
+  const noun = item.kind === "component" ? "component" : "landing page";
+  const label = item.niche ?? categoryLabel(item.category);
+  const title = item.kind === "component" ? `${item.title} — ${label} ${noun}` : `${item.title} — ${noun}`;
+  const description =
+    item.description ?? `${item.title}: a ${label} ${noun} with live preview and the exact AI prompt that built it.`;
+  const url = `/items/${slug}`;
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      siteName: SITE_NAME,
+      title,
+      description,
+      url,
+      images: [{ url: item.thumbnail_url, width: 1200, height: 900, alt: item.title }],
+    },
+    twitter: { card: "summary_large_image", title, description, images: [item.thumbnail_url] },
+  };
+}
 
 export default async function ItemDetailPage({ params, searchParams }: PageProps<"/items/[slug]">) {
   const { slug } = await params;
@@ -112,6 +147,22 @@ export default async function ItemDetailPage({ params, searchParams }: PageProps
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: item.title,
+            description: item.description ?? undefined,
+            image: item.thumbnail_url,
+            url: `${SITE_URL}/items/${item.slug}`,
+            genre: item.niche ?? categoryLabel(item.category),
+            isAccessibleForFree: isFree,
+            publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
       <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-sm text-muted">{categoryLabel(item.category)} · {item.niche}</p>
