@@ -16,13 +16,13 @@ export default async function ShowcasePage() {
       <div className="mb-8 max-w-2xl">
         <h1 className="font-serif text-4xl">The CREAO Landing Page Pack</h1>
         <p className="mt-3 text-muted">
-          100 production-ready landing pages across SaaS, local service, retail, real estate,
+          155 production-ready landing pages across SaaS, local service, retail, real estate,
           institutions, and portfolio &amp; creative niches. 10 are free to copy and deploy; the
           rest are unlocked with Premium ($10/month). Built entirely with{" "}
           <a href="https://agent.creao.ai/@Sonofpeace" target="_blank" rel="noopener" className="text-accent hover:underline">
             CREAO
           </a>
-          , and hosted at{" "}
+          . The original 100 are also hosted at{" "}
           <a
             href="https://creao-landing-page-pack.vercel.app"
             target="_blank"
