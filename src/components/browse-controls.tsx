@@ -12,6 +12,7 @@ export function BrowseControls() {
 
   function update(next: Record<string, string | null>) {
     const params = new URLSearchParams(searchParams.toString());
+    params.delete("page"); // any filter change starts again from page 1
     for (const [key, value] of Object.entries(next)) {
       if (value) params.set(key, value);
       else params.delete(key);

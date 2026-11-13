@@ -15,7 +15,7 @@ export async function NavBar() {
           <Image src="/logo-white.png" alt="CREAO" width={91} height={33} className="theme-logo-dark h-6 w-auto" priority />
           <Image src="/logo-black.png" alt="CREAO" width={91} height={33} className="theme-logo-light h-6 w-auto" priority />
         </Link>
-        <nav className="order-last flex w-full items-center gap-5 overflow-x-auto whitespace-nowrap text-sm text-muted [scrollbar-width:none] sm:order-none sm:w-auto sm:flex-1 sm:gap-6 sm:overflow-visible">
+        <nav className="order-last flex w-full items-center gap-5 overflow-x-auto whitespace-nowrap text-sm text-muted [scrollbar-width:none] [&>a]:-my-1 [&>a]:py-2.5 sm:[&>a]:my-0 sm:[&>a]:py-0 sm:order-none sm:w-auto sm:flex-1 sm:gap-6 sm:overflow-visible">
           <Link href="/browse" className="hover:text-fg">Browse</Link>
           <Link href="/components" className="hover:text-fg">Components</Link>
           <Link href="/showcase" className="hover:text-fg">Showcase</Link>
