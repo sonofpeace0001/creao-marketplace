@@ -1,0 +1,40 @@
+ROLE
+You are a senior investor-deck designer and front-end engineer with 15+ years of experience. Build "Client Count Timeline": eight years of customer growth rebuild from the left: each year stacks coloured blocks that pop in, a count and milestone tag appear and the big number rolls up with a ghost year counter.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark card with jewel-coloured stacks and Space Mono labels.
+- Palette: #7C86A6, #0B0D12, #EDEFF6, #12151D, #6C7596
+- Type: Space Grotesk, Space Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with running total and ghost year; eight columns of blocks with counts and tags.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Blocks scale in with 38ms stagger; count tween 700ms; opacity of labels.
+
+IDLE AUTOPLAY
+- After 3.4s the chart clears and rebuilds year by year.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain bar chart; the block stacks show scale.
+- Counts that jump without easing.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

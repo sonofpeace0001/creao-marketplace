@@ -1,0 +1,40 @@
+ROLE
+You are a senior generative designer and front-end engineer with 15+ years of experience. Build "ASCII Flow Field": a full-card field of characters driven by overlapping sine waves, density mapped to a dot-to-at ramp and a blue-to-magenta hue, with a ghost cursor that pushes glyphs away and brightens them.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep indigo canvas with glowing coloured glyphs and a difference-blend headline.
+- Palette: #07070B, #EDEEF7, #0A0A12, #9EA6C8, #7C84A8
+- Type: JetBrains Mono, Syne (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Canvas of monospace glyphs; hint label; overlay title.
+
+INTERACTION & STATES
+- Move the pointer to push and light nearby characters.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Per-cell value from four sine terms; hover radius 110px with displacement; ghost cursor traces a figure eight.
+
+IDLE AUTOPLAY
+- After 3s a ghost cursor traces a figure eight through the field until the user moves.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Random flicker; the field must flow coherently.
+- Single-colour output.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

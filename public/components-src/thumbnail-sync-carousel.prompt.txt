@@ -1,0 +1,40 @@
+ROLE
+You are a senior gallery designer and front-end engineer with 15+ years of experience. Build "Thumbnail Sync Carousel": a photo carousel whose main image cross-fades with a Ken Burns zoom while its caption slides up and a thumbnail strip centres the active frame, which rises with an indigo ring and a progress line.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card around a cinematic landscape stage with indigo selection.
+- Palette: #6366F1, #101420, #ECEEF2
+- Type: Manrope, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Main stage with caption, counter and arrows; scrolling thumbnail strip with progress line.
+
+INTERACTION & STATES
+- Arrows and thumbnails change slides.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Cross-fade 900ms; Ken Burns 6s; strip translate 600ms spring; progress line over 3.4s.
+
+IDLE AUTOPLAY
+- After 3s slides advance every 3.4s through seven scenes.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A thumbnail strip that does not follow the active slide.
+- Static main image.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Calc Convert Palette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0F0D;color:#E8F3EC;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(560px 380px at 20% 100%,rgba(52,211,153,.14),transparent 70%)}
+.pl{width:100%;max-width:640px;background:#121A16;border-radius:24px;box-shadow:0 50px 80px -34px #000,0 0 0 1px rgba(255,255,255,.1);overflow:hidden}
+.in{display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.07)}.in b{font:600 15px 'JetBrains Mono';color:#34D399}.in div{flex:1;font:500 20px 'JetBrains Mono';min-height:28px;letter-spacing:-.01em}.in div i{display:inline-block;width:2px;height:22px;background:#34D399;vertical-align:-4px;margin-left:1px;animation:bk .8s steps(2) infinite}@keyframes bk{50%{opacity:0}}.in kbd{font:500 11px 'JetBrains Mono';padding:3px 8px;border-radius:7px;background:rgba(255,255,255,.08);color:#8FB3A0}
+.rs{padding:18px 22px 10px;min-height:150px}.big{opacity:0;transform:translateY(10px);transition:opacity .4s,transform .5s cubic-bezier(.3,1.4,.5,1)}.big.on{opacity:1;transform:none}
+.big small{display:block;font:600 11px 'JetBrains Mono';letter-spacing:.16em;color:#6FA38A;margin-bottom:6px;text-transform:uppercase}.big .v{font:800 56px/1 'Manrope';letter-spacing:-.05em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:10px}.big .v span{font:600 22px 'Manrope';letter-spacing:0;color:#6FA38A}
+.big .ex{margin-top:10px;font:400 13px 'JetBrains Mono';color:#6F8A7C}
+.ac{display:flex;gap:8px;margin-top:14px}.ac button{border:0;border-radius:11px;padding:9px 14px;background:rgba(255,255,255,.08);color:#CFE6D9;font:700 13px 'Manrope';cursor:pointer;display:flex;gap:7px;align-items:center;transition:all .25s}.ac button.ok{background:#34D399;color:#06281D}.ac button.pr{transform:scale(.94)}.ac button:focus-visible{outline:2px solid #34D399}
+.hs{padding:6px 14px 14px}.hs h4{font:600 10.500px 'JetBrains Mono';letter-spacing:.16em;color:#6FA38A;margin:6px 8px}.hs .r{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:11px;font:500 14px 'JetBrains Mono';color:#A6C2B3;animation:in .45s cubic-bezier(.3,1.4,.5,1)}.hs .r:nth-child(odd){background:rgba(255,255,255,.03)}.hs .r span{margin-left:auto;color:#34D399;font-weight:600}@keyframes in{from{opacity:0;transform:translateY(-8px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="pl" id="pl"><div class="in"><b>=</b><div><span id="tx"></span><i></i></div><kbd>⌘ K</kbd></div>
+<div class="rs"><div class="big" id="bg"><small id="bs"></small><div class="v"><span id="vv" style="font:800 56px/1 'Manrope';letter-spacing:-.05em;color:#fff"></span><span id="vu"></span></div><div class="ex" id="ex"></div><div class="ac"><button id="cp">⧉ Copy result</button><button>Swap units</button></div></div></div>
+<div class="hs"><h4>RECENT</h4><div id="hs"></div></div></div>
+<script>
+const Q=[{q:'250 usd in eur',s:'Currency · live rate',to:231.40,u:'EUR',dec:2,ex:'1 USD = 0.9256 EUR · ECB 14:02',h:'250 USD → 231.40 EUR'},{q:'18% of 240',s:'Percentage',to:43.2,u:'',dec:2,ex:'240 × 0.18',h:'18% of 240 = 43.20'},{q:'5 mi to km',s:'Length',to:8.05,u:'km',dec:2,ex:'1 mile = 1.60934 km',h:'5 mi → 8.05 km'},{q:'3pm est in tokyo',s:'Time zone',to:5,u:'AM +1 day · JST',dec:0,ex:'EST (UTC−5) → JST (UTC+9)',h:'3:00 PM EST → 5:00 AM JST'}];
+const $=id=>document.getElementById(id),sl=t=>new Promise(r=>setTimeout(r,t));let off=false,hist=[Q[1],Q[2]],tw=0;
+function val(h){return (h.h.includes('→')?h.h.split('→')[1]:h.h.split('=')[1]).trim()}
+function renderH(){$('hs').innerHTML=hist.slice(0,3).map(h=>'<div class="r">'+h.q+'<span>'+val(h)+'</span></div>').join('')}
+function show(q,inst){$('bs').textContent=q.s;$('vu').textContent=q.u;$('ex').textContent=q.ex;$('bg').classList.add('on');cancelAnimationFrame(tw);const t0=performance.now();if(inst){$('vv').textContent=q.dec?q.to.toFixed(q.dec):(q.u.startsWith('AM')?'5:00':q.to);return}(function f(n){const k=Math.min(1,(n-t0)/900),e=1-Math.pow(1-k,3);const v=q.to*e;$('vv').textContent=q.q.includes('tokyo')?(Math.round(k*5)+':00'):v.toFixed(q.dec);if(k<1)tw=requestAnimationFrame(f)})(t0)}
+$('tx').textContent=Q[0].q;show(Q[0],true);renderH();$('bg').style.transition='none';requestAnimationFrame(()=>requestAnimationFrame(()=>$('bg').style.transition=''));
+document.getElementById('pl').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a palette that doubles as a calculator and converter; a query like 250 usd in eur is typed, the result card rises with its headline number rolling up from zero, the source, rate and working line fade in, then Copy result presses itself and turns green, and the query is pushed into a recent list that grows below, cycling currency, percentage, length and time zone queries, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);let k=1;while(!off){const q=Q[k%Q.length];k++;$('bg').classList.remove('on');for(let i=$('tx').textContent.length;i>=0;i--){$('tx').textContent=$('tx').textContent.slice(0,i);await sl(14)}for(let i=1;i<=q.q.length&&!off;i++){$('tx').textContent=q.q.slice(0,i);await sl(55)}await sl(250);show(q);await sl(1500);const b=$('cp');b.classList.add('pr');await sl(200);b.classList.remove('pr');b.classList.add('ok');b.textContent='✓ Copied';hist.unshift(q);renderH();await sl(1700);b.classList.remove('ok');b.textContent='⧉ Copy result'}})()}
+</script></body></html>

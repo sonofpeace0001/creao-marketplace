@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ASCII Image Converter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0B0F;color:#E8EAF2;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:760px;border-radius:26px;background:#12141B;padding:20px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.hd h1{font-size:17px;font-weight:700;letter-spacing:-.02em}.hd span{font:500 12px 'Geist Mono';color:#7C8498}
+.st{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pn{position:relative;border-radius:16px;overflow:hidden;background:#07080C;height:300px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.pn small{position:absolute;left:12px;top:10px;z-index:2;font:500 11px 'Geist Mono';letter-spacing:.14em;color:#B9C0D6;background:rgba(0,0,0,.55);padding:3px 8px;border-radius:6px}
+canvas{width:100%;height:100%;display:block;image-rendering:auto}
+pre{position:absolute;inset:0;padding:6px;font:500 6.600px/6.900px 'Geist Mono';letter-spacing:0;color:#8CF0B8;white-space:pre;overflow:hidden;display:grid;align-content:center}
+.sc{position:absolute;top:0;bottom:0;width:2px;background:#8CF0B8;box-shadow:0 0 14px 3px rgba(140,240,184,.7);z-index:3;left:var(--x,0%)}
+.ft{display:flex;gap:8px;margin-top:14px;align-items:center}.ft button{border:0;border-radius:99px;padding:8px 15px;background:#1B1E28;color:#B9C0D6;font:600 12.500px 'Geist';cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:all .25s}.ft button.on{background:#8CF0B8;color:#06190F}.ft button:focus-visible{outline:2px solid #8CF0B8;outline-offset:2px}.ft span{margin-left:auto;font:500 12px 'Geist Mono';color:#7C8498}
+@media(max-width:620px){.st{grid-template-columns:1fr}.pn{height:200px}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>Image to ASCII</h1><span id="ms">112 × 46 cells</span></div>
+<div class="st"><div class="pn"><small>SOURCE</small><canvas id="cv" width="448" height="368"></canvas></div><div class="pn"><small>ASCII OUTPUT</small><pre id="pr"></pre><i class="sc" id="sc"></i></div></div>
+<div class="ft" id="ft"><button class="on">Classic</button><button>Blocks</button><button>Dots</button><button>Binary</button><span id="rp"></span></div></div>
+<script>
+const W=76,H=38,RAMPS=[' .:-=+*#%@',' ░▒▓█',' ·•●⬤',' 01'],NAM=['Classic','Blocks','Dots','Binary'];
+const cv=document.getElementById('cv'),cx=cv.getContext('2d'),sm=document.createElement('canvas');sm.width=W;sm.height=H;const sx=sm.getContext('2d',{willReadFrequently:true}),pr=document.getElementById('pr');let ramp=0,t=2.4,off=false;
+function scene(c,w,h,t){const g=c.createLinearGradient(0,0,0,h);g.addColorStop(0,'#101A55');g.addColorStop(.55,'#E2557C');g.addColorStop(1,'#FFB26B');c.fillStyle=g;c.fillRect(0,0,w,h);
+ const sy=h*(.46+.08*Math.sin(t*.5)),sxp=w*(.5+.18*Math.sin(t*.35));const sg=c.createRadialGradient(sxp,sy,2,sxp,sy,h*.5);sg.addColorStop(0,'rgba(255,250,220,1)');sg.addColorStop(.18,'rgba(255,236,170,.95)');sg.addColorStop(1,'rgba(255,200,120,0)');c.fillStyle=sg;c.fillRect(0,0,w,h);
+ c.fillStyle='rgba(255,255,255,.55)';for(let i=0;i<3;i++){const x=((t*14*(1+i*.4)+i*w*.4)%(w*1.4))-w*.2,y=h*(.18+i*.1);c.beginPath();c.ellipse(x,y,w*.1,h*.025,0,0,6.28);c.ellipse(x+w*.06,y-h*.012,w*.07,h*.03,0,0,6.28);c.fill()}
+ [['#2A1B3F',.62,.1,.6],['#170F2A',.76,.14,1.4],['#0A0716',.9,.18,2.2]].forEach(([col,base,amp,ph])=>{c.fillStyle=col;c.beginPath();c.moveTo(0,h);for(let x=0;x<=w;x+=w/50){c.lineTo(x,h*base-h*amp*Math.abs(Math.sin(x/w*5+ph))-h*amp*.35*Math.sin(x/w*13+ph))}c.lineTo(w,h);c.fill()})}
+function ascii(){scene(sx,W,H,t);const d=sx.getImageData(0,0,W,H).data,R=RAMPS[ramp];let s='';for(let y=0;y<H;y++){for(let x=0;x<W;x++){const i=(y*W+x)*4,l=(d[i]*.3+d[i+1]*.59+d[i+2]*.11)/255;s+=R[Math.min(R.length-1,Math.floor(Math.pow(l,.55)*R.length))]}s+='\n'}pr.textContent=s}
+function paint(){scene(cx,448,368,t);ascii()}
+function fit(){const w=document.querySelector('.pn:last-child').clientWidth-12;const fs=Math.min(8,w/(W*.6));pr.style.fontSize=fs+'px';pr.style.lineHeight=(fs*1.05)+'px'}fit();addEventListener('resize',fit);document.getElementById('ms').textContent=W+' × '+H+' cells';
+paint();
+const bs=[...document.querySelectorAll('#ft button')];function setR(i){ramp=i;bs.forEach((b,k)=>b.classList.toggle('on',k===i));document.getElementById('rp').textContent='ramp: "'+RAMPS[i].replace(/ /g,'·')+'"';ascii()}setR(0);bs.forEach((b,i)=>b.onclick=()=>{off=true;setR(i)});
+/* Idle demo: a generated sunset scene (drifting sun, clouds, three mountain ranges) is sampled each frame and rebuilt as text beside it; a green scan line sweeps across the output, and every few seconds the density ramp switches between classic punctuation, shade blocks, dots and binary, until you pick a ramp. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0,sw=0;(function lp(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;if(n>3000){t+=dt;sw=(sw+dt*.4)%1.2;document.getElementById('sc').style.setProperty('--x',Math.min(100,sw/1.0*100)+'%');paint()}requestAnimationFrame(lp)})(0);(async()=>{const sl=ms=>new Promise(r=>setTimeout(r,ms));await sl(4800);let k=0;while(!off){k=(k+1)%4;setR(k);await sl(2600)}})()}
+</script></body></html>

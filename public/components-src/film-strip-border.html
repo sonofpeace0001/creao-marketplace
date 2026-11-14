@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Film Strip Border</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#100C08;color:#F2E6CF;font-family:'Courier Prime',monospace;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(700px 420px at 50% 50%,rgba(255,170,70,.12),transparent 70%)}
+.cd{width:100%;max-width:780px}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px;padding:0 4px}.hd h1{font:400 44px/.9 'Anton';letter-spacing:.02em;text-transform:uppercase}.hd span{font-size:13px;color:#B79B6B;letter-spacing:.14em}
+.fs{position:relative;height:240px;background:#0A0705;border-radius:10px;overflow:hidden;box-shadow:0 40px 60px -30px #000,0 0 0 1px #2A1F14}
+.hl{position:absolute;left:0;right:0;height:14px;background:repeating-linear-gradient(90deg,transparent 0 12px,#E8DCC4 12px 28px,transparent 28px 40px);background-size:40px 100%;animation:sp .45s linear infinite;z-index:3;opacity:.85}.hl.t{top:12px}.hl.b{bottom:12px}@keyframes sp{to{background-position:-40px 0}}
+.tr{position:absolute;left:0;top:40px;bottom:40px;display:flex;gap:10px;will-change:transform}
+.fr{position:relative;flex:none;width:190px;height:100%;border-radius:4px;overflow:hidden;background:#222;transform:scale(var(--s,1));transition:filter .2s;filter:saturate(var(--sat,.7)) brightness(var(--br,.7))}.fr svg{width:100%;height:100%;display:block}
+.fr span{position:absolute;left:8px;bottom:6px;font:700 11px 'Courier Prime';color:#FFB454;letter-spacing:.12em;text-shadow:0 1px 3px #000}.fr em{position:absolute;right:8px;top:6px;font:700 11px 'Courier Prime';font-style:normal;color:#F2E6CF;background:rgba(0,0,0,.5);padding:1px 5px;border-radius:3px}
+.gt{position:absolute;left:50%;top:34px;bottom:34px;width:206px;margin-left:-103px;border:2px solid #FFB454;border-radius:6px;box-shadow:0 0 0 999px rgba(5,3,2,.0),0 0 24px rgba(255,180,84,.5);pointer-events:none;z-index:4}.gt::before,.gt::after{content:"";position:absolute;width:10px;height:10px;border:2px solid #FFB454}.gt::before{left:-6px;top:-6px;border-right:0;border-bottom:0}.gt::after{right:-6px;bottom:-6px;border-left:0;border-top:0}
+.rc{position:absolute;right:16px;top:44px;z-index:5;display:flex;align-items:center;gap:8px;font:700 12px 'Courier Prime';color:#FF5A4D;letter-spacing:.14em}.rc i{width:9px;height:9px;border-radius:50%;background:#FF5A4D;animation:bk 1s steps(2) infinite}@keyframes bk{50%{opacity:.2}}
+.ft{display:flex;justify-content:space-between;margin-top:14px;padding:0 4px;font-size:13px;color:#B79B6B;letter-spacing:.1em}.ft b{color:#F2E6CF;font-weight:700}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>Reel 04 · Coastline</h1><span id="tc">00:00:12:08</span></div>
+<div class="fs" id="fs"><div class="hl t"></div><div class="hl b"></div><div class="tr" id="tr"></div><div class="gt"></div><div class="rc"><i></i>REC</div></div>
+<div class="ft"><span>35mm · 24fps · Kodak 5219</span><span>Frame <b id="fn">07</b> of 24</span></div></div>
+<script>
+function scene(s){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};const P=[['#1B2A6B','#E85D75','#FFB86B'],['#0B3B3C','#2FA58B','#F4E285'],['#3A1C5B','#C4478D','#FF9E7A'],['#10243A','#3D7BA8','#F2D8A7']][Math.floor(r(4))];const id='f'+Math.floor(s);let h='<svg viewBox="0 0 190 150" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+P[0]+'"/><stop offset=".6" stop-color="'+P[1]+'"/><stop offset="1" stop-color="'+P[2]+'"/></linearGradient></defs><rect width="190" height="150" fill="url(#'+id+')"/><circle cx="'+(40+r(110))+'" cy="'+(40+r(30))+'" r="'+(14+r(10))+'" fill="#FFF3D1"/>';
+ for(let l=0;l<3;l++){let d='M0 150L0 '+(90+l*18);const a=10+r(16),f=.02+r(.03),ph=r(6);for(let x=0;x<=190;x+=6)d+=' L'+x+' '+(90+l*18-a*Math.abs(Math.sin(x*f+ph))).toFixed(1);d+=' L190 150Z';h+='<path d="'+d+'" fill="#0C0A14" opacity="'+(.3+l*.28)+'"/>'}return h+'</svg>'}
+const N=24,FW=200,tr=document.getElementById('tr'),fs=document.getElementById('fs');const frs=[];
+for(let k=0;k<N*2;k++){const i=k%N,d=document.createElement('div');d.className='fr';d.innerHTML=scene(i*13+5)+'<em>'+String(i+1).padStart(2,'0')+'</em><span>▶ '+String(i+1).padStart(2,'0')+'A</span>';tr.appendChild(d);frs.push(d)}
+let x=-FW*5,off=false,t=0;
+function paint(){tr.style.transform='translateX('+x+'px)';const cx=fs.clientWidth/2;let best=0,bd=1e9;frs.forEach((f,i)=>{const c=x+i*FW+95;const d=Math.abs(c-cx);if(d<bd){bd=d;best=i}const k=Math.max(0,1-d/260);f.style.setProperty('--s',(1+.06*k).toFixed(3));f.style.setProperty('--sat',(.6+.55*k).toFixed(2));f.style.setProperty('--br',(.55+.5*k).toFixed(2))});document.getElementById('fn').textContent=String(best%N+1).padStart(2,'0');const sec=Math.floor(t);document.getElementById('tc').textContent='00:00:'+String(12+sec%48).padStart(2,'0')+':'+String(Math.floor(t*24)%24).padStart(2,'0')}
+paint();
+fs.addEventListener('pointerenter',()=>{off=true});fs.addEventListener('pointerleave',()=>{off=false});
+/* Idle demo: a 35mm film strip with scrolling sprocket holes top and bottom slides continuously past an amber gate; frames brighten, saturate and swell as they approach the centre, the frame counter and running timecode update, and a REC lamp blinks, pausing while you hover the strip. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0;requestAnimationFrame(function lp(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;if(!off&&n>2500){x-=dt*90;t+=dt;if(x<-N*FW-FW*5)x+=N*FW;paint()}requestAnimationFrame(lp)})}
+</script></body></html>

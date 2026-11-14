@@ -1,0 +1,40 @@
+ROLE
+You are a senior customer experience designer and front-end engineer with 15+ years of experience. Build "CSAT Rating Chat": a post-chat satisfaction card where a highlight springs between five emoji faces, the label and accent change from red to green and a follow-up opens: a typed comment for a low score or reason chips for a high one.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean white widget with a colour that follows the rating.
+- Palette: #F1F4F6, #12212A, #7B8C95, #6C7E88, #22C55E, #E8EEF0
+- Type: Onest (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; closing messages; rating card with five faces, label, follow-up area, send button; thank-you overlay.
+
+INTERACTION & STATES
+- Pick a face, choose chips or type, send.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Highlight spring 500ms; chosen face scales 1.28; follow-up expands 500ms; confetti burst.
+
+IDLE AUTOPLAY
+- After 3.4s it alternates between a typed low review and a great review.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Stars only; the faces carry emotion.
+- The same follow-up for every score.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

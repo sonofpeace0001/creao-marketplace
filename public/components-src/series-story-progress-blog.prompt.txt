@@ -1,0 +1,40 @@
+ROLE
+You are a senior editorial product designer and front-end engineer with 15+ years of experience. Build "Series Story Progress Blog": a multi-part article series read like stories: a segmented bar fills for the current part, then the giant numeral and headline slide out, the next slide in, and the colours cross-fade.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep jewel-toned card with an enormous serif numeral and a coloured glow per part.
+- Palette: #12142B, #E7E9F3, #8B5CF6
+- Type: DM Serif Display, Manrope, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Segmented progress bar; header with series and counter; slide with numeral, headline, summary and tags; footer with read time and next button.
+
+INTERACTION & STATES
+- Next part button advances; the last part restarts.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Slides translate 700ms with fade; background and glow cross-fade 600ms; segment fills over 4.2s.
+
+IDLE AUTOPLAY
+- After 3s the parts advance automatically through all five.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A normal paginated list; the story rhythm is the identity.
+- Background changes that are abrupt.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

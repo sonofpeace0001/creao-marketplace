@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Postage Stamp Border</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#CDBFA6;color:#2B2218;font-family:'Special Elite',monospace;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(600px 400px at 50% 0,rgba(255,255,255,.35),transparent 70%)}
+.ev{position:relative;width:100%;max-width:700px;background:#F3EAD7;border-radius:6px;padding:34px 34px 28px;box-shadow:0 36px 56px -30px rgba(43,34,24,.6),0 0 0 1px rgba(43,34,24,.15);background-image:repeating-linear-gradient(90deg,#C8442F 0 22px,transparent 22px 34px,#2F5D8C 34px 56px,transparent 56px 68px);background-size:100% 8px;background-repeat:no-repeat;background-position:0 0}
+.ev::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:repeating-linear-gradient(90deg,#C8442F 0 22px,transparent 22px 34px,#2F5D8C 34px 56px,transparent 56px 68px)}
+.rw{display:flex;gap:22px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin-top:6px}
+.st{position:relative;width:150px;height:186px;filter:drop-shadow(0 6px 8px rgba(43,34,24,.28));transform:rotate(var(--r,0deg))}
+.st svg{width:100%;height:100%;display:block;overflow:visible}
+.pm{position:absolute;right:-30px;top:44px;width:104px;height:104px;opacity:0;transform:scale(1.7) rotate(-20deg);pointer-events:none;z-index:3}.pm.hit{animation:ht 3s cubic-bezier(.3,1.4,.5,1) forwards}@keyframes ht{0%{opacity:0;transform:scale(1.8) rotate(-30deg)}10%{opacity:.88;transform:scale(1) rotate(-14deg)}14%{transform:scale(1.04) rotate(-14deg)}78%{opacity:.88}100%{opacity:0;transform:scale(1) rotate(-14deg)}}
+.pm svg *{fill:none;stroke:#2A2342;stroke-width:2.200}.pm text{fill:#2A2342;stroke:none;font:700 10px 'Special Elite'}
+.ad{margin-top:22px;text-align:center;font:italic 700 22px 'Playfair Display',serif;color:#4A3C2A}.ad small{display:block;font:400 12.500px 'Special Elite';letter-spacing:.16em;color:#8A7A63;margin-top:6px;text-transform:uppercase}
+.tk{margin-top:14px;text-align:center;font-size:13px;color:#8A7A63}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="ev"><div class="rw" id="rw"></div><div class="ad">Postcards from the coast<small>Collection no. 07 · Air mail</small></div><div class="tk" id="tk">Cancelled 0 of 3</div></div>
+<script>
+const W=150,H=186,P=14,R=4.800;
+function scallop(){let d='M0 0';for(let x=P;x<=W;x+=P){const mid=x-P/2;d+=' L'+(mid-R)+' 0 A'+R+' '+R+' 0 0 0 '+(mid+R)+' 0 L'+x+' 0'}
+ const ny=Math.round(H/P);const dy=H/ny;for(let y=dy;y<=H+.1;y+=dy){const mid=y-dy/2;d+=' L'+W+' '+(mid-R)+' A'+R+' '+R+' 0 0 0 '+W+' '+(mid+R)+' L'+W+' '+y}
+ for(let x=W-P;x>=-.1;x-=P){const mid=x+P/2;d+=' L'+(mid+R)+' '+H+' A'+R+' '+R+' 0 0 0 '+(mid-R)+' '+H+' L'+x+' '+H}
+ for(let y=H-dy;y>=-.1;y-=dy){const mid=y+dy/2;d+=' L0 '+(mid+R)+' A'+R+' '+R+' 0 0 0 0 '+(mid-R)+' L0 '+y}return d+'Z'}
+const ST=[['#2F5D8C','#F3EAD7','LIGHTHOUSE','1ST',-3,'<path d="M0 120h60l-8-6H8z" fill="#1F3F63" transform="translate(45 0)"/><rect x="62" y="40" width="26" height="64" fill="#fff"/><rect x="62" y="56" width="26" height="10" fill="#C8442F"/><rect x="62" y="78" width="26" height="10" fill="#C8442F"/><path d="M58 40h34l-17-16z" fill="#C8442F"/><rect x="68" y="28" width="14" height="12" fill="#F7D774"/><path d="M82 34l50-14v28z" fill="#F7D774" opacity=".4"/>'],
+['#C8442F','#F3EAD7','HARBOUR SAIL','2ND',2,'<path d="M0 118q20-10 40 0t40 0 40 0 30 0v20H0z" fill="#1F3F63"/><path d="M72 30v68l-34-6z" fill="#fff"/><path d="M76 38v60l30-8z" fill="#F7D774"/><path d="M60 100h40l-6 12H66z" fill="#2B2218"/>'],
+['#3F7A4F','#F3EAD7','SEA TURTLE','AIR',-1,'<ellipse cx="75" cy="86" rx="38" ry="28" fill="#6BA37A"/><path d="M52 76h46M50 90h50M56 102h38M75 60v52" stroke="#2D5A3B" stroke-width="2" fill="none"/><circle cx="116" cy="82" r="11" fill="#6BA37A"/><circle cx="120" cy="79" r="2" fill="#111"/><path d="M44 66l-16-14M44 104l-16 14M104 66l14-14M104 108l14 14" stroke="#6BA37A" stroke-width="9" stroke-linecap="round"/>']];
+const rw=document.getElementById('rw'),sl=ms=>new Promise(r=>setTimeout(r,ms));const pms=[];let off=false,n=0;
+ST.forEach((s,i)=>{const d=document.createElement('div');d.className='st';d.style.setProperty('--r',s[4]+'deg');d.innerHTML='<svg viewBox="0 0 '+W+' '+H+'"><defs><clipPath id="c'+i+'"><path d="'+scallop()+'"/></clipPath></defs><path d="'+scallop()+'" fill="#FBF6EA"/><g clip-path="url(#c'+i+')"><rect x="12" y="12" width="'+(W-24)+'" height="'+(H-24)+'" fill="'+s[0]+'"/><rect x="18" y="18" width="'+(W-36)+'" height="'+(H-62)+'" fill="#EADFC5" transform="translate(0 0)"/><g transform="translate(0 6)">'+s[5]+'</g><text x="75" y="'+(H-32)+'" text-anchor="middle" font-family="Playfair Display,serif" font-weight="800" font-style="italic" font-size="12" fill="#F3EAD7" letter-spacing="1">'+s[2]+'</text><text x="'+(W-20)+'" y="'+(H-14)+'" text-anchor="end" font-family="Playfair Display,serif" font-weight="800" font-size="17" fill="#F3EAD7">'+s[3]+'</text></g></svg><div class="pm"><svg viewBox="0 0 104 104"><circle cx="52" cy="52" r="42"/><circle cx="52" cy="52" r="30"/><text x="52" y="46" text-anchor="middle">PORT ARTHUR</text><text x="52" y="60" text-anchor="middle">14 NOV 26</text><path d="M-40 28q14-8 28 0t28 0 28 0 28 0 28 0M-40 44q14-8 28 0t28 0 28 0 28 0 28 0M-40 60q14-8 28 0t28 0 28 0 28 0 28 0" transform="translate(94 4)" stroke-width="2.500"/></svg></div>';rw.appendChild(d);pms.push(d.querySelector('.pm'))});
+function hit(i){const p=pms[i];p.classList.remove('hit');void p.offsetWidth;p.classList.add('hit');n=Math.min(3,n+1);document.getElementById('tk').textContent='Cancelled '+n+' of 3'}
+pms[0].style.cssText='opacity:.88;transform:scale(1) rotate(-14deg)';n=1;document.getElementById('tk').textContent='Cancelled 1 of 3';
+/* Idle demo: three postage stamps with real scalloped perforated edges and little printed scenes sit on an air-mail envelope; one at a time a circular postmark with wavy cancel lines slams down from above with a small overshoot, holds, and fades, while the counter below tallies the cancelled stamps, until you hover the envelope. */
+document.querySelector('.ev').addEventListener('pointerenter',()=>{off=true});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3800);let k=1;while(!off){k=(k+1)%3;n=k===0?0:n;hit(k);await sl(3400)}})()}
+</script></body></html>

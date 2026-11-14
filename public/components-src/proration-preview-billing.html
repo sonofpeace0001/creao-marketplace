@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Proration Preview Billing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEEF6;color:#14183A;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:600px;background:#fff;border-radius:28px;padding:26px;box-shadow:0 40px 56px -34px rgba(20,24,58,.5),inset 0 0 0 1px rgba(20,24,58,.07)}
+.hd h1{font-size:21px;font-weight:800;letter-spacing:-.03em}.hd p{font-size:13.500px;color:#6B7194;margin:3px 0 18px}
+.sg{position:relative;display:grid;grid-template-columns:repeat(3,1fr);padding:4px;border-radius:14px;background:#EEF0F8;margin-bottom:14px}.sg .th{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/3);border-radius:11px;background:#fff;box-shadow:0 4px 10px -4px rgba(20,24,58,.3);transition:transform .45s cubic-bezier(.3,1.4,.4,1)}
+.sg button{position:relative;z-index:1;border:0;background:none;padding:11px 8px;font:700 14px 'Plus Jakarta Sans';color:#6B7194;cursor:pointer;transition:color .3s}.sg button.on{color:#14183A}.sg button small{display:block;font:500 11px 'JetBrains Mono';color:#9AA0C0;margin-top:2px}.sg button:focus-visible{outline:2px solid #5B5BFF;border-radius:11px}
+.st{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:14px;background:#F6F7FC;margin-bottom:18px;font-size:14px;font-weight:600}.st div{display:flex;align-items:center;gap:10px}.st button{width:30px;height:30px;border:0;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1.5px #D9DCF0;font-size:17px;cursor:pointer;color:#14183A}.st b{font:600 17px 'JetBrains Mono';min-width:24px;text-align:center}
+.cy{margin-bottom:18px}.cy .lb{display:flex;justify-content:space-between;font:500 11.500px 'JetBrains Mono';color:#8A90B0;margin-bottom:8px}.bar{position:relative;height:14px;border-radius:7px;background:#EEF0F8;overflow:hidden;display:flex}.bar i{display:block;height:100%}.bar .u{width:var(--t);background:repeating-linear-gradient(135deg,#C9CDEB 0 5px,#D8DBF2 5px 10px)}.bar .c{width:var(--r);background:linear-gradient(90deg,#5B5BFF,#8B5CF6)}.an .bar i{transition:width .6s cubic-bezier(.3,1,.4,1)}
+.cy .mk{position:relative;height:0}.cy .mk b{position:absolute;left:var(--t);top:-24px;transform:translateX(-50%);font:600 10.500px 'JetBrains Mono';background:#14183A;color:#fff;padding:2px 7px;border-radius:5px}
+.ln{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 0;border-bottom:1px dashed #E0E3F2;font-size:14px}.ln span small{display:block;font-size:12px;color:#8A90B0;margin-top:1px}.ln b{font:600 14.500px 'JetBrains Mono';font-variant-numeric:tabular-nums}.ln.cr b{color:#0F9D6E}
+.tt{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0 4px}.tt span{font-size:15px;font-weight:700}.tt b{font:800 38px/1 'Plus Jakarta Sans';letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.nx{font-size:13px;color:#6B7194;margin-bottom:16px}.nx b{color:#14183A}
+.cta{width:100%;border:0;border-radius:15px;padding:15px;background:#14183A;color:#fff;font:700 15.500px 'Plus Jakarta Sans';cursor:pointer;transition:transform .15s}.cta:active,.cta.pr{transform:scale(.97)}.cta:focus-visible{outline:3px solid #5B5BFF;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>Change your plan</h1><p>Billing cycle renews on Dec 1 · 14 days left</p></div>
+<div class="sg" id="sg"><span class="th" id="th"></span></div>
+<div class="st"><span>Seats</span><div><button id="mn" aria-label="Fewer">−</button><b id="sn">5</b><button id="pl" aria-label="More">+</button></div></div>
+<div class="cy"><div class="lb"><span>Nov 1</span><span>Today</span><span>Dec 1</span></div><div class="mk"><b style="--t:53%">Day 16</b></div><div class="bar" id="bar"><i class="u" style="--t:53%"></i><i class="c" id="cb" style="--r:47%"></i></div></div>
+<div id="ls"></div><div class="tt"><span>Due today</span><b id="tot">$0.00</b></div><div class="nx" id="nx"></div><button class="cta" id="cta">Confirm change</button></div>
+<script>
+const PL=[['Starter',12],['Pro',24],['Team',40]],DAYS=14,CY=30,CUR={p:1,s:5};let sel=1,seats=5,off=false,shown=0,tgt=0;
+const sg=document.getElementById('sg'),th=document.getElementById('th'),bs=[];
+PL.forEach((p,i)=>{const b=document.createElement('button');b.innerHTML=p[0]+'<small>$'+p[1]+' / seat</small>';b.onclick=()=>{off=true;set(i,seats)};sg.appendChild(b);bs.push(b)});
+const $=id=>document.getElementById(id),m=v=>(v<0?'−':'')+'$'+Math.abs(v).toFixed(2);
+function calc(){const credit=CUR.s*PL[CUR.p][1]*DAYS/CY,charge=seats*PL[sel][1]*DAYS/CY,sub=charge-credit,tax=Math.max(0,sub)*.08;return{credit,charge,tax,total:sub+tax,next:seats*PL[sel][1]}}
+function set(p,s){sel=p;seats=Math.max(1,Math.min(25,s));bs.forEach((b,i)=>b.classList.toggle('on',i===p));th.style.transform='translateX('+(p*100)+'%)';$('sn').textContent=seats;const c=calc();
+ $('ls').innerHTML='<div class="ln cr"><span>Unused time on Pro<small>'+CUR.s+' seats × '+DAYS+' days</small></span><b>'+m(-c.credit)+'</b></div><div class="ln"><span>'+PL[sel][0]+' for the rest of the cycle<small>'+seats+' seats × '+DAYS+' days</small></span><b>'+m(c.charge)+'</b></div><div class="ln"><span>Tax (8%)</span><b>'+m(c.tax)+'</b></div>';
+ tgt=c.total;$('nx').innerHTML='Then <b>$'+c.next.toFixed(2)+'</b> per month from Dec 1';$('cta').textContent=c.total<0?'Confirm and receive a credit':'Confirm and pay '+m(c.total);
+ $('cb').style.setProperty('--r',(Math.min(1,Math.abs(c.charge)/Math.max(1,c.credit+c.charge))*47)+'%')}
+$('mn').onclick=()=>{off=true;set(sel,seats-1)};$('pl').onclick=()=>{off=true;set(sel,seats+1)};
+set(2,8);shown=tgt;$('tot').textContent=m(shown);requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('an')));
+(function tw(){shown+=(tgt-shown)*.14;if(Math.abs(tgt-shown)<.005)shown=tgt;$('tot').textContent=m(shown);requestAnimationFrame(tw)})();
+/* Idle demo: the plan pill glides between Starter, Pro and Team and the seat count steps up and down; each change recomputes the proration lines (credit for unused Pro time, charge for the new plan, tax), the cycle bar re-balances and the due-today total rolls to its new value, with the confirm button label following, until you click a control. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sl(3600);const seq=[[0,3],[1,9],[2,5],[0,5],[2,12]];let k=0;while(!off){const[p,s]=seq[k++%seq.length];set(p,s);await sl(2300)}})()}
+</script></body></html>

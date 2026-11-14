@@ -1,0 +1,40 @@
+ROLE
+You are a senior studio brand designer and front-end engineer with 15+ years of experience. Build "Office Hours Contact": a studio's opening hours come alive: a clock runs across the day, a marker slides along a 24-hour bar, the card is grey and sleepy before nine, then flips to a pulsing green online state and the team lights up one by one.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft sage card with a green open state that desaturates when closed.
+- Palette: #16A34A, #13201A, #7A8F83, #9AA79F, #6E8377, #EDF1EE
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Eyebrow, headline and status chip; big clock; hours bar with now marker; team list with presence dots; buttons.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Virtual clock at 72 minutes per second; status chip and avatars crossfade 500ms; presence dots turn green in turn.
+
+IDLE AUTOPLAY
+- After 3.2s the clock runs from 7:30 to 20:00 and loops.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static Open now badge.
+- Team avatars that never change state.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

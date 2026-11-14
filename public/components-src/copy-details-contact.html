@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Copy Details Contact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F0E9DF;color:#221A12;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{position:relative;width:100%;max-width:600px;background:#FFFCF7;border-radius:30px;padding:30px;box-shadow:0 40px 56px -34px rgba(34,26,18,.5),inset 0 0 0 1px rgba(34,26,18,.08);overflow:hidden}
+.cd h1{font:800 44px/.95 'Syne';letter-spacing:-.05em;margin-bottom:6px}.cd h1 span{color:#E5522B}.cd>p{font-size:15.500px;color:#85715C;margin-bottom:22px}
+.rw{position:relative;display:grid;grid-template-columns:48px 1fr auto;gap:16px;align-items:center;padding:15px 16px;border-radius:20px;background:#fff;box-shadow:inset 0 0 0 1.5px #EFE3D3;margin-bottom:10px;cursor:pointer;transition:background .3s,box-shadow .3s,transform .4s cubic-bezier(.3,1.6,.5,1)}
+.rw:hover,.rw.hv{box-shadow:inset 0 0 0 2px #E5522B;transform:translateX(4px)}.rw.ok{background:#EAF7EE;box-shadow:inset 0 0 0 2px #16A34A}.rw:focus-visible{outline:3px solid #221A12;outline-offset:2px}
+.ic{width:48px;height:48px;border-radius:15px;background:var(--c);display:grid;place-items:center}.ic svg{width:23px;height:23px;stroke:#fff;stroke-width:2.200;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.rw small{display:block;font:600 11px 'Outfit';letter-spacing:.14em;color:#A38C73;text-transform:uppercase;margin-bottom:3px}.rw b{font:700 20px 'Syne';letter-spacing:-.03em}
+.cp{position:relative;width:46px;height:46px;border-radius:14px;background:#F6EEE2;display:grid;place-items:center;transition:background .3s}.rw.hv .cp,.rw:hover .cp{background:#E5522B}.rw.ok .cp{background:#16A34A}
+.cp svg{position:absolute;width:21px;height:21px;fill:none;stroke:#7B6650;stroke-width:2.200;stroke-linecap:round;stroke-linejoin:round;transition:all .35s cubic-bezier(.3,1.8,.5,1)}.rw.hv .cp svg,.rw:hover .cp svg{stroke:#fff}.cp .ck{opacity:0;transform:scale(.4) rotate(-40deg);stroke:#fff}.rw.ok .cp .co{opacity:0;transform:scale(.4) rotate(40deg)}.rw.ok .cp .ck{opacity:1;transform:none}.rw.ok .cp svg{stroke:#fff}
+.tt{position:absolute;right:76px;top:-30px;padding:5px 11px;border-radius:9px;background:#221A12;color:#fff;font:600 12px 'Outfit';white-space:nowrap;opacity:0;transform:translateY(6px);transition:all .3s}.rw.ok .tt{opacity:1;transform:none}
+.ft{display:flex;align-items:center;gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid #F0E6D7}.ft .dn{position:relative;width:46px;height:46px}.ft .dn svg{width:100%;height:100%;transform:rotate(-90deg)}.dn .t{fill:none;stroke:#F0E6D7;stroke-width:5}.dn .v{fill:none;stroke:#E5522B;stroke-width:5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p,.8))}.dn b{position:absolute;inset:0;display:grid;place-items:center;font:700 11px 'Outfit'}
+.ft span{font-size:14px;color:#85715C}.ft span b{color:#221A12}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><h1>Say hello<span>.</span></h1><p>Click anything to copy it. We answer fast.</p><div id="ls"></div>
+<div class="ft"><div class="dn"><svg viewBox="0 0 36 36"><circle class="t" cx="18" cy="18" r="15"/><circle class="v" cx="18" cy="18" r="15" pathLength="1"/></svg><b>96%</b></div><span>Replied to within <b>2 hours</b> in the last 30 days</span></div></div>
+<script>
+const R=[['Email','hello@northwind.studio','#E5522B','<path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/>'],['Phone','+44 20 7946 0958','#2563EB','<path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/>'],['Studio','12 Fenwick Yard, London E2','#0F9D6E','<path d="M12 21s7-6.500 7-12a7 7 0 0 0-14 0c0 5.500 7 12 7 12Z"/><circle cx="12" cy="9" r="2.500"/>']];
+const ls=document.getElementById('ls'),sl=t=>new Promise(r=>setTimeout(r,t));let off=false;
+const els=R.map(r=>{const d=document.createElement('div');d.className='rw';d.tabIndex=0;d.style.setProperty('--c',r[2]);d.innerHTML='<div class="ic"><svg viewBox="0 0 24 24">'+r[3]+'</svg></div><div><small>'+r[0]+'</small><b>'+r[1]+'</b></div><div class="cp"><svg class="co" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg><svg class="ck" viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg></div><span class="tt">Copied to clipboard</span>';const go=()=>{off=true;copy(d,r[1])};d.onclick=go;d.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}};ls.appendChild(d);return d});
+async function copy(d,t){try{navigator.clipboard&&navigator.clipboard.writeText(t)}catch(e){}els.forEach(e=>e.classList.remove('ok'));d.classList.add('ok');await sl(1800);d.classList.remove('ok')}
+els[0].classList.add('hv');els[0].classList.add('ok');
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: three contact rows each hold a copy button; one at a time the row gets a coral outline and nudges right as if hovered, the copy icon spins into a white tick on a green button, the row turns mint and a Copied to clipboard tooltip pops above it, then it relaxes and the next row takes its turn, while a response-rate ring sits at the bottom, until you click a row. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3200);let k=1;while(!off){els.forEach(e=>e.classList.remove('hv','ok'));const d=els[k%3];k++;d.classList.add('hv');await sl(900);if(off)return;d.classList.add('ok');await sl(1800);d.classList.remove('ok');await sl(400);d.classList.remove('hv')}})()}
+</script></body></html>

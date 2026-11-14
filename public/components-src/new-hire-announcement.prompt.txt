@@ -1,0 +1,40 @@
+ROLE
+You are a senior internal comms designer and front-end engineer with 15+ years of experience. Build "New Hire Announcement": a warm welcome card with a spinning gradient ring around an illustrated portrait, a waving hand and reaction buttons whose counts tick up while emoji float away.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream card with peach glow, serif name and friendly rounded chips.
+- Palette: #FF8A4C, #2B1B12, #EBD9C7, #F6EBDD, #FFFBF5, #C2552A
+- Type: Fraunces, Figtree (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Eyebrow; avatar with ring and wave badge; name and role; fun-fact chips; intro paragraph; four reaction buttons.
+
+INTERACTION & STATES
+- React to increment a count and release floating emoji.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ring rotates 6s; wave rotates in bursts; reactions pop and float with random drift.
+
+IDLE AUTOPLAY
+- After 3.4s reactions arrive one by one every second or so.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A stock photo placeholder; use an illustrated portrait.
+- Reactions that change numbers without any visual feedback.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

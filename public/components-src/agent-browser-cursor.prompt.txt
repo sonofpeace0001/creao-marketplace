@@ -1,0 +1,40 @@
+ROLE
+You are a senior agentic browser product designer and front-end engineer with 15+ years of experience. Build "Agent Browser Cursor": an AI agent cursor driving a flight search page: it glides to each field, types, clicks Search so fares slide in, and every step is written to an action log beside the browser.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft lilac-grey page, crisp white browser frame, indigo agent cursor and a dark log rail.
+- Palette: #101828, #6366F1, #E3E7F0, #667085, #E4E8F2, #F2F4F9
+- Type: Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Mock browser with address bar, four-field form, search button and result rows; floating labelled cursor; action log panel.
+
+INTERACTION & STATES
+- Moving your pointer over the browser stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Cursor travels with a 900ms cubic ease and a click squash; fields focus and type at 45ms per character; results stagger in.
+
+IDLE AUTOPLAY
+- After 3.6s the agent fills the whole form, searches, shows fares and loops.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A generic arrow cursor without an agent label.
+- A log that does not match what happens on the page.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

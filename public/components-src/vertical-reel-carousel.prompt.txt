@@ -1,0 +1,40 @@
+ROLE
+You are a senior social video designer and front-end engineer with 15+ years of experience. Build "Vertical Reel Carousel": a phone plays short vertical reels: a segmented progress bar fills, a double-tap heart bursts and the like counter ticks up, then the stack glides to the next reel.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black phone frame on a magenta glow with landscape reels and white captions.
+- Palette: #FF3B6B, #0A0A12, #25252F, #14141C
+- Type: Outfit, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Phone shell with notch; progress segments; reels with creator, caption and sound; like, comment and share column; heart burst.
+
+INTERACTION & STATES
+- Tap top half for next, bottom for previous, double-tap to like.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Stack translates 800ms; heart pops and floats up; progress fills 3.6s.
+
+IDLE AUTOPLAY
+- After 3s the reels advance automatically with a heart burst in each.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A horizontal slider in a phone shape.
+- A like button that does not react.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

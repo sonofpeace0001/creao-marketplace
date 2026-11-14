@@ -1,0 +1,40 @@
+ROLE
+You are a senior AI safety UX designer and front-end engineer with 15+ years of experience. Build "Agent Approval Gate": a human-in-the-loop approval card where an agent asks permission with a risk badge, a diff preview and a countdown ring, then executes with a progress overlay once approved.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cool grey page, white card, dark approve button and red, amber and green risk chips.
+- Palette: #6366F1, #141A26, #EC4899, #76809A, #EEF1F7, #ECEFF4
+- Type: Hanken Grotesk, Fira Code (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Agent header with risk chip; title and description; diff block; countdown ring with Deny, Edit and Approve; execution overlay.
+
+INTERACTION & STATES
+- Approve, Deny or Edit; deny shows a red cross state; each action cycles to the next request.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ring drains continuously; Approve presses with a halo; overlay fades in with a bar and a spring check.
+
+IDLE AUTOPLAY
+- After 3.4s the ring drains, Approve presses itself, the action executes and the next request (refund, branch clean-up, mass email) arrives.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Auto-approving silently; the press must be visible.
+- The same risk colour for every action.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

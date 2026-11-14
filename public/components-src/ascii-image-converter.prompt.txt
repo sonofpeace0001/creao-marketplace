@@ -1,0 +1,40 @@
+ROLE
+You are a senior creative tools designer and front-end engineer with 15+ years of experience. Build "ASCII Image Converter": a generated sunset scene shown next to its live ASCII conversion, with a scan line and ramp chips that switch between classic punctuation, shade blocks, dots and binary.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark tool panel with a mint terminal output beside a vivid image.
+- Palette: #8CF0B8, #7C8498, #B9C0D6, #0A0B0F, #E8EAF2, #12141B
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with cell count; source canvas; ASCII pre with scan line; ramp chips and ramp readout.
+
+INTERACTION & STATES
+- Pick a ramp chip to change the density characters.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Scene redraws each frame; luminance is sampled to characters; scan line sweeps; ramps cycle.
+
+IDLE AUTOPLAY
+- After 3s the scene drifts and the ramp changes every 2.6s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static image; the source must move.
+- Characters too small to read; fit the font to the panel.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

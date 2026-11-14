@@ -1,0 +1,40 @@
+ROLE
+You are a senior product marketing designer and front-end engineer with 15+ years of experience. Build "Diff Release Notes Changelog": a release-notes card where Added, Improved and Fixed counts tick up, notes slide in with colour-coded tags and a before and after mock of the redesigned dialog is revealed by a sweeping white divider.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card, big tight version number and violet accent.
+- Palette: #6D5DFC, #12161F, #C4C8D2, #565C6B, #E9ECF1, #7C8497
+- Type: Bricolage Grotesque, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Version header with count chips; before and after compare panel with draggable divider; five tagged notes.
+
+INTERACTION & STATES
+- Drag the divider.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Counts ease-out over 2.4s; notes stagger in; divider sweeps on a sine path.
+
+IDLE AUTOPLAY
+- After 3.5s the counts and notes replay while the divider sweeps.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A text-only changelog; show the change.
+- A divider handle without a drag affordance.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

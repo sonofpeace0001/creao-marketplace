@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Consent Receipt Consent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E8E6F0;color:#1B1830;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:700px;background:#fff;border-radius:30px;padding:26px;box-shadow:0 40px 56px -34px rgba(27,24,48,.5),inset 0 0 0 1px rgba(27,24,48,.07);display:grid;grid-template-columns:1fr 250px;gap:24px;min-height:430px}
+.pf h1{font-size:23px;font-weight:800;letter-spacing:-.03em}.pf p{font-size:14px;color:#6E6A92;margin:4px 0 16px;line-height:1.45}
+.rw{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:15px;background:#F6F5FB;margin-bottom:8px}.rw b{display:block;font-size:14.500px;font-weight:700}.rw span{font-size:12.500px;color:#8A86AE}.sw{position:relative;margin-left:auto;flex:none;width:44px;height:25px;border-radius:99px;background:#D8D5EA;border:0;cursor:pointer;transition:background .3s}.sw::after{content:"";position:absolute;left:3px;top:3px;width:19px;height:19px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:transform .35s cubic-bezier(.3,1.7,.5,1)}.sw.on{background:#6D4DFF}.sw.on::after{transform:translateX(19px)}.sw.lk{opacity:.55;cursor:not-allowed}.sw:focus-visible{outline:3px solid #1B1830;outline-offset:2px}
+.sv{width:100%;margin-top:6px;border:0;border-radius:15px;padding:14px;background:#1B1830;color:#fff;font:800 15px 'Hanken Grotesk';cursor:pointer;transition:transform .15s}.sv.pr{transform:scale(.97)}.sv:focus-visible{outline:3px solid #6D4DFF;outline-offset:3px}
+.pr{position:relative;display:flex;flex-direction:column;align-items:center}.pr .sl{position:relative;z-index:2;width:100%;height:16px;border-radius:99px;background:#1B1830;box-shadow:inset 0 3px 6px #000,0 6px 12px -4px rgba(27,24,48,.5)}
+.pr .vp{position:relative;width:calc(100% - 26px);flex:1;overflow:hidden;margin-top:-6px}
+.rc{position:absolute;left:0;right:0;top:0;background:#FFFEFB;padding:16px 16px 22px;font:400 12px/1.6 'Courier Prime',monospace;color:#2C2845;box-shadow:0 10px 20px -8px rgba(0,0,0,.25);transform:translateY(-102%);-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/12px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/12px 100%}
+.rc.out{transform:translateY(0);transition:transform 1.600s cubic-bezier(.25,.8,.3,1)}.rc.tear{transform:translate(40px,120%) rotate(8deg);transition:transform .8s ease-in;opacity:0}
+.rc h4{text-align:center;font:700 13px 'Courier Prime';letter-spacing:.2em;margin-bottom:4px}.rc .d{border-top:1.500px dashed #BDB8DA;margin:7px 0}.rc .l{display:flex;justify-content:space-between}.rc .l b{font-weight:700}
+.rc .bc{height:34px;margin:8px 0 2px;background:repeating-linear-gradient(90deg,#1B1830 0 2px,transparent 2px 4px,#1B1830 4px 5px,transparent 5px 8px,#1B1830 8px 11px,transparent 11px 13px)}.rc .cn{text-align:center;font-size:10.500px;color:#8A86AE;letter-spacing:.14em}
+.rc .ln{opacity:0;transform:translateY(-4px)}.rc.pt .ln{opacity:1;transform:none;transition:opacity .25s calc(var(--i)*.14s + .6s),transform .25s calc(var(--i)*.14s + .6s)}
+.dl{margin-top:10px;border:0;background:none;color:#6D4DFF;font:700 13px 'Hanken Grotesk';cursor:pointer;opacity:0;transition:opacity .4s}.dl.on{opacity:1}
+@media(max-width:620px){.cd{grid-template-columns:1fr}.pr{min-height:340px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="pf"><h1>Cookie preferences</h1><p>Choose what you are comfortable with. We will give you a receipt you can keep.</p><div id="ct"></div><button class="sv" id="sv">Save my choices</button></div>
+<div class="pr"><i class="sl"></i><div class="vp"><div class="rc" id="rc"></div></div><button class="dl" id="dl">⬇ Download receipt (PDF)</button></div></div>
+<script>
+const CAT=[['Essential','Required for the site to work',true],['Analytics','Anonymous usage statistics',false],['Personalisation','Remember your layout and language',false],['Advertising','Relevant offers on partner sites',false]];
+const $=id=>document.getElementById(id),sl=t=>new Promise(r=>setTimeout(r,t));let off=false;const st=CAT.map(c=>c[2]);
+const sws=CAT.map((c,i)=>{const d=document.createElement('div');d.className='rw';d.innerHTML='<div><b>'+c[0]+'</b><span>'+c[1]+'</span></div><button class="sw'+(c[2]?' on lk':'')+'" role="switch" aria-checked="'+c[2]+'" aria-label="'+c[0]+'"></button>';const b=d.querySelector('.sw');if(!c[2])b.onclick=()=>{off=true;set(i,!st[i])};$('ct').appendChild(d);return b});
+function set(i,v){st[i]=v;sws[i].classList.toggle('on',v);sws[i].setAttribute('aria-checked',v)}
+function receipt(){const id='CR-'+Math.floor(10000+Math.random()*89999);const lines=CAT.map((c,i)=>'<div class="l ln" style="--i:'+(i+3)+'"><span>'+c[0]+'</span><b>'+(st[i]?'[x] ALLOWED':'[ ] DENIED')+'</b></div>').join('');$('rc').innerHTML='<h4 class="ln" style="--i:0">CONSENT RECEIPT</h4><div class="l ln" style="--i:1"><span>ID</span><b>'+id+'</b></div><div class="l ln" style="--i:2"><span>When</span><b>14 Nov 2026 14:32</b></div><div class="d ln" style="--i:2"></div>'+lines+'<div class="d ln" style="--i:7"></div><div class="l ln" style="--i:8"><span>Policy</span><b>v3.2</b></div><div class="l ln" style="--i:9"><span>Valid for</span><b>12 months</b></div><div class="bc ln" style="--i:10"></div><div class="cn ln" style="--i:11">WITHDRAW ANYTIME IN SETTINGS</div>'}
+function show(inst){receipt();const r=$('rc');r.className='rc';void r.offsetWidth;if(inst){r.style.transition='none';r.className='rc out pt';void r.offsetWidth;r.style.transition=''}else{r.className='rc out pt'}$('dl').classList.add('on')}
+async function press(){const b=$('sv');b.classList.add('pr');await sl(240);b.classList.remove('pr')}
+set(1,true);set(2,true);show(true);
+$('sv').onclick=()=>{off=true;show(false)};document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: preferences become a paper trail; after toggling a category and pressing Save my choices, a till-roll receipt feeds out of a dark slot with a torn zigzag edge, its lines print one after another, a consent ID, timestamp, allowed or denied tick for each category, policy version and a barcode, a Download receipt link fades in, then the receipt is torn away and the cycle repeats with different choices, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3600);let k=0;while(!off){const r=$('rc');r.className='rc tear';$('dl').classList.remove('on');await sl(900);if(off)return;r.className='rc';set(1,k%2===0);set(2,k%2===1);set(3,k%3===0);await sl(900);await press();receipt();r.className='rc out pt';$('dl').classList.add('on');k++;await sl(5200)}})()}
+</script></body></html>

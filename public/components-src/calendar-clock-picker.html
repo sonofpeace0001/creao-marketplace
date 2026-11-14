@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Calendar Clock Picker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E7ECE9;color:#14231C;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:640px;background:#fff;border-radius:30px;padding:26px;box-shadow:0 40px 56px -34px rgba(20,35,28,.5),inset 0 0 0 1px rgba(20,35,28,.07);display:grid;grid-template-columns:1fr 250px;gap:26px;align-items:center}
+.l h1{font-size:22px;font-weight:800;letter-spacing:-.03em}.l p{font-size:13.500px;color:#6D8579;margin:3px 0 16px}
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:18px}.wk button{border:0;border-radius:14px;padding:10px 0;background:#F1F5F3;color:#14231C;cursor:pointer;transition:all .35s cubic-bezier(.3,1.6,.5,1)}.wk small{display:block;font:500 10.500px 'Fira Code';color:#7F968B}.wk b{display:block;font-size:17px;font-weight:800;margin-top:2px}.wk button.on{background:#0F7B55;color:#fff;transform:translateY(-4px);box-shadow:0 12px 18px -8px rgba(15,123,85,.7)}.wk button.on small{color:#B8F0D8}.wk button:focus-visible{outline:2px solid #0F7B55}
+.rd{display:flex;align-items:center;gap:12px}.rd .t{font:800 62px/1 'Hanken Grotesk';letter-spacing:-.06em;font-variant-numeric:tabular-nums}.rd .t i{font-style:normal;animation:bk 1.200s steps(2) infinite}@keyframes bk{50%{opacity:.25}}
+.ap{display:grid;gap:4px}.ap button{border:0;border-radius:10px;padding:8px 12px;background:#F1F5F3;font:800 13px 'Hanken Grotesk';color:#7F968B;cursor:pointer;transition:all .3s}.ap button.on{background:#14231C;color:#fff}
+.sm{margin-top:16px;padding:12px 14px;border-radius:14px;background:#F1F5F3;font-size:14px;font-weight:700}.sm span{display:block;font:500 12px 'Fira Code';color:#7F968B;font-weight:500}
+.ck{position:relative;width:250px;height:250px}.ck svg{width:100%;height:100%;overflow:visible}
+.fc{fill:#F6F9F7;stroke:#E1EAE5;stroke-width:3}.nm{font:800 17px 'Hanken Grotesk';fill:#14231C;text-anchor:middle;dominant-baseline:central}.nm.s{fill:#B4C4BB;font-size:11px}.tk{stroke:#CBD8D1;stroke-width:1.500}
+.hd{transform-origin:125px 125px;transition:transform .9s cubic-bezier(.3,1.35,.4,1)}.hd.h line{stroke:#14231C;stroke-width:8;stroke-linecap:round}.hd.m line{stroke:#0F7B55;stroke-width:5;stroke-linecap:round}.hd circle{fill:#fff;stroke-width:4}.hd.h circle{stroke:#14231C}.hd.m circle{stroke:#0F7B55;fill:#0F7B55}
+.ct{fill:#14231C}
+@media(max-width:620px){.cd{grid-template-columns:1fr}.ck{margin:0 auto}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="l"><h1>Schedule a call</h1><p>Pick a day, then set the time on the clock.</p><div class="wk" id="wk"></div><div class="rd"><div class="t"><span id="hh">2</span><i>:</i><span id="mm">45</span></div><div class="ap"><button id="am">AM</button><button id="pm" class="on">PM</button></div></div><div class="sm"><div id="sm1">Thursday, 19 November · 2:45 PM</div><span>Europe/London · 30 minutes</span></div></div>
+<div class="ck"><svg id="sv" viewBox="0 0 250 250"><circle class="fc" cx="125" cy="125" r="118"/><g id="tks"></g><g class="hd m" id="hm"><line x1="125" y1="125" x2="125" y2="36"/><circle cx="125" cy="36" r="9"/></g><g class="hd h" id="hh2"><line x1="125" y1="125" x2="125" y2="62"/><circle cx="125" cy="62" r="8"/></g><circle class="ct" cx="125" cy="125" r="7"/></svg></div></div>
+<script>
+const DAYS=[['Mon',16],['Tue',17],['Wed',18],['Thu',19],['Fri',20],['Sat',21],['Sun',22]],$=id=>document.getElementById(id),sl=t=>new Promise(r=>setTimeout(r,t));let off=false,ha=0,ma=0,day=3,h=2,m=45,pm=true;
+let g='';for(let i=0;i<60;i++){const a=i*6*Math.PI/180,r1=i%5?110:104,r2=116;g+='<line class="tk" x1="'+(125+Math.sin(a)*r1)+'" y1="'+(125-Math.cos(a)*r1)+'" x2="'+(125+Math.sin(a)*r2)+'" y2="'+(125-Math.cos(a)*r2)+'"/>'}
+for(let i=1;i<=12;i++){const a=i*30*Math.PI/180;g+='<text class="nm" x="'+(125+Math.sin(a)*82)+'" y="'+(125-Math.cos(a)*82)+'">'+i+'</text>'}$('tks').innerHTML=g;
+const wk=$('wk');DAYS.forEach((d,i)=>{const b=document.createElement('button');b.innerHTML='<small>'+d[0].toUpperCase()+'</small><b>'+d[1]+'</b>';b.onclick=()=>{off=true;setDay(i)};wk.appendChild(b)});
+function setDay(i){day=i;[...wk.children].forEach((b,k)=>b.classList.toggle('on',k===i));sum()}
+function near(cur,t){return cur+(((t-cur)%360)+360)%360}
+function setTime(H,M,P,inst){h=H;m=M;pm=P;$('hh').textContent=H;$('mm').textContent=String(M).padStart(2,'0');$('am').classList.toggle('on',!P);$('pm').classList.toggle('on',P);const th=((H%12)+M/60)*30,tm=M*6;ha=near(ha,th);ma=near(ma,tm);const a=$('hh2'),b=$('hm');if(inst){a.style.transition=b.style.transition='none'}a.style.transform='rotate('+ha+'deg)';b.style.transform='rotate('+ma+'deg)';if(inst){void a.offsetWidth;a.style.transition=b.style.transition=''}sum()}
+function sum(){const d=DAYS[day];$('sm1').textContent=d[0]+'day, '+d[1]+' November · '+h+':'+String(m).padStart(2,'0')+' '+(pm?'PM':'AM')}
+$('am').onclick=()=>{off=true;setTime(h,m,false)};$('pm').onclick=()=>{off=true;setTime(h,m,true)};
+setDay(3);setTime(2,45,true,true);document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a day strip and an analogue clock work together; a day pill lifts and turns green, then the hour and minute hands swing to a new time with a springy overshoot (taking the shortest way round), the big digital readout, the AM and PM switch and the summary line below all update, and it moves through a few different appointments, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);const seq=[[5,9,15,false],[1,11,40,false],[4,6,30,true],[3,2,45,true]];let k=0;while(!off){const[d,H,M,P]=seq[k++%4];setDay(d);await sl(500);setTime(H,M,P);await sl(2800)}})()}
+</script></body></html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Diff Release Notes Changelog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9ECF1;color:#12161F;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:680px;background:#fff;border-radius:28px;padding:26px;box-shadow:0 40px 56px -34px rgba(18,22,31,.5),inset 0 0 0 1px rgba(18,22,31,.07)}
+.hd{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}.hd small{font:500 12px 'Geist Mono';letter-spacing:.14em;color:#7C8497;text-transform:uppercase}.hd h1{font:800 56px/.95 'Bricolage Grotesque';letter-spacing:-.06em;margin-top:6px}.hd h1 span{color:#6D5DFC}
+.ch{display:flex;gap:8px}.ch div{padding:9px 13px;border-radius:14px;background:var(--bg);color:var(--t);font-size:13px;font-weight:700;text-align:center}.ch b{display:block;font:800 24px/1 'Bricolage Grotesque';letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.cm{position:relative;height:190px;border-radius:20px;overflow:hidden;background:#F2F4F8;margin-bottom:18px;user-select:none}
+.ui{position:absolute;inset:0;display:grid;place-items:center;padding:18px}.ui .pn{width:100%;max-width:420px;border-radius:16px;padding:16px 18px;display:grid;gap:10px}
+.bf{background:#E7E9EE}.bf .pn{background:#DCDFE6;box-shadow:inset 0 0 0 1px #C4C8D2}.bf h4{font:600 13px 'Geist Mono';color:#565C6B}.bf .rw{height:12px;border-radius:2px;background:#C4C8D2}.bf .bt{height:28px;border:1px solid #9096A3;background:#CFD3DB;display:grid;place-items:center;font:600 12px 'Geist Mono';color:#565C6B;width:120px}
+.af{background:linear-gradient(135deg,#EEF0FF,#F9EEFF);clip-path:inset(0 0 0 var(--x,50%))}.af .pn{background:#fff;box-shadow:0 14px 30px -12px rgba(109,93,252,.45)}.af h4{font:800 17px 'Bricolage Grotesque';letter-spacing:-.02em}.af .rw{height:12px;border-radius:6px;background:#E6E7F5}.af .rw:nth-child(3){width:68%}.af .bt{height:36px;border-radius:12px;background:linear-gradient(135deg,#6D5DFC,#C65BFF);display:grid;place-items:center;font:700 14px 'Bricolage Grotesque';color:#fff;width:132px;box-shadow:0 8px 16px -6px rgba(109,93,252,.7)}
+.dv{position:absolute;top:0;bottom:0;left:var(--x,50%);width:3px;margin-left:-1.500px;background:#fff;box-shadow:0 0 0 1px rgba(18,22,31,.15),0 0 18px rgba(109,93,252,.5);z-index:3}.dv::after{content:"⇆";position:absolute;top:50%;left:50%;width:38px;height:38px;margin:-19px;border-radius:50%;background:#12161F;color:#fff;display:grid;place-items:center;font-size:16px;box-shadow:0 6px 14px rgba(0,0,0,.35)}
+.cm small{position:absolute;top:10px;z-index:4;font:600 11px 'Geist Mono';letter-spacing:.14em;padding:3px 9px;border-radius:6px}.cm .l{left:10px;background:rgba(18,22,31,.7);color:#fff}.cm .r{right:10px;background:#6D5DFC;color:#fff}
+.nt{display:grid;gap:7px}.n{display:grid;grid-template-columns:86px 1fr;gap:12px;align-items:center;padding:9px 12px;border-radius:12px;background:#F6F7FA;font-size:14.500px;opacity:0;transform:translateX(-14px);transition:opacity .4s,transform .5s cubic-bezier(.3,1.3,.5,1)}.n.in{opacity:1;transform:none}
+.tg{font:700 11px 'Geist Mono';letter-spacing:.08em;text-align:center;padding:4px 0;border-radius:7px}.tg.a{background:#DDF7E8;color:#0A7F4D}.tg.i{background:#E5E9FF;color:#4338CA}.tg.f{background:#FFE9DD;color:#B4470F}
+@media(max-width:560px){.hd h1{font-size:42px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><div><small>Released 12 November</small><h1>v4.8<span>.0</span></h1></div><div class="ch"><div style="--bg:#DDF7E8;--t:#0A7F4D"><b id="ca">0</b>Added</div><div style="--bg:#E5E9FF;--t:#4338CA"><b id="ci">0</b>Improved</div><div style="--bg:#FFE9DD;--t:#B4470F"><b id="cf">0</b>Fixed</div></div></div>
+<div class="cm" id="cm"><small class="l">BEFORE</small><small class="r">AFTER</small><div class="ui bf"><div class="pn"><h4>Share_dialog_v2</h4><div class="rw"></div><div class="rw" style="width:60%"></div><div class="bt">SEND</div></div></div><div class="ui af"><div class="pn"><h4>Share with your team</h4><div class="rw"></div><div class="rw"></div><div class="bt">Send invite</div></div></div><div class="dv"></div></div>
+<div class="nt" id="nt"></div></div>
+<script>
+const N=[['a','ADDED','Redesigned share dialog with role-aware invites'],['a','ADDED','Keyboard shortcut sheet, press ? anywhere'],['i','IMPROVED','Search is 3× faster on workspaces over 10k items'],['i','IMPROVED','Clearer empty states across the dashboard'],['f','FIXED','Duplicate notifications after reconnecting']];
+const nt=document.getElementById('nt'),cm=document.getElementById('cm'),$=id=>document.getElementById(id),sl=ms=>new Promise(r=>setTimeout(r,ms));let off=false,x=50;
+const els=N.map(n=>{const d=document.createElement('div');d.className='n';d.innerHTML='<span class="tg '+n[0]+'">'+n[1]+'</span>'+n[2];nt.appendChild(d);return d});
+function setX(v){x=v;cm.style.setProperty('--x',v+'%')}
+function counts(k){$('ca').textContent=Math.round(6*k);$('ci').textContent=Math.round(4*k);$('cf').textContent=Math.round(3*k)}
+setX(46);counts(1);els.forEach(e=>{e.style.transition='none';e.classList.add('in')});requestAnimationFrame(()=>requestAnimationFrame(()=>els.forEach(e=>e.style.transition='')));
+function drag(e){const r=cm.getBoundingClientRect();setX(Math.max(4,Math.min(96,(e.clientX-r.left)/r.width*100)))}
+cm.addEventListener('pointerdown',e=>{off=true;cm.setPointerCapture(e.pointerId);drag(e);cm.onpointermove=drag});cm.addEventListener('pointerup',()=>{cm.onpointermove=null});
+/* Idle demo: a release-notes card where the headline counts of Added, Improved and Fixed tick up from zero, the change notes slide in one after another with colour-coded tags, and a before and after mock of the redesigned dialog is revealed by a white divider that sweeps back and forth across it, replaying every few seconds, until you drag the divider yourself. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3500);while(!off){els.forEach(e=>e.classList.remove('in'));counts(0);const t0=performance.now();let i=0;while(performance.now()-t0<2400&&!off){const k=(performance.now()-t0)/2400,ee=1-Math.pow(1-k,3);counts(ee);setX(46+40*Math.sin(k*6.28*1.1));while(i<els.length&&k>i/els.length*.8){els[i++].classList.add('in')}await sl(30)}counts(1);els.forEach(e=>e.classList.add('in'));const t1=performance.now();while(performance.now()-t1<4200&&!off){const k=(performance.now()-t1)/4200;setX(46+4*Math.sin(k*3));await sl(40)}}})()}
+</script></body></html>

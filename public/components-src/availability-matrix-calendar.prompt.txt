@@ -1,0 +1,40 @@
+ROLE
+You are a senior scheduling product designer and front-end engineer with 15+ years of experience. Build "Availability Matrix Calendar": a group scheduling grid where participants join one by one, every slot recolours by how many people are free, and the single slot that works for everyone gets an outline, pulse and Best time tag.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on pale lilac with an indigo heat scale and mono hour labels.
+- Palette: #17194A, #6E73A3, #E8EAF7, #8A8FB8, #EEF0FA, #7479A8
+- Type: Plus Jakarta Sans, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with title and avatar stack; five-day by eight-hour grid; legend scale and result line.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Cell colours transition 500ms; avatars spring in; best cell pulses 1.6s.
+
+IDLE AUTOPLAY
+- After 3.4s the poll resets and rebuilds person by person until the best time is found.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain checkbox grid; the heat scale shows overlap.
+- Highlighting more than one best slot.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

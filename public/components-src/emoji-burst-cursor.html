@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Emoji Burst Cursor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1B1233;color:#fff;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.st{position:relative;width:100%;max-width:780px;aspect-ratio:16/10;border-radius:28px;overflow:hidden;background:radial-gradient(600px 400px at 30% 20%,#4B2A8A,#241545 70%);box-shadow:0 44px 70px -34px #000,inset 0 0 0 1px rgba(255,255,255,.1);cursor:none;touch-action:none}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.tx{position:absolute;left:7%;top:10%;pointer-events:none}.tx small{display:block;font:500 12px 'DM Mono';letter-spacing:.2em;color:#C9B8FF;text-transform:uppercase;margin-bottom:8px}.tx h1{font:800 58px/.95 'Outfit';letter-spacing:-.05em}
+.ct{position:absolute;right:20px;bottom:18px;padding:9px 16px;border-radius:99px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);font:700 14px 'Outfit';display:flex;gap:8px;align-items:center}.ct b{font-variant-numeric:tabular-nums;min-width:2ch;text-align:right}
+.cu{position:absolute;left:0;top:0;width:44px;height:44px;margin:-8px 0 0 -8px;font-size:34px;line-height:44px;text-align:center;pointer-events:none;will-change:transform;filter:drop-shadow(0 6px 8px rgba(0,0,0,.4));transition:transform .08s}
+.cu.pr{animation:pr .35s}@keyframes pr{40%{scale:.7}}
+</style></head><body>
+<div class="st" id="st"><canvas id="cv"></canvas><div class="tx"><small>Click anywhere</small><h1>Spread a<br>little joy.</h1></div><div class="ct"><span>Reactions</span><b id="ct">0</b></div><div class="cu" id="cu">👆</div></div>
+<script>
+const st=document.getElementById('st'),cv=document.getElementById('cv'),cx=cv.getContext('2d'),cu=document.getElementById('cu');let W,H,dpr=Math.min(2,devicePixelRatio||1),off=false,mx=.6,my=.55,P=[],n=0;
+function size(){const r=st.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);cx.textAlign='center';cx.textBaseline='middle'}size();addEventListener('resize',size);
+const EM=['🎉','✨','💜','🔥','🌟','🎈','🥳','⚡'];
+function burst(x,y,k){for(let i=0;i<k;i++){const a=-Math.PI/2+(Math.random()-.5)*2.400,v=5+Math.random()*9;P.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,r:(Math.random()-.5)*.3,vr:(Math.random()-.5)*.25,s:20+Math.random()*26,e:EM[Math.floor(Math.random()*EM.length)],l:1})}n+=k;document.getElementById('ct').textContent=n;cu.classList.remove('pr');void cu.offsetWidth;cu.classList.add('pr')}
+function frame(){cx.clearRect(0,0,W,H);for(let i=P.length-1;i>=0;i--){const p=P[i];p.vy+=.24;p.x+=p.vx;p.y+=p.vy;p.vx*=.992;p.r+=p.vr;p.l-=.0042;if(p.l<=0||p.y>H+40){P.splice(i,1);continue}cx.save();cx.globalAlpha=Math.min(1,p.l*2);cx.translate(p.x,p.y);cx.rotate(p.r);cx.font=p.s+'px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';cx.fillText(p.e,0,0);cx.restore()}cu.style.transform='translate('+(mx*W)+'px,'+(my*H)+'px)';requestAnimationFrame(frame)}
+st.addEventListener('pointermove',e=>{off=true;const r=st.getBoundingClientRect();mx=(e.clientX-r.left)/r.width;my=(e.clientY-r.top)/r.height;cu.textContent='👆'});
+st.addEventListener('pointerdown',e=>{off=true;const r=st.getBoundingClientRect();burst(e.clientX-r.left,e.clientY-r.top,26)});
+requestAnimationFrame(frame);setTimeout(()=>{if(!off)burst(W*.55,H*.66,26)},1000);setTimeout(()=>{if(!off)burst(W*.3,H*.72,22)},2300);
+/* Idle demo: a pointing-hand cursor drifts around a purple stage and every second or so taps; each tap fires twenty-odd emoji (confetti, sparkles, hearts, flames, balloons) up and outward in a fan with random size and spin, they arc under gravity, tumble and fade, and a reaction counter in the corner tallies every one, until you click or move your own pointer. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));await sl(3000);const pts=[[.25,.7],[.7,.5],[.45,.82],[.8,.75],[.3,.45],[.62,.68]];let k=0;while(!off){const p=pts[k++%pts.length];mx=p[0];my=p[1];await sl(750);if(off)return;burst(W*p[0],H*p[1],22);await sl(900)}})()}
+</script></body></html>

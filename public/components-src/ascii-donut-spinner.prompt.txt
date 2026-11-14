@@ -1,0 +1,40 @@
+ROLE
+You are a senior creative coder and front-end engineer with 15+ years of experience. Build "ASCII Donut Spinner": the classic rotating ASCII torus rendered live in a green phosphor terminal, with a side panel showing both rotation angles, the luminance ramp and the point count.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: CRT-green on black with scanlines and a terminal prompt.
+- Palette: #7CFF9B, #17331E, #4E9F66, #050805, #0A0F0B, #0F1811
+- Type: IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Terminal bar with fps; 80x22 character pre; side readouts; command line with caret.
+
+INTERACTION & STATES
+- Click toggles pause.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Torus rotated on two axes at about 30fps, z-buffered and shaded through a twelve-step ramp.
+
+IDLE AUTOPLAY
+- Spins continuously from load.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A pre-rendered animation; the maths must run live.
+- Colour per character; keep the mono green.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

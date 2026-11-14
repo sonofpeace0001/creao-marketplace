@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Magazine Cover Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9E4DA;color:#161411;font-family:'Karla',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.mg{width:100%;max-width:780px;background:#F7F3EA;border-radius:6px;padding:20px 22px 22px;box-shadow:0 40px 56px -34px rgba(22,20,17,.55),0 0 0 1px rgba(22,20,17,.12)}
+.mh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px double #161411;padding-bottom:8px;margin-bottom:14px}.mh h1{font:800 30px 'Playfair Display',serif;letter-spacing:-.02em;font-style:italic}.mh span{font:600 11px 'Karla';letter-spacing:.2em;text-transform:uppercase;color:#7A7367}
+.gr{display:grid;grid-template-columns:1.45fr 1fr;gap:20px}
+.hero{position:relative;height:330px;overflow:hidden;background:#161411;color:#fff}
+.hero .im{position:absolute;inset:0}.hero svg{width:100%;height:100%;display:block;transform:scale(1.1)}.an .hero svg{animation:kb 9s ease-in-out infinite alternate}@keyframes kb{to{transform:scale(1.2) translate(-3%,-2%)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(10,8,6,.88))}
+.hero .tx{position:absolute;left:20px;right:20px;bottom:18px;z-index:2}
+.hero .ct{display:inline-block;font:700 11px 'Karla';letter-spacing:.2em;text-transform:uppercase;background:#E5422B;padding:4px 10px;margin-bottom:10px}
+.hero h2{font:800 31px/1.05 'Playfair Display',serif;letter-spacing:-.02em;margin-bottom:10px}.hero h2 span{display:inline-block;opacity:0;transform:translateY(14px);animation:wr .6s cubic-bezier(.3,1.2,.5,1) forwards}@keyframes wr{to{opacity:1;transform:none}}
+.hero .by{font-size:13px;color:rgba(255,255,255,.8)}
+.cv{position:absolute;inset:0;background:#161411;z-index:3;transform:translateY(100%);pointer-events:none}.cv.sw{animation:sw .9s cubic-bezier(.7,0,.2,1)}@keyframes sw{0%{transform:translateY(100%)}45%,55%{transform:none}100%{transform:translateY(-100%)}}
+.lt{display:grid;gap:0;align-content:start}
+.st{position:relative;padding:14px 12px 14px 44px;border-bottom:1px solid #D8D1C2;cursor:pointer;transition:background .3s}.st:last-child{border-bottom:0}.st:hover,.st.on{background:#EFE9DB}
+.st i{position:absolute;left:10px;top:12px;font:800 24px 'Playfair Display',serif;font-style:italic;color:#C9BFAA;transition:color .3s}.st.on i{color:#E5422B}
+.st small{display:block;font:700 10.500px 'Karla';letter-spacing:.18em;text-transform:uppercase;color:#E5422B;margin-bottom:4px}.st b{display:block;font:700 17px/1.2 'Playfair Display',serif;letter-spacing:-.01em;margin-bottom:5px}.st span{font-size:12.500px;color:#7A7367}
+.st::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:0;background:#E5422B}.st.on::after{animation:pg 3.600s linear forwards}@keyframes pg{to{width:100%}}
+@media(max-width:640px){.gr{grid-template-columns:1fr}.hero{height:260px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.hero h2 span{opacity:1;transform:none}}
+</style></head><body>
+<div class="mg"><div class="mh"><h1>The Meridian</h1><span>Issue 118 · November</span></div>
+<div class="gr"><div class="hero" id="hero"><div class="im" id="im"></div><div class="tx"><span class="ct" id="ct"></span><h2 id="h2"></h2><div class="by" id="by"></div></div><div class="cv" id="cv"></div></div><div class="lt" id="lt"></div></div></div>
+<script>
+function scene(s){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};const P=[['#1B2A6B','#E85D75','#FFB86B'],['#0B3B3C','#2FA58B','#F4E285'],['#3A1C5B','#C4478D','#FF9E7A'],['#10243A','#3D7BA8','#F2D8A7']][Math.floor(r(4))];let h='<svg viewBox="0 0 400 330" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g'+Math.floor(s)+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+P[0]+'"/><stop offset=".55" stop-color="'+P[1]+'"/><stop offset="1" stop-color="'+P[2]+'"/></linearGradient></defs><rect width="400" height="330" fill="url(#g'+Math.floor(s)+')"/><circle cx="'+(80+r(240))+'" cy="'+(80+r(60))+'" r="'+(26+r(18))+'" fill="#FFF3D1" opacity=".95"/>';
+ for(let l=0;l<4;l++){let d='M0 330 L0 '+(190+l*28);const a=22+r(26),f=.01+r(.02),ph=r(6);for(let x=0;x<=400;x+=8)d+=' L'+x+' '+(190+l*28-a*Math.abs(Math.sin(x*f+ph))-a*.4*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L400 330Z';h+='<path d="'+d+'" fill="#0C0A14" opacity="'+(.22+l*.24)+'"/>'}return h+'</svg>'}
+const S=[['Travel','The last night train across the Alps','Words by Marta Lind · 12 min read',7],['Design','Why every interface is learning to slow down','Words by Theo Okafor · 8 min read',22],['Food','A year inside the Lisbon bakery that never closes','Words by Ana Reyes · 15 min read',31]];
+const lt=document.getElementById('lt'),$=id=>document.getElementById(id),sl=ms=>new Promise(r=>setTimeout(r,ms));let cur=0,off=false;const els=[];
+S.forEach((s,i)=>{const d=document.createElement('div');d.className='st';d.innerHTML='<i>'+(i+1)+'</i><small>'+s[0]+'</small><b>'+s[1]+'</b><span>'+s[2].split(' · ')[1]+'</span>';d.onclick=()=>{off=true;go(i)};lt.appendChild(d);els.push(d)});
+function words(t,delay){return t.split(' ').map((w,i)=>'<span style="animation-delay:'+(delay+i*.07)+'s">'+w+'&nbsp;</span>').join('')}
+function show(i,delay){const s=S[i];$('im').innerHTML=scene(s[3]);$('ct').textContent=s[0];$('h2').innerHTML=words(s[1],delay);$('by').textContent=s[2];els.forEach((e,k)=>{e.classList.remove('on');void e.offsetWidth;e.classList.toggle('on',k===i)});cur=i}
+async function go(i){const cv=$('cv');cv.classList.remove('sw');void cv.offsetWidth;cv.classList.add('sw');await sl(430);show(i,0)}
+show(0,-9);document.querySelectorAll('#h2 span').forEach(s=>{s.style.animation='none';s.style.opacity=1;s.style.transform='none'});requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('an')));
+/* Idle demo: the cover story slowly zooms (Ken Burns) while a red progress line runs along the highlighted story in the list; every few seconds a black curtain wipes up over the cover and the next story's illustration, category tag and headline reveal word by word, then the list highlight moves down, until you click a story. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3600);while(!off){await go((cur+1)%S.length);await sl(3600)}})()}
+</script></body></html>

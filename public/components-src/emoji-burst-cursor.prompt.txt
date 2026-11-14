@@ -1,0 +1,40 @@
+ROLE
+You are a senior interactive designer and front-end engineer with 15+ years of experience. Build "Emoji Burst Cursor": a pointing-hand cursor taps around a purple stage and each tap fires emoji up and outward in a fan with random size and spin, arcing under gravity and fading, with a reaction counter tallying them all.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep purple stage with bright emoji and a glassy counter pill.
+- Palette: #1B1233, #4B2A8A, #241545, #C9B8FF
+- Type: Outfit, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Canvas of emoji particles; headline; counter pill; hand cursor.
+
+INTERACTION & STATES
+- Click anywhere to burst.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Particles with velocity, gravity 0.24, spin and fade; cursor squashes on tap.
+
+IDLE AUTOPLAY
+- After 3s the hand taps every 1.6s at new spots.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A single repeating emoji.
+- Particles with no physics.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

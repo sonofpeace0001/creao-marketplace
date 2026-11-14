@@ -1,0 +1,40 @@
+ROLE
+You are a senior conversational commerce designer and front-end engineer with 15+ years of experience. Build "Quick Reply Flow Chat": a shopping assistant chat that plays itself: typing dots precede each bot message, quick-reply chips pop in and the chosen one becomes the user bubble, then a product carousel appears and an Add button turns green.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Purple gift concierge with white bubbles on a lilac wash.
+- Palette: #7C3AED, #EEE9FA, #E8E3F4, #241B3D, #C026D3, #34D399
+- Type: Nunito (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with presence; message list; quick reply chips; product cards; composer.
+
+INTERACTION & STATES
+- Tap the chat to stop.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Bubbles spring in 450ms; typing dots bounce; chips stagger; button press and state change.
+
+IDLE AUTOPLAY
+- After 3.4s the flow completes with a gift-wrap offer, then restarts.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Instant messages without typing indicators.
+- Chips that do not turn into the user's message.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

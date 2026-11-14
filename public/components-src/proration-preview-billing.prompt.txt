@@ -1,0 +1,40 @@
+ROLE
+You are a senior billing product designer and front-end engineer with 15+ years of experience. Build "Proration Preview Billing": a plan-change preview that recomputes live: switch plan or seats and see the credit for unused time, the prorated charge, tax and a rolling due-today total, with a billing-cycle bar that re-balances.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Crisp white card on a pale lilac page with indigo accents and mono figures.
+- Palette: #14183A, #6B7194, #5B5BFF, #EEF0F8, #8A90B0, #ECEEF6
+- Type: Plus Jakarta Sans, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; three-plan segmented control with sliding thumb; seat stepper; cycle bar with today marker; proration lines; due-today total; next-invoice note; confirm button.
+
+INTERACTION & STATES
+- Pick a plan, step seats up or down; every number and the button label update.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Thumb springs 450ms; total eases to its new value; cycle segments animate width 600ms.
+
+IDLE AUTOPLAY
+- After 3.6s the plan and seat count cycle through five scenarios every 2.3s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static price table; the proration maths is the point.
+- Totals that jump without easing.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

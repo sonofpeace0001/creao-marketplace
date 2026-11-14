@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Agent Token Budget</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080A10;color:#E8ECF8;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:620px;border-radius:26px;background:#0F1220;padding:24px;box-shadow:0 40px 60px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08)}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}.hd small{font:500 11.500px 'Geist Mono';letter-spacing:.14em;color:#7C86A8;text-transform:uppercase;display:block;margin-bottom:6px}.hd h1{font-size:18px;font-weight:700;letter-spacing:-.02em}
+.cs{text-align:right}.cs b{display:block;font:700 26px/1 'Sora';letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:#34D399}.cs span{font:500 11.500px 'Geist Mono';color:#7C86A8}
+.nm{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}.nm b{font:800 44px/1 'Sora';letter-spacing:-.05em;font-variant-numeric:tabular-nums}.nm span{font:500 14px 'Geist Mono';color:#7C86A8}.nm em{margin-left:auto;font:600 12px 'Geist Mono';font-style:normal;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.06);color:#B8C0DA;transition:all .3s}.nm em.hot{background:rgba(251,146,60,.18);color:#FDBA74}.nm em.cmp{background:rgba(167,139,250,.2);color:#C4B5FD}
+.bar{position:relative;height:46px;border-radius:14px;background:#0A0C16;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);overflow:hidden;display:flex}
+.sg{height:100%;width:var(--w,0%);background:var(--c);position:relative;transition:width .12s linear,background .6s}.sg+.sg{box-shadow:-2px 0 0 #0A0C16}
+.sg.sm{background:repeating-linear-gradient(135deg,#8B5CF6 0 6px,#7C3AED 6px 12px)}
+.ln{position:absolute;top:0;bottom:0;width:2px;background:#FB7185;opacity:.8;left:90%}.ln::after{content:"90%";position:absolute;top:-17px;left:-12px;font:500 10px 'Geist Mono';color:#FB7185}
+.lc{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}.lc div{display:flex;align-items:center;gap:7px;font:500 11.500px 'Geist Mono';color:#9AA3C0}.lc i{width:9px;height:9px;border-radius:3px;background:var(--c)}.lc b{display:block;color:#fff;font-weight:600}
+.sp{margin-top:18px;height:70px;position:relative}.sp svg{width:100%;height:100%;overflow:visible}.sp path.l{fill:none;stroke:#818CF8;stroke-width:2;stroke-linejoin:round}.sp path.a{fill:url(#sg);stroke:none}
+.sp span{position:absolute;right:0;top:-4px;font:600 12px 'Geist Mono';color:#818CF8}
+.tp{margin-top:6px;font:500 11.500px 'Geist Mono';color:#6A7396}
+.fl{position:absolute;inset:0;border-radius:14px;background:radial-gradient(circle,rgba(167,139,250,.55),transparent 70%);opacity:0;pointer-events:none}.fl.on{animation:fl 1.1s}@keyframes fl{20%{opacity:1}100%{opacity:0}}
+@media(max-width:560px){.lc{grid-template-columns:repeat(3,1fr)}}
+</style></head><body>
+<div class="cd"><div class="hd"><div><small>Context window · 200k</small><h1>Research agent run</h1></div><div class="cs"><b id="co">$0.00</b><span>spent this run</span></div></div>
+<div class="nm"><b id="nm">0</b><span>/ 200,000 tokens</span><em id="em">STREAMING</em></div>
+<div class="bar" id="bar"><i class="ln"></i><i class="fl" id="fl"></i></div>
+<div class="lc" id="lc"></div>
+<div class="sp"><svg viewBox="0 0 400 70" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#818CF8" stop-opacity=".35"/><stop offset="1" stop-color="#818CF8" stop-opacity="0"/></linearGradient></defs><path class="a" id="pa"/><path class="l" id="pl"/></svg><span id="ts">0 tok/s</span></div><div class="tp">Throughput, last 40 seconds</div></div>
+<script>
+const SEG=[['System','#6366F1',3800],['Tools','#22D3EE',9200],['Memory','#34D399',6400],['Conversation','#F59E0B',28000],['Output','#F472B6',9000]];
+const bar=document.getElementById('bar'),lc=document.getElementById('lc'),em=document.getElementById('em'),fl=document.getElementById('fl');const sg=[],val=SEG.map(s=>s[2]);let cost=0,hist=Array.from({length:60},(_,i)=>46+Math.sin(i/3.2)*18+Math.sin(i*1.7)*7),off=false,compact=false,sm=null;
+SEG.forEach((s,i)=>{const d=document.createElement('div');d.className='sg';d.style.setProperty('--c',s[1]);bar.insertBefore(d,bar.querySelector('.ln'));sg.push(d);const l=document.createElement('div');l.innerHTML='<i style="--c:'+s[1]+'"></i><div>'+s[0]+'<b></b></div>';lc.appendChild(l)});
+function paint(){const tot=val.reduce((a,b)=>a+b,0)+(sm||0);sg.forEach((d,i)=>d.style.setProperty('--w',(val[i]/200000*100)+'%'));if(sm!==null){if(!bar.querySelector('.smx')){const x=document.createElement('div');x.className='sg sm smx';bar.insertBefore(x,bar.querySelector('.ln'))}bar.querySelector('.smx').style.setProperty('--w',(sm/200000*100)+'%')}else{const x=bar.querySelector('.smx');if(x)x.remove()}
+ [...lc.children].forEach((c,i)=>c.querySelector('b').textContent=Math.round(val[i]/1000*10)/10+'k');document.getElementById('nm').textContent=Math.round(tot).toLocaleString('en-US');document.getElementById('co').textContent='$'+cost.toFixed(2);
+ const pct=tot/200000;em.textContent=compact?'COMPACTING':pct>.8?'NEAR LIMIT':'STREAMING';em.className=compact?'cmp':pct>.8?'hot':''}
+function spark(){const W=400,H=70,mx=Math.max(...hist,60);const pts=hist.map((v,i)=>[i/(hist.length-1)*W,H-6-(v/mx)*(H-14)]);const d='M'+pts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L');document.getElementById('pl').setAttribute('d',d);document.getElementById('pa').setAttribute('d',d+' L'+W+' '+H+' L0 '+H+'Z');document.getElementById('ts').textContent=Math.round(hist[hist.length-1])+' tok/s'}
+paint();spark();cost=0.34;val[3]=64000;val[4]=21000;val[2]=14400;val[1]=14200;paint();
+/* Idle demo: the context bar fills as the agent works, with Conversation and Output segments growing, throughput charting beside a rising dollar cost; at the 90 percent line the bar flashes violet and the conversation segment compacts into a small striped summary block, freeing most of the window, then it fills again, until you hover the bar. */
+bar.addEventListener('pointerenter',()=>{off=true});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0,sleepT=0;requestAnimationFrame(function lp(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;if(!off&&!compact&&n>3200){const r=900+Math.random()*1100;val[3]+=r*dt*5;val[4]+=r*dt*2.2;val[2]+=r*dt*.6;val[1]+=r*dt*.7;cost+=r*dt*.0028;hist.push(r/9+Math.random()*10);hist.shift();spark();const tot=val.reduce((a,b)=>a+b,0);if(tot>=180000){compact=true;fl.classList.add('on');setTimeout(()=>{sm=8200;val[3]=0;val[4]=3000;val[2]=val[2]*.4;val[1]=val[1]*.7;cost+=.04;paint();setTimeout(()=>{val[3]=sm;sm=null;val[3]=8200;compact=false;fl.classList.remove('on');paint()},1600)},500)}}paint();requestAnimationFrame(lp)})}
+</script></body></html>

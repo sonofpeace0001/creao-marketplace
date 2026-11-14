@@ -1,0 +1,40 @@
+ROLE
+You are a senior game UI designer and front-end engineer with 15+ years of experience. Build "HUD Chamfer Border": sci-fi interface panels with chamfered corners, a glowing light circling each border, corner brackets and a pulsing LOW tag, plus a radar sweep and segment bars that drift with their readouts.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black grid backdrop with cyan, green and red glowing instruments.
+- Palette: #27E1FF, #5A8B97, #FF4D6D, #04080C, #CFF6FF, #6EA3B0
+- Type: Rajdhani, Share Tech Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Sector scan panel with radar; shield and thruster panels with large readouts and segment bars; SVG chamfer borders.
+
+INTERACTION & STATES
+- Hover pauses the values.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Dash segment loops around the border in 6s; radar rotates 4s; values follow slow sine drifts.
+
+IDLE AUTOPLAY
+- Border light, radar and readouts animate from load.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Rounded corners; the chamfer is the identity.
+- Flat borders with no moving light.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

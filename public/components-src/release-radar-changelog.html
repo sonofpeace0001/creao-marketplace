@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Release Radar Changelog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EAF0EE;color:#10201C;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:700px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 40px 56px -34px rgba(16,32,28,.5),inset 0 0 0 1px rgba(16,32,28,.07);display:grid;grid-template-columns:300px 1fr;gap:22px;align-items:center}
+.rd{position:relative;width:300px;height:300px}.rd svg{width:100%;height:100%;overflow:visible}
+.rg{fill:none;stroke:#D5E3DE;stroke-width:1.500}.rg.f{fill:rgba(15,138,95,.05)}.ax{stroke:#E1ECE8;stroke-width:1}.lb{fill:#7FA096;font:600 9.500px 'Fira Code';letter-spacing:.18em}
+.sw{transform-origin:150px 150px;animation:sw 6s linear infinite}@keyframes sw{to{transform:rotate(360deg)}}
+.ft{transition:transform 1.100s cubic-bezier(.4,0,.2,1)}.ft circle{fill:var(--c);transition:fill .5s}.ft .ph{fill:none;stroke:var(--c);stroke-width:2;transform-box:fill-box;transform-origin:center;opacity:0}.ft.pg .ph{animation:ph 1.200s ease-out}@keyframes ph{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(3.600)}}
+.ft text{font:700 10.500px 'Hanken Grotesk';fill:#10201C;paint-order:stroke;stroke:#fff;stroke-width:3.500px}
+.ls h1{font-size:21px;font-weight:800;letter-spacing:-.03em}.ls p{font-size:13.500px;color:#6B8680;margin:2px 0 14px}
+.gp{margin-bottom:12px}.gp h4{display:flex;align-items:center;gap:8px;font:600 11px 'Fira Code';letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-bottom:6px}.gp h4 i{width:8px;height:8px;border-radius:50%;background:var(--c)}.gp h4 b{margin-left:auto;color:#8DA79F;font-weight:500}
+.it{display:flex;align-items:center;gap:10px;padding:7px 11px;border-radius:11px;background:#F3F7F5;font-size:14px;font-weight:600;margin-bottom:4px;animation:in .6s cubic-bezier(.3,1.4,.5,1)}@keyframes in{from{opacity:0;transform:translateX(-14px)}}.it span{margin-left:auto;font:500 11px 'Fira Code';color:#7FA096}
+.it.fl{background:color-mix(in srgb,var(--c) 18%,#fff)}
+@media(max-width:640px){.cd{grid-template-columns:1fr;justify-items:center}.ls{width:100%}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="rd"><svg viewBox="0 0 300 300"><circle class="rg f" cx="150" cy="150" r="140"/><circle class="rg" cx="150" cy="150" r="96"/><circle class="rg" cx="150" cy="150" r="52"/><path class="ax" d="M150 10v280M10 150h280"/><text class="lb" x="150" y="108" text-anchor="middle">NOW</text><text class="lb" x="150" y="62" text-anchor="middle">NEXT</text><text class="lb" x="150" y="20" text-anchor="middle">LATER</text><g class="sw"><path d="M150 150L150 10A140 140 0 0 1 249 51z" fill="rgba(15,138,95,.16)"/><path d="M150 150L150 10" stroke="#0F8A5F" stroke-width="2"/></g><g id="fts"></g></svg></div>
+<div class="ls"><h1>Release radar</h1><p>Features move inward as they get closer to shipping.</p><div id="ls"></div></div></div>
+<script>
+const F=[['Dark mode',0,'#0F8A5F',40],['Team inbox',1,'#2563EB',110],['Public API',2,'#9333EA',175],['Offline sync',2,'#EA580C',225],['AI summaries',1,'#DB2777',285],['SSO login',0,'#0891B2',335],['Webhooks',2,'#CA8A04',70]];
+const R=[52*.5+8,96*.5+26,118],ST=['Now','Next','Later'],COL=['#0F8A5F','#2563EB','#9333EA'];const NS='http://www.w3.org/2000/svg',fts=document.getElementById('fts'),$=id=>document.getElementById(id),sl=ms=>new Promise(r=>setTimeout(r,ms));let off=false;
+const RR=[24,74,118];const els=F.map(f=>{const g=document.createElementNS(NS,'g');g.setAttribute('class','ft');g.style.setProperty('--c',f[2]);g.innerHTML='<circle r="6.500" cx="0" cy="0"/><circle class="ph" r="6.500" cx="0" cy="0"/><text x="10" y="3.500">'+f[0]+'</text>';fts.appendChild(g);return g});
+function pos(i){const f=F[i],a=(f[3]-90)*Math.PI/180,r=RR[f[1]];return [150+Math.cos(a)*r,150+Math.sin(a)*r]}
+function layout(){F.forEach((f,i)=>{const[x,y]=pos(i);els[i].style.transform='translate('+x+'px,'+y+'px)';els[i].querySelector('text').setAttribute('text-anchor',x>150?'start':'end');els[i].querySelector('text').setAttribute('x',x>150?10:-10)});list()}
+let flash=-1;function list(){$('ls').innerHTML=[0,1,2].map(s=>{const m=F.map((f,i)=>[f,i]).filter(([f])=>f[1]===s);return '<div class="gp" style="--c:'+COL[s]+'"><h4><i></i>'+(s===0?'Shipping now':s===1?'Up next':'Later')+'<b>'+m.length+'</b></h4>'+m.map(([f,i])=>'<div class="it'+(i===flash?' fl':'')+'" style="--c:'+f[2]+'"><i style="width:8px;height:8px;border-radius:50%;background:'+f[2]+'"></i>'+f[0]+'<span>'+(s===0?'v4.9':s===1?'Q1':'2027')+'</span></div>').join('')+'</div>'}).join('')}
+els.forEach(e=>e.style.transition='none');layout();requestAnimationFrame(()=>requestAnimationFrame(()=>els.forEach(e=>e.style.transition='')));
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a radar of three concentric rings (Later, Next, Now) shows upcoming features as coloured dots with labels while a green sweep rotates; every couple of seconds one feature advances a ring inwards, gliding across the radar with a pulse ring, and the grouped list beside it re-sorts with the moved item flashing in its colour, and once everything has shipped the radar resets, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);const plan=[2,3,6,1,4,2,3,6,4,1];let k=0;while(!off){let moved=false;for(const i of [...plan.slice(k%plan.length),...plan]){if(F[i][1]>0){F[i][1]--;flash=i;els[i].classList.remove('pg');void els[i].getBoundingClientRect();els[i].classList.add('pg');layout();moved=true;break}}k++;if(!moved){await sl(2200);F.forEach((f,i)=>{f[1]=[0,1,2,2,1,0,2][i]});flash=-1;layout()}await sl(2400)}})()}
+</script></body></html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Logo Grid Quote Morph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDEAF4;color:#1B1535;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:700px;background:#fff;border-radius:30px;padding:24px;box-shadow:0 40px 56px -34px rgba(27,21,53,.5),inset 0 0 0 1px rgba(27,21,53,.07)}
+.hd{text-align:center;margin-bottom:18px}.hd small{font-size:12px;font-weight:700;letter-spacing:.2em;color:#8A82AE;text-transform:uppercase}
+.gd{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.rg{position:absolute;left:0;top:0;border-radius:18px;box-shadow:0 0 0 2.500px var(--c,#6D4DFF),0 16px 28px -10px var(--c,#6D4DFF);background:#fff;transition:transform .6s cubic-bezier(.3,1.3,.4,1),width .3s,height .3s,box-shadow .4s;z-index:0}
+.lg{position:relative;z-index:1;height:74px;border:0;border-radius:18px;background:#F6F4FB;display:grid;place-items:center;cursor:pointer;transition:background .3s,transform .4s cubic-bezier(.3,1.6,.5,1);filter:grayscale(1);opacity:.7}
+.lg.on{background:transparent;filter:none;opacity:1;transform:scale(1.04)}.lg:focus-visible{outline:2px solid #6D4DFF}
+.lg span{display:flex;align-items:center;gap:8px;font:800 17px 'Plus Jakarta Sans';letter-spacing:-.04em;color:var(--c)}.lg span i{width:20px;height:20px;border-radius:var(--r);background:var(--c);display:block;position:relative}.lg span i::after{content:"";position:absolute;inset:5px;border-radius:50%;background:#F6F4FB}.lg.on span i::after{background:#fff}
+.qd{position:relative;margin-top:16px;border-radius:22px;padding:24px 26px;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 60%,#000));color:#fff;overflow:hidden;min-height:170px;transition:background .6s}
+.qd::before{content:"“";position:absolute;right:20px;top:-30px;font:600 190px/1 'Fraunces',serif;color:rgba(255,255,255,.14)}
+.qd p{position:relative;font:500 23px/1.3 'Fraunces',serif;letter-spacing:-.01em;max-width:480px;margin-bottom:18px;transition:opacity .35s,transform .45s}.qd.sw p,.qd.sw .by{opacity:0;transform:translateY(10px)}
+.by{position:relative;display:flex;align-items:center;gap:12px;transition:opacity .35s,transform .45s}.by u{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;font-weight:800;text-decoration:none}.by b{display:block;font-size:14.500px}.by span{font-size:12.500px;opacity:.82}
+.mt{position:absolute;right:24px;bottom:22px;text-align:right}.mt b{display:block;font:800 40px/1 'Plus Jakarta Sans';letter-spacing:-.05em;font-variant-numeric:tabular-nums}.mt span{font-size:12px;font-weight:600;opacity:.82}
+@media(max-width:560px){.gd{grid-template-columns:repeat(3,1fr)}.mt{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><small>Trusted by 1,200+ teams</small></div><div class="gd" id="gd"><i class="rg" id="rg"></i></div>
+<div class="qd" id="qd"><p id="qt"></p><div class="by"><u id="qa"></u><div><b id="qn"></b><span id="qr"></span></div></div><div class="mt"><b id="mv"></b><span id="ml"></span></div></div></div>
+<script>
+const L=[['Northwind','#4338CA','6px',"We cut onboarding from three weeks to four days.",'Marta Lind','VP Growth','4 days','to onboard'],['Lumen','#0284C7','50%',"The first tool our finance team asked to keep.",'Sam Ortega','CFO','98%','team adoption'],['Halcyon','#EA580C','6px',"Support volume dropped by half in a quarter.",'Dev Anand','Head of CX','−51%','tickets'],['Orbit','#7C3AED','50%',"It paid for itself before the trial ended.",'Hana Sato','COO','12 days','to payback'],['Verve','#DB2777','6px',"Our designers and engineers finally share a language.",'Theo Okafor','Design Lead','3.2×','faster handoff'],['Atlas','#059669','50%',"We shipped the whole redesign in one sprint.",'Ines Rocha','CTO','1 sprint','to ship'],['Fable','#D97706','6px',"The best developer experience I have used in years.",'Leo Park','Staff Engineer','9.4/10','dev score'],['Nimbus','#0D9488','50%',"Everyone on the team uses it every single day.",'Mara Lindqvist','Product Director','100%','weekly active'],['Quill','#BE123C','6px',"Procurement approved it in two days. A record.",'Sofia Reyes','Head of Ops','2 days','to approve'],['Zenith','#2563EB','50%',"We stopped losing handoffs between teams.",'Kai Tanaka','Eng Manager','−64%','rework'],['Kinetic','#0F766E','6px',"Daily releases became boring, which is the point.",'Ana Cruz','VP Eng','Daily','releases'],['Fathom','#9333EA','50%',"Reporting that used to take Fridays is now instant.",'Ravi Nair','Analytics Lead','−6 h','weekly']];
+const gd=document.getElementById('gd'),rg=document.getElementById('rg'),$=id=>document.getElementById(id),sl=t=>new Promise(r=>setTimeout(r,t));const tiles=[];let cur=2,off=false;
+L.forEach((l,i)=>{const b=document.createElement('button');b.className='lg';b.style.cssText='--c:'+l[1]+';--r:'+l[2];b.innerHTML='<span><i></i>'+l[0]+'</span>';b.onclick=()=>{off=true;sel(i)};gd.appendChild(b);tiles.push(b)});
+function sel(i,inst){cur=i;const l=L[i];tiles.forEach((t,k)=>t.classList.toggle('on',k===i));const t=tiles[i],g=gd.getBoundingClientRect(),r=t.getBoundingClientRect();rg.style.setProperty('--c',l[1]);rg.style.width=r.width+'px';rg.style.height=r.height+'px';if(inst)rg.style.transition='none';rg.style.transform='translate('+(r.left-g.left)+'px,'+(r.top-g.top)+'px)';if(inst){void rg.offsetWidth;rg.style.transition=''}
+ const qd=$('qd');const fill=()=>{$('qt').textContent='“'+l[3]+'”';$('qn').textContent=l[4];$('qr').textContent=l[5]+', '+l[0];$('qa').textContent=l[4][0];$('mv').textContent=l[6];$('ml').textContent=l[7];qd.style.setProperty('--c',l[1]);qd.classList.remove('sw')};if(inst){fill()}else{qd.classList.add('sw');setTimeout(fill,320)}}
+sel(2,true);addEventListener('resize',()=>sel(cur,true));document.fonts.ready.then(()=>sel(cur,true));
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: twelve client wordmarks sit greyed out in a grid while one is active; a coloured ring with a glow springs from logo to logo, the active wordmark gains its brand colour and lifts slightly, and the testimonial card below recolours to match, fades its serif quote and name out and in, and swaps the headline metric, cycling through the clients, until you click a logo. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);const seq=[7,0,5,10,3,8,1,11,4,9,6,2];let k=0;while(!off){sel(seq[k++%seq.length]);await sl(2800)}})()}
+</script></body></html>

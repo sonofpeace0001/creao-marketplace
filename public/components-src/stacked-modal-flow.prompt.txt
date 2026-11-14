@@ -1,0 +1,40 @@
+ROLE
+You are a senior product designer and front-end engineer with 15+ years of experience. Build "Stacked Modal Flow": three modals stack in depth instead of replacing each other: the invite step recedes behind the role picker with a scale-down, lift and dimming, then both recede behind a success modal, and Done dismisses the stack.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Pale page behind a blurred scrim with crisp white cards and violet accents.
+- Palette: #6D4DFF, #161A3C, #F3F0FF, #E7E9F4, #F7F8FD, #DDE0F0
+- Type: Manrope (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Blurred page; scrim; three modals with chips, radio rows and success; progress dots.
+
+INTERACTION & STATES
+- Continue, Send invites and Done advance the stack.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Transforms 700ms spring; back cards at 0.94 and 0.88 with dimming; check springs in.
+
+IDLE AUTOPLAY
+- After 3.4s the flow advances, closes and restarts with chips typed one by one.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Replacing the modal content abruptly.
+- Back cards with no depth cue.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

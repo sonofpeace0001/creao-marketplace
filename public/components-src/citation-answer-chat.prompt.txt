@@ -1,0 +1,40 @@
+ROLE
+You are a senior AI search product designer and front-end engineer with 15+ years of experience. Build "Citation Answer Chat": a sourced AI answer where numbered citation chips pop in turn, the sentence each supports glows blue and the matching source card lifts out of the row with a relevance meter.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cool grey page, white card, serif answer text and cobalt citation accents.
+- Palette: #2563EB, #6A7A8B, #E9EEF3, #14202B, #233443, #E7EEF7
+- Type: Public Sans, Source Serif 4, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Question; search status with favicon stack; serif answer with marked sentences and chips; three source cards.
+
+INTERACTION & STATES
+- Hover a chip or source card to link them; the demo stops.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Chip scales 1.25 with a spring; sentence highlight fades in; card lifts 4px with a blue ring and shadow; favicons pop in during search.
+
+IDLE AUTOPLAY
+- After 3.4s a highlight tours the three citations and the search strip replays between rounds.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Footnote numbers that are not linked to anything.
+- Source cards without a relevance signal.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

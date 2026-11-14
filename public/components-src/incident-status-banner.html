@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Incident Status Banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#F59E0B;--bg:#FFF7E6;background:#EEF0F5;color:#141A26;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+body.s1{--c:#EF4444;--bg:#FEECEC}body.s2{--c:#F59E0B;--bg:#FFF7E6}body.s3{--c:#3B82F6;--bg:#EAF2FF}body.s4{--c:#16A34A;--bg:#E8F8EE}
+.cd{width:100%;max-width:640px;border-radius:26px;background:#fff;box-shadow:0 40px 56px -34px rgba(20,26,38,.5),inset 0 0 0 1px rgba(20,26,38,.07);overflow:hidden}
+.bn{position:relative;padding:20px 24px;background:var(--bg);transition:background .6s;display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:center;overflow:hidden}
+.bn::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c);transition:background .6s}
+.ic{position:relative;width:44px;height:44px;border-radius:50%;background:var(--c);display:grid;place-items:center;color:#fff;transition:background .6s}.ic::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--c);animation:pg 2s infinite;z-index:-1}body.s4 .ic::after{animation:none}@keyframes pg{from{transform:scale(1);opacity:.5}to{transform:scale(1.7);opacity:0}}
+.ic svg{width:22px;height:22px;stroke:#fff;stroke-width:2.600;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.bn h1{font-size:19px;font-weight:800;letter-spacing:-.03em}.bn p{font-size:14px;color:#4B5568;margin-top:2px}
+.pl{font:600 12px 'JetBrains Mono';padding:6px 12px;border-radius:99px;background:#fff;color:var(--c);letter-spacing:.06em;text-transform:uppercase;box-shadow:inset 0 0 0 1.5px var(--c);transition:color .6s,box-shadow .6s}
+.tl{padding:20px 24px 8px;position:relative}.tl::before{content:"";position:absolute;left:36px;top:30px;bottom:30px;width:2px;background:#E4E8F0}
+.up{position:relative;display:grid;grid-template-columns:26px 1fr;gap:16px;padding-bottom:18px}
+.dt{width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2.500px var(--k);display:grid;place-items:center;z-index:1}.dt i{width:10px;height:10px;border-radius:50%;background:var(--k)}
+.up.new{animation:in .6s cubic-bezier(.3,1.4,.5,1)}@keyframes in{from{opacity:0;transform:translateY(-14px)}}
+.up b{font-size:15px;font-weight:700}.up b em{font:500 12px 'JetBrains Mono';font-style:normal;color:#8A93A8;margin-left:8px}.up span{display:block;font-size:14px;color:#4B5568;line-height:1.45;margin-top:2px}
+.sv{display:flex;gap:8px;padding:6px 24px 22px;flex-wrap:wrap}.sv span{font:500 12px 'JetBrains Mono';padding:6px 11px;border-radius:9px;background:#F3F5F9;color:#4B5568;display:flex;align-items:center;gap:7px;transition:all .5s}.sv span i{width:8px;height:8px;border-radius:50%;background:var(--sc)}
+@media(max-width:560px){.bn{grid-template-columns:44px 1fr}.pl{grid-column:2}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body class="s2">
+<div class="cd"><div class="bn"><span class="ic"><svg id="ic" viewBox="0 0 24 24"></svg></span><div><h1 id="h"></h1><p id="p"></p></div><span class="pl" id="pl"></span></div>
+<div class="tl" id="tl"></div><div class="sv" id="sv"></div></div>
+<script>
+const IC={1:'<path d="M12 8v5M12 17h.01"/><path d="M10.300 3.900 2.400 17.500A2 2 0 0 0 4.100 20.500h15.800a2 2 0 0 0 1.700-3L13.700 3.900a2 2 0 0 0-3.400 0Z"/>',2:'<circle cx="11" cy="11" r="7"/><path d="m21 21-5-5"/>',3:'<path d="M3 12h4l3 8 4-16 3 8h4"/>',4:'<path d="m5 12.500 4.500 4.500L19 7"/>'};
+const ST=[{n:1,h:'Investigating elevated API errors',p:'Some requests to the Payments API are failing. Our on-call team is looking into it.',pl:'Investigating',t:'09:14',m:'We are seeing a spike in 502 responses on the Payments API and have paged the on-call engineer.',k:'#EF4444'},
+{n:2,h:'Root cause identified',p:'A failed database failover is causing connection timeouts. A fix is being rolled out.',pl:'Identified',t:'09:31',m:'The primary replica failed to promote. We are forcing a failover and draining stale connections.',k:'#F59E0B'},
+{n:3,h:'Fix deployed, monitoring recovery',p:'Error rates are falling. We are watching the system for the next 30 minutes.',pl:'Monitoring',t:'09:52',m:'Failover complete. Error rate is back under 0.1% and queues are draining.',k:'#3B82F6'},
+{n:4,h:'All systems operational',p:'This incident has been resolved. A full post-mortem will follow within 48 hours.',pl:'Resolved',t:'10:24',m:'No further errors for 30 minutes. Thank you for your patience.',k:'#16A34A'}];
+const SV=[['Payments API',['#EF4444','#F59E0B','#3B82F6','#16A34A']],['Checkout',['#F59E0B','#F59E0B','#16A34A','#16A34A']],['Webhooks',['#EF4444','#EF4444','#F59E0B','#16A34A']],['Dashboard',['#16A34A','#16A34A','#16A34A','#16A34A']]];
+const $=id=>document.getElementById(id),tl=$('tl');let step=0,off=false;
+function row(i,anim){const s=ST[i],d=document.createElement('div');d.className='up'+(anim?' new':'');d.style.setProperty('--k',s.k);d.innerHTML='<span class="dt"><i></i></span><div><b>'+s.pl+'<em>'+s.t+' UTC</em></b><span>'+s.m+'</span></div>';tl.insertBefore(d,tl.firstChild)}
+function apply(i){const s=ST[i];document.body.className='s'+s.n;$('ic').innerHTML=IC[s.n];$('h').textContent=s.h;$('p').textContent=s.p;$('pl').textContent=s.pl;$('sv').innerHTML=SV.map(v=>'<span style="--sc:'+v[1][i]+'"><i></i>'+v[0]+'</span>').join('')}
+function go(i,anim){step=i;apply(i);if(anim)row(i,true)}
+tl.innerHTML='';row(0);row(1);go(1,false);
+[...tl.children].forEach(c=>c.classList.remove('new'));
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: the incident moves through its lifecycle; the banner recolours red, amber, blue then green with a pulsing icon that swaps glyph, the headline and status pill change, a new timeline update drops in at the top, and service dots shift from failing to healthy, then it resets to a fresh incident, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sl(3600);while(!off){go(2,true);await sl(3400);if(off)return;go(3,true);await sl(4200);if(off)return;tl.innerHTML='';row(0);go(0,false);await sl(3000);if(off)return;go(1,true);await sl(1500)}})()}
+</script></body></html>

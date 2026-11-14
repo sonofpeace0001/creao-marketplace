@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Invoice History Download</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EAEEF2;color:#101828;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{position:relative;width:100%;max-width:640px;background:#fff;border-radius:28px;padding:22px 22px 18px;box-shadow:0 40px 56px -34px rgba(16,24,40,.5),inset 0 0 0 1px rgba(16,24,40,.07);overflow:hidden}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:0 6px}.hd h1{font-size:20px;font-weight:800;letter-spacing:-.03em}.hd span{font:500 12px 'Geist Mono';color:#7A8499}
+.th,.r{display:grid;grid-template-columns:1.2fr 1fr 1fr .9fr 48px;gap:12px;align-items:center;padding:0 10px}.th{font:600 10.500px 'Geist Mono';letter-spacing:.14em;color:#98A2B3;text-transform:uppercase;padding-bottom:8px}
+.r{padding:13px 10px;border-radius:14px;font-size:14.500px;transition:background .3s}.r:hover{background:#F6F8FB}.r b{font-weight:700}.r .d{color:#667085}.r .a{font:600 14px 'Geist Mono';font-variant-numeric:tabular-nums}
+.sb{display:inline-flex;align-items:center;gap:6px;font:600 12px 'Inter Tight';padding:4px 10px;border-radius:99px;width:max-content}.sb i{width:6px;height:6px;border-radius:50%;background:currentColor}.pd{background:#E6F7EE;color:#0F8A5F}.du{background:#FFF3DC;color:#B5700A}.rf{background:#EEF0FB;color:#4F55C9}
+.dl{position:relative;width:38px;height:38px;border:0;border-radius:12px;background:#F2F4F7;color:#344054;cursor:pointer;display:grid;place-items:center;transition:background .25s,transform .15s}.dl:hover{background:#E6E9EF}.dl:active{transform:scale(.92)}.dl:focus-visible{outline:2px solid #4F55C9}
+.dl svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.200;fill:none;stroke-linecap:round;stroke-linejoin:round}.dl .rg{position:absolute;inset:-1px;transform:rotate(-90deg);opacity:0}.dl .rg circle{fill:none;stroke:#4F55C9;stroke-width:2.500;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p,0))}
+.dl.go{background:#EEF0FB}.dl.go .rg{opacity:1}.dl.go svg{animation:bn .5s infinite alternate}@keyframes bn{to{transform:translateY(2px)}}.dl.done{background:#E6F7EE;color:#0F8A5F}
+.tr{margin:12px 6px 0;padding:12px 14px;border-radius:16px;background:#101828;color:#fff;display:flex;align-items:center;gap:10px;min-height:56px;transition:background .4s}
+.tr .fs{display:flex;gap:6px;flex:1;flex-wrap:wrap}.fl{font:600 11.500px 'Geist Mono';padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.12);display:flex;align-items:center;gap:6px;animation:pp .5s cubic-bezier(.3,1.7,.5,1)}@keyframes pp{from{opacity:0;transform:translateY(-22px) scale(.6)}}.fl::before{content:"PDF";font-size:9px;background:#F04438;border-radius:3px;padding:1px 4px}
+.tr em{font-style:normal;font-size:13px;color:#98A2B3}.tr button{border:0;border-radius:11px;padding:9px 14px;background:#fff;color:#101828;font:700 13px 'Inter Tight';cursor:pointer;opacity:.35;pointer-events:none;transition:opacity .3s}.tr.rd button{opacity:1;pointer-events:auto}
+@media(max-width:560px){.th,.r{grid-template-columns:1fr 1fr 48px}.th span:nth-child(2),.r .d,.th span:nth-child(4),.r .sb{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>Invoices</h1><span>Acme Studio · 2026</span></div><div class="th"><span>Invoice</span><span>Date</span><span>Amount</span><span>Status</span><span></span></div><div id="ls"></div>
+<div class="tr" id="tr"><div class="fs" id="fs"><em>No files selected</em></div><button id="all">Download all</button></div></div>
+<script>
+const I=[['INV-2041','Nov 1, 2026','$1,240.00','pd','Paid'],['INV-2040','Oct 1, 2026','$1,240.00','pd','Paid'],['INV-2039','Sep 1, 2026','$980.00','pd','Paid'],['INV-2038','Aug 1, 2026','$980.00','rf','Refunded'],['INV-2042','Dec 1, 2026','$1,490.00','du','Due']];
+const ls=document.getElementById('ls'),fs=document.getElementById('fs'),tr=document.getElementById('tr'),sl=ms=>new Promise(r=>setTimeout(r,ms)),btn=[];let off=false,n=0;
+const DL='<svg viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg><svg class="rg" viewBox="0 0 38 38" style="position:absolute;inset:-1px;width:40px;height:40px;transform:rotate(-90deg);animation:none"><circle cx="19" cy="19" r="17" pathLength="1"/></svg>';
+I.forEach((v,i)=>{const r=document.createElement('div');r.className='r';r.innerHTML='<b>'+v[0]+'</b><span class="d">'+v[1]+'</span><span class="a">'+v[2]+'</span><span class="sb '+v[3]+'"><i></i>'+v[4]+'</span><button class="dl" aria-label="Download '+v[0]+'">'+DL+'</button>';const b=r.querySelector('.dl');b.onclick=()=>{off=true;get(i)};ls.appendChild(r);btn.push(b)});
+async function get(i){const b=btn[i];if(b.classList.contains('go')||b.classList.contains('done'))return;b.classList.add('go');const c=b.querySelector('circle');for(let p=0;p<=1.001;p+=.05){c.style.setProperty('--p',p);b.style.setProperty('--p',p);b.querySelector('.rg circle').style.strokeDashoffset=1-p;await sl(45)}b.classList.remove('go');b.classList.add('done');b.querySelector('svg').innerHTML='<path d="m5 12.500 4.500 4.500L19 7"/>';
+ if(!fs.querySelector('.fl'))fs.innerHTML='';const f=document.createElement('span');f.className='fl';f.textContent=I[i][0]+'.pdf';fs.appendChild(f);n++;tr.classList.add('rd');document.getElementById('all').textContent=n>1?'Open '+n+' files':'Open file'}
+function reset(){btn.forEach(b=>{b.className='dl';b.querySelector('svg').innerHTML='<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>'});fs.innerHTML='<em>No files selected</em>';tr.classList.remove('rd');n=0;document.getElementById('all').textContent='Download all'}
+document.getElementById('all').onclick=()=>{off=true};
+btn[0].classList.add('done');btn[0].querySelector('svg').innerHTML='<path d="m5 12.500 4.500 4.500L19 7"/>';fs.innerHTML='<span class="fl" style="animation:none">INV-2041.pdf</span>';n=1;tr.classList.add('rd');
+/* Idle demo: each invoice's download button fills a progress ring as the file prepares, then turns into a green tick while a PDF chip drops into the dark tray below and the tray button comes alive with a running count, one invoice after another, then the tray empties and it repeats, until you click a download button. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3600);while(!off){for(const i of [1,2,3]){if(off)return;await get(i);await sl(500)}await sl(3000);if(off)return;reset();await sl(900);await get(0);await sl(600)}})()}
+</script></body></html>

@@ -1,0 +1,40 @@
+ROLE
+You are a senior interaction designer and front-end engineer with 15+ years of experience. Build "Ruler Scrub Date Picker": a ruler-style date scrubber: a fixed playhead over a gliding strip of day ticks with taller labelled Mondays and month starts, while the huge day number, weekday, month and relative phrase update live.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark card with a glowing violet playhead and a gradient day number.
+- Palette: #7C8CFF, #10131D, #7C86A8, #B4BEFF, #090B12, #EAEEF8
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Eyebrow; large day number with weekday and month; relative chip; ruler with ticks and playhead; shortcut buttons.
+
+INTERACTION & STATES
+- Drag the ruler or press a shortcut.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Spring approach to target; selected tick lights white and grows; text updates per whole day.
+
+IDLE AUTOPLAY
+- After 3.2s the ruler jumps between dates every 2.6s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A text input only.
+- A ruler without labelled landmarks.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

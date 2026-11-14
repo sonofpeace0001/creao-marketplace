@@ -1,0 +1,40 @@
+ROLE
+You are a senior consent flow designer and front-end engineer with 15+ years of experience. Build "Scroll to Accept Terms": a terms dialog whose checkbox is locked until you reach the end: a progress ring and edge bar fill with scroll, the lock opens with a wobble, the box ticks, Continue lights up and a success toast rises.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with a serif legal text well and an indigo progress ring.
+- Palette: #6366F1, #12202B, #E2E8EC, #566772, #F7F9FA, #92A3AF
+- Type: Hanken Grotesk, Newsreader, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with version; scroll well with progress bar and fade; ring checkbox, label and Continue; toast.
+
+INTERACTION & STATES
+- Scroll to the end, tick the box, press Continue.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ring and bar follow scroll; lock wobble 600ms; tick draws 300ms; button and toast spring.
+
+IDLE AUTOPLAY
+- After 3.2s the text scrolls itself, the box is ticked and Continue pressed, then it resets.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Unlocking before the end.
+- No visible progress toward unlocking.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,40 @@
+ROLE
+You are a senior event product designer and front-end engineer with 15+ years of experience. Build "Agenda Schedule Accordion": a conference agenda accordion with a running clock: the session that is on now gets a blue ring, LIVE badge and progress line, and goes live and opens as the hour reaches it.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Fresh pale-blue page, white card, cobalt accent and mono timestamps.
+- Palette: #6C7A96, #3B6BFF, #12203A, #43506B, #E6EEF9, #FF4D6D
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with title and live clock chip; five session rows with time, title, duration and room; panels with abstract, speaker avatar and room tag.
+
+INTERACTION & STATES
+- Click any row to open it manually, which stops the automatic following.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Clock advances in accelerated time; progress line fills along the live row; ring and badge appear when a session starts.
+
+IDLE AUTOPLAY
+- A virtual clock runs 10:00 to 13:00 and the live session opens itself, then it loops.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Static times; the live state must be driven by the clock.
+- Auto-opening again after the user has taken control.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

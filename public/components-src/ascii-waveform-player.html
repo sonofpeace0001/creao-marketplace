@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ASCII Waveform Player</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0805;color:#FFB454;font-family:'Share Tech Mono',monospace;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.pl{width:100%;max-width:640px;border-radius:22px;background:linear-gradient(180deg,#1A130B,#120D07);padding:18px;box-shadow:0 44px 60px -34px #000,inset 0 0 0 1px #3A2A16,inset 0 2px 0 rgba(255,255,255,.06)}
+.sc{position:relative;border-radius:12px;background:#080604;padding:16px 18px;box-shadow:inset 0 4px 14px #000,inset 0 0 0 1px #2B1F10;overflow:hidden}
+.sc::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px);pointer-events:none}
+.hd{display:flex;justify-content:space-between;font-size:15px;color:#C98A38;letter-spacing:.1em}.hd b{color:#FFC978;font-weight:400}
+.tt{font:400 34px/1 'VT323',monospace;color:#FFC978;text-shadow:0 0 10px rgba(255,180,84,.6);margin:6px 0 2px;letter-spacing:.04em}.ar{font-size:14px;color:#A06E2C;letter-spacing:.12em}
+pre{font:400 17px/15px 'Share Tech Mono';color:#FFB454;text-shadow:0 0 8px rgba(255,180,84,.7);height:128px;overflow:hidden;margin:12px 0 6px;letter-spacing:.02em}
+.pg{font-size:16px;color:#FFB454;letter-spacing:.04em;display:flex;gap:10px;align-items:center;white-space:pre}.pg i{font-style:normal;color:#C98A38}
+.ct{display:flex;justify-content:center;gap:12px;margin-top:16px}.ct button{border:0;border-radius:12px;padding:12px 20px;background:linear-gradient(#2A1F11,#1D150A);color:#FFB454;font:400 18px 'VT323';letter-spacing:.1em;cursor:pointer;box-shadow:0 3px 0 #0A0704,inset 0 1px 0 rgba(255,255,255,.08);transition:transform .08s,box-shadow .08s}.ct button:active,.ct .pr{transform:translateY(3px);box-shadow:0 0 0 #0A0704}.ct button:focus-visible{outline:2px solid #FFB454}
+.ct .pp{min-width:120px;color:#FFE1B0;box-shadow:0 3px 0 #0A0704,0 0 18px rgba(255,180,84,.25),inset 0 1px 0 rgba(255,255,255,.08)}
+.lv{display:flex;gap:3px;margin-top:2px}
+@media(max-width:560px){pre{font-size:12px;letter-spacing:0;height:120px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="pl" id="pl"><div class="sc"><div class="hd"><span>TRACK <b id="tn">02/09</b></span><span id="st">▶ PLAYING</span><span>VBR 320K</span></div><div class="tt" id="tt">NIGHT DRIVE</div><div class="ar">NEON HARBOUR · SIDE B</div><pre id="pr"></pre><div class="pg" id="pg"></div></div>
+<div class="ct"><button id="pv">|◀◀</button><button class="pp" id="pp">❚❚ PAUSE</button><button id="nx">▶▶|</button></div></div>
+<script>
+const COLS=56,ROWS=8,TR=[['NIGHT DRIVE','NEON HARBOUR · SIDE B',221],['GLASS ARCADE','NEON HARBOUR · SIDE B',187],['SLOW CURRENCY','LIOR VALE',243]];
+const pr=document.getElementById('pr');let t=0,pos=84,ti=0,play=true,off=false,lev=new Array(COLS).fill(.2);const hist=[];
+function f(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0')}
+function draw(){const rows=[];for(let r=ROWS-1;r>=0;r--){let s='';for(let c=0;c<COLS;c++){const h=lev[c]*ROWS;const d=h-r;s+=d>=1?'█':d>=.75?'▆':d>=.5?'▄':d>=.25?'▂':(r===0?'_':' ')}rows.push(s)}pr.textContent=rows.join('\n');
+ const len=TR[ti][2],w=34,fill=Math.round(pos/len*w);document.getElementById('pg').innerHTML='<i>[</i>'+'='.repeat(Math.max(0,fill-1))+(fill?'>':'')+'<i>'+'-'.repeat(w-fill)+']</i> '+f(pos)+' / '+f(len)}
+function setTrack(i){ti=(i+TR.length)%TR.length;pos=0;document.getElementById('tt').textContent=TR[ti][0];document.querySelector('.ar').textContent=TR[ti][1];document.getElementById('tn').textContent='0'+(ti+2)+'/09'}
+function step(dt){t+=dt;if(play){pos+=dt;if(pos>TR[ti][2])setTrack(ti+1);const beat=Math.pow(Math.max(0,Math.sin(t*7.4)),5);for(let c=0;c<COLS;c++){const band=c/COLS;const base=.28+.22*Math.sin(t*2+c*.35)+.18*Math.sin(t*3.1+c*.9);const bass=beat*(1-band)*.55;const hi=Math.abs(Math.sin(t*11+c*1.7))*band*.25;lev[c]+=(Math.max(.08,Math.min(1,base+bass+hi))-lev[c])*.35}}else for(let c=0;c<COLS;c++)lev[c]+=(.06-lev[c])*.2;draw()}
+for(let k=0;k<20;k++)step(.05);
+document.getElementById('pp').onclick=()=>{off=true;play=!play;document.getElementById('pp').textContent=play?'❚❚ PAUSE':'▶ PLAY';document.getElementById('st').textContent=play?'▶ PLAYING':'❚❚ PAUSED'};
+document.getElementById('nx').onclick=()=>{off=true;setTrack(ti+1)};document.getElementById('pv').onclick=()=>{off=true;setTrack(ti-1)};
+/* Idle demo: a retro amber music player draws a live equaliser entirely out of block characters, bass-heavy columns on the left kicking with the beat, shimmering highs on the right, while a text progress bar of equals signs advances with the elapsed time and the player flips to the next track at the end, until you press a control. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0;(function lp(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;step(dt);requestAnimationFrame(lp)})(0);setTimeout(()=>{if(!off){const b=document.getElementById('nx');b.classList.add('pr');setTimeout(()=>{b.classList.remove('pr');if(!off)setTrack(ti+1)},180)}},6500)}
+</script></body></html>

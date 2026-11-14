@@ -1,0 +1,40 @@
+ROLE
+You are a senior creative developer and front-end engineer with 15+ years of experience. Build "Ribbon Trail Cursor": a glowing head follows the pointer on a spring and drags a 44-segment ribbon behind it that is thick and bright near the head and thin and transparent at the end, hue cycling and thickening with speed.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark grid stage with a rainbow ribbon and a mono speed readout.
+- Palette: #05060B, #090B14, #7C86B0, #5E6690
+- Type: Space Grotesk, Space Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Canvas ribbon; grid backdrop; headline; speed readout.
+
+INTERACTION & STATES
+- Move the pointer to draw.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Head spring 0.09; each segment lerps toward the previous at 0.38; width scales with speed; hue cycles.
+
+IDLE AUTOPLAY
+- After load the head traces a looping curve until the user moves.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Unstable chains that explode; use a stable lerp.
+- A ribbon of constant width.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

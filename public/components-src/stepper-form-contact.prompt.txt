@@ -1,0 +1,40 @@
+ROLE
+You are a senior conversion designer and front-end engineer with 15+ years of experience. Build "Stepper Form Contact": a three-step contact form that fills itself: a topic tile is chosen, the panel slides sideways to details where name, email and message are typed, a review step lists them and a green check springs in after Send.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on lilac with an indigo segmented progress bar.
+- Palette: #4F46E5, #7C82AE, #E7E9F6, #16193F, #8B5CF6, #F6F7FD
+- Type: Manrope, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Progress segments and step label; sliding panels for topic, details, review and success; footer with hint and button.
+
+INTERACTION & STATES
+- Continue advances the steps.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Panels translate 700ms; typing caret; progress segments fill 600ms; check scales with spring.
+
+IDLE AUTOPLAY
+- After 3.4s the form advances, sends and restarts with a different topic.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- One long form; the steps reduce effort.
+- No review before sending.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

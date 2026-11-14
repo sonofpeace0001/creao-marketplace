@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Availability Matrix Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E8EAF7;color:#17194A;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:680px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 40px 56px -34px rgba(23,25,74,.5),inset 0 0 0 1px rgba(23,25,74,.07)}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap}.hd h1{font-size:21px;font-weight:800;letter-spacing:-.03em}.hd p{font-size:13px;color:#6E73A3;margin-top:2px}
+.av{display:flex}.av i{width:34px;height:34px;border-radius:50%;margin-left:-8px;display:grid;place-items:center;font:800 13px 'Plus Jakarta Sans';font-style:normal;color:#fff;background:var(--c);box-shadow:0 0 0 3px #fff;transform:scale(0);transition:transform .45s cubic-bezier(.3,1.8,.5,1)}.av i:first-child{margin-left:0}.av i.on{transform:scale(1)}
+.gd{display:grid;grid-template-columns:44px repeat(5,1fr);gap:4px}
+.gd .dh{font:700 12px 'Plus Jakarta Sans';text-align:center;color:#6E73A3;padding:4px 0 8px}.gd .dh b{display:block;font-size:15px;color:#17194A}
+.gd .tm{font:500 11px 'JetBrains Mono';color:#8A8FB8;text-align:right;padding:0 8px 0 0;display:flex;align-items:center;justify-content:flex-end}
+.c{position:relative;height:36px;border-radius:8px;background:var(--b,#EEF0FA);transition:background .5s;display:grid;place-items:center;font:700 12px 'JetBrains Mono';color:rgba(255,255,255,.9)}
+.c.best{box-shadow:0 0 0 2.500px #17194A,0 10px 20px -6px rgba(79,70,229,.7);z-index:2;animation:bp 1.600s ease-in-out infinite}@keyframes bp{50%{transform:scale(1.07)}}
+.c.best::after{content:"Best time";position:absolute;top:-9px;left:50%;transform:translateX(-50%);padding:2px 8px;border-radius:99px;background:#17194A;color:#fff;font:700 10px 'Plus Jakarta Sans';white-space:nowrap}
+.lg{display:flex;align-items:center;gap:10px;margin-top:16px;font:500 11.500px 'JetBrains Mono';color:#7479A8}.lg .sc{display:flex;gap:3px}.lg .sc i{width:26px;height:10px;border-radius:3px}.lg b{margin-left:auto;font:700 13px 'Plus Jakarta Sans';color:#17194A}
+@media(max-width:560px){.c{height:28px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><div><h1>Find a time that works</h1><p>Design review · 60 min · week of 16 Nov</p></div><div class="av" id="av"></div></div><div class="gd" id="gd"></div>
+<div class="lg"><span>Fewer free</span><span class="sc" id="sc"></span><span>All free</span><b id="bt">Choosing…</b></div></div>
+<script>
+const DAYS=['Mon','Tue','Wed','Thu','Fri'],NUM=[16,17,18,19,20],HRS=[9,10,11,12,13,14,15,16];
+const PPL=[['A','#6366F1'],['M','#EC4899'],['J','#F59E0B'],['S','#10B981']];
+const BUSY=[[ '0-9,0-10,1-13,2-9,2-10,3-11,4-14,4-15','' ],['0-11,0-12,1-9,1-10,2-13,3-14,3-15,4-9',''],['0-13,0-14,1-11,1-12,2-11,3-9,3-13,4-10,4-11'],['0-9,1-15,1-16,2-12,2-16,3-12,3-16,4-12,4-13']].map(a=>new Set(a[0].split(',')));
+const gd=document.getElementById('gd'),av=document.getElementById('av'),cells={};let show=3,off=false;
+gd.appendChild(document.createElement('div'));DAYS.forEach((d,i)=>{const e=document.createElement('div');e.className='dh';e.innerHTML=d+'<b>'+NUM[i]+'</b>';gd.appendChild(e)});
+HRS.forEach((h,r)=>{const t=document.createElement('div');t.className='tm';t.textContent=h+':00';gd.appendChild(t);DAYS.forEach((d,c)=>{const e=document.createElement('div');e.className='c';gd.appendChild(e);cells[c+'-'+h]=e})});
+PPL.forEach(p=>{const i=document.createElement('i');i.style.setProperty('--c',p[1]);i.textContent=p[0];av.appendChild(i)});
+const SC=['#EEF0FA','#C9CDF7','#9EA5F0','#6F78E6','#4F46E5'];document.getElementById('sc').innerHTML=SC.map(c=>'<i style="background:'+c+'"></i>').join('');
+function paint(n,best){[...av.children].forEach((a,i)=>a.classList.toggle('on',i<n));let top=null,bn=-1;DAYS.forEach((d,c)=>HRS.forEach(h=>{let free=0;for(let p=0;p<n;p++)if(!BUSY[p].has(c+'-'+h))free++;const e=cells[c+'-'+h];e.classList.remove('best');e.style.setProperty('--b',SC[Math.round(free/Math.max(1,n)*4)]);e.textContent=free===n&&n>1?free:'';if(free===n&&n===PPL.length&&free>bn){bn=free;if(!top)top=[c,h]}}));
+ if(best&&top){const e=cells[top[0]+'-'+top[1]];e.classList.add('best');document.getElementById('bt').textContent=DAYS[top[0]]+' '+top[1]+':00 works for all '+n}else document.getElementById('bt').textContent=n+' of '+PPL.length+' added'}
+paint(4,true);
+/* Idle demo: participants join the scheduling poll one by one; each avatar springs in and every slot recolours from pale to deep indigo by how many people are free, showing a count in fully free slots, and when the fourth person joins the one slot that works for everyone gets a dark outline, a pulse and a Best time tag, then the poll resets, until you click. */
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sl(3400);while(!off){await sl(2600);if(off)return;paint(1,false);await sl(1500);paint(2,false);await sl(1500);paint(3,false);await sl(1700);paint(4,true);await sl(1200)}})()}
+</script></body></html>

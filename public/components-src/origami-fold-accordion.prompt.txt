@@ -1,0 +1,40 @@
+ROLE
+You are a senior editorial product designer and front-end engineer with 15+ years of experience. Build "Origami Fold Accordion": a shipping and care accordion whose panels unfold like paper: three leaves hinge down from the top edge one after another with a shaded crease that lightens as they flatten.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm kraft-paper page, ivory card, terracotta numerals and a chunky serif headline.
+- Palette: #2B2118, #B0674A, #E9E0D0, #F7F1E5, #D6603A, #6D5E4E
+- Type: Young Serif, Outfit (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with eyebrow and title; four numbered rows with a plus that rotates to a minus; each panel holds three white leaf cards.
+
+INTERACTION & STATES
+- Click a row to open it; the previous row folds shut; button state is exposed with aria-expanded.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Grid-row height transition at 600ms; leaves rotateX from -96deg to 0 with staggered 120ms delays and a spring overshoot; crease shading fades over 900ms.
+
+IDLE AUTOPLAY
+- After 3.2s the sections open in turn every 3s until the user clicks.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain height slide with fading text; the hinged leaves are the signature.
+- Opening several panels at once.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Origami Fold Accordion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9E0D0;color:#2B2118;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(500px 360px at 15% 0,rgba(214,96,58,.16),transparent 70%)}
+.cd{width:100%;max-width:560px;background:#F7F1E5;border-radius:26px;padding:30px 30px 26px;box-shadow:0 34px 46px -30px rgba(43,33,24,.55),inset 0 0 0 1px rgba(43,33,24,.08)}
+.hd small{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#B0674A;font-weight:600}.hd h1{font:400 32px/1.05 'Young Serif',serif;letter-spacing:-.02em;margin:6px 0 20px}
+.it{border-top:1.5px solid rgba(43,33,24,.14)}.it:last-child{border-bottom:1.5px solid rgba(43,33,24,.14)}
+.bt{width:100%;display:grid;grid-template-columns:34px 1fr 28px;align-items:center;gap:10px;padding:17px 2px;border:0;background:none;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.bt:focus-visible{outline:2px solid #D6603A;outline-offset:2px;border-radius:8px}
+.bt i{font:400 14px 'Young Serif',serif;font-style:normal;color:#B0674A}.bt b{font:400 21px 'Young Serif',serif;letter-spacing:-.01em}
+.pl{position:relative;width:22px;height:22px}.pl::before,.pl::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:2px;margin:-1px 0 0 -7px;background:#2B2118;border-radius:1px}.pl::after{transform:rotate(90deg)}
+.an .pl{transition:transform .5s cubic-bezier(.3,1.5,.5,1)}.an .pl::after{transition:opacity .3s}.it.on .pl{transform:rotate(180deg)}.it.on .pl::after{opacity:0}
+.pn{display:grid;grid-template-rows:0fr}.pn>div{overflow:hidden;perspective:900px}.an .pn{transition:grid-template-rows .6s cubic-bezier(.4,0,.2,1)}.it.on .pn{grid-template-rows:1fr}
+.lv{padding:0 0 0 44px}
+.lf{position:relative;transform-origin:top center;transform:rotateX(-96deg);opacity:0;padding:10px 14px;margin-bottom:6px;border-radius:10px;background:#fff;box-shadow:0 1px 0 rgba(43,33,24,.08)}
+.lf:last-child{margin-bottom:18px}.lf b{display:block;font-size:14.5px;font-weight:600}.lf span{font-size:14px;color:#6D5E4E;line-height:1.45}
+.lf::after{content:"";position:absolute;inset:0;border-radius:10px;background:linear-gradient(180deg,rgba(43,33,24,.34),rgba(43,33,24,0));opacity:1;pointer-events:none}
+.an .lf{transition:transform .75s cubic-bezier(.3,1.35,.5,1),opacity .3s,margin 0s}.an .lf::after{transition:opacity .9s}
+.it.on .lf{transform:none;opacity:1}.it.on .lf::after{opacity:0}
+.an .it.on .lf:nth-child(1){transition-delay:.12s}.an .it.on .lf:nth-child(2){transition-delay:.26s}.an .it.on .lf:nth-child(3){transition-delay:.4s}
+.an .it:not(.on) .lf{transition-duration:.25s}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><small>Order help</small><h1>Shipping &amp; care</h1></div><div id="ac"></div></div>
+<script>
+const S=[['Delivery',[['Standard','3 to 5 working days, tracked end to end from the warehouse door.'],['Express','Next working day when ordered before 2pm, signature on arrival.'],['Collection','Free pick-up from any of our 40 stores within 48 hours.']]],
+['Returns',[['30 days','Changed your mind? Send it back unworn with the tags attached.'],['Free labels','Print a prepaid label from your account in two clicks.'],['Refunds','Money is back on your card within 3 working days of arrival.']]],
+['Care',[['Wash','Cold cycle, inside out, with a gentle detergent.'],['Dry','Hang flat in the shade. Never tumble dry the knit.'],['Store','Fold, never hang, with a cedar block for the wool.']]],
+['Warranty',[['2 years','Stitching, zips and fastenings are covered from the day you buy.'],['Repairs','We mend it for free or replace it if we cannot.'],['Claim','Start a claim in your account with a photo, no receipt needed.']]]];
+const ac=document.getElementById('ac'),its=[];
+S.forEach((s,i)=>{const d=document.createElement('div');d.className='it';d.innerHTML='<button class="bt" aria-expanded="false"><i>0'+(i+1)+'</i><b>'+s[0]+'</b><span class="pl"></span></button><div class="pn"><div><div class="lv">'+s[1].map(l=>'<div class="lf"><b>'+l[0]+'</b><span>'+l[1]+'</span></div>').join('')+'</div></div></div>';d.querySelector('.bt').onclick=()=>{off=true;open(i)};ac.appendChild(d);its.push(d)});
+function open(i){its.forEach((d,k)=>{const o=k===i&&!d.classList.contains('on');d.classList.toggle('on',o);d.querySelector('.bt').setAttribute('aria-expanded',o)})}
+open(0);requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('an')));
+/* Idle demo: after 3s the sections open in turn; each panel unfolds like paper, three leaves hinging down from the top edge one after another with a shaded crease that lightens as they flatten, while the previous section folds shut and the plus rotates to a minus. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);let k=0;while(!off){k=(k+1)%S.length;open(k);await sleep(3000)}})()}
+</script></body></html>

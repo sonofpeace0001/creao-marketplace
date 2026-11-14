@@ -1,0 +1,40 @@
+ROLE
+You are a senior permissions UI designer and front-end engineer with 15+ years of experience. Build "Tri-State Tree Checkbox": a permissions tree with true tri-state parents: checked when all children are on, a dash when only some are, empty when none, with counts, a root box and a progress summary.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with indigo boxes that draw their tick or dash.
+- Palette: #4F46E5, #F4F5FC, #E9EBF6, #17194A, #6E73A3, #E8EAFF
+- Type: Manrope, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; tree rows with checkbox, label and count; footer summary with bar.
+
+INTERACTION & STATES
+- Click or press Space on any row.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Tick stroke 300ms; dash 250ms; box scales with spring; row flashes.
+
+IDLE AUTOPLAY
+- After 3.4s a scripted series of toggles ticks groups, unticks a child and clears the tree.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Parent boxes that cannot show partial state.
+- Toggling a parent without updating children.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

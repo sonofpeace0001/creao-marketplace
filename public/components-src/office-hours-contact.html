@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Office Hours Contact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#16A34A;background:#E9EEE8;color:#13201A;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+body.cl{--c:#9AA79F}
+.cd{width:100%;max-width:720px;background:#fff;border-radius:30px;padding:28px;box-shadow:0 40px 56px -34px rgba(19,32,26,.5),inset 0 0 0 1px rgba(19,32,26,.07);display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.l small{font:500 12px 'DM Mono';letter-spacing:.16em;color:#7A8F83;text-transform:uppercase}.l h1{font:800 40px/.98 'Bricolage Grotesque';letter-spacing:-.055em;margin:8px 0 14px}
+.st{display:inline-flex;align-items:center;gap:9px;padding:8px 14px;border-radius:99px;background:color-mix(in srgb,var(--c) 14%,#fff);color:var(--c);font-weight:800;font-size:14px;transition:all .5s}.st i{width:9px;height:9px;border-radius:50%;background:var(--c);position:relative}body:not(.cl) .st i::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--c);animation:pg 1.800s infinite}@keyframes pg{from{transform:scale(1);opacity:.6}to{transform:scale(3);opacity:0}}
+.ck{margin:20px 0 6px;font:800 62px/1 'Bricolage Grotesque';letter-spacing:-.06em;font-variant-numeric:tabular-nums}.ck span{font-size:20px;letter-spacing:0;color:#7A8F83;font-weight:600;margin-left:6px}.cz{font-size:13.500px;color:#6E8377;margin-bottom:18px}
+.tl{position:relative;height:48px;margin-top:6px}.tl .tr{position:absolute;left:0;right:0;top:20px;height:10px;border-radius:5px;background:#EDF1EE;overflow:hidden}.tl .op{position:absolute;left:calc(9/24*100%);width:calc(9/24*100%);top:0;bottom:0;background:linear-gradient(90deg,#34D399,#16A34A);border-radius:5px}
+.tl .nw{position:absolute;top:10px;width:3px;height:30px;margin-left:-1.500px;background:#13201A;border-radius:2px;left:var(--p,0%)}.tl .nw::after{content:"";position:absolute;left:50%;top:-5px;width:11px;height:11px;margin-left:-5.500px;border-radius:50%;background:#13201A}
+.tl .lb{position:absolute;top:36px;font:500 10.500px 'DM Mono';color:#8CA094;transform:translateX(-50%)}
+.r{display:flex;flex-direction:column}.r h3{font-size:13px;font-weight:700;color:#7A8F83;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.tm{display:grid;gap:8px;flex:1}.pp{display:grid;grid-template-columns:48px 1fr auto;gap:13px;align-items:center;padding:11px 13px;border-radius:18px;background:#F4F7F5;transition:background .4s}
+.av{position:relative;width:48px;height:48px;border-radius:50%;background:var(--g);display:grid;place-items:center;font:800 18px 'Bricolage Grotesque';color:#fff;transition:filter .5s}body.cl .av{filter:grayscale(1) brightness(1.1)}
+.av::after{content:"";position:absolute;right:0;bottom:1px;width:13px;height:13px;border-radius:50%;background:#9AA79F;box-shadow:0 0 0 3px #F4F7F5;transition:background .4s}.pp.on .av::after{background:#16A34A}
+.pp b{display:block;font-size:15.500px;font-weight:800}.pp span{font-size:12.500px;color:#6E8377}.pp .rt{font:500 11.500px 'DM Mono';color:#16A34A;opacity:0;transform:translateX(8px);transition:all .4s}.pp.on .rt{opacity:1;transform:none}.pp .zz{font-size:19px;opacity:0;transition:opacity .4s;position:absolute;right:16px}.pp:not(.on) .zz{opacity:1}
+.pp{position:relative}.pp:not(.on) .rt{display:none}
+.bt{margin-top:14px;display:flex;gap:9px}.bt a{flex:1;text-align:center;padding:13px;border-radius:14px;background:var(--c);color:#fff;font-weight:800;font-size:14.500px;text-decoration:none;transition:background .5s}.bt a+a{background:#EDF1EE;color:#13201A}
+@media(max-width:620px){.cd{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="l"><small>Lisbon studio · UTC+0</small><h1>Talk to a human.</h1><div class="st" id="st"><i></i><span id="sl">We are online now</span></div><div class="ck"><span id="ck" style="font:inherit;color:inherit;margin:0">10:12</span><span id="ap">AM</span></div><div class="cz" id="cz">Opens 9:00 AM · closes 6:00 PM, Monday to Friday</div>
+<div class="tl"><div class="tr"><i class="op"></i></div><i class="nw" id="nw"></i><span class="lb" style="left:0">0</span><span class="lb" style="left:37.5%">9</span><span class="lb" style="left:75%">18</span><span class="lb" style="left:100%">24</span></div></div>
+<div class="r"><h3>Who is on the line</h3><div class="tm" id="tm"></div><div class="bt"><a href="#">Start a chat</a><a href="#">Email us</a></div></div></div>
+<script>
+const P=[['Ines Rocha','Support lead','linear-gradient(135deg,#F43F5E,#FB923C)','~2 min'],['Tom Okafor','Solutions','linear-gradient(135deg,#6366F1,#38BDF8)','~4 min'],['Hana Sato','Billing','linear-gradient(135deg,#10B981,#84CC16)','~6 min'],['Leo Park','Engineering','linear-gradient(135deg,#A855F7,#EC4899)','~9 min']];
+const $=id=>document.getElementById(id),tm=$('tm'),sl=t=>new Promise(r=>setTimeout(r,t));let off=false,min=10*60+12;const els=P.map(p=>{const d=document.createElement('div');d.className='pp';d.innerHTML='<div class="av" style="--g:'+p[2]+'">'+p[0][0]+'</div><div><b>'+p[0]+'</b><span>'+p[1]+'</span></div><span class="rt">replies '+p[3]+'</span><span class="zz">😴</span>';tm.appendChild(d);return d});
+function paint(){const h=Math.floor(min/60)%24,m=Math.floor(min%60),open=h>=9&&h<18;document.body.classList.toggle('cl',!open);$('sl').textContent=open?'We are online now':(h<9?'Opening at 9:00 AM':'Closed for the day');$('ck').textContent=((h%12)||12)+':'+String(m).padStart(2,'0');$('ap').textContent=h>=12?'PM':'AM';$('nw').style.setProperty('--p',(min/1440*100)+'%');$('cz').textContent=open?'Closes at 6:00 PM · average reply 4 minutes':'Leave a message and we will reply first thing';els.forEach((e,i)=>{const on=open&&min>=9*60+i*18&&min<18*60-i*10;e.classList.toggle('on',on)})}
+els.forEach(e=>e.style.transition='none');paint();requestAnimationFrame(()=>requestAnimationFrame(()=>els.forEach(e=>e.style.transition='')));
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a studio's opening hours come alive; a virtual clock runs across the day, a black marker slides along a 24-hour bar with a green open window, before nine the whole card is grey with sleepy teammates and an Opening at 9:00 AM status, at nine the status flips to a pulsing green We are online now and the four teammates light up one after another with reply-time chips, and at six it closes again, looping, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0;requestAnimationFrame(function lp(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;if(!off&&n>3200){min+=dt*72;if(min>=20*60)min=7*60+30;paint()}requestAnimationFrame(lp)})}
+</script></body></html>

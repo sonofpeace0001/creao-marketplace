@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ASCII Donut Spinner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050805;color:#7CFF9B;font-family:'IBM Plex Mono',monospace;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.tm{width:100%;max-width:680px;border-radius:16px;background:#0A0F0B;box-shadow:0 40px 60px -34px #000,0 0 0 1px #17331E,0 0 60px -20px rgba(124,255,155,.3);overflow:hidden;position:relative}
+.tm::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px);pointer-events:none}
+.bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#0F1811;border-bottom:1px solid #17331E;font-size:12px;color:#5FBF78}.bar i{width:10px;height:10px;border-radius:50%;background:#1F4A2B}.bar span{margin-left:8px}.bar em{margin-left:auto;font-style:normal;color:#3F8F57}
+.bd{display:grid;grid-template-columns:1fr 150px}
+pre{padding:14px 10px 14px 18px;font:500 11.500px/1 'IBM Plex Mono';letter-spacing:.06em;color:#7CFF9B;text-shadow:0 0 6px rgba(124,255,155,.7);height:312px;overflow:hidden;white-space:pre}
+.sd{padding:14px 14px 14px 6px;font-size:12px;line-height:1.7;color:#4E9F66;border-left:1px solid #17331E}.sd b{display:block;color:#A8FFC0;font-weight:600;letter-spacing:.14em;font-size:11px;margin:10px 0 2px}.sd b:first-child{margin-top:0}.sd span{display:block;font-variant-numeric:tabular-nums;color:#7CFF9B}
+.rp{margin-top:6px;letter-spacing:.1em;font-size:14px;color:#7CFF9B;word-break:break-all}
+.cm{padding:9px 14px;border-top:1px solid #17331E;font-size:12px;color:#4E9F66;display:flex;gap:8px}.cm i{font-style:normal;color:#7CFF9B;animation:bk 1s steps(2) infinite}@keyframes bk{50%{opacity:0}}
+@media(max-width:560px){.bd{grid-template-columns:1fr}.sd{display:none}pre{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="tm" id="tm"><div class="bar"><i></i><i></i><i></i><span>donut.js — 80×22</span><em id="fp">60 fps</em></div>
+<div class="bd"><pre id="pr"></pre><div class="sd"><b>ROTATION A</b><span id="ra">0.00 rad</span><b>ROTATION B</b><span id="rb">0.00 rad</span><b>LUMINANCE RAMP</b><div class="rp">.,-~:;=!*#$@</div><b>POINTS / FRAME</b><span id="pt">0</span></div></div>
+<div class="cm">$ node donut.js <i>▍</i></div></div>
+<script>
+const W=80,H=22,pr=document.getElementById('pr'),CH='.,-~:;=!*#$@';let A=1.1,B=.6,fr=0,t0=performance.now(),off=false;
+function frame(){const b=new Array(W*H).fill(' '),z=new Array(W*H).fill(0);const cA=Math.cos(A),sA=Math.sin(A),cB=Math.cos(B),sB=Math.sin(B);let pts=0;
+ for(let j=0;j<6.28;j+=.07){const ct=Math.cos(j),st=Math.sin(j);for(let i=0;i<6.28;i+=.02){const sp=Math.sin(i),cp=Math.cos(i),h=ct+2,D=1/(sp*h*sA+st*cA+5),t=sp*h*cA-st*sA;const x=Math.floor(W/2+30*D*(cp*h*cB-t*sB)),y=Math.floor(H/2+1+15*D*(cp*h*sB+t*cB)),o=x+W*y,N=Math.floor(8*((st*sA-sp*ct*cA)*cB-sp*ct*sA-st*cA-cp*ct*sB));if(y>=0&&y<H&&x>=0&&x<W&&D>z[o]){z[o]=D;b[o]=CH[N>0?N:0];pts++}}}
+ let s='';for(let k=0;k<W*H;k++){s+=k%W===W-1?b[k]+'\n':b[k]}pr.textContent=s;document.getElementById('ra').textContent=(A%6.28).toFixed(2)+' rad';document.getElementById('rb').textContent=(B%6.28).toFixed(2)+' rad';document.getElementById('pt').textContent=pts.toLocaleString('en-US')}
+frame();
+/* Idle demo: the classic ASCII donut is rendered live: a torus of points is rotated on two axes, depth-sorted and shaded into a twelve-step character ramp from dot to at-sign, and the side panel shows both rotation angles, the ramp and the point count updating as it spins, until you click to pause it. */
+document.getElementById('tm').addEventListener('pointerdown',()=>{off=!off});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0;(function lp(n){if(!off&&n-last>33){last=n;A+=.055;B+=.027;frame();fr++;if(n-t0>1000){document.getElementById('fp').textContent=fr+' fps';fr=0;t0=n}}requestAnimationFrame(lp)})(0)}
+</script></body></html>

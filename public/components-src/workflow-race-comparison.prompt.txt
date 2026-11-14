@@ -1,0 +1,40 @@
+ROLE
+You are a senior product storytelling designer and front-end engineer with 15+ years of experience. Build "Workflow Race Comparison": two lanes race through the same five-step workflow: the automated runner finishes in seconds with a timer under four minutes while the manual runner crawls with amber waits and a timer in hours, then a Time saved figure counts up.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black card with amber manual lane versus mint automated lane and mono timers.
+- Palette: #7C86A6, #0B0D12, #EDEFF6, #12151D, #34D399, #181C28
+- Type: Space Grotesk, Space Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with time saved; two lanes with five step markers, progress and runner; timers and notes.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Runner position follows progress; steps light up; time saved counts 900ms.
+
+IDLE AUTOPLAY
+- After 3.4s the race runs and repeats.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Equal speeds.
+- No concrete time figures.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,40 @@
+ROLE
+You are a senior voice UI designer and front-end engineer with 15+ years of experience. Build "Voice Conversation Orb": a voice assistant screen where a blobby orb swells with the voice level and recolours through listening, thinking and speaking while captions light up word by word and a call timer ticks.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black phone-sized stage with a coloured glow behind the orb, mono status label and round call controls.
+- Palette: #05060C, #EEF0FA, #1B1F52, #8B9CFF, #7C84A8, #C5CCFF
+- Type: Figtree, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Status label and timer; canvas orb; caption area with speaker name; mute, talk and end buttons.
+
+INTERACTION & STATES
+- Tapping stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Orb radius modulated by three sine layers scaled by amplitude; colours ease between blue, violet and teal; words fade in at speech pace.
+
+IDLE AUTOPLAY
+- After 3.6s it loops through short exchanges, listening to the user, thinking and then speaking back.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A flat equaliser bar; the organic orb is the identity.
+- Captions that appear all at once.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

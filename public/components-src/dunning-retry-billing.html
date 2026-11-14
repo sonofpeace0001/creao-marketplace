@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dunning Retry Billing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#F87171;background:#0E0F14;color:#EEF0F8;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+body.ok{--c:#34D399}
+.cd{width:100%;max-width:620px;border-radius:28px;background:#161821;padding:24px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08);position:relative;overflow:hidden}
+.cd::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 200px at 0 0,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%);transition:background .8s;pointer-events:none}
+.hd{display:flex;align-items:center;gap:14px;margin-bottom:18px;position:relative}.ic{width:46px;height:46px;border-radius:14px;background:color-mix(in srgb,var(--c) 18%,#161821);display:grid;place-items:center;color:var(--c);transition:all .6s}.ic svg{width:24px;height:24px;stroke:currentColor;stroke-width:2.600;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hd h1{font-size:20px;font-weight:800;letter-spacing:-.03em}.hd p{font-size:13.500px;color:#9096B0;margin-top:2px}.hd .am{margin-left:auto;font:600 18px 'Fira Code'}
+.cw{position:relative;height:150px;perspective:900px;margin-bottom:16px}.cc{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,1.2,.4,1)}.cc.fl{transform:rotateY(180deg)}
+.fc{position:absolute;inset:0;border-radius:18px;padding:18px 20px;backface-visibility:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 20px 30px -16px #000}
+.f1{background:linear-gradient(135deg,#2A2D3E,#1B1D2A);box-shadow:inset 0 0 0 1.5px rgba(248,113,113,.5),0 20px 30px -16px #000}.f2{background:linear-gradient(135deg,#5B5BFF,#8B5CF6);transform:rotateY(180deg)}
+.fc .t{display:flex;justify-content:space-between;font:600 13px 'Hanken Grotesk';letter-spacing:.06em}.fc .n{font:500 19px 'Fira Code';letter-spacing:.12em}.fc .b{display:flex;justify-content:space-between;font:500 12px 'Fira Code';opacity:.85}
+.er{position:absolute;right:16px;bottom:16px;font:600 11px 'Fira Code';padding:4px 10px;border-radius:99px;background:rgba(248,113,113,.18);color:#FCA5A5}
+.tl{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}.tl div{padding:12px;border-radius:14px;background:#1D2029;font-size:12.500px;color:#8A90A8;box-shadow:inset 0 0 0 1.5px transparent;transition:all .5s}.tl b{display:block;font-size:14px;color:#D5D9E8;margin-bottom:3px}.tl i{display:block;font:500 11px 'Fira Code';font-style:normal;margin-top:6px}
+.tl .f{box-shadow:inset 0 0 0 1.5px rgba(248,113,113,.5)}.tl .f i{color:#F87171}.tl .p{box-shadow:inset 0 0 0 1.5px #818CF8;background:#1F2133}.tl .p i{color:#A5B4FC}.tl .s{box-shadow:inset 0 0 0 1.5px #34D399;background:#16241F}.tl .s i{color:#6EE7B7}.tl .sp i::after{content:"";display:inline-block;width:9px;height:9px;margin-left:6px;border:2px solid #818CF8;border-top-color:transparent;border-radius:50%;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.gr{position:relative;margin-bottom:16px}.gr .lb{display:flex;justify-content:space-between;font:500 12px 'Fira Code';color:#9096B0;margin-bottom:7px}.gr .tr{height:8px;border-radius:4px;background:#232632;overflow:hidden}.gr .tr i{display:block;height:100%;width:var(--p);background:var(--c);border-radius:4px;transition:width .5s linear,background .6s}
+.bt{display:flex;gap:10px;position:relative}.bt button{flex:1;border:0;border-radius:14px;padding:14px;font:700 15px 'Hanken Grotesk';cursor:pointer;transition:transform .15s,background .4s}.bt .p{background:#fff;color:#14183A;flex:1.4}.bt .s{background:#242836;color:#C9CEE0}.bt .pr{transform:scale(.96)}.bt button:focus-visible{outline:3px solid #818CF8;outline-offset:2px}
+@media(max-width:560px){.tl{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><span class="ic"><svg id="ic" viewBox="0 0 24 24"></svg></span><div><h1 id="h"></h1><p id="p"></p></div><span class="am">$49.00</span></div>
+<div class="cw"><div class="cc" id="cc"><div class="fc f1"><div class="t"><span>VISA</span><span>EXP 08/25</span></div><div class="n">•••• •••• •••• 4417</div><div class="b"><span>RIYA MENON</span><span></span></div><span class="er" id="er">insufficient funds</span></div><div class="fc f2"><div class="t"><span>MASTERCARD</span><span>EXP 03/29</span></div><div class="n">•••• •••• •••• 8821</div><div class="b"><span>RIYA MENON</span><span>NEW</span></div></div></div></div>
+<div class="tl" id="tl"></div><div class="gr"><div class="lb"><span id="gl">Access ends in 5 days</span><span id="gp">Grace period</span></div><div class="tr"><i id="gb" style="--p:70%"></i></div></div>
+<div class="bt"><button class="p" id="up">Update payment method</button><button class="s" id="rn">Retry now</button></div></div>
+<script>
+const IC={f:'<path d="M12 8v5M12 17h.01"/><path d="M10.300 3.900 2.400 17.500A2 2 0 0 0 4.100 20.500h15.800a2 2 0 0 0 1.700-3L13.700 3.900a2 2 0 0 0-3.400 0Z"/>',o:'<path d="m5 12.500 4.500 4.500L19 7"/>'};
+const A=[['Day 0','Charge attempted'],['Day 3','Automatic retry'],['Day 5','Automatic retry'],['Day 7','Final attempt']];
+const $=id=>document.getElementById(id),tl=$('tl'),els=[],sl=ms=>new Promise(r=>setTimeout(r,ms));let off=false;
+A.forEach(a=>{const d=document.createElement('div');d.innerHTML='<b>'+a[0]+'</b>'+a[1]+'<i></i>';tl.appendChild(d);els.push(d)});
+function st(i,c,t){els[i].className=c;els[i].querySelector('i').textContent=t}
+function failed(){document.body.className='';$('ic').innerHTML=IC.f;$('h').textContent='Payment failed';$('p').textContent='We could not charge your Visa ending 4417.';$('cc').classList.remove('fl');st(0,'f','Declined');st(1,'','Scheduled');st(2,'','Scheduled');st(3,'','Scheduled');$('gl').textContent='Access ends in 5 days';$('gp').textContent='Grace period';$('gb').style.setProperty('--p','70%')}
+function success(){document.body.className='ok';$('ic').innerHTML=IC.o;$('h').textContent='Payment successful';$('p').textContent='Your Mastercard ending 8821 was charged. You are all set.';st(1,'s','Paid ✓');st(2,'','Cancelled');st(3,'','Cancelled');$('gl').textContent='Account in good standing';$('gp').textContent='Active';$('gb').style.setProperty('--p','100%')}
+async function recover(){const b=$('up');b.classList.add('pr');await sl(260);b.classList.remove('pr');$('cc').classList.add('fl');await sl(1100);st(1,'p sp','Retrying now');$('p').textContent='Retrying with your Mastercard ending 8821…';await sl(1900);success()}
+$('up').onclick=()=>{off=true;recover()};$('rn').onclick=()=>{off=true};
+failed();st(1,'p','In 2 days');
+/* Idle demo: a failed-payment recovery flow; the declined Visa glows red above a four-step retry timeline and a draining access-grace bar, then Update payment method presses itself, the card flips in 3D to a new Mastercard, the next retry spins and succeeds, and the whole card turns green with the account restored, then resets, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3800);let g=70;while(!off){for(let k=0;k<12&&!off;k++){g-=2;$('gb').style.setProperty('--p',g+'%');await sl(130)}if(off)return;await recover();await sl(4200);if(off)return;g=70;failed();st(1,'p','In 2 days');await sl(1800)}})()}
+</script></body></html>

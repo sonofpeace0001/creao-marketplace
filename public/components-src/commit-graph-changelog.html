@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Commit Graph Changelog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0C10;color:#E7EAF2;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:660px;background:#11141B;border-radius:26px;padding:22px 22px 18px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.hd h1{font-size:19px;font-weight:800;letter-spacing:-.03em}.hd span{font:500 12px 'Fira Code';color:#7C86A0;display:flex;gap:6px;align-items:center}.hd span i{width:8px;height:8px;border-radius:50%;background:#34D399}
+.gr{position:relative;height:calc(var(--n)*38px + 16px)}
+.gr svg{position:absolute;left:0;top:0;width:150px;height:100%;overflow:visible}
+.ed{fill:none;stroke-width:3;stroke-linecap:round}.cm{stroke:#11141B;stroke-width:3}
+.cm.pop{animation:pp .5s cubic-bezier(.3,2,.5,1)}@keyframes pp{from{r:0}}
+.rw{position:absolute;left:150px;right:0;height:38px;display:flex;align-items:center;gap:10px;padding-left:8px;opacity:0;transform:translateX(-10px);transition:opacity .35s,transform .45s cubic-bezier(.3,1.3,.5,1)}.rw.on{opacity:1;transform:none}
+.rw b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rw code{font:400 11.500px 'Fira Code';color:#6A7390}.rw em{margin-left:auto;font:600 11.500px 'Fira Code';font-style:normal;padding:3px 9px;border-radius:99px;background:rgba(251,191,36,.16);color:#FBBF24;white-space:nowrap}.rw em.t{background:rgba(52,211,153,.16);color:#34D399}
+.rw.mg b{color:#9AA3C0;font-weight:500}
+.br{display:flex;gap:14px;margin-top:10px;font:500 11.500px 'Fira Code';color:#7C86A0}.br span{display:flex;gap:6px;align-items:center}.br i{width:10px;height:3px;border-radius:2px;background:var(--c)}
+@media(max-width:560px){.rw code{display:none}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>search-service</h1><span><i></i>main</span></div><div class="gr" id="gr" style="--n:10"></div><div class="br"><span><i style="--c:#60A5FA"></i>main</span><span><i style="--c:#F472B6"></i>feat/search</span><span><i style="--c:#FBBF24"></i>fix/cache</span></div></div>
+<script>
+const LX={m:20,f:62,x:104},LC={m:'#60A5FA',f:'#F472B6',x:'#FBBF24'},RH=38,N=10;
+const C=[[0,'m','Release v1.4.0','a41c9e','v1.4.0'],[1,'m','Merge feat/search into main','7be302'],[2,'f','Add fuzzy ranking to results','c9d014'],[3,'m','Bump dependencies','2f8a61'],[4,'f','Search index in a background worker','e51b77'],[5,'m','Merge fix/cache into main','90ac33'],[6,'x','Fix stale cache after logout','3d6ef8'],[7,'f','Scaffold search module','b2297d'],[8,'m','Release v1.3.0','5c01ea','v1.3.0'],[9,'m','Speed up cold start','18fa90']];
+const E=[[9,'m',8,'m'],[8,'m',5,'m'],[5,'m',3,'m'],[3,'m',1,'m'],[1,'m',0,'m'],[8,'m',7,'f'],[7,'f',4,'f'],[4,'f',2,'f'],[2,'f',1,'m'],[8,'m',6,'x'],[6,'x',5,'m']];
+const NS='http://www.w3.org/2000/svg',gr=document.getElementById('gr'),H=N*RH+16,Y=r=>16+r*RH-8+RH/2-8,sl=ms=>new Promise(r=>setTimeout(r,ms));
+const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 150 '+H);svg.innerHTML='<defs><clipPath id="cl"><rect id="cr" x="-20" y="0" width="200" height="'+H+'"/></clipPath></defs><g clip-path="url(#cl)" id="g"></g><g id="dots"></g>';gr.appendChild(svg);
+const g=svg.querySelector('#g'),dots=svg.querySelector('#dots'),cr=svg.querySelector('#cr');
+E.forEach(([r1,l1,r2,l2])=>{const x1=LX[l1],y1=Y(r1),x2=LX[l2],y2=Y(r2),col=LC[l1==='m'?l2:l1];const p=document.createElementNS(NS,'path');p.setAttribute('class','ed');p.setAttribute('stroke',col);p.setAttribute('d',x1===x2?'M'+x1+' '+y1+' L'+x2+' '+y2:'M'+x1+' '+y1+' C'+x1+' '+((y1+y2)/2)+' '+x2+' '+((y1+y2)/2)+' '+x2+' '+y2);g.appendChild(p)});
+const rows=[],cds=[];C.forEach(c=>{const d=document.createElementNS(NS,'circle');d.setAttribute('class','cm');d.setAttribute('cx',LX[c[1]]);d.setAttribute('cy',Y(c[0]));d.setAttribute('r',c[4]?7:5.500);d.setAttribute('fill',LC[c[1]]);d.style.opacity=0;dots.appendChild(d);cds.push(d);const r=document.createElement('div');r.className='rw'+(/^Merge/.test(c[2])?' mg':'');r.style.top=(c[0]*RH)+'px';r.innerHTML='<b>'+c[2]+'</b><code>'+c[3]+'</code>'+(c[4]?'<em class="t">'+c[4]+'</em>':(c[1]==='x'?'<em>hotfix</em>':''));gr.appendChild(r);rows.push(r)});
+function reveal(k){const y=H-k*H;cr.setAttribute('y',y);cr.setAttribute('height',H-y+10);C.forEach((c,i)=>{const on=Y(c[0])>=y-2;if(on&&!rows[i].classList.contains('on')){rows[i].classList.add('on');cds[i].style.opacity=1;cds[i].classList.remove('pop');void cds[i].getBoundingClientRect();cds[i].classList.add('pop')}else if(!on){rows[i].classList.remove('on');cds[i].style.opacity=0;cds[i].classList.remove('pop')}})}
+reveal(1);rows.forEach(r=>{r.style.transition='none'});requestAnimationFrame(()=>requestAnimationFrame(()=>rows.forEach(r=>r.style.transition='')));
+let off=false;document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: the repository history is drawn from the oldest commit upward; branch lines are traced in colour, feature and hotfix branches curve away from main and curve back in as merges, each commit dot pops as the line reaches it and its message slides in, tags v1.3.0 and v1.4.0 light up green, and when the graph is complete it holds then redraws from scratch, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3200);let k=1;while(!off){k=0;reveal(0);await sl(700);while(k<1&&!off){k=Math.min(1,k+.012);reveal(k);await sl(40)}await sl(4200)}})()}
+</script></body></html>

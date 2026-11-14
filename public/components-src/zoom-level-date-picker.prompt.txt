@@ -1,0 +1,40 @@
+ROLE
+You are a senior calendar UX designer and front-end engineer with 15+ years of experience. Build "Zoom Level Date Picker": a date picker that zooms through levels: pressing the title zooms out from days to months to years, each new grid scaling in, and picking a year then a month zooms back down to a day.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with violet gradient selection and soft tiles.
+- Palette: #7C5CFF, #F3EFFB, #1D1638, #9A8FC2, #C05CFF, #F7F4FD
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with arrows and zoomable title; viewport with day, month or year grid; footer with the chosen date and level.
+
+INTERACTION & STATES
+- Click the title to zoom out, pick to zoom in, arrows to move.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Outgoing grid scales 1 to 1.35 or 0.72 and fades; incoming scales from the opposite; 480ms spring.
+
+IDLE AUTOPLAY
+- After 3.4s it zooms to years, picks 2028, March and the 14th, then resets.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Three separate dropdowns.
+- Hard swaps between levels.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

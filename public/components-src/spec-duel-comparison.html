@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Spec Duel Comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--a:#38BDF8;--b:#F472B6;background:#080A12;color:#E9ECF8;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:720px;background:#10131E;border-radius:30px;padding:26px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08)}
+.hd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;margin-bottom:22px}
+.pn{display:flex;align-items:center;gap:14px}.pn.r{flex-direction:row-reverse;text-align:right}
+.ph{position:relative;width:62px;height:104px;border-radius:15px;background:linear-gradient(160deg,var(--c),color-mix(in srgb,var(--c) 40%,#000));box-shadow:0 18px 30px -14px var(--c);animation:fl 3.200s ease-in-out infinite}.pn.r .ph{animation-delay:-1.600s}@keyframes fl{50%{transform:translateY(-6px)}}
+.ph::before{content:"";position:absolute;left:6px;right:6px;top:6px;bottom:6px;border-radius:10px;background:rgba(0,0,0,.35)}.ph::after{content:"";position:absolute;left:50%;top:10px;width:16px;height:4px;margin-left:-8px;border-radius:2px;background:rgba(255,255,255,.4)}
+.pn b{display:block;font-size:21px;font-weight:800;letter-spacing:-.04em}.pn span{font:500 12px 'Geist Mono';color:#8A93B6}
+.vs{width:54px;height:54px;border-radius:50%;background:#fff;color:#10131E;display:grid;place-items:center;font:800 17px 'Sora';letter-spacing:-.02em;box-shadow:0 0 0 6px rgba(255,255,255,.08);animation:pu 2s ease-in-out infinite}@keyframes pu{50%{box-shadow:0 0 0 12px rgba(255,255,255,0)}}
+.rw{display:grid;grid-template-columns:1fr 100px 1fr;align-items:center;gap:12px;margin-bottom:13px}
+.rw .lb{text-align:center;font:600 11.500px 'Geist Mono';letter-spacing:.1em;color:#8A93B6;text-transform:uppercase}
+.bar{position:relative;height:14px;border-radius:7px;background:#181C2B;overflow:hidden;display:flex}.bar.l{justify-content:flex-end}.bar i{display:block;height:100%;width:var(--w,0%);background:var(--c);border-radius:7px;transition:width 1s cubic-bezier(.3,1,.4,1);box-shadow:0 0 12px var(--c)}
+.vl{position:absolute;top:50%;transform:translateY(-50%);font:700 12px 'Geist Mono';color:#fff;mix-blend-mode:normal}
+.nums{display:flex;justify-content:space-between;margin-top:5px;font:600 13px 'Geist Mono'}.nums b{color:#aab2d0;font-weight:600;font-variant-numeric:tabular-nums;transition:color .4s}.nums b.w{color:var(--c)}.nums b.w::after{content:" ★";font-size:11px}
+.ft{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+.sc{font:800 44px/1 'Sora';letter-spacing:-.05em;font-variant-numeric:tabular-nums;color:var(--c)}.sc.r{text-align:right}.ft small{display:block;font:500 10.500px 'Geist Mono';letter-spacing:.14em;color:#7C86A8;margin-top:5px}.ft .m{text-align:center;font:600 12px 'Geist Mono';color:#8A93B6;letter-spacing:.1em}
+@media(max-width:560px){.pn b{font-size:16px}.ph{width:44px;height:76px}.rw{grid-template-columns:1fr 70px 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><div class="pn" style="--c:var(--a)"><div class="ph"></div><div><b>Aero 12</b><span>from $799</span></div></div><div class="vs">VS</div><div class="pn r" style="--c:var(--b)"><div class="ph"></div><div><b>Nova X</b><span>from $899</span></div></div></div><div id="rw"></div>
+<div class="ft"><div><div class="sc" id="sa" style="--c:var(--a)">0</div><small>AERO 12 WINS</small></div><div class="m">ROUNDS</div><div><div class="sc r" id="sb" style="--c:var(--b)">0</div><small style="text-align:right">NOVA X WINS</small></div></div></div>
+<script>
+const R=[['Battery life',38,31,' h'],['Camera score',142,151,''],['Display peak',1800,2400,' nits'],['Charging',65,45,' W'],['Weight',172,191,' g',true]];
+const rw=document.getElementById('rw'),sl=t=>new Promise(r=>setTimeout(r,t));let off=false;const els=[];
+R.forEach(r=>{const mx=Math.max(r[1],r[2])*1.12;const d=document.createElement('div');d.innerHTML='<div class="rw"><div class="bar l" style="--c:var(--a)"><i></i></div><div class="lb">'+r[0]+'</div><div class="bar" style="--c:var(--b)"><i></i></div></div><div class="nums"><b class="a">0</b><b class="b">0</b></div>';rw.appendChild(d);els.push({d,mx,r,bars:d.querySelectorAll('.bar i'),n:d.querySelectorAll('.nums b')})});
+function setRow(i,k){const e=els[i],[n,a,b,u,low]=e.r;e.bars[0].style.setProperty('--w',(a/e.mx*100*k)+'%');e.bars[1].style.setProperty('--w',(b/e.mx*100*k)+'%');e.n[0].textContent=Math.round(a*k)+u;e.n[1].textContent=Math.round(b*k)+u;const aw=low?a<b:a>b;e.n[0].classList.toggle('w',k>=1&&aw);e.n[1].classList.toggle('w',k>=1&&!aw);e.n[0].style.setProperty('--c','var(--a)');e.n[1].style.setProperty('--c','var(--b)')}
+function score(){let a=0,b=0;els.forEach(e=>{const[,x,y,,low]=e.r;if(e.n[0].classList.contains('w'))a++;if(e.n[1].classList.contains('w'))b++});document.getElementById('sa').textContent=a;document.getElementById('sb').textContent=b}
+els.forEach((e,i)=>{e.bars.forEach(b=>b.style.transition='none');setRow(i,1)});score();requestAnimationFrame(()=>requestAnimationFrame(()=>els.forEach(e=>e.bars.forEach(b=>b.style.transition=''))));
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: two phones float head to head under a pulsing VS badge; every spec row's pair of glowing bars grows outward from the centre label while both numbers count up, a crown and highlight mark the winner of each round (lower weight wins), and the win tallies at the bottom update, then the bars retract and the whole duel replays, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);while(!off){els.forEach((e,i)=>setRow(i,0));score();await sl(600);for(let i=0;i<els.length&&!off;i++){const t0=performance.now();while(performance.now()-t0<1000&&!off){const k=1-Math.pow(1-(performance.now()-t0)/1000,3);setRow(i,k);await sl(24)}setRow(i,1);score();await sl(250)}await sl(4200)}})()}
+</script></body></html>

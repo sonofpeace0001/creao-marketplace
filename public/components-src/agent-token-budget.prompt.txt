@@ -1,0 +1,40 @@
+ROLE
+You are a senior LLM observability designer and front-end engineer with 15+ years of experience. Build "Agent Token Budget": a context-window meter for an AI agent run: stacked segments grow as it works with a rising dollar cost and throughput chart, then compact into a striped summary block at the 90 percent line.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black panel, bright category segments, large tabular token count and a violet compaction flash.
+- Palette: #7C86A8, #0A0C16, #FB7185, #818CF8, #080A10, #E8ECF8
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with cost; token counter with state chip; segmented bar with 90 percent marker; legend; throughput sparkline.
+
+INTERACTION & STATES
+- Hovering the bar pauses the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Segments widen continuously; sparkline redraws each frame; compaction flashes violet and collapses the conversation segment into a hatched block.
+
+IDLE AUTOPLAY
+- After 3.2s the context fills toward the limit, compacts, and fills again.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A single bar colour; each context source must be distinct.
+- Compaction as a hard reset; show the summary block remaining.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

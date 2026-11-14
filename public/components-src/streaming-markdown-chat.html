@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Streaming Markdown Chat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F1EEE8;color:#1B1A17;font-family:'Instrument Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:640px;height:610px;background:#FBFAF7;border-radius:28px;box-shadow:0 40px 56px -34px rgba(27,26,23,.5),inset 0 0 0 1px rgba(27,26,23,.08);display:flex;flex-direction:column;overflow:hidden}
+.top{display:flex;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid #EEEAE0;font-size:13.500px;font-weight:600}.top i{width:9px;height:9px;border-radius:50%;background:#D97757}.top span{margin-left:auto;font:500 11.500px 'JetBrains Mono';color:#9A9487}
+.ms{flex:1;overflow:hidden;padding:18px 20px;display:flex;flex-direction:column;justify-content:flex-end;gap:14px}
+.u{align-self:flex-end;max-width:80%;padding:11px 16px;border-radius:20px 20px 6px 20px;background:#1B1A17;color:#fff;font-size:14.500px;line-height:1.45}
+.a{display:flex;gap:12px}.av{flex:none;width:30px;height:30px;border-radius:10px;background:#D97757;display:grid;place-items:center;color:#fff;font:700 14px 'Instrument Sans'}
+.bd{font-size:14.500px;line-height:1.6;min-width:0;flex:1}.bd h4{font-size:15.500px;font-weight:700;margin-bottom:5px;letter-spacing:-.01em}.bd p{margin-bottom:10px}.bd strong{font-weight:700}.bd code.i{font:500 12.500px 'JetBrains Mono';background:#EEEAE0;padding:1px 6px;border-radius:5px}
+.cb{margin:2px 0 12px;border-radius:14px;background:#1E1C19;overflow:hidden}.cb .h{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;background:#2A2723;font:500 11.500px 'JetBrains Mono';color:#A39C8F}.cb .h b{font-weight:500;padding:3px 9px;border-radius:6px;background:rgba(255,255,255,.08);color:#E9E3D6;transition:background .3s,color .3s}.cb .h b.ok{background:#3C7A55;color:#fff}
+.cb pre{padding:12px 14px;font:400 12.500px/1.65 'JetBrains Mono';color:#E9E3D6;white-space:pre;overflow:hidden}.k{color:#F29E74}.f{color:#8FD1B8}.s{color:#E8C877}.c{color:#7D766A}
+.bd ul{margin:0 0 10px 20px}.bd li{margin-bottom:3px}
+.tb{width:100%;border-collapse:collapse;font-size:13.500px;margin-bottom:4px}.tb th,.tb td{text-align:left;padding:7px 12px;border-bottom:1px solid #EEEAE0}.tb th{font-size:11.500px;letter-spacing:.08em;text-transform:uppercase;color:#9A9487}
+.cr{display:inline-block;width:7px;height:16px;background:#D97757;vertical-align:-3px;margin-left:2px;animation:bk .9s steps(2) infinite}@keyframes bk{50%{opacity:0}}
+.in{display:flex;gap:10px;padding:12px 16px;border-top:1px solid #EEEAE0}.in div{flex:1;padding:11px 14px;border-radius:14px;background:#F1EEE8;font-size:14px;color:#9A9487}.in button{width:44px;border:0;border-radius:14px;background:#D97757;color:#fff;font-size:18px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="cd"><div class="top"><i></i>Claude Sonnet<span>streaming</span></div><div class="ms" id="ms"><div class="u">How do I debounce a search input in React?</div><div class="a"><div class="av">C</div><div class="bd" id="bd"></div></div></div><div class="in"><div>Reply…</div><button aria-label="Send">↑</button></div></div>
+<script>
+const B=['<h4>Debounce the value, not the callback</h4>','<p>A <strong>debounce</strong> waits until the user stops typing before the work runs. Wrap the value in a small hook:</p>',
+'<div class="cb"><div class="h">typescript <b>Copy</b></div><pre><span class="k">function</span> <span class="f">useDebounce</span>(value, ms = <span class="s">300</span>) {\n  <span class="k">const</span> [v, setV] = <span class="f">useState</span>(value);\n  <span class="f">useEffect</span>(() =&gt; {\n    <span class="k">const</span> t = <span class="f">setTimeout</span>(() =&gt; <span class="f">setV</span>(value), ms);\n    <span class="k">return</span> () =&gt; <span class="f">clearTimeout</span>(t);\n  }, [value, ms]);\n  <span class="k">return</span> v;\n}</pre></div>',
+'<ul><li>Run your fetch on the <code class="i">debounced</code> value.</li><li>Cancel in-flight requests with <code class="i">AbortController</code>.</li></ul>',
+'<table class="tb"><tr><th>Delay</th><th>Feel</th></tr><tr><td>150 ms</td><td>Snappy, more requests</td></tr><tr><td>300 ms</td><td>Balanced default</td></tr><tr><td>500 ms</td><td>Feels sluggish</td></tr></table>'];
+const bd=document.getElementById('bd'),sl=ms=>new Promise(r=>setTimeout(r,ms));let off=false,gen=0;
+function nodes(el){const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),a=[];let n;while(n=w.nextNode())a.push(n);return a}
+async function typeBlock(html,my,fast){const t=document.createElement('div');t.innerHTML=html;const el=t.firstElementChild;bd.appendChild(el);const cr=document.createElement('i');cr.className='cr';
+ const ns=nodes(el).filter(n=>n.textContent.trim().length||/\n/.test(n.textContent));const full=ns.map(n=>n.textContent);ns.forEach(n=>n.textContent='');
+ for(let k=0;k<ns.length;k++){ns[k].parentNode.appendChild(cr);const s=full[k];const step=fast?99:(s.length>40?3:2);for(let i=0;i<s.length;i+=step){if(my!==gen)return;ns[k].textContent=s.slice(0,i+step);await sl(fast?0:18)}ns[k].textContent=s}
+ cr.remove();const cp=el.querySelector('.h b');if(cp&&!fast){await sl(300);cp.classList.add('ok');cp.textContent='Copied';setTimeout(()=>{cp.classList.remove('ok');cp.textContent='Copy'},1400)}}
+function instant(n){bd.innerHTML='';for(let i=0;i<n;i++){const t=document.createElement('div');t.innerHTML=B[i];bd.appendChild(t.firstElementChild)}}
+instant(4);const cr0=document.createElement('i');cr0.className='cr';bd.appendChild(cr0);
+/* Idle demo: the assistant answer streams in like a real model, a heading, a paragraph with bold, a syntax-coloured code block whose Copy button flips to Copied, a bullet list and finally a table, each typed with a blinking caret; when finished it clears and streams again from the top, until you interact. */
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);const my=++gen;cr0.remove();await typeBlock(B[4],my);await sl(4200);while(!off){const m=++gen;bd.innerHTML='';for(let i=0;i<B.length&&m===gen;i++){await typeBlock(B[i],m);await sl(250)}await sl(4200)}})()}
+</script></body></html>

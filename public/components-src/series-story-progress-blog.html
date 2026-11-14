@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Series Story Progress Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@500;600;700;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E7E9F3;color:#12142B;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{position:relative;width:100%;max-width:540px;height:590px;border-radius:32px;background:var(--bg,#12142B);color:#fff;overflow:hidden;box-shadow:0 44px 64px -34px rgba(18,20,43,.7);transition:background .6s}
+.sg{position:absolute;left:18px;right:18px;top:16px;display:flex;gap:5px;z-index:5}.sg i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.28);overflow:hidden}.sg i b{display:block;height:100%;width:var(--w,0%);background:#fff}
+.hd{position:absolute;left:22px;right:22px;top:34px;display:flex;justify-content:space-between;align-items:center;z-index:5;font:500 12px 'DM Mono';letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.sl{position:absolute;inset:0;padding:96px 34px 40px;display:flex;flex-direction:column;opacity:0;transform:translateX(60px);transition:opacity .5s,transform .7s cubic-bezier(.3,1,.4,1)}.sl.on{opacity:1;transform:none}.sl.out{opacity:0;transform:translateX(-60px)}
+.nm{font:400 190px/.8 'DM Serif Display',serif;color:rgba(255,255,255,.14);margin-left:-8px;letter-spacing:-.04em}
+.sl h1{font:400 42px/1.02 'DM Serif Display',serif;letter-spacing:-.02em;margin:-34px 0 16px;position:relative}.sl p{font-size:16.500px;line-height:1.55;color:rgba(255,255,255,.82);margin-bottom:22px;max-width:400px}
+.tg{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.tg span{padding:7px 14px;border-radius:99px;background:rgba(255,255,255,.14);font-size:13px;font-weight:600;backdrop-filter:blur(6px)}
+.ft{position:absolute;left:34px;right:34px;bottom:28px;display:flex;justify-content:space-between;align-items:center;z-index:5}.ft span{font:500 12px 'DM Mono';color:rgba(255,255,255,.7)}.ft button{border:0;border-radius:99px;padding:11px 20px;background:#fff;color:#12142B;font:800 14px 'Manrope';cursor:pointer;transition:transform .15s}.ft button:active{transform:scale(.95)}.ft button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.bl{position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:var(--ac,#8B5CF6);filter:blur(70px);opacity:.55;transition:background .6s}
+.sl .tg{margin-bottom:56px}
+@media(max-width:520px){.nm{font-size:130px}.sl h1{font-size:34px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd" id="cd"><i class="bl"></i><div class="sg" id="sg"></div><div class="hd"><span>Series · Design systems</span><span id="pg">1 / 5</span></div><div id="sl"></div><div class="ft"><span id="rt">4 min read</span><button id="nx">Next part →</button></div></div>
+<script>
+const S=[['One','Start with the problem, not the palette','Before a single token exists, write down the three recurring decisions your team keeps remaking. That list is your system.','#12142B','#6366F1',['4 min','Foundations']],
+['Two','Naming is the real architecture','Names outlive colours. We spent a week on vocabulary and never regretted a day of it.','#2A1250','#C026D3',['6 min','Tokens']],
+['Three','Components that earn their keep','A component is a promise. Ship fewer, make each one boring in the best way, and document the edge cases.','#0B3B3C','#14B8A6',['5 min','Components']],
+['Four','Governance without the committee','A weekly office hour beat every approval flow we tried. Trust the people closest to the problem.','#4A1F12','#F97316',['7 min','Process']],
+['Five','Measuring whether it worked','Adoption is vanity. Watch the time from design handoff to shipped screen and the size of your diff.','#10243A','#38BDF8',['5 min','Results']]];
+const $=id=>document.getElementById(id),sg=$('sg'),sl=$('sl'),cd=$('cd'),w=ms=>new Promise(r=>setTimeout(r,ms));let cur=0,off=false,pr=0,t0=0;const bars=[],slides=[];
+S.forEach((s,i)=>{const b=document.createElement('i');b.innerHTML='<b></b>';sg.appendChild(b);bars.push(b.firstChild);const d=document.createElement('section');d.className='sl';d.innerHTML='<div class="nm">'+(i+1)+'</div><h1>'+s[1]+'</h1><p>'+s[2]+'</p><div class="tg"><span>'+s[5][0]+'</span><span>'+s[5][1]+'</span><span>Part '+s[0]+'</span></div>';sl.appendChild(d);slides.push(d)});
+function show(i){slides.forEach((d,k)=>{d.classList.toggle('on',k===i);d.classList.toggle('out',k<i)});cd.style.setProperty('--bg',S[i][3]);cd.style.setProperty('--ac',S[i][4]);bars.forEach((b,k)=>b.style.setProperty('--w',k<i?'100%':k===i?pr*100+'%':'0%'));$('pg').textContent=(i+1)+' / '+S.length;$('rt').textContent=S[i][5][0]+' read';$('nx').textContent=i===S.length-1?'Start again ↺':'Next part →';cur=i}
+$('nx').onclick=()=>{off=true;pr=0;show((cur+1)%S.length)};
+sl.addEventListener('click',()=>{});
+slides.forEach(s=>s.style.transition='none');pr=.55;show(1);requestAnimationFrame(()=>requestAnimationFrame(()=>slides.forEach(s=>s.style.transition='')));
+/* Idle demo: the series reads like stories; a segmented bar at the top fills for the current part, then the giant numeral, headline and tags slide out to the left while the next part slides in, the card background and glow cross-fade to that part's colour, and the counter and read time update, looping through all five, until you press Next part. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0;requestAnimationFrame(function lp(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;if(n>3000&&!off){pr+=dt/4.2;if(pr>=1){pr=0;show((cur+1)%S.length)}bars[cur].style.setProperty('--w',pr*100+'%')}requestAnimationFrame(lp)})}
+</script></body></html>

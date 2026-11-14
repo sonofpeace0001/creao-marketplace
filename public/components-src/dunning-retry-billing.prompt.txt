@@ -1,0 +1,40 @@
+ROLE
+You are a senior subscription billing designer and front-end engineer with 15+ years of experience. Build "Dunning Retry Billing": a failed-payment recovery card: a declined Visa above a four-step retry timeline and a draining grace bar, then the card flips in 3D to a new Mastercard, the retry spins and succeeds and everything turns green.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark card with a red glow that resolves to mint on success.
+- Palette: #818CF8, #F87171, #34D399, #161821, #9096B0, #0E0F14
+- Type: Hanken Grotesk, Fira Code (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with status icon and amount; 3D flip card; four attempt tiles; access grace bar; update and retry buttons.
+
+INTERACTION & STATES
+- Update payment method triggers the recovery flow.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Card flips 900ms; spinner on the retry tile; glow, icon and text recolour; grace bar drains.
+
+IDLE AUTOPLAY
+- After 3.8s the grace bar drains, Update presses itself, the flow succeeds, then resets.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A generic error banner; show the retry plan and the consequence.
+- Success without visible state change across the card.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

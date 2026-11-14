@@ -1,0 +1,40 @@
+ROLE
+You are a senior calendar product designer and front-end engineer with 15+ years of experience. Build "Day Timeline Calendar": a single-day calendar with a creeping red now line where a cursor drags to create an event: a dashed ghost block stretches with live times, the title types itself and the block locks in with a toast.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White day view with tinted event blocks and mono time labels.
+- Palette: #EF4444, #4338CA, #111827, #F0F1F4, #6366F1, #EEF0F3
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with date and nav; hour grid; five tinted events; red now line; ghost event; cursor; toast.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Cursor travels 800ms; ghost height follows the drag; title types at 55ms per character; toast springs up.
+
+IDLE AUTOPLAY
+- After 3.5s a new Design review event is created by drag, confirmed, removed and repeated.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Pre-made static events only; creation is the interaction.
+- Time labels that do not follow the drag.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

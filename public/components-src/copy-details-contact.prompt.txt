@@ -1,0 +1,40 @@
+ROLE
+You are a senior studio website designer and front-end engineer with 15+ years of experience. Build "Copy Details Contact": three contact rows each with a copy button: a row outlines and nudges as if hovered, the copy icon spins into a tick on a green button, the row turns mint and a Copied tooltip pops, with a response-rate ring below.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream card with Syne headings and coloured icon tiles.
+- Palette: #221A12, #E5522B, #85715C, #16A34A, #F0E6D7, #F0E9DF
+- Type: Syne, Outfit (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Headline; three detail rows with icon, label, value and copy button; tooltip; response ring and stat.
+
+INTERACTION & STATES
+- Click or press Enter on a row to copy it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Row translate 400ms spring; icon swap with rotation; tooltip rises; colours transition 300ms.
+
+IDLE AUTOPLAY
+- After 3.2s each row is copied in turn.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Copy buttons with no confirmation.
+- Tiny copy targets.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

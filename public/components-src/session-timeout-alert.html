@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Session Timeout Alert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#14181F;color:#EEF1F6;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.app{position:relative;width:100%;max-width:640px;height:420px;border-radius:24px;background:#1B212B;overflow:hidden;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.07)}
+.bg{position:absolute;inset:0;padding:20px;display:grid;grid-template-columns:150px 1fr;gap:16px;filter:blur(0);transition:filter .5s}.app.on .bg{filter:blur(3px) brightness(.6)}
+.sb{display:grid;gap:8px;align-content:start}.sb i{display:block;height:34px;border-radius:10px;background:rgba(255,255,255,.06)}.sb i:first-child{background:rgba(255,255,255,.14)}
+.mn{display:grid;gap:12px;align-content:start}.mn i{display:block;border-radius:14px;background:rgba(255,255,255,.05)}.mn i:nth-child(1){height:46px;width:60%}.mn i:nth-child(2){height:130px}.mn i:nth-child(3){height:90px}
+.sc{position:absolute;inset:0;background:rgba(5,8,14,.55);opacity:0;pointer-events:none;transition:opacity .4s}.app.on .sc{opacity:1;pointer-events:auto}
+.md{position:absolute;left:50%;top:50%;width:min(380px,88%);transform:translate(-50%,-46%) scale(.94);opacity:0;border-radius:24px;background:#fff;color:#141A26;padding:28px 26px 24px;text-align:center;box-shadow:0 30px 60px -20px #000;transition:all .5s cubic-bezier(.3,1.5,.5,1);pointer-events:none}.app.on .md{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto}
+.rg{position:relative;width:110px;height:110px;margin:0 auto 14px}.rg svg{width:100%;height:100%;transform:rotate(-90deg)}.rg .t{fill:none;stroke:#EEF1F6;stroke-width:8}.rg .v{fill:none;stroke:var(--k,#F59E0B);stroke-width:8;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p,1));transition:stroke .4s}
+.rg b{position:absolute;inset:0;display:grid;place-items:center;font:700 34px 'Hanken Grotesk';letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.md h2{font-size:21px;font-weight:800;letter-spacing:-.03em;margin-bottom:5px}.md p{font-size:14px;color:#566074;line-height:1.5;margin-bottom:18px}
+.bt{display:grid;grid-template-columns:1fr 1.3fr;gap:10px}.bt button{border:0;border-radius:13px;padding:13px;font:700 14.500px 'Hanken Grotesk';cursor:pointer;transition:transform .15s,background .25s}.bt button:active,.bt .pr{transform:scale(.96)}
+.so{background:#EEF1F6;color:#33405C}.st{background:#141A26;color:#fff}.bt button:focus-visible{outline:3px solid #6366F1;outline-offset:2px}
+.tk{position:absolute;left:50%;bottom:24px;transform:translate(-50%,20px);padding:10px 18px;border-radius:99px;background:#16A34A;color:#fff;font:700 13.500px 'Hanken Grotesk';opacity:0;transition:all .45s cubic-bezier(.3,1.6,.5,1);white-space:nowrap}.tk.on{opacity:1;transform:translate(-50%,0)}
+.mono{position:absolute;top:14px;right:18px;font:500 11.500px 'Geist Mono';color:#69758A}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="app" id="app"><div class="bg"><div class="sb"><i></i><i></i><i></i><i></i></div><div class="mn"><i></i><i></i><i></i></div></div><span class="mono" id="il">idle for 14:00</span><div class="sc"></div>
+<div class="md" role="alertdialog" aria-labelledby="t"><div class="rg"><svg viewBox="0 0 36 36"><circle class="t" cx="18" cy="18" r="15"/><circle class="v" id="v" cx="18" cy="18" r="15" pathLength="1"/></svg><b id="n">60</b></div><h2 id="t">Still there?</h2><p>For your security we sign you out after 15 minutes of inactivity. Your draft is saved.</p><div class="bt"><button class="so">Sign out</button><button class="st" id="stay">Stay signed in</button></div></div><div class="tk" id="tk">✓ Session extended for 15 minutes</div></div>
+<script>
+const $=id=>document.getElementById(id),app=$('app'),sl=ms=>new Promise(r=>setTimeout(r,ms));let left=42,off=false,live=false;
+function paint(){$('n').textContent=Math.ceil(left);$('v').style.setProperty('--p',left/60);$('v').style.setProperty('--k',left<=15?'#EF4444':left<=30?'#F59E0B':'#10B981');}
+async function extend(){live=false;app.classList.remove('on');$('tk').classList.add('on');await sl(2200);$('tk').classList.remove('on')}
+$('stay').onclick=()=>{off=true;extend()};
+app.classList.add('on');paint();
+/* Idle demo: a dimmed app is covered by a sign-out warning; the ring drains and turns from green to amber to red while the seconds count down, then Stay signed in presses itself, the modal springs away and a success toast rises, and the cycle restarts, until you press a button. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3600);while(!off){live=true;const t0=performance.now(),from=42;while(live&&!off&&left>9){left=from-(performance.now()-t0)/1000*5;paint();await sl(50)}if(off)return;$('stay').classList.add('pr');await sl(320);$('stay').classList.remove('pr');await extend();await sl(2600);if(off)return;left=60;paint();app.classList.add('on');await sl(1200);left=42;paint()}})()}
+</script></body></html>

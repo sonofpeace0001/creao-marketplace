@@ -1,0 +1,40 @@
+ROLE
+You are a senior creative developer and front-end engineer with 15+ years of experience. Build "Spotlight Lens Cursor": a dark screen shows only a blurred ghost of the headline until a glowing lens with a magnifier handle glides over it; inside the lens the headline turns to a sunset gradient and a hidden paragraph becomes readable.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black stage, blurred dim copy and a warm gradient revealed in the lens.
+- Palette: #2A2D40, #FFB454, #05060A, #0A0B12, #222538, #FF5E8A
+- Type: Syne, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Blurred base layer; masked bright layer; lens ring with dashed inner ring and handle; hint.
+
+INTERACTION & STATES
+- Move the pointer to move the lens.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- CSS mask centred on lens position; smoothed follow 0.1; dashed ring rotates 14s.
+
+IDLE AUTOPLAY
+- After 2.8s the lens traces a figure eight until the user moves.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A spotlight that only dims; the content must reveal.
+- Hard lens edges.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

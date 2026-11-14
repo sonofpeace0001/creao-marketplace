@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Circular Ring Carousel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#07070D;color:#F0F0FA;font-family:'Syne',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;overflow:hidden;-webkit-font-smoothing:antialiased}
+.st{position:relative;width:100%;max-width:760px;height:470px;border-radius:28px;background:radial-gradient(500px 300px at 50% 80%,rgba(124,92,255,.25),transparent 70%),#0C0C16;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08);overflow:hidden;perspective:1300px;cursor:grab;touch-action:pan-y;user-select:none}
+.st:active{cursor:grabbing}
+.rg{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+.cdd{position:absolute;width:210px;height:290px;margin:-160px 0 0 -105px;border-radius:20px;overflow:hidden;backface-visibility:hidden;box-shadow:0 20px 40px -14px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.14)}
+.cdd svg{width:100%;height:100%;display:block}.cdd .tx{position:absolute;left:0;right:0;bottom:0;padding:44px 16px 15px;background:linear-gradient(transparent,rgba(5,5,10,.85))}.cdd .tx small{font:500 10.500px 'DM Mono';letter-spacing:.18em;color:rgba(255,255,255,.7);text-transform:uppercase}.cdd .tx b{display:block;font:800 20px/1.05 'Syne';letter-spacing:-.02em;margin-top:3px}
+.fl{position:absolute;left:50%;top:76%;width:380px;height:60px;margin-left:-190px;border-radius:50%;background:radial-gradient(ellipse,rgba(124,92,255,.45),transparent 70%);filter:blur(8px)}
+.lb{position:absolute;left:0;right:0;bottom:18px;text-align:center;font:500 12px 'DM Mono';letter-spacing:.14em;color:#8C8CAA}.lb b{color:#fff;font-weight:500}
+.hn{position:absolute;left:22px;top:20px;font:500 11.500px 'DM Mono';letter-spacing:.16em;color:#7C7CA0}
+</style></head><body>
+<div class="st" id="st"><span class="hn">DRAG TO SPIN</span><div class="fl"></div><div class="rg" id="rg"></div><div class="lb" id="lb"></div></div>
+<script>
+function scene(s){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};const P=[['#1B2A6B','#E85D75','#FFB86B'],['#0B3B3C','#2FA58B','#F4E285'],['#3A1C5B','#C4478D','#FF9E7A'],['#10243A','#3D7BA8','#F2D8A7'],['#3B1A1A','#D1583B','#F8C37A']][Math.floor(r(5))];const id='g'+Math.floor(s);let h='<svg viewBox="0 0 190 260" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+P[0]+'"/><stop offset=".55" stop-color="'+P[1]+'"/><stop offset="1" stop-color="'+P[2]+'"/></linearGradient></defs><rect width="190" height="260" fill="url(#'+id+')"/><circle cx="'+(50+r(90))+'" cy="'+(60+r(50))+'" r="'+(20+r(14))+'" fill="#FFF3D1" opacity=".95"/>';for(let l=0;l<4;l++){let d='M0 260L0 '+(150+l*26);const a=18+r(24),f=.012+r(.02),ph=r(6);for(let x=0;x<=190;x+=6)d+=' L'+x+' '+(150+l*26-a*Math.abs(Math.sin(x*f+ph))-a*.35*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L190 260Z';h+='<path d="'+d+'" fill="#0C0A14" opacity="'+(.22+l*.22)+'"/>'}return h+'</svg>'}
+const T=[['Iceland','Black sand dawn'],['Kyoto','Temple in the mist'],['Marrakech','Rooftop dusk'],['Patagonia','Wind and granite'],['Lofoten','Midnight sun'],['Cappadocia','Balloon sunrise'],['Faroe','Cliffs and fog'],['Atacama','Salt flats at noon']];
+const N=T.length,R=370,st=document.getElementById('st'),rg=document.getElementById('rg'),cards=[];
+T.forEach((t,i)=>{const c=document.createElement('div');c.className='cdd';c.innerHTML=scene(i*17+3)+'<div class="tx"><small>'+String(i+1).padStart(2,'0')+' · '+t[0]+'</small><b>'+t[1]+'</b></div>';c.style.transform='rotateY('+(i*360/N)+'deg) translateZ('+R+'px)';rg.appendChild(c);cards.push(c)});
+let ang=0,vel=0,drag=false,lx=0,off=false,t0=0;
+function paint(){rg.style.transform='translateZ(-'+R+'px) rotateX(-6deg) rotateY('+ang+'deg)';let best=0,bd=1e9;cards.forEach((c,i)=>{const a=(((i*360/N+ang)%360)+540)%360-180,d=Math.abs(a);if(d<bd){bd=d;best=i}c.style.filter='brightness('+(1-Math.min(1,d/140)*.62)+')'});document.getElementById('lb').innerHTML='<b>'+T[best][0]+'</b> · '+T[best][1]}
+st.addEventListener('pointerdown',e=>{off=true;drag=true;lx=e.clientX;vel=0;st.setPointerCapture(e.pointerId)});st.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lx;lx=e.clientX;ang+=dx*.4;vel=dx*.4});st.addEventListener('pointerup',()=>{drag=false});
+paint();
+/* Idle demo: eight scene cards are arranged on a true 3D cylinder; after 3s it turns steadily, the card at the front brightens and the others dim by their angle, the label below names the front card, and a purple glow pools on the floor, until you grab it and spin it with inertia. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0;requestAnimationFrame(function lp(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;if(!drag){if(off){ang+=vel;vel*=.95;if(Math.abs(vel)<.05){vel=0}}else if(n>3000){ang-=dt*14}}paint();requestAnimationFrame(lp)})}
+</script></body></html>

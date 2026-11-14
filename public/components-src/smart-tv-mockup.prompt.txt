@@ -1,0 +1,40 @@
+ROLE
+You are a senior streaming UI designer and front-end engineer with 15+ years of experience. Build "Smart TV Mockup": a smart-TV home screen driven by a tiny on-screen remote: a pressed arrow lights, the white focus ring and enlarged poster step along the row, the backdrop cross-fades and the hero details swap.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark TV on a slim stand with cinematic scenes and a glass remote.
+- Palette: #0B0D16, #C8CEE6, #9BA3C4, #16161B, #0A0B10, #050507
+- Type: Archivo, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- TV bezel; backdrop scene; nav; hero with title, genre, description and meta; poster row; remote; stand.
+
+INTERACTION & STATES
+- Click a poster to focus it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Focus scale 1.14 with spring; backdrop fade 800ms; hero text rises 260ms; remote key presses.
+
+IDLE AUTOPLAY
+- After 3.4s the focus walks through the row and back every 2.1s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A hero that does not follow focus.
+- No remote cue for how focus moves.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

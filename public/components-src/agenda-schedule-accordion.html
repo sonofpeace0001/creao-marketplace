@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Agenda Schedule Accordion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E6EEF9;color:#12203A;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:580px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 36px 50px -34px rgba(18,32,58,.5),inset 0 0 0 1px rgba(18,32,58,.07)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.hd h1{font-size:23px;font-weight:800;letter-spacing:-.04em}.hd small{font:500 12px 'DM Mono';color:#6C7A96;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:3px}
+.clk{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;background:#12203A;color:#fff;font:500 14px 'DM Mono';font-variant-numeric:tabular-nums}.clk i{width:8px;height:8px;border-radius:50%;background:#FF4D6D;animation:bl 1.2s infinite}@keyframes bl{50%{opacity:.25}}
+.it{border-radius:18px;margin-bottom:6px;position:relative;background:#F4F7FD}.an .it{transition:background .4s,box-shadow .4s}.it.lv{background:#EAF1FF;box-shadow:inset 0 0 0 2px #3B6BFF}
+.bt{width:100%;display:grid;grid-template-columns:62px 1fr 20px;align-items:center;gap:12px;padding:14px 16px;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;border-radius:18px}.bt:focus-visible{outline:2px solid #3B6BFF}
+.bt time{font:500 13.500px 'DM Mono';color:#6C7A96}.it.lv .bt time{color:#3B6BFF}.bt b{display:block;font-size:16.500px;font-weight:700;letter-spacing:-.02em}.bt span.s{font-size:13px;color:#6C7A96}
+.badge{display:inline-block;margin-right:8px;font:500 11px 'DM Mono';letter-spacing:.1em;padding:2px 8px;border-radius:99px;background:#3B6BFF;color:#fff;vertical-align:1px}
+.ch{width:9px;height:9px;border-right:2px solid #6C7A96;border-bottom:2px solid #6C7A96;transform:rotate(45deg) translate(-2px,-2px)}.an .ch{transition:transform .4s cubic-bezier(.3,1.5,.5,1)}.it.on .ch{transform:rotate(225deg)}
+.pg{position:absolute;left:16px;right:16px;bottom:0;height:3px;border-radius:2px;background:transparent;overflow:hidden}.it.lv .pg{background:rgba(59,107,255,.18)}.pg i{display:block;height:100%;width:var(--p,0%);background:#3B6BFF}
+.pn{display:grid;grid-template-rows:0fr}.an .pn{transition:grid-template-rows .5s cubic-bezier(.4,0,.2,1)}.it.on .pn{grid-template-rows:1fr}.pn>div{overflow:hidden}
+.bd{padding:0 16px 18px 90px;font-size:14px;line-height:1.5;color:#43506B}
+.sp{display:flex;align-items:center;gap:10px;margin-top:12px}.sp u{width:30px;height:30px;border-radius:50%;background:var(--c);display:grid;place-items:center;color:#fff;font:700 12px 'Bricolage Grotesque';text-decoration:none}.sp em{font-style:normal;font-weight:600;font-size:13.500px}.sp .tg{margin-left:auto;font:500 11.500px 'DM Mono';padding:4px 10px;border-radius:99px;background:#fff;color:#43506B}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><div><small>Day 2 · Main stage</small><h1>Schedule</h1></div><div class="clk"><i></i><span id="ck">10:00</span></div></div><div id="ac"></div></div>
+<script>
+const S=[['10:00',45,'Opening keynote','Ines Marchetti','#3B6BFF','Hall A','Where product design is heading, told through five prototypes that never shipped and what each taught the team.'],
+['10:45',40,'Design systems at scale','Tomas Okafor','#10B981','Hall A','How a 300-person org kept one component library alive, with the governance model they would repeat.'],
+['11:25',20,'Coffee and demo floor','Open floor','#F59E0B','Atrium','Twelve live demos from sponsors. The espresso bar is by the stairs.'],
+['11:45',40,'Motion in product','Hana Sato','#EC4899','Hall B','A practical tour of easing, choreography and the budget that keeps animation fast on a mid-range phone.'],
+['12:25',35,'Lunch and lightning talks','Community','#8B5CF6','Terrace','Five-minute talks from the community. Sign up on the board by the entrance.']];
+const m=t=>{const[a,b]=t.split(':');return +a*60+ +b},f=x=>String(Math.floor(x/60)).padStart(2,'0')+':'+String(Math.floor(x%60)).padStart(2,'0');
+const ac=document.getElementById('ac'),its=[];let clock=m('10:00')+14,off=false,lastLive=-1;
+S.forEach((s,i)=>{const d=document.createElement('div');d.className='it';d.innerHTML='<button class="bt" aria-expanded="false"><time>'+s[0]+'</time><div><b>'+s[2]+'</b><span class="s"><span class="lbl"></span>'+s[1]+' min · '+s[5]+'</span></div><span class="ch"></span></button><div class="pn"><div><div class="bd">'+s[6]+'<div class="sp"><u style="--c:'+s[4]+'">'+s[3][0]+'</u><em>'+s[3]+'</em><span class="tg">'+s[5]+'</span></div></div></div></div><div class="pg"><i></i></div>';d.querySelector('.bt').onclick=()=>{off=true;tog(i)};ac.appendChild(d);its.push(d)});
+function tog(i){its.forEach((d,k)=>{const o=k===i&&!d.classList.contains('on');d.classList.toggle('on',o);d.querySelector('.bt').setAttribute('aria-expanded',o)})}
+function upd(){let live=-1;S.forEach((s,i)=>{const st=m(s[0]),p=(clock-st)/s[1];const d=its[i];d.querySelector('.pg i').style.setProperty('--p',Math.max(0,Math.min(1,p))*100+'%');const isLive=p>=0&&p<1;d.classList.toggle('lv',isLive);d.querySelector('.lbl').innerHTML=isLive?'<span class="badge">LIVE</span>':'';if(isLive)live=i});document.getElementById('ck').textContent=f(clock);if(live!==lastLive&&live>=0){lastLive=live;if(!off)tog(live)}}
+tog(0);upd();requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('an')));
+/* Idle demo: a clock runs through the conference morning; the session that is on right now gets a blue ring, a LIVE badge and a progress line that fills along its bottom edge, and when the hour reaches the next session it goes live and its panel opens with the speaker, until you open a row yourself. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0;requestAnimationFrame(function lp(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;clock+=dt*3.2;if(clock>m('13:00')){clock=m('10:00');lastLive=-1}upd();requestAnimationFrame(lp)})}
+</script></body></html>

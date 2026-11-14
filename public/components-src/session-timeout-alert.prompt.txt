@@ -1,0 +1,40 @@
+ROLE
+You are a senior security UX designer and front-end engineer with 15+ years of experience. Build "Session Timeout Alert": a sign-out warning dialog over a dimmed app: the ring drains and turns green, amber, red with a seconds countdown, and Stay signed in presses itself, springs the modal away and raises a success toast.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Slate dashboard behind a scrim with a clean white alert dialog.
+- Palette: #EEF1F6, #141A26, #14181F, #1B212B, #F59E0B, #566074
+- Type: Hanken Grotesk, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Dimmed app skeleton with an idle label; scrim; dialog with countdown ring, title, copy and two buttons; success toast.
+
+INTERACTION & STATES
+- Stay signed in extends the session; Sign out is available.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Modal springs in 500ms; ring stroke drains with colour thresholds; toast rises with a spring.
+
+IDLE AUTOPLAY
+- After 3.6s the countdown runs, Stay signed in presses itself and the cycle repeats.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain number countdown; the draining ring is the signal.
+- Skipping the success feedback.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

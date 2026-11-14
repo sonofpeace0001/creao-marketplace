@@ -1,0 +1,40 @@
+ROLE
+You are a senior playful brand designer and front-end engineer with 15+ years of experience. Build "Cookie Jar Consent": a glass cookie jar fills as consent is given: essential cookies sit at the bottom, enabling a category drops its cookies in with a bounce, Accept all fills the jar and Only essentials empties it.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream card with a chunky glass jar and chocolate-chip cookies.
+- Palette: #3A2410, #C0813E, #4A2A10, #F3E8D6, #FFFAF0, #E6B070
+- Type: Fraunces, Nunito (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Glass jar SVG with cookies; headline; four category rows with switches and counts; Only essentials and Accept all buttons.
+
+INTERACTION & STATES
+- Toggle categories or press the buttons.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Cookies drop 900ms with bounce; leave upward 350ms; switches spring.
+
+IDLE AUTOPLAY
+- After 3.4s Marketing is enabled, essentials-only empties the jar, Accept all refills it, then categories toggle.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A generic toggle list with no visual of what is being added.
+- Cookies that appear without falling.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

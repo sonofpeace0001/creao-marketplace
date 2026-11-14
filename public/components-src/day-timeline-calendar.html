@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Day Timeline Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF0F3;color:#111827;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{position:relative;width:100%;max-width:560px;height:560px;background:#fff;border-radius:26px;box-shadow:0 40px 56px -34px rgba(17,24,39,.5),inset 0 0 0 1px rgba(17,24,39,.07);overflow:hidden;display:flex;flex-direction:column}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:18px 22px 12px;border-bottom:1px solid #F0F1F4}.hd h1{font-size:20px;font-weight:800;letter-spacing:-.03em}.hd small{font:500 12px 'Geist Mono';color:#7C8494}.hd .dt{display:flex;gap:6px}.hd .dt i{width:30px;height:30px;border-radius:9px;background:#F3F4F6;display:grid;place-items:center;font-style:normal;font-size:14px;color:#4B5563}
+.bd{position:relative;flex:1;overflow:hidden}
+.tl{position:absolute;left:0;right:0;top:0;height:calc(var(--n)*60px);padding-top:6px}
+.hr{position:absolute;left:0;right:0;height:60px;border-top:1px solid #F0F1F4}.hr span{position:absolute;left:14px;top:-8px;background:#fff;padding:0 4px;font:500 11px 'Geist Mono';color:#9AA1AE}
+.ev{position:absolute;left:70px;right:20px;border-radius:12px;padding:8px 12px;background:var(--bg);border-left:4px solid var(--c);overflow:hidden}.ev b{display:block;font-size:13.500px;font-weight:700;color:var(--t)}.ev span{font:500 11.500px 'Geist Mono';color:var(--t);opacity:.75}
+.nw{position:absolute;left:0;right:0;height:2px;background:#EF4444;z-index:5}.nw::before{content:"";position:absolute;left:58px;top:-4px;width:10px;height:10px;border-radius:50%;background:#EF4444;box-shadow:0 0 0 4px rgba(239,68,68,.2)}.nw span{position:absolute;left:8px;top:-10px;padding:2px 6px;border-radius:5px;background:#EF4444;color:#fff;font:600 10.500px 'Geist Mono'}
+.gh{position:absolute;left:70px;right:20px;border-radius:12px;border:2px dashed #6366F1;background:rgba(99,102,241,.12);z-index:4;padding:8px 12px;overflow:hidden;opacity:0}.gh.on{opacity:1}.gh b{font-size:13.500px;color:#4338CA;font-weight:700;white-space:nowrap}.gh b::after{content:"";display:inline-block;width:2px;height:13px;background:#4338CA;vertical-align:-2px;margin-left:2px;animation:bk .8s steps(2) infinite}@keyframes bk{50%{opacity:0}}.gh span{display:block;font:500 11.500px 'Geist Mono';color:#4338CA;opacity:.8}.gh.ok{border-style:solid;background:#EEF0FF;border-color:#6366F1}.gh.ok b::after{display:none}
+.cu{position:absolute;z-index:6;width:22px;pointer-events:none;transition:transform .8s cubic-bezier(.5,0,.2,1)}.cu svg{width:22px;filter:drop-shadow(0 3px 5px rgba(0,0,0,.35))}
+.ts{position:absolute;left:50%;bottom:16px;transform:translate(-50%,24px);padding:9px 16px;border-radius:99px;background:#111827;color:#fff;font:700 13px 'Inter Tight';opacity:0;transition:all .4s cubic-bezier(.3,1.6,.5,1);z-index:7;white-space:nowrap}.ts.on{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="cd" id="cd"><div class="hd"><div><h1>Thursday, 19 Nov</h1><small>5 events · 2 free blocks</small></div><div class="dt"><i>‹</i><i>›</i></div></div><div class="bd" id="bd"><div class="tl" id="tl"></div><div class="nw" id="nw"><span id="nt">11:20</span></div><div class="gh" id="gh"><b id="gt"></b><span id="gs"></span></div><div class="cu" id="cu"><svg viewBox="0 0 24 24"><path d="M4 3l16 8-7 2-3 7Z" fill="#111827" stroke="#fff" stroke-width="1.500" stroke-linejoin="round"/></svg></div></div><div class="ts" id="ts">Event added · Design review</div></div>
+<script>
+const H0=8,H1=18,PX=60,$=id=>document.getElementById(id),tl=$('tl'),bd=$('bd');tl.style.setProperty('--n',H1-H0);const sl=ms=>new Promise(r=>setTimeout(r,ms));
+for(let h=H0;h<H1;h++){const d=document.createElement('div');d.className='hr';d.style.top=(6+(h-H0)*PX)+'px';d.innerHTML='<span>'+h+':00</span>';tl.appendChild(d)}
+const EV=[[8.5,9.25,'Standup','8:30 – 9:15','#EEF2FF','#6366F1','#3730A3'],[10,11.25,'Roadmap sync','10:00 – 11:15','#ECFDF5','#10B981','#065F46'],[11.75,12.5,'1:1 with Priya','11:45 – 12:30','#FFF7ED','#F97316','#9A3412'],[15,16,'Customer call','15:00 – 16:00','#FDF2F8','#EC4899','#9D174D'],[16.5,17.5,'Retro','16:30 – 17:30','#F0F9FF','#0EA5E9','#075985']];
+EV.forEach(e=>{const d=document.createElement('div');d.className='ev';d.style.cssText='top:'+(6+(e[0]-H0)*PX)+'px;height:'+((e[1]-e[0])*PX-3)+'px;--bg:'+e[4]+';--c:'+e[5]+';--t:'+e[6];d.innerHTML='<b>'+e[2]+'</b><span>'+e[3]+'</span>';tl.appendChild(d)});
+const y=t=>6+(t-H0)*PX;let now=11.33;function setNow(t){now=t;$('nw').style.top=y(t)+'px';const h=Math.floor(t),m=Math.floor((t-h)*60);$('nt').textContent=h+':'+String(m).padStart(2,'0')}
+setNow(11.33);const gh=$('gh'),cu=$('cu'),f=t=>{const h=Math.floor(t),m=Math.round((t-h)*60);return h+':'+String(m).padStart(2,'0')};let off=false;
+function cur(x,t,dur){cu.style.transition=dur===0?'none':'';cu.style.transform='translate('+x+'px,'+(y(t)+4)+'px)'}
+cur(300,13,0);
+document.getElementById('cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a day timeline with a red now line creeping down; after 3.5s a cursor glides to an empty slot and drags downwards, a dashed ghost event stretches with live start and end times, the title types itself, the block locks in as a solid indigo event and a toast confirms, then the event is removed and the cursor drags again, until you click. */
+(async()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;let last=0;requestAnimationFrame(function lp(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;if(!off)setNow(Math.min(17.9,now+dt*.025));requestAnimationFrame(lp)});
+ await sl(3500);while(!off){const s=13,e=14.5;cur(300,s,800);await sl(900);gh.className='gh on';gh.style.top=y(s)+'px';gh.style.height='6px';$('gt').textContent='';$('gs').textContent='';await sl(150);const t0=performance.now();while(performance.now()-t0<900){const k=(performance.now()-t0)/900,ee=s+(e-s)*(1-Math.pow(1-k,3));gh.style.height=((ee-s)*PX-3)+'px';cu.style.transition='none';cu.style.transform='translate(300px,'+(y(ee)+4)+'px)';$('gs').textContent=f(s)+' – '+f(ee);await sl(24)}
+ const T='Design review';for(let i=1;i<=T.length;i++){$('gt').textContent=T.slice(0,i);await sl(55)}await sl(300);gh.classList.add('ok');$('ts').classList.add('on');await sl(2200);$('ts').classList.remove('on');await sl(800);gh.className='gh';if(off)return;await sl(800)}})();
+</script></body></html>

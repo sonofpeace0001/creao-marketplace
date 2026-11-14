@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Spend Forecast Billing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--k:#38BDF8;background:#090B12;color:#E9EDF8;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:680px;border-radius:28px;background:#10131D;padding:24px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08)}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px}.hd small{font:500 11.500px 'Geist Mono';letter-spacing:.14em;color:#7C86A8;text-transform:uppercase;display:block;margin-bottom:6px}.hd h1{font:800 40px/1 'Sora';letter-spacing:-.05em;font-variant-numeric:tabular-nums}.hd h1 span{font-size:16px;color:#7C86A8;font-weight:600;letter-spacing:0;margin-left:8px}
+.fl{padding:8px 13px;border-radius:12px;font:600 12.500px 'Geist Mono';text-align:right;background:rgba(56,189,248,.13);color:#7DD3FC;transition:all .5s}.fl.bad{background:rgba(251,113,133,.15);color:#FDA4AF}
+.sc{display:flex;gap:8px;margin-bottom:14px}.sc button{border:0;border-radius:99px;padding:8px 15px;background:#171B28;color:#A3ACC6;font:600 12.500px 'Sora';cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:all .3s}.sc button.on{background:#E9EDF8;color:#10131D}.sc button:focus-visible{outline:2px solid #38BDF8;outline-offset:2px}
+.ch{position:relative;height:210px}.ch svg{width:100%;height:100%;overflow:visible}
+.gl{stroke:rgba(255,255,255,.06)}.ax{fill:#6E7799;font:500 10.500px 'Geist Mono'}.bu{stroke:#FB7185;stroke-width:1.500;stroke-dasharray:6 5}.bul{fill:#FB7185;font:600 10.500px 'Geist Mono'}
+.ac{fill:none;stroke:#38BDF8;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.fc{fill:none;stroke:var(--k);stroke-width:2.500;stroke-dasharray:2 7;stroke-linecap:round;transition:stroke .5s}.bd{fill:var(--k);opacity:.14;transition:fill .5s}.ov{fill:#FB7185;opacity:.25}
+.nw{fill:#fff;stroke:#38BDF8;stroke-width:3}.ed{fill:var(--k);transition:fill .5s}.pl{fill:none;stroke:var(--k);stroke-width:1.500;transform-box:fill-box;transform-origin:center;animation:rg 1.800s infinite}@keyframes rg{from{transform:scale(1);opacity:.8}to{transform:scale(3);opacity:0}}
+.ft{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.ft div{padding:12px 14px;border-radius:14px;background:#161A27}.ft span{display:block;font:500 11px 'Geist Mono';color:#7C86A8;margin-bottom:4px}.ft b{font:700 18px 'Sora';letter-spacing:-.03em;font-variant-numeric:tabular-nums}.ft b.bad{color:#FDA4AF}
+@media(max-width:560px){.hd{flex-direction:column}.ft{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><div><small>Projected month-end spend</small><h1 id="pj">$0<span>of $4,000 budget</span></h1></div><div class="fl" id="fl"></div></div>
+<div class="sc" id="sc"><button class="on">Current pace</button><button>+20% usage</button><button>−15% usage</button><button>Cap at $3.8k</button></div>
+<div class="ch"><svg viewBox="0 0 600 210" preserveAspectRatio="none"><g id="g"></g><line class="bu" x1="0" x2="600" id="bl"/><text class="bul" x="6" id="bt">Budget $4,000</text><path class="ov" id="ov"/><path class="bd" id="bd"/><path class="ac" id="ac"/><path class="fc" id="fc"/><g id="pt"></g></svg></div>
+<div class="ft"><div><span>Spent so far</span><b>$2,310</b></div><div><span>Daily average</span><b id="da">$0</b></div><div><span>Over budget on</span><b id="ob">—</b></div></div></div>
+<script>
+const $=id=>document.getElementById(id),D=30,T=16,BUD=4000,H=210,MX=5600;const base=[];let a=0;for(let d=1;d<=T;d++){a+=120+Math.sin(d*1.7)*30+d*2.6;base.push(a)}
+const SC=[{g:1,cap:0},{g:1.2,cap:0},{g:.85,cap:0},{g:1,cap:3800}];let sc=0,gShown=1,gTgt=1,capShown=0,capTgt=0,off=false;
+const sx=d=>d/D*600,sy=v=>H-8-v/MX*(H-24);
+[0,1,2,3].forEach(i=>$('g').insertAdjacentHTML('beforeend','<line class="gl" x1="0" x2="600" y1="'+(10+i*60)+'" y2="'+(10+i*60)+'"/>'));
+[1,8,15,22,30].forEach(d=>$('g').insertAdjacentHTML('beforeend','<text class="ax" x="'+sx(d)+'" y="206" text-anchor="middle">Nov '+d+'</text>'));
+function frame(){const last=base[T-1],daily=last/T*gShown*(1+.5*0);const proj=[];let v=last;for(let d=T;d<=D;d++){proj.push([d,v]);v+=last/T*gShown*(1+(d-T)*.012)}let cap=capShown;if(cap){proj.forEach(p=>{if(p[1]>cap)p[1]=cap+(p[1]-cap)*.02})}
+ const end=proj[proj.length-1][1];const hi=proj.map(p=>[p[0],p[1]*(1+(p[0]-T)*.012)]),lo=proj.map(p=>[p[0],p[1]*(1-(p[0]-T)*.01)]);
+ $('ac').setAttribute('d','M'+base.map((v,i)=>sx(i+1)+' '+sy(v)).join(' L'));$('fc').setAttribute('d','M'+proj.map(p=>sx(p[0])+' '+sy(p[1])).join(' L'));
+ $('bd').setAttribute('d','M'+hi.map(p=>sx(p[0])+' '+sy(p[1])).join(' L')+' L'+lo.slice().reverse().map(p=>sx(p[0])+' '+sy(p[1])).join(' L')+'Z');
+ const by=sy(BUD);$('bl').setAttribute('y1',by);$('bl').setAttribute('y2',by);$('bt').setAttribute('y',by-6);
+ let cross=null;for(let i=1;i<proj.length;i++){if(proj[i][1]>BUD&&proj[i-1][1]<=BUD){const f=(BUD-proj[i-1][1])/(proj[i][1]-proj[i-1][1]);cross=proj[i-1][0]+f}}
+ const over=end>BUD;document.body.style.setProperty('--k',over?'#FB7185':'#38BDF8');
+ const ovp=proj.filter(p=>p[1]>BUD);$('ov').setAttribute('d',ovp.length>1?'M'+sx(ovp[0][0])+' '+by+' L'+ovp.map(p=>sx(p[0])+' '+sy(p[1])).join(' L')+' L'+sx(ovp[ovp.length-1][0])+' '+by+'Z':'');
+ const bp=base[T-1];$('pt').innerHTML='<circle class="nw" cx="'+sx(T)+'" cy="'+sy(bp)+'" r="5.500"/><circle class="pl" cx="'+sx(D)+'" cy="'+sy(end)+'" r="5"/><circle class="ed" cx="'+sx(D)+'" cy="'+sy(end)+'" r="5"/>';
+ $('pj').innerHTML='$'+Math.round(end).toLocaleString('en-US')+'<span>of $4,000 budget</span>';const diff=end-BUD;$('fl').className='fl'+(over?' bad':'');$('fl').textContent=over?'+$'+Math.round(diff).toLocaleString('en-US')+' over budget':'$'+Math.round(-diff).toLocaleString('en-US')+' under budget';$('ob').textContent=cross?'Nov '+Math.floor(cross):'—';$('ob').className=cross?'bad':'';$('da').textContent='$'+Math.round(last/T*gShown)}
+const bs=[...document.querySelectorAll('#sc button')];function pick(i){sc=i;gTgt=SC[i].g;capTgt=SC[i].cap;bs.forEach((b,k)=>b.classList.toggle('on',k===i))}
+bs.forEach((b,i)=>b.onclick=()=>{off=true;pick(i)});
+pick(1);gShown=gTgt;frame();
+/* Idle demo: month-to-date spend is a solid line and the forecast to month end is a dotted line inside a soft confidence band, with the budget as a dashed rose rule; the scenario chips switch pace, so the forecast bends, turns rose with a pulsing end point and a red overage area when it crosses the budget, the projected total and over-budget date update, and a spending cap flattens it, until you pick a chip. */
+(function tw(){gShown+=(gTgt-gShown)*.08;capShown+=(capTgt-capShown)*.1;if(Math.abs(capTgt-capShown)<1)capShown=capTgt;frame();requestAnimationFrame(tw)})();
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sl(3600);let k=1;while(!off){k=(k+1)%4;pick(k);await sl(3000)}})()}
+</script></body></html>

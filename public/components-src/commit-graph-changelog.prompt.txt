@@ -1,0 +1,40 @@
+ROLE
+You are a senior git tooling designer and front-end engineer with 15+ years of experience. Build "Commit Graph Changelog": a repository history drawn from the oldest commit upward: branch lines trace in colour, feature and hotfix branches curve away from main and merge back, commit dots pop and messages slide in with release tags lit green.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark panel with blue, pink and amber branch lines and Fira Code hashes.
+- Palette: #11141B, #7C86A0, #34D399, #0A0C10, #E7EAF2, #6A7390
+- Type: Inter Tight, Fira Code (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with branch; SVG graph with three lanes; ten commit rows with message, hash and tags; branch legend.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- A clip rect reveals the graph bottom to top; dots pop as the line reaches them; rows slide in.
+
+IDLE AUTOPLAY
+- After 3.2s the graph redraws from scratch and holds when complete.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static git graph picture.
+- Merges drawn as straight lines.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

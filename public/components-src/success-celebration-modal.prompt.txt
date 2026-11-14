@@ -1,0 +1,40 @@
+ROLE
+You are a senior checkout designer and front-end engineer with 15+ years of experience. Build "Success Celebration Modal": a payment-complete dialog that celebrates: the card springs up, a green ring draws, the check strokes in with a pulse, confetti fans out, the amount counts up and receipt lines slide in.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Mint-grey stage with a white card, green ring and multicolour confetti.
+- Palette: #16A34A, #10241A, #F4F8F6, #5F7A6C, #E4EDE8, #D9E6DF
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Blurred page; modal with ring and check, headline, amount, receipt lines and button; confetti layer.
+
+INTERACTION & STATES
+- Back to dashboard closes the dialog.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ring draws 800ms; check draws 500ms; pulse 1.2s; amount counts 1.4s; receipt lines stagger.
+
+IDLE AUTOPLAY
+- After 3.6s the dialog closes and replays every 6s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static tick icon.
+- Confetti that is not tied to the moment of success.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

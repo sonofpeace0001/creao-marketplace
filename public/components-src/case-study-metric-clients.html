@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Case Study Metric Clients</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9EBF2;color:#14172E;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.wr{width:100%;max-width:800px}.hd{margin-bottom:16px;padding:0 4px}.hd small{font:500 12px 'DM Mono';letter-spacing:.16em;color:#6E7499;text-transform:uppercase}.hd h1{font:800 32px/1.05 'Bricolage Grotesque';letter-spacing:-.05em;margin-top:6px}
+.rw{display:flex;gap:12px;height:330px}
+.cs{position:relative;flex:1;border-radius:26px;padding:22px;background:var(--bg);color:var(--t);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;box-shadow:0 22px 40px -26px rgba(20,23,46,.5);transition:flex .7s cubic-bezier(.3,1.1,.4,1)}.cs.on{flex:2.5}
+.cs .lg{display:flex;align-items:center;gap:9px;font:800 19px 'Bricolage Grotesque';letter-spacing:-.04em}.lg i{width:22px;height:22px;border-radius:7px;background:var(--a);display:block;position:relative}.lg i::after{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--bg)}
+.cs .mt{margin-top:auto;font:800 64px/.9 'Bricolage Grotesque';letter-spacing:-.07em;font-variant-numeric:tabular-nums;white-space:nowrap}.cs .mt small{font-size:.42em;letter-spacing:-.02em;opacity:.7;margin-left:3px}
+.cs .lb{font-size:14.500px;font-weight:600;margin-top:8px;opacity:.82;max-width:200px;line-height:1.3}
+.cs .qt{position:absolute;left:22px;right:22px;top:58px;font:600 17px/1.35 'Bricolage Grotesque';letter-spacing:-.02em;opacity:0;transform:translateY(10px);transition:opacity .4s,transform .5s;pointer-events:none;max-width:330px}.cs.on .qt{opacity:1;transform:none;transition-delay:.25s}
+.cs .by{position:absolute;left:22px;right:22px;bottom:22px;display:flex;align-items:center;gap:10px;font-size:13.500px;font-weight:600;opacity:0;transition:opacity .4s}.cs.on .by{opacity:.9;transition-delay:.35s}.by u{width:30px;height:30px;border-radius:50%;background:var(--a);display:grid;place-items:center;font:800 12px 'Bricolage Grotesque';text-decoration:none;color:var(--bg)}
+.cs.on .lb,.cs.on .mt{align-self:flex-end;text-align:right}.cs.on .lb{margin-top:6px}.cs.on .mt{margin-top:auto;transform:translateY(-34px)}.cs .mt,.cs .lb{transition:transform .6s cubic-bezier(.3,1.1,.4,1)}.cs.on .lb{transform:translateY(-34px)}
+.cs svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:90px;opacity:.28;pointer-events:none}.cs svg path{fill:none;stroke:var(--a);stroke-width:3}.cs svg .f{fill:var(--a);stroke:none;opacity:.35}
+@media(max-width:640px){.rw{flex-direction:column;height:auto}.cs{min-height:120px;flex:none}.cs.on{min-height:300px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="wr"><div class="hd"><small>Customer results</small><h1>Teams that shipped faster</h1></div><div class="rw" id="rw"></div></div>
+<script>
+const C=[['Northwind','#1B1F4B','#fff','#8B9CFF',312,'%','+','more qualified signups in 90 days','“The new onboarding paid for itself in six weeks.”','Marta Lind, VP Growth','M'],['Halcyon','#FFE9D2','#3A1B09','#E5522B',48,'%','−','lower support costs per ticket','“Our agents finally close tickets before lunch.”','Dev Anand, Head of CX','D'],['Kinetic','#D9F7EA','#06301F','#0F9D6E',4.2,'×','','faster release cycles across 14 squads','“We went from monthly releases to daily ones.”','Ines Rocha, CTO','I']];
+const rw=document.getElementById('rw'),els=[];let cur=0,off=false,tw=0;
+const spark=a=>{const pts=a.map((v,i)=>[i/(a.length-1)*300,90-v]);return '<svg viewBox="0 0 300 90" preserveAspectRatio="none"><path class="f" d="M'+pts.map(p=>p.join(' ')).join(' L')+' L300 90 L0 90Z"/><path d="M'+pts.map(p=>p.join(' ')).join(' L')+'"/></svg>'};
+const SP=[[10,14,20,26,38,52,66,82],[80,74,70,58,50,44,36,30],[12,16,22,28,44,58,70,84]];
+C.forEach((c,i)=>{const d=document.createElement('div');d.className='cs';d.style.cssText='--bg:'+c[1]+';--t:'+c[2]+';--a:'+c[3];d.tabIndex=0;d.innerHTML='<div class="lg"><i></i>'+c[0]+'</div><div class="qt">'+c[8]+'</div><div class="mt"><span class="n">0</span><small>'+c[5]+'</small></div><div class="lb">'+c[6]+'</div><div class="by"><u>'+c[10]+'</u>'+c[9]+'</div>'+spark(SP[i]);d.onclick=()=>{off=true;go(i)};d.onkeydown=e=>{if(e.key==='Enter'){off=true;go(i)}};rw.appendChild(d);els.push(d)});
+function setN(i,k){const c=C[i];els[i].querySelector('.n').textContent=c[7]+(c[4]%1?(c[4]*k).toFixed(1):Math.round(c[4]*k))}
+function go(i){cur=i;els.forEach((e,k)=>e.classList.toggle('on',k===i));const t0=performance.now();cancelAnimationFrame(tw);(function f(n){const k=Math.min(1,(n-t0)/1100),e=1-Math.pow(1-k,3);setN(i,e);if(k<1)tw=requestAnimationFrame(f)})(t0)}
+C.forEach((c,i)=>{c[7]=c[7]||'';});
+C[0][7]='+';C[1][7]='−';C[2][7]='';
+els.forEach(e=>e.style.transition='none');go(0);cancelAnimationFrame(tw);C.forEach((c,i)=>setN(i,1));requestAnimationFrame(()=>requestAnimationFrame(()=>els.forEach(e=>e.style.transition='')));
+document.querySelector('.wr').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: three customer result cards form a horizontal accordion; every few seconds the next card swells to more than twice its width while the others shrink, its headline metric counts up from zero (plus 312 percent, minus 48 percent, 4.2 times), a pull quote and the speaker fade in after the move and a sparkline sits behind, until you click a card. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=t=>new Promise(r=>setTimeout(r,t));(async()=>{await sl(3400);while(!off){go((cur+1)%3);await sl(3400)}})()}
+</script></body></html>

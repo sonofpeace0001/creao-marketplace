@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Flight Dates Picker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E6ECF5;color:#102040;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:760px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 40px 56px -34px rgba(16,32,64,.5),inset 0 0 0 1px rgba(16,32,64,.07)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px}.hd h1{font-size:21px;font-weight:800;letter-spacing:-.03em}.rt{display:flex;align-items:center;gap:12px;font:600 13px 'Plus Jakarta Sans'}.rt span{padding:8px 14px;border-radius:12px;background:#F0F4FA;min-width:112px;text-align:center;transition:background .3s,color .3s}.rt span.on{background:#102040;color:#fff}.rt i{font-style:normal;color:#8A9BBA}
+.ms{display:grid;grid-template-columns:1fr 1fr;gap:26px}.mn h3{font-size:15px;font-weight:800;margin-bottom:10px;text-align:center}
+.wk,.gd{display:grid;grid-template-columns:repeat(7,1fr)}.wk span{font:600 11px 'Plus Jakarta Sans';color:#8A9BBA;text-align:center;padding-bottom:6px}
+.d{position:relative;height:48px;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;color:#102040;font:700 14px 'Plus Jakarta Sans';transition:background .25s}.d small{font:500 9.500px 'JetBrains Mono';color:#7A8BAA}.d.ch small{color:#0F9D6E;font-weight:700}.d.ex small{color:#E5822B}
+.d.in{background:#E6EEFF}.d.s{border-radius:14px 0 0 14px;background:#2563EB;color:#fff;z-index:1}.d.e{border-radius:0 14px 14px 0;background:#2563EB;color:#fff;z-index:1}.d.s.e{border-radius:14px}.d.s small,.d.e small{color:#CFE0FF}.d.hv:not(.s):not(.e){background:#E6EEFF}.d.hv.hz{border-radius:0 14px 14px 0;background:#BFD3FF}
+.d:focus-visible{outline:2px solid #2563EB}.d.off{opacity:.3;pointer-events:none}
+.d.pop{animation:pp .35s cubic-bezier(.3,2,.5,1)}@keyframes pp{from{transform:scale(.8)}}
+.ft{display:flex;align-items:center;gap:14px;margin-top:16px;padding-top:16px;border-top:1px solid #EEF2F8}.ft .tx{flex:1}.ft .tx b{display:block;font-size:16px;font-weight:800}.ft .tx span{font-size:13px;color:#6E80A0}.ft .pr{text-align:right}.ft .pr small{display:block;font:500 11px 'JetBrains Mono';color:#8A9BBA}.ft .pr b{font:800 26px 'Plus Jakarta Sans';letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:#0F9D6E}
+.ft button{border:0;border-radius:14px;padding:13px 22px;background:#2563EB;color:#fff;font:800 14.500px 'Plus Jakarta Sans';cursor:pointer;opacity:.4;transition:opacity .3s,transform .15s}.ft button.on{opacity:1}.ft button.pr2{transform:scale(.95)}
+@media(max-width:620px){.ms{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>When are you flying?</h1><div class="rt"><span id="a" class="on">Depart</span><i>→</i><span id="b">Return</span></div></div><div class="ms" id="ms"></div>
+<div class="ft"><div class="tx"><b id="ft1">Pick a departure date</b><span id="ft2">Green days are the cheapest</span></div><div class="pr"><small id="pl">ROUND TRIP FROM</small><b id="pp">—</b></div><button id="go">Search flights</button></div></div>
+<script>
+const MO=[[2026,11],[2027,0]],MN=['December 2026','January 2027'],DN=['Su','Mo','Tu','We','Th','Fr','Sa'];
+const price=d=>{const w=d.getDay();return 280+((d.getDate()*37+d.getMonth()*23)%150)+(w===5||w===0?60:0)};
+const $=id=>document.getElementById(id),sl=t=>new Promise(r=>setTimeout(r,t));let off=false,s=null,e=null,h=null;const cells=[];
+MO.forEach(([y,m],mi)=>{const w=document.createElement('div');w.className='mn';w.innerHTML='<h3>'+MN[mi]+'</h3><div class="wk">'+DN.map(x=>'<span>'+x+'</span>').join('')+'</div>';const gd=document.createElement('div');gd.className='gd';const f=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate();for(let i=0;i<f;i++)gd.appendChild(document.createElement('span'));for(let d=1;d<=n;d++){const dt=new Date(y,m,d),p=price(dt),b=document.createElement('button');b.className='d'+(p<=330?' ch':p>=420?' ex':'');b.innerHTML=d+'<small>$'+p+'</small>';if(dt<new Date(2026,11,5))b.classList.add('off');b.onclick=()=>{off=true;pick(dt)};b.onpointerenter=()=>{if(s&&!e){h=dt;paint()}};gd.appendChild(b);cells.push({b,dt})}w.appendChild(gd);$('ms').appendChild(w)});
+const fm=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+function paint(){cells.forEach(({b,dt})=>{const t=+dt,S=s&&+s,E=e&&+e,H=h&&+h;b.classList.toggle('s',t===S);b.classList.toggle('e',t===E);b.classList.toggle('in',!!(S&&E&&t>S&&t<E)||!!(S&&!E&&H&&t>S&&t<H));b.classList.toggle('hv',!!(S&&!E&&H&&t===H));b.classList.toggle('hz',!!(S&&!E&&H&&t===H&&H>S))});
+ $('a').classList.toggle('on',!s||!!e);$('b').classList.toggle('on',!!s&&!e);$('a').textContent=s?fm(s):'Depart';$('b').textContent=e?fm(e):'Return';
+ if(s&&e){const n=Math.round((e-s)/864e5);$('ft1').textContent=fm(s)+' → '+fm(e)+' · '+n+' nights';$('ft2').textContent='Direct flights, 1 bag included';$('pp').textContent='$'+(price(s)+price(e));$('go').classList.add('on')}else{$('ft1').textContent=s?'Now pick your return date':'Pick a departure date';$('ft2').textContent='Green days are the cheapest';$('pp').textContent='—';$('go').classList.remove('on')}}
+function pick(d){if(!s||(s&&e)){s=d;e=null;h=null}else if(d>s){e=d}else{s=d}paint();const c=cells.find(x=>+x.dt===+d).b;c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop')}
+s=new Date(2026,11,12);e=new Date(2026,11,19);paint();
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a two-month flight date picker with the day's fare under every date, cheap days in green and peak days in orange; a start date springs in, a pale band follows an invisible cursor across the days to the return date, the end cap snaps on, and the summary below counts the nights and totals the round-trip price while the Depart and Return chips highlight in turn, then it clears and picks another trip, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);const trips=[[[11,23],[1,2]],[[11,8],[11,15]],[[11,12],[11,19]]];let k=0;while(!off){s=e=h=null;paint();await sl(700);const[[m1,d1],[m2,d2]]=trips[k++%3];const y1=m1===11?2026:2027,y2=m2===11?2026:2027;pick(new Date(y1,m1,d1));await sl(900);const st=new Date(y1,m1,d1),en=new Date(y2,m2,d2);for(let d=new Date(+st+864e5);+d<=+en&&!off;d=new Date(+d+864e5)){h=d;paint();await sl(110)}pick(en);await sl(3600)}})()}
+</script></body></html>

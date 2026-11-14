@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Client Count Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0D12;color:#EDEFF6;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:760px;background:#12151D;border-radius:28px;padding:26px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08)}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px;gap:14px;flex-wrap:wrap}.hd small{font:700 11.500px 'Space Mono';letter-spacing:.18em;color:#7C86A6;text-transform:uppercase}.hd h1{font:700 44px/1 'Space Grotesk';letter-spacing:-.05em;margin-top:6px;font-variant-numeric:tabular-nums}.hd h1 span{font-size:16px;color:#7C86A6;letter-spacing:0;font-weight:500;margin-left:8px}
+.hd .y{font:700 54px/1 'Space Grotesk';letter-spacing:-.05em;color:rgba(255,255,255,.14);font-variant-numeric:tabular-nums}
+.ch{position:relative;display:grid;grid-template-columns:repeat(8,1fr);gap:8px;align-items:end;height:280px;padding-bottom:30px}
+.ch::after{content:"";position:absolute;left:0;right:0;bottom:30px;height:1px;background:rgba(255,255,255,.12)}
+.cl{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:3px}
+.sq{width:100%;max-width:46px;height:14px;border-radius:4px;background:var(--c);transform:scale(0);opacity:0}.sq.on{transform:scale(1);opacity:1;transition:transform .4s cubic-bezier(.3,2,.5,1),opacity .2s}
+.cl b{position:absolute;bottom:calc(var(--h)*17px + 36px);font:700 13px 'Space Mono';color:#fff;opacity:0;transition:opacity .4s;white-space:nowrap}.cl.on b{opacity:1}
+.cl em{position:absolute;bottom:-26px;font:700 12px 'Space Mono';font-style:normal;color:#6C7596}.cl.on em{color:#fff}
+.cl .lg{position:absolute;bottom:calc(var(--h)*17px + 58px);font:700 10px 'Space Mono';padding:2px 7px;border-radius:99px;background:var(--c);color:#fff;opacity:0;transform:translateY(8px);transition:all .4s;white-space:nowrap}.cl.on .lg{opacity:1;transform:none}
+@media(max-width:560px){.ch{height:220px}.sq{height:10px}.cl b{bottom:calc(var(--h)*13px + 36px)}.cl .lg{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><div><small>Customers, year by year</small><h1><span id="n" style="font-size:44px;color:#fff;margin:0;font-weight:700;letter-spacing:-.05em">0</span><span>teams</span></h1></div><div class="y" id="y">2019</div></div><div class="ch" id="ch"></div></div>
+<script>
+const Y=[[2019,12,'Seed'],[2020,31,'First 30'],[2021,74,'Series A'],[2022,150,'First enterprise'],[2023,290,'Self-serve'],[2024,520,'EU launch'],[2025,860,'Marketplace'],[2026,1284,'Today']];
+const COLS=['#6366F1','#8B5CF6','#EC4899','#F97316','#F59E0B','#10B981','#0EA5E9','#6366F1'];
+const ch=document.getElementById('ch'),sl=t=>new Promise(r=>setTimeout(r,t));let off=false;const cols=[];
+Y.forEach((y,i)=>{const n=Math.max(1,Math.ceil(y[1]/100)),d=document.createElement('div');d.className='cl';d.style.cssText='--c:'+COLS[i]+';--h:'+n;let sq='';for(let k=0;k<n;k++)sq+='<i class="sq"></i>';d.innerHTML=sq+'<span class="lg">'+y[2]+'</span><b>'+y[1].toLocaleString('en-US')+'</b><em>'+y[0]+'</em>';ch.appendChild(d);cols.push(d)});
+function show(i,on){cols[i].classList.toggle('on',on);cols[i].querySelectorAll('.sq').forEach((s,k)=>{if(on)setTimeout(()=>s.classList.add('on'),k*38);else s.classList.remove('on')})}
+let tw=0,shown=0;function num(v){cancelAnimationFrame(tw);const f=shown,t0=performance.now();(function g(n){const k=Math.min(1,(n-t0)/700),e=1-Math.pow(1-k,3);shown=f+(v-f)*e;document.getElementById('n').textContent=Math.round(shown).toLocaleString('en-US');if(k<1)tw=requestAnimationFrame(g)})(t0)}
+cols.forEach((c,i)=>{c.classList.add('on');c.querySelectorAll('.sq').forEach(s=>{s.style.transition='none';s.classList.add('on')})});shown=1284;document.getElementById('n').textContent='1,284';document.getElementById('y').textContent='2026';requestAnimationFrame(()=>requestAnimationFrame(()=>cols.forEach(c=>c.querySelectorAll('.sq').forEach(s=>s.style.transition=''))));
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: eight years of customer growth rebuild themselves from the left; each year's column stacks small coloured blocks (one per hundred customers) that pop in from the bottom up, a count and milestone tag appear above it, the big number rolls up to the running total and a ghost year counter advances, then the finished chart holds before it clears and replays, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);while(!off){for(let i=Y.length-1;i>=0;i--)show(i,false);shown=0;document.getElementById('n').textContent='0';await sl(500);for(let i=0;i<Y.length&&!off;i++){document.getElementById('y').textContent=Y[i][0];show(i,true);num(Y[i][1]);await sl(850)}await sl(4200)}})()}
+</script></body></html>

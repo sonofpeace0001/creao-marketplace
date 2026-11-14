@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Spotlight Lens Cursor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05060A;color:#fff;font-family:'Syne',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.st{--x:62%;--y:46%;position:relative;width:100%;max-width:780px;aspect-ratio:16/10;border-radius:28px;overflow:hidden;background:#0A0B12;box-shadow:0 44px 70px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08);cursor:none;touch-action:none}
+.ly{position:absolute;inset:0;padding:8% 7%;display:flex;flex-direction:column;justify-content:center}
+.ly small{font:500 12px 'DM Mono';letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px}.ly h1{font:800 64px/.96 'Syne';letter-spacing:-.05em}.ly p{font:500 14px/1.6 'DM Mono';margin-top:20px;max-width:430px}
+.b{color:#2A2D40;filter:blur(2.500px)}.b small{color:#2A2D40}.b h1{color:#222538}
+.t{color:#fff;-webkit-mask-image:radial-gradient(circle 120px at var(--x) var(--y),#000 55%,transparent 100%);mask-image:radial-gradient(circle 120px at var(--x) var(--y),#000 55%,transparent 100%)}.t small{color:#FFB454}.t h1{background:linear-gradient(90deg,#FFB454,#FF5E8A,#8B7BFF);-webkit-background-clip:text;background-clip:text;color:transparent}.t p{color:#E9E6F8}
+.ln{position:absolute;left:var(--x);top:var(--y);width:240px;height:240px;margin:-120px 0 0 -120px;border-radius:50%;box-shadow:0 0 0 2px rgba(255,255,255,.55),inset 0 0 40px rgba(255,180,84,.25),0 0 80px rgba(255,94,138,.35);pointer-events:none;z-index:4}
+.ln::before{content:"";position:absolute;inset:6px;border-radius:50%;border:1px dashed rgba(255,255,255,.28);animation:sp 14s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.ln::after{content:"";position:absolute;right:-26px;bottom:-18px;width:30px;height:7px;border-radius:4px;background:#fff;transform:rotate(45deg);box-shadow:0 0 14px rgba(255,255,255,.6)}
+.hn{position:absolute;left:24px;bottom:20px;font:500 11.500px 'DM Mono';letter-spacing:.16em;color:#4A4E6A;z-index:5}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="st" id="st"><div class="ly b"><small>What you are looking for</small><h1>The details<br>hide in plain sight.</h1><p>Move the lens to read what the dark keeps.</p></div>
+<div class="ly t"><small>Revealed under the lens</small><h1>The details<br>hide in plain sight.</h1><p>Hover states, easing curves, kerning you can feel. Everything we obsess over lives right here.</p></div><i class="ln"></i><span class="hn">MOVE THE LENS</span></div>
+<script>
+const st=document.getElementById('st');let off=false,tx=62,ty=46,cx=62,cy=46;
+function set(x,y){st.style.setProperty('--x',x+'%');st.style.setProperty('--y',y+'%')}
+st.addEventListener('pointermove',e=>{off=true;const r=st.getBoundingClientRect();tx=(e.clientX-r.left)/r.width*100;ty=(e.clientY-r.top)/r.height*100});
+set(cx,cy);
+/* Idle demo: a dark screen shows only a blurred ghost of the headline until a glowing lens, a ring with a magnifier handle and a slowly turning dashed inner ring, glides over it on a looping figure-eight path, and inside the lens the headline snaps into a sunset gradient and the hidden paragraph becomes readable, with smooth trailing so it feels weighty, until you move your own pointer in. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0;requestAnimationFrame(function lp(n){const t=n/1000;if(!off&&n>2800){const a=(t-2.8)*.6;tx=50+28*Math.sin(a);ty=48+22*Math.sin(a*2)}cx+=(tx-cx)*.1;cy+=(ty-cy)*.1;set(cx,cy);requestAnimationFrame(lp)})}
+</script></body></html>

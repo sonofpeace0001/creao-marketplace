@@ -1,0 +1,40 @@
+ROLE
+You are a senior travel booking designer and front-end engineer with 15+ years of experience. Build "Flight Dates Picker": a two-month flight date picker with each day's fare under the date, cheap days in green and peak days in orange; a start springs in, a pale band follows a hover to the return date and the summary totals nights and price.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on pale blue with a strong blue range and mono prices.
+- Palette: #2563EB, #102040, #8A9BBA, #0F9D6E, #E6EEFF, #E6ECF5
+- Type: Plus Jakarta Sans, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with Depart and Return chips; two month grids with fares; summary with nights and total; search button.
+
+INTERACTION & STATES
+- Click a start and an end date; hover previews the range.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Band follows hover at 110ms steps; selected cells pop with spring; chips swap highlight.
+
+IDLE AUTOPLAY
+- After 3.4s three trips are picked in turn with a hover sweep.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A calendar without prices when price is the decision.
+- A range with no hover preview.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

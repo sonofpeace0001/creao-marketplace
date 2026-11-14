@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Stroke Draw Border Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0B10;color:#F2F2F8;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.wr{width:100%;max-width:760px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.bx{position:relative;height:250px;padding:26px 22px;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer}
+.bx svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.bx .bg{fill:rgba(255,255,255,.03);stroke:rgba(255,255,255,.1);stroke-width:1.500}
+.bx .dr{fill:none;stroke:url(#g);stroke-width:2.500;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.bx.d2 .dr{stroke-dasharray:.5 1;stroke-dashoffset:.5}
+.bx.on .dr{stroke-dashoffset:0;transition:stroke-dashoffset 1.600s cubic-bezier(.6,0,.2,1)}
+.bx.d2.on .dr{stroke-dashoffset:-.5;transition:stroke-dashoffset 1.600s cubic-bezier(.6,0,.2,1)}
+.bx.d3 .dr{stroke-dasharray:.06 .04;stroke-dashoffset:0;opacity:0}.bx.d3.on .dr{opacity:1;animation:tr 2.600s linear infinite}@keyframes tr{to{stroke-dashoffset:-1}}
+.bx .n{font:700 12px 'Syne';letter-spacing:.2em;color:var(--c);margin-bottom:auto;text-transform:uppercase}
+.bx h2{font:800 25px/1.05 'Syne';letter-spacing:-.03em;margin-bottom:8px}.bx p{font-size:14px;line-height:1.5;color:#A5A8BD}
+.bx .ic{position:absolute;right:20px;top:22px;width:34px;height:34px;opacity:.9}.bx .ic *{fill:none;stroke:var(--c);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:640px){.wr{grid-template-columns:1fr}.bx{height:170px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.bx .dr{stroke-dashoffset:0!important;opacity:1!important}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#818CF8"/><stop offset="1" stop-color="#F472B6"/></linearGradient></defs></svg>
+<div class="wr" id="wr"></div>
+<script>
+const C=[['Draw once','Trace from the top-left','A single stroke draws the whole outline around the card in one continuous pass, easing in and out.','#22D3EE','<rect x="6" y="6" width="22" height="22" rx="5"/><path d="M12 17l4 4 7-8"/>','d1','r'],
+['From both ends','Meet at the middle','Two strokes leave the same corner in opposite directions and join on the far side.','#818CF8','<path d="M6 17h22M17 6l11 11-11 11"/>','d2','r'],
+['Dash loop','A loop that never stops','A string of short dashes circles the pill forever, a quiet beacon for the active card.','#F472B6','<circle cx="17" cy="17" r="11"/><path d="M17 10v7l5 3"/>','d3','p']];
+const wr=document.getElementById('wr'),els=[],sl=ms=>new Promise(r=>setTimeout(r,ms));let off=false;
+C.forEach((c,i)=>{const d=document.createElement('div');d.className='bx '+c[5];d.style.setProperty('--c',c[3]);d.innerHTML='<svg><rect class="bg"/><path class="dr" pathLength="1"/></svg><svg class="ic" viewBox="0 0 34 34" style="width:34px;height:34px;left:auto">'+c[4]+'</svg><div class="n">'+c[0]+'</div><h2>'+c[1]+'</h2><p>'+c[2]+'</p>';d.onpointerenter=()=>{off=true;d.classList.remove('on');void d.offsetWidth;d.classList.add('on')};wr.appendChild(d);els.push([d,c[6]])});
+function build(){els.forEach(([d,k])=>{const w=d.clientWidth,h=d.clientHeight,r=k==='p'?64:22,bg=d.querySelector('.bg'),dr=d.querySelector('.dr');bg.setAttribute('x',1);bg.setAttribute('y',1);bg.setAttribute('width',w-2);bg.setAttribute('height',h-2);bg.setAttribute('rx',r);
+ const x=1,y=1,X=w-1,Y=h-1;const p='M'+(x+r)+' '+y+' H'+(X-r)+' A'+r+' '+r+' 0 0 1 '+X+' '+(y+r)+' V'+(Y-r)+' A'+r+' '+r+' 0 0 1 '+(X-r)+' '+Y+' H'+(x+r)+' A'+r+' '+r+' 0 0 1 '+x+' '+(Y-r)+' V'+(y+r)+' A'+r+' '+r+' 0 0 1 '+(x+r)+' '+y+' Z';dr.setAttribute('d',p);
+ if(d.classList.contains('d2')){const dr2=d.querySelector('.dr2')||dr.cloneNode();dr2.classList.add('dr2');dr2.style.transform='scaleX(-1)';dr2.style.transformOrigin='center';if(!d.querySelector('.dr2'))dr.parentNode.appendChild(dr2)}})}
+build();addEventListener('resize',build);
+els.forEach(([d])=>{d.classList.add('on');d.querySelectorAll('.dr').forEach(p=>{p.style.transition='none'});requestAnimationFrame(()=>requestAnimationFrame(()=>d.querySelectorAll('.dr').forEach(p=>p.style.transition='')))});
+/* Idle demo: each card's border is a single SVG path that draws itself: the first traces the whole outline in one pass, the second sends two strokes from the same corner that meet on the far side, and the third runs a string of dashes around a pill forever; every few seconds the first two redraw in turn with a gradient stroke, until you hover a card. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3600);while(!off){for(const [d] of els.slice(0,2)){if(off)return;d.classList.remove('on');void d.offsetWidth;await sl(60);d.classList.add('on');await sl(2300)}}})()}
+</script></body></html>

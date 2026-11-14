@@ -1,0 +1,40 @@
+ROLE
+You are a senior compliance tooling designer and front-end engineer with 15+ years of experience. Build "Cookie Scan Report": a cookie scanner audits a site: a cyan scan line sweeps down a list as cookie rows slide in with vendor, lifetime and a category chip, counters and a stacked bar grow, and a privacy risk rating resolves at the end.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark scanner panel with mono rows and four category colours.
+- Palette: #38BDF8, #7C8AA0, #34D399, #080C12, #E8EEF8, #0F151F
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with count and risk; stacked category bar; legend counts; cookie list with scan line; action buttons.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Scan line steps 430ms per row; rows slide in; bar widths transition 500ms.
+
+IDLE AUTOPLAY
+- After 3.4s the scan clears and runs again.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static table.
+- Risk shown before the scan finishes.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

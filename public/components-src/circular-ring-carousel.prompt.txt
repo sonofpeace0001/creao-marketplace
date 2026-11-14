@@ -1,0 +1,40 @@
+ROLE
+You are a senior WebGL-style interface designer and front-end engineer with 15+ years of experience. Build "Circular Ring Carousel": eight scene cards on a true 3D cylinder that turns steadily with the front card brightest and the rest dimming by angle, with a floor glow and a label naming the front card; drag to spin with inertia.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black stage with a violet floor glow and cinematic landscape cards.
+- Palette: #07070D, #F0F0FA, #0C0C16, #8C8CAA, #7C7CA0
+- Type: Syne, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Perspective stage; ring of eight cards with titles; floor glow; front-card label; drag hint.
+
+INTERACTION & STATES
+- Drag to spin; release keeps inertia.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ring rotates 14 degrees per second; brightness derived from angle; pointer drag adds velocity with decay.
+
+IDLE AUTOPLAY
+- After 3s the ring turns slowly until the user grabs it.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A flat row of cards pretending to be 3D.
+- Equal brightness on all cards.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

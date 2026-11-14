@@ -1,0 +1,40 @@
+ROLE
+You are a senior FinOps product designer and front-end engineer with 15+ years of experience. Build "Cost Anomaly Alert": a cloud-spend alert where a live line crosses a dashed threshold, turning rose with a pulsing ring, a 3.4x NORMAL badge, a glowing card and action buttons that rise in.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black analytics card with a sky-blue line and rose danger state.
+- Palette: #FB7185, #0C0E12, #ECEFF5, #14171E, #FDA4AF, #7C8498
+- Type: Manrope, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with badge; large hourly spend and delta; area chart with threshold; service breakdown bars; action buttons.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Line redraws as data streams; hot segment recolours; pulse ring expands; glow, badge and actions fade in with the anomaly level.
+
+IDLE AUTOPLAY
+- After 3.6s spend spikes over the threshold, holds, then settles and repeats.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- An alert that is only a red box; the chart must show the breach.
+- Alert chrome visible when everything is normal.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

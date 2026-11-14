@@ -1,0 +1,40 @@
+ROLE
+You are a senior content site designer and front-end engineer with 15+ years of experience. Build "FLIP Filter Blog Grid": a journal grid whose filter chips shrink away non-matching posts, glide the remaining cards to new positions with a FLIP spring and pop returning cards back in, with a count that updates.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark journal with generated abstract thumbnails tinted per category.
+- Palette: #0C0D12, #7C84A0, #EDEEF6, #13151D, #1B1E29, #AAB1CB
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with post count; category chips with a springing white pill; four-column card grid with art, tag, title and read time.
+
+INTERACTION & STATES
+- Click a chip to filter.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Exit 260ms; FLIP translate 620ms spring; entrance scale 420ms; active pill scales in.
+
+IDLE AUTOPLAY
+- After 3.4s filters cycle Design, Product, Culture, Engineering, All.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Cards that just disappear and the grid jumps.
+- Identical thumbnails.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

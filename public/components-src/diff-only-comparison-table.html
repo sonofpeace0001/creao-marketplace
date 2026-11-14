@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Diff Only Comparison Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9ECF6;color:#151A3C;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:700px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 40px 56px -34px rgba(21,26,60,.5),inset 0 0 0 1px rgba(21,26,60,.07)}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}.hd h1{font-size:21px;font-weight:800;letter-spacing:-.03em}.hd p{font-size:13px;color:#6E75A3;margin-top:2px}
+.sw{display:flex;align-items:center;gap:10px;font-size:13.500px;font-weight:700;cursor:pointer;user-select:none}.sw .tk{position:relative;width:44px;height:26px;border-radius:99px;background:#D8DBF0;transition:background .3s}.sw .tk::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.25);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}.sw.on .tk{background:#4F46E5}.sw.on .tk::after{transform:translateX(18px)}.sw:focus-visible{outline:2px solid #4F46E5;outline-offset:3px;border-radius:99px}
+.tb{position:relative;display:grid;grid-template-columns:1.5fr repeat(3,1fr)}
+.col{position:absolute;top:0;bottom:0;width:calc(100%/4.5);border-radius:16px;background:linear-gradient(180deg,rgba(79,70,229,.12),rgba(79,70,229,.03));box-shadow:inset 0 0 0 2px rgba(79,70,229,.45);transition:left .6s cubic-bezier(.3,1.2,.4,1);pointer-events:none;z-index:0}
+.ph{position:relative;z-index:1;padding:12px 8px 14px;text-align:center}.ph b{display:block;font-size:16px;font-weight:800;letter-spacing:-.02em}.ph span{font:500 12px 'JetBrains Mono';color:#7B82B0}
+.r{display:contents}.r>*{position:relative;z-index:1;display:flex;align-items:center;transition:opacity .4s,max-height .55s cubic-bezier(.4,0,.2,1),padding .55s;max-height:56px;padding:13px 10px;overflow:hidden;border-top:1px solid #EEF0FA;font-size:14px}.r>.n{font-weight:600}.r>.c{justify-content:center;font:700 14px 'JetBrains Mono'}
+.c.y{color:#16A34A}.c.x{color:#C4C8E6}
+.r.same.hide>*{max-height:0;padding-top:0;padding-bottom:0;opacity:0;border-top-width:0}
+.ft{margin-top:14px;font:500 12px 'JetBrains Mono';color:#8187B3;display:flex;justify-content:space-between}
+@media(max-width:560px){.tb{grid-template-columns:1.2fr repeat(3,1fr)}.r>*{font-size:12.500px;padding:11px 6px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><div><h1>Compare plans</h1><p>Start with what is different.</p></div><div class="sw" id="sw" role="switch" aria-checked="false" tabindex="0"><span class="tk"></span>Differences only</div></div>
+<div class="tb" id="tb"><i class="col" id="col" style="left:calc(1.5/4.5*100%)"></i></div><div class="ft"><span id="ct">8 features shown</span><span>All plans include SSL and daily backups</span></div></div>
+<script>
+const PL=[['Starter','$12'],['Pro','$29'],['Team','$79']];const FT=[['Unlimited projects',1,1,1],['Custom domains',1,1,1],['Team members',0,1,1],['Priority support',0,0,1],['Version history',1,1,1],['Advanced analytics',0,1,1],['SSO and audit logs',0,0,1],['Free SSL certificate',1,1,1]];
+const tb=document.getElementById('tb'),col=document.getElementById('col'),$=id=>document.getElementById(id),sl=t=>new Promise(r=>setTimeout(r,t));let off=false,only=false,hi=1;
+tb.insertAdjacentHTML('beforeend','<div class="ph"></div>'+PL.map(p=>'<div class="ph"><b>'+p[0]+'</b><span>'+p[1]+'/mo</span></div>').join(''));
+const rows=FT.map(f=>{const same=f[1]===f[2]&&f[2]===f[3];const html=['<div class="n">'+f[0]+'</div>',...f.slice(1).map(v=>'<div class="c '+(v?'y':'x')+'">'+(v?'✓':'—')+'</div>')];const w=document.createElement('div');w.className='r'+(same?' same':'');w.innerHTML=html.join('');tb.appendChild(w);return w});
+function setOnly(v){only=v;$('sw').classList.toggle('on',v);$('sw').setAttribute('aria-checked',v);rows.forEach(r=>r.classList.toggle('hide',v&&r.classList.contains('same')));const n=FT.filter(f=>!(f[1]===f[2]&&f[2]===f[3])).length;$('ct').textContent=v?n+' of '+FT.length+' features differ':FT.length+' features shown'}
+function setCol(i){hi=i;col.style.left='calc((1.5 + '+i+')/4.5*100%)'}
+$('sw').onclick=()=>{off=true;setOnly(!only)};$('sw').onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();off=true;setOnly(!only)}};
+setCol(1);document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a plan comparison table where a soft indigo column highlight glides between Starter, Pro and Team; the Differences only switch flips itself on and every row that is identical across all plans collapses away in a smooth squeeze, leaving only the rows that distinguish the plans while the footer counts how many differ, then it flips back and the rows expand again, until you click the switch. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);while(!off){setCol(2);await sl(1100);setOnly(true);await sl(2600);setCol(0);await sl(1500);setCol(1);await sl(1400);setOnly(false);await sl(1800)}})()}
+</script></body></html>

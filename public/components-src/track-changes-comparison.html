@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Track Changes Comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Geist:wght@500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDEDE8;color:#1A1A17;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:680px;background:#FDFCF9;border-radius:26px;padding:26px 30px;box-shadow:0 40px 56px -34px rgba(26,26,23,.5),inset 0 0 0 1px rgba(26,26,23,.08)}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}.hd small{font:500 11.500px 'Geist Mono';letter-spacing:.14em;color:#8C8A80;text-transform:uppercase;display:block;margin-bottom:4px}.hd h1{font-size:19px;font-weight:700;letter-spacing:-.02em}
+.sg{position:relative;display:grid;grid-template-columns:repeat(3,1fr);padding:4px;border-radius:99px;background:#EFEEE8}.sg .th{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/3);border-radius:99px;background:#1A1A17;transition:transform .45s cubic-bezier(.3,1.4,.4,1)}.sg button{position:relative;z-index:1;border:0;background:none;padding:8px 16px;font:600 13px 'Geist';color:#7E7C72;cursor:pointer;transition:color .3s;white-space:nowrap}.sg button.on{color:#fff}.sg button:focus-visible{outline:2px solid #2563EB;border-radius:99px}
+.doc{font:400 21px/1.65 'Newsreader',serif;color:#2A2A25}.doc h2{font:600 28px/1.15 'Newsreader',serif;letter-spacing:-.02em;margin-bottom:12px}
+.s{display:inline-block;vertical-align:bottom;overflow:hidden;white-space:pre-wrap;transition:max-width .6s cubic-bezier(.4,0,.2,1),opacity .4s,background .4s,color .4s,text-decoration-color .4s;max-width:600px;border-radius:3px}
+.d{text-decoration:line-through;text-decoration-color:transparent}.i{background:transparent}
+.m-c .d{background:rgba(239,68,68,.14);color:#B42318;text-decoration-color:#B42318}.m-c .i{background:rgba(16,185,129,.18);color:#067647;box-shadow:inset 0 -2px 0 #10B981}
+.m-o .i{max-width:0;opacity:0}.m-s .d{max-width:0;opacity:0}
+.s.ac{background:transparent!important;color:inherit!important;box-shadow:none!important;text-decoration-color:transparent!important}.s.ac.d{max-width:0;opacity:0}
+.ft{display:flex;align-items:center;gap:16px;margin-top:20px;padding-top:16px;border-top:1px solid #EFEEE8;font-size:13px;color:#7E7C72}.ft b{color:#1A1A17}.ft .cn{display:flex;gap:14px;font:500 12px 'Geist Mono'}.ft .cn span i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px}.ft .btn{margin-left:auto;border:0;border-radius:12px;padding:9px 16px;background:#1A1A17;color:#fff;font:700 13px 'Geist';cursor:pointer;transition:transform .15s}.ft .btn.pr{transform:scale(.94)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><div><small>Homepage hero · v3 edits</small><h1>Review changes</h1></div><div class="sg" id="sg"><span class="th" id="th"></span></div></div>
+<div class="doc m-c" id="doc"></div>
+<div class="ft"><div class="cn"><span><i style="background:#EF4444"></i><b id="nd">4</b> removed</span><span><i style="background:#10B981"></i><b id="ni">4</b> added</span></div><button class="btn" id="ac">Accept all</button></div></div>
+<script>
+const P=[['k','Build faster with '],['d','a platform '],['i','one workspace '],['k','your team will '],['d','probably '],['i','actually '],['k','enjoy using. We replaced '],['d','dozens of disconnected tools '],['i','six tools with one '],['k','so that every launch takes '],['d','weeks of coordination '],['i','a single afternoon'],['k','.']];
+const doc=document.getElementById('doc'),sg=document.getElementById('sg'),$=id=>document.getElementById(id),sl=t=>new Promise(r=>setTimeout(r,t));let off=false,mode=2;
+doc.innerHTML='<h2>One tool for the whole launch</h2><p>'+P.map(p=>'<span class="s '+p[0]+'">'+p[1]+'</span>').join('')+'</p>';
+const spans=[...doc.querySelectorAll('.s')];
+['Original','Suggested','Changes'].forEach((l,i)=>{const b=document.createElement('button');b.textContent=l;b.onclick=()=>{off=true;set(i)};sg.appendChild(b)});
+function set(i){mode=i;doc.className='doc '+['m-o','m-s','m-c'][i];[...sg.querySelectorAll('button')].forEach((b,k)=>b.classList.toggle('on',k===i));$('th').style.transform='translateX('+(i*100)+'%)';spans.forEach(s=>s.classList.remove('ac'))}
+set(2);
+async function acceptAll(){const b=$('ac');b.classList.add('pr');await sl(220);b.classList.remove('pr');for(const s of spans){if(s.classList.contains('d')||s.classList.contains('i')){s.classList.add('ac');await sl(260)}}$('nd').textContent=0;$('ni').textContent=0;b.textContent='Accepted ✓'}
+function reset(){$('nd').textContent=4;$('ni').textContent=4;$('ac').textContent='Accept all';set(2)}
+$('ac').onclick=()=>{off=true;acceptAll()};
+doc.parentNode.addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a document review where edits are tracked; in Changes view deletions are struck through in red and additions highlighted green, then the switch glides to Original so every addition collapses away, to Suggested so every deletion collapses and the new copy closes the gaps, back to Changes, and finally Accept all resolves each edit one by one, the markings fading and the counters dropping to zero, until you click a control. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);while(!off){set(0);await sl(2300);set(1);await sl(2600);set(2);await sl(1800);await acceptAll();await sl(2400);reset();await sl(900)}})()}
+</script></body></html>

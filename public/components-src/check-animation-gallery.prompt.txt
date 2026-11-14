@@ -1,0 +1,40 @@
+ROLE
+You are a senior micro-interaction designer and front-end engineer with 15+ years of experience. Build "Check Animation Gallery": six checkboxes each with their own animation, a drawn stroke, ripple flood, 3D flip, squash and stretch, droplet with spray and a random pixel fill, toggling in a staggered wave.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black stage with a jewel-coloured box for each style and mono timing notes.
+- Palette: #7C7CA0, #0EA5E9, #EC4899, #0B0B12, #F0F0FA, #12121C
+- Type: Syne, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; six cells each with a box and caption naming the technique and timing.
+
+INTERACTION & STATES
+- Click or press Space on any cell.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Stroke dashoffset 350ms; clip-path circle 450ms; rotateY 600ms; squash keyframes 550ms; scale overshoot with particles; 36 cells with random delays.
+
+IDLE AUTOPLAY
+- After 3.4s all six toggle in a wave, then untoggle.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Six variations of the same fade.
+- Hidden timing; show the values.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

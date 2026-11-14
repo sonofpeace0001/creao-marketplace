@@ -1,0 +1,40 @@
+ROLE
+You are a senior trust and privacy designer and front-end engineer with 15+ years of experience. Build "Consent Receipt": preferences become a paper trail: after Save my choices, a till-roll receipt feeds from a dark slot with a torn edge, its lines print one by one with ID, timestamp, allowed or denied marks and a barcode, then tears away.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with indigo toggles and a Courier receipt.
+- Palette: #1B1830, #6D4DFF, #8A86AE, #E8E6F0, #6E6A92, #F6F5FB
+- Type: Hanken Grotesk, Courier Prime (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Preferences with four switches and a save button; slot and receipt viewport; download link.
+
+INTERACTION & STATES
+- Toggle categories and save.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Receipt translate 1.6s ease-out; lines fade in at 140ms stagger; tear-away rotates and fades.
+
+IDLE AUTOPLAY
+- After 3.6s a receipt is printed, torn away and printed again with different choices.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain Saved toast.
+- A receipt without an ID and timestamp.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

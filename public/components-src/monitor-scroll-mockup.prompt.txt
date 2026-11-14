@@ -1,0 +1,40 @@
+ROLE
+You are a senior web agency designer and front-end engineer with 15+ years of experience. Build "Monitor Scroll Mockup": a desktop monitor shows a long marketing page that scrolls with a real easing curve between stops (hero, features, testimonial, stats, call to action) while a pointer glides and a glass reflection sweeps the screen.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Silver monitor on a near-black violet-glow stage with a rich dark page inside.
+- Palette: #0D0F18, #7C8194, #7C5CFF, #8C91A1, #0C0E15, #C9CCD6
+- Type: Bricolage Grotesque, Inter Tight (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Monitor bezel with chin; screen with scrolling page; reflection; stand and base; pointer.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Page translateY eases 7.5% per frame to targets; pointer travels 1.2s; reflection sweeps every 6s.
+
+IDLE AUTOPLAY
+- After 3.2s the page scrolls through the sections and returns to the top.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A page that is a single image.
+- Linear scrolling.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

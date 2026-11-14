@@ -1,0 +1,40 @@
+ROLE
+You are a senior B2B dashboard designer and front-end engineer with 15+ years of experience. Build "Slide-Over Panel Modal": a slide-over details drawer on an orders table: the page dims and blurs as the panel slides in, a cursor moves the tab underline between Details, Activity and Files with staggered content, then closes the panel.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White admin UI with an indigo underline and soft shadows.
+- Palette: #98A2B3, #111827, #F2F4F7, #EEF0F4, #E9ECF1, #F0F2F6
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Orders table; scrim; panel with header, tabs, three tab panes and actions; cursor.
+
+INTERACTION & STATES
+- Click a row to open, tabs to switch, close button to dismiss.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Panel translateX 650ms; underline slides and resizes 450ms; items stagger in at 100ms.
+
+IDLE AUTOPLAY
+- After 3.4s tabs switch, the panel closes and reopens.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A centred modal for a record view.
+- Tabs without an animated indicator.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

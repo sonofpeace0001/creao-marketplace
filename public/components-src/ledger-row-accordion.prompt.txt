@@ -1,0 +1,40 @@
+ROLE
+You are a senior fintech product designer and front-end engineer with 15+ years of experience. Build "Ledger Row Accordion": a transaction list where each row opens into a paper receipt with a torn zigzag edge whose dotted line items print one after another down to a ruled total.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Mint-grey page, soft green card, Courier receipt paper and clear amounts.
+- Palette: #0F8A5F, #2A3B32, #DCE9E1, #142A20, #F4FAF6, #5B7567
+- Type: Manrope, Courier Prime (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; four rows with merchant tile, detail and signed amount; receipt panel with title, dotted lines and total.
+
+INTERACTION & STATES
+- Click a row to open its receipt; only one open at a time.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Panel height 600ms; line items fade and drop in with 120ms stagger; zigzag edge made with a conic-gradient mask.
+
+IDLE AUTOPLAY
+- After 3.2s each transaction opens in turn every 3.1s until the user clicks.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A receipt without the torn edge.
+- Line items that appear all at once.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI Command Palette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#07080D;color:#E9EBF5;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(600px 400px at 80% 0,rgba(139,92,246,.2),transparent 70%)}
+.pl{width:100%;max-width:700px;background:#11131C;border-radius:24px;box-shadow:0 50px 80px -34px #000,0 0 0 1px rgba(255,255,255,.1);overflow:hidden}
+.in{position:relative;display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.07)}
+.in::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:linear-gradient(90deg,#8B5CF6,#EC4899,#38BDF8,#8B5CF6);background-size:200% 100%;animation:fl 2s linear infinite;opacity:var(--b,0);transition:opacity .3s}@keyframes fl{to{background-position:-200% 0}}
+.in svg{width:20px;height:20px;stroke:#A78BFA;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}.in div{flex:1;font:500 17px 'Inter Tight';min-height:24px}.in div i{display:inline-block;width:2px;height:19px;background:#A78BFA;vertical-align:-4px;margin-left:1px;animation:bk .8s steps(2) infinite}@keyframes bk{50%{opacity:0}}
+.in kbd{font:500 11.500px 'Geist Mono';padding:3px 8px;border-radius:7px;background:rgba(255,255,255,.08);color:#9AA2C0}
+.bd{display:grid;grid-template-columns:1fr 250px;min-height:300px}
+.st{padding:14px 16px;display:grid;gap:6px;align-content:start}.st h4{font:600 11px 'Geist Mono';letter-spacing:.16em;color:#7C86A8;margin:2px 4px 6px;display:flex;align-items:center;gap:8px}.st h4 span{color:#A78BFA}
+.sp{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:13px;background:rgba(255,255,255,.04);font-size:14px;opacity:0;transform:translateX(-10px);transition:opacity .35s,transform .45s cubic-bezier(.3,1.4,.5,1)}.sp.on{opacity:1;transform:none}
+.sp .mk{flex:none;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px #3A3E58;position:relative;display:grid;place-items:center;transition:all .3s}.sp.run .mk{box-shadow:none;border:2.500px solid rgba(167,139,250,.3);border-top-color:#A78BFA;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}.sp.ok .mk{background:#34D399;box-shadow:none}.sp.ok .mk::after{content:"";width:4px;height:8px;border:solid #06281D;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.sp code{margin-left:auto;font:500 11px 'Geist Mono';color:#7C86A8}
+.sk{height:44px;border-radius:13px;background:linear-gradient(90deg,#171A26 25%,#232738 50%,#171A26 75%);background-size:200% 100%;animation:sh 1.200s linear infinite}@keyframes sh{to{background-position:-200% 0}}
+.pv{border-left:1px solid rgba(255,255,255,.07);padding:14px;background:#0D0F16}.pv h4{font:600 11px 'Geist Mono';letter-spacing:.16em;color:#7C86A8;margin-bottom:10px}
+.pg{height:210px;border-radius:14px;overflow:hidden;background:var(--bg);box-shadow:0 0 0 1px rgba(255,255,255,.08);transition:background .7s;position:relative;padding:14px}
+.pg .nv{display:flex;gap:6px;margin-bottom:22px}.pg .nv i{width:30px;height:5px;border-radius:3px;background:var(--fg);opacity:.35;transition:background .7s}.pg .nv i:first-child{width:18px;opacity:.9}
+.pg h5{font:800 17px/1.05 'Inter Tight';letter-spacing:-.03em;color:var(--hf);transition:color .7s}.pg p{font-size:10.500px;color:var(--fg);opacity:.7;margin:6px 0 12px;line-height:1.35;transition:color .7s}
+.pg .bt{display:inline-block;padding:7px 14px;border-radius:9px;background:#8B5CF6;color:#fff;font:700 11px 'Inter Tight';transform:scale(0);opacity:0;transition:transform .5s cubic-bezier(.3,2,.5,1),opacity .3s}.pg.btn .bt{transform:scale(1);opacity:1}
+.pg{--bg:#F5F5FA;--fg:#4B5160;--hf:#14161F}.pg.dk{--bg:#12131C;--fg:#C9CDE0;--hf:#fff}
+@media(max-width:620px){.bd{grid-template-columns:1fr}.pv{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="pl" id="pl"><div class="in" id="in"><svg viewBox="0 0 24 24"><path d="M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z"/><path d="M19 17l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><div><span id="tx"></span><i></i></div><kbd>⌘ K</kbd></div>
+<div class="bd"><div class="st" id="st"></div><div class="pv"><h4>PREVIEW</h4><div class="pg" id="pg"><div class="nv"><i></i><i></i><i></i></div><h5>Ship faster with fewer meetings</h5><p>One workspace for specs, tasks and releases.</p><span class="bt">Start free</span></div></div></div></div>
+<script>
+const Q='make the hero dark and add a signup button',S=[['Switch hero theme to dark','hero.tsx'],['Add primary button “Start free”','hero.tsx'],['Match nav contrast to the new theme','nav.tsx']];
+const $=id=>document.getElementById(id),st=$('st'),pg=$('pg'),sl=t=>new Promise(r=>setTimeout(r,t));let off=false;
+function plan(state){st.innerHTML='<h4><span>✦</span> PLAN · '+S.length+' STEPS</h4>'+S.map((s,i)=>'<div class="sp'+(state[i]?' on '+state[i]:'')+'"><span class="mk"></span>'+s[0]+'<code>'+s[1]+'</code></div>').join('')}
+function skel(){st.innerHTML='<h4><span>✦</span> THINKING…</h4><div class="sk"></div><div class="sk" style="width:86%"></div><div class="sk" style="width:70%"></div>'}
+function apply(i){if(i===0)pg.classList.add('dk');if(i===1)pg.classList.add('btn')}
+function reset(){pg.classList.remove('dk','btn');$('tx').textContent='';$('in').style.setProperty('--b',0);st.innerHTML='<h4><span>✦</span> ASK ANYTHING</h4><div class="sp on" style="opacity:.6"><span class="mk"></span>Describe a change in plain words</div>'}
+$('tx').textContent=Q;pg.classList.add('dk','btn');pg.style.transition='none';plan(['ok','ok','run']);requestAnimationFrame(()=>requestAnimationFrame(()=>pg.style.transition=''));
+document.getElementById('pl').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a command palette that understands plain English; a sentence is typed into the prompt, a gradient line starts flowing along the input while skeleton rows shimmer, then a three-step plan streams in with spinners that turn into green ticks one by one and a live preview on the right that really changes (the hero flips to dark, a Start free button springs in), until the run finishes and it resets, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);while(!off){reset();await sl(500);for(let i=1;i<=Q.length&&!off;i++){$('tx').textContent=Q.slice(0,i);await sl(38)}$('in').style.setProperty('--b',1);skel();await sl(1300);if(off)return;const stt=[null,null,null];plan(stt);const els=[...st.querySelectorAll('.sp')];for(let i=0;i<S.length;i++){els[i].classList.add('on');await sl(280)}for(let i=0;i<S.length;i++){els[i].classList.add('run');await sl(900);els[i].classList.remove('run');els[i].classList.add('ok');apply(i)}$('in').style.setProperty('--b',0);await sl(4200)}})()}
+</script></body></html>

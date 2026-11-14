@@ -1,0 +1,40 @@
+ROLE
+You are a senior data visualisation designer and front-end engineer with 15+ years of experience. Build "Radar Skills Chart": two glowing radar polygons, earlier and latest, morph between three teams' datasets, with legend averages and a biggest-mover readout computed from the live shapes.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark card with indigo and mint polygons, faint rings and mono scale numbers.
+- Palette: #10131E, #E8ECF8, #080A12, #AEB6D4, #6A7396, #8B93B3
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Radar SVG with four rings, six spokes and labels; two polygons with dots; side panel with title, tabs, legend and mover.
+
+INTERACTION & STATES
+- Choose a team tab.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Each vertex eases 7% per frame; glow follows the shape.
+
+IDLE AUTOPLAY
+- After 3.4s the dataset changes every 3.2s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A radar with no comparison series.
+- Snapping between datasets.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

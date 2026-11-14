@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HUD Chamfer Border</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#27E1FF;background:#04080C;color:#CFF6FF;font-family:'Rajdhani',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:linear-gradient(rgba(39,225,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(39,225,255,.05) 1px,transparent 1px);background-size:32px 32px}
+.hu{width:100%;max-width:760px;display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:auto auto;gap:16px}
+.pn{position:relative;padding:22px 24px;background:linear-gradient(135deg,rgba(39,225,255,.1),rgba(39,225,255,.02));clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
+.pn.w{grid-row:span 2}
+.pn svg.bd{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}.bd .ln{fill:none;stroke:rgba(39,225,255,.28);stroke-width:1.500}.bd .tv{fill:none;stroke:var(--k,#27E1FF);stroke-width:2.500;stroke-linecap:round;filter:drop-shadow(0 0 5px var(--k,#27E1FF))}.bd .cn{fill:none;stroke:var(--k,#27E1FF);stroke-width:2.500}
+.pn h3{font:600 13px 'Share Tech Mono';letter-spacing:.24em;color:var(--k,#27E1FF);text-transform:uppercase;display:flex;justify-content:space-between;margin-bottom:8px}.pn h3 i{font-style:normal;color:#5A8B97;font-size:11px}
+.pn .v{font:700 58px/1 'Rajdhani';letter-spacing:-.01em;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 0 18px rgba(39,225,255,.5)}.pn .v small{font:500 18px 'Rajdhani';color:#5A8B97;margin-left:4px}
+.pn p{font:400 13px/1.5 'Share Tech Mono';color:#6EA3B0;margin-top:6px}
+.br{display:flex;gap:3px;margin-top:14px}.br i{flex:1;height:16px;background:rgba(39,225,255,.12);clip-path:polygon(4px 0,100% 0,calc(100% - 4px) 100%,0 100%);transition:background .2s}.br i.on{background:var(--k,#27E1FF);box-shadow:0 0 8px var(--k)}
+.rd{position:relative;height:150px;margin-top:6px}.rd svg{width:100%;height:100%}.rd .rg{fill:none;stroke:rgba(39,225,255,.25);stroke-width:1}.rd .sw{transform-origin:100px 75px;animation:sw 4s linear infinite}@keyframes sw{to{transform:rotate(360deg)}}.rd .bp{fill:#FF4D6D;animation:bp 4s linear infinite;opacity:0}@keyframes bp{0%{opacity:1}30%,100%{opacity:0}}
+.al{padding:3px 10px;background:rgba(255,77,109,.16);color:#FF8FA3;font:600 11px 'Share Tech Mono';letter-spacing:.14em;animation:bk 1s steps(2) infinite}@keyframes bk{50%{opacity:.3}}
+.pn.a{--k:#FF4D6D}.pn.g{--k:#7CFFB2}
+@media(max-width:640px){.hu{grid-template-columns:1fr}.pn.w{grid-row:auto}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="hu" id="hu">
+<div class="pn w" data-k="1"><h3><span>Sector scan</span><i>LAT 41.2 / LON 7.8</i></h3><div class="v" id="rg">142<small>km</small></div><div class="rd"><svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet"><circle class="rg" cx="100" cy="75" r="70"/><circle class="rg" cx="100" cy="75" r="46"/><circle class="rg" cx="100" cy="75" r="22"/><path class="rg" d="M100 5v140M30 75h140"/><g class="sw"><path d="M100 75L100 5A70 70 0 0 1 150 26z" fill="rgba(39,225,255,.22)"/><path d="M100 75L100 5" stroke="#27E1FF" stroke-width="2"/></g><circle class="bp" cx="128" cy="40" r="3.500" style="animation-delay:.5s"/><circle class="bp" cx="62" cy="96" r="3.500" style="animation-delay:2.4s"/><circle class="bp" cx="138" cy="102" r="3.500" style="animation-delay:3.2s"/></svg></div><p>3 contacts · closest bearing 042°</p></div>
+<div class="pn a" data-k="1"><h3><span>Shield</span><span class="al">LOW</span></h3><div class="v" id="sh">34<small>%</small></div><div class="br" id="sb"></div></div>
+<div class="pn g" data-k="1"><h3><span>Thrusters</span><i>MAIN</i></h3><div class="v" id="th">87<small>%</small></div><div class="br" id="tb"></div></div></div>
+<script>
+const hu=document.getElementById('hu'),pns=[...hu.querySelectorAll('.pn')],NS='http://www.w3.org/2000/svg',C=18;let off=false;
+function build(){pns.forEach(p=>{let s=p.querySelector('svg.bd');if(s)s.remove();const w=p.clientWidth,h=p.clientHeight;s=document.createElementNS(NS,'svg');s.setAttribute('class','bd');s.setAttribute('viewBox','0 0 '+w+' '+h);const pts=[[C,1],[w-1,1],[w-1,h-C],[w-C,h-1],[1,h-1],[1,C]];const d='M'+pts.map(q=>q.join(' ')).join(' L')+'Z';const per=perim(pts);s.innerHTML='<path class="ln" d="'+d+'"/><path class="tv" id="" d="'+d+'" pathLength="1" stroke-dasharray=".16 .84" style="animation:tv 6s linear infinite"/><path class="cn" d="M1 '+(C+14)+'V'+C+'L'+C+' 1H'+(C+14)+'M'+(w-14)+' '+(h-1)+'H'+(w-C)+'L'+(w-1)+' '+(h-C)+'V'+(h-C-14)+'"/>';p.appendChild(s)})}
+function perim(a){let t=0;for(let i=0;i<a.length;i++){const b=a[(i+1)%a.length];t+=Math.hypot(b[0]-a[i][0],b[1]-a[i][1])}return t}
+const st=document.createElement('style');st.textContent='@keyframes tv{to{stroke-dashoffset:-1}}';document.head.appendChild(st);
+function bars(id,n,v){const e=document.getElementById(id);if(!e.children.length)for(let i=0;i<n;i++)e.appendChild(document.createElement('i'));[...e.children].forEach((c,i)=>c.classList.toggle('on',i<Math.round(v/100*n)))}
+let sh=34,th=87,rg=142;function paint(){document.getElementById('sh').innerHTML=Math.round(sh)+'<small>%</small>';document.getElementById('th').innerHTML=Math.round(th)+'<small>%</small>';document.getElementById('rg').innerHTML=Math.round(rg)+'<small>km</small>';bars('sb',20,sh);bars('tb',20,th)}
+document.fonts.ready.then(build);build();paint();addEventListener('resize',build);
+hu.addEventListener('pointerenter',()=>{off=true});
+/* Idle demo: three sci-fi panels with chamfered corners wear a glowing light that circles each border forever, corner brackets and a pulsing LOW tag on the shield; a radar sweep rotates and lights contact blips as it passes, and the shield and thruster segment bars drift up and down with their percentages and the sector range, until you hover the panels. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let t=0,last=0;requestAnimationFrame(function lp(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;t+=dt;if(n>2500&&!off){sh=34+26*Math.sin(t*.7);th=75+20*Math.sin(t*.5+1);rg=142+30*Math.sin(t*.4);paint()}requestAnimationFrame(lp)})}
+</script></body></html>

@@ -1,0 +1,40 @@
+ROLE
+You are a senior AI product designer and front-end engineer with 15+ years of experience. Build "Agent Plan Checklist": an AI agent working through a six-step plan: the active step spins and names its tool, a terminal streams log lines, a failing test turns a step amber before a retry passes, and counters climb.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep violet-black workspace, violet progress and mint success, Geist Mono logs.
+- Palette: #A78BFA, #FCD34D, #EDEAF7, #C4B5FD, #6EE7B7, #34D399
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Goal header with status pill; plan list with spinner or check markers and live tool chips; log terminal; footer with tool calls, time and tokens.
+
+INTERACTION & STATES
+- Read-only observation surface; the run is the interaction.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Spinner ring, green tick pop, amber warning state, log lines slide up 350ms, counters tick every 100ms.
+
+IDLE AUTOPLAY
+- After 3.4s the agent continues from step 4, hits a failing test, repairs it, opens the pull request, then restarts.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain progress bar; each step must show its tool call.
+- A flawless run; the retry makes it believable.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

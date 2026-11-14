@@ -1,0 +1,40 @@
+ROLE
+You are a senior hardware product designer and front-end engineer with 15+ years of experience. Build "Spec Sheet Accordion": a technical spec accordion for a pair of headphones where each open panel charges tick-mark gauges and counts every figure up from zero.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Blueprint-dark card with a faint grid, lime accent glow and IBM Plex Mono readouts.
+- Palette: #8A917C, #7C8272, #C6F432, #0B0C0A, #E9ECE2, #12140F
+- Type: Space Grotesk, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with model code and revision; four rows with title, headline value and chevron; panels with three gauge rows and a footnote.
+
+INTERACTION & STATES
+- Click a row to open it and re-run its gauge and counter animation.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Tick gauges widen over 900ms with a glow; numbers ease-out count up over 900ms; chevron flips with a spring.
+
+IDLE AUTOPLAY
+- After 3.4s the panels open in turn every 3.2s until the user clicks.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Smooth progress bars; the segmented tick marks are the look.
+- Counting numbers that never land on the exact spec.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,40 @@
+ROLE
+You are a senior conversational UI designer and front-end engineer with 15+ years of experience. Build "Branching Reply Chat": a chat reply with regenerate branches: a 2 of 2 counter with arrows, a shimmering skeleton while a new tagline generates, sideways slides between branches and tone chips like Punchier.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Charcoal chat card with a pink glow, serif tagline output and a conic gradient avatar.
+- Palette: #F472B6, #818CF8, #23252E, #0E0F13, #16171D, #323542
+- Type: Newsreader, Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- User bubble; assistant row with branch viewport, navigator pill, copy, like and regenerate buttons, and tone chips.
+
+INTERACTION & STATES
+- Arrows step between branches; regenerate and chips create a new branch; like toggles.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Branches slide with a 500ms spring; skeleton shimmer 1.1s; counter updates live.
+
+IDLE AUTOPLAY
+- After 3.4s regenerate presses itself, a new branch appears, then the arrows step back through earlier ones and a chip asks for another take.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Replacing text in place with no sense of branches.
+- A counter that does not match the branches.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

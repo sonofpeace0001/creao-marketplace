@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Agent Plan Checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0D0B14;color:#EDEAF7;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(600px 400px at 0 0,rgba(139,92,246,.18),transparent 70%)}
+.cd{width:100%;max-width:700px;border-radius:26px;background:#14111F;padding:22px;box-shadow:0 40px 60px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08);display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.gl{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:14px}.gl small{font:500 11.500px 'Geist Mono';letter-spacing:.14em;color:#8B7BE0;text-transform:uppercase;display:block;margin-bottom:4px}.gl h1{font-size:19px;font-weight:700;letter-spacing:-.03em}
+.st{font:600 12px 'Geist Mono';padding:6px 12px;border-radius:99px;background:rgba(139,92,246,.18);color:#C4B5FD;display:flex;align-items:center;gap:7px;white-space:nowrap}.st i{width:7px;height:7px;border-radius:50%;background:#A78BFA;animation:pu 1.2s infinite}.st.dn{background:rgba(52,211,153,.16);color:#6EE7B7}.st.dn i{background:#34D399;animation:none}@keyframes pu{50%{opacity:.3}}
+.pl{display:grid;gap:4px;align-content:start}
+.s{display:grid;grid-template-columns:24px 1fr;gap:11px;align-items:start;padding:9px 10px;border-radius:12px;font-size:14px;color:#8E89A6;transition:background .3s,color .3s}
+.s.run{background:rgba(139,92,246,.14);color:#fff}.s.ok{color:#B9B4D0}.s.er{background:rgba(251,191,36,.1);color:#FCD34D}
+.mk{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 2px #3A3552;display:grid;place-items:center;position:relative;margin-top:1px;transition:all .35s cubic-bezier(.3,1.7,.5,1)}
+.s.run .mk{box-shadow:none;border:2.5px solid rgba(167,139,250,.3);border-top-color:#A78BFA;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.s.ok .mk{background:#34D399;box-shadow:none}.s.ok .mk::after{content:"";width:5px;height:9px;border:solid #06281D;border-width:0 2.500px 2.500px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.s.er .mk{background:#FBBF24;box-shadow:none}.s.er .mk::after{content:"!";font:800 13px 'Inter Tight';color:#3B2A00}
+.tc{display:block;margin-top:5px;font:500 11.500px 'Geist Mono';color:#A78BFA;opacity:0;max-height:0;transition:opacity .3s,max-height .3s}.s.run .tc,.s.er .tc{opacity:1;max-height:20px}.s.er .tc{color:#FCD34D}
+.lg{background:#0A0812;border-radius:16px;padding:14px;font:400 12px/1.65 'Geist Mono';color:#9A94B8;height:300px;overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.lg::after{content:"";position:absolute;left:0;right:0;top:0;height:40px;background:linear-gradient(#0A0812,transparent);pointer-events:none}
+.lg div{animation:in .35s ease}@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.lg .tl{color:#C4B5FD}.lg .ok{color:#6EE7B7}.lg .wr{color:#FCD34D}.lg .dm{color:#5E5978}
+.ft{grid-column:1/-1;display:flex;gap:18px;font:500 12px 'Geist Mono';color:#7D7798;padding-top:2px}.ft b{color:#EDEAF7}
+@media(max-width:600px){.cd{grid-template-columns:1fr}.lg{height:200px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="gl"><div><small>Goal</small><h1>Migrate billing to Stripe Billing v2</h1></div><span class="st" id="st"><i></i><span>Working</span></span></div>
+<div class="pl" id="pl"></div><div class="lg" id="lg"></div><div class="ft"><span><b id="tc">0</b> tool calls</span><span><b id="tm">0.0s</b> elapsed</span><span><b id="tk">0</b> tokens</span></div></div>
+<script>
+const P=[['Read the current billing module',[['read_file','billing/service.ts'],['grep','"createSubscription"']]],
+['Draft the v2 API adapter',[['write_file','billing/v2/adapter.ts'],['write_file','billing/v2/types.ts']]],
+['Port webhook handlers',[['read_file','webhooks/stripe.ts'],['edit_file','webhooks/stripe.ts']]],
+['Run the test suite',[['run_tests','billing/**'],['run_tests','billing/** (retry)']],true],
+['Update docs and changelog',[['edit_file','docs/billing.md']]],
+['Open the pull request',[['git','commit -m "billing: v2"'],['gh','pr create']]]];
+const pl=document.getElementById('pl'),lg=document.getElementById('lg'),st=document.getElementById('st');let rows=[],calls=0,tok=0,t0=0,run=false;
+P.forEach((p,i)=>{const d=document.createElement('div');d.className='s';d.innerHTML='<span class="mk"></span><div>'+p[0]+'<span class="tc"></span></div>';pl.appendChild(d);rows.push(d)});
+function log(h,c){const d=document.createElement('div');d.className=c||'';d.innerHTML=h;lg.appendChild(d);while(lg.children.length>13)lg.firstChild.remove()}
+function reset(){rows.forEach(r=>{r.className='s';r.querySelector('.tc').textContent=''});lg.innerHTML='';calls=0;tok=0;st.className='st';st.innerHTML='<i></i><span>Working</span>';t0=performance.now();upd()}
+function upd(){document.getElementById('tc').textContent=calls;document.getElementById('tk').textContent=tok.toLocaleString('en-US');document.getElementById('tm').textContent=((performance.now()-t0)/1000).toFixed(1)+'s'}
+setInterval(()=>{if(run)upd()},100);
+function preset(){reset();[0,1,2].forEach(i=>rows[i].classList.add('ok'));calls=6;tok=18240;rows[3].classList.add('run');rows[3].querySelector('.tc').textContent='run_tests · billing/**';log('<span class="dm">01</span> <span class="tl">read_file</span> billing/service.ts');log('<span class="dm">02</span> <span class="tl">grep</span> "createSubscription" <span class="dm">· 9 hits</span>');log('<span class="dm">03</span> <span class="tl">write_file</span> billing/v2/adapter.ts');log('<span class="dm">04</span> <span class="tl">edit_file</span> webhooks/stripe.ts');log('<span class="dm">05</span> <span class="tl">run_tests</span> billing/**');log('<span class="wr">  FAIL</span> invoice.proration &gt; rounds half up');upd()}
+preset();t0=performance.now()-24200;upd();
+/* Idle demo: the agent works through its plan; the active step spins and shows the tool it is calling, log lines stream into the terminal, a failing test turns one step amber before a retry passes, finished steps tick green, and the counters of tool calls, time and tokens climb until the pull request is opened, then it restarts. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3400);run=true;while(!off){for(let i=3;i<P.length;i++){const r=rows[i],tcn=r.querySelector('.tc');r.className='s run';let n=0;for(const [tool,arg] of P[i][1]){tcn.textContent=tool+' · '+arg;log('<span class="dm">'+String(++calls+0).padStart(2,'0')+'</span> <span class="tl">'+tool+'</span> '+arg);tok+=1400+Math.floor(Math.random()*900);upd();await sleep(1100);if(i===3&&n===0){log('<span class="wr">  FAIL</span> invoice.proration &gt; rounds half up','');r.className='s er';tcn.textContent='1 failure · fixing rounding';await sleep(1200);log('<span class="dm">  ·</span> edit_file billing/v2/adapter.ts <span class="dm">(round half even)</span>');calls++;r.className='s run'}n++}
+ if(i===3)log('<span class="ok">  PASS</span> 48 tests · 0 failed');r.className='s ok';tcn.textContent='';await sleep(500)}
+ st.className='st dn';st.innerHTML='<i></i><span>Done</span>';log('<span class="ok">Pull request #2481 opened</span>');run=false;upd();await sleep(4200);if(off)return;reset();preset();t0=performance.now()-24200;run=true;await sleep(900)}})()}
+</script></body></html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>FLIP Filter Blog Grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0C0D12;color:#EDEEF6;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:780px;background:#13151D;border-radius:28px;padding:24px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px}.hd h1{font-size:23px;font-weight:800;letter-spacing:-.04em}.hd span{font:500 12px 'DM Mono';color:#7C84A0}
+.ch{display:flex;gap:8px;flex-wrap:wrap}.ch button{position:relative;border:0;border-radius:99px;padding:8px 15px;background:#1B1E29;color:#AAB1CB;font:600 13.500px 'Bricolage Grotesque';cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:color .3s}.ch button em{font:500 11px 'DM Mono';font-style:normal;margin-left:6px;opacity:.6}.ch button.on{color:#0C0D12}.ch button .bg{position:absolute;inset:0;border-radius:99px;background:#fff;z-index:-1;opacity:0;transform:scale(.8);transition:all .35s cubic-bezier(.3,1.6,.5,1)}.ch button.on .bg{opacity:1;transform:none}.ch button{z-index:0}.ch button:focus-visible{outline:2px solid #818CF8;outline-offset:2px}
+.gr{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.cdd{position:relative;border-radius:18px;background:#1A1D28;overflow:hidden;display:flex;flex-direction:column;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.cdd .im{height:90px;position:relative;overflow:hidden}.cdd .im svg{width:100%;height:100%;display:block}.cdd .tx{padding:11px 12px 13px}.cdd small{font:500 10.500px 'DM Mono';letter-spacing:.14em;text-transform:uppercase;color:var(--c)}.cdd b{display:block;font-size:14px;line-height:1.2;font-weight:700;letter-spacing:-.02em;margin:4px 0 6px}.cdd span{font:500 11px 'DM Mono';color:#7C84A0}
+@media(max-width:640px){.gr{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>From the journal</h1><span id="ct">8 posts</span></div><div class="ch" id="ch"></div><div class="gr" id="gr"></div></div>
+<script>
+const T={Design:'#F472B6',Engineering:'#38BDF8',Product:'#FBBF24',Culture:'#34D399'};
+const P=[['Design','Designing for the second glance','6 min',3],['Engineering','Why we deleted our design tokens','9 min',11],['Product','The roadmap is a story, not a list','5 min',18],['Culture','Four days, no meetings: what broke','7 min',26],['Design','A field guide to empty states','4 min',33],['Engineering','Shipping a 90 kB editor','11 min',41],['Product','What churned users actually told us','8 min',52],['Culture','Onboarding as a team sport','6 min',64]];
+function art(s,c){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};let h='<svg viewBox="0 0 200 90" preserveAspectRatio="xMidYMid slice"><rect width="200" height="90" fill="#14161F"/>';for(let i=0;i<5;i++){h+='<circle cx="'+(r(200))+'" cy="'+(r(90))+'" r="'+(10+r(34))+'" fill="'+c+'" opacity="'+(.18+r(.5))+'"/>'}h+='<rect x="'+(20+r(100))+'" y="'+(14+r(30))+'" width="'+(40+r(60))+'" height="'+(26+r(28))+'" rx="'+(4+r(14))+'" fill="none" stroke="'+c+'" stroke-width="2.500" opacity=".9"/>';return h+'</svg>'}
+const gr=document.getElementById('gr'),ch=document.getElementById('ch'),sl=ms=>new Promise(r=>setTimeout(r,ms));const cards=P.map(p=>{const d=document.createElement('article');d.className='cdd';d.style.setProperty('--c',T[p[0]]);d.innerHTML='<div class="im">'+art(p[3],T[p[0]])+'</div><div class="tx"><small>'+p[0]+'</small><b>'+p[1]+'</b><span>'+p[2]+' read</span></div>';gr.appendChild(d);return d});
+const F=['All',...Object.keys(T)];let cur='All',busy=false,off=false;const bs=F.map(f=>{const b=document.createElement('button');b.innerHTML='<span class="bg"></span>'+f+'<em>'+(f==='All'?P.length:P.filter(p=>p[0]===f).length)+'</em>';b.onclick=()=>{off=true;flt(f)};ch.appendChild(b);return b});
+function mark(f){bs.forEach((b,i)=>b.classList.toggle('on',F[i]===f))}
+async function flt(f){if(busy||f===cur)return;busy=true;cur=f;mark(f);const vis=cards.filter((c,i)=>f==='All'||P[i][0]===f),hide=cards.filter(c=>!vis.includes(c)&&c.style.display!=='none');
+ hide.forEach(c=>c.animate([{opacity:1,transform:'scale(1)'},{opacity:0,transform:'scale(.85)'}],{duration:260,fill:'forwards',easing:'ease'}));await sl(280);
+ const before=new Map(cards.filter(c=>c.style.display!=='none'&&!hide.includes(c)).map(c=>[c,c.getBoundingClientRect()]));hide.forEach(c=>{c.style.display='none';c.getAnimations().forEach(a=>a.cancel())});
+ const shown=vis.filter(c=>c.style.display==='none');shown.forEach(c=>c.style.display='');
+ vis.forEach(c=>{const a=c.getBoundingClientRect(),b=before.get(c);if(b){const dx=b.left-a.left,dy=b.top-a.top;if(dx||dy)c.animate([{transform:'translate('+dx+'px,'+dy+'px)'},{transform:'none'}],{duration:620,easing:'cubic-bezier(.3,1.15,.4,1)'})}else c.animate([{opacity:0,transform:'scale(.8)'},{opacity:1,transform:'none'}],{duration:420,easing:'cubic-bezier(.3,1.5,.5,1)'})});
+ document.getElementById('ct').textContent=vis.length+' post'+(vis.length>1?'s':'');await sl(640);busy=false}
+mark('All');
+/* Idle demo: after 3s the filter chips switch between All, Design, Engineering, Product and Culture; cards that no longer match shrink and fade, then the remaining cards glide to their new grid positions with a springy FLIP animation and the returning ones pop back in, while the active chip's white pill springs behind its label and the post count updates, until you click a chip. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);let k=0;const seq=['Design','Product','Culture','Engineering','All'];while(!off){await flt(seq[k++%seq.length]);await sl(2000)}})()}
+</script></body></html>

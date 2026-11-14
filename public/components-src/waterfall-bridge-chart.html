@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Waterfall Bridge Chart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9EDF1;color:#0F1A2B;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:740px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 40px 56px -34px rgba(15,26,43,.5),inset 0 0 0 1px rgba(15,26,43,.07)}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:14px}.hd small{font:500 11.500px 'Geist Mono';letter-spacing:.14em;color:#7A8699;text-transform:uppercase}.hd h1{font-size:23px;font-weight:800;letter-spacing:-.03em;margin-top:4px}
+.kp{display:flex;gap:10px}.kp div{padding:9px 14px;border-radius:14px;background:#F2F5F8;text-align:right}.kp span{display:block;font:500 10.500px 'Geist Mono';letter-spacing:.1em;color:#7A8699}.kp b{font:800 20px 'Inter Tight';letter-spacing:-.03em;font-variant-numeric:tabular-nums}.kp .g b{color:#0F9D6E}
+svg{width:100%;height:auto;display:block}
+.gl{stroke:#EEF1F5}.ax{fill:#8995A8;font:500 11px 'Geist Mono'}.lb{font:600 12px 'Inter Tight';fill:#46536A;text-anchor:middle}.vl{font:700 13px 'Geist Mono';text-anchor:middle}
+.bar{transition:none}.cn{stroke:#B4BDCB;stroke-dasharray:3 4;stroke-width:1.500;fill:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><div><small>ARR bridge · FY26</small><h1>From $4.2M to $5.2M</h1></div><div class="kp"><div class="g"><span>NET RETENTION</span><b id="nr">0%</b></div><div><span>GROWTH</span><b id="gr">0%</b></div></div></div><svg id="sv" viewBox="0 0 700 320"></svg></div>
+<script>
+const D=[['Start',4.2,'t'],['New logos',1.1,'u'],['Expansion',0.8,'u'],['Churn',-0.6,'d'],['Contraction',-0.3,'d'],['End',null,'t']];
+let run=0;const steps=D.map(d=>{if(d[2]==='t'&&d[1]!==null){run=d[1];return{n:d[0],a:0,b:run,v:run,t:'t'}}if(d[2]==='t')return{n:d[0],a:0,b:run,v:run,t:'t'};const a=run;run+=d[1];return{n:d[0],a:a,b:run,v:d[1],t:d[2]}});
+const NS='http://www.w3.org/2000/svg',sv=document.getElementById('sv'),X0=44,W=640,H=320,B=34,T=24,MAX=6,N=steps.length,BW=62,GAPX=(W-N*BW)/(N-1);const y=v=>H-B-v/MAX*(H-B-T);
+let h='';[0,2,4,6].forEach(v=>{h+='<line class="gl" x1="'+X0+'" x2="'+(X0+W)+'" y1="'+y(v)+'" y2="'+y(v)+'"/><text class="ax" x="0" y="'+(y(v)+4)+'">$'+v+'M</text>'});sv.innerHTML=h;
+const bars=[],vals=[],cons=[];const COL={t:'#4F46E5',u:'#0F9D6E',d:'#E5484D'};
+steps.forEach((s,i)=>{const x=X0+i*(BW+GAPX);const r=document.createElementNS(NS,'rect');r.setAttribute('x',x);r.setAttribute('width',BW);r.setAttribute('rx',8);r.setAttribute('fill',COL[s.t]);sv.appendChild(r);bars.push(r);
+ const l=document.createElementNS(NS,'text');l.setAttribute('class','lb');l.setAttribute('x',x+BW/2);l.setAttribute('y',H-12);l.textContent=s.n;sv.appendChild(l);
+ const v=document.createElementNS(NS,'text');v.setAttribute('class','vl');v.setAttribute('x',x+BW/2);v.setAttribute('fill',COL[s.t]);sv.appendChild(v);vals.push(v);
+ if(i<N-1){const c=document.createElementNS(NS,'path');c.setAttribute('class','cn');const level=s.t==='t'?s.b:s.b;c.setAttribute('d','M'+(x+BW)+' '+y(level)+' H'+(x+BW+GAPX));c.style.opacity=0;sv.appendChild(c);cons.push(c)}});
+function setBar(i,k){const s=steps[i],top=Math.max(s.a,s.b),bot=Math.min(s.a,s.b);const t0=s.t==='t'?0:bot;let a,b;if(s.t==='t'){a=0;b=s.b*k}else{const mid=s.v>=0?s.a:s.a;a=s.a;b=s.a+(s.b-s.a)*k}const hi=Math.max(a,b),lo=Math.min(a,b);const r=bars[i];r.setAttribute('y',y(hi));r.setAttribute('height',Math.max(0,y(lo)-y(hi)));r.style.opacity=k>0?1:0;const v=vals[i];v.setAttribute('y',y(hi)-8);v.style.opacity=k>0?1:0;v.textContent=(s.t==='t'?'$'+(s.b*k).toFixed(1)+'M':(s.v>0?'+':'−')+'$'+Math.abs(s.v*k).toFixed(1)+'M');if(i<N-1)cons[i].style.opacity=k>.98?1:0}
+function kpis(k){const nrr=(4.2+1.1*0+0.8-0.6-0.3+4.2*0)/4.2;const nr=(4.2+0.8-0.6-0.3)/4.2*100,gr=(run-4.2)/4.2*100;document.getElementById('nr').textContent=Math.round(nr*k)+'%';document.getElementById('gr').textContent='+'+Math.round(gr*k)+'%'}
+let off=false;steps.forEach((s,i)=>setBar(i,1));kpis(1);
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a revenue bridge from the opening ARR to the closing ARR; after 3s the bars rebuild one at a time, the starting bar rises, green expansion bars grow upward from the running total, red churn bars drop down from it, dashed connectors link each level, every value counts up as its bar grows and the final total bar lands last while net retention and growth tick up, then it pauses and replays, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sl(3400);while(!off){steps.forEach((s,i)=>setBar(i,0));kpis(0);await sl(500);for(let i=0;i<N&&!off;i++){const t0=performance.now();while(performance.now()-t0<650&&!off){const k=1-Math.pow(1-(performance.now()-t0)/650,3);setBar(i,k);if(i===N-1)kpis(k);await sl(20)}setBar(i,1);await sl(180)}kpis(1);await sl(4200)}})()}
+</script></body></html>

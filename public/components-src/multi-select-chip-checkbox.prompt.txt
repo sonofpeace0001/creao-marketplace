@@ -1,0 +1,40 @@
+ROLE
+You are a senior onboarding designer and front-end engineer with 15+ years of experience. Build "Multi-Select Chip Checkbox": interest chips act as checkboxes: each round badge spins from a plus to a tick as the chip fills with its own colour, while a dark action bar springs up with growing emoji avatars and a live count.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream card with coloured pills and a dark rounded action bar.
+- Palette: #241A12, #F0E8DC, #FFFCF7, #B0714A, #7D6A5A, #E7D9C8
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with step; fourteen chips; bottom bar with avatars, count and Continue.
+
+INTERACTION & STATES
+- Tap chips to select or deselect.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Badge rotates 360deg with spring; chip swells; avatars pop in; bar translates 550ms.
+
+IDLE AUTOPLAY
+- After 3.4s five more chips are picked, Continue presses, then the selection clears chip by chip.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Chips that change colour only.
+- A bar that does not react to the count.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

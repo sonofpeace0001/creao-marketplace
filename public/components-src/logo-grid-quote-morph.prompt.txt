@@ -1,0 +1,40 @@
+ROLE
+You are a senior brand marketing designer and front-end engineer with 15+ years of experience. Build "Logo Grid Quote Morph": twelve client wordmarks in a grid with one active: a coloured ring springs between logos while the testimonial card recolours, fades its quote and swaps the headline metric.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card on lilac with greyed logos that colour when active.
+- Palette: #6D4DFF, #F6F4FB, #EDEAF4, #1B1535, #8A82AE
+- Type: Plus Jakarta Sans, Fraunces (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Eyebrow; 4x3 logo grid with shared ring; testimonial card with quote, person and metric.
+
+INTERACTION & STATES
+- Click a logo to select it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ring transform 600ms spring; card colour 600ms; quote fade and rise 450ms.
+
+IDLE AUTOPLAY
+- After 3.4s the selection cycles through all twelve clients.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Logos that look identical.
+- A quote card that does not change colour.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

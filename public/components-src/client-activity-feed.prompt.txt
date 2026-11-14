@@ -1,0 +1,40 @@
+ROLE
+You are a senior growth marketing designer and front-end engineer with 15+ years of experience. Build "Client Activity Feed": a live customer sign-up feed where each new team drops in at the top with a green glow, the list slides down, the counter ticks up and a sparkline of signups scrolls.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark panel with coloured logo tiles, mono amounts and colour-coded plan chips.
+- Palette: #34D399, #7C8AA0, #080B10, #E8EEF6, #10151D, #171D28
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with live dot, big counter and sparkline; five feed rows with logo tile, name, time, amount and plan.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- New row drops in 600ms with glow; rows translate 600ms; oldest row fades.
+
+IDLE AUTOPLAY
+- After 3.2s a new team joins every 1.9s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Fake names that look like real brands.
+- A feed that does not move older rows.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

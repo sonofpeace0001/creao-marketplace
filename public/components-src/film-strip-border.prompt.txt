@@ -1,0 +1,40 @@
+ROLE
+You are a senior cinematic web designer and front-end engineer with 15+ years of experience. Build "Film Strip Border": a 35mm film strip with scrolling sprocket holes slides past an amber gate; frames brighten and swell near the centre, the frame counter and timecode update and a REC lamp blinks.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm black stage with amber light, condensed display type and Courier timecode.
+- Palette: #F2E6CF, #FFB454, #B79B6B, #FF5A4D, #100C08, #0A0705
+- Type: Anton, Courier Prime (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Reel title and timecode; film strip with sprocket rows, 48 generated frames and a gate; footer with format and frame number.
+
+INTERACTION & STATES
+- Hover pauses the strip.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Strip translates at 90px/s; holes scroll in sync; frames scale and saturate by distance to centre.
+
+IDLE AUTOPLAY
+- After 2.5s the strip scrolls continuously.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static row of thumbnails.
+- Sprockets that move at a different speed to the film.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

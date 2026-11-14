@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ruler Scrub Date Picker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#090B12;color:#EAEEF8;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:640px;background:#10131D;border-radius:30px;padding:30px 0 26px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08);text-align:center;overflow:hidden}
+.cd small{font:600 11.500px 'Geist Mono';letter-spacing:.2em;color:#7C86A8;text-transform:uppercase}
+.big{display:flex;justify-content:center;align-items:baseline;gap:14px;margin:12px 0 4px}.big b{font:800 104px/.9 'Sora';letter-spacing:-.07em;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,#A6B4FF);-webkit-background-clip:text;background-clip:text;color:transparent}.big div{text-align:left}.big strong{display:block;font-size:26px;font-weight:700;letter-spacing:-.03em}.big span{font:500 14px 'Geist Mono';color:#7C86A8}
+.rel{display:inline-block;margin:10px 0 24px;padding:6px 14px;border-radius:99px;background:rgba(124,140,255,.16);color:#B4BEFF;font:600 12.500px 'Geist Mono'}
+.rl{position:relative;height:96px;cursor:grab;touch-action:pan-y;user-select:none}.rl:active{cursor:grabbing}
+.rl::before,.rl::after{content:"";position:absolute;top:0;bottom:0;width:130px;z-index:3;pointer-events:none}.rl::before{left:0;background:linear-gradient(90deg,#10131D,transparent)}.rl::after{right:0;background:linear-gradient(270deg,#10131D,transparent)}
+.tk{position:absolute;left:50%;top:0;height:100%;will-change:transform}
+.t{position:absolute;top:0;width:28px;margin-left:-14px;height:100%}.t i{position:absolute;left:50%;bottom:34px;width:2px;margin-left:-1px;border-radius:1px;background:#5A648F;height:16px;transition:background .2s,height .2s}.t.w i{background:#8C98CF;height:22px}.t.m i{background:#8C98E0;height:36px}.t.we i{background:#7C8CFF}
+.t span{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);font:600 10.500px 'Geist Mono';color:#5B6490;white-space:nowrap;opacity:0}.t.m span{opacity:1;color:#B4BEFF;letter-spacing:.1em}.t.w span{opacity:1}
+.t.on i{background:#fff;height:50px;box-shadow:0 0 14px #7C8CFF}
+.cn{position:absolute;left:50%;top:-6px;width:3px;height:70px;margin-left:-1.5px;background:linear-gradient(#7C8CFF,#C084FC);border-radius:2px;z-index:4;box-shadow:0 0 18px rgba(124,140,255,.8)}.cn::before{content:"";position:absolute;left:50%;top:-4px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(124,140,255,.4)}
+.qk{display:flex;justify-content:center;gap:8px;margin-top:20px}.qk button{border:0;border-radius:99px;padding:8px 15px;background:#171B29;color:#AEB7D6;font:600 12.500px 'Sora';cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:all .25s}.qk button:hover{background:#222842;color:#fff}.qk button:focus-visible{outline:2px solid #7C8CFF}
+@media(max-width:560px){.big b{font-size:76px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><small>Delivery date</small><div class="big"><b id="dn">19</b><div><strong id="dw">Thursday</strong><span id="dm">November 2026</span></div></div><div class="rel" id="rel">in 5 days</div>
+<div class="rl" id="rl"><i class="cn"></i><div class="tk" id="tk"></div></div><div class="qk"><button data-o="0">Today</button><button data-o="1">Tomorrow</button><button data-o="7">Next week</button><button data-o="30">In a month</button></div></div>
+<script>
+const TODAY=new Date(2026,10,14),RANGE=70,PX=28;const $=id=>document.getElementById(id),tk=$('tk'),sl=t=>new Promise(r=>setTimeout(r,t));let off=false,pos=5,vel=0,tgt=5,drag=false,lx=0,last=-999;
+const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],WD=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],FM=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const els=[];for(let o=-RANGE;o<=RANGE;o++){const d=new Date(+TODAY+o*864e5),e=document.createElement('div');e.className='t'+(d.getDate()===1?' m':d.getDay()===1?' w':'')+((d.getDay()===0||d.getDay()===6)?' we':'');e.style.left=(o*PX)+'px';e.innerHTML='<i></i><span>'+(d.getDate()===1?MN[d.getMonth()].toUpperCase():d.getDate())+'</span>';tk.appendChild(e);els.push(e)}
+function paint(){tk.style.transform='translateX('+(-pos*PX)+'px)';const r=Math.round(pos);if(r!==last){last=r;els.forEach((e,i)=>e.classList.toggle('on',i-RANGE===r));const d=new Date(+TODAY+r*864e5);$('dn').textContent=d.getDate();$('dw').textContent=WD[d.getDay()];$('dm').textContent=FM[d.getMonth()]+' '+d.getFullYear();$('rel').textContent=r===0?'today':r===1?'tomorrow':r>0?'in '+r+' days':Math.abs(r)+' days ago'}}
+$('rl').addEventListener('pointerdown',e=>{off=true;drag=true;lx=e.clientX;vel=0;$('rl').setPointerCapture(e.pointerId)});$('rl').addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lx;lx=e.clientX;pos=Math.max(-RANGE+2,Math.min(RANGE-2,pos-dx/PX));tgt=pos;vel=-dx/PX});$('rl').addEventListener('pointerup',()=>{drag=false;tgt=Math.round(pos+vel*8)});
+document.querySelectorAll('.qk button').forEach(b=>b.onclick=()=>{off=true;tgt=+b.dataset.o});
+pos=5;paint();
+/* Idle demo: a ruler-style date scrubber; a glowing playhead stays fixed while a strip of day ticks glides beneath it with a spring settle, Mondays and month starts get taller labelled ticks, the tick under the playhead lights white and grows, and the huge gradient day number, weekday, month and relative phrase (in 12 days, 20 days ago) all update live as it passes, jumping between dates, until you drag the ruler or press a shortcut. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let lt=0;requestAnimationFrame(function lp(n){const dt=Math.min(.05,(n-lt)/1000||0);lt=n;if(!drag){const k=off?.12:.07;pos+=(tgt-pos)*k}paint();requestAnimationFrame(lp)});(async()=>{await sl(3200);const seq=[17,-9,34,3,-22,12,5];let k=0;while(!off){tgt=seq[k++%seq.length];await sl(2600)}})()}
+</script></body></html>

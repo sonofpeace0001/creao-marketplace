@@ -1,0 +1,40 @@
+ROLE
+You are a senior scheduling UI designer and front-end engineer with 15+ years of experience. Build "Calendar Clock Picker": a day strip and an analogue clock work together: a day pill lifts and turns green, then the hour and minute hands swing to the new time with a springy overshoot while the digital readout, AM and PM switch and summary update.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White card with a deep green accent and a clean analogue dial.
+- Palette: #14231C, #0F7B55, #F1F5F3, #7F968B, #E7ECE9, #6D8579
+- Type: Hanken Grotesk, Fira Code (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; week strip; big digital time with AM/PM; summary; SVG clock with hands.
+
+INTERACTION & STATES
+- Pick a day; AM and PM buttons toggle.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Hands rotate 900ms spring taking the shortest way; day pill lifts 350ms.
+
+IDLE AUTOPLAY
+- After 3.4s the picker cycles four appointments.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Hands that spin the long way round.
+- A clock that does not drive the readout.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

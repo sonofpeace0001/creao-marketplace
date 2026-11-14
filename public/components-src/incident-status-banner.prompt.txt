@@ -1,0 +1,40 @@
+ROLE
+You are a senior status page product designer and front-end engineer with 15+ years of experience. Build "Incident Status Banner": a service-incident alert that moves through Investigating, Identified, Monitoring and Resolved: the banner recolours with a pulsing icon, a timeline update drops in and service dots shift from failing to healthy.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Calm light card with a colour-coded banner, mono timestamps and a clear vertical timeline.
+- Palette: #4B5568, #F59E0B, #FFF7E6, #EEF0F5, #141A26, #EF4444
+- Type: Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Banner with pulsing glyph, headline, sentence and status pill; update timeline with dated entries; affected service chips with health dots.
+
+INTERACTION & STATES
+- Click stops the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Banner colour and glyph change over 600ms; new timeline rows slide down 600ms with spring; icon halo pulses until resolved.
+
+IDLE AUTOPLAY
+- After 3.6s the incident advances to Monitoring, then Resolved, then resets to a fresh incident.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- One static red banner; the lifecycle is the point.
+- Service dots that do not follow the status.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

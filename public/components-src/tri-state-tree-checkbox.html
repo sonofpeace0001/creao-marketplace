@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tri-State Tree Checkbox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9EBF6;color:#17194A;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:480px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 40px 56px -34px rgba(23,25,74,.5),inset 0 0 0 1px rgba(23,25,74,.07)}
+.hd h1{font-size:21px;font-weight:800;letter-spacing:-.03em}.hd p{font-size:13.500px;color:#6E73A3;margin:3px 0 16px}
+.tr{display:grid;gap:2px}.rw{position:relative;display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:12px;cursor:pointer;transition:background .3s}.rw:hover{background:#F4F5FC}.rw.fl{background:#E8EAFF}.rw:focus-visible{outline:2px solid #4F46E5}
+.rw[data-d="1"]{margin-left:26px}.rw[data-d="2"]{margin-left:52px}
+.cb{position:relative;flex:none;width:22px;height:22px;border-radius:7px;box-shadow:inset 0 0 0 2px #C4C7E6;background:#fff;display:grid;place-items:center;transition:background .25s,box-shadow .25s,transform .3s cubic-bezier(.3,2,.5,1)}.cb svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:3.200;stroke-linecap:round;stroke-linejoin:round}
+.cb .ck{stroke-dasharray:20;stroke-dashoffset:20;transition:stroke-dashoffset .3s .05s}.cb .dh{stroke-dasharray:12;stroke-dashoffset:12;transition:stroke-dashoffset .25s}
+.rw.all .cb,.rw.some .cb{background:#4F46E5;box-shadow:none}.rw.all .cb{transform:scale(1.08)}.rw.all .ck{stroke-dashoffset:0}.rw.some .dh{stroke-dashoffset:0}
+.rw b{font-size:15px;font-weight:600}.rw.p b{font-weight:800}.rw small{margin-left:auto;font:500 12px 'JetBrains Mono';color:#8A8FB8}
+.ft{margin-top:16px;padding:14px;border-radius:16px;background:#F4F5FC}.ft .t{display:flex;justify-content:space-between;font-size:13.500px;font-weight:700;margin-bottom:9px}.ft .t span{font:500 12px 'JetBrains Mono';color:#7479A8}.ft .b{height:7px;border-radius:4px;background:#E2E4F5;overflow:hidden}.ft .b i{display:block;height:100%;width:var(--p,0%);background:linear-gradient(90deg,#4F46E5,#8B5CF6);border-radius:4px;transition:width .45s cubic-bezier(.3,1.2,.5,1)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>Share access</h1><p>Choose what the new teammate can open.</p></div><div class="tr" id="tr"></div><div class="ft"><div class="t"><b id="sm">0 of 8 selected</b><span id="pc">0%</span></div><div class="b"><i id="bar"></i></div></div></div>
+<script>
+const T=[['Projects',['Alpha','Beta','Gamma']],['Members',['Admins','Editors','Viewers']],['Billing',['Invoices','Cards']]];
+const sel={};T.forEach(g=>g[1].forEach(l=>sel[g[0]+'/'+l]=false));[ 'Projects/Alpha','Projects/Gamma','Members/Admins'].forEach(k=>sel[k]=true);
+const tr=document.getElementById('tr'),rows={},CB='<span class="cb"><svg viewBox="0 0 24 24"><path class="ck" d="m6 12.500 4 4 8-9"/><path class="dh" d="M7 12h10"/></svg></span>';let off=false;
+function row(id,label,d,p,sub){const r=document.createElement('div');r.className='rw'+(p?' p':'');r.dataset.d=d;r.tabIndex=0;r.innerHTML=CB+'<b>'+label+'</b><small></small>';r.onclick=()=>{off=true;tog(id)};r.onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();off=true;tog(id)}};tr.appendChild(r);rows[id]=r}
+row('root','Workspace',0,true);T.forEach(g=>{row(g[0],g[0],1,true);g[1].forEach(l=>row(g[0]+'/'+l,l,2,false))});
+function leaves(id){if(id==='root')return Object.keys(sel);if(sel[id]!==undefined)return[id];return Object.keys(sel).filter(k=>k.startsWith(id+'/'))}
+function st(id){const l=leaves(id),n=l.filter(k=>sel[k]).length;return n===0?'none':n===l.length?'all':'some'}
+function paint(){Object.keys(rows).forEach(id=>{const s=st(id),r=rows[id];r.classList.toggle('all',s==='all');r.classList.toggle('some',s==='some');const l=leaves(id);if(l.length>1)r.querySelector('small').textContent=l.filter(k=>sel[k]).length+'/'+l.length});const n=Object.values(sel).filter(Boolean).length,t=Object.keys(sel).length;document.getElementById('sm').textContent=n+' of '+t+' selected';document.getElementById('pc').textContent=Math.round(n/t*100)+'%';document.getElementById('bar').style.setProperty('--p',n/t*100+'%')}
+function tog(id){const l=leaves(id),v=st(id)!=='all';l.forEach(k=>sel[k]=v);paint();const r=rows[id];r.classList.add('fl');setTimeout(()=>r.classList.remove('fl'),500)}
+rows.root.querySelectorAll('.cb *').forEach(e=>e.style.transition='none');paint();
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a permissions tree whose parent checkboxes are tri-state, checked when every child is on, drawn with a dash when only some are, and empty when none are; automatically a whole group is ticked (its tick draws in and the parent follows), a single child is unticked so the parent drops to the dash state, another group is added, and the root Workspace box tracks all of it while a counter and progress bar update, then it clears and repeats, until you click a row. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=t=>new Promise(r=>setTimeout(r,t));(async()=>{await sl(3400);while(!off){tog('Projects');await sl(1300);if(off)return;tog('Projects/Beta');await sl(1300);tog('Members');await sl(1300);tog('Billing/Invoices');await sl(1500);tog('root');await sl(1500);if(off)return;tog('root');await sl(1200);Object.keys(sel).forEach(k=>sel[k]=false);paint();sel['Projects/Alpha']=sel['Projects/Gamma']=sel['Members/Admins']=true;paint();await sl(1200)}})()}
+</script></body></html>

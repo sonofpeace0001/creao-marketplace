@@ -1,0 +1,40 @@
+ROLE
+You are a senior AI chat interface designer and front-end engineer with 15+ years of experience. Build "Streaming Markdown Chat": an assistant reply that streams like a real model: a heading, paragraph with bold, a syntax-coloured code block whose Copy button flips to Copied, a bullet list and a table, each typed with a caret.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm off-white page, ivory chat card, terracotta avatar and a dark code block.
+- Palette: #EEEAE0, #D97757, #9A9487, #F1EEE8, #1B1A17, #E9E3D6
+- Type: Instrument Sans, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Top bar; user bubble; assistant row with avatar and streamed blocks; composer.
+
+INTERACTION & STATES
+- Interacting stops the loop.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Text nodes are typed in sequence with a blinking terracotta caret; the code block header Copy flips to green Copied.
+
+IDLE AUTOPLAY
+- After 3.4s the final table streams in, then the whole answer clears and streams again from the top.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Fading the whole answer in at once; the per-character stream is the point.
+- Unstyled code; it needs syntax colour.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>New Hire Announcement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F6EBDD;color:#2B1B12;font-family:'Figtree',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{position:relative;width:100%;max-width:560px;border-radius:32px;background:#FFFBF5;padding:32px;box-shadow:0 40px 56px -34px rgba(43,27,18,.55),inset 0 0 0 1px rgba(43,27,18,.08);overflow:hidden;text-align:center}
+.cd::before{content:"";position:absolute;left:50%;top:-120px;width:420px;height:420px;margin-left:-210px;border-radius:50%;background:radial-gradient(circle,rgba(255,138,76,.28),transparent 68%)}
+.eb{position:relative;font:700 12px 'Figtree';letter-spacing:.2em;color:#C2552A;text-transform:uppercase;margin-bottom:18px}
+.av{position:relative;width:128px;height:128px;margin:0 auto 18px}
+.av .ring{position:absolute;inset:-10px;border-radius:50%;background:conic-gradient(from 0deg,#FF8A4C,#F43F5E,#8B5CF6,#FF8A4C);animation:sp 6s linear infinite;mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px))}@keyframes sp{to{transform:rotate(360deg)}}
+.av .im{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#FFD9BF}.av svg{width:100%;height:100%;display:block}
+.wv{position:absolute;right:-12px;bottom:-4px;width:46px;height:46px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:25px;box-shadow:0 8px 16px -6px rgba(43,27,18,.5);transform-origin:70% 80%;animation:wv 2.200s ease-in-out infinite}@keyframes wv{0%,60%,100%{transform:rotate(0)}68%{transform:rotate(18deg)}76%{transform:rotate(-12deg)}84%{transform:rotate(16deg)}92%{transform:rotate(-6deg)}}
+h1{position:relative;font:700 36px/1.05 'Fraunces',serif;letter-spacing:-.03em;margin-bottom:6px}.rl{position:relative;font-size:16.500px;font-weight:600;color:#7A5A48;margin-bottom:16px}
+.ch{position:relative;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}.ch span{padding:7px 14px;border-radius:99px;background:#fff;box-shadow:inset 0 0 0 1.5px #EBD9C7;font-size:13.500px;font-weight:600;color:#6B4A38}
+.bi{position:relative;font-size:15.500px;line-height:1.55;color:#5A4132;max-width:430px;margin:0 auto 22px}
+.rx{position:relative;display:flex;justify-content:center;gap:10px}.rx button{display:flex;align-items:center;gap:8px;padding:10px 16px;border:0;border-radius:99px;background:#fff;box-shadow:inset 0 0 0 1.5px #EBD9C7;font:700 14.500px 'Figtree';color:#2B1B12;cursor:pointer;transition:transform .2s cubic-bezier(.3,1.8,.5,1),background .3s,box-shadow .3s}.rx button span{font-size:19px}.rx button.on{background:#FFEFE2;box-shadow:inset 0 0 0 2px #FF8A4C}.rx button.pr{transform:scale(1.14)}.rx button:focus-visible{outline:3px solid #FF8A4C;outline-offset:2px}
+.fl{position:absolute;font-size:24px;pointer-events:none;animation:fl 1.800s cubic-bezier(.3,.7,.4,1) forwards;z-index:3}@keyframes fl{0%{transform:translateY(0) scale(.5);opacity:0}15%{opacity:1;transform:translateY(-30px) scale(1)}100%{transform:translateY(-190px) translateX(var(--dx)) scale(1.1) rotate(var(--r));opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="cd" id="cd"><div class="eb">Please welcome</div><div class="av"><div class="ring"></div><div class="im" id="im"></div><div class="wv">👋</div></div><h1>Ada Okonkwo</h1><div class="rl">Senior Product Designer · Brand &amp; Growth</div>
+<div class="ch"><span>📍 Lagos → Lisbon</span><span>🎨 Ex-Studio Nine</span><span>☕ Oat flat white</span></div><p class="bi">Ada joins the Growth squad on Monday to rebuild our onboarding from the first tap. Say hello and tell her where to get the best coffee near the office.</p>
+<div class="rx" id="rx"></div></div>
+<script>
+function face(){return '<svg viewBox="0 0 128 128"><rect width="128" height="128" fill="#FFD9BF"/><path d="M20 128c2-26 22-38 44-38s42 12 44 38Z" fill="#2B1B12"/><rect x="54" y="78" width="20" height="18" rx="6" fill="#A8683F"/><ellipse cx="64" cy="58" rx="25" ry="29" fill="#B97748"/><path d="M36 54c-2-26 16-36 30-36s32 8 28 36c-4-14-12-20-28-20s-26 8-30 20Z" fill="#1E1008"/><circle cx="46" cy="26" r="13" fill="#1E1008"/><circle cx="82" cy="26" r="13" fill="#1E1008"/><circle cx="54" cy="60" r="3" fill="#1E1008"/><circle cx="74" cy="60" r="3" fill="#1E1008"/><path d="M52 72q12 12 24 0" fill="none" stroke="#5A2E18" stroke-width="3" stroke-linecap="round"/><circle cx="47" cy="68" r="5" fill="#E58A6B" opacity=".5"/><circle cx="81" cy="68" r="5" fill="#E58A6B" opacity=".5"/></svg>'}
+document.getElementById('im').innerHTML=face();
+const R=[['👋',24],['🎉',18],['❤️',31],['☕',9]],rx=document.getElementById('rx'),cd=document.getElementById('cd'),btn=[];let off=false;
+R.forEach((r,i)=>{const b=document.createElement('button');b.innerHTML='<span>'+r[0]+'</span><b>'+r[1]+'</b>';b.onclick=()=>{off=true;add(i,true)};rx.appendChild(b);btn.push(b)});
+function add(i,user){const b=btn[i],c=b.querySelector('b');c.textContent=+c.textContent+1;b.classList.add('on','pr');setTimeout(()=>b.classList.remove('pr'),250);const rc=b.getBoundingClientRect(),pc=cd.getBoundingClientRect();for(let k=0;k<3;k++){const f=document.createElement('i');f.className='fl';f.textContent=R[i][0];f.style.cssText+='left:'+(rc.left-pc.left+rc.width/2-12+(Math.random()*30-15))+'px;top:'+(rc.top-pc.top-10)+'px;--dx:'+(Math.random()*80-40)+'px;--r:'+(Math.random()*40-20)+'deg;animation-delay:'+(k*.12)+'s';cd.appendChild(f);setTimeout(()=>f.remove(),2100)}}
+btn[0].classList.add('on');btn[2].classList.add('on');
+/* Idle demo: the welcome card keeps a slowly spinning gradient ring around the new hire's illustrated portrait and a waving hand; after 3s the reaction buttons start ticking up on their own, each tap puffs its emoji into floating hearts, party poppers and coffee cups that drift up the card, until you react yourself. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sl(3400);let seq=[2,1,0,2,3,1,2,0];let k=0;while(!off){add(seq[k++%seq.length]);await sl(1100+Math.random()*700)}})()}
+</script></body></html>

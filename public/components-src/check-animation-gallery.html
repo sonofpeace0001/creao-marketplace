@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Check Animation Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0B12;color:#F0F0FA;font-family:'Syne',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:700px;background:#12121C;border-radius:28px;padding:24px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08)}
+.hd{margin-bottom:18px}.hd h1{font-size:23px;font-weight:800;letter-spacing:-.03em}.hd p{font:500 12px 'DM Mono';color:#7C7CA0;margin-top:4px}
+.gr{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ce{display:grid;justify-items:center;gap:14px;padding:26px 10px 18px;border-radius:20px;background:#191926;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);cursor:pointer}.ce:focus-visible{outline:2px solid #818CF8}
+.ce b{font-size:14.500px;font-weight:700}.ce span{font:500 11px 'DM Mono';color:#7C7CA0;display:block;text-align:center;margin-top:3px}
+.bx{position:relative;width:48px;height:48px;--c:#6366F1}
+.bx svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.bx .st{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.o{position:absolute;inset:0;border-radius:14px;box-shadow:inset 0 0 0 3px #3A3A55;transition:box-shadow .2s}
+/* 1 draw */
+.d1 .ck{stroke-dasharray:36;stroke-dashoffset:36;stroke:var(--c);transition:stroke-dashoffset .35s ease-out}.d1.on .ck{stroke-dashoffset:0}.d1.on .o{box-shadow:inset 0 0 0 3px var(--c)}
+/* 2 ripple */
+.d2 .f{position:absolute;inset:0;border-radius:14px;background:#0EA5E9;clip-path:circle(0% at 50% 50%);transition:clip-path .45s cubic-bezier(.4,0,.2,1)}.d2.on .f{clip-path:circle(75% at 50% 50%)}.d2 .ck{stroke-dasharray:36;stroke-dashoffset:36;transition:stroke-dashoffset .3s .2s}.d2.on .ck{stroke-dashoffset:0}.d2.on .o{box-shadow:inset 0 0 0 3px #0EA5E9}
+/* 3 flip */
+.d3{perspective:300px}.d3 .in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,1.4,.5,1)}.d3.on .in{transform:rotateY(180deg)}.d3 .a,.d3 .z{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden}.d3 .z{background:#22C55E;transform:rotateY(180deg)}.d3 .z svg path{stroke-dasharray:none}
+/* 4 bounce */
+.d4 .f{position:absolute;inset:0;border-radius:14px;background:#F59E0B;transform:scale(0);transition:transform .15s}.d4.on .f{transform:scale(1)}.d4.on{animation:bn .55s cubic-bezier(.3,1,.5,1)}@keyframes bn{0%{transform:scale(1)}25%{transform:scale(.72,1.18)}50%{transform:scale(1.18,.82)}75%{transform:scale(.94,1.06)}100%{transform:scale(1)}}.d4 .ck{stroke-dasharray:36;stroke-dashoffset:36;transition:stroke-dashoffset .25s .1s}.d4.on .ck{stroke-dashoffset:0}
+/* 5 droplet */
+.d5 .f{position:absolute;inset:0;border-radius:50%;background:#EC4899;transform:scale(0);transition:transform .5s cubic-bezier(.3,2,.5,1),border-radius .4s}.d5.on .f{transform:scale(1);border-radius:14px}.d5 .ck{stroke-dasharray:36;stroke-dashoffset:36;transition:stroke-dashoffset .3s .2s}.d5.on .ck{stroke-dashoffset:0}.d5 .dr{position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.500px;border-radius:50%;background:#EC4899;opacity:0}.d5.on .dr{animation:dp .6s ease-out}@keyframes dp{from{opacity:1;transform:translate(0,0)}to{opacity:0;transform:translate(var(--x),var(--y)) scale(.3)}}
+/* 6 pixel */
+.d6 .px{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr);gap:1.500px;padding:0}.d6 .px i{display:block;background:#2A2A40;border-radius:1.500px;transition:background .15s var(--d)}.d6.on .px i{background:#A3E635}.d6 .px i.k{}.d6.on .px i.k{background:#fff}
+.nt{margin-top:16px;font:500 11.500px 'DM Mono';color:#6C6C90;text-align:center}
+@media(max-width:560px){.gr{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>Six ways to say checked</h1><p>One tap, six different animations</p></div><div class="gr" id="gr"></div><div class="nt">Each one reacts to a click, and they all fire in a wave when idle.</div></div>
+<script>
+const CK='<svg viewBox="0 0 48 48"><path class="st ck" d="M13 25l8 8 14-17"/></svg>';
+const V=[['Draw','stroke 350ms · ease-out','d1','<i class="o"></i>'+CK],['Ripple','clip-path circle · 450ms','d2','<i class="o"></i><i class="f"></i>'+CK],['Flip','rotateY 600ms · spring','d3','<div class="in"><div class="a"><i class="o"></i></div><div class="z"><svg viewBox="0 0 48 48" style="position:absolute;inset:0"><path class="st" d="M13 25l8 8 14-17"/></svg></div></div>'],['Squash','scale squash and stretch','d4','<i class="o"></i><i class="f"></i>'+CK],['Droplet','scale overshoot + spray','d5','<i class="o"></i><i class="f"></i><i class="dr" style="--x:-30px;--y:-26px"></i><i class="dr" style="--x:32px;--y:-24px"></i><i class="dr" style="--x:-26px;--y:30px"></i><i class="dr" style="--x:28px;--y:28px"></i>'+CK],['Pixels','36 cells · random stagger','d6','<div class="px" id="px"></div>']];
+const gr=document.getElementById('gr'),bxs=[],sl=t=>new Promise(r=>setTimeout(r,t));let off=false,on=false;
+V.forEach((v,i)=>{const c=document.createElement('div');c.className='ce';c.tabIndex=0;c.innerHTML='<div class="bx '+v[2]+'">'+v[3]+'</div><div><b>'+v[0]+'</b><span>'+v[1]+'</span></div>';const b=c.querySelector('.bx');c.onclick=()=>{off=true;b.classList.toggle('on')};c.onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();off=true;b.classList.toggle('on')}};gr.appendChild(c);bxs.push(b)});
+const px=bxs[5].querySelector('.px'),KEY=[19,26,27,34,32,33,25,28];const mark=new Set([20,27,28,33,34,13+0,17+1,17+0,22].map(x=>x));for(let k=0;k<36;k++){const i=document.createElement('i');i.style.setProperty('--d',Math.floor(Math.random()*260)+'ms');const r=Math.floor(k/6),c=k%6;if((r===3&&c===0)||(r===4&&c===1)||(r===3&&c===2)||(r===2&&c===3)||(r===1&&c===4)||(r===2&&c===4)||(r===4&&c===2))i.className='k';px.appendChild(i)}
+bxs.forEach(b=>b.classList.add('on'));
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: six checkboxes, each with its own check animation, toggle in a staggered wave: a stroke that draws itself, a colour ripple that floods from the centre, a 3D flip to a green back, a squash-and-stretch bounce, a droplet that overshoots with spray particles, and a pixel grid whose cells light in a random order, then they all uncheck and repeat, until you click one. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);let s=false;while(!off){s=!s;for(const b of bxs){if(off)return;b.classList.toggle('on',s);await sl(170)}await sl(2200)}})()}
+</script></body></html>

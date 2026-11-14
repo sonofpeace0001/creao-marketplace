@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Agent Approval Gate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEFF4;color:#141A26;font-family:'Hanken Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:560px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 40px 56px -34px rgba(20,26,38,.55),inset 0 0 0 1px rgba(20,26,38,.07);position:relative;overflow:hidden}
+.hd{display:flex;align-items:center;gap:13px;margin-bottom:16px}.av{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#6366F1,#EC4899);display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px}.hd b{display:block;font-size:16px}.hd span{font-size:12.500px;color:#76809A}
+.rk{margin-left:auto;font:500 12px 'Fira Code';padding:5px 11px;border-radius:99px;background:var(--rb);color:var(--rc);transition:all .4s}
+h2{font-size:21px;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:6px}.ds{font-size:14px;color:#5B6580;line-height:1.5;margin-bottom:14px}
+.df{background:#0F1420;border-radius:14px;padding:12px 14px;font:400 12.500px/1.7 'Fira Code';color:#9AA5C0;margin-bottom:16px;min-height:104px}.df div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.df .a{color:#6EE7B7;background:rgba(52,211,153,.1)}.df .r{color:#FCA5A5;background:rgba(248,113,113,.1)}.df .m{color:#5C6683}
+.ac{display:flex;gap:10px;align-items:center}
+.bn{flex:1;border:0;border-radius:14px;padding:14px;font:700 15px 'Hanken Grotesk';cursor:pointer;transition:transform .15s,box-shadow .25s,background .3s}.bn:active,.bn.pr{transform:scale(.96)}.bn:focus-visible{outline:3px solid #6366F1;outline-offset:2px}
+.ok{background:#141A26;color:#fff;box-shadow:0 10px 20px -10px rgba(20,26,38,.7)}.ok.pr{box-shadow:0 0 0 6px rgba(99,102,241,.25)}.ed{flex:.6;background:#EEF1F7;color:#33405C}.dn{flex:.6;background:#FEECEC;color:#B91C1C}
+.cdn{position:relative;width:46px;height:46px;flex:none}.cdn svg{width:100%;height:100%;transform:rotate(-90deg)}.cdn .t{fill:none;stroke:#EEF1F7;stroke-width:5}.cdn .v{fill:none;stroke:#6366F1;stroke-width:5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p,1))}.cdn b{position:absolute;inset:0;display:grid;place-items:center;font:600 13px 'Fira Code'}
+.ov{position:absolute;inset:0;background:rgba(255,255,255,.96);display:grid;place-items:center;align-content:center;gap:12px;opacity:0;pointer-events:none;transition:opacity .35s;text-align:center;padding:30px}.ov.on{opacity:1}
+.ov .pg{width:240px;height:6px;border-radius:3px;background:#E8ECF4;overflow:hidden}.ov .pg i{display:block;height:100%;width:var(--p,0%);background:linear-gradient(90deg,#6366F1,#EC4899)}
+.ov .ck{width:56px;height:56px;border-radius:50%;background:#16A34A;display:none;place-items:center}.ov.fin .ck{display:grid;animation:pop .5s cubic-bezier(.3,1.8,.5,1)}.ov.fin .pg{display:none}@keyframes pop{from{transform:scale(0)}}.ov .ck svg{width:26px;height:26px;stroke:#fff;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ov b{font-size:17px;font-weight:700}.ov span{font-size:13px;color:#76809A}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd" id="cd"><div class="hd"><div class="av">N</div><div><b>Nova agent</b><span>Asks before acting · Ops workspace</span></div><span class="rk" id="rk">MEDIUM RISK</span></div>
+<h2 id="tt"></h2><p class="ds" id="ds"></p><div class="df" id="df"></div>
+<div class="ac"><div class="cdn"><svg viewBox="0 0 36 36"><circle class="t" cx="18" cy="18" r="15"/><circle class="v" id="cv" cx="18" cy="18" r="15" pathLength="1"/></svg><b id="cn">30</b></div><button class="bn dn" id="bd">Deny</button><button class="bn ed" id="be">Edit</button><button class="bn ok" id="ba">Approve</button></div>
+<div class="ov" id="ov"><div class="ck"><svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg></div><b id="ot"></b><div class="pg"><i id="op"></i></div><span id="os"></span></div></div>
+<script>
+const R=[{t:'Refund order #48213 for $240.00',d:'The customer reported a damaged item and the courier confirmed the claim. This returns the full amount to the original card.',k:'MEDIUM RISK',bg:'#FEF3C7',c:'#92400E',df:[['m','payments/refunds.ts'],['r','- amount: 0'],['a','+ amount: 24000'],['a','+ reason: "damaged_in_transit"'],['a','+ notify_customer: true']],done:'Refund of $240.00 issued',sub:'Customer notified by email'},
+{t:'Delete 12 stale branches',d:'Branches merged more than 60 days ago with no open pull request. They stay recoverable for 30 days.',k:'LOW RISK',bg:'#DCFCE7',c:'#166534',df:[['m','git push origin --delete'],['r','- feature/old-checkout'],['r','- fix/typo-footer'],['r','- spike/graphql (+9 more)'],['m','all merged, none protected']],done:'12 branches deleted',sub:'Recoverable for 30 days'},
+{t:'Email 1,204 customers about the price change',d:'Sends the approved announcement to every active subscriber on the Pro plan. This cannot be recalled once sent.',k:'HIGH RISK',bg:'#FEE2E2',c:'#991B1B',df:[['m','campaigns/price-change.md'],['a','+ audience: plan=pro, active'],['a','+ recipients: 1204'],['a','+ send_at: now'],['r','! irreversible action']],done:'Campaign sent to 1,204 people',sub:'Delivery report in 10 minutes'}];
+const $=id=>document.getElementById(id);let idx=0,left=30,off=false,tmr=0,busy=false;
+function show(i){const r=R[i];$('tt').textContent=r.t;$('ds').textContent=r.d;$('rk').textContent=r.k;$('rk').style.setProperty('--rb',r.bg);$('rk').style.setProperty('--rc',r.c);$('df').innerHTML=r.df.map(x=>'<div class="'+x[0]+'">'+x[1]+'</div>').join('');$('ov').className='ov';left=30;tick()}
+function tick(){$('cv').style.setProperty('--p',left/30);$('cn').textContent=Math.ceil(left)}
+async function exec(ok){if(busy)return;busy=true;const r=R[idx],ov=$('ov');if(ok){ov.className='ov on';$('ot').textContent='Executing…';$('os').textContent='Running with your approval';$('op').style.setProperty('--p','0%');for(let p=0;p<=100;p+=5){$('op').style.setProperty('--p',p+'%');await sl(60)}ov.className='ov on fin';$('ot').textContent=r.done;$('os').textContent=r.sub}else{ov.className='ov on fin';ov.querySelector('.ck').style.background='#DC2626';ov.querySelector('.ck svg').innerHTML='<path d="M6 6l12 12M18 6L6 18"/>';$('ot').textContent='Request denied';$('os').textContent='The agent was told to stop'}await sl(2400);ov.querySelector('.ck').style.background='';ov.querySelector('.ck svg').innerHTML='<path d="m5 12.500 4.500 4.500L19 7"/>';idx=(idx+1)%R.length;show(idx);busy=false}
+const sl=ms=>new Promise(r=>setTimeout(r,ms));
+$('ba').onclick=()=>{off=true;exec(true)};$('bd').onclick=()=>{off=true;exec(false)};$('be').onclick=()=>{off=true};
+show(0);left=21;tick();
+/* Idle demo: the countdown ring drains while the agent waits, then the Approve button presses itself, the card flips to an Executing overlay with a filling bar and a green tick, and the next request (refund, branch cleanup, mass email) arrives with a risk badge matched to its severity, until you act. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);while(!off){const t=performance.now();while(!off&&performance.now()-t<5200){left=Math.max(3,21-(performance.now()-t)/5200*18);tick();await sl(60)}if(off)return;$('ba').classList.add('pr');await sl(300);$('ba').classList.remove('pr');await exec(true);await sl(2800)}})()}
+</script></body></html>

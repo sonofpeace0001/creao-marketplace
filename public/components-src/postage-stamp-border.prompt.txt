@@ -1,0 +1,40 @@
+ROLE
+You are a senior print-inspired designer and front-end engineer with 15+ years of experience. Build "Postage Stamp Border": three postage stamps with real scalloped perforated edges and printed scenes sit on an air-mail envelope while a circular postmark with wavy cancel lines slams down on each in turn.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Kraft paper stage, air-mail striped envelope, typewriter text and vintage stamp colours.
+- Palette: #C8442F, #2F5D8C, #2A2342, #8A7A63, #CDBFA6, #2B2218
+- Type: Playfair Display, Special Elite (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Envelope with striped edges; three SVG stamps with perforation path; postmark overlays; address line and counter.
+
+INTERACTION & STATES
+- Hover pauses the demo.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Postmark scales from 1.8 to 1 with a small overshoot, holds, then fades.
+
+IDLE AUTOPLAY
+- After 3.8s a postmark stamps each stamp in turn.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A dashed CSS border pretending to be perforation.
+- Flat stamps with no paper tone.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

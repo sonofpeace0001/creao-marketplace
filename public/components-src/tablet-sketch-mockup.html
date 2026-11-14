@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tablet Sketch Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#DCD6CE;color:#1E1B18;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(700px 440px at 50% 0,rgba(255,255,255,.55),transparent 70%)}
+.tb{position:relative;width:100%;max-width:760px;aspect-ratio:4/3;background:linear-gradient(145deg,#2B2B2F,#121214);border-radius:42px;padding:20px;box-shadow:0 56px 70px -34px rgba(30,27,24,.8),inset 0 0 0 2px #3A3A40,inset 0 0 0 5px #0B0B0D}
+.tb::before{content:"";position:absolute;left:50%;top:8px;width:7px;height:7px;margin-left:-3.500px;border-radius:50%;background:#1D2A44;box-shadow:inset 0 0 0 1.500px #2A3A5E}
+.sc{position:relative;width:100%;height:100%;border-radius:24px;overflow:hidden;background:#F4F1EB;display:grid;grid-template-columns:62px 1fr}
+.bar{grid-column:1/3;position:absolute;left:0;right:0;top:0;height:42px;display:flex;align-items:center;gap:10px;padding:0 18px 0 78px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border-bottom:1px solid #E5E0D6;z-index:5;font-weight:700;font-size:14px}.bar span{margin-left:auto;font-size:12px;color:#8B8478;font-weight:600}.bar i{width:8px;height:8px;border-radius:50%;background:#34C759}
+.tools{background:#ECE8DF;border-right:1px solid #DFD9CC;padding:56px 0 10px;display:flex;flex-direction:column;align-items:center;gap:8px}.tools b{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:transparent;transition:background .3s}.tools b.on{background:#fff;box-shadow:0 4px 10px -4px rgba(0,0,0,.25)}.tools svg{width:20px;height:20px;stroke:#5B554A;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.tools b.on svg{stroke:#1E1B18}
+.cv{position:relative;padding-top:42px;background-image:radial-gradient(#D9D3C6 1.100px,transparent 1.200px);background-size:22px 22px}.cv svg.dr{position:absolute;left:0;top:42px;width:100%;height:calc(100% - 42px)}
+.dr path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pc{position:absolute;left:0;top:0;width:34px;height:34px;margin:-30px 0 0 -4px;transform-origin:4px 30px;pointer-events:none;z-index:6;filter:drop-shadow(0 4px 4px rgba(0,0,0,.3))}
+.pal{position:absolute;right:16px;bottom:16px;display:flex;gap:7px;padding:8px 10px;border-radius:99px;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);box-shadow:0 8px 20px -8px rgba(0,0,0,.35);z-index:5}.pal i{width:22px;height:22px;border-radius:50%;background:var(--c);transition:transform .3s cubic-bezier(.3,2,.5,1),box-shadow .3s}.pal i.on{transform:scale(1.25);box-shadow:0 0 0 3px #fff,0 0 0 5px var(--c)}
+@media(max-width:560px){.tb{border-radius:26px;padding:12px}.sc{grid-template-columns:44px 1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="tb"><div class="sc"><div class="bar"><b>Lighthouse study</b><span>Autosaved</span><i></i></div><div class="tools" id="tl"></div><div class="cv" id="cv"><svg class="dr" id="dr" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet"></svg><svg class="pc" id="pc" viewBox="0 0 34 34"><path d="M4 30 L8 22 L26 4 Q29 2 31 4 Q33 6 30 9 L12 27 Z" fill="#F5C242" stroke="#1E1B18" stroke-width="1.600" stroke-linejoin="round"/><path d="M4 30 L8 22 L12 26 Z" fill="#F2D6B3" stroke="#1E1B18" stroke-width="1.600" stroke-linejoin="round"/><path d="M4 30 L5.500 27 L7 28.500Z" fill="#1E1B18"/></svg><div class="pal" id="pl"></div></div></div></div>
+<script>
+const NS='http://www.w3.org/2000/svg',dr=document.getElementById('dr'),pc=document.getElementById('pc'),$=id=>document.getElementById(id),sl=t=>new Promise(r=>setTimeout(r,t));let off=false,tok=0;
+const IC=['<path d="M4 20l4-1 11-11-3-3L5 16z"/>','<circle cx="12" cy="12" r="8"/>','<path d="M4 7h16M4 12h16M4 17h10"/>','<rect x="5" y="5" width="14" height="14" rx="3"/>','<path d="M5 12l5 5L19 7"/>'];
+IC.forEach((s,i)=>$('tl').insertAdjacentHTML('beforeend','<b class="'+(i===0?'on':'')+'"><svg viewBox="0 0 24 24">'+s+'</svg></b>'));
+const COL=['#1E1B18','#E5484D','#F5A524','#2F6FED'];COL.forEach((c,i)=>$('pl').insertAdjacentHTML('beforeend','<i style="--c:'+c+'" class="'+(i===0?'on':'')+'"></i>'));
+const P=[['M30 352 Q120 336 220 350 T420 346 T580 352',COL[0],5],['M244 348 L272 150 L348 150 L376 348',COL[0],5],['M262 212 L358 212',COL[1],16],['M255 276 L365 276',COL[1],16],['M268 150 L310 108 L352 150',COL[0],5],['M286 150 L286 126 L334 126 L334 150',COL[0],4],['M336 136 L516 92',COL[2],5],['M336 140 L544 154',COL[2],5],['M284 136 L112 100',COL[2],5],['M520 62 a26 26 0 1 0 .1 0',COL[2],5],['M60 372 q14-10 28 0 t28 0',COL[3],4],['M470 376 q14-10 28 0 t28 0 t28 0',COL[3],4]];
+const paths=P.map(p=>{const e=document.createElementNS(NS,'path');e.setAttribute('d',p[0]);e.setAttribute('stroke',p[1]);e.setAttribute('stroke-width',p[2]);dr.appendChild(e);const L=e.getTotalLength();e.style.strokeDasharray=L;e.style.strokeDashoffset=L;e.dataset.l=L;return e});
+function setProg(i,k){const e=paths[i],L=+e.dataset.l;e.style.strokeDashoffset=L*(1-k)}
+function pencil(i,k){const e=paths[i],L=+e.dataset.l,pt=e.getPointAtLength(L*k);const r=dr.getBoundingClientRect(),vb=dr.viewBox.baseVal;const sc=Math.min(r.width/vb.width,r.height/vb.height),ox=(r.width-vb.width*sc)/2,oy=(r.height-vb.height*sc)/2;const cr=$('cv').getBoundingClientRect();pc.style.transform='translate('+(ox+pt.x*sc)+'px,'+(oy+pt.y*sc+42)+'px) rotate(-8deg)'}
+function hiPal(c){[...$('pl').children].forEach((x,i)=>x.classList.toggle('on',COL[i]===c))}
+function reset(){paths.forEach((p,i)=>setProg(i,0));pc.style.opacity=0}
+for(let i=0;i<7;i++)setProg(i,1);setProg(7,.55);pencil(7,.55);hiPal(COL[2]);
+document.querySelector('.tb').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a tablet running a sketch app draws a lighthouse stroke by stroke with a stylus; the pencil tip rides the exact end of each line, the colour palette highlights the ink in use as the black outline gives way to red stripes, amber light beams and a sun and blue waves, and when the drawing is complete it holds, then is wiped and sketched again, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3200);while(!off){reset();pc.style.opacity=1;await sl(500);for(let i=0;i<paths.length&&!off;i++){hiPal(P[i][1]);const dur=Math.max(600,paths[i].dataset.l*5);const t0=performance.now();while(performance.now()-t0<dur&&!off){const k=(performance.now()-t0)/dur,e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;setProg(i,e);pencil(i,e);await sl(16)}setProg(i,1);await sl(150)}pc.style.opacity=0;await sl(3600)}})()}
+</script></body></html>

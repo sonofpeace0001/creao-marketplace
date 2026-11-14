@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Branching Reply Chat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E0F13;color:#ECEDF2;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(520px 360px at 85% 100%,rgba(244,114,182,.12),transparent 70%)}
+.cd{width:100%;max-width:600px;background:#16171D;border-radius:28px;padding:22px;box-shadow:0 40px 60px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08)}
+.u{margin-left:auto;width:max-content;max-width:86%;padding:12px 17px;border-radius:20px 20px 6px 20px;background:#2B2D38;font-size:15px;line-height:1.45;margin-bottom:18px}
+.a{display:flex;gap:13px}.av{flex:none;width:32px;height:32px;border-radius:50%;background:conic-gradient(from 200deg,#F472B6,#818CF8,#22D3EE,#F472B6);display:grid;place-items:center}.av::after{content:"";width:12px;height:12px;border-radius:50%;background:#16171D}
+.col{flex:1;min-width:0}
+.vw{position:relative;min-height:128px;overflow:hidden}
+.v{position:absolute;inset:0;font:500 25px/1.3 'Newsreader',serif;letter-spacing:-.01em;opacity:0;transform:translateX(30px);transition:opacity .4s,transform .5s cubic-bezier(.3,1.2,.5,1)}.v.on{opacity:1;transform:none}.v.lf{transform:translateX(-30px)}
+.v small{display:block;font:500 12px 'Geist Mono';color:#7E8195;letter-spacing:.06em;margin-top:10px}
+.v.sk{opacity:1;transform:none}.sk i{display:block;height:20px;border-radius:7px;margin-bottom:10px;background:linear-gradient(90deg,#23252E 25%,#323542 50%,#23252E 75%);background-size:200% 100%;animation:sh 1.1s linear infinite}@keyframes sh{to{background-position:-200% 0}}
+.bar{display:flex;align-items:center;gap:6px;margin-top:6px}
+.nv{display:flex;align-items:center;gap:2px;padding:3px;border-radius:99px;background:#1F212A}.nv button{width:28px;height:28px;border:0;border-radius:50%;background:none;color:#B5B8C9;font-size:15px;cursor:pointer}.nv button:hover{background:#2B2E3A}.nv span{font:500 12.500px 'Geist Mono';padding:0 6px;color:#E3E5EF;font-variant-numeric:tabular-nums}
+.ib{width:32px;height:32px;border:0;border-radius:10px;background:none;color:#8F93A8;font-size:15px;cursor:pointer;transition:background .2s,color .2s}.ib:hover{background:#23252E;color:#fff}.ib.on{color:#F472B6}.ib.pr{background:#323542;transform:scale(.92)}.ib:focus-visible,.nv button:focus-visible{outline:2px solid #818CF8}
+.ch{display:flex;gap:7px;margin-top:16px;flex-wrap:wrap}.ch button{border:0;border-radius:99px;padding:7px 14px;background:#1F212A;color:#C8CBDB;font:500 13px 'Geist';cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);transition:all .25s}.ch button.pr{background:#818CF8;color:#0E0F13;transform:scale(.95)}
+.rg{margin-left:auto;font:500 11.500px 'Geist Mono';color:#6F7388}
+</style></head><body>
+<div class="cd"><div class="u">Write a tagline for our coffee subscription.</div><div class="a"><div class="av"></div><div class="col"><div class="vw" id="vw"></div>
+<div class="bar"><div class="nv"><button id="pv" aria-label="Previous">‹</button><span id="ct">2 / 2</span><button id="nx" aria-label="Next">›</button></div><button class="ib" id="cp" aria-label="Copy">⧉</button><button class="ib" id="lk" aria-label="Like">♥</button><button class="ib" id="rg" aria-label="Regenerate">↻</button><span class="rg" id="st"></span></div>
+<div class="ch" id="ch"><button>Shorter</button><button>Warmer</button><button>Punchier</button></div></div></div></div>
+<script>
+const V=[['Good mornings, delivered.','Warm · 4 words'],['Roasted Tuesday. At your door by Thursday.','Specific · 8 words'],['Your ritual, restocked.','Calm · 3 words'],['Wake up to something better than a reminder.','Playful · 8 words'],['Fresh beans. Zero errands.','Punchy · 4 words']];
+const vw=document.getElementById('vw'),sl=ms=>new Promise(r=>setTimeout(r,ms));let list=[0,1],cur=1,off=false,busy=false;
+const els=V.map((v,i)=>{const d=document.createElement('div');d.className='v';d.innerHTML=v[0]+'<small>'+v[1]+'</small>';vw.appendChild(d);return d});
+function show(k,dir){const n=list.length;const prev=els.find(e=>e.classList.contains('on'));if(prev){prev.classList.remove('on');prev.classList.toggle('lf',dir>0)}const e=els[list[k]];e.classList.remove('lf');if(dir<0)e.classList.add('lf');requestAnimationFrame(()=>{e.style.transition='none';e.classList.toggle('lf',dir<0);void e.offsetWidth;e.style.transition='';e.classList.add('on');e.classList.remove('lf')});cur=k;document.getElementById('ct').textContent=(k+1)+' / '+n}
+function showNow(k){els.forEach(e=>e.classList.remove('on'));els[list[k]].classList.add('on');cur=k;document.getElementById('ct').textContent=(k+1)+' / '+list.length}
+async function regen(btn){if(busy)return;busy=true;const nxt=[2,3,4][list.length-2]??4;els.forEach(e=>e.classList.remove('on'));const sk=document.createElement('div');sk.className='v sk';sk.innerHTML='<i style="width:92%"></i><i style="width:64%"></i>';vw.appendChild(sk);document.getElementById('st').textContent='regenerating…';await sl(1300);sk.remove();document.getElementById('st').textContent='';list.push(nxt);showNow(list.length-1);busy=false}
+document.getElementById('pv').onclick=()=>{off=true;if(cur>0)show(cur-1,-1)};document.getElementById('nx').onclick=()=>{off=true;if(cur<list.length-1)show(cur+1,1)};document.getElementById('rg').onclick=()=>{off=true;regen()};document.getElementById('lk').onclick=e=>{off=true;e.target.classList.toggle('on')};document.getElementById('cp').onclick=()=>{off=true};
+[...document.querySelectorAll('#ch button')].forEach(b=>b.onclick=()=>{off=true;regen()});
+showNow(1);
+/* Idle demo: the reply is one of several branches; after 3s the regenerate button presses itself, a shimmer skeleton shows, a fresh tagline slides in and the counter grows to 3 of 3, then the arrows step back through earlier branches with a sideways slide, and a chip like Punchier asks for another take, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);const rg=document.getElementById('rg'),chs=[...document.querySelectorAll('#ch button')];while(!off){rg.classList.add('pr');await sl(250);rg.classList.remove('pr');await regen();await sl(2300);if(off)return;if(cur>0){show(cur-1,-1);await sl(2100)}if(off)return;if(cur>0){show(cur-1,-1);await sl(2000)}if(off)return;show(list.length-1,1);await sl(1700);if(off)return;const c=chs[2];c.classList.add('pr');await sl(300);c.classList.remove('pr');await regen();await sl(2600);if(list.length>=5){list=[0,1];showNow(1);await sl(1200)}}})()}
+</script></body></html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Cost Anomaly Alert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0C0E12;color:#ECEFF5;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{position:relative;width:100%;max-width:600px;border-radius:26px;background:#14171E;padding:24px;box-shadow:0 40px 60px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08);overflow:hidden}
+.cd::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 220px at 80% 0,rgba(251,113,133,.2),transparent 70%);opacity:var(--a,0);transition:opacity .4s;pointer-events:none}
+.hd{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;position:relative}.bd{padding:6px 11px;border-radius:99px;background:rgba(251,113,133,.16);color:#FDA4AF;font:600 11.500px 'JetBrains Mono';letter-spacing:.06em;display:flex;align-items:center;gap:7px;opacity:var(--a,0);transform:translateY(calc((1 - var(--a,0))*6px));transition:all .4s}.bd i{width:7px;height:7px;border-radius:50%;background:#FB7185;animation:bk 1s infinite}@keyframes bk{50%{opacity:.3}}
+.hd h1{font-size:17px;font-weight:700;letter-spacing:-.02em}.hd small{display:block;font:500 12px 'JetBrains Mono';color:#7C8498;margin-top:3px}.hd .bd{margin-left:auto}
+.big{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;position:relative}.big b{font:800 46px/1 'Manrope';letter-spacing:-.05em;font-variant-numeric:tabular-nums}.big span{font:600 15px 'JetBrains Mono';color:#FB7185;opacity:var(--a,0);transition:opacity .3s}
+.ch{position:relative;height:150px;margin-top:6px}.ch svg{width:100%;height:100%;overflow:visible}
+.gl{stroke:rgba(255,255,255,.07);stroke-width:1}.th{stroke:#FB7185;stroke-width:1.5;stroke-dasharray:5 5;opacity:.8}.thl{fill:#FB7185;font:500 10.500px 'JetBrains Mono'}
+.ln{fill:none;stroke:#7DD3FC;stroke-width:2.500;stroke-linejoin:round;stroke-linecap:round}.ar{fill:url(#ag);stroke:none}.hot{fill:none;stroke:#FB7185;stroke-width:3;stroke-linecap:round}
+.pt{fill:#FB7185;filter:drop-shadow(0 0 8px #FB7185)}.pr{fill:none;stroke:#FB7185;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:rg 1.400s infinite}@keyframes rg{from{transform:scale(1);opacity:.8}to{transform:scale(3.4);opacity:0}}
+.sv{display:grid;gap:6px;margin-top:14px;position:relative}.r{display:grid;grid-template-columns:110px 1fr 70px;gap:12px;align-items:center;font:500 12.500px 'JetBrains Mono';color:#9AA2B6}.r i{display:block;height:7px;border-radius:4px;background:#232834;position:relative;overflow:hidden}.r i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);background:var(--c);border-radius:4px;transition:width .4s}.r b{text-align:right;color:#fff;font-weight:500}
+.ac{display:flex;gap:10px;margin-top:16px;position:relative;opacity:var(--a,0);transform:translateY(calc((1 - var(--a,0))*10px));transition:all .45s}.ac button{border:0;border-radius:12px;padding:11px 16px;font:700 13.500px 'Manrope';cursor:pointer}.ac .p{background:#FB7185;color:#2A0A12}.ac .s{background:rgba(255,255,255,.08);color:#D6DBE8}.ac button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd" id="cd"><div class="hd"><div><h1>Cloud spend, today</h1><small>us-east-1 · updated just now</small></div><span class="bd"><i></i>3.4× NORMAL</span></div>
+<div class="big"><b id="amt">$0</b><span id="dl">+240% vs. typical hour</span></div>
+<div class="ch"><svg viewBox="0 0 520 150" preserveAspectRatio="none"><defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7DD3FC" stop-opacity=".28"/><stop offset="1" stop-color="#7DD3FC" stop-opacity="0"/></linearGradient></defs><g id="gl"></g><line class="th" x1="0" x2="520" y1="64" y2="64"/><text class="thl" x="4" y="58">Alert threshold $620/h</text><path class="ar" id="ar"/><path class="ln" id="ln"/><path class="hot" id="ht"/><g id="pn"></g></svg></div>
+<div class="sv" id="sv"></div><div class="ac"><button class="p">Review resources</button><button class="s">Snooze 1h</button><button class="s">Raise budget</button></div></div>
+<script>
+const $=id=>document.getElementById(id),cd=$('cd');let off=false;
+const base=[210,225,215,230,222,218,240,235,228,245,238,250];let data=base.slice();const TH=620;
+[0,1,2,3].forEach(i=>$('gl').insertAdjacentHTML('beforeend','<line class="gl" x1="0" x2="520" y1="'+(i*45+4)+'" y2="'+(i*45+4)+'"/>'));
+const SV=[['EC2 compute','#7DD3FC',.42,'$412'],['Data transfer','#FB7185',.88,'$1,106'],['S3 storage','#A78BFA',.12,'$132'],['Lambda','#34D399',.2,'$194']];
+$('sv').innerHTML=SV.map(s=>'<div class="r"><span>'+s[0]+'</span><i style="--w:'+(s[2]*100)+'%;--c:'+s[1]+'"></i><b>'+s[3]+'</b></div>').join('');
+let shown=0;function y(v){return 150-6-(v/900)*140}
+function draw(a){const n=data.length,sx=520/(n-1);const pts=data.map((v,i)=>[i*sx,y(v)]);const d='M'+pts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L');$('ln').setAttribute('d',d);$('ar').setAttribute('d',d+' L520 150 L0 150Z');
+ const hot=[];pts.forEach((p,i)=>{if(data[i]>TH)hot.push(p)});if(hot.length>1){const i0=pts.findIndex((p,i)=>data[i]>TH)-1;const seg=pts.slice(Math.max(0,i0));$('ht').setAttribute('d','M'+seg.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L'))}else $('ht').setAttribute('d','');
+ const l=pts[n-1];const over=data[n-1]>TH;$('pn').innerHTML=over?'<circle class="pr" cx="'+l[0]+'" cy="'+l[1]+'" r="5"/><circle class="pt" cx="'+l[0]+'" cy="'+l[1]+'" r="5"/>':'<circle cx="'+l[0]+'" cy="'+l[1]+'" r="4.500" fill="#7DD3FC"/>';
+ const v=data[n-1];$('amt').textContent='$'+Math.round(v)+'/h';cd.style.setProperty('--a',Math.max(0,Math.min(1,(v-TH+40)/120)))}
+data=base.concat([260,410,690,820]);draw();
+/* Idle demo: spend streams in as a live line; when it crosses the dashed threshold the segment turns rose with a pulsing ring on the latest point, a 3.4x NORMAL badge fades in, a rose glow washes the card, the headline figure climbs and the action buttons rise, then spend settles and the card calms before it repeats, until you click. */
+cd.addEventListener('pointerdown',()=>{off=true});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sl(3600);while(!off){data=base.concat([252,270]);for(let i=0;i<12&&!off;i++){data.push(i<3?300+i*40:i<6?470+i*95:i<9?820-i*8+Math.random()*40:900-(i-8)*170);data.shift();draw();await sl(520)}if(off)return;await sl(1800);data=base.slice();for(let k=0;k<6;k++){data.push(data[data.length-1]*.9);data.shift()}draw();await sl(1400)}})()}
+</script></body></html>

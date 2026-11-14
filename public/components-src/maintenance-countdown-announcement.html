@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maintenance Countdown Announcement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#FBBF24;background:#0B0D12;color:#EDEFF6;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+body.m{--c:#F87171}body.d{--c:#34D399}
+.cd{width:100%;max-width:660px;border-radius:26px;background:#12151D;padding:24px 26px;box-shadow:0 40px 60px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08);position:relative;overflow:hidden}
+.st{position:absolute;left:0;right:0;top:0;height:6px;background:repeating-linear-gradient(135deg,var(--c) 0 12px,#12151D 12px 24px);background-size:34px 34px;animation:mv 1.200s linear infinite;transition:background .6s}body.d .st{animation:none;background:var(--c)}@keyframes mv{to{background-position:34px 0}}
+.hd{display:flex;align-items:center;gap:12px;margin:8px 0 18px}.hd i{width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c);animation:bk 1.400s infinite}body.d .hd i{animation:none}@keyframes bk{50%{opacity:.35}}
+.hd b{font:700 12px 'Space Mono';letter-spacing:.18em;color:var(--c);text-transform:uppercase}.hd span{margin-left:auto;font:400 12px 'Space Mono';color:#7C8498}
+h1{font-size:25px;font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:6px}.sub{font-size:14.500px;color:#9AA2B6;line-height:1.5;margin-bottom:20px;max-width:480px}
+.cn{display:flex;gap:10px;margin-bottom:22px;align-items:flex-start}.u{text-align:center}.u div{width:76px;height:84px;border-radius:14px;background:#1A1E29;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);display:grid;place-items:center;font:700 42px 'Space Mono';font-variant-numeric:tabular-nums;position:relative;overflow:hidden}.u div::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.5)}.u span{display:block;margin-top:7px;font:400 10.500px 'Space Mono';letter-spacing:.16em;color:#6B7389;text-transform:uppercase}
+.u div b{display:block;font-weight:700}.u div b.tick{animation:tk .35s cubic-bezier(.3,1.4,.5,1)}@keyframes tk{from{transform:translateY(-16px);opacity:0}}
+.cl{padding-top:22px;font:700 36px 'Space Mono'}
+.ph{position:relative;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px}.ph div{padding:10px 12px;border-radius:12px;background:#1A1E29;font-size:13px;color:#7C8498;transition:all .5s;box-shadow:inset 0 0 0 1.5px transparent}.ph div b{display:block;font-size:14px;color:#C9CFDE;margin-bottom:2px}.ph div.on{background:color-mix(in srgb,var(--c) 14%,#12151D);box-shadow:inset 0 0 0 1.5px var(--c);color:#E8EBF3}.ph div.on b{color:#fff}.ph div.dn{opacity:.55}
+.tr{height:6px;border-radius:3px;background:#1E2330;overflow:hidden;margin-bottom:18px}.tr i{display:block;height:100%;width:var(--p,0%);background:var(--c);border-radius:3px;transition:background .6s}
+.ft{display:flex;gap:10px}.ft button{border:0;border-radius:12px;padding:11px 16px;font:700 13.500px 'Space Grotesk';cursor:pointer}.ft .p{background:var(--c);color:#14110A}.ft .s{background:rgba(255,255,255,.08);color:#D3D8E6}.ft button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media(max-width:560px){.u div{width:56px;height:64px;font-size:30px}.ph{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd" id="cd"><div class="st"></div><div class="hd"><i></i><b id="lb">Scheduled maintenance</b><span>Sat 14 Nov · 02:00 to 04:00 UTC</span></div>
+<h1 id="h"></h1><p class="sub" id="sb"></p>
+<div class="cn" id="cn"></div><div class="ph" id="ph"><div><b>Read-only</b>From 02:00, 15 min</div><div><b>Maintenance</b>Down for about 1 h 30</div><div><b>Back online</b>Expected by 04:00</div></div><div class="tr"><i id="tr"></i></div>
+<div class="ft"><button class="p">Add to calendar</button><button class="s">Subscribe to updates</button></div></div>
+<script>
+const $=id=>document.getElementById(id);let t=3*3600+41*60+18,off=false,mode=0;const cn=$('cn'),ud=[];
+['Hours','Minutes','Seconds'].forEach((l,i)=>{const u=document.createElement('div');u.className='u';u.innerHTML='<div><b>00</b></div><span>'+l+'</span>';cn.appendChild(u);ud.push(u.querySelector('b'));if(i<2){const c=document.createElement('div');c.className='cl';c.textContent=':';cn.appendChild(c)}});
+const TX=[['Platform maintenance starts soon','We are upgrading our database cluster. Your data stays safe and the app will be read-only first.'],['Maintenance in progress','Writes are paused while we upgrade. You can still view your dashboards.'],['We are back online','The upgrade finished ahead of schedule. Everything is running normally. Thank you for your patience.']];
+function setMode(m){mode=m;document.body.className=['','m','d'][m];$('lb').textContent=['Scheduled maintenance','Maintenance in progress','Completed'][m];$('h').textContent=TX[m][0];$('sb').textContent=TX[m][1];[...$('ph').children].forEach((d,i)=>{d.classList.toggle('on',i===m);d.classList.toggle('dn',i<m)})}
+function paint(){const s=Math.max(0,Math.floor(t)),v=[Math.floor(s/3600),Math.floor(s%3600/60),s%60];v.forEach((x,i)=>{const str=String(x).padStart(2,'0');if(ud[i].textContent!==str){ud[i].textContent=str;ud[i].classList.remove('tick');void ud[i].offsetWidth;ud[i].classList.add('tick')}});const total=3*3600+45*60;$('tr').style.setProperty('--p',Math.min(100,(1-t/total)*100)+'%')}
+setMode(0);paint();ud.forEach(u=>u.classList.remove('tick'));
+/* Idle demo: the live countdown ticks each digit with a small drop, a striped warning bar slides along the top and the three-phase plan highlights the current stage; time then fast-forwards, the banner turns red for Maintenance in progress, and finally green with a completed message, before looping, until you click. */
+$('cd').addEventListener('pointerdown',()=>{off=true});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sl(3400);while(!off){const t0=performance.now();let last=t0;while(!off&&t>1){const n=performance.now();t-=(n-last)/1000*(t>60?1800:1);last=n;paint();await sl(250);if(t<100&&t>1&&performance.now()-t0>9000)break}if(off)return;t=0;paint();setMode(1);await sl(3200);if(off)return;setMode(2);t=0;paint();await sl(3800);if(off)return;t=3*3600+41*60+18;setMode(0);paint();await sl(800)}})()}
+</script></body></html>

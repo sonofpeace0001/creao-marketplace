@@ -1,0 +1,40 @@
+ROLE
+You are a senior finance dashboard designer and front-end engineer with 15+ years of experience. Build "Treemap Morph Chart": a spend treemap where switching quarter re-runs a squarified layout and every tile glides and resizes to its new place while figures, shares and the rolling total update.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper card with saturated category tiles and mono labels.
+- Palette: #1B1914, #FBF9F4, #EFEBE1, #ECE9E2, #8C8473, #7C7463
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with total and quarter tabs; treemap of eight tiles with name, amount and share.
+
+INTERACTION & STATES
+- Click a quarter.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Rect x, y, width and height ease 10% per frame; total eases.
+
+IDLE AUTOPLAY
+- After 3.4s the quarter advances every 3s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Redrawing the treemap without transition.
+- Tiles whose label overflows when small.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

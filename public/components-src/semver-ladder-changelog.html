@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Semver Ladder Changelog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080A11;color:#E9ECF8;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:620px;background:#10131D;border-radius:28px;padding:26px 26px 18px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08);overflow:hidden}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.hd h1{font-size:21px;font-weight:800;letter-spacing:-.03em}.hd span{font:600 12px 'JetBrains Mono';padding:5px 11px;border-radius:99px;background:rgba(124,92,255,.18);color:#B4A3FF}
+.lg{display:flex;gap:16px;margin-bottom:14px;font:500 11.500px 'JetBrains Mono';color:#7C84A4}.lg span{display:flex;align-items:center;gap:7px}.lg .m{width:12px;height:12px;transform:rotate(45deg);border-radius:3px;background:linear-gradient(135deg,#FFD166,#FF7A59)}.lg .n{width:10px;height:10px;border-radius:50%;background:#7C5CFF}.lg .p{width:6px;height:6px;border-radius:50%;background:#5EEAD4}
+.ls{position:relative;height:calc(var(--n)*84px)}.ls::before{content:"";position:absolute;left:21px;top:0;bottom:0;width:2px;background:linear-gradient(#7C5CFF,#2A2F44 60%)}
+.it{position:absolute;left:0;right:0;height:78px;display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;transition:transform .7s cubic-bezier(.3,1.15,.4,1),opacity .6s}
+.it.new{animation:ni .8s cubic-bezier(.3,1.4,.5,1)}@keyframes ni{from{opacity:0;transform:translateY(-30px) scale(.9)}}
+.nd{position:relative;display:grid;place-items:center;height:44px}.nd i{display:block;background:var(--c);box-shadow:0 0 14px var(--c)}.t-m .nd i{width:26px;height:26px;transform:rotate(45deg);border-radius:6px;background:linear-gradient(135deg,#FFD166,#FF7A59)}.t-n .nd i{width:16px;height:16px;border-radius:50%}.t-p .nd i{width:9px;height:9px;border-radius:50%;box-shadow:none}
+.nd u{position:absolute;inset:0;margin:auto;width:20px;height:20px;border-radius:50%;border:2px solid var(--c);opacity:0;pointer-events:none}.it.new .nd u{animation:bu 1.100s .2s ease-out}@keyframes bu{from{opacity:.9;transform:scale(.6)}to{opacity:0;transform:scale(3.4)}}
+.it.new.t-m .nd u{animation-duration:1.600s;border-width:3px}
+.tx b{display:flex;align-items:center;gap:9px;font:700 16px 'JetBrains Mono';letter-spacing:-.02em}.tx b em{font:700 10px 'Sora';font-style:normal;letter-spacing:.1em;padding:2px 8px;border-radius:99px;background:#7C5CFF;color:#fff}.tx span{display:block;font-size:13.500px;color:#9AA2C2;margin-top:3px;line-height:1.35}
+.dt{font:500 11.500px 'JetBrains Mono';color:#6A7292;align-self:start;margin-top:14px}
+.t-m .tx span{color:#D4D9EE}
+@media(max-width:520px){.dt{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>Release history</h1><span id="cl">latest 2.3.1</span></div><div class="lg"><span><i class="m"></i>major</span><span><i class="n"></i>minor</span><span><i class="p"></i>patch</span></div><div class="ls" id="ls" style="--n:5"></div></div>
+<script>
+const V=[['2.3.1','p','Fix: avatar upload on Safari 17','Today','#5EEAD4'],['2.3.0','n','Saved filters and shareable views','3 days ago','#7C5CFF'],['2.2.4','p','Fix: timezone drift in recurring events','1 week ago','#5EEAD4'],['2.2.0','n','Bulk edit for tasks and labels','2 weeks ago','#7C5CFF'],['2.1.2','p','Faster cold start on mobile','3 weeks ago','#5EEAD4'],['3.0.0','m','A new engine: realtime sync, 4× faster','just now','#FFD166'],['3.0.1','p','Fix: sync conflict on first launch','just now','#5EEAD4'],['3.1.0','n','Offline mode with background merge','just now','#7C5CFF'],['3.1.1','p','Fix: empty state flicker','just now','#5EEAD4']];
+let items=V.slice(0,5).map(v=>({v,id:v[0]})),next=5,off=false;const ls=document.getElementById('ls'),sl=ms=>new Promise(r=>setTimeout(r,ms));
+function render(newId){const keep=new Set(items.map(i=>i.id));[...ls.children].forEach(c=>{if(!keep.has(c.dataset.id)){c.style.opacity=0;c.style.transform='translateY(80px)';setTimeout(()=>c.remove(),650)}});
+ items.forEach((it,i)=>{let el=ls.querySelector('[data-id="'+it.id+'"]');const v=it.v;if(!el){el=document.createElement('div');el.dataset.id=it.id;el.className='it t-'+v[1]+(it.id===newId?' new':'');el.style.setProperty('--c',v[4]);el.innerHTML='<div class="nd"><u></u><i></i></div><div class="tx"><b>v'+v[0]+(i===0?'<em>LATEST</em>':'')+'</b><span>'+v[2]+'</span></div><span class="dt">'+v[3]+'</span>';ls.appendChild(el)}else{const b=el.querySelector('b'),em=b.querySelector('em');if(i===0&&!em)b.insertAdjacentHTML('beforeend','<em>LATEST</em>');if(i!==0&&em)em.remove()}el.style.transform='translateY('+(i*84)+'px)'})
+ document.getElementById('cl').textContent='latest '+items[0].v[0]}
+items.forEach(i=>{});render();[...ls.children].forEach(c=>c.classList.remove('new'));
+document.querySelector('.cd').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: a release ladder where node shape tells you the semver level: a gold diamond for major, a violet circle for minor, a teal dot for patch; every few seconds a new version ships, dropping in at the top with an expanding shockwave ring (bigger and slower for a major), the LATEST badge hops to it, the rest of the ladder slides down and the oldest release falls away, until you click. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3600);while(!off){const v=V[5+((next-5)%4)];const id=v[0]+'#'+next++;items.unshift({v:[v[0],v[1],v[2],v[3],v[4]],id});if(items.length>5)items.pop();render(id);await sl(2800)}})()}
+</script></body></html>

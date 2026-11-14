@@ -1,0 +1,40 @@
+ROLE
+You are a senior editorial designer and front-end engineer with 15+ years of experience. Build "Magazine Cover Blog": a magazine front page where the cover story slowly zooms, a red progress line runs along the highlighted story and a curtain wipes in the next story with its headline revealing word by word.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream newsprint with a double rule masthead, Playfair headlines and a red kicker.
+- Palette: #161411, #E5422B, #7A7367, #E9E4DA, #F7F3EA, #D8D1C2
+- Type: Playfair Display, Karla (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Masthead; cover story with illustration, category, headline and byline; numbered list of three stories.
+
+INTERACTION & STATES
+- Click a story to bring it to the cover.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ken Burns 9s; curtain wipe 900ms; per-word headline reveal; list progress line 3.6s.
+
+IDLE AUTOPLAY
+- After 3.6s the cover advances to the next story every 3.6s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain card grid; this is a front page.
+- Swapping content with no transition.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

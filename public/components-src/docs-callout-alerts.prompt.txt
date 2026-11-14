@@ -1,0 +1,40 @@
+ROLE
+You are a senior developer documentation designer and front-end engineer with 15+ years of experience. Build "Docs Callout Alerts": four documentation callouts, Note, Tip, Warning and Danger, each with its own icon motion, a bar that draws down the left edge, and dismissal that collapses and slides the row away.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper docs page with soft tinted callouts and a mono code chip.
+- Palette: #1C1B18, #8A867C, #F5F4F0, #55524B, #F0EEE8, #44413B
+- Type: Onest, Fira Code (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Docs heading and paragraph; four tinted callouts with icon tile, title, text and close; a restore row.
+
+INTERACTION & STATES
+- Dismiss any callout; Restore all brings them back.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Warning icon wobbles, Danger icon pulses a halo, Tip bulb bobs; left bar scaleY draw 700ms; dismiss collapses max-height 500ms.
+
+IDLE AUTOPLAY
+- After 4.2s callouts dismiss one by one then all return.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Identical callouts with only a colour change.
+- Dismissals that just disappear.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

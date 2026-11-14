@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ledger Row Accordion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#DCE9E1;color:#142A20;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:520px;background:#F4FAF6;border-radius:28px;padding:22px 20px;box-shadow:0 36px 50px -34px rgba(20,42,32,.55),inset 0 0 0 1px rgba(20,42,32,.08)}
+.hd{display:flex;justify-content:space-between;align-items:baseline;padding:2px 8px 14px}.hd h1{font-size:21px;font-weight:800;letter-spacing:-.03em}.hd span{font-size:13px;color:#5B7567;font-weight:600}
+.it{margin-bottom:4px}
+.bt{width:100%;display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:12px 10px;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;border-radius:16px}.an .bt{transition:background .3s}.bt:hover{background:rgba(20,42,32,.04)}.it.on .bt{background:rgba(20,42,32,.05)}.bt:focus-visible{outline:2px solid #0F8A5F}
+.ic{width:44px;height:44px;border-radius:14px;background:var(--c);display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px}
+.bt b{display:block;font-size:15.500px;font-weight:700}.bt span.d{font-size:12.500px;color:#6B8576}.am{font:700 15px 'Manrope';font-variant-numeric:tabular-nums}.am.p{color:#0F8A5F}
+.pn{display:grid;grid-template-rows:0fr}.an .pn{transition:grid-template-rows .6s cubic-bezier(.4,0,.2,1)}.it.on .pn{grid-template-rows:1fr}.pn>div{overflow:hidden}
+.rc{margin:6px 14px 12px;padding:16px 16px 22px;background:#fff;font:400 13px/1.55 'Courier Prime',monospace;color:#2A3B32;box-shadow:0 8px 18px -10px rgba(20,42,32,.4);-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%;padding-bottom:26px}
+.rc h4{text-align:center;font-weight:700;letter-spacing:.2em;font-size:12.500px;margin-bottom:8px}
+.ln{display:flex;gap:6px;opacity:0;transform:translateY(-6px)}.ln i{flex:1;border-bottom:1.5px dotted #B5C3BB;margin-bottom:5px;font-style:normal}.an .ln{transition:opacity .35s,transform .35s}.it.on .ln{opacity:1;transform:none}
+.an .it.on .ln:nth-child(2){transition-delay:.2s}.an .it.on .ln:nth-child(3){transition-delay:.32s}.an .it.on .ln:nth-child(4){transition-delay:.44s}.an .it.on .ln:nth-child(5){transition-delay:.56s}
+.ln.t{border-top:1.5px solid #2A3B32;margin-top:6px;padding-top:6px;font-weight:700}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>Recent activity</h1><span>Today</span></div><div id="ac"></div></div>
+<script>
+const S=[['B','#6D4C41','Blue Bottle Coffee','Card ending 4417',-14.8,[['Flat white',4.8],['Oat croissant',5.2],['Cold brew',4.8]]],
+['U','#111827','Uber trip','Airport to Hotel',-23.4,[['Base fare',9.5],['Distance',11.2],['Booking fee',2.7]]],
+['R','#0F8A5F','Refund from Figma','Seat removed',62,[['Editor seat',45],['Prorated credit',17]]],
+['F','#7C3AED','Figma Professional','Monthly plan',-45,[['Editor seat',45]]]];
+const ac=document.getElementById('ac'),its=[];let off=false;const fm=v=>(v<0?'-':'+')+'$'+Math.abs(v).toFixed(2);
+S.forEach((s,i)=>{const d=document.createElement('div');d.className='it';const tot=Math.abs(s[4]);d.innerHTML='<button class="bt" aria-expanded="false"><span class="ic" style="--c:'+s[1]+'">'+s[0]+'</span><div><b>'+s[2]+'</b><span class="d">'+s[3]+'</span></div><span class="am'+(s[4]>0?' p':'')+'">'+fm(s[4])+'</span></button><div class="pn"><div><div class="rc"><h4>RECEIPT</h4>'+s[5].map(l=>'<div class="ln"><span>'+l[0]+'</span><i></i><span>$'+l[1].toFixed(2)+'</span></div>').join('')+'<div class="ln t"><span>TOTAL</span><i style="border:0"></i><span>$'+tot.toFixed(2)+'</span></div></div></div></div>';d.querySelector('.bt').onclick=()=>{off=true;tog(i)};ac.appendChild(d);its.push(d)});
+function tog(i){its.forEach((d,k)=>{const o=k===i&&!d.classList.contains('on');d.classList.toggle('on',o);d.querySelector('.bt').setAttribute('aria-expanded',o)})}
+tog(0);requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('an')));
+/* Idle demo: after 3s each transaction opens in turn; a paper receipt drops out with a torn zigzag bottom edge and its dotted line items print one after another down to a ruled total, then it folds away as the next row opens, until you click a row. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);let k=0;while(!off){k=(k+1)%S.length;tog(k);await sleep(3100)}})()}
+</script></body></html>

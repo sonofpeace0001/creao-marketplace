@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sankey Flow Chart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EAEDF5;color:#141A33;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:760px;background:#fff;border-radius:28px;padding:24px;box-shadow:0 40px 56px -34px rgba(20,26,51,.5),inset 0 0 0 1px rgba(20,26,51,.07)}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin-bottom:10px;flex-wrap:wrap}.hd h1{font-size:21px;font-weight:800;letter-spacing:-.03em}.hd p{font-size:13px;color:#6E7799;margin-top:2px}
+.rd{padding:9px 14px;border-radius:14px;background:#F1F3FB;font:600 13px 'JetBrains Mono';transition:background .3s;min-width:260px}.rd b{color:var(--c,#4F46E5)}.rd span{display:block;font:500 11px 'JetBrains Mono';color:#7C85A8;margin-bottom:2px;letter-spacing:.1em}
+svg{width:100%;height:auto;display:block}
+.rb{fill:none;transition:opacity .45s,stroke-opacity .45s;stroke-opacity:.34;cursor:pointer}.rb.hl{stroke-opacity:.72}.dim .rb:not(.hl){stroke-opacity:.07}
+.pt{fill:none;stroke:#fff;stroke-width:1.600;stroke-dasharray:3 14;stroke-linecap:round;animation:fl 2.400s linear infinite;pointer-events:none;opacity:.8}@keyframes fl{to{stroke-dashoffset:-34}}
+.nd{rx:4}.nl{font:700 12.500px 'Plus Jakarta Sans';fill:#141A33}.nv{font:500 11px 'JetBrains Mono';fill:#7C85A8}.cl{font:600 10.500px 'JetBrains Mono';letter-spacing:.14em;fill:#9AA2C0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><div><h1>Where visitors go</h1><p>10,000 sessions · last 30 days</p></div><div class="rd" id="rd"><span>HOVER A SOURCE</span>—</div></div><svg id="sv" viewBox="0 0 700 340"></svg></div>
+<script>
+const SRC=[['Search','#4F46E5'],['Social','#EC4899'],['Email','#F59E0B'],['Direct','#10B981']],PG=['Landing','Pricing','Blog'],OUT=[['Signup','#16A34A'],['Trial','#0EA5E9'],['Bounce','#94A3B8']];
+const F1={Search:[2400,600,1200],Social:[1500,300,800],Email:[700,800,300],Direct:[600,700,100]},F2={Landing:[900,500,3800],Pricing:[600,500,1300],Blog:[200,200,2000]};
+const NS='http://www.w3.org/2000/svg',sv=document.getElementById('sv'),H=340,GAP=14,W=700,SC=(H-GAP*3-40)/10000;const ribs=[];let off=false;
+const tot=(a)=>a.reduce((x,y)=>x+y,0);
+function layout(names,vals){let y=8;return names.map((n,i)=>{const h=vals[i]*SC,o={y,h,out:0,inn:0};y+=h+GAP;return o})}
+const s=layout(SRC.map(x=>x[0]),SRC.map(x=>tot(F1[x[0]]))),p=layout(PG,PG.map((n,i)=>tot(SRC.map(x=>F1[x[0]][i])))),o=layout(OUT.map(x=>x[0]),OUT.map((x,i)=>tot(PG.map(n=>F2[n][i]))));
+const X=[10,330,650],NW=14;let g='';
+function ribbon(x0,n0,x1,n1,v,col,tag,meta){const w=v*SC,y0=n0.y+n0.out+w/2,y1=n1.y+n1.inn+w/2;n0.out+=w;n1.inn+=w;const xm=(x0+x1)/2;const d='M'+x0+' '+y0+' C'+xm+' '+y0+' '+xm+' '+y1+' '+x1+' '+y1;const e=document.createElementNS(NS,'path');e.setAttribute('class','rb');e.setAttribute('d',d);e.setAttribute('stroke',col);e.setAttribute('stroke-width',Math.max(1,w));e.dataset.tag=tag;sv.appendChild(e);const q=document.createElementNS(NS,'path');q.setAttribute('class','pt');q.setAttribute('d',d);q.dataset.tag=tag;sv.appendChild(q);ribs.push([e,q,meta])}
+SRC.forEach((x,i)=>PG.forEach((pg,j)=>ribbon(X[0]+NW,s[i],X[1],p[j],F1[x[0]][j],x[1],x[0],[x[0],pg,F1[x[0]][j]])));
+PG.forEach((pg,j)=>OUT.forEach((ou,k)=>ribbon(X[1]+NW,p[j],X[2],o[k],F2[pg][k],ou[1],'p'+j,[pg,ou[0],F2[pg][k]])));
+function node(x,n,lab,col,anchor,val){const r=document.createElementNS(NS,'rect');r.setAttribute('class','nd');r.setAttribute('x',x);r.setAttribute('y',n.y);r.setAttribute('width',NW);r.setAttribute('height',Math.max(2,n.h));r.setAttribute('fill',col);sv.appendChild(r);const t=document.createElementNS(NS,'text');t.setAttribute('class','nl');t.setAttribute('x',anchor==='s'?x+NW+8:anchor==='e'?x-8:x+NW+8);t.setAttribute('y',n.y+n.h/2+(anchor==='m'?-8:-2));t.setAttribute('text-anchor',anchor==='e'?'end':'start');t.textContent=lab;sv.appendChild(t);const v=document.createElementNS(NS,'text');v.setAttribute('class','nv');v.setAttribute('x',t.getAttribute('x'));v.setAttribute('y',n.y+n.h/2+(anchor==='m'?6:12));v.setAttribute('text-anchor',t.getAttribute('text-anchor'));v.textContent=val.toLocaleString('en-US');sv.appendChild(v)}
+SRC.forEach((x,i)=>node(X[0],s[i],x[0],x[1],'s',tot(F1[x[0]])));PG.forEach((pg,j)=>node(X[1],p[j],pg,'#475069','m',tot(SRC.map(x=>F1[x[0]][j]))));OUT.forEach((ou,k)=>node(X[2],o[k],ou[0],ou[1],'e',tot(PG.map(pg=>F2[pg][k]))));
+[['SOURCE',10],['PAGE',330],['OUTCOME',690]].forEach(([t,x],i)=>{const e=document.createElementNS(NS,'text');e.setAttribute('class','cl');e.setAttribute('x',x);e.setAttribute('y',H-2);e.setAttribute('text-anchor',i===2?'end':'start');e.textContent=t;sv.appendChild(e)});
+function hl(tag){sv.classList.toggle('dim',!!tag);ribs.forEach(([e,q])=>{const on=!tag||e.dataset.tag===tag;e.classList.toggle('hl',!!tag&&on);q.style.opacity=tag?(on?.9:0):.8});const rd=document.getElementById('rd');if(!tag){rd.innerHTML='<span>HOVER A SOURCE</span>—';return}
+ const si=SRC.findIndex(x=>x[0]===tag);if(si>=0){const t=tot(F1[tag]);const conv=PG.reduce((a,pg,j)=>a+F1[tag][j]*(F2[pg][0]+F2[pg][1])/tot(F2[pg]),0);rd.style.setProperty('--c',SRC[si][1]);rd.innerHTML='<span>'+tag.toUpperCase()+'</span><b>'+t.toLocaleString('en-US')+'</b> sessions · <b>'+(conv/t*100).toFixed(1)+'%</b> convert'}}
+ribs.forEach(([e])=>{e.onpointerenter=()=>{off=true;hl(e.dataset.tag)};e.onpointerleave=()=>hl(null)});
+hl('Search');
+/* Idle demo: a three-column Sankey of 10,000 sessions flows from traffic sources through pages to outcomes; every ribbon carries a stream of moving white dashes, and one source at a time is spotlit while the others fade, with the readout above showing that source's sessions and conversion rate, cycling Search, Social, Email, Direct, until you hover a ribbon. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sl(3400);let k=0;const seq=['Social','Email','Direct','p0','Search'];while(!off){const t=seq[k++%seq.length];hl(t.startsWith('p')?null:t);if(t.startsWith('p')){hl(null)}await sl(2400)}})()}
+</script></body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Radar Skills Chart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080A12;color:#E8ECF8;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:680px;background:#10131E;border-radius:28px;padding:24px;box-shadow:0 44px 64px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08);display:grid;grid-template-columns:1fr 210px;gap:18px;align-items:center}
+.cv{position:relative}svg{width:100%;height:auto;display:block;overflow:visible}
+.gr{fill:none;stroke:rgba(255,255,255,.09);stroke-width:1}.gr.o{fill:rgba(255,255,255,.015)}.ax{stroke:rgba(255,255,255,.1)}.lb{font:600 11px 'Sora';fill:#AEB6D4;letter-spacing:.02em}.sc{font:500 10px 'Geist Mono';fill:#6A7396}
+.pa{fill:var(--c);fill-opacity:.2;stroke:var(--c);stroke-width:2.200;stroke-linejoin:round;filter:drop-shadow(0 0 10px var(--c))}.dt{fill:var(--c);stroke:#10131E;stroke-width:2}
+.sd h1{font-size:19px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px}.sd p{font-size:12.500px;color:#8B93B3;line-height:1.5;margin-bottom:16px}
+.tb{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}.tb button{border:0;border-radius:99px;padding:7px 13px;background:#181C2A;color:#A5ADCA;font:600 12px 'Sora';cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:all .3s}.tb button.on{background:#E8ECF8;color:#10131E}.tb button:focus-visible{outline:2px solid #818CF8;outline-offset:2px}
+.lg{display:grid;gap:8px;margin-bottom:16px}.lg div{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600}.lg i{width:12px;height:12px;border-radius:4px;background:var(--c)}.lg b{margin-left:auto;font:600 13px 'Geist Mono'}
+.bs{padding:12px 14px;border-radius:14px;background:#171B29}.bs small{font:500 10.500px 'Geist Mono';letter-spacing:.14em;color:#7C86A8;display:block;margin-bottom:4px}.bs b{font-size:17px;letter-spacing:-.02em}.bs span{color:#34D399;font:600 12px 'Geist Mono';margin-left:6px}
+@media(max-width:620px){.cd{grid-template-columns:1fr}}
+</style></head><body>
+<div class="cd"><div class="cv"><svg id="sv" viewBox="-70 -30 440 360"></svg></div>
+<div class="sd"><h1>Team capability</h1><p>Two review periods plotted across six dimensions.</p><div class="tb" id="tb"></div><div class="lg"><div style="--c:#7C8CFF"><i></i>Earlier<b id="la">—</b></div><div style="--c:#34D399"><i></i>Latest<b id="lb">—</b></div></div><div class="bs"><small>BIGGEST MOVER</small><b id="bm">—</b></div></div></div>
+<script>
+const AX=['Speed','Quality','Reach','Retention','Revenue','Support'],CX=150,CY=150,R=118;
+const DS=[['Product',[62,70,55,60,48,72],[78,84,66,74,70,81]],['Growth',[48,52,70,44,58,50],[64,60,86,63,79,58]],['Ops',[70,58,40,66,52,80],[74,76,62,82,60,90]]];
+const NS='http://www.w3.org/2000/svg',sv=document.getElementById('sv');let a=DS[0][1].slice(),b=DS[0][2].slice(),ta=a.slice(),tb=b.slice(),off=false,cur=0;
+const pt=(i,v)=>{const ang=-Math.PI/2+i/6*Math.PI*2;return[CX+Math.cos(ang)*R*v/100,CY+Math.sin(ang)*R*v/100]};
+let h='';[25,50,75,100].forEach((r,k)=>{h+='<polygon class="gr'+(k===3?' o':'')+'" points="'+AX.map((_,i)=>pt(i,r).join(',')).join(' ')+'"/><text class="sc" x="'+(CX+4)+'" y="'+(CY-R*r/100+11)+'">'+r+'</text>'});
+AX.forEach((n,i)=>{const e=pt(i,100),l=pt(i,128);h+='<line class="ax" x1="'+CX+'" y1="'+CY+'" x2="'+e[0]+'" y2="'+e[1]+'"/><text class="lb" x="'+l[0]+'" y="'+(l[1]+4)+'" text-anchor="'+(Math.abs(l[0]-CX)<8?'middle':l[0]>CX?'start':'end')+'">'+n+'</text>'});
+sv.innerHTML=h+'<polygon class="pa" id="pa" style="--c:#7C8CFF"/><polygon class="pa" id="pb" style="--c:#34D399"/><g id="dts"></g>';
+const pa=document.getElementById('pa'),pb=document.getElementById('pb'),dts=document.getElementById('dts');
+function draw(){pa.setAttribute('points',a.map((v,i)=>pt(i,v).join(',')).join(' '));pb.setAttribute('points',b.map((v,i)=>pt(i,v).join(',')).join(' '));dts.innerHTML=a.map((v,i)=>'<circle class="dt" style="--c:#7C8CFF" cx="'+pt(i,v)[0]+'" cy="'+pt(i,v)[1]+'" r="4"/>').join('')+b.map((v,i)=>'<circle class="dt" style="--c:#34D399" cx="'+pt(i,v)[0]+'" cy="'+pt(i,v)[1]+'" r="4.500"/>').join('');
+ const avg=x=>Math.round(x.reduce((p,c)=>p+c,0)/6);document.getElementById('la').textContent=avg(a);document.getElementById('lb').textContent=avg(b);let bi=0,bd=-99;b.forEach((v,i)=>{if(v-a[i]>bd){bd=v-a[i];bi=i}});document.getElementById('bm').innerHTML=AX[bi]+'<span>+'+Math.round(bd)+'</span>'}
+const tbn=document.getElementById('tb'),bs=DS.map((d,i)=>{const e=document.createElement('button');e.textContent=d[0];e.onclick=()=>{off=true;set(i)};tbn.appendChild(e);return e});
+function set(i){cur=i;ta=DS[i][1].slice();tb=DS[i][2].slice();bs.forEach((e,k)=>e.classList.toggle('on',k===i))}
+set(0);a=ta.slice();b=tb.slice();draw();
+/* Idle demo: two glowing radar polygons, earlier in indigo and latest in mint, morph smoothly between three teams' datasets every few seconds; each vertex dot glides on its own spoke, the legend averages and the biggest-mover readout update from the live shapes, until you click a team tab. */
+(function tw(){let ch=false;for(let i=0;i<6;i++){a[i]+=(ta[i]-a[i])*.07;b[i]+=(tb[i]-b[i])*.07;if(Math.abs(ta[i]-a[i])>.05)ch=true}draw();requestAnimationFrame(tw)})();
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sl=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sl(3400);while(!off){set((cur+1)%DS.length);await sl(3200)}})()}
+</script></body></html>

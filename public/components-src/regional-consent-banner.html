@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Regional Consent Banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#2563EB;background:#E5E8EF;color:#121828;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.sc{position:relative;width:100%;max-width:760px;height:480px;background:#fff;border-radius:26px;box-shadow:0 44px 70px -34px rgba(18,24,40,.55),inset 0 0 0 1px rgba(18,24,40,.08);overflow:hidden}
+.pg{padding:20px 24px;filter:blur(1.500px);opacity:.7}.pg .nv{display:flex;gap:14px;align-items:center;margin-bottom:26px}.pg .nv b{width:90px;height:16px;border-radius:5px;background:#CBD2E3}.pg .nv i{width:50px;height:9px;border-radius:5px;background:#E1E6F1;margin-left:auto}.pg .nv i+i{margin-left:0}
+.pg h2{width:70%;height:34px;border-radius:9px;background:#D5DBEA;margin-bottom:12px}.pg p{height:12px;border-radius:5px;background:#E4E8F2;margin-bottom:8px;width:84%}.pg p+p{width:62%}.pg .gr{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.pg .gr i{height:90px;border-radius:14px;background:#EEF1F8}
+.rg{position:absolute;left:18px;top:14px;z-index:5;display:flex;gap:6px;padding:4px;border-radius:99px;background:rgba(18,24,40,.9);backdrop-filter:blur(8px)}.rg button{border:0;border-radius:99px;padding:6px 13px;background:none;color:#B8C0D8;font:600 12px 'Geist Mono';cursor:pointer;transition:all .3s}.rg button.on{background:#fff;color:#121828}.rg button:focus-visible{outline:2px solid #fff}
+.bn{position:absolute;left:16px;right:16px;bottom:16px;background:#121828;color:#fff;border-radius:22px;padding:20px 22px;box-shadow:0 30px 50px -14px rgba(0,0,0,.6);transition:height .6s cubic-bezier(.4,0,.2,1)}
+.bn .in{transition:opacity .3s,transform .4s}.bn.sw .in{opacity:0;transform:translateY(8px)}
+.bn .tp{display:flex;align-items:center;gap:10px;margin-bottom:10px}.bn .tg{display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border-radius:99px;background:color-mix(in srgb,var(--c) 28%,transparent);color:color-mix(in srgb,var(--c) 40%,#fff);font:600 11px 'Geist Mono';letter-spacing:.08em;transition:all .5s}.bn .fl{font-size:20px}
+.bn .ld{margin-left:auto;font:500 11.500px 'Geist Mono';color:#8A92AE}
+.bn h3{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:5px}.bn p{font-size:14px;line-height:1.5;color:#B4BBD2;max-width:560px}
+.ac{display:flex;gap:9px;margin-top:16px;flex-wrap:wrap;align-items:center}.ac button{border:0;border-radius:13px;padding:12px 20px;font:800 14px 'Inter Tight';cursor:pointer;transition:transform .15s}.ac button.p{background:var(--c);color:#fff}.ac button.s{background:rgba(255,255,255,.1);color:#fff}.ac a{color:#B4BBD2;font-size:13.500px;font-weight:600;text-decoration:underline;text-underline-offset:3px;margin-left:4px}
+.gp{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:10px;background:rgba(52,211,153,.14);color:#6EE7B7;font:600 11.500px 'Geist Mono'}
+@media(max-width:640px){.sc{height:520px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="sc" id="sc"><div class="pg"><div class="nv"><b></b><i></i><i></i><i></i></div><h2></h2><p></p><p></p><div class="gr"><i></i><i></i><i></i></div></div>
+<div class="rg" id="rg"></div><div class="bn" id="bn"><div class="in" id="in"></div></div></div>
+<script>
+const R=[{k:'EU',fl:'🇪🇺',c:'#2563EB',tag:'GDPR',t:'Your privacy choices',p:'We use cookies to run this site and, only with your permission, to measure and improve it. Rejecting is as easy as accepting.',b:[['Accept all','p'],['Reject all','s'],['Customise','s']],ex:''},
+{k:'California',fl:'🇺🇸',c:'#0D9488',tag:'CCPA / CPRA',t:'Your California privacy rights',p:'We may share limited data with partners for advertising. You can opt out of sale or sharing at any time.',b:[['Okay','p'],['Do not sell or share my info','s']],ex:'<span class="gp">✓ Global Privacy Control detected</span>'},
+{k:'Brazil',fl:'🇧🇷',c:'#16A34A',tag:'LGPD',t:'Seus dados, suas escolhas',p:'We process cookies on the legal basis of consent. Choose which categories you allow and change your mind whenever you like.',b:[['Aceitar','p'],['Recusar','s'],['Preferências','s']],ex:''},
+{k:'Japan',fl:'🇯🇵',c:'#E11D48',tag:'APPI',t:'Cookie notice',p:'This site uses cookies to improve your experience. Third-party cookies are only used with your consent.',b:[['Agree','p'],['Settings','s']],ex:''}];
+const $=id=>document.getElementById(id),sl=t=>new Promise(r=>setTimeout(r,t));let cur=0,off=false;
+R.forEach((r,i)=>{const b=document.createElement('button');b.textContent=r.fl+' '+r.k;b.onclick=()=>{off=true;go(i)};$('rg').appendChild(b)});
+function render(i,detect){const r=R[i];document.body.style.setProperty('--c',r.c);[...$('rg').children].forEach((b,k)=>b.classList.toggle('on',k===i));$('in').innerHTML='<div class="tp"><span class="fl">'+r.fl+'</span><span class="tg">'+r.tag+'</span><span class="ld">'+(detect?'Detecting your region…':'Region detected: '+r.k)+'</span></div><h3>'+r.t+'</h3><p>'+r.p+'</p><div class="ac">'+r.b.map(b=>'<button class="'+b[1]+'">'+b[0]+'</button>').join('')+(r.ex||'')+'<a href="#">Privacy policy</a></div>'}
+async function go(i,anim){const bn=$('bn');cur=i;if(anim){bn.classList.add('sw');await sl(320)}render(i,false);bn.classList.remove('sw')}
+render(0,false);
+document.querySelector('.sc').addEventListener('pointerdown',()=>{off=true});
+/* Idle demo: one banner adapts to where the visitor is; the region chip row at the top highlights EU, California, Brazil and Japan in turn, and for each the banner fades, shows a Detecting your region line, then re-renders with that law's tag (GDPR, CCPA, LGPD, APPI), wording, accent colour and button set, equal-weight Accept and Reject in the EU, a Do not sell link plus a Global Privacy Control badge in California, until you pick a region. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sl(3400);while(!off){const n=(cur+1)%R.length;$('bn').classList.add('sw');await sl(320);render(n,true);$('bn').classList.remove('sw');await sl(800);render(n,false);cur=n;await sl(3000)}})()}
+</script></body></html>
