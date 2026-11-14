@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Avatar Stack Expand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDF0F7;color:#141830;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:560px;display:grid;gap:16px}
+.c{border-radius:26px;background:#fff;padding:24px;box-shadow:0 26px 34px -26px rgba(20,24,48,.45),inset 0 0 0 1px rgba(20,24,48,.07)}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}.hd b{font-size:18px;letter-spacing:-.03em}.hd span{font-size:13px;color:#6C7194;font-weight:500}
+.st{display:flex;align-items:center;padding:8px 0 30px;min-height:90px}
+.av{position:relative;width:56px;height:56px;border-radius:50%;margin-left:-16px;flex:none;box-shadow:0 0 0 3.500px #fff;transition:margin .5s cubic-bezier(.3,1.4,.4,1),transform .4s cubic-bezier(.3,1.6,.5,1);cursor:pointer;background:var(--bg)}
+.av:first-child{margin-left:0}
+.av svg{width:100%;height:100%;border-radius:50%;display:block}
+.st.open .av{margin-left:10px}.st.open .av:first-child{margin-left:0}
+.av:hover,.av.hl{transform:translateY(-8px) scale(1.12);z-index:5}
+.tp{position:absolute;left:50%;top:calc(100% + 8px);transform:translate(-50%,-4px) scale(.9);padding:5px 10px;border-radius:9px;background:#141830;color:#fff;font-size:12px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:all .25s cubic-bezier(.3,1.5,.5,1)}
+.tp::before{content:"";position:absolute;left:50%;top:-4px;margin-left:-4px;width:8px;height:8px;background:#141830;transform:rotate(45deg)}
+.av:hover .tp,.av.hl .tp{opacity:1;transform:translate(-50%,0) scale(1)}
+.mo{display:grid;place-items:center;background:#141830!important;color:#fff;font-size:15px;font-weight:800;letter-spacing:-.02em}
+.row2{display:grid;gap:14px}
+.r{display:flex;align-items:center;justify-content:space-between;padding:12px 4px;border-top:1px solid #EEF0F7}.r b{font-size:15px;display:block}.r small{font-size:12.500px;color:#8A8FAE}
+.mn{display:flex}.mn .av{width:34px;height:34px;margin-left:-9px;box-shadow:0 0 0 2.500px #fff}.mn .av:first-child{margin-left:0}.mn .av .tp{display:none}
+.bt{border:0;border-radius:99px;padding:9px 16px;background:#141830;color:#fff;font:700 13px 'Plus Jakarta Sans';cursor:pointer}.bt:focus-visible{outline:3px solid #6366F1;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="c"><div class="hd"><b>Design review</b><span id="cn">8 reviewers</span></div>
+<div class="st" id="st" tabindex="0" aria-label="Reviewers, press to expand"></div>
+<div class="row2"><div class="r"><div><b>Onboarding flow v3</b><small>Needs 2 more approvals</small></div><div class="mn" id="m1"></div></div><div class="r"><div><b>Pricing page copy</b><small>Approved by everyone</small></div><div class="mn" id="m2"></div></div></div>
+<button class="bt" id="bt" style="margin-top:14px">Expand reviewers</button></div></div>
+<script>
+function face(s){const r=n=>{s=(s*9301+49297)%233280;return Math.floor(s/233280*n)};const sk=['#F2C9A5','#E0A57A','#B9784B','#8A5230','#5B3420','#F7D9C1'][r(6)],hr=['#1B1410','#3B2314','#7A4A21','#C9A15E','#B5361F','#6B6B73','#2D2A6B'][r(7)],bg=['#FFD6A5','#CAFFBF','#9BF6FF','#BDB2FF','#FFC6FF','#FDFFB6','#A0C4FF','#FFADAD'][r(8)],sh=['#6366F1','#EC4899','#0EA5E9','#10B981','#F59E0B','#8B5CF6'][r(6)],st=r(5),gl=r(3)===0,sm=r(3);
+ let h='';if(st===1)h+='<path d="M24 52c-2-24 8-34 26-34s28 10 26 34c-2 12-6 16-6 16H30s-4-4-6-16Z" fill="'+hr+'"/>';
+ let top='';if(st===0)top='<path d="M27 46c0-16 9-22 23-22s23 6 23 22c-6-8-14-10-23-10s-17 2-23 10Z" fill="'+hr+'"/>';else if(st===1)top='<path d="M27 48c0-17 9-24 23-24s23 7 23 24c-7-7-14-11-23-11s-16 4-23 11Z" fill="'+hr+'"/>';else if(st===2)top='<g fill="'+hr+'"><circle cx="31" cy="40" r="9"/><circle cx="42" cy="31" r="10"/><circle cx="56" cy="30" r="10"/><circle cx="68" cy="39" r="9"/><circle cx="50" cy="27" r="9"/></g>';else if(st===3)top='<g fill="'+hr+'"><path d="M28 46c0-14 8-20 22-20s22 6 22 20c-5-6-13-9-22-9s-17 3-22 9Z"/><circle cx="50" cy="20" r="8"/></g>';
+ return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="'+bg+'"/>'+h+'<path d="M14 100c2-18 16-26 36-26s34 8 36 26Z" fill="'+sh+'"/><rect x="43" y="62" width="14" height="14" rx="6" fill="'+sk+'"/><ellipse cx="50" cy="48" rx="21" ry="24" fill="'+sk+'"/>'+top+'<circle cx="42" cy="50" r="2.200" fill="#2A1A12"/><circle cx="58" cy="50" r="2.200" fill="#2A1A12"/>'+(gl?'<g fill="none" stroke="#2A1A12" stroke-width="1.800"><circle cx="42" cy="50" r="6.500"/><circle cx="58" cy="50" r="6.500"/><path d="M48.500 50h3"/></g>':'')+'<path d="'+(sm===0?'M43 60q7 6 14 0':sm===1?'M44 60q6 4 12 0':'M43 59q7 8 14 0')+'" fill="none" stroke="#2A1A12" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/><circle cx="64" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/></svg>'}
+const N=['Priya Nair','Marcus Webb','Amara Diallo','Hannah Cho','Tomas Novak','Lucas Ferreira','Imani Cole','Sana Iyer'];
+const st=document.getElementById('st'),bt=document.getElementById('bt');
+N.slice(0,6).forEach((n,i)=>{const a=document.createElement('div');a.className='av';a.innerHTML=face(i*37+11)+'<span class="tp">'+n+'</span>';st.appendChild(a)});
+const mo=document.createElement('div');mo.className='av mo';mo.innerHTML='+2<span class="tp">Imani Cole, Sana Iyer</span>';st.appendChild(mo);
+const mk=(id,k,c)=>{const m=document.getElementById(id);for(let i=0;i<k;i++){const a=document.createElement('div');a.className='av';a.innerHTML=face((i+c)*41+7);m.appendChild(a)}};mk('m1',4,3);mk('m2',5,9);
+const avs=[...st.children];
+function setOpen(o){st.classList.toggle('open',o);bt.textContent=o?'Collapse reviewers':'Expand reviewers'}
+bt.onclick=()=>{off=true;setOpen(!st.classList.contains('open'))};st.addEventListener('pointerenter',()=>{off=true;setOpen(true)});st.addEventListener('pointerleave',()=>setOpen(false));st.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setOpen(!st.classList.contains('open'))}});
+setOpen(true);avs[2].classList.add('hl');
+/* Idle demo: the stack breathes open and closed, and while open a highlight with a name tooltip walks along the reviewers, until a pointer arrives. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);while(!off){setOpen(false);avs.forEach(a=>a.classList.remove('hl'));await sleep(1500);if(off)return;setOpen(true);await sleep(700);for(const a of avs){if(off)return;avs.forEach(x=>x.classList.remove('hl'));a.classList.add('hl');await sleep(650)}avs.forEach(x=>x.classList.remove('hl'));await sleep(900)}})()}
+</script></body></html>

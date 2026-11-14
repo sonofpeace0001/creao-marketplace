@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Avatar Frame Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 480px at 50% 30%,#241B4A,#0B0916 75%);color:#F0EDFF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.w{width:100%;max-width:560px;display:grid;gap:22px;justify-items:center;text-align:center}
+.w h1{font-size:26px;font-weight:800;letter-spacing:-.045em}.w p{color:#8D86B8;font-size:14px;margin-top:6px}
+.stage{position:relative;width:260px;height:260px;display:grid;place-items:center}
+.av{position:relative;width:170px;height:170px;border-radius:50%;overflow:hidden;z-index:1}.av svg{width:100%;height:100%;display:block}
+.fr{position:absolute;inset:0;pointer-events:none;opacity:0;transform:scale(.8);transition:opacity .45s,transform .6s cubic-bezier(.3,1.5,.5,1)}.fr.on{opacity:1;transform:none}
+.fr svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.f-neon .rg{position:absolute;left:50%;top:50%;width:196px;height:196px;margin:-98px;border-radius:50%;border:4px solid #22E6FF;box-shadow:0 0 14px #22E6FF,0 0 34px #22E6FF,inset 0 0 14px #22E6FF;animation:np 2.400s ease-in-out infinite}@keyframes np{50%{box-shadow:0 0 22px #FF3DCB,0 0 52px #FF3DCB,inset 0 0 18px #FF3DCB;border-color:#FF3DCB}}
+.f-aurora .rg{position:absolute;left:50%;top:50%;width:204px;height:204px;margin:-102px;border-radius:50%;background:conic-gradient(from var(--a),#22D3EE,#8B5CF6,#F472B6,#FBBF24,#22D3EE);animation:ro 4s linear infinite;-webkit-mask:radial-gradient(circle,transparent 82px,#000 83px);mask:radial-gradient(circle,transparent 82px,#000 83px);filter:drop-shadow(0 0 14px rgba(139,92,246,.7))}@keyframes ro{to{--a:360deg}}
+.f-stamp .rg{position:absolute;left:50%;top:50%;width:208px;height:208px;margin:-104px;border-radius:50%;border:3px dashed #F5C542;animation:sp 14s linear infinite}.f-stamp .r2{position:absolute;left:50%;top:50%;width:192px;height:192px;margin:-96px;border-radius:50%;border:2px solid rgba(245,197,66,.7)}@keyframes sp{to{transform:rotate(360deg)}}
+.f-pixel .px{position:absolute;left:50%;top:50%;width:196px;height:196px;margin:-98px;border-radius:50%;border:8px solid transparent;background:conic-gradient(#FF4D6D 0 25%,#FFD23F 0 50%,#3DDC97 0 75%,#4CC9F0 0) border-box;-webkit-mask:repeating-conic-gradient(#000 0 6deg,transparent 6deg 12deg),linear-gradient(#000 0 0) content-box;mask:repeating-conic-gradient(#000 0 6deg,transparent 6deg 12deg);animation:pxr 3s steps(30) infinite;-webkit-mask-composite:source-in}@keyframes pxr{to{transform:rotate(360deg)}}
+.f-crown .cr{position:absolute;left:50%;top:-6px;width:96px;margin-left:-48px;animation:cb 2.800s ease-in-out infinite;filter:drop-shadow(0 8px 10px rgba(245,197,66,.5))}@keyframes cb{50%{transform:translateY(-5px) rotate(2deg)}}
+.f-crown .rg{position:absolute;left:50%;top:50%;width:190px;height:190px;margin:-95px;border-radius:50%;border:4px solid #F5C542;box-shadow:0 0 0 3px rgba(245,197,66,.3)}
+.f-laurel svg{inset:-8px;width:calc(100% + 16px);height:calc(100% + 16px)}.f-laurel .lf{animation:lf 3s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}@keyframes lf{50%{transform:rotate(4deg) scale(1.04)}}
+.nm{font-size:20px;font-weight:800;letter-spacing:-.04em}.sb{font:500 12px 'Geist Mono';color:#9A93C4;letter-spacing:.1em;text-transform:uppercase;margin-top:-14px}
+.pk{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.ch{display:grid;justify-items:center;gap:7px;border:0;background:none;color:#B5AEDD;font:700 12px 'Sora';cursor:pointer;transition:transform .3s cubic-bezier(.3,1.6,.5,1),color .2s}.ch:hover{transform:translateY(-3px)}
+.ch i{display:block;width:62px;height:62px;border-radius:18px;background:#1B1738;box-shadow:inset 0 0 0 1.500px rgba(255,255,255,.08);position:relative;overflow:hidden;transition:box-shadow .3s,background .3s}.ch i::before{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px;border-radius:50%;background:#4A4278;box-shadow:0 0 0 var(--w,4px) var(--c)}
+.ch[aria-pressed=true]{color:#fff}.ch[aria-pressed=true] i{background:#241E4C;box-shadow:inset 0 0 0 2px var(--c)}.ch:focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:14px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div><h1>Frame it your way</h1><p>Six frames, each with its own motion. Pick one and it springs on.</p></div>
+<div class="stage" id="st"><div class="av" id="av"></div></div><div class="nm" id="nm"></div><div class="sb" id="sb"></div>
+<div class="pk" id="pk" role="group" aria-label="Frames"></div></div>
+<script>
+function face(s){const r=n=>{s=(s*9301+49297)%233280;return Math.floor(s/233280*n)};const sk=['#F2C9A5','#E0A57A','#B9784B','#8A5230','#5B3420','#F7D9C1'][r(6)],hr=['#1B1410','#3B2314','#7A4A21','#C9A15E','#B5361F','#6B6B73','#2D2A6B'][r(7)],bg=['#FFD6A5','#CAFFBF','#9BF6FF','#BDB2FF','#FFC6FF','#FDFFB6','#A0C4FF','#FFADAD'][r(8)],sh=['#6366F1','#EC4899','#0EA5E9','#10B981','#F59E0B','#8B5CF6'][r(6)],st=r(5),gl=r(3)===0,sm=r(3);
+ let h='';if(st===1)h+='<path d="M24 52c-2-24 8-34 26-34s28 10 26 34c-2 12-6 16-6 16H30s-4-4-6-16Z" fill="'+hr+'"/>';
+ let top='';if(st===0)top='<path d="M27 46c0-16 9-22 23-22s23 6 23 22c-6-8-14-10-23-10s-17 2-23 10Z" fill="'+hr+'"/>';else if(st===1)top='<path d="M27 48c0-17 9-24 23-24s23 7 23 24c-7-7-14-11-23-11s-16 4-23 11Z" fill="'+hr+'"/>';else if(st===2)top='<g fill="'+hr+'"><circle cx="31" cy="40" r="9"/><circle cx="42" cy="31" r="10"/><circle cx="56" cy="30" r="10"/><circle cx="68" cy="39" r="9"/><circle cx="50" cy="27" r="9"/></g>';else if(st===3)top='<g fill="'+hr+'"><path d="M28 46c0-14 8-20 22-20s22 6 22 20c-5-6-13-9-22-9s-17 3-22 9Z"/><circle cx="50" cy="20" r="8"/></g>';
+ return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="'+bg+'"/>'+h+'<path d="M14 100c2-18 16-26 36-26s34 8 36 26Z" fill="'+sh+'"/><rect x="43" y="62" width="14" height="14" rx="6" fill="'+sk+'"/><ellipse cx="50" cy="48" rx="21" ry="24" fill="'+sk+'"/>'+top+'<circle cx="42" cy="50" r="2.200" fill="#2A1A12"/><circle cx="58" cy="50" r="2.200" fill="#2A1A12"/>'+(gl?'<g fill="none" stroke="#2A1A12" stroke-width="1.800"><circle cx="42" cy="50" r="6.500"/><circle cx="58" cy="50" r="6.500"/><path d="M48.500 50h3"/></g>':'')+'<path d="'+(sm===0?'M43 60q7 6 14 0':sm===1?'M44 60q6 4 12 0':'M43 59q7 8 14 0')+'" fill="none" stroke="#2A1A12" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/><circle cx="64" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/></svg>'}
+function leaf(side){let h='';for(let i=0;i<9;i++){const a=(i/8)*130-10,x=130+Math.cos((a+90)*Math.PI/180)*(side*104),y=130+Math.sin((a+90)*Math.PI/180)*104;h+='<ellipse class="lf" style="animation-delay:'+(i*.15)+'s" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" rx="7" ry="15" fill="#F5C542" transform="rotate('+(side*(a+40)+(side<0?0:0))+' '+x.toFixed(1)+' '+y.toFixed(1)+')"/>'}return h}
+const F=[['Neon','Glow ring','#22E6FF','<div class="rg"></div>'],['Aurora','Spinning gradient','#A78BFA','<div class="rg"></div>'],['Stamp','Dashed seal','#F5C542','<div class="rg"></div><div class="r2"></div>'],['Pixel','Stepped colour ring','#FF4D6D','<div class="px"></div>'],['Crown','Royalty','#FBBF24','<div class="rg"></div><svg class="cr" viewBox="0 0 96 60"><path d="M6 52 12 12l22 20 14-26 14 26 22-20 6 40Z" fill="#F5C542" stroke="#B8860B" stroke-width="3" stroke-linejoin="round"/><circle cx="12" cy="10" r="5" fill="#EF4444"/><circle cx="48" cy="6" r="5" fill="#22D3EE"/><circle cx="84" cy="10" r="5" fill="#EC4899"/></svg>'],['Laurel','Victory wreath','#F5C542','<svg viewBox="0 0 260 260">'+leaf(1)+leaf(-1)+'</svg>']];
+const st=document.getElementById('st'),pk=document.getElementById('pk'),nm=document.getElementById('nm'),sb=document.getElementById('sb'),frs=[];
+document.getElementById('av').innerHTML=face(91);
+F.forEach(([n,d,c,h],i)=>{const f=document.createElement('div');f.className='fr f-'+n.toLowerCase();f.innerHTML=h;st.appendChild(f);frs.push(f);
+ const b=document.createElement('button');b.className='ch';b.style.setProperty('--c',c);b.style.setProperty('--w',(3+i%3*2)+'px');b.setAttribute('aria-pressed','false');b.innerHTML='<i></i>'+n;b.onclick=()=>{off=true;pick(i)};pk.appendChild(b)});
+function pick(i){frs.forEach((f,k)=>f.classList.toggle('on',k===i));[...pk.children].forEach((b,k)=>b.setAttribute('aria-pressed',k===i));nm.textContent=F[i][0]+' frame';sb.textContent=F[i][1]}
+pick(1);
+/* Idle demo: the frames cycle every 2.2s, the previous one shrinking away and the next springing on, each with its own continuous motion (pulse, spin, orbit, leaf sway, crown bob), until a frame is chosen. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3000);let k=2;while(!off){pick(k++%6);await sleep(2200)}})()}
+</script></body></html>

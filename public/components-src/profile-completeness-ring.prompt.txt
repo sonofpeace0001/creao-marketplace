@@ -1,0 +1,40 @@
+ROLE
+You are a senior onboarding product designer and front-end engineer with 15+ years of experience. Build "Profile Completeness Ring": a gradient ring that fills as onboarding tasks are ticked, with drawn checkmarks, strikethroughs, percentage chips per task and a confetti burst when the profile reaches one hundred percent.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft periwinkle backdrop, white card, indigo to pink ring, friendly rounded checks.
+- Palette: #6366F1, #16A34A, #8A90B5, #EDEFF8, #13173A, #EEF0FA
+- Type: Plus Jakarta Sans, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Ring with centre percentage; task list with check circle, label and share chip; completion badge.
+
+INTERACTION & STATES
+- Click any task to toggle it; the ring and number follow.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Checkmark draws; label strikes through; ring eases with a drop shadow; badge springs in with confetti at 100 percent.
+
+IDLE AUTOPLAY
+- Remaining tasks are completed one by one, the badge and confetti fire, then the list resets.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Instant ring jumps; it must ease.
+- Confetti on every tick; reserve it for completion.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

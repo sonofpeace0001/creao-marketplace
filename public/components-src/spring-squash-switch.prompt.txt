@@ -1,0 +1,40 @@
+ROLE
+You are a senior mobile interaction designer and front-end engineer with 15+ years of experience. Build "Spring Squash Switch": five system-style switches whose knob stretches wide while pressed, overshoots with a spring on release, and rings a ripple.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cool grey page, white settings card, coloured icon tiles and a green on-state in the style of a phone settings panel.
+- Palette: #10142B, #E8ECF5, #6C7396, #EFF1F8, #8A90B0, #34C759
+- Type: Outfit, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; five rows (Airplane mode, Wi-Fi, Bluetooth, Do not disturb, Location), each with icon tile, title, mono status and a 62 by 38 switch.
+
+INTERACTION & STATES
+- Pressing stretches the knob from 32px to 40px; releasing springs it across; the status text switches between On and Off; a ring ping marks the change.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Knob travel 500ms cubic-bezier(.3,1.9,.45,.9); width 220ms cubic-bezier(.3,1.4,.5,1); track colour 350ms; ripple scales .8 to 1.9 over 600ms.
+
+IDLE AUTOPLAY
+- Each switch is pressed (stretch), then flipped with a spring, one after another.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Linear knob movement; the overshoot is the character.
+- Hit areas smaller than the visual switch.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

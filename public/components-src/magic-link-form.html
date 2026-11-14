@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Magic Link Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F7EFE3;color:#2B2018;font-family:'Figtree',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(600px 400px at 10% 0,#FFE2C2,transparent 70%)}
+.cd{position:relative;width:100%;max-width:420px;height:420px;border-radius:28px;background:#FFFCF7;box-shadow:0 40px 60px -34px rgba(43,32,24,.45),inset 0 0 0 1px rgba(43,32,24,.07);overflow:hidden}
+.ph{position:absolute;inset:0;padding:32px;display:flex;flex-direction:column;justify-content:center;transition:transform .6s cubic-bezier(.7,0,.2,1),opacity .4s}
+.p2{transform:translateY(100%);opacity:0;align-items:center;text-align:center}
+.cd.sent .p1{transform:translateY(-100%);opacity:0}.cd.sent .p2{transform:none;opacity:1}
+.p1 h1{font:700 32px/1 'Fraunces';letter-spacing:-.035em}.p1>p{color:#7F6E5F;font-size:15px;margin:10px 0 26px;line-height:1.45}
+.fl{position:relative}.fl input{width:100%;border:0;border-radius:16px;background:#F6EEE2;font:600 17px 'Figtree';color:#2B2018;padding:26px 16px 10px;outline:0;box-shadow:inset 0 0 0 1.500px transparent;transition:box-shadow .25s,background .25s}
+.fl label{position:absolute;left:16px;top:19px;font-size:16px;font-weight:600;color:#9C8A79;pointer-events:none;transition:all .22s cubic-bezier(.3,1.2,.4,1);transform-origin:left}
+.fl input:focus,.fl input:not(:placeholder-shown){background:#fff}
+.fl input:focus{box-shadow:inset 0 0 0 2px #E8590C}
+.fl input:focus+label,.fl input:not(:placeholder-shown)+label{top:9px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#E8590C}
+.fl.err input{box-shadow:inset 0 0 0 2px #DC2626;animation:sh .35s}.fl.err label{color:#DC2626!important}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.er{height:18px;font-size:13px;color:#DC2626;font-weight:600;margin:8px 4px 8px}
+.btn{position:relative;width:100%;border:0;border-radius:16px;padding:17px;background:#2B2018;color:#FFF7EA;font:700 16px 'Figtree';cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;overflow:hidden;transition:transform .15s}
+.btn:active{transform:scale(.98)}.btn:focus-visible{outline:3px solid #E8590C;outline-offset:3px}
+.btn .sp{width:18px;height:18px;border-radius:50%;border:2.500px solid rgba(255,247,234,.3);border-top-color:#FFF7EA;display:none;animation:spin .7s linear infinite}.btn.ld .sp{display:block}.btn.ld .tx{opacity:.7}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fine{font-size:12.500px;color:#9C8A79;text-align:center;margin-top:16px}
+.env{width:132px;height:100px;position:relative;margin-bottom:22px}
+.env .bd{position:absolute;inset:18px 0 0;border-radius:12px;background:#E8590C;box-shadow:0 18px 22px -12px rgba(232,89,12,.55)}
+.env .lt{position:absolute;left:14px;right:14px;top:22px;height:64px;border-radius:8px;background:#fff;transition:transform .7s .35s cubic-bezier(.3,1.4,.4,1);padding:12px}.env .lt::before,.env .lt::after{content:"";display:block;height:6px;border-radius:3px;background:#F0E4D4;margin-bottom:8px}.env .lt::after{width:60%}
+.cd.sent .env .lt{transform:translateY(-34px)}
+.env .fr{position:absolute;inset:18px 0 0;border-radius:12px;background:linear-gradient(135deg,#FB923C,#EA580C);clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)}
+.env .fp{position:absolute;left:0;right:0;top:18px;height:52px;background:#F97316;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:50% 0;transition:transform .45s cubic-bezier(.5,0,.3,1)}
+.cd.sent .env .fp{transform:rotateX(180deg)}
+.p2 h2{font:700 28px/1.05 'Fraunces';letter-spacing:-.03em}.p2 p{color:#7F6E5F;font-size:15px;margin:10px 0 20px;line-height:1.5}.p2 b{color:#2B2018}
+.rs{border:0;background:none;color:#E8590C;font:700 14px 'Figtree';cursor:pointer;padding:8px 12px;border-radius:99px}.rs:disabled{color:#9C8A79;cursor:default}.rs:focus-visible{outline:2px solid #E8590C}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="cd" id="cd">
+<form class="ph p1" id="fm" novalidate><h1>Sign in without a password</h1><p>We will email you a link that signs you in on this device. It works once and expires in 10 minutes.</p>
+<div class="fl" id="fl"><input id="em" type="email" placeholder=" " autocomplete="email" aria-describedby="er"><label for="em">Work email</label></div><div class="er" id="er" role="alert"></div>
+<button class="btn" id="bt" type="submit"><span class="sp"></span><span class="tx">Send magic link</span></button><div class="fine">No account yet? We will create one.</div></form>
+<div class="ph p2" aria-live="polite"><div class="env"><div class="bd"></div><div class="lt"></div><div class="fr"></div><div class="fp"></div></div><h2>Check your inbox</h2><p>We sent a sign-in link to <b id="to">you</b>. Open it on this device.</p><button class="rs" id="rs" disabled>Resend in <span id="cn">30</span>s</button></div>
+</div>
+<script>
+const cd=document.getElementById('cd'),fm=document.getElementById('fm'),em=document.getElementById('em'),fl=document.getElementById('fl'),er=document.getElementById('er'),bt=document.getElementById('bt'),to=document.getElementById('to'),rs=document.getElementById('rs'),cn=document.getElementById('cn');
+let tm,busy=false;
+function countdown(){let n=30;cn.textContent=n;rs.disabled=true;rs.firstChild.textContent='Resend in ';clearInterval(tm);tm=setInterval(()=>{n--;if(n<=0){clearInterval(tm);rs.disabled=false;rs.textContent='Resend link'}else{rs.firstChild.textContent='Resend in ';cn.textContent=n}},1000)}
+function submit(){if(busy)return;const v=em.value.trim();if(!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v)){fl.classList.remove('err');void fl.offsetWidth;fl.classList.add('err');er.textContent='Enter a valid work email, like name@company.com';return}
+ fl.classList.remove('err');er.textContent='';busy=true;bt.classList.add('ld');setTimeout(()=>{bt.classList.remove('ld');to.textContent=v;cd.classList.add('sent');countdown();busy=false},1100)}
+fm.addEventListener('submit',e=>{e.preventDefault();submit()});em.addEventListener('input',()=>{fl.classList.remove('err');er.textContent=''});
+rs.onclick=()=>{cd.classList.remove('sent');em.focus()};
+/* Idle demo: types an address, sends the link, shows the inbox state, then resets, until real input. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),addr='noor@studio.co';
+ (async()=>{await sleep(3600);while(!off){cd.classList.remove('sent');em.value='';for(let i=1;i<=addr.length;i++){if(off)return;em.value=addr.slice(0,i);await sleep(95)}await sleep(500);if(off)return;submit();await sleep(4200)}})()}
+</script></body></html>

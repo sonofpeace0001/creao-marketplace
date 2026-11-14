@@ -1,0 +1,40 @@
+ROLE
+You are a senior SaaS product designer and front-end engineer with 15+ years of experience. Build "Workspace Switcher Dropdown": a sidebar workspace menu with staggered rows, logo tiles, keyboard shortcut hints and a trigger that morphs to the chosen workspace's colour, initial and plan.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cool grey app shell, white surfaces, an indigo focus ring and a distinct colour per workspace.
+- Palette: #6366F1, #8A8FAB, #9AA0BB, #F5F6FA, #F0F1FA, #DC2626
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Sidebar with trigger (logo tile, name, plan, chevron); menu with four workspace rows (logo, name, members, shortcut or check), Create workspace, Workspace settings, Log out; main pane that re-titles with the workspace.
+
+INTERACTION & STATES
+- Opens from the trigger, closes on Escape or outside click; hover moves the highlight; choosing a workspace updates the trigger, plan, accent and page heading.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Menu: opacity and translateY -8px with scale .97 over a 350ms spring; rows enter with a 40ms stagger; chevron rotates 180 degrees; trigger tile colour crossfades 450ms.
+
+IDLE AUTOPLAY
+- The menu opens, the highlight steps down, a workspace is chosen and the trigger morphs, then it closes and repeats.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Menu items appearing all at once with no stagger.
+- A trigger that does not reflect the chosen workspace's identity.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

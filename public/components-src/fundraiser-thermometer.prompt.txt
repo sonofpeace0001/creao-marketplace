@@ -1,0 +1,40 @@
+ROLE
+You are a senior nonprofit campaign designer and front-end engineer with 15+ years of experience. Build "Fundraiser Thermometer": a classic fundraising thermometer with a rose mercury that rises as donations arrive, coins dropping into the tube, bubbles, a count-up amount and a live donor feed.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream page, white card, deep rose mercury, chunky grotesque numbers.
+- Palette: #A0907A, #E11D48, #2A1A10, #F8EFE2, #F4EADB, #E2D3BD
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Glass tube and bulb with $10k tick scale; headline, big amount, three stats, donor feed, give button.
+
+INTERACTION & STATES
+- Give $25 adds a donation instantly with a coin drop and feed row.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Mercury eases toward the amount; coin falls into the tube; bubbles rise; feed rows slide in at the top; amount counts up.
+
+IDLE AUTOPLAY
+- Donations arrive every 1.5s with varied sizes until the goal, then the fund resets.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain horizontal bar; the vessel and mercury are the signature.
+- Static numbers; everything counts.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tip Split Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0D1B16;color:#E8F5EE;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(560px 380px at 15% 0,rgba(74,222,128,.16),transparent 70%)}
+.w{width:100%;max-width:460px;display:grid;gap:12px}
+.cd{border-radius:24px;padding:22px;background:#12261E;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.lb{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#7FA395;margin-bottom:12px;display:flex;justify-content:space-between}
+.bill{display:flex;align-items:center;gap:6px;border-radius:16px;background:#0D1B16;padding:6px 16px;box-shadow:inset 0 0 0 1.500px rgba(255,255,255,.09);transition:box-shadow .2s}
+.bill:focus-within{box-shadow:inset 0 0 0 2px #4ADE80}
+.bill span{font:600 28px 'IBM Plex Mono';color:#4ADE80}.bill input{flex:1;min-width:0;border:0;outline:0;background:none;color:#fff;font:600 34px 'IBM Plex Mono';letter-spacing:-.04em;padding:8px 0;text-align:right}
+.tips{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-radius:16px;background:#0D1B16;padding:4px}
+.tips .th{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/4);border-radius:12px;background:#4ADE80;transition:transform .35s cubic-bezier(.3,1.3,.4,1)}
+.tips button{position:relative;z-index:1;border:0;background:none;color:#9DC1B1;font:700 17px 'Sora';padding:14px 0;cursor:pointer;border-radius:12px;transition:color .2s}
+.tips button[aria-pressed=true]{color:#06281A}.tips button:focus-visible{outline:2px solid #fff;outline-offset:-3px}
+.sp{display:flex;align-items:center;justify-content:space-between}
+.sp .st{display:flex;align-items:center;gap:6px;background:#0D1B16;border-radius:16px;padding:6px}
+.sp .st button{width:48px;height:48px;border:0;border-radius:12px;background:#183327;color:#E8F5EE;font:600 24px 'Sora';cursor:pointer;transition:background .15s,transform .1s}
+.sp .st button:hover{background:#1F4533}.sp .st button:active{transform:scale(.92)}.sp .st button:focus-visible{outline:2px solid #4ADE80}
+.sp .st output{min-width:56px;text-align:center;font:700 26px 'IBM Plex Mono'}
+.sp .ppl{display:flex}.sp .ppl i{width:34px;height:34px;border-radius:50%;border:3px solid #12261E;margin-left:-10px;display:grid;place-items:center;font:700 12px 'Sora';font-style:normal;color:#06281A;animation:pop .3s cubic-bezier(.3,1.7,.5,1)}
+@keyframes pop{from{transform:scale(.3);opacity:0}}
+.res{border-radius:24px;padding:24px;background:linear-gradient(135deg,#4ADE80,#22C55E 60%,#86EFAC);color:#06281A;position:relative;overflow:hidden}
+.res::after{content:"";position:absolute;right:-50px;top:-50px;width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,.22)}
+.res small{font:700 12px 'Sora';letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.res .big{font:800 52px/1 'IBM Plex Mono';letter-spacing:-.06em;margin:6px 0 16px;position:relative}.res .big sup{font-size:.5em;vertical-align:.6em;margin-right:2px}
+.bd{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;position:relative}.bd div{background:rgba(6,40,26,.12);border-radius:12px;padding:10px 12px}.bd b{display:block;font:700 17px 'IBM Plex Mono';letter-spacing:-.03em}.bd small{font-size:10px;letter-spacing:.12em}
+.bar{display:flex;height:8px;border-radius:4px;overflow:hidden;margin-top:14px;background:rgba(6,40,26,.15);position:relative}.bar i{display:block;height:100%;transition:width .4s cubic-bezier(.3,1.1,.4,1)}.bar i:first-child{background:#06281A}.bar i:last-child{background:rgba(255,255,255,.7)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<form class="w" onsubmit="return false">
+<div class="cd"><div class="lb"><label for="bill">Bill total</label><span>Dinner for the table</span></div><div class="bill"><span>$</span><input id="bill" inputmode="decimal" value="184.60" aria-label="Bill total in dollars"></div></div>
+<div class="cd"><div class="lb"><span>Tip</span><span id="tl">20% of the bill</span></div><div class="tips" id="tips" role="group" aria-label="Tip percentage"><span class="th" id="th"></span><button type="button" data-t="10" aria-pressed="false">10%</button><button type="button" data-t="15" aria-pressed="false">15%</button><button type="button" data-t="20" aria-pressed="true">20%</button><button type="button" data-t="25" aria-pressed="false">25%</button></div></div>
+<div class="cd"><div class="lb"><span>Split between</span></div><div class="sp"><div class="st"><button type="button" id="mi" aria-label="One fewer person">&minus;</button><output id="pc" aria-live="polite">3</output><button type="button" id="pl" aria-label="One more person">+</button></div><div class="ppl" id="pp"></div></div></div>
+<div class="res"><small>Each person pays</small><div class="big"><sup>$</sup><span id="ea">0.00</span></div><div class="bd"><div><small>TIP</small><b id="tp">$0</b></div><div><small>TOTAL</small><b id="to">$0</b></div><div><small>ROUND UP</small><b id="ru">$0</b></div></div><div class="bar"><i id="b1"></i><i id="b2"></i></div></div></form>
+<script>
+const bill=document.getElementById('bill'),tips=[...document.querySelectorAll('#tips button')],th=document.getElementById('th'),pc=document.getElementById('pc'),pp=document.getElementById('pp'),ea=document.getElementById('ea');
+let tip=20,ppl=3,shown=0,target=0;const COL=['#4ADE80','#FACC15','#38BDF8','#F472B6','#FB923C','#A78BFA','#34D399','#F87171'];
+const money=v=>'$'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+function calc(){const b=parseFloat(bill.value.replace(/[^0-9.]/g,''))||0,t=b*tip/100,tot=b+t,per=tot/ppl;target=per;
+ document.getElementById('tl').textContent=tip+'% of the bill';document.getElementById('tp').textContent=money(t);document.getElementById('to').textContent=money(tot);document.getElementById('ru').textContent=money(Math.ceil(per)*ppl);
+ document.getElementById('b1').style.width=(b/tot*100||0)+'%';document.getElementById('b2').style.width=(t/tot*100||0)+'%';
+ tips.forEach((x,i)=>{const on=+x.dataset.t===tip;x.setAttribute('aria-pressed',on);if(on)th.style.transform='translateX('+i*100+'%)'});pc.textContent=ppl;
+ while(pp.children.length<ppl){const i=document.createElement('i');i.textContent=String.fromCharCode(65+pp.children.length);i.style.background=COL[pp.children.length%8];pp.appendChild(i)}while(pp.children.length>ppl)pp.lastChild.remove()}
+tips.forEach(x=>x.onclick=()=>{tip=+x.dataset.t;calc()});document.getElementById('mi').onclick=()=>{ppl=Math.max(1,ppl-1);calc()};document.getElementById('pl').onclick=()=>{ppl=Math.min(12,ppl+1);calc()};bill.addEventListener('input',calc);
+(function tw(){shown+=(target-shown)*.14;if(Math.abs(target-shown)<.004)shown=target;ea.textContent=shown.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});requestAnimationFrame(tw)})();
+calc();shown=target;
+/* Idle demo: tip and headcount cycle through plausible scenarios, and the total counts to each, until real input. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sc=[[15,2],[25,4],[10,6],[20,3]],sleep=ms=>new Promise(r=>setTimeout(r,ms));
+ (async()=>{await sleep(3600);let i=0;while(!off){[tip,ppl]=sc[i++%sc.length];calc();await sleep(2000)}})()}
+</script></body></html>

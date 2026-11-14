@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Country Select Dropdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDEFF6;color:#141830;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:start center;padding:4vh 14px 24px;-webkit-font-smoothing:antialiased}
+.w{position:relative;width:100%;max-width:440px}
+.w>label{display:block;font-size:13.500px;font-weight:700;margin-bottom:9px}
+.tr{width:100%;display:flex;align-items:center;gap:12px;border:0;border-radius:16px;padding:12px 14px;background:#fff;font:inherit;color:inherit;cursor:pointer;text-align:left;box-shadow:inset 0 0 0 1.500px #D6DAE8,0 1px 2px rgba(20,24,48,.05);transition:box-shadow .2s}
+.tr:hover,.tr[aria-expanded=true]{box-shadow:inset 0 0 0 2px #4F46E5,0 0 0 5px rgba(79,70,229,.12)}.tr:focus-visible{outline:2px solid #4F46E5;outline-offset:2px}
+.fg{width:34px;height:24px;border-radius:6px;display:grid;place-items:center;font:700 11px 'Geist Mono';color:#fff;background:var(--c);flex:none;letter-spacing:.04em;transition:background .35s}
+.tr .n{flex:1}.tr .n b{display:block;font-size:15px;font-weight:700}.tr .n span{font:500 12px 'Geist Mono';color:#7C829E}
+.tr svg{width:18px;height:18px;color:#8A90AB;transition:transform .3s}.tr[aria-expanded=true] svg{transform:rotate(180deg)}
+.pp{position:absolute;left:0;right:0;top:calc(100% + 10px);border-radius:20px;background:#fff;box-shadow:0 34px 60px -16px rgba(20,24,48,.45),inset 0 0 0 1px rgba(20,24,48,.09);opacity:0;transform:translateY(-8px) scale(.97);transform-origin:top;pointer-events:none;transition:opacity .22s,transform .35s cubic-bezier(.3,1.5,.5,1);z-index:5;overflow:hidden}
+.pp.on{opacity:1;transform:none;pointer-events:auto}
+.sr{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #EEF0F7}.sr svg{width:18px;height:18px;color:#8A90AB;flex:none}.sr svg *{fill:none;stroke:currentColor;stroke-width:2.200;stroke-linecap:round}
+.sr input{flex:1;min-width:0;border:0;outline:0;background:none;font:600 15px 'Plus Jakarta Sans';color:#141830}.sr input::placeholder{color:#A3A9C4;font-weight:500}
+.sr kbd{font:600 10.500px 'Geist Mono';padding:3px 7px;border-radius:6px;background:#F1F2F9;color:#7C829E}
+.ls{max-height:172px;overflow:hidden;padding:6px}
+.gh{font:600 10.500px 'Geist Mono';letter-spacing:.14em;text-transform:uppercase;color:#A3A9C4;padding:8px 10px 4px}
+.o{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:12px;cursor:pointer;transition:background .12s;animation:in .3s cubic-bezier(.3,1.4,.5,1) both;animation-delay:calc(var(--i)*22ms)}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.o.hl{background:#EEF0FF}.o.sel .ck{opacity:1;transform:none}
+.o b{font-size:14.500px;font-weight:600}.o b mark{background:none;color:#4F46E5;font-weight:800}.o span.cc{margin-left:auto;font:500 12px 'Geist Mono';color:#8A90AB}
+.ck{width:18px;height:18px;border-radius:50%;background:#4F46E5;display:grid;place-items:center;opacity:0;transform:scale(.4);transition:all .3s cubic-bezier(.3,1.8,.5,1)}.ck svg{width:10px;height:10px}
+.em{padding:26px 14px;text-align:center;font-size:14px;color:#8A90AB}
+.ft{display:flex;gap:16px;padding:9px 14px;border-top:1px solid #EEF0F7;font-size:11.500px;color:#8A90AB}.ft kbd{font:600 10.500px 'Geist Mono';padding:2px 6px;border-radius:5px;background:#F1F2F9;color:#5C6285}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w" id="w"><label>Country or region</label><button class="tr" id="tr" aria-haspopup="listbox" aria-expanded="false"><span class="fg" id="tf">GB</span><span class="n"><b id="tn">United Kingdom</b><span id="tc">GBP, +44</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="pp" id="pp"><div class="sr"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.500"/><path d="m16 16 4.500 4.500"/></svg><input id="in" placeholder="Search 12 countries" role="combobox" aria-expanded="true" aria-controls="ls" autocomplete="off"><kbd>ESC</kbd></div><div class="ls" id="ls" role="listbox"></div><div class="ft"><span><kbd>&uarr;</kbd> <kbd>&darr;</kbd> move</span><span><kbd>Enter</kbd> choose</span></div></div></div>
+<script>
+const C=[['GB','United Kingdom','GBP, +44','#4F46E5'],['US','United States','USD, +1','#DC2626'],['NG','Nigeria','NGN, +234','#16A34A'],['IN','India','INR, +91','#F59E0B'],['DE','Germany','EUR, +49','#334155'],['FR','France','EUR, +33','#2563EB'],['BR','Brazil','BRL, +55','#059669'],['JP','Japan','JPY, +81','#E11D48'],['KE','Kenya','KES, +254','#0F766E'],['MX','Mexico','MXN, +52','#15803D'],['CA','Canada','CAD, +1','#B91C1C'],['AU','Australia','AUD, +61','#1D4ED8']];
+const tr=document.getElementById('tr'),pp=document.getElementById('pp'),ls=document.getElementById('ls'),inp=document.getElementById('in');let cur=0,hl=0,open=false,list=[];
+function render(){const q=inp.value.trim().toLowerCase();list=C.map((c,i)=>i).filter(i=>C[i][1].toLowerCase().includes(q)||C[i][0].toLowerCase()===q);hl=Math.min(hl,Math.max(0,list.length-1));
+ let h='';if(!q&&list.length)h+='<div class="gh">Suggested</div>';
+ h+=list.length?list.map((i,k)=>{const c=C[i],n=c[1],a=q?n.toLowerCase().indexOf(q):-1,nm=a>=0?n.slice(0,a)+'<mark>'+n.slice(a,a+q.length)+'</mark>'+n.slice(a+q.length):n;return '<div class="o'+(k===hl?' hl':'')+(i===cur?' sel':'')+'" role="option" data-i="'+i+'" style="--i:'+k+'"><span class="fg" style="--c:'+c[3]+'">'+c[0]+'</span><b>'+nm+'</b><span class="cc">'+c[2].split(',')[1].trim()+'</span><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span></div>'}).join(''):'<div class="em">No country matches &ldquo;'+inp.value.replace(/</g,'')+'&rdquo;</div>';
+ ls.innerHTML=h;ls.querySelectorAll('.o').forEach(o=>o.onmousedown=e=>{e.preventDefault();off=true;choose(+o.dataset.i)});const hs=ls.querySelector('.hl');if(hs)hs.scrollIntoView({block:'nearest'})}
+function choose(i){cur=i;const c=C[i];document.getElementById('tf').textContent=c[0];document.getElementById('tf').style.setProperty('--c',c[3]);document.getElementById('tn').textContent=c[1];document.getElementById('tc').textContent=c[2];setOpen(false)}
+function setOpen(o){open=o;pp.classList.toggle('on',o);tr.setAttribute('aria-expanded',o);if(o){inp.value='';render()}}
+tr.onclick=()=>{off=true;setOpen(!open);if(open)inp.focus()};
+inp.addEventListener('input',()=>{off=true;hl=0;render()});inp.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){hl=(hl+1)%Math.max(1,list.length);render();e.preventDefault()}else if(e.key==='ArrowUp'){hl=(hl+list.length-1)%Math.max(1,list.length);render();e.preventDefault()}else if(e.key==='Enter'&&list.length){choose(list[hl]);e.preventDefault()}else if(e.key==='Escape')setOpen(false)});
+document.getElementById('tf').style.setProperty('--c',C[0][3]);setOpen(true);hl=2;render();
+/* Idle demo: the list opens and a query is typed letter by letter, so the matches filter and highlight live; the selection is chosen, the trigger morphs to that flag and details, and the menu reopens for the next search, until a real click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),Q=['ni','ja','br','ken'];(async()=>{await sleep(3200);let k=0;while(!off){setOpen(false);await sleep(800);if(off)return;setOpen(true);await sleep(700);for(const c of Q[k++%4]){if(off)return;inp.value+=c;hl=0;render();await sleep(300)}await sleep(900);if(off)return;choose(list[0]);await sleep(1300)}})()}
+</script></body></html>

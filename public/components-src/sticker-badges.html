@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sticker Badges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#D9C7A7;color:#2A1D0E;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden;background-image:radial-gradient(rgba(60,35,10,.12) 1.200px,transparent 1.200px),radial-gradient(900px 600px at 30% 20%,rgba(255,255,255,.35),transparent 70%);background-size:18px 18px,auto}
+.w{width:100%;max-width:640px;display:grid;gap:18px;justify-items:center;text-align:center}
+.w h1{font:700 40px/1 'Caveat';letter-spacing:-.01em;transform:rotate(-2deg)}.w p{font-size:14px;color:#6B5434;margin-top:-6px}
+.b{position:relative;width:100%;border-radius:22px;padding:34px 26px;background:linear-gradient(160deg,#FFF9EE,#F3E6CB);box-shadow:0 30px 40px -26px rgba(60,35,10,.65),inset 0 0 0 1.500px rgba(60,35,10,.1);min-height:340px}
+.g{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:26px 14px;justify-items:center;align-items:center}
+.st{--r:0deg;position:relative;width:132px;height:132px;display:grid;place-items:center;transform:rotate(var(--r));filter:drop-shadow(2.500px 0 0 #fff) drop-shadow(-2.500px 0 0 #fff) drop-shadow(0 2.500px 0 #fff) drop-shadow(0 -2.500px 0 #fff) drop-shadow(0 9px 8px rgba(60,35,10,.35));cursor:pointer;transition:transform .4s cubic-bezier(.3,1.7,.5,1)}
+.st:hover,.st.up{transform:rotate(calc(var(--r) * -1)) scale(1.1)}
+.st .sh{position:absolute;inset:0;background:var(--bg);clip-path:var(--cp);display:grid;place-items:center;text-align:center;color:var(--fg);padding:14px;overflow:hidden}
+.st .sh::after{content:"";position:absolute;top:-40%;left:-70%;width:40%;height:180%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:rotate(18deg);animation:gl 5s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes gl{0%,70%{left:-70%}100%{left:140%}}
+.st .sh::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.28),transparent 45%,rgba(0,0,0,.12));pointer-events:none}
+.st .tx{position:relative;z-index:1;display:grid;gap:3px;justify-items:center}.st b{font:800 17px/.95 'Bricolage Grotesque';letter-spacing:-.03em;text-transform:uppercase}.st small{font:700 22px/1 'Caveat'}.st svg{width:26px;height:26px}.st svg *{fill:none;stroke:currentColor;stroke-width:2.200;stroke-linecap:round;stroke-linejoin:round}
+.st.drop{animation:dp .7s cubic-bezier(.3,1.5,.5,1)}@keyframes dp{0%{transform:translateY(-70px) rotate(calc(var(--r) + 28deg)) scale(1.3);opacity:0}55%{transform:translateY(0) rotate(var(--r)) scale(.9,1.1);opacity:1}75%{transform:scale(1.08,.92) rotate(var(--r))}100%{transform:rotate(var(--r))}}
+.pl{position:absolute;right:-2px;bottom:-2px;width:34px;height:34px;background:linear-gradient(135deg,transparent 50%,rgba(60,35,10,.28) 50%);border-bottom-right-radius:8px;opacity:0;transition:opacity .25s,transform .25s;transform-origin:100% 100%;pointer-events:none}
+.st:hover .pl{opacity:1;transform:scale(1.2)}
+@media(max-width:560px){.g{grid-template-columns:repeat(2,1fr)}.st{width:116px;height:116px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><h1>Stick it on everything</h1><p>Die-cut stickers with a white border, a glint and a peel.</p><div class="b"><div class="g" id="g"></div></div></div>
+<script>
+function star(n,a,b){let p=[];for(let i=0;i<n*2;i++){const r=i%2?b:a,t=i/(n*2)*Math.PI*2-Math.PI/2;p.push((50+r*Math.cos(t)).toFixed(1)+'% '+(50+r*Math.sin(t)).toFixed(1)+'%')}return 'polygon('+p.join(',')+')'}
+const S=[['Best seller','#FF5A36','#fff',star(16,50,43),-8,'<small>No.1 pick</small>'],['Staff pick','#FFD23F','#2A1D0E','circle(50%)',6,'<svg viewBox="0 0 24 24"><path d="M12 20s-7.500-4.600-7.500-10A4.300 4.300 0 0 1 12 7.300 4.300 4.300 0 0 1 19.500 10c0 5.400-7.500 10-7.500 10Z"/></svg>'],['Hand made','#2F6BFF','#fff','polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0 50%)',-4,'<small>with love</small>'],['Only 3 left','#16A34A','#fff','inset(18% 0 18% 0 round 40px)',9,'<small>hurry up</small>'],['Organic','#F472B6','#4A0F2A','polygon(50% 0,61% 12%,78% 8%,82% 25%,98% 32%,90% 48%,100% 62%,84% 70%,82% 88%,64% 86%,50% 100%,36% 86%,18% 88%,16% 70%,0 62%,10% 48%,2% 32%,18% 25%,22% 8%,39% 12%)',-10,'<svg viewBox="0 0 24 24"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15M5 19c3-5 6-8 10-10"/></svg>'],['Free shipping','#1F1A33','#FFD23F','inset(14% 0 14% 0 round 14px)',5,'<svg viewBox="0 0 24 24"><path d="M3 7h11v9H3ZM14 10h4l3 3v3h-7M7 19a1.800 1.800 0 1 0 0-3.600A1.800 1.800 0 0 0 7 19ZM17 19a1.800 1.800 0 1 0 0-3.600A1.800 1.800 0 0 0 17 19Z"/></svg>']];
+const g=document.getElementById('g');
+S.forEach(([t,bg,fg,cp,r,ex],i)=>{const e=document.createElement('div');e.className='st';e.tabIndex=0;e.setAttribute('role','img');e.setAttribute('aria-label',t+' sticker');e.style.cssText='--bg:'+bg+';--fg:'+fg+';--cp:'+cp+';--r:'+r+'deg;--d:'+(i*.8)+'s';
+ e.innerHTML='<div class="sh"><div class="tx"><b>'+t.replace(' ','<br>')+'</b>'+ex+'</div></div>';g.appendChild(e);e.addEventListener('pointerenter',()=>off=true)});
+const st=[...g.children];
+/* Idle demo: the stickers are slapped on one after another, dropping in with a squash, then they lift in a slow wave, and the glint sweeps each one, until a pointer arrives. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3400);while(!off){for(const e of st){e.classList.remove('drop');void e.offsetWidth;e.classList.add('drop');await sleep(260)}await sleep(900);for(const e of st){if(off)break;st.forEach(x=>x.classList.remove('up'));e.classList.add('up');await sleep(700)}st.forEach(x=>x.classList.remove('up'));await sleep(1200)}})()}
+</script></body></html>

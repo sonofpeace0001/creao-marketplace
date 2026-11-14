@@ -1,0 +1,40 @@
+ROLE
+You are a senior creative developer and avatar designer with 15+ years of experience. Build "Avatar Shape Morph": a portrait whose outline morphs between circle, squircle, hexagon, star, blob and diamond by interpolating 48-point clip paths.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper card with a soft ground shadow and a yellow-on-ink selected chip.
+- Palette: #1D1A14, #F2EFE8, #8A8269, #9A9179, #6B6350, #F5F2EA
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading; portrait in a morphing clip-path with drop shadow; shape name and point count; six shape chips with live outlines.
+
+INTERACTION & STATES
+- Selecting a shape interpolates every point from the current outline to the target over 700ms with ease-in-out-cubic, starting from whatever shape is on screen.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- requestAnimationFrame lerp of 48 polygon points; each outline is generated parametrically (superellipse, hexagon radius function, five-lobe star, summed-sine blob, diamond).
+
+IDLE AUTOPLAY
+- The portrait morphs to a new shape every 2 seconds.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Cross-fading between different shapes; the edge itself must flow.
+- Shapes defined with different point counts.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

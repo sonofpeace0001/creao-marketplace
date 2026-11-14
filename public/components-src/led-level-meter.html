@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LED Level Meter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0B0D;color:#D7DBE0;font-family:'Chakra Petch',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.rk{width:100%;max-width:640px;border-radius:22px;background:linear-gradient(180deg,#24272D,#16181C);padding:22px 26px 24px;box-shadow:0 40px 60px -30px #000,inset 0 0 0 1px #34383F,inset 0 2px 0 rgba(255,255,255,.08);position:relative}
+.rk::before,.rk::after{content:"";position:absolute;top:50%;width:11px;height:11px;margin-top:-5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8A9099,#2A2D33);box-shadow:inset 0 1px 2px #000}.rk::before{left:7px}.rk::after{right:7px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}.hd b{font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:#9AA1AB}.hd span{font:600 12px 'JetBrains Mono';color:#5C636D;letter-spacing:.08em}
+.pn{display:grid;grid-template-columns:30px 1fr 56px;gap:14px;align-items:center;padding:12px 14px;border-radius:12px;background:#0C0D10;box-shadow:inset 0 3px 8px #000,0 0 0 1px #2B2E34;margin-bottom:10px}
+.ch{font:700 12px 'JetBrains Mono';color:#6A717C;letter-spacing:.1em}
+.bar{display:grid;grid-template-columns:repeat(32,1fr);gap:3px}.led{height:20px;border-radius:2px;background:#1B1D22;transition:background .05s,box-shadow .05s;position:relative}
+.led.on{background:var(--c);box-shadow:0 0 8px var(--c),inset 0 0 0 1px rgba(255,255,255,.35)}.led.pk{background:#fff;box-shadow:0 0 10px #fff,0 0 4px var(--c)}
+.led.on.g{--c:#2EF28A}.led.on.y{--c:#FFD23F}.led.on.r{--c:#FF3B4E}
+.db{font:700 15px 'JetBrains Mono';text-align:right;font-variant-numeric:tabular-nums;color:#2EF28A;transition:color .1s}.db.y{color:#FFD23F}.db.r{color:#FF3B4E}
+.sc{display:grid;grid-template-columns:30px 1fr 56px;gap:14px;margin:-4px 0 12px;font:600 10.500px 'JetBrains Mono';color:#5C636D}.sc div{display:flex;justify-content:space-between}
+.ft{display:flex;gap:10px;margin-top:14px}.ft button{flex:1;border:0;border-radius:10px;padding:11px;background:linear-gradient(#2E3138,#222428);color:#C9CED6;font:700 12px 'Chakra Petch';letter-spacing:.14em;text-transform:uppercase;cursor:pointer;box-shadow:0 3px 0 #0C0D10,inset 0 1px 0 rgba(255,255,255,.1);transition:transform .08s,box-shadow .08s}.ft button:active{transform:translateY(3px);box-shadow:0 0 0 #0C0D10}.ft button.on{color:#2EF28A;text-shadow:0 0 10px #2EF28A}.ft button:focus-visible{outline:2px solid #2EF28A;outline-offset:2px}
+.clip{position:absolute;left:158px;top:20px;font:700 11px 'JetBrains Mono';letter-spacing:.14em;padding:3px 9px;border-radius:5px;background:#3A1118;color:#4A1B22;transition:all .08s}.clip.on{background:#FF3B4E;color:#fff;box-shadow:0 0 16px #FF3B4E}
+</style></head><body>
+<div class="rk"><div class="hd"><b>Master bus</b><span id="rt">-6.0 dB LUFS</span></div><span class="clip" id="cl">CLIP</span><div id="ps"></div>
+<div class="sc"><span></span><div><span>-60</span><span>-40</span><span>-20</span><span>-10</span><span>-3</span><span>0</span></div><span></span></div>
+<div class="ft"><button id="m1">Mute L</button><button id="m2">Mute R</button><button id="mt" class="on">Live</button></div></div>
+<script>
+const N=32,ps=document.getElementById('ps'),ch=[];const NM=['L','R'];
+NM.forEach(n=>{const p=document.createElement('div');p.className='pn';p.innerHTML='<span class="ch">'+n+'</span><div class="bar"></div><span class="db">-inf</span>';ps.appendChild(p);const bar=p.querySelector('.bar'),leds=[];for(let i=0;i<N;i++){const l=document.createElement('i');l.className='led '+(i<22?'g':i<28?'y':'r');bar.appendChild(l);leds.push(l)}ch.push({leds,db:p.querySelector('.db'),v:.2,pk:0,pkT:0,mute:false})});
+let t0=0,live=true,off=false,clipT=0;
+function paint(c,v,now){const n=Math.round(v*N);c.leds.forEach((l,i)=>{l.classList.toggle('on',i<n);l.classList.remove('pk')});if(v>=c.pk){c.pk=v;c.pkT=now}else if(now-c.pkT>900)c.pk=Math.max(0,c.pk-.012);const pi=Math.min(N-1,Math.round(c.pk*N)-1);if(pi>=0&&pi>=n)c.leds[pi].classList.add('pk');const dB=v<=0.01?-60:Math.round((v*60-60)*10)/10;c.db.textContent=v<=.01?'-inf':dB.toFixed(1);c.db.className='db'+(v>.9?' r':v>.7?' y':'');if(v>.97)clipT=now}
+function sig(t,k){const beat=Math.pow(Math.max(0,Math.sin(t*6.8+k*.4)),6),sw=.5+.28*Math.sin(t*1.7+k),n=Math.random()*.1;const drop=Math.sin(t*.45)>.8?.55:1;return Math.min(1,(.3+beat*.55*sw+n+Math.max(0,Math.sin(t*.9))*.16)*drop*(1+(Math.sin(t*.22)>.6?.38:0)))}
+const sm=[.3,.3];
+function loop(ms){const t=ms/1000,now=ms;ch.forEach((c,k)=>{if(live&&!c.mute){const target=sig(t,k);sm[k]+=(target-sm[k])*(target>sm[k]?.55:.14);c.v=sm[k]}else{c.v+=(0-c.v)*.18}paint(c,c.v,now)});document.getElementById('cl').classList.toggle('on',now-clipT<260);document.getElementById('rt').textContent=(-24+Math.max(ch[0].v,ch[1].v)*24).toFixed(1)+' dB LUFS';requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+const m=[document.getElementById('m1'),document.getElementById('m2')];m.forEach((b,i)=>b.onclick=()=>{off=true;ch[i].mute=!ch[i].mute;b.classList.toggle('on',ch[i].mute)});
+document.getElementById('mt').onclick=e=>{live=!live;e.target.classList.toggle('on',live);e.target.textContent=live?'Live':'Paused'};
+/* Idle demo: a synthetic music signal drives two channels; 32 LED segments light green to amber to red with a fast attack and slow release, a white peak-hold LED lingers then falls, the dB readouts update, and loud passages flash CLIP, continuously. */
+</script></body></html>

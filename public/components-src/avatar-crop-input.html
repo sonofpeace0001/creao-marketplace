@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Avatar Crop Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF0F4;color:#12141C;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:600px;border-radius:28px;background:#fff;padding:24px;display:grid;gap:18px;box-shadow:0 30px 44px -30px rgba(18,20,28,.5),inset 0 0 0 1px rgba(18,20,28,.07)}
+.hd{display:flex;justify-content:space-between;align-items:center}.hd h1{font-size:22px;font-weight:800;letter-spacing:-.04em}.hd span{font:500 12px 'Geist Mono';color:#838899}
+.bd{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
+.vp{position:relative;width:260px;height:260px;border-radius:20px;overflow:hidden;background:#1C1F2B;cursor:grab;touch-action:none;user-select:none}
+.vp.dr{cursor:grabbing}
+.im{position:absolute;left:0;top:0;width:420px;height:420px;transform-origin:0 0;will-change:transform}.im svg{width:100%;height:100%;display:block;pointer-events:none}
+.ms{position:absolute;left:50%;top:50%;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;box-shadow:0 0 0 400px rgba(10,12,20,.62),inset 0 0 0 2px rgba(255,255,255,.9);pointer-events:none}
+.ms::before,.ms::after{content:"";position:absolute;background:rgba(255,255,255,.28)}.ms::before{left:33.300%;right:33.300%;top:0;bottom:0;border:solid rgba(255,255,255,.28);border-width:0 1px;background:none}.ms::after{top:33.300%;bottom:33.300%;left:0;right:0;border:solid rgba(255,255,255,.28);border-width:1px 0;background:none}
+.sd{display:grid;gap:18px}
+.pv{display:flex;align-items:flex-end;gap:14px}.pw{display:grid;justify-items:center;gap:6px}.pc{border-radius:50%;overflow:hidden;background:#1C1F2B;position:relative;flex:none}.pc svg{position:absolute;left:0;top:0;transform-origin:0 0;display:block}
+.pv small{font:500 11px 'Geist Mono';color:#838899}
+.zm{display:grid;gap:8px}.zm label{display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:#4D5163}.zm label b{font:500 12.500px 'Geist Mono';color:#12141C}
+.zm input{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:linear-gradient(90deg,#12141C var(--p,40%),#DDE0E8 var(--p,40%));outline:0;cursor:pointer}
+.zm input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid #12141C;box-shadow:0 4px 8px rgba(18,20,28,.3)}.zm input::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:4px solid #12141C}.zm input:focus-visible{outline:3px solid #6366F1;outline-offset:5px}
+.bt{display:flex;gap:10px;justify-content:flex-end}.bt button{border:0;border-radius:14px;padding:13px 20px;font:700 14.500px 'Inter Tight';cursor:pointer}.bt .ca{background:#F0F2F6;color:#12141C}.bt .sv{background:#12141C;color:#fff}.bt button:focus-visible{outline:3px solid #6366F1;outline-offset:3px}
+.ht{font-size:13px;color:#838899}
+@media(max-width:540px){.bd{grid-template-columns:1fr;justify-items:center}.sd{width:100%}.vp{width:min(260px,80vw);height:min(260px,80vw)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Crop your photo</h1><span id="ds">1.1x, centred</span></div>
+<div class="bd"><div class="vp" id="vp"><div class="im" id="im"><svg viewBox="0 0 420 420" aria-label="Photo to crop"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB27A"/><stop offset=".6" stop-color="#F472B6"/><stop offset="1" stop-color="#6366F1"/></linearGradient></defs><rect width="420" height="420" fill="url(#sk)"/><circle cx="330" cy="86" r="34" fill="#FFF1C2"/><path d="M0 330c60-50 110-40 170-10s120 20 250-30v130H0Z" fill="#3B2A7A" opacity=".85"/><path d="M0 370c80-30 150-20 220 0s130 10 200-14v64H0Z" fill="#241A52"/>
+<path d="M118 420c4-62 42-96 92-96s88 34 92 96Z" fill="#14B8A6"/><rect x="190" y="250" width="40" height="46" rx="18" fill="#B9784B"/><ellipse cx="210" cy="206" rx="62" ry="72" fill="#C9885A"/><path d="M146 196c-4-52 24-76 64-76s68 24 64 76c-18-24-40-32-64-32s-46 8-64 32Z" fill="#1B1410"/><circle cx="188" cy="212" r="6" fill="#2A1A12"/><circle cx="232" cy="212" r="6" fill="#2A1A12"/><path d="M190 246q20 18 40 0" fill="none" stroke="#2A1A12" stroke-width="5" stroke-linecap="round"/><circle cx="168" cy="236" r="9" fill="#FF8A8A" opacity=".3"/><circle cx="252" cy="236" r="9" fill="#FF8A8A" opacity=".3"/><g fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"><path d="M30 60h60M30 76h40"/></g></svg></div><div class="ms"></div></div>
+<div class="sd"><div class="pv" id="pv"></div><div class="zm"><label for="zm">Zoom <b id="zv">1.4x</b></label><input type="range" id="zm" min="1" max="3" step="0.01" value="1.1"></div><div class="ht">Drag to reposition. Scroll or use the slider to zoom.</div></div></div>
+<div class="bt"><button class="ca">Cancel</button><button class="sv">Save photo</button></div></div>
+<script>
+const vp=document.getElementById('vp'),im=document.getElementById('im'),zm=document.getElementById('zm'),pv=document.getElementById('pv');
+const V=260,R=200,IM=420;let z=1.1,x=(V-IM*1.1)/2,y=(V-IM*1.1)/2+8;
+const src=im.querySelector('svg').innerHTML.replace(/id="sk"/g,'id="skp"').replace(/url\(#sk\)/g,'url(#skp)');
+[72,44,28].forEach(s=>{const w=document.createElement('div');w.className='pw';w.innerHTML='<div class="pc" data-s="'+s+'" style="width:'+s+'px;height:'+s+'px"><svg viewBox="0 0 420 420" width="'+IM+'" height="'+IM+'">'+src+'</svg></div><small>'+s+'px</small>';pv.appendChild(w)});
+function clamp(){const w=IM*z,left=(V-R)/2,right=(V+R)/2;x=Math.min(left,Math.max(right-w,x));y=Math.min(left,Math.max(right-w,y))}
+function apply(){clamp();im.style.transform='translate('+x+'px,'+y+'px) scale('+z+')';zm.value=z;zm.style.setProperty('--p',((z-1)/2*100)+'%');document.getElementById('zv').textContent=z.toFixed(1)+'x';
+ const cx=((V-R)/2-x)/z,cy=((V-R)/2-y)/z,k=R/z;pv.querySelectorAll('.pc').forEach(c=>{c.firstChild.style.transform='scale('+(+c.dataset.s/k)+') translate('+(-cx)+'px,'+(-cy)+'px)'});
+ const ox=Math.round(((V/2)-x)/z-IM/2);document.getElementById('ds').textContent=z.toFixed(1)+'x, '+(Math.abs(ox)<12?'centred':ox>0?'right':'left')}
+let drag=null;vp.addEventListener('pointerdown',e=>{off=true;drag={px:e.clientX,py:e.clientY,x,y};vp.classList.add('dr');vp.setPointerCapture(e.pointerId)});vp.addEventListener('pointermove',e=>{if(!drag)return;x=drag.x+e.clientX-drag.px;y=drag.y+e.clientY-drag.py;apply()});['pointerup','pointercancel'].forEach(ev=>vp.addEventListener(ev,()=>{drag=null;vp.classList.remove('dr')}));
+vp.addEventListener('wheel',e=>{e.preventDefault();off=true;const o=z;z=Math.min(3,Math.max(1,z-e.deltaY*.0015));const k=z/o,cx=V/2,cy=V/2;x=cx-(cx-x)*k;y=cy-(cy-y)*k;apply()},{passive:false});
+zm.addEventListener('input',()=>{off=true;const o=z;z=+zm.value;const k=z/o;x=V/2-(V/2-x)*k;y=V/2-(V/2-y)*k;apply()});
+apply();
+/* Idle demo: the crop frame glides over the photo, panning and zooming on slow sine paths while the three live previews follow, until the first touch. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)(function loop(n){if(!off&&n>3200){const t=(n-3200)/1000;z=1.35+.3*Math.sin(t*.7);const w=IM*z;x=V/2-w*(.5+.1*Math.sin(t*.5));y=V/2-w*(.46+.08*Math.sin(t*.8+1));apply()}requestAnimationFrame(loop)})(0);
+</script></body></html>

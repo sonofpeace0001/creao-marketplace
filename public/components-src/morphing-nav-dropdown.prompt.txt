@@ -1,0 +1,40 @@
+ROLE
+You are a senior marketing site designer and front-end engineer with 15+ years of experience. Build "Morphing Nav Dropdown": a navbar whose single dropdown panel glides and resizes between menus, with its arrow sliding to the active tab and old and new contents passing each other.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Lavender gradient page, a frosted pill navbar and a white panel with gradient icon tiles and cards.
+- Palette: #13163A, #6366F1, #E6E9FB, #F7EEF8, #EC4899, #4B5072
+- Type: Plus Jakarta Sans, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Pill navbar with logo, four tabs and CTA; one floating panel containing four content panes (Products grid, Solutions list, Resources cards, Company list).
+
+INTERACTION & STATES
+- Hover or focus a tab to open its pane; moving between tabs keeps one panel and animates it; Escape and leaving the nav close it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Panel left, width and height transition 500ms cubic-bezier(.3,1.2,.4,1); arrow left transitions the same; panes translate 40px opposite the travel direction and fade 300ms.
+
+IDLE AUTOPLAY
+- The panel is carried along the tabs every 2.1s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A separate panel per tab, which pops instead of morphing.
+- Panels that overflow the nav's width.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

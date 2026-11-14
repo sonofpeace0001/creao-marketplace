@@ -1,0 +1,41 @@
+ROLE
+You are a senior security product designer and front-end engineer with 15+ years of experience. Build "Radar Sweep Hero": a security hero with a radar whose sweeping beam lights up labelled threat blips at the exact moment it passes them.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black-green phosphor with a bright sweep, rose threat blips, mono readouts and a compact stat row.
+- Palette: #22C55E, #DDF2E6, #03160B, #5E7D6C, #7CFFA6, #050A08
+- Type: Space Grotesk, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Nav; status line; headline; copy; trial and report buttons; three stats; radar with rings, crosshair, conic sweep, six blips with labels, centre node.
+
+INTERACTION & STATES
+- None required; the radar is ambient.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Sweep: conic-gradient beam rotating 360 degrees every 7s linear.
+- Each blip animates on the same 7s clock with delay = period x angle / 360 minus the period, so it flashes with a glow as the beam crosses and fades to 12 percent; labels appear and fade with it.
+
+IDLE AUTOPLAY
+- The sweep and blips run continuously and stay in sync because they share one period.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Blips on an independent timer; they must be tied to the beam angle.
+- More than six labels, which turns the radar into noise.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

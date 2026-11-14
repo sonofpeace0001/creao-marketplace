@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Live Cursor Presence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E7E9F0;color:#12141F;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:20px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.app{width:100%;max-width:760px;border-radius:24px;background:#fff;box-shadow:0 36px 50px -32px rgba(18,20,31,.5),inset 0 0 0 1px rgba(18,20,31,.08);overflow:hidden}
+.bar{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid #EEF0F5}
+.bar b{font-size:15px;letter-spacing:-.02em}.bar .pg{font-size:12.500px;color:#8B90A6;margin-left:4px}
+.pr{display:flex;margin-left:auto}.pr i{position:relative;width:30px;height:30px;border-radius:50%;margin-left:-8px;box-shadow:0 0 0 2.500px #fff;display:grid;place-items:center;font:700 11px 'Inter Tight';font-style:normal;color:#fff;background:var(--c)}
+.pr i::after{content:"";position:absolute;right:-1px;bottom:-1px;width:9px;height:9px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 2px #fff}
+.bt{border:0;border-radius:10px;padding:8px 14px;background:#12141F;color:#fff;font:700 12.500px 'Inter Tight';cursor:default}
+.cv{position:relative;height:430px;background:#F6F7FB;background-image:radial-gradient(rgba(18,20,31,.1) 1px,transparent 1px);background-size:20px 20px;overflow:hidden}
+.el{position:absolute;border-radius:16px;background:#fff;box-shadow:0 14px 22px -16px rgba(18,20,31,.4),inset 0 0 0 1px rgba(18,20,31,.07)}
+.el.hd{left:6%;top:9%;width:52%;height:92px;padding:16px 20px}.el.hd h2{font:400 32px/1 'Instrument Serif'}.el.hd p{font-size:13px;color:#8B90A6;margin-top:6px}
+.el.im{left:6%;top:30%;width:52%;height:200px;background:linear-gradient(135deg,#FFB27A,#F472B6 55%,#6366F1);overflow:hidden}.el.im::before{content:"";position:absolute;right:18%;top:16%;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.7)}.el.im::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-30%;height:70%;border-radius:50% 50% 0 0;background:rgba(40,20,90,.55)}
+.el.cd{left:62%;top:9%;width:32%;height:150px;padding:16px}.el.cd b{font-size:15px}.el.cd .ln{height:8px;border-radius:4px;background:#EDEFF6;margin-top:10px}.el.cd .ln:nth-child(3){width:70%}
+.el.bn{left:62%;top:42%;width:32%;height:52px;background:#12141F;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px}
+.el.tg{left:6%;top:78%;width:52%;height:62px;padding:16px 20px;display:flex;gap:10px;align-items:center}.el.tg i{height:28px;padding:0 12px;border-radius:99px;background:#EEF0FF;color:#4B36C7;font:700 12.500px 'Inter Tight';display:grid;place-items:center;font-style:normal}
+.sel{position:absolute;border:2px solid var(--c);border-radius:var(--r,16px);background:color-mix(in srgb,var(--c) 7%,transparent);pointer-events:none;opacity:0;transition:all .45s cubic-bezier(.3,1.1,.4,1)}
+.sel.on{opacity:1}.sel .nt{position:absolute;left:-2px;top:-24px;padding:3px 9px;border-radius:7px 7px 7px 0;background:var(--c);color:#fff;font:700 11px 'Inter Tight';white-space:nowrap}
+.cu{position:absolute;left:0;top:0;pointer-events:none;will-change:transform}
+.cu svg{width:22px;height:22px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.28))}.cu .fl{position:absolute;left:16px;top:18px;padding:4px 10px;border-radius:0 10px 10px 10px;background:var(--c);color:#fff;font:700 11.500px 'Inter Tight';white-space:nowrap;box-shadow:0 8px 12px -6px rgba(0,0,0,.4)}
+.cu .bb{position:absolute;left:18px;top:42px;max-width:190px;padding:7px 12px;border-radius:0 12px 12px 12px;background:#fff;color:#12141F;font:600 12.500px/1.35 'Inter Tight';box-shadow:0 12px 20px -8px rgba(18,20,31,.4),0 0 0 1.500px var(--c);opacity:0;transform:translateY(6px) scale(.9);transform-origin:top left;transition:all .3s cubic-bezier(.3,1.6,.5,1)}.cu .bb.on{opacity:1;transform:none}
+@media(max-width:600px){.cv{height:380px}.el.hd h2{font-size:24px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="app"><div class="bar"><b>Autumn landing page</b><span class="pg">Page 1 of 3</span><div class="pr" id="pr"></div><button class="bt" tabindex="-1">Share</button></div>
+<div class="cv" id="cv"><div class="el hd" data-k="hd"><h2>Autumn, in full colour</h2><p>New range lands Friday</p></div><div class="el im" data-k="im"></div><div class="el cd" data-k="cd"><b>Early access</b><div class="ln"></div><div class="ln"></div></div><div class="el bn" data-k="bn">Shop the range</div><div class="el tg" data-k="tg"><i>Knitwear</i><i>Outerwear</i><i>Accessories</i></div></div></div>
+<script>
+const U=[['Priya','#7C3AED',['hd','im','bn'],['Love this headline','Can we warm up the gradient?']],['Marcus','#0EA5E9',['bn','cd','tg'],['Button needs a focus ring','Contrast checks out']],['Amara','#F59E0B',['tg','hd','cd'],['Copy locked','Ship it Friday']],['Hannah','#EC4899',['im','tg','bn'],['Swapping the hero art','New crop is up']]];
+const cv=document.getElementById('cv'),pr=document.getElementById('pr'),els={};cv.querySelectorAll('.el').forEach(e=>els[e.dataset.k]=e);
+const ARR='<svg viewBox="0 0 24 24"><path d="M4 3l16 7-7 2.500L10 20Z" fill="var(--c)" stroke="#fff" stroke-width="1.800" stroke-linejoin="round"/></svg>';
+const S=U.map(([n,c,seq,msgs],i)=>{pr.insertAdjacentHTML('beforeend','<i style="--c:'+c+'">'+n[0]+'</i>');
+ const cu=document.createElement('div');cu.className='cu';cu.style.setProperty('--c',c);cu.innerHTML=ARR+'<span class="fl">'+n+'</span><span class="bb"></span>';cv.appendChild(cu);
+ const sl=document.createElement('div');sl.className='sel';sl.style.setProperty('--c',c);sl.innerHTML='<span class="nt">'+n+' is editing</span>';cv.appendChild(sl);
+ return{n,c,seq,msgs,cu,sl,bb:cu.querySelector('.bb'),x:0,y:0,tx:0,ty:0,k:i,mi:0,wait:0,phase:0}});
+function target(s,k){const r=els[k],cr=cv.getBoundingClientRect(),b=r.getBoundingClientRect();return[b.left-cr.left+b.width*(.25+.5*Math.random()),b.top-cr.top+b.height*(.3+.4*Math.random())]}
+function place(sl,k){const r=els[k];sl.style.left=(r.offsetLeft-4)+'px';sl.style.top=(r.offsetTop-4)+'px';sl.style.width=(r.offsetWidth+8)+'px';sl.style.height=(r.offsetHeight+8)+'px'}
+S.forEach((s,i)=>{const cr=cv.getBoundingClientRect();s.x=s.tx=cr.width*(.2+i*.2);s.y=s.ty=cr.height*(.3+(i%2)*.3)});
+function pick(s){s.k=(s.k+1)%s.seq.length;const key=s.seq[s.k];[s.tx,s.ty]=target(s,key);s.cur=key;s.sl.classList.remove('on');s.phase=1}
+let last=0;
+function frame(n){const dt=Math.min(.05,(n-last)/1000);last=n;S.forEach(s=>{const dx=s.tx-s.x,dy=s.ty-s.y,d=Math.hypot(dx,dy);const k=1-Math.pow(.0012,dt);s.x+=dx*k;s.y+=dy*k;s.cu.style.transform='translate('+s.x.toFixed(1)+'px,'+s.y.toFixed(1)+'px)';
+ if(s.phase===1&&d<6){s.phase=2;s.wait=n+1900+Math.random()*1000;place(s.sl,s.cur);s.sl.classList.add('on');s.bb.textContent=s.msgs[s.mi++%s.msgs.length];if(Math.random()<.85)setTimeout(()=>s.bb.classList.add('on'),250)}
+ else if(s.phase===2&&n>s.wait){s.bb.classList.remove('on');setTimeout(()=>pick(s),250);s.phase=3}});requestAnimationFrame(frame)}
+/* Pre-place everyone on an element with a selection box and one visible comment so the first frame already looks collaborative. */
+S.forEach((s,i)=>{s.cur=s.seq[0];s.k=0;[s.tx,s.ty]=target(s,s.cur);s.x=s.tx;s.y=s.ty;place(s.sl,s.cur);s.sl.classList.add('on');s.phase=2;s.wait=2500+i*700;s.bb.textContent=s.msgs[0];if(i===0||i===2)s.bb.classList.add('on')});
+document.fonts.ready.then(()=>S.forEach(s=>{[s.tx,s.ty]=target(s,s.cur);s.x=s.tx;s.y=s.ty;place(s.sl,s.cur)}));
+/* Idle demo: four collaborators glide between elements, outline what they are editing with a name tag, and drop short comments, continuously, as in a multiplayer design file. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)requestAnimationFrame(n=>{last=n;frame(n)});
+</script></body></html>

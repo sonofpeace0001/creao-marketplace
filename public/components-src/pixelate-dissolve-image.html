@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pixelate Dissolve Image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E0A1C;color:#F1ECFF;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:22px 22px}
+.w{width:100%;max-width:660px;display:grid;gap:14px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font-size:28px;font-weight:700;letter-spacing:-.04em}.hd span{font:500 12px 'JetBrains Mono';letter-spacing:.1em;text-transform:uppercase;color:#8A7FB6}
+.fr{position:relative;aspect-ratio:16/10;border:4px solid #1D1540;border-radius:6px;box-shadow:0 0 0 2px #0A0716,8px 8px 0 #0A0716,0 40px 60px -30px rgba(0,0,0,.9);overflow:hidden;background:#000}
+canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;display:block}
+.hud{position:absolute;left:12px;top:12px;display:flex;gap:8px;z-index:2}.hud span{font:700 11.500px 'JetBrains Mono';letter-spacing:.06em;padding:5px 9px;background:#1D1540;color:#FFE66B;box-shadow:2px 2px 0 #0A0716}
+.bar{display:flex;align-items:center;gap:12px;font:500 12px 'JetBrains Mono';color:#8A7FB6}.bar .tr{flex:1;height:10px;background:#1D1540;position:relative;box-shadow:2px 2px 0 #0A0716}.bar .tr i{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p,0)*100%);background:repeating-linear-gradient(90deg,#FF4D9D 0 8px,#FF8AC8 8px 16px)}
+.ch{display:flex;gap:8px;flex-wrap:wrap}.ch button{border:0;padding:9px 14px;background:#1D1540;color:#C9BEFF;font:700 12.500px 'JetBrains Mono';cursor:pointer;box-shadow:3px 3px 0 #0A0716;transition:transform .1s,box-shadow .1s}.ch button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #0A0716}.ch button[aria-pressed=true]{background:#FFE66B;color:#1D1540}.ch button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Resolve it pixel by pixel</h1><span>Canvas, no libraries</span></div><div class="fr"><canvas id="cv" width="640" height="400" aria-label="Landscape that pixelates and resolves into the next scene"></canvas><div class="hud"><span id="bs">BLOCK 1</span><span id="sn">LAKE</span></div></div>
+<div class="bar"><span>Detail</span><div class="tr"><i id="pg"></i></div><span id="pc">100%</span></div><div class="ch" id="ch"></div></div>
+<script>
+function svg(c,seed){let s=seed;const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};let h='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c[2]+'"/><stop offset=".55" stop-color="'+c[1]+'"/><stop offset="1" stop-color="'+c[0]+'"/></linearGradient></defs><rect width="640" height="400" fill="url(#g)"/><circle cx="'+(150+r(340))+'" cy="'+(100+r(60))+'" r="'+(44+r(22))+'" fill="#FFF6D6"/>';
+ for(let l=0;l<4;l++){let d='M0 400 L0 '+(220+l*44);const a=30+r(34),f=.008+r(.012),ph=r(6);for(let x=0;x<=640;x+=8)d+=' L'+x+' '+(220+l*44-a*Math.abs(Math.sin(x*f+ph))-a*.4*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L640 400Z';h+='<path d="'+d+'" fill="'+c[3]+'" opacity="'+(.3+l*.2)+'"/>'}
+ return h+'</svg>'}
+const SC=[['LAKE',['#FFB27A','#F472B6','#6366F1','#2B1B5E'],5],['DESERT',['#FDE68A','#FDBA74','#F97316','#7C2D12'],14],['FOREST',['#A7F3D0','#34D399','#059669','#064E3B'],9],['OCEAN',['#BAE6FD','#38BDF8','#0369A1','#0C2A4A'],22]];
+const cv=document.getElementById('cv'),g=cv.getContext('2d'),off2=document.createElement('canvas'),o=off2.getContext('2d');const imgs=[];let ready=0;
+SC.forEach(([n,c,sd],i)=>{const im=new Image();im.onload=()=>{imgs[i]=im;if(++ready===SC.length)init()};im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg(c,sd))});
+const ch=document.getElementById('ch'),sn=document.getElementById('sn'),bs=document.getElementById('bs'),pg=document.getElementById('pg'),pc=document.getElementById('pc');let cur=0,busy=false,idle=null;
+function draw(im,b){const w=Math.max(1,Math.ceil(640/b)),h=Math.max(1,Math.ceil(400/b));off2.width=w;off2.height=h;o.imageSmoothingEnabled=true;o.drawImage(im,0,0,w,h);g.imageSmoothingEnabled=false;g.clearRect(0,0,640,400);g.drawImage(off2,0,0,w,h,0,0,w*b,h*b);bs.textContent='BLOCK '+b;const p=Math.max(0,1-Math.log2(b)/6);pg.style.setProperty('--p',p);pc.textContent=Math.round(p*100)+'%'}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function go(i){if(busy||i===cur)return;busy=true;const steps=[1,2,4,8,16,32,64],from=cur;for(const b of steps){draw(imgs[from],b);await sleep(70)}cur=i;sn.textContent=SC[i][0];[...ch.children].forEach((x,k)=>x.setAttribute('aria-pressed',k===i));await sleep(180);for(const b of [...steps].reverse()){draw(imgs[i],b);await sleep(70)}busy=false}
+function init(){SC.forEach(([n],i)=>{const b=document.createElement('button');b.textContent=n;b.setAttribute('aria-pressed',i===0);b.onclick=()=>{off=true;go(i)};ch.appendChild(b)});draw(imgs[0],1);
+ draw(imgs[0],16);/* first frame is caught mid-dissolve so the effect is visible */setTimeout(()=>draw(imgs[0],1),600);
+/* Idle demo: the picture is coarsened block by block (1, 2, 4 ... 64 pixels), swaps to the next scene at the blockiest point, then sharpens back to full detail; the HUD shows the live block size and a detail meter, looping through four scenes, until you pick one. */
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches)(async()=>{await sleep(3000);let k=1;while(!off){await go(k++%4);await sleep(1800)}})()}
+let off=false;
+</script></body></html>

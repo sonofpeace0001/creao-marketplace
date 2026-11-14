@@ -1,0 +1,41 @@
+ROLE
+You are a senior developer-tools designer and front-end engineer with 15+ years of experience. Build "Code to UI Hero": a developer-tool hero where an editor types a component line by line and each finished line mounts its element in a live preview card.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep slate with emerald and indigo glows, a syntax-coloured editor and a bright product preview.
+- Palette: #34D399, #E6EDF6, #6366F1, #0B1018, #8294AD, #101828
+- Type: Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Nav; version eyebrow; headline; copy; install buttons; stage with editor (line numbers, syntax colours, caret) beside a live preview card with avatar, heading, progress and button.
+
+INTERACTION & STATES
+- Each finished code line reveals its matching preview element with a springy rise.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Typing at 22ms per two characters with a blinking caret on a 1s steps(1) loop; 160ms pause between lines; preview items rise 10px and scale from .96 over 450ms cubic-bezier(.3,1.3,.4,1).
+- After the last line the full state holds for 4.2s, then the editor clears and replays.
+
+IDLE AUTOPLAY
+- The type-and-build sequence loops forever after a short pause.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A screenshot of code; every line is live text with syntax colours.
+- Preview elements that appear before their code is typed.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

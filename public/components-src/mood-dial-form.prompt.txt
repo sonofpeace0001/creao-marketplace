@@ -1,0 +1,41 @@
+ROLE
+You are a senior UX researcher turned interaction designer and front-end engineer with 15+ years of experience. Build "Mood Dial Form": an NPS feedback form where a slider drives a large SVG face whose mouth, brows, eyes and colour all change with the score.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream with a white card; the face and slider thumb move continuously from red through amber to green.
+- Palette: #231A12, #FFF8EC, #6E5C48, #85735F, #A8967F, #FBF3E4
+- Type: Bricolage Grotesque, DM Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Question; large SVG face; giant score numeral and caption; gradient range slider with end labels; adaptive follow-up textarea whose label changes with the score; Send button.
+
+INTERACTION & STATES
+- Dragging or arrow-keying the slider changes the score 0 to 10; the face morphs; the follow-up prompt switches between what went wrong, what could make it a 10, and what do you love most.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Hue = score x 12.5 (0 red to 125 green) applied to face, numeral and thumb, 150ms.
+- Mouth is a quadratic path with control point y = 66 + (score - 5) x 3.2; brows rotate inner-up when score is below 5 and lift slightly above 5; transitions 180ms cubic-bezier(.3,1.3,.4,1).
+
+IDLE AUTOPLAY
+- The dial sweeps 8, 3, 0, 5, 10, 6 one step per 120ms with 1.3s holds so the face keeps changing.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static emoji that swaps; the face must morph continuously.
+- A slider with no keyboard operation or accessible label.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

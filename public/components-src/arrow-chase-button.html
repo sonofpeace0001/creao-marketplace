@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Arrow Chase Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFF6EA;color:#2B1B12;font-family:'Instrument Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:660px;display:grid;gap:36px;justify-items:center;text-align:center}
+.w h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(34px,6vw,56px);letter-spacing:-.02em;line-height:1}.w h1 i{color:#D9480F}
+.w p{color:#8A6F5E;font-size:16px;margin-top:12px}
+.row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+.ac{--bg:#2B1B12;--fg:#FFF6EA;--ac:#FF7A3D;position:relative;display:inline-flex;align-items:center;gap:18px;border:0;border-radius:99px;padding:8px 8px 8px 30px;background:var(--bg);color:var(--fg);font:600 17px 'Instrument Sans';cursor:pointer;overflow:hidden;isolation:isolate;transition:color .4s}
+.ac .bub{position:absolute;right:8px;top:50%;width:48px;height:48px;margin-top:-24px;border-radius:50%;background:var(--ac);z-index:-1;transition:transform .6s cubic-bezier(.7,0,.2,1)}
+.ac .ic{position:relative;width:48px;height:48px;border-radius:50%;overflow:hidden;display:grid;place-items:center;flex:none;color:#fff;transition:background .4s}
+.ac .ic svg{position:absolute;width:20px;height:20px;transition:transform .5s cubic-bezier(.7,0,.2,1)}
+.ac .ic .a1{transform:translateX(0)}.ac .ic .a2{transform:translateX(-44px)}
+.ac:is(:hover,:focus-visible,.on,.auto) .bub{transform:scale(12)}
+.ac:is(:hover,:focus-visible,.on,.auto) .a1{transform:translateX(44px)}
+.ac:is(:hover,:focus-visible,.on,.auto) .a2{transform:translateX(0)}
+.ac:is(:hover,:focus-visible,.on,.auto){color:#2B1B12}
+.ac:focus-visible{outline:3px solid #D9480F;outline-offset:4px}
+.ac.lt{--bg:transparent;--fg:#2B1B12;--ac:#2B1B12;box-shadow:inset 0 0 0 1.500px #2B1B12}
+.ac.lt .ic{background:#2B1B12;color:#FFF6EA}
+.ac.lt:is(:hover,:focus-visible,.on,.auto){color:#FFF6EA}
+.ac.lt:is(:hover,:focus-visible,.on,.auto) .ic{background:transparent}
+.ac.on,.ac.on *{transition:none!important}
+@media(prefers-reduced-motion:reduce){.ac,.ac *{transition:none!important}}
+</style></head><body>
+<div class="w"><div><h1>One arrow leaves, <i>another</i> arrives</h1><p>The arrow chases itself out of the circle while the colour floods the whole button.</p></div>
+<div class="row">
+<button class="ac"><span class="bub"></span>Book a demo<span class="ic"><svg class="a1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg class="a2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+<button class="ac lt on"><span class="bub"></span>View case studies<span class="ic"><svg class="a1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg><svg class="a2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
+</div></div>
+<script>
+/* Idle demo: the two buttons take turns flooding. Stops for good on the first real interaction. */
+const bs=[...document.querySelectorAll('.ac')],reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let live=true,i=1,timer;
+const stop=()=>{live=false;clearInterval(timer);bs.forEach(b=>b.classList.remove('auto','on'))};
+addEventListener('pointermove',stop,{once:true});addEventListener('keydown',stop,{once:true});addEventListener('touchstart',stop,{once:true});
+if(!reduce)setTimeout(()=>{if(!live)return;bs[1].classList.remove('on');bs[1].classList.add('auto');timer=setInterval(()=>{bs.forEach(b=>b.classList.remove('auto'));i=1-i;bs[i].classList.add('auto')},1900)},3600);
+</script></body></html>

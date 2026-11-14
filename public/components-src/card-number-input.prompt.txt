@@ -1,0 +1,41 @@
+ROLE
+You are a senior payments UX designer and front-end engineer with 15+ years of experience. Build "Card Number Input": a payment field that groups digits as you type, detects the card network, validates with the Luhn check and mirrors everything onto a live card preview.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm stone page, a network-coloured preview card (blue, orange or green) and quiet mono digits.
+- Palette: #1C1A17, #2563EB, #F97316, #059669, #DC2626, #EFEDE7
+- Type: Manrope, Martian Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Preview card with network name, chip, four digit groups, cardholder and expiry; form card with number field, network badge and validity tick, expiry and CVC fields.
+
+INTERACTION & STATES
+- Digits are grouped in fours; the first digit selects a fictional network (Arc, Nova, Orbit) which recolours the card and badge; sixteen digits run the Luhn check, showing a drawn tick or a shaking error with a specific message; expiry auto-inserts the slash.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Badge scales .9 to 1 with a 350ms spring; card background crossfades 500ms.
+- Validity tick scales in over 350ms and draws via stroke-dashoffset; invalid state shakes 300ms.
+
+IDLE AUTOPLAY
+- Three valid test cards are typed digit by digit at 85ms with expiry and CVC, held for 2.6s, then cleared.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Real network logos; use fictional networks.
+- Validating on every keystroke before sixteen digits, which flags valid input as wrong.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

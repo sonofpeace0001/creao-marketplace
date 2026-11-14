@@ -1,0 +1,40 @@
+ROLE
+You are a senior social tools designer and front-end engineer with 15+ years of experience. Build "Aspect Crop Frames": a crop tool with a springing frame that moves between social presets (1:1, 4:5, 16:9, 9:16, 3:2), thirds guides, corner handles, size labels and a live re-cropped preview.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Charcoal editor with a white crop frame over a dimmed generated landscape.
+- Palette: #12141C, #7C84A6, #EEF0FA, #1A1D2A, #B4BAD6, #21253A
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; canvas with image, frame (thirds grid, four corner handles, tag, pixel size); preview thumbnail; six preset buttons with ratio glyphs and platform names.
+
+INTERACTION & STATES
+- Choosing a preset resizes and repositions the frame, updates the tag and size, and resizes and re-crops the thumbnail.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Frame left, top, width and height transition 650ms cubic-bezier(.3,1.2,.4,1); thumbnail frame and inner image use the same timing so they stay in sync; the dim outside is a 999px box-shadow.
+
+IDLE AUTOPLAY
+- The frame moves through the presets every 2.3s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A preview that is a separate static image.
+- Crops that leave the image bounds.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

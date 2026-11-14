@@ -1,0 +1,40 @@
+ROLE
+You are a senior promotions designer and creative developer with 15+ years of experience. Build "Scratch Reveal Image": a scratch card: a silver foil layer is rubbed away with the pointer to reveal a destination; at about 40 to 55 percent the rest dissolves with confetti.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight violet stage, brushed silver foil with sparkle noise and a golden coin cursor.
+- Palette: #A79CD6, #8F6410, #3A2A6E, #120C26, #F7F2FF, #FFD9A0
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading; card with prize artwork and text, foil canvas, coin; progress bar with percent; Reset foil button.
+
+INTERACTION & STATES
+- Pointer drag scratches with destination-out circles joined by interpolated lines; coverage is sampled from the canvas alpha; reaching the threshold reveals the prize.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Foil is a metallic gradient plus random sparkle pixels; foil fades 700ms on win; 26 confetti pieces; the demo coin follows a zig-zag path with a gentle tilt.
+
+IDLE AUTOPLAY
+- A golden coin scratches the foil in seven rows, the card reveals itself with confetti, then resets to a new destination and repeats.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Revealing with a click; the scratching is the interaction.
+- Sampling every pixel on every move; sample sparsely.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

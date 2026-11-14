@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Keycap Press Buttons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E7E3DC;color:#2A2723;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px 14px;-webkit-font-smoothing:antialiased;user-select:none}
+.w{width:100%;max-width:640px;display:grid;gap:34px;justify-items:center;text-align:center}
+.w h1{font-size:clamp(26px,4.6vw,40px);font-weight:800;letter-spacing:-.04em}.w p{color:#7A746A;font-size:16px;margin-top:8px}
+.board{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;padding:26px 28px 34px;border-radius:26px;background:linear-gradient(180deg,#CFC9BE,#BDB6A9);box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -6px 0 rgba(0,0,0,.1),0 26px 40px -22px rgba(42,39,35,.55)}
+.k{--h:#F7F4EE;--s:#D6CFC2;--d:#A79F90;--ink:#2A2723;position:relative;border:0;background:none;padding:0 0 10px;cursor:pointer;font:inherit;display:block}
+.k .cap{display:grid;place-items:center;gap:2px;min-width:96px;height:88px;padding:0 20px;border-radius:14px;background:linear-gradient(180deg,var(--h),var(--s));color:var(--ink);box-shadow:0 10px 0 var(--d),0 16px 14px -4px rgba(0,0,0,.28),inset 0 2px 0 rgba(255,255,255,.7);transition:transform .08s,box-shadow .08s;font-weight:800;font-size:19px;letter-spacing:-.01em;position:relative;top:0}
+.k .cap small{font:700 11px 'JetBrains Mono';letter-spacing:.06em;opacity:.55}
+.k.dn .cap,.k:active .cap{transform:translateY(9px);box-shadow:0 1px 0 var(--d),0 3px 6px -2px rgba(0,0,0,.3),inset 0 2px 0 rgba(255,255,255,.55)}
+.k:focus-visible .cap{outline:3px solid #2A2723;outline-offset:4px}
+.k.or{--h:#FF9A6B;--s:#F2602E;--d:#B53E14;--ink:#fff}
+.k.bl{--h:#8FB4FF;--s:#4A7BF0;--d:#2A4FB0;--ink:#fff}
+.k.gr{--h:#8FE3B0;--s:#2FB36B;--d:#1C7A48;--ink:#fff}
+.k.wide .cap{min-width:190px}
+.log{font:700 12px 'JetBrains Mono';letter-spacing:.08em;color:#7A746A;text-transform:uppercase;min-height:16px}
+@media(prefers-reduced-motion:reduce){.k .cap{transition:none}}
+</style></head><body>
+<div class="w"><div><h1>Chunky keys you can actually press</h1><p>Real depth, real travel. Click a key or tap the matching key on your keyboard.</p></div>
+<div class="board" role="group" aria-label="Shortcut keys">
+<button class="k or dn" data-k="r"><span class="cap">Record<small>R</small></span></button>
+<button class="k bl" data-k="p"><span class="cap">Publish<small>P</small></span></button>
+<button class="k gr" data-k="s"><span class="cap">Save<small>S</small></span></button>
+<button class="k wide" data-k=" "><span class="cap">Preview<small>SPACE</small></span></button>
+</div>
+<div class="log" id="log" aria-live="polite">Record armed</div></div>
+<script>
+const keys=[...document.querySelectorAll('.k')],log=document.getElementById('log');
+const say=k=>log.textContent=k.querySelector('.cap').firstChild.textContent+' pressed';
+keys.forEach(k=>{k.addEventListener('pointerdown',()=>{k.classList.add('dn');say(k)});['pointerup','pointerleave','pointercancel'].forEach(ev=>k.addEventListener(ev,()=>k.classList.remove('dn')))});
+addEventListener('keydown',e=>{if(e.repeat)return;const k=keys.find(x=>x.dataset.k===e.key.toLowerCase());if(k&&document.activeElement.tagName!=='BUTTON'){e.preventDefault();k.classList.add('dn');say(k)}});
+addEventListener('keyup',e=>{const k=keys.find(x=>x.dataset.k===e.key.toLowerCase());if(k)k.classList.remove('dn')});
+/* Idle demo: an invisible typist taps the keys in turn until a real press happens. */
+{let i=0,timer,off=false;const stop=()=>{off=true;clearInterval(timer)};addEventListener('pointerdown',stop,{once:true});addEventListener('keydown',stop,{once:true});
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setTimeout(()=>{if(off)return;timer=setInterval(()=>{keys.forEach(k=>k.classList.remove('dn'));i=(i+1)%keys.length;const k=keys[i];k.classList.add('dn');say(k);setTimeout(()=>k.classList.remove('dn'),260)},1300)},3800)}
+</script></body></html>

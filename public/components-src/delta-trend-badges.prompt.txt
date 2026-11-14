@@ -1,0 +1,40 @@
+ROLE
+You are a senior analytics designer and front-end engineer with 15+ years of experience. Build "Delta Trend Badges": six metric cards whose delta badges, arrows, colours, sparklines and headline numbers all update live as new data points stream in.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Clean off-white dashboard tiles with green and red semantic deltas, Geist and Geist Mono, and tabular numerals.
+- Palette: #16A34A, #F4F5F7, #0F1115, #7C828F, #E6F7EC, #DC2626
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with a streaming indicator; six cards, each with label, big number, delta pill with arrow, area sparkline with an end point, and footer.
+
+INTERACTION & STATES
+- Every 1.4s each series takes a new point; the percentage recomputes, the arrow rotates to the sign, colour reflects good or bad for that metric (lower is better for churn and wait time), and the number eases to its new value.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Number eases 10% of the gap per frame; arrow rotates 500ms spring; colours transition 400ms; seeded random walk with a per-metric drift.
+
+IDLE AUTOPLAY
+- The dashboard streams continuously.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Treating every drop as red; semantic colour depends on the metric.
+- Percentages computed from arbitrary scales; they are damped to believable values.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

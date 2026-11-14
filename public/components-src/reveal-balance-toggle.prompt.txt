@@ -1,0 +1,40 @@
+ROLE
+You are a senior fintech privacy designer and front-end engineer with 15+ years of experience. Build "Reveal Balance Toggle": a banking card with an eye button that blinks shut with a drawn slash while the balance and transactions blur away, and opens again to reveal them.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep indigo card with soft discs, mint positives and large tabular figures.
+- Palette: #9AA2D4, #C7CCF5, #7DE3A8, #EEF1F6, #0F1424, #10162E
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Card header with account label and eye button; large balance with dots overlay; monthly delta pill; three transactions; status hint.
+
+INTERACTION & STATES
+- Toggling blurs the balance by 14px and the transaction names and amounts by 7px, shows masking dots and flips aria-pressed and the label.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Blur 500ms cubic-bezier(.4,0,.2,1); eyelid scaleY to .15 over 450ms spring; slash draws via pathLength 400ms; pupil scales to 0.
+
+IDLE AUTOPLAY
+- The balance hides and reveals every 2.8s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Hiding by changing text only; the blur and dots make it feel physical.
+- Leaving amounts selectable while hidden.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

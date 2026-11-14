@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Aspect Crop Frames</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#12141C;color:#EEF0FA;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:720px;display:grid;gap:16px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font-size:26px;font-weight:800;letter-spacing:-.045em}.hd span{font:500 12px 'Geist Mono';letter-spacing:.1em;text-transform:uppercase;color:#7C84A6}
+.ed{display:grid;grid-template-columns:1fr 150px;gap:16px}
+.cv{position:relative;aspect-ratio:3/2;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 36px 50px -28px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.1)}
+.cv svg.sc{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fm{position:absolute;left:var(--l);top:var(--t);width:var(--w);height:var(--h);box-shadow:0 0 0 999px rgba(8,10,18,.68);border:2px solid #fff;border-radius:6px;transition:left .65s cubic-bezier(.3,1.2,.4,1),top .65s cubic-bezier(.3,1.2,.4,1),width .65s cubic-bezier(.3,1.2,.4,1),height .65s cubic-bezier(.3,1.2,.4,1)}
+.fm::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px) 0 33.300%/100% 33.400% repeat-y,linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px) 33.300% 0/33.400% 100% repeat-x;opacity:.7}
+.fm i{position:absolute;width:16px;height:16px;border:solid #fff;border-width:0}.fm i:nth-child(1){left:-3px;top:-3px;border-width:4px 0 0 4px}.fm i:nth-child(2){right:-3px;top:-3px;border-width:4px 4px 0 0}.fm i:nth-child(3){left:-3px;bottom:-3px;border-width:0 0 4px 4px}.fm i:nth-child(4){right:-3px;bottom:-3px;border-width:0 4px 4px 0}
+.fm .tg{position:absolute;left:8px;top:8px;padding:4px 9px;border-radius:7px;background:#fff;color:#12141C;font:700 11.500px 'Geist Mono';letter-spacing:.04em}
+.fm .sz{position:absolute;right:8px;bottom:8px;padding:3px 8px;border-radius:7px;background:rgba(18,20,28,.7);font:600 11px 'Geist Mono';color:#fff}
+.pv{display:grid;gap:10px;align-content:start}.pv small{font:600 10.500px 'Geist Mono';letter-spacing:.14em;color:#7C84A6;text-transform:uppercase}
+.th{position:relative;border-radius:12px;overflow:hidden;background:#000;margin:0 auto;box-shadow:0 0 0 1.500px rgba(255,255,255,.2);transition:width .65s cubic-bezier(.3,1.2,.4,1),height .65s cubic-bezier(.3,1.2,.4,1)}
+.th svg{position:absolute;max-width:none;transition:all .65s cubic-bezier(.3,1.2,.4,1)}
+.pl{display:flex;gap:8px;flex-wrap:wrap}.pl button{display:flex;align-items:center;gap:9px;border:0;border-radius:14px;padding:9px 14px 9px 10px;background:#1A1D2A;color:#B4BAD6;font:700 13px 'Inter Tight';cursor:pointer;box-shadow:inset 0 0 0 1.500px transparent;transition:all .25s}
+.pl button:hover{background:#21253A}.pl button[aria-pressed=true]{background:#fff;color:#12141C}.pl button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.pl button i{display:block;border:2px solid currentColor;border-radius:3px;flex:none}.pl button small{font:500 11px 'Geist Mono';opacity:.6}
+@media(max-width:600px){.ed{grid-template-columns:1fr}.pv{grid-template-columns:auto 1fr;align-items:center}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Crop for every feed</h1><span>6000 x 4000 source</span></div>
+<div class="ed"><div class="cv" id="cv"><svg class="sc" viewBox="0 0 300 200" preserveAspectRatio="none" id="sc"></svg><div class="fm" id="fm"><i></i><i></i><i></i><i></i><span class="tg" id="tg">1:1</span><span class="sz" id="sz"></span></div></div>
+<div class="pv"><small>Preview</small><div class="th" id="th"><svg id="ts" viewBox="0 0 300 200"></svg></div></div></div>
+<div class="pl" id="pl" role="group" aria-label="Aspect ratio"></div></div>
+<script>
+function scene(){let h='<defs><linearGradient id="a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6366F1"/><stop offset=".55" stop-color="#F472B6"/><stop offset="1" stop-color="#FFB27A"/></linearGradient></defs><rect width="300" height="200" fill="url(#a)"/><circle cx="214" cy="56" r="22" fill="#FFF6D6"/>';
+ const m=(y,c,o,ph,a,f)=>{let d='M0 200 L0 '+y;for(let x=0;x<=300;x+=6)d+=' L'+x+' '+(y-a*Math.abs(Math.sin(x*f+ph))-a*.3*Math.sin(x*f*2.7)).toFixed(1);return '<path d="'+d+' L300 200Z" fill="'+c+'" opacity="'+o+'"/>'};
+ h+=m(130,'#2B1B5E',.55,1,28,.014)+m(150,'#2B1B5E',.75,2.200,24,.02)+m(172,'#1A1040',.95,3.700,18,.028);
+ h+='<g transform="translate(78 108)"><rect x="-3" y="12" width="6" height="40" fill="#14102A"/><path d="M-16 20 0 -14 16 20Z" fill="#14102A"/><path d="M-12 34 0 6 12 34Z" fill="#1A1440"/></g><circle cx="150" cy="96" r="9" fill="#FFF" opacity=".9"/><path d="M146 106c0 12 8 22 4 40" stroke="#FFF" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"/>';return h}
+const S=scene();document.getElementById('sc').innerHTML=S;document.getElementById('ts').innerHTML=S.replace(/id="a"/g,'id="b"').replace(/url\(#a\)/g,'url(#b)');
+const PR=[['1:1','Square post',1,1,'1080 x 1080'],['4:5','Portrait feed',4,5,'1080 x 1350'],['16:9','Video cover',16,9,'1920 x 1080'],['9:16','Story or reel',9,16,'1080 x 1920'],['3:2','Original',3,2,'6000 x 4000']];
+const pl=document.getElementById('pl'),fm=document.getElementById('fm'),cv=document.getElementById('cv'),th=document.getElementById('th'),ts=document.getElementById('ts');let cur=0;
+PR.forEach(([n,d,a,b],i)=>{const bt=document.createElement('button');bt.setAttribute('aria-pressed','false');const w=16,h=Math.round(16*b/a);bt.innerHTML='<i style="width:'+Math.min(22,w*(a>=b?1:a/b)*1.2)+'px;height:'+Math.min(22,16*(b>a?1:b/a)*1.2)+'px"></i>'+n+'<small>'+d+'</small>';bt.onclick=()=>{off=true;pick(i)};pl.appendChild(bt)});
+function pick(i){cur=i;const[n,d,a,b,px]=PR[i],W=cv.clientWidth,H=cv.clientHeight,r=a/b;let w=Math.min(W*.86,H*.86*r),h=w/r;if(h>H*.86){h=H*.86;w=h*r}const l=(W-w)/2+(i===2?0:(i===3?W*.04:0)),t=(H-h)/2;
+ fm.style.setProperty('--l',l+'px');fm.style.setProperty('--t',t+'px');fm.style.setProperty('--w',w+'px');fm.style.setProperty('--h',h+'px');document.getElementById('tg').textContent=n+'  '+d;document.getElementById('sz').textContent=px;[...pl.children].forEach((x,k)=>x.setAttribute('aria-pressed',k===i));
+ const tw=r>=1?130:Math.round(130*r*1.15),thh=Math.round(tw/r);th.style.width=tw+'px';th.style.height=thh+'px';ts.style.width=(W/w*tw)+'px';ts.style.height=(H/h*thh)+'px';ts.style.left=(-l/w*tw)+'px';ts.style.top=(-t/h*thh)+'px'}
+pick(0);document.fonts.ready.then(()=>pick(cur));addEventListener('resize',()=>pick(cur));
+/* Idle demo: the crop frame glides through the platform presets, one after another (square, portrait, video, story, original): it springs to the new ratio and position over 650ms while the live thumbnail resizes and re-crops to match, until you pick one. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2800);let k=1;while(!off){pick(k++%5);await sleep(2300)}})()}
+</script></body></html>

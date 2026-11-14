@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Radar Sweep Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050A08;color:#DDF2E6;font-family:'Space Grotesk',sans-serif;min-height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased}
+.hero{min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(800px 600px at 76% 50%,rgba(34,197,94,.15),transparent 70%)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px clamp(18px,4vw,48px)}
+.lg{font-weight:700;font-size:19px;letter-spacing:-.03em;display:flex;align-items:center;gap:9px}.lg i{width:22px;height:22px;border-radius:50%;border:2.500px solid #22C55E;display:block;position:relative}.lg i::after{content:"";position:absolute;inset:4px;border-radius:50%;background:#22C55E}
+nav ul{display:flex;gap:26px;list-style:none;font:500 13px 'IBM Plex Mono';color:#6C8D7A}nav a{color:inherit;text-decoration:none}
+.nb{border:0;border-radius:8px;padding:10px 16px;background:#22C55E;color:#03160B;font:700 13px 'Space Grotesk';cursor:pointer}.nb:focus-visible,.b1:focus-visible,.b2:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.body{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;padding:0 clamp(18px,5vw,70px) 36px}
+.st{display:inline-flex;align-items:center;gap:9px;font:500 12px 'IBM Plex Mono';letter-spacing:.14em;text-transform:uppercase;color:#22C55E}.st i{width:8px;height:8px;border-radius:50%;background:#22C55E;animation:pu 1.600s ease-out infinite}
+@keyframes pu{70%{box-shadow:0 0 0 9px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+h1{font-size:clamp(34px,5.2vw,68px);line-height:1;font-weight:700;letter-spacing:-.055em;margin:16px 0 18px}h1 span{color:#22C55E}
+.sb{font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:#8DAD9B;max-width:470px}
+.ct{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}.b1{border:0;border-radius:10px;padding:15px 24px;background:#22C55E;color:#03160B;font:700 15px 'Space Grotesk';cursor:pointer}.b2{border:0;border-radius:10px;padding:15px 24px;background:none;color:#DDF2E6;font:600 15px 'Space Grotesk';cursor:pointer;box-shadow:inset 0 0 0 1.500px rgba(221,242,230,.3)}
+.kp{display:grid;grid-template-columns:repeat(3,auto);gap:30px;justify-content:start;margin-top:34px;font:500 12px 'IBM Plex Mono';color:#5E7D6C;letter-spacing:.06em}.kp b{display:block;font:700 28px 'Space Grotesk';color:#DDF2E6;letter-spacing:-.04em}
+.rd{--T:7s;position:relative;width:min(560px,92%);aspect-ratio:1;margin-inline:auto;border-radius:50%;background:radial-gradient(circle,rgba(34,197,94,.1),rgba(34,197,94,.02) 70%);box-shadow:inset 0 0 0 1.500px rgba(34,197,94,.55),0 0 80px rgba(34,197,94,.15)}
+.rd .rg{position:absolute;left:50%;top:50%;border-radius:50%;border:1px solid rgba(34,197,94,.28);transform:translate(-50%,-50%)}
+.rd .x{position:absolute;background:rgba(34,197,94,.22)}.rd .x1{left:50%;top:0;bottom:0;width:1px}.rd .x2{top:50%;left:0;right:0;height:1px}
+.sw{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 270deg,rgba(34,197,94,.05) 300deg,rgba(34,197,94,.55) 358deg,#7CFFA6 360deg);animation:sp var(--T) linear infinite;-webkit-mask:radial-gradient(circle,#000 0 70%,#000 100%)}
+@keyframes sp{to{transform:rotate(360deg)}}
+.bp{position:absolute;left:var(--x);top:var(--y);width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--c,#22C55E);opacity:.15;animation:bp var(--T) linear infinite;animation-delay:calc(var(--T)*var(--a)/360 - var(--T))}
+.bp::after{content:attr(data-l);position:absolute;left:18px;top:-4px;white-space:nowrap;font:500 10px 'IBM Plex Mono';letter-spacing:.06em;color:var(--c,#22C55E);opacity:0;animation:lb var(--T) linear infinite;animation-delay:inherit}
+@keyframes bp{0%{opacity:1;transform:scale(1.6);box-shadow:0 0 0 0 var(--c,#22C55E)}6%{opacity:1;transform:scale(1.3);box-shadow:0 0 20px 8px var(--c,#22C55E)}40%{opacity:.5;transform:scale(1);box-shadow:none}100%{opacity:.12;transform:scale(1)}}
+@keyframes lb{0%,30%{opacity:1}60%,100%{opacity:0}}
+.bp.r{--c:#FB7185}
+.ct2{position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#7CFFA6;box-shadow:0 0 18px 6px rgba(124,255,166,.7)}
+.tag{position:absolute;font:500 10px 'IBM Plex Mono';letter-spacing:.1em;color:#5E7D6C}
+@media(max-width:860px){.body{grid-template-columns:1fr}nav ul{display:none}.rd{width:min(380px,92%)}}
+@media(prefers-reduced-motion:reduce){.sw,.bp,.bp::after{animation:none}.bp{opacity:.9}.bp::after{opacity:1}}
+</style></head><body>
+<section class="hero"><nav><div class="lg"><i></i>Sentinel</div><ul><li><a href="#">Detect</a></li><li><a href="#">Respond</a></li><li><a href="#">Trust</a></li></ul><button class="nb">Book a demo</button></nav>
+<div class="body"><div><span class="st"><i></i>All systems monitored</span><h1>See every threat <span>before it lands</span></h1><p class="sb">Sentinel watches your cloud, endpoints and identities in one sweep, scores what it finds and quarantines the real problems before anyone is paged.</p>
+<div class="ct"><button class="b1">Start 14 day trial</button><button class="b2">Read the threat report</button></div>
+<div class="kp"><div><b>0.8s</b>Median detection</div><div><b>94%</b>Noise removed</div><div><b>SOC 2</b>Type II</div></div></div>
+<div class="rd" aria-hidden="true"><div class="rg" style="width:33%;height:33%"></div><div class="rg" style="width:66%;height:66%"></div><div class="rg" style="width:99%;height:99%"></div><div class="x x1"></div><div class="x x2"></div><div class="sw"></div>
+<div class="bp" style="--x:68%;--y:30%;--a:48" data-l="us-east / 10.4.0.12"></div><div class="bp r" style="--x:30%;--y:24%;--a:326" data-l="auth: brute force"></div><div class="bp" style="--x:78%;--y:62%;--a:118" data-l="eu-west / edge-9"></div><div class="bp r" style="--x:60%;--y:80%;--a:164" data-l="exfil: 2.1 GB"></div><div class="bp" style="--x:24%;--y:68%;--a:222" data-l="ap-south / db-3"></div><div class="bp" style="--x:42%;--y:40%;--a:300" data-l="ci-runner-18"></div><div class="ct2"></div></div></div></section>
+</body></html>

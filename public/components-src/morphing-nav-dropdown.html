@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Morphing Nav Dropdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#E6E9FB,#F7EEF8);color:#13163A;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:start center;padding:6vh 14px 24px;-webkit-font-smoothing:antialiased}
+.w{position:relative;width:100%;max-width:760px}
+nav{position:relative;display:flex;align-items:center;gap:6px;padding:10px 14px;border-radius:99px;background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-shadow:0 14px 30px -14px rgba(19,22,58,.35),inset 0 0 0 1px rgba(19,22,58,.07)}
+.lg{font-weight:800;font-size:19px;letter-spacing:-.05em;display:flex;align-items:center;gap:9px;margin-right:auto;padding-left:6px}.lg i{width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,#6366F1,#EC4899);display:block}
+.nv{position:relative;border:0;background:none;padding:10px 16px;border-radius:99px;font:600 14.500px 'Plus Jakarta Sans';color:#4B5072;cursor:pointer;transition:color .2s,background .2s}
+.nv:hover,.nv[aria-expanded=true]{color:#13163A;background:rgba(99,102,241,.1)}.nv:focus-visible{outline:2px solid #6366F1;outline-offset:2px}
+.cta{border:0;border-radius:99px;padding:11px 20px;background:#13163A;color:#fff;font:700 14px 'Plus Jakarta Sans';cursor:pointer;margin-left:6px}
+.pn{position:absolute;top:calc(100% + 12px);left:var(--l,0px);width:var(--w,300px);height:var(--h,200px);border-radius:26px;background:#fff;box-shadow:0 36px 60px -20px rgba(19,22,58,.5),inset 0 0 0 1px rgba(19,22,58,.08);opacity:0;transform:translateY(-10px) scale(.97);transform-origin:top;pointer-events:none;transition:left .5s cubic-bezier(.3,1.2,.4,1),width .5s cubic-bezier(.3,1.2,.4,1),height .5s cubic-bezier(.3,1.2,.4,1),opacity .25s,transform .4s cubic-bezier(.3,1.5,.5,1);z-index:5}
+.pn.on{opacity:1;transform:none;pointer-events:auto}
+.pn::before{content:"";position:absolute;top:-7px;left:var(--ar,40px);width:14px;height:14px;background:#fff;transform:rotate(45deg);border-radius:3px 0 0 0;box-shadow:-2px -2px 0 rgba(19,22,58,.06);transition:left .5s cubic-bezier(.3,1.2,.4,1)}
+.in{position:absolute;inset:0;overflow:hidden;border-radius:26px}
+.pa{position:absolute;left:0;top:0;padding:18px;opacity:0;transform:translateX(var(--dx,0px));transition:opacity .3s,transform .45s cubic-bezier(.3,1.2,.4,1);pointer-events:none}.pa.on{opacity:1;transform:none;pointer-events:auto}
+.gr{display:grid;gap:4px}.gr.c2{grid-template-columns:1fr 1fr}
+.lk{display:flex;gap:13px;align-items:flex-start;padding:11px 12px;border-radius:16px;cursor:pointer;transition:background .15s}.lk:hover{background:#F3F4FD}
+.lk .ic{width:38px;height:38px;border-radius:12px;background:var(--c);display:grid;place-items:center;flex:none}.lk .ic svg{width:19px;height:19px}.lk .ic svg *{fill:none;stroke:#fff;stroke-width:2.100;stroke-linecap:round;stroke-linejoin:round}
+.lk b{display:block;font-size:14.500px;font-weight:700;white-space:nowrap}.lk span{font-size:12.500px;color:#7A7FA2;line-height:1.35;display:block;width:150px}
+.ft{display:flex;align-items:center;gap:10px;margin-top:8px;padding:12px 14px;border-radius:14px;background:linear-gradient(120deg,#EEF0FF,#FBEFFA);font-size:13.500px;font-weight:600}.ft i{font-style:normal;margin-left:auto;font:600 12px 'Geist Mono';color:#6366F1}
+.big{display:grid;grid-template-columns:1fr 1fr;gap:12px}.big .cd{height:112px;border-radius:18px;padding:14px;background:var(--c);color:#fff;display:flex;flex-direction:column;justify-content:flex-end}.big .cd b{font-size:16px}.big .cd span{font-size:12.500px;opacity:.85}
+.bg{margin-top:36px;display:grid;gap:12px}.bg div{height:14px;border-radius:7px;background:rgba(19,22,58,.08)}.bg div:nth-child(1){width:46%;height:34px}.bg div:nth-child(2){width:70%}.bg div:nth-child(3){width:58%}
+@media(max-width:620px){.nv{padding:9px 10px;font-size:13px}.cta{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w" id="w"><nav id="nv"><div class="lg"><i></i>Meridian</div><button class="nv">Products</button><button class="nv">Solutions</button><button class="nv">Resources</button><button class="nv">Company</button><button class="cta">Start free</button></nav>
+<div class="pn" id="pn" role="region"><div class="in" id="in"></div></div><div class="bg"><div></div><div></div><div></div></div></div>
+<script>
+const IC={a:'<path d="M12 3 4 7v6c0 4 3.200 7 8 8 4.800-1 8-4 8-8V7Z"/>',b:'<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>',c:'<path d="M13 2 4 14h6l-1 8 9-12h-6Z"/>',d:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/>',e:'<path d="M4 5h16v11H9l-5 4Z"/>',f:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',g:'<path d="M7 3h8l4 4v14H7ZM15 3v4h4"/>',h:'<path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3 20c0-3 2.500-5 5-5s5 2 5 5M16 8h5M16 12h5"/>'};
+const L=(i,c,t,d)=>'<div class="lk"><span class="ic" style="--c:'+c+'"><svg viewBox="0 0 24 24">'+IC[i]+'</svg></span><div><b>'+t+'</b><span>'+d+'</span></div></div>';
+const P=[{w:430,h:232,html:'<div class="gr c2">'+L('d','#6366F1','Payments','Accept cards and wallets anywhere')+L('b','#0EA5E9','Analytics','Dashboards for every team')+L('a','#10B981','Fraud shield','Block bad actors in real time')+L('c','#F59E0B','Automations','Workflows without code')+'</div>'},
+{w:300,h:216,html:'<div class="gr">'+L('d','#EC4899','Marketplaces','Split payments between sellers')+L('e','#8B5CF6','SaaS billing','Subscriptions and invoices')+L('f','#14B8A6','Global teams','Local currencies in 40 countries')+'</div>'},
+{w:450,h:282,html:'<div class="big"><div class="cd" style="--c:linear-gradient(135deg,#6366F1,#8B5CF6)"><b>Guides</b><span>Step-by-step playbooks</span></div><div class="cd" style="--c:linear-gradient(135deg,#EC4899,#F59E0B)"><b>Customer stories</b><span>How teams grew with us</span></div></div><div class="ft">Read the 2026 state of payments report<i>New</i></div><div class="gr" style="margin-top:6px">'+L('g','#0EA5E9','API reference','Every endpoint, with examples')+'</div>'},
+{w:310,h:204,html:'<div class="gr">'+L('h','#F97316','About us','Our story and values')+L('e','#10B981','Careers','Join a team of 140 people')+L('f','#6366F1','Newsroom','Press, awards and updates')+'</div>'}];
+const nv=[...document.querySelectorAll('#nv .nv')],pn=document.getElementById('pn'),inn=document.getElementById('in'),w=document.getElementById('w');let cur=-1;
+P.forEach(p=>{const e=document.createElement('div');e.className='pa';e.style.width=p.w+'px';e.innerHTML=p.html;inn.appendChild(e);p.el=e;p.h=e.offsetHeight||p.h;p.h+=0});
+function show(i){const prev=cur;cur=i;nv.forEach((b,k)=>{b.setAttribute('aria-expanded',k===i)});
+ if(i<0){pn.classList.remove('on');P.forEach(p=>p.el.classList.remove('on'));return}
+ const p=P[i],wr=w.getBoundingClientRect(),br=nv[i].getBoundingClientRect(),cx=br.left-wr.left+br.width/2;let l=cx-p.w/2;l=Math.max(0,Math.min(wr.width-p.w,l));
+ P.forEach((q,k)=>{q.el.style.setProperty('--dx',(k===i?0:(k<i?-40:40))+'px');q.el.classList.toggle('on',k===i)});
+ if(prev<0){pn.style.transition='none';P[i].el.style.setProperty('--dx','0px')}
+ pn.style.setProperty('--l',l+'px');pn.style.setProperty('--w',p.w+'px');pn.style.setProperty('--h',(p.el.offsetHeight||p.h)+'px');pn.style.setProperty('--ar',(cx-l-7)+'px');
+ if(prev<0){void pn.offsetWidth;pn.style.transition=''}pn.classList.add('on')}
+nv.forEach((b,i)=>{b.addEventListener('pointerenter',()=>{off=true;show(i)});b.addEventListener('focus',()=>{off=true;show(i)});b.onclick=()=>{off=true;show(cur===i?-1:i)}});
+w.addEventListener('pointerleave',()=>{if(off)show(-1)});addEventListener('keydown',e=>{if(e.key==='Escape')show(-1)});
+document.fonts.ready.then(()=>{P.forEach(p=>p.h=p.el.offsetHeight);show(2)});setTimeout(()=>show(2),50);
+/* Idle demo: the panel is carried along the navbar from item to item; one container glides and resizes to fit each menu, its pointer arrow slides to the active tab, and the old and new contents slide past each other, until a real hover. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3000);let k=3;while(!off){show(k++%4);await sleep(2100)}})()}
+</script></body></html>

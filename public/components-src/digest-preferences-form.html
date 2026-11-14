@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Digest Preferences Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9EEE7;color:#17261D;font-family:'Figtree',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.f{width:100%;max-width:800px;display:grid;grid-template-columns:1.15fr 1fr;border-radius:28px;overflow:hidden;background:#FAFBF8;box-shadow:0 40px 60px -38px rgba(23,38,29,.5),inset 0 0 0 1px rgba(23,38,29,.08)}
+.l{padding:28px}.l h1{font:700 30px/1 'Fraunces';letter-spacing:-.035em}.l>p{color:#667A6D;font-size:14px;margin:8px 0 20px}
+.sec{font-size:11.500px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#7C8F83;margin:18px 0 10px}
+.tp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tp label{position:relative;display:flex;gap:10px;align-items:center;padding:12px;border-radius:16px;box-shadow:inset 0 0 0 1.500px #D7E0D8;cursor:pointer;font-size:14px;font-weight:600;transition:all .25s}
+.tp input{position:absolute;opacity:0}.tp .ic{width:34px;height:34px;border-radius:11px;background:#EAF0EA;display:grid;place-items:center;color:#4E6A58;transition:all .25s cubic-bezier(.3,1.5,.5,1);flex:none}.tp .ic svg{width:18px;height:18px}
+.tp label:has(input:checked){background:var(--bg);box-shadow:inset 0 0 0 2px var(--c)}.tp label:has(input:checked) .ic{background:var(--c);color:#fff;transform:rotate(-8deg) scale(1.08)}
+.tp label:has(input:focus-visible){outline:3px solid #17261D;outline-offset:2px}
+.tp .ck{margin-left:auto;width:18px;height:18px;border-radius:50%;background:var(--c);display:grid;place-items:center;transform:scale(0);transition:transform .3s cubic-bezier(.3,1.8,.5,1)}.tp .ck svg{width:10px;height:10px}.tp label:has(input:checked) .ck{transform:scale(1)}
+.seg{position:relative;display:grid;grid-template-columns:repeat(3,1fr);border-radius:14px;background:#E8EEE8;padding:4px}
+.seg .th{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/3);border-radius:10px;background:#17261D;transition:transform .35s cubic-bezier(.3,1.3,.4,1)}
+.seg button{position:relative;z-index:1;border:0;background:none;padding:11px 0;font:700 14px 'Figtree';color:#52695A;cursor:pointer;border-radius:10px;transition:color .2s}.seg button[aria-pressed=true]{color:#FAFBF8}.seg button:focus-visible{outline:2px solid #17261D;outline-offset:-3px}
+.r{background:#17261D;color:#EAF2EC;padding:28px;display:flex;flex-direction:column}
+.r small{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7FA38C}
+.mail{margin-top:12px;flex:1;border-radius:18px;background:#FAFBF8;color:#17261D;padding:18px;box-shadow:0 20px 28px -18px rgba(0,0,0,.6);display:flex;flex-direction:column;gap:10px;min-height:290px}
+.mail .hd{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #E1E8E2;padding-bottom:10px}.mail .hd b{font:700 17px 'Fraunces';letter-spacing:-.02em}.mail .hd span{font-size:12px;font-weight:600;color:#667A6D}
+.it{display:flex;gap:10px;align-items:flex-start;overflow:hidden;animation:in .4s cubic-bezier(.3,1.2,.4,1)}.it.out{animation:o .25s forwards}
+@keyframes in{from{opacity:0;transform:translateY(8px);max-height:0}to{max-height:70px}}@keyframes o{to{opacity:0;transform:translateX(16px);max-height:0}}
+.it i{width:8px;height:8px;border-radius:50%;background:var(--c);margin-top:6px;flex:none}.it b{display:block;font-size:13.500px;line-height:1.3}.it span{font-size:12px;color:#7C8F83;font-weight:600}
+.empty{margin:auto;color:#9AA89F;font-size:14px;text-align:center}
+.go{margin-top:14px;border:0;border-radius:14px;padding:15px;background:#9BE8B6;color:#0D2A1A;font:700 15px 'Figtree';cursor:pointer}.go:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(max-width:680px){.f{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<form class="f" id="f" onsubmit="return false"><div class="l"><h1>Shape your Friday digest</h1><p>Pick the topics you care about. We send one email, never more.</p>
+<div class="sec">Topics</div><div class="tp" id="tp"></div>
+<div class="sec">How often</div><div class="seg" id="sg" role="group" aria-label="Frequency"><span class="th" id="th"></span><button type="button" aria-pressed="false">Daily</button><button type="button" aria-pressed="true">Weekly</button><button type="button" aria-pressed="false">Monthly</button></div></div>
+<div class="r"><small>Live preview</small><div class="mail" id="ml" aria-live="polite"></div><button class="go">Save preferences</button></div></form>
+<script>
+const T=[['design','Design','#E8590C','#FFF1E8','M12 3l2.500 6.500L21 12l-6.500 2.500L12 21l-2.500-6.500L3 12l6.500-2.500Z',['The quiet return of skeuomorphic depth','Why grids are loosening on purpose']],['eng','Engineering','#2563EB','#EAF1FF','M16 18l6-6-6-6M8 6l-6 6 6 6',['Edge rendering without the cold starts','What a 40 ms budget does to a codebase']],['ai','AI','#7C3AED','#F1EAFF','M12 2v4M12 18v4M4.900 4.900l2.800 2.800M16.300 16.300l2.800 2.800M2 12h4M18 12h4M4.900 19.100l2.800-2.800M16.300 7.700l2.800-2.800',['Agents that finish the boring half of the job','Evals are the new unit tests']],['biz','Business','#059669','#E6F7EF','M3 17l6-6 4 4 8-9M15 6h6v6',['The unglamorous maths of net retention','Pricing pages that survived a recession']],['cul','Culture','#DB2777','#FFE8F2','M20.800 4.600a5.500 5.500 0 0 0-7.800 0L12 5.700l-1-1.100a5.500 5.500 0 0 0-7.800 7.800l1 1.100L12 21l7.800-7.500 1-1.100a5.500 5.500 0 0 0 0-7.800Z',['Notes from a four day week, year two','How small teams keep their taste']],['sci','Science','#0891B2','#E2F6FA','M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.800 3h10.400a2 2 0 0 0 1.800-3l-5-9V3',['A battery that charges in the time it takes to read this','The case for boring clinical trials']]];
+const tp=document.getElementById('tp'),ml=document.getElementById('ml'),sg=document.getElementById('sg'),th=document.getElementById('th');const F=[['Daily','7 min'],['Weekly','9 min'],['Monthly','14 min']];let fi=1;
+T.forEach(([k,n,c,bg,d])=>{tp.insertAdjacentHTML('beforeend','<label style="--c:'+c+';--bg:'+bg+'"><input type="checkbox" value="'+k+'" '+(['design','eng','biz'].includes(k)?'checked':'')+'><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="'+d+'"/></svg></span>'+n+'<span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span></label>')});
+const boxes=[...tp.querySelectorAll('input')];let shown={};
+function pv(){const on=boxes.filter(b=>b.checked).map(b=>b.value);ml.querySelector('.hd')||(ml.innerHTML='<div class="hd"><b>The Friday Digest</b><span id="rd"></span></div><div class="empty" id="em">Pick a topic to see your digest take shape.</div>');
+ document.getElementById('rd').textContent=F[fi][0]+'  |  '+F[fi][1]+' read';
+ T.forEach(([k,n,c,bg,d,items])=>{const want=on.includes(k);
+  if(want&&!shown[k]){shown[k]=[];items.forEach(t=>{const e=document.createElement('div');e.className='it';e.style.setProperty('--c',c);e.dataset.k=k;e.innerHTML='<i></i><div><b>'+t+'</b><span>'+n+'</span></div>';ml.insertBefore(e,document.getElementById('em'))})}
+  if(!want&&shown[k]){ml.querySelectorAll('.it[data-k="'+k+'"]').forEach(e=>{e.classList.add('out');setTimeout(()=>e.remove(),240)});delete shown[k]}});
+ document.getElementById('em').style.display=on.length?'none':''}
+function seg(i){fi=i;[...sg.querySelectorAll('button')].forEach((b,k)=>b.setAttribute('aria-pressed',k===i));th.style.transform='translateX('+i*100+'%)';pv()}
+boxes.forEach(b=>b.addEventListener('change',pv));sg.querySelectorAll('button').forEach((b,i)=>b.onclick=()=>seg(i));seg(1);
+/* Idle demo: topics toggle on and off and the frequency slides, so the preview email keeps rebuilding, until real input. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),flip=k=>{const b=boxes[k];b.checked=!b.checked;pv()};
+ (async()=>{await sleep(3600);const plan=[[2,'t'],[0,'t'],[null,2],[4,'t'],[1,'t'],[null,0],[2,'t'],[null,1]];while(!off){for(const[k,a]of plan){if(off)return;if(k===null)seg(a);else flip(k);await sleep(1500)}}})()}
+</script></body></html>

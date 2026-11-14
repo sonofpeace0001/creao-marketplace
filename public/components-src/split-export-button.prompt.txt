@@ -1,0 +1,40 @@
+ROLE
+You are a senior productivity app designer and front-end engineer with 15+ years of experience. Build "Split Export Button": a split button with a main action and a format menu: choosing a format turns the button orange with a live percentage and progress line, then green with a check and a toast.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper card with an ink button, file-type tiles with folded corners and an orange to green state change.
+- Palette: #E8590C, #1D1A14, #A59D88, #9A917D, #16A34A, #EFEBE2
+- Type: Instrument Sans, Instrument Serif, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Report header; split button (action and chevron); menu with five file formats (name, type, size) and a Copy link action; preview chart; toast.
+
+INTERACTION & STATES
+- The main button repeats the last format; the chevron opens the menu; choosing a format runs a 45ms-per-5-percent export, then confirms with a toast naming the file and size.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Progress line width follows the percentage; state colours transition 300ms; toast springs up 16px over 450ms; menu on a 350ms spring with 35ms row stagger.
+
+IDLE AUTOPLAY
+- A new format is chosen every cycle, runs, completes and shows its toast.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A menu with no feedback after choosing.
+- Indeterminate spinners for an export; show a percentage.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

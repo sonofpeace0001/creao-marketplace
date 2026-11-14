@@ -1,0 +1,40 @@
+ROLE
+You are a senior gamification designer and front-end engineer with 15+ years of experience. Build "Level Up Badge": a hexagon level badge inside a gradient XP ring: experience climbs, the badge pops, the number rolls up and confetti bursts.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep violet night, a violet to pink to amber gradient ring and a faceted amethyst hexagon.
+- Palette: #F59E0B, #EC4899, #2B1A5E, #0D0A22, #F3EEFF, #E4D8FF
+- Type: Unbounded, Manrope (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Badge with progress ring, hexagon, LEVEL label and rolling number; LEVEL UP flash; rank title and hint; XP label with a segmented gradient bar.
+
+INTERACTION & STATES
+- XP values drive the ring stroke and bar width together; reaching 1,000 triggers the level-up sequence.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ring stroke-dashoffset eases over 500ms; level up: scale .88, then 1.2 with -4 degree twist, then 1 over 800ms; a radial flash expands to 1.5x; 22 confetti pieces travel 110 to 170px; the number rolls vertically over 550ms; LEVEL UP pill rises and fades over 1.9s.
+
+IDLE AUTOPLAY
+- XP climbs in 90 to 150 point steps every 650ms, levels up, and starts again.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A progress ring that is separate from the bar's value.
+- Instant number changes; the number must roll.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

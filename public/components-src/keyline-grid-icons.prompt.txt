@@ -1,0 +1,40 @@
+ROLE
+You are a senior icon system designer and front-end engineer with 15+ years of experience. Build "Keyline Grid Icons": an icon construction sheet on a blueprint grid with animated keyline shapes, anchor points, a self-drawing glyph and an optical size ladder.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cobalt blueprint paper with white line work, amber keylines, rose anchor points and mono specs.
+- Palette: #FFC400, #9CB8FF, #0B3294, #CFE0FF, #0C3AA6, #E8F0FF
+- Type: Inter Tight, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Title; canvas with 24 pixel grid, live area, circle, square, portrait and landscape keylines, glyph and anchors; keyline toggle chips; optical size ladder (16 to 48); spec list.
+
+INTERACTION & STATES
+- Chips switch the visible keyline and update the title and spec; the glyph redraws on each change.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Keyline opacity 400ms; glyph draws via pathLength dashoffset over 2s cubic-bezier(.6,0,.2,1); anchor points fade in 300ms.
+
+IDLE AUTOPLAY
+- After 3.6s the keylines cycle every 2.2s through circle, square, portrait, landscape and all.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A grid with no live-area padding.
+- Using one stroke weight at every optical size; the ladder steps from 1.9 to 1.5.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

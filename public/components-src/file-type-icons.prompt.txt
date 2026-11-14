@@ -1,0 +1,40 @@
+ROLE
+You are a senior product designer and front-end engineer with 15+ years of experience. Build "File Type Icons": eight document icons with folded corners, fanned stacked pages and coloured type tabs that lift and fan out on hover.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm grey desk, white paper with soft shadows and a coloured label tab per format.
+- Palette: #1B1A17, #98927F, #F2F0EB, #EF4444, #F6F4EE, #FBFAF6
+- Type: Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; four-by-two grid; each file with two back sheets, a front sheet with folded corner and text lines, a tab, name and size.
+
+INTERACTION & STATES
+- Hover or focus lifts the file, fans the back sheets to -12 and 11 degrees and nudges the tab.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Lift 10px with -2 degree tilt over 450ms spring; shadow shrinks to .8 scale; back sheets rotate with the same spring.
+
+IDLE AUTOPLAY
+- A lift travels along the files in order every 650ms.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Generic grey document glyphs with a letter on them.
+- Corner folds drawn as flat triangles with no shading.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

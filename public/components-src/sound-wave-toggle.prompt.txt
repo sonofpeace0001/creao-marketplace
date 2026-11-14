@@ -1,0 +1,40 @@
+ROLE
+You are a senior audio interface designer and front-end engineer with 15+ years of experience. Build "Sound Wave Toggle": a mute button whose speaker cone throbs and three waves ripple outward when sound is on, a slash draws when muted, and the record, equaliser and volume bar respond.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm black with a coral to magenta record, an orange equaliser and a glowing round button.
+- Palette: #FF5A36, #A58C84, #16100E, #FBEFEA, #201714, #C2185B
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Track header with spinning record; 24-bar equaliser; mute button; volume bar with value; state label.
+
+INTERACTION & STATES
+- Toggling stops the record and equaliser, collapses volume to zero, draws a slash over the speaker and updates the label and aria-pressed.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Cone scales 1 to 1.07 by 1.12 at 350ms alternate; waves translate and fade over 1.5s staggered .25s; equaliser bars loop 1s with offset delays; volume width 600ms spring.
+
+IDLE AUTOPLAY
+- Sound toggles every 3s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static speaker icon swap.
+- Equaliser bars that animate while muted.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

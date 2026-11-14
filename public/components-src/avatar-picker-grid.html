@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Avatar Picker Grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#14101F;color:#F1ECFF;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(560px 380px at 20% 0,rgba(168,85,247,.2),transparent 70%)}
+.c{width:100%;max-width:640px;border-radius:30px;background:#1B1530;padding:24px;display:grid;grid-template-columns:200px 1fr;gap:24px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 40px 60px -36px rgba(0,0,0,.9)}
+.pv{display:grid;justify-items:center;align-content:start;gap:14px;text-align:center}
+.big{position:relative;width:170px;height:170px;border-radius:50%;box-shadow:0 0 0 5px #1B1530,0 0 0 8px var(--c,#A855F7),0 24px 34px -10px var(--c,#A855F7);transition:box-shadow .5s;overflow:hidden}
+.big svg{position:absolute;inset:0;width:100%;height:100%;display:block}.big svg.in{animation:pi .55s cubic-bezier(.3,1.6,.5,1)}.big svg.out{animation:po .3s ease-in forwards}@keyframes pi{from{transform:scale(1.25);opacity:0}}@keyframes po{to{transform:scale(.8);opacity:0}}
+.pv b{font-size:20px;font-weight:800;letter-spacing:-.04em}.pv span{font:500 12px 'DM Mono';color:#9A8FC4;letter-spacing:.06em}
+.sv{margin-top:6px;border:0;border-radius:14px;padding:12px 26px;background:var(--c,#A855F7);color:#fff;font:700 14.500px 'Bricolage Grotesque';cursor:pointer;transition:background .5s,transform .15s}.sv:active{transform:scale(.96)}.sv:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.gd{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-content:start}
+.rg{position:absolute;left:0;top:0;width:var(--w);height:var(--w);border-radius:50%;box-shadow:0 0 0 3px #1B1530,0 0 0 6px var(--c,#A855F7);transform:translate(var(--x),var(--y));transition:transform .5s cubic-bezier(.3,1.4,.4,1),box-shadow .5s;pointer-events:none;z-index:2}
+.o{position:relative;aspect-ratio:1;border-radius:50%;overflow:hidden;border:0;padding:0;cursor:pointer;background:none;transition:transform .3s cubic-bezier(.3,1.6,.5,1),filter .3s;filter:saturate(.7) brightness(.85)}
+.o svg{width:100%;height:100%;display:block}.o:hover{transform:scale(1.08);filter:none}.o.on{filter:none}.o:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(max-width:560px){.c{grid-template-columns:1fr}.gd{grid-template-columns:repeat(4,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="pv"><div class="big" id="big"></div><b id="nm">Juniper</b><span id="id">AVATAR 07 / 12</span><button class="sv" id="sv">Use this avatar</button></div>
+<div class="gd" id="gd" role="radiogroup" aria-label="Choose an avatar"><span class="rg" id="rg"></span></div></div>
+<script>
+function face(s){const r=n=>{s=(s*9301+49297)%233280;return Math.floor(s/233280*n)};const sk=['#F2C9A5','#E0A57A','#B9784B','#8A5230','#5B3420','#F7D9C1'][r(6)],hr=['#1B1410','#3B2314','#7A4A21','#C9A15E','#B5361F','#6B6B73','#2D2A6B'][r(7)],bg=['#FFD6A5','#CAFFBF','#9BF6FF','#BDB2FF','#FFC6FF','#FDFFB6','#A0C4FF','#FFADAD'][r(8)],sh=['#6366F1','#EC4899','#0EA5E9','#10B981','#F59E0B','#8B5CF6'][r(6)],st=r(5),gl=r(3)===0,sm=r(3);
+ let h='';if(st===1)h+='<path d="M24 52c-2-24 8-34 26-34s28 10 26 34c-2 12-6 16-6 16H30s-4-4-6-16Z" fill="'+hr+'"/>';
+ let top='';if(st===0)top='<path d="M27 46c0-16 9-22 23-22s23 6 23 22c-6-8-14-10-23-10s-17 2-23 10Z" fill="'+hr+'"/>';else if(st===1)top='<path d="M27 48c0-17 9-24 23-24s23 7 23 24c-7-7-14-11-23-11s-16 4-23 11Z" fill="'+hr+'"/>';else if(st===2)top='<g fill="'+hr+'"><circle cx="31" cy="40" r="9"/><circle cx="42" cy="31" r="10"/><circle cx="56" cy="30" r="10"/><circle cx="68" cy="39" r="9"/><circle cx="50" cy="27" r="9"/></g>';else if(st===3)top='<g fill="'+hr+'"><path d="M28 46c0-14 8-20 22-20s22 6 22 20c-5-6-13-9-22-9s-17 3-22 9Z"/><circle cx="50" cy="20" r="8"/></g>';
+ return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="'+bg+'"/>'+h+'<path d="M14 100c2-18 16-26 36-26s34 8 36 26Z" fill="'+sh+'"/><rect x="43" y="62" width="14" height="14" rx="6" fill="'+sk+'"/><ellipse cx="50" cy="48" rx="21" ry="24" fill="'+sk+'"/>'+top+'<circle cx="42" cy="50" r="2.200" fill="#2A1A12"/><circle cx="58" cy="50" r="2.200" fill="#2A1A12"/>'+(gl?'<g fill="none" stroke="#2A1A12" stroke-width="1.800"><circle cx="42" cy="50" r="6.500"/><circle cx="58" cy="50" r="6.500"/><path d="M48.500 50h3"/></g>':'')+'<path d="'+(sm===0?'M43 60q7 6 14 0':sm===1?'M44 60q6 4 12 0':'M43 59q7 8 14 0')+'" fill="none" stroke="#2A1A12" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/><circle cx="64" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/></svg>'}
+const NM=['Juniper','Marlow','Indigo','Saffron','Tamsin','Rowan','Wren','Odessa','Linden','Briar','Cassia','Fenwick'],CL=['#A855F7','#EC4899','#38BDF8','#F59E0B','#10B981','#F97316','#6366F1','#F43F5E','#22D3EE','#84CC16','#E879F9','#FB7185'];
+const gd=document.getElementById('gd'),rg=document.getElementById('rg'),big=document.getElementById('big'),nm=document.getElementById('nm'),id=document.getElementById('id');let cur=6,os=[];
+NM.forEach((n,i)=>{const b=document.createElement('button');b.className='o';b.setAttribute('role','radio');b.setAttribute('aria-label',n);b.innerHTML=face(i*53+17);b.onclick=()=>{off=true;sel(i)};gd.appendChild(b);os.push(b)});
+function sel(i){cur=i;os.forEach((o,k)=>{o.classList.toggle('on',k===i);o.setAttribute('aria-checked',k===i)});const o=os[i];rg.style.setProperty('--w',o.offsetWidth+'px');rg.style.setProperty('--x',o.offsetLeft+'px');rg.style.setProperty('--y',o.offsetTop+'px');
+ const c=CL[i];[rg,big.parentNode].forEach(e=>e.style.setProperty('--c',c));const old=big.firstElementChild;if(old){old.classList.add('out');setTimeout(()=>old.remove(),300)}big.insertAdjacentHTML('beforeend',face(i*53+17));big.lastElementChild.classList.add('in');nm.textContent=NM[i];id.textContent='AVATAR '+String(i+1).padStart(2,'0')+' / 12'}
+sel(6);document.fonts.ready.then(()=>sel(cur));addEventListener('resize',()=>sel(cur));
+/* Idle demo: a single selection ring glides between tiles with a spring while the large preview swaps with a pop and its glow takes on that avatar's colour, until a pick is made. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),ord=[2,9,4,11,0,7];(async()=>{await sleep(3200);let k=0;while(!off){sel(ord[k++%6]);await sleep(1500)}})()}
+</script></body></html>

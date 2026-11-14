@@ -1,0 +1,40 @@
+ROLE
+You are a senior content tools designer and front-end engineer with 15+ years of experience. Build "URL Unfurl Input": a link field that turns a pasted URL into a skeleton and then a rich preview card with image, source, title and description.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper with serif headings, mono URL text and a generated artwork thumbnail.
+- Palette: #1F1B16, #9A917F, #E8590C, #EFE9DC, #F3EFE8, #DDD6C8
+- Type: Instrument Sans, Instrument Serif, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Serif label; link field with icon, input and Add button; preview slot showing a shimmering skeleton, then a card with artwork, source tag, headline, two-line description and Remove link.
+
+INTERACTION & STATES
+- Paste or Enter fetches; the link icon spins; a skeleton shows for 1.3s; the card unfurls with a spring and the artwork slowly settles; Remove clears.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Card: 500ms spring rise from translateY 12px; skeleton shimmer 1.2s linear; artwork scale 1.08 to 1 over 6s.
+
+IDLE AUTOPLAY
+- Three links are typed in turn, each loading and unfurling before the field clears.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Layout jump when the card replaces the skeleton; they share a height.
+- Remote images in the demo; artwork is generated.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Upload Queue Progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EEF0F6;color:#12141F;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:560px;border-radius:28px;background:#fff;padding:22px;box-shadow:0 36px 50px -34px rgba(18,20,31,.55),inset 0 0 0 1px rgba(18,20,31,.07)}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.hd h1{font-size:21px;font-weight:800;letter-spacing:-.04em}.hd span{font:600 12.500px 'Geist Mono';color:#7C8196;font-variant-numeric:tabular-nums}
+.ov{margin:10px 0 14px;height:8px;border-radius:4px;background:#EEF0F6;overflow:hidden}.ov i{display:block;height:100%;width:var(--p,0%);border-radius:4px;background:linear-gradient(90deg,#6366F1,#8B5CF6);transition:width .2s linear}
+.ls{display:grid;gap:4px}
+.f{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:12px 10px;border-radius:16px;transition:background .3s,opacity .5s,transform .5s cubic-bezier(.3,1.3,.5,1),max-height .5s;max-height:90px;animation:in .5s cubic-bezier(.3,1.4,.5,1)}
+@keyframes in{from{opacity:0;transform:translateY(12px);max-height:0}}
+.f.out{opacity:0;transform:translateX(30px);max-height:0;padding-top:0;padding-bottom:0;overflow:hidden}
+.f.dn{background:#F4FBF6}.f.er{background:#FEF5F5}
+.ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font:700 11px 'Geist Mono';color:#fff;background:var(--c);letter-spacing:.04em;position:relative;transition:background .3s}
+.ic .ck{position:absolute;right:-5px;bottom:-5px;width:20px;height:20px;border-radius:50%;background:#16A34A;border:2.500px solid #fff;display:grid;place-items:center;transform:scale(0);transition:transform .4s cubic-bezier(.3,1.9,.5,1)}.f.dn .ck{transform:scale(1)}.ck svg{width:10px;height:10px}
+.mid{min-width:0}.mid b{display:block;font-size:14.500px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mid .sub{display:flex;gap:10px;font:500 11.500px 'Geist Mono';color:#8A90A6;margin:2px 0 7px}
+.bar{height:6px;border-radius:3px;background:#E9ECF3;overflow:hidden;position:relative}.bar i{position:absolute;left:0;top:0;bottom:0;width:var(--p,0%);border-radius:3px;background:linear-gradient(90deg,#6366F1,#8B5CF6);transition:width .2s linear,background .3s}
+.bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);transform:translateX(-100%);animation:sw 1.200s linear infinite}@keyframes sw{to{transform:translateX(100%)}}
+.f.dn .bar i{background:#16A34A}.f.dn .bar i::after{display:none}.f.er .bar i{background:#EF4444}.f.er .bar i::after,.f.ps .bar i::after{display:none}.f.ps .bar i{background:#B8BDCE}
+.rt{display:flex;align-items:center;gap:8px;font:600 13px 'Geist Mono';color:#4B5167;font-variant-numeric:tabular-nums;min-width:80px;justify-content:flex-end}
+.bt{width:30px;height:30px;border-radius:50%;border:0;background:#F1F2F8;color:#4B5167;display:grid;place-items:center;cursor:pointer;transition:background .2s,transform .15s}.bt:hover{background:#E5E7F2}.bt:active{transform:scale(.9)}.bt:focus-visible{outline:2px solid #6366F1}.bt svg{width:14px;height:14px}.bt svg *{fill:none;stroke:currentColor;stroke-width:2.600;stroke-linecap:round;stroke-linejoin:round}
+.f.dn .rt{color:#16A34A}.f.er .rt{color:#DC2626}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="hd"><h1>Uploading 4 files</h1><span id="tt">0 of 4 done</span></div><div class="ov"><i id="ov"></i></div><div class="ls" id="ls"></div></div>
+<script>
+const POOL=[['brand-guidelines.pdf','PDF','#E11D48',48.2],['hero-reel.mp4','MP4','#7C3AED',212],['product-shots.zip','ZIP','#F59E0B',96.4],['pricing-model.xlsx','XLS','#16A34A',3.8],['launch-deck.key','KEY','#2563EB',64],['logo-pack.fig','FIG','#EC4899',18.6],['interview.wav','WAV','#0891B2',142]];
+const ls=document.getElementById('ls'),tt=document.getElementById('tt'),ov=document.getElementById('ov');let items=[],pi=0;
+const CK='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4.500" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg>';
+function add(init){const p=POOL[pi++%POOL.length],e=document.createElement('div');e.className='f';e.innerHTML='<span class="ic" style="--c:'+p[2]+'">'+p[1]+'<span class="ck">'+CK+'</span></span><div class="mid"><b>'+p[0]+'</b><div class="sub"><span class="sz"></span><span class="sp"></span></div><div class="bar"><i></i></div></div><div class="rt"><span class="pc">0%</span><button class="bt" aria-label="Pause upload"><svg viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg></button></div>';ls.appendChild(e);
+ const it={e,mb:p[3],p:init||0,v:.8+Math.random()*1.4,st:'run',pc:e.querySelector('.pc'),bar:e.querySelector('.bar i'),sz:e.querySelector('.sz'),sp:e.querySelector('.sp'),bt:e.querySelector('.bt')};
+ it.bt.onclick=()=>{off=true;toggle(it)};
+ items.push(it);paint(it);return it}
+function toggle(it){if(it.st==='run'){it.st='pause';it.e.classList.add('ps');it.bt.innerHTML='<svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8Z"/></svg>'}else if(it.st==='pause'){it.st='run';it.e.classList.remove('ps');it.bt.innerHTML='<svg viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg>'}}
+function paint(it){it.bar.style.setProperty('--p',it.p+'%');it.pc.textContent=it.st==='done'?'':Math.round(it.p)+'%';it.sz.textContent=(it.mb*it.p/100).toFixed(1)+' of '+it.mb+' MB';it.sp.textContent=it.st==='run'?(it.v*2.4).toFixed(1)+' MB/s':it.st==='pause'?'paused':it.st==='done'?'complete':'failed'}
+function finish(it){it.st='done';it.p=100;it.e.classList.add('dn');it.e.classList.remove('ps');it.pc.textContent='';it.bt.innerHTML='<svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg>';it.bt.style.background='#DCFCE7';it.bt.style.color='#16A34A';it.bt.onclick=null;paint(it)}
+function totals(){const live=items.filter(i=>i.st!=='out'),done=live.filter(i=>i.st==='done').length;tt.textContent=done+' of '+live.length+' done';const tot=live.reduce((a,i)=>a+i.mb,0),up=live.reduce((a,i)=>a+i.mb*i.p/100,0);ov.style.setProperty('--p',(up/tot*100)+'%');document.querySelector('.hd h1').textContent=done===live.length?'All files uploaded':'Uploading '+(live.length-done)+' file'+(live.length-done===1?'':'s')}
+add(100);finish(items[0]);add(64);add(31);add(8);toggle(items[2]);items.forEach(paint);totals();
+/* Idle demo: every file uploads at its own speed with a shimmering bar and live MB and speed; finished rows turn green with a tick, one is paused and later resumed, completed rows slide out and fresh files join the queue, in a loop, until you press pause or resume. */
+let off=false,lastT=0;
+function tick(n){const dt=Math.min(.06,(n-lastT)/1000||0);lastT=n;items.forEach(it=>{if(it.st==='run'){it.p=Math.min(100,it.p+it.v*dt*9);paint(it);if(it.p>=100)finish(it)}});totals();requestAnimationFrame(tick)}
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){requestAnimationFrame(n=>{lastT=n;tick(n)});const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);while(true){const ps=items.find(i=>i.st==='pause');if(ps&&!off)toggle(ps);await sleep(5200);const done=items.filter(i=>i.st==='done');if(done.length>=2){const d=done[0];d.e.classList.add('out');d.st='out';await sleep(550);d.e.remove();items=items.filter(i=>i!==d);add(0);await sleep(400)}await sleep(2600)}})()}
+</script></body></html>

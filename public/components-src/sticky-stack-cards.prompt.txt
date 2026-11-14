@@ -1,0 +1,41 @@
+ROLE
+You are a senior editorial designer and front-end engineer with 15+ years of experience. Build "Sticky Stack Cards": process cards that stick and stack as you scroll, each earlier card scaling back and dimming as the next one slides over it.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper with peach, sage, periwinkle and butter cards, serif display and a bold ink line illustration on each.
+- Palette: #1F1A14, #EFE9DD, #8A7F6E, #E4DCCB, #FFB59A, #BFD7A8
+- Type: Fraunces, Inter Tight (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; scroll tray with four sticky cards (Discover, Shape, Build, Learn) each with step number, title, copy and corner illustration; progress dashes.
+
+INTERACTION & STATES
+- position: sticky with a 22px step offset per card; scroll position drives scale and brightness of covered cards; dashes track the active card.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Covered card: scale 1 to 0.94 and brightness 1 to 0.78 across the 280px of overlap, transform-origin top centre.
+- Progress dash widens 22px to 34px and fills ink.
+
+IDLE AUTOPLAY
+- After 3.6s the tray scrolls itself down and back on a cosine curve; any wheel, touch, key or pointer press hands control back.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Cards that simply slide with no scale or dim, so depth is lost.
+- Text running under the corner illustration.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

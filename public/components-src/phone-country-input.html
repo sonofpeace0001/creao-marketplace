@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Phone Country Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0C0D12;color:#EDEEF5;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(500px 340px at 20% 10%,rgba(99,102,241,.2),transparent 70%)}
+.w{width:100%;max-width:420px}
+label.t{display:block;font-size:13px;font-weight:600;color:#9A9DB5;margin-bottom:9px}
+.f{position:relative;display:flex;border-radius:16px;background:#14151D;box-shadow:inset 0 0 0 1.500px rgba(255,255,255,.1);transition:box-shadow .2s}
+.f:focus-within,.f.open{box-shadow:inset 0 0 0 2px #818CF8,0 0 0 5px rgba(129,140,248,.16)}
+.cc{display:flex;align-items:center;gap:9px;border:0;background:none;color:#fff;font:600 15px 'Geist';padding:0 12px 0 14px;cursor:pointer;border-radius:16px 0 0 16px;position:relative}
+.cc::after{content:"";position:absolute;right:0;top:14px;bottom:14px;width:1px;background:rgba(255,255,255,.12)}
+.cc:focus-visible{outline:2px solid #818CF8;outline-offset:-3px}
+.fl{width:30px;height:22px;border-radius:5px;display:grid;place-items:center;font:700 10px 'Geist Mono';color:#fff;letter-spacing:.04em;transition:background .3s}
+.cc .ar{width:12px;height:12px;transition:transform .25s}.f.open .ar{transform:rotate(180deg)}
+.f input{flex:1;min-width:0;border:0;outline:0;background:none;color:#fff;font:500 18px 'Geist Mono';letter-spacing:.03em;padding:17px 14px}.f input::placeholder{color:#4B4E63}
+.vd{display:grid;place-items:center;width:44px}.vd i{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px #3B3E55;transition:all .3s cubic-bezier(.3,1.6,.5,1);position:relative}
+.vd i::after{content:"";position:absolute;left:5px;top:3px;width:5px;height:9px;border:solid #052E1A;border-width:0 2.500px 2.500px 0;transform:rotate(45deg) scale(0);transition:transform .25s .1s}
+.f.ok .vd i{background:#34D399;box-shadow:none}.f.ok .vd i::after{transform:rotate(45deg) scale(1)}
+.ls{position:absolute;left:0;right:0;top:calc(100% + 8px);border-radius:16px;background:#181A25;box-shadow:0 24px 40px -14px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.1);padding:6px;opacity:0;transform:translateY(-8px) scale(.98);pointer-events:none;transition:all .25s cubic-bezier(.3,1.3,.4,1);z-index:5}
+.f.open .ls{opacity:1;transform:none;pointer-events:auto}
+.ls button{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;color:#EDEEF5;font:500 14.500px 'Geist';padding:10px;border-radius:11px;cursor:pointer;text-align:left}
+.ls button:hover,.ls button.hl{background:rgba(129,140,248,.16)}.ls button b{margin-left:auto;font:500 13px 'Geist Mono';color:#9A9DB5}
+.ls button:focus-visible{outline:2px solid #818CF8}
+.hint{margin-top:12px;font-size:13px;color:#7C7F99;display:flex;gap:8px;align-items:center}.hint code{font:500 12.500px 'Geist Mono';color:#C7CAFF;background:rgba(129,140,248,.14);padding:2px 7px;border-radius:6px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><label class="t" for="ph">Mobile number</label>
+<div class="f" id="f"><button type="button" class="cc" id="cc" aria-haspopup="listbox" aria-expanded="false" aria-label="Country code"><span class="fl" id="fl"></span><span id="cd">+44</span><svg class="ar" viewBox="0 0 24 24" fill="none" stroke="#9A9DB5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+<input id="ph" type="tel" inputmode="tel" autocomplete="tel-national" aria-describedby="hn"><span class="vd"><i></i></span><div class="ls" id="ls" role="listbox"></div></div>
+<div class="hint" id="hn">Format <code id="fm"></code></div></div>
+<script>
+const C=[['GB','United Kingdom','44',[4,3,3],'#6366F1'],['US','United States','1',[3,3,4],'#EF4444'],['NG','Nigeria','234',[3,3,4],'#10B981'],['IN','India','91',[5,5],'#F59E0B'],['DE','Germany','49',[4,7],'#64748B'],['BR','Brazil','55',[2,5,4],'#22C55E']];
+const f=document.getElementById('f'),ph=document.getElementById('ph'),ls=document.getElementById('ls'),cc=document.getElementById('cc'),fl=document.getElementById('fl'),cd=document.getElementById('cd'),fm=document.getElementById('fm');let ci=0;
+C.forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','option');b.innerHTML='<span class="fl" style="background:'+c[4]+'">'+c[0]+'</span>'+c[1]+'<b>+'+c[2]+'</b>';b.onclick=()=>{pick(i);toggle(false);ph.focus()};ls.appendChild(b)});
+function fmt(d,p){let o=[],k=0;for(const n of p){if(k>=d.length)break;o.push(d.slice(k,k+n));k+=n}return o.join(' ')}
+function paint(){const c=C[ci],p=c[3],max=p.reduce((a,b)=>a+b,0),d=ph.value.replace(/\D/g,'').slice(0,max);ph.value=fmt(d,p);f.classList.toggle('ok',d.length===max);fm.textContent=p.map(n=>'X'.repeat(n)).join(' ');ph.placeholder=fmt('0'.repeat(max),p).replace(/0/g,'0')}
+function pick(i){ci=i;const c=C[i];fl.textContent=c[0];fl.style.background=c[4];cd.textContent='+'+c[2];[...ls.children].forEach((b,k)=>b.classList.toggle('hl',k===i));paint()}
+function toggle(v){const o=v??!f.classList.contains('open');f.classList.toggle('open',o);cc.setAttribute('aria-expanded',o)}
+cc.onclick=()=>toggle();ph.addEventListener('input',paint);addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false)});document.addEventListener('pointerdown',e=>{if(!f.contains(e.target))toggle(false)});
+pick(0);ph.value='7911123456';paint();
+/* Idle demo: the country menu opens, a new country is chosen, and a number is typed in that country's format, in a loop. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),nums=['2025550143','8031234567','9876543210','15123456789','11987654321'];
+ (async()=>{await sleep(3600);let k=1;while(!off){toggle(true);await sleep(700);for(let s=0;s<2&&!off;s++){[...ls.children].forEach((b,j)=>b.classList.toggle('hl',j===(ci+1)%C.length&&s===0));await sleep(400)}if(off)return;pick(k%C.length);toggle(false);ph.value='';paint();await sleep(500);for(const ch of nums[(k-1)%nums.length]){if(off)return;ph.value+=ch;paint();await sleep(110)}k++;await sleep(2200)}})()}
+</script></body></html>

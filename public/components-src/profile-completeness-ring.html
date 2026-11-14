@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Profile Completeness Ring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDEFF8;color:#13173A;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{position:relative;width:100%;max-width:640px;border-radius:32px;background:#fff;padding:30px;display:grid;grid-template-columns:230px 1fr;gap:30px;align-items:center;box-shadow:0 36px 50px -34px rgba(19,23,58,.55),inset 0 0 0 1px rgba(19,23,58,.07);overflow:hidden}
+.rg{position:relative;width:230px;height:230px}
+.rg svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.rg .tr{fill:none;stroke:#EEF0FA;stroke-width:16}.rg .v{fill:none;stroke:url(#g);stroke-width:16;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p,0));filter:drop-shadow(0 6px 10px rgba(99,102,241,.45))}
+.rg .dt{fill:#fff;stroke:#6366F1;stroke-width:5}
+.ct{position:absolute;inset:0;display:grid;place-items:center;align-content:center;text-align:center}.ct b{font:800 58px/1 'Plus Jakarta Sans';letter-spacing:-.06em;font-variant-numeric:tabular-nums}.ct b small{font-size:.42em;color:#8A90B5}.ct span{font:600 12px 'Geist Mono';letter-spacing:.14em;color:#8A90B5;text-transform:uppercase;margin-top:4px}
+.dn .ct b{color:#16A34A}
+.ls h1{font-size:22px;font-weight:800;letter-spacing:-.04em}.ls p{font-size:14px;color:#7B82A8;margin:4px 0 14px}
+.t{display:flex;align-items:center;gap:13px;padding:11px 12px;border-radius:15px;transition:background .3s}
+.t.cur{background:#F2F3FF}
+.ck{position:relative;width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 2px #CBD0EC;flex:none;display:grid;place-items:center;transition:all .4s cubic-bezier(.3,1.8,.5,1)}.ck svg{width:14px;height:14px;stroke-dasharray:18;stroke-dashoffset:18;transition:stroke-dashoffset .35s .12s}.ck svg *{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.t.ok .ck{background:#6366F1;box-shadow:none;transform:scale(1.1)}.t.ok .ck svg{stroke-dashoffset:0}
+.t b{font-size:14.500px;font-weight:600;position:relative;transition:color .3s}.t b::after{content:"";position:absolute;left:0;top:50%;height:2px;background:currentColor;width:0;transition:width .4s .15s}.t.ok b{color:#9AA0C4}.t.ok b::after{width:100%}
+.t i{margin-left:auto;font:700 12px 'Geist Mono';font-style:normal;color:#6366F1;padding:3px 9px;border-radius:99px;background:#EEF0FF;transition:all .3s}.t.ok i{background:#DCFCE7;color:#16A34A}
+.bd{position:absolute;left:30px;bottom:26px;display:flex;align-items:center;gap:9px;padding:9px 16px;border-radius:99px;background:#16A34A;color:#fff;font:700 13px 'Plus Jakarta Sans';opacity:0;transform:translateY(12px) scale(.9);transition:all .5s cubic-bezier(.3,1.7,.5,1);pointer-events:none;z-index:2}.bd.on{opacity:1;transform:none}.bd svg{width:15px;height:15px}.bd svg *{fill:none;stroke:#fff;stroke-width:3.500;stroke-linecap:round;stroke-linejoin:round}
+.pt{position:absolute;left:115px;top:115px;width:8px;height:8px;margin:-4px;border-radius:2px;background:var(--c);animation:bs 1s cubic-bezier(.2,.8,.3,1) forwards;pointer-events:none;z-index:3}@keyframes bs{from{transform:translate(0,0)}to{transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.2);opacity:0}}
+@media(max-width:560px){.cd{grid-template-columns:1fr;justify-items:center}.ls{width:100%}.bd{position:static;margin-top:10px;justify-self:center}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="cd" id="cd"><div class="rg"><svg viewBox="0 0 120 120"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#EC4899"/></linearGradient></defs><circle class="tr" cx="60" cy="60" r="50"/><circle class="v" id="v" cx="60" cy="60" r="50" pathLength="1"/></svg><div class="ct"><b id="pc">0<small>%</small></b><span id="lb">complete</span></div></div>
+<div class="ls"><h1>Finish setting up</h1><p>Complete your profile to unlock team features.</p><div id="ts"></div></div><div class="bd" id="bd"><svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg>Profile complete</div></div>
+<script>
+const T=[['Add a profile photo',15],['Verify your email',15],['Write a short bio',15],['Connect your calendar',20],['Invite a teammate',20],['Turn on two-step sign-in',15]];
+const ts=document.getElementById('ts'),v=document.getElementById('v'),pc=document.getElementById('pc'),cd=document.getElementById('cd'),bd=document.getElementById('bd');const rows=[];let shown=0,target=0;
+const CK='<svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg>';
+T.forEach(([n,p],i)=>{const d=document.createElement('div');d.className='t';d.innerHTML='<span class="ck">'+CK+'</span><b>'+n+'</b><i>+'+p+'%</i>';d.onclick=()=>{off=true;tg(i)};ts.appendChild(d);rows.push(d)});
+function calc(){let s=0;rows.forEach((r,i)=>{if(r.classList.contains('ok'))s+=T[i][1]});return s}
+function tg(i){rows[i].classList.toggle('ok');target=calc();const full=target>=100;cd.classList.toggle('dn',full);bd.classList.toggle('on',full);document.getElementById('lb').textContent=full?'all done':'complete';const cur=rows.findIndex(r=>!r.classList.contains('ok'));rows.forEach((r,k)=>r.classList.toggle('cur',k===cur));if(full)burst()}
+function burst(){const C=['#6366F1','#EC4899','#F59E0B','#22D3EE','#16A34A'];for(let i=0;i<22;i++){const p=document.createElement('i');p.className='pt';const a=i/22*Math.PI*2,dd=100+Math.random()*60;p.style.cssText='--c:'+C[i%5]+';--x:'+Math.cos(a)*dd+'px;--y:'+Math.sin(a)*dd+'px;--r:'+(Math.random()*500-250)+'deg;'+(i%3?'':'border-radius:50%');cd.appendChild(p);setTimeout(()=>p.remove(),1050)}}
+[0,1,2].forEach(i=>rows[i].classList.add('ok'));target=calc();shown=target;rows[3].classList.add('cur');
+(function tw(){shown+=(target-shown)*.09;if(Math.abs(target-shown)<.1)shown=target;v.style.setProperty('--p',shown/100);pc.innerHTML=Math.round(shown)+'<small>%</small>';requestAnimationFrame(tw)})();
+/* Idle demo: the remaining tasks are ticked off one at a time; each draws its checkmark and strikes through its label, the ring eases up by that task's share and the number counts, and at 100 percent the badge pops with confetti before everything resets, until you click a task. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2600);while(!off){for(const i of [3,4,5]){if(off)return;tg(i);await sleep(1700)}await sleep(2600);if(off)return;rows.forEach((r,i)=>{if(i>2&&r.classList.contains('ok'))r.classList.remove('ok')});target=calc();cd.classList.remove('dn');bd.classList.remove('on');document.getElementById('lb').textContent='complete';rows.forEach((r,k)=>r.classList.toggle('cur',k===3));await sleep(1200)}})()}
+</script></body></html>

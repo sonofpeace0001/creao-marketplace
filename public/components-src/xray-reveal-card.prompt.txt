@@ -1,0 +1,40 @@
+ROLE
+You are a senior design systems engineer and front-end developer with 15+ years of experience. Build "X-Ray Reveal Card": a finished app screen with a lens that reveals its blueprint underneath: dashed bounds, hex values, radii and spacing annotations.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft periwinkle stage, a polished purple-to-pink fintech screen, and a navy graph-paper blueprint inside a white-ringed lens.
+- Palette: #7C3AED, #FDE68A, #12203A, #0B2A66, #9CD2FF, #E9EEF7
+- Type: Plus Jakarta Sans, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Phone-like card with the finished design layer and an identical spec layer clipped by a circle; ring lens with a centre dot; heading and hint.
+
+INTERACTION & STATES
+- Pointer position inside the card moves a circular clip-path (r 92px) revealing the spec layer; the native cursor is hidden.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- clip-path: circle(var(--r) at var(--x) var(--y)); lens ring and clip move together with no easing for exact registration.
+
+IDLE AUTOPLAY
+- The lens glides over the layout on a Lissajous path until a pointer enters the card.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Two layers that do not align pixel for pixel.
+- Generic wireframe boxes; annotations must carry real values.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

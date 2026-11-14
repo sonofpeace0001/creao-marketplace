@@ -1,0 +1,40 @@
+ROLE
+You are a senior editorial web designer and front-end engineer with 15+ years of experience. Build "Accordion Image Strip": five vertical image panels where the open one grows to five times its neighbours, its picture settling from a zoom and its caption rising, while the others fold to a vertical label.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Night page with saturated generated landscapes, serif headlines and mono place tags.
+- Palette: #0E0C14, #F6F2FF, #8A83A8, #FFE0A8, #FFD9A0, #D9D2EC
+- Type: Fraunces, Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; strip of five panels (number chip, vertical label, picture, scrim, caption with CTA); pagination dots.
+
+INTERACTION & STATES
+- Hover, focus or tap opens a panel; panels are tabs with selected state; on phones the strip stacks vertically.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Flex-grow transitions 800ms cubic-bezier(.3,1,.35,1); picture scale 1.15 to 1 over 1.4s with brightness restoring; caption translateY 20px with a .35s delay; dots widen to 28px.
+
+IDLE AUTOPLAY
+- Panels open one after another every 2.2s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Equal-width panels that merely highlight.
+- Hover-only access with no focus or tap path.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

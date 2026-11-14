@@ -1,0 +1,40 @@
+ROLE
+You are a senior creative developer and pixel-art enthusiast with 15+ years of experience. Build "Pixelate Dissolve Image": a canvas image that coarsens block by block, swaps to the next scene at the blockiest point and sharpens back, with a live block size and detail meter in an arcade bezel.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep purple arcade UI with hard offset shadows, a hot pink meter and a chunky yellow selected chip.
+- Palette: #0A0716, #1D1540, #8A7FB6, #FFE66B, #0E0A1C, #F1ECFF
+- Type: Space Grotesk, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; bezelled canvas with BLOCK and scene chips; detail bar with percent; four scene buttons.
+
+INTERACTION & STATES
+- Choosing a scene runs the dissolve from the current one; busy state prevents overlap.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Block sizes 1, 2, 4, 8, 16, 32, 64 at 70ms steps out, a 180ms hold at the swap, then reversed back in; scaling uses imageSmoothingEnabled false for hard pixels.
+
+IDLE AUTOPLAY
+- A new scene is dissolved to every few seconds, cycling through four scenes.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Smoothed pixelation; edges must be crisp squares.
+- Swapping scenes at low block size where the cut is visible.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,41 @@
+ROLE
+You are a senior product designer and front-end engineer with 15+ years of experience. Build "Keycap Press Buttons": chunky skeuomorphic keycaps with real depth that press down on click and respond to the matching keyboard keys.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm grey desk mat with orange, blue and green caps and a printed status line.
+- Palette: #2A2723, #7A746A, #E7E3DC, #CFC9BE, #BDB6A9, #F7F4EE
+- Type: Outfit, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Headline and intro; a keyboard tray with four caps (Record, Publish, Save, wide Preview) each labelled with its shortcut; live status line.
+
+INTERACTION & STATES
+- Pressing a cap drops it 9px and removes its shadow; R, P, S and Space on a physical keyboard press the matching cap; a live region announces the action.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Cap travel 9px: resting shadow 0 10px 0 base colour plus a soft 16px drop; pressed shadow 0 1px 0.
+- Press 80ms, release 80ms; inner top highlight inset 0 2px 0 rgba(255,255,255,.7) stays on both states.
+
+IDLE AUTOPLAY
+- An invisible typist taps R, P, S, Space in turn every 1.3s for 260ms each and the status line updates.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A flat button with a drop shadow pretending to be a key.
+- Pressing that changes size instead of travelling down.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

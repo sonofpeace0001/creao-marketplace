@@ -1,0 +1,40 @@
+ROLE
+You are a senior hardware UI designer and front-end engineer with 15+ years of experience. Build "Battery Charge Progress": a ten-cell glowing battery that charges in a loop, shifting the cells from red to amber to green while a bolt pulses and fast-charge, time-to-full and temperature chips update.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black stage with a neon green glow, big tabular percentage above a glassy battery shell.
+- Palette: #0B1117, #25323E, #34D399, #E9F4EE, #111A22, #17222C
+- Type: Unbounded, Manrope (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Status label and large percent; battery shell with ten segmented cells, terminal nub and lightning bolt; three stat chips.
+
+INTERACTION & STATES
+- None required; the readouts are live and the charge loops.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Cells light one by one with a short flash; colour shifts through red, amber, green by level; the bolt breathes; the last cell blinks while charging.
+
+IDLE AUTOPLAY
+- After 2.6s the charge climbs from low to full, labels change from Trickle to Fast to Full, and it drains and restarts.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A flat rectangle bar; the segmented shell with terminal is the identity.
+- Neon on every element; only the cells and percentage glow.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

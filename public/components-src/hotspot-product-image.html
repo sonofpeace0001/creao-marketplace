@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hotspot Product Image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFE9DD;color:#241C10;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:720px;display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:center}
+.im{position:relative;aspect-ratio:1;border-radius:32px;background:radial-gradient(circle at 50% 38%,#FFE8B8,#F5D9A6 45%,#E9C58B);box-shadow:0 36px 50px -30px rgba(36,28,16,.6),inset 0 0 0 1px rgba(36,28,16,.08);overflow:hidden}
+.im svg.pr{position:absolute;inset:0;width:100%;height:100%}
+.gl{animation:gw 3.600s ease-in-out infinite}@keyframes gw{50%{opacity:.72}}
+.hs{position:absolute;left:var(--x);top:var(--y);width:36px;height:36px;margin:-18px;border:0;border-radius:50%;background:#fff;box-shadow:0 8px 16px -4px rgba(36,28,16,.5);cursor:pointer;display:grid;place-items:center;z-index:3;transition:transform .35s cubic-bezier(.3,1.7,.5,1),background .25s,color .25s;color:#241C10;padding:0}
+.hs::before,.hs::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #fff;animation:pl 2.200s ease-out infinite}.hs::after{animation-delay:1.100s}
+@keyframes pl{from{transform:scale(1);opacity:.9}to{transform:scale(2.200);opacity:0}}
+.hs svg{width:16px;height:16px;transition:transform .35s cubic-bezier(.3,1.7,.5,1)}.hs svg *{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round}
+.hs.on{background:#241C10;color:#fff;transform:scale(1.15)}.hs.on svg{transform:rotate(45deg)}.hs.on::before,.hs.on::after{border-color:#241C10}
+.hs:focus-visible{outline:3px solid #E8590C;outline-offset:3px}
+.cd{position:absolute;width:210px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);box-shadow:0 24px 40px -14px rgba(36,28,16,.55);opacity:0;transform:translateY(8px) scale(.94);transform-origin:var(--o,top left);pointer-events:none;transition:opacity .25s,transform .4s cubic-bezier(.3,1.6,.5,1);z-index:4}
+.cd.on{opacity:1;transform:none}
+.cd small{font:500 10.500px 'DM Mono';letter-spacing:.14em;text-transform:uppercase;color:#E8590C}.cd b{display:block;font-size:17px;font-weight:800;letter-spacing:-.03em;margin:3px 0 4px}.cd p{font-size:13px;color:#6F6350;line-height:1.45}
+.pn h1{font-size:30px;font-weight:800;letter-spacing:-.05em;line-height:1}.pn p{font-size:14.500px;color:#7B6F58;margin:10px 0 18px;line-height:1.5}
+.ls{display:grid;gap:8px}.ls button{display:flex;align-items:center;gap:12px;border:0;border-radius:16px;padding:12px 14px;background:#fff;color:inherit;font:600 14.500px 'Bricolage Grotesque';cursor:pointer;text-align:left;box-shadow:inset 0 0 0 1.500px transparent;transition:all .25s}
+.ls button:hover{box-shadow:inset 0 0 0 1.500px #D9CBAE}.ls button.on{background:#241C10;color:#fff}.ls button:focus-visible{outline:3px solid #E8590C;outline-offset:2px}
+.ls button i{width:26px;height:26px;border-radius:50%;background:#F3E9D2;color:#241C10;display:grid;place-items:center;font:700 12px 'DM Mono';font-style:normal;flex:none;transition:all .25s}.ls button.on i{background:#E8590C;color:#fff}
+.pr2{margin-top:18px;display:flex;align-items:baseline;gap:10px}.pr2 b{font-size:30px;font-weight:800;letter-spacing:-.05em}.pr2 s{color:#A99B7C;font-size:16px}
+@media(max-width:620px){.w{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="im" id="im"><svg class="pr" viewBox="0 0 400 400" aria-label="Desk lamp product illustration"><defs><linearGradient id="mt" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2B2A28"/><stop offset=".5" stop-color="#5B5953"/><stop offset="1" stop-color="#2B2A28"/></linearGradient><linearGradient id="sh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F2EEE6"/><stop offset=".5" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D9D3C5"/></linearGradient><radialGradient id="lt"><stop offset="0" stop-color="#FFF3C8"/><stop offset="1" stop-color="#FFC95C" stop-opacity="0"/></radialGradient></defs>
+<ellipse cx="200" cy="356" rx="120" ry="14" fill="rgba(60,40,10,.25)"/><g class="gl"><ellipse cx="136" cy="238" rx="150" ry="120" fill="url(#lt)" opacity=".7"/></g>
+<rect x="104" y="334" width="190" height="22" rx="11" fill="url(#mt)"/><rect x="104" y="334" width="190" height="6" rx="3" fill="rgba(255,255,255,.18)"/><circle cx="262" cy="345" r="4.500" fill="#FFB020"/>
+<path d="M190 334 L196 226 L270 120" fill="none" stroke="url(#mt)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><circle cx="196" cy="226" r="11" fill="#6B6862"/><circle cx="196" cy="226" r="4.500" fill="#2B2A28"/>
+<g transform="rotate(-24 270 120)"><path d="M230 118 L310 118 L292 168 L248 168 Z" fill="url(#sh)"/><ellipse cx="270" cy="168" rx="23" ry="7" fill="#FFE9A8"/><rect x="226" y="108" width="88" height="14" rx="7" fill="url(#mt)"/></g></svg>
+<button class="hs" style="--x:62%;--y:42%" aria-label="Warm LED hotspot"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><button class="hs" style="--x:49%;--y:57%" aria-label="Joint hotspot"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><button class="hs" style="--x:65%;--y:86%" aria-label="Charging base hotspot"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+<div class="cd" id="c0" style="left:6%;top:14%;--o:top right"><small>Light</small><b>Warm LED, 2700 to 5000 K</b><p>Tunable from candlelight to crisp daylight, 95 CRI, flicker free.</p></div><div class="cd" id="c1" style="left:4%;top:52%;--o:top right"><small>Joint</small><b>Magnetic pivot</b><p>Swings 270 degrees and holds any angle without a screw.</p></div><div class="cd" id="c2" style="right:5%;top:64%;--o:bottom right"><small>Base</small><b>15 W wireless charging</b><p>A Qi pad in the base keeps your phone topped up while you work.</p></div></div>
+<div class="pn"><h1>Lumen One desk lamp</h1><p>Tap the dots to see what is inside. Every detail is machined from one block of aluminium.</p><div class="ls" id="ls"><button><i>1</i>Tunable warm LED</button><button><i>2</i>Magnetic pivot arm</button><button><i>3</i>Wireless charging base</button></div><div class="pr2"><b>$189</b><s>$229</s></div></div></div>
+<script>
+const hs=[...document.querySelectorAll('.hs')],cd=[0,1,2].map(i=>document.getElementById('c'+i)),ls=[...document.querySelectorAll('#ls button')];let cur=-1;
+function show(i){cur=cur===i?-1:i;hs.forEach((h,k)=>h.classList.toggle('on',k===cur));cd.forEach((c,k)=>c.classList.toggle('on',k===cur));ls.forEach((l,k)=>l.classList.toggle('on',k===cur))}
+hs.forEach((h,i)=>h.onclick=()=>{off=true;show(i)});ls.forEach((l,i)=>l.onclick=()=>{off=true;show(i)});addEventListener('keydown',e=>{if(e.key==='Escape'&&cur>=0)show(cur)});
+show(0);
+/* Idle demo: each hotspot is opened in turn; its card springs up beside it, the dot rotates from a plus into a cross, and the matching feature in the list lights up, while the lamp glow breathes and every dot pulses, until you tap. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3000);let k=1;while(!off){cur=-1;show(k++%3);await sleep(2400)}})()}
+</script></body></html>

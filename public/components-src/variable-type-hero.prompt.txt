@@ -1,0 +1,41 @@
+ROLE
+You are a senior type designer and creative developer with 15+ years of experience. Build "Variable Type Hero": a type-foundry hero where every letter of a giant headline changes weight and width according to its distance from the pointer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper, ink black and vermilion, set in a variable grotesque with 100 to 900 weight and 50 to 150 width axes.
+- Palette: #14110D, #FF4D1C, #F1ECE2, #6B6458, #4A443A, #8B8374
+- Type: Anybody, Instrument Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Nav; three-line uppercase headline made of per-letter spans; descriptive copy with two buttons; footer strip with font metadata.
+
+INTERACTION & STATES
+- Each letter reads its distance to the pointer, with a smoothstep falloff over 34% of the viewport width, and sets its own weight and width.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Per-letter font-variation-settings: wght 200 to 900 and wdth 82 to 150, driven by custom properties, with a 120ms linear transition.
+- Distance uses a 0.55 vertical weighting so the field is wider than tall.
+
+IDLE AUTOPLAY
+- An invisible pointer travels a Lissajous path over the bounds of the letters so weight and width ripple through the headline.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Animating font-size, which reflows the page; only variation axes change.
+- Letters that overflow the viewport at maximum width; the base size is capped at 12.5vw.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

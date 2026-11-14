@@ -1,0 +1,40 @@
+ROLE
+You are a senior learning-app designer and front-end engineer with 15+ years of experience. Build "Streak Flame Badge": a three-layer flickering flame with sparks and a rolling day counter above a week of dots that light up with flames as lessons are completed.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cream paper, an orange to red flame with a yellow core, rounded white card and warm brown type.
+- Palette: #F2570C, #FFF6EC, #2A1708, #FFD27A, #E8590C, #8B6B50
+- Type: Outfit (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Flame with three independently animated layers, four rising sparks and a counter; headline and note; seven weekday rings; longest-streak pill.
+
+INTERACTION & STATES
+- Completing a day lights that weekday ring with a flame glyph, pops it, rolls the counter and updates the copy.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Flame layers flicker with scaleY, scaleX and skew at 1.3s, 0.9s and 0.7s alternating; sparks rise 100px over 2.2s; day pop 600ms spring; counter rolls 550ms.
+
+IDLE AUTOPLAY
+- The remaining days of the week complete one by one every 2.9s; the week then rewinds and repeats.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A single static flame icon.
+- Counter changes without a roll and pop.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

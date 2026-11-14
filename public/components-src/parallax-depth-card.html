@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Parallax Depth Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=Figtree:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1A1626;color:#fff;font-family:'Figtree',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.card{--mx:0;--my:0;position:relative;width:min(360px,86vw);aspect-ratio:3/4;border-radius:28px;overflow:hidden;background:#241B3A;box-shadow:0 40px 60px -28px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,255,255,.12);isolation:isolate;transform:perspective(900px) rotateY(calc(var(--mx)*6deg)) rotateX(calc(var(--my)*-5deg));transition:transform .5s cubic-bezier(.2,1,.3,1)}
+.card.live{transition:transform .1s linear}
+.ly{position:absolute;inset:-6%;width:112%;height:112%;transform:translate(calc(var(--mx)*var(--d)*1px),calc(var(--my)*var(--d)*.6px));transition:inherit;will-change:transform}
+.ly svg{width:100%;height:100%;display:block}
+.mist{position:absolute;left:-20%;right:-20%;height:90px;background:radial-gradient(60% 100% at 50% 50%,rgba(255,220,240,.35),transparent 70%);filter:blur(8px);animation:drift 11s ease-in-out infinite alternate}
+.m1{top:56%}.m2{top:68%;animation-duration:15s;animation-delay:-5s;opacity:.7}
+@keyframes drift{from{transform:translateX(-8%)}to{transform:translateX(8%)}}
+.bird{position:absolute;width:20px;height:8px;border-top:2px solid rgba(40,20,60,.8);border-radius:50% 50% 0 0;animation:fly 14s linear infinite}
+.b1{top:24%;left:-10%}.b2{top:30%;left:-16%;animation-delay:-4s;transform:scale(.7)}
+@keyframes fly{to{transform:translateX(480px) translateY(-26px)}}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(18,10,34,.88));z-index:3}
+.tx{position:absolute;left:0;right:0;bottom:0;padding:26px;z-index:4;transform:translate(calc(var(--mx)*-6px),calc(var(--my)*-4px));transition:inherit}
+.tx small{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px)}
+.tx h2{font:italic 500 40px/1 'Newsreader';letter-spacing:-.02em;margin:12px 0 6px}.tx p{font-size:14px;color:rgba(255,255,255,.78);line-height:1.45;max-width:270px}
+.tx .r{display:flex;gap:14px;margin-top:14px;font-size:12px;font-weight:700;color:rgba(255,255,255,.7)}.tx .r b{color:#fff;font-size:15px;display:block}
+@media(prefers-reduced-motion:reduce){.card,.ly,.tx{transition:none!important}.mist,.bird{animation:none}}
+</style></head><body>
+<div class="card" id="c">
+<div class="ly" style="--d:-4"><svg viewBox="0 0 360 480" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B2A74"/><stop offset=".5" stop-color="#C45A92"/><stop offset="1" stop-color="#FFB27A"/></linearGradient></defs><rect width="360" height="480" fill="url(#s)"/><g fill="#fff" opacity=".8"><circle cx="40" cy="40" r="1.300"/><circle cx="110" cy="70" r="1"/><circle cx="260" cy="36" r="1.500"/><circle cx="318" cy="92" r="1"/><circle cx="190" cy="22" r="1"/></g></svg></div>
+<div class="ly" style="--d:-9"><svg viewBox="0 0 360 480" preserveAspectRatio="xMidYMid slice"><circle cx="250" cy="215" r="48" fill="#FFE9B8"/><circle cx="250" cy="215" r="74" fill="#FFE9B8" opacity=".18"/></svg></div>
+<div class="ly" style="--d:-14"><svg viewBox="0 0 360 480" preserveAspectRatio="xMidYMid slice"><path d="M-20 300 70 205l48 58 66-98 74 120 52-60 70 75v180H-20Z" fill="#6A3C86"/></svg></div>
+<div class="mist m1"></div>
+<div class="ly" style="--d:-22"><svg viewBox="0 0 360 480" preserveAspectRatio="xMidYMid slice"><path d="M-20 350 40 280l58 52 62-82 70 92 60-48 90 60v176H-20Z" fill="#43275F"/></svg></div>
+<div class="mist m2"></div>
+<div class="ly" style="--d:-34"><svg viewBox="0 0 360 480" preserveAspectRatio="xMidYMid slice"><path d="M-20 400c40-40 60-60 90-20 20-50 48-70 78-20 28-44 58-60 90-10 26-30 56-40 82-4 22-24 40-26 40-26v160H-20Z" fill="#241538"/><g fill="#241538"><path d="M30 430 44 372 58 430Z"/><path d="M68 440 86 360 104 440Z"/><path d="M280 436 296 376 312 436Z"/><path d="M318 444 336 384 354 444Z"/></g></svg></div>
+<span class="bird b1"></span><span class="bird b2"></span>
+<div class="shade"></div>
+<div class="tx"><small>Day 3 of 9</small><h2>Tre Cime at dusk</h2><p>Trail lights off at 17:40. The refuge serves polenta until the last hiker is down.</p><div class="r"><div><b>14.2 km</b>Distance</div><div><b>2,320 m</b>Highest</div><div><b>6h 10</b>Moving</div></div></div>
+</div>
+<script>
+const c=document.getElementById('c');let real=0;
+function aim(x,y){const r=c.getBoundingClientRect();c.style.setProperty('--mx',Math.max(-1,Math.min(1,(x-(r.left+r.width/2))/(r.width/2))).toFixed(3));c.style.setProperty('--my',Math.max(-1,Math.min(1,(y-(r.top+r.height/2))/(r.height/2))).toFixed(3))}
+addEventListener('pointermove',e=>{real=performance.now();c.classList.add('live');aim(e.clientX,e.clientY)});document.addEventListener('pointerleave',()=>{real=0;c.classList.remove('live');c.style.setProperty('--mx',0);c.style.setProperty('--my',0)});
+/* Idle demo: a slow camera drift moves every layer at its own depth until a real pointer appears. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)(function loop(n){if(!real||n-real>2200){const t=n/1000+1.1;c.classList.add('live');c.style.setProperty('--mx',(Math.sin(t*.7)*.85).toFixed(3));c.style.setProperty('--my',(Math.cos(t*.5)*.6).toFixed(3))}requestAnimationFrame(loop)})(0);
+</script></body></html>

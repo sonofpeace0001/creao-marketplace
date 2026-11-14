@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Segmented Date Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@500;600;700&family=Martian+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#14110F;color:#F3EBDD;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(520px 340px at 70% 0,rgba(251,146,60,.18),transparent 70%)}
+.w{width:100%;max-width:480px}
+.w>label{display:block;font:700 13px 'Manrope';letter-spacing:.14em;text-transform:uppercase;color:#A89B86;margin-bottom:14px}
+.seg{display:flex;align-items:center;gap:6px;border-radius:24px;padding:14px;background:#1D1815;box-shadow:inset 0 0 0 1.500px rgba(255,255,255,.09);transition:box-shadow .2s}
+.seg:focus-within{box-shadow:inset 0 0 0 2px #FB923C,0 0 0 6px rgba(251,146,60,.14)}
+.sg{position:relative;border-radius:14px;padding:8px 6px;text-align:center;cursor:pointer;outline:0;transition:background .15s;flex:none}
+.sg.d{min-width:84px}.sg.m{min-width:84px}.sg.y{min-width:132px}
+.sg:focus,.sg.hl{background:#FB923C;color:#1B0F05}
+.sg small{display:block;font:700 10px 'Manrope';letter-spacing:.18em;text-transform:uppercase;opacity:.55;margin-bottom:2px}
+.sg .v{display:flex;justify-content:center;height:1.1em;overflow:hidden;font:800 52px/1.1 'Manrope';letter-spacing:-.04em}
+.dg{display:block;height:1.1em;overflow:hidden}.dg .st{display:block;transition:transform .4s cubic-bezier(.3,1.2,.4,1)}.dg .st b{display:block;height:1.1em;line-height:1.1em;font-weight:800;text-align:center;width:.62em}
+.sp{font:300 44px 'Syne';color:#5C5146}
+.bt{display:flex;flex-direction:column;gap:3px;margin-left:auto}.bt button{width:32px;height:30px;border:0;border-radius:9px;background:#2A231F;color:#F3EBDD;cursor:pointer;display:grid;place-items:center;transition:background .15s,transform .1s}.bt button:hover{background:#3A302A}.bt button:active{transform:scale(.9)}.bt button:focus-visible{outline:2px solid #FB923C}.bt svg{width:14px;height:14px}
+.inf{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding:16px 18px;border-radius:18px;background:#1D1815;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.inf b{font:800 22px 'Manrope';letter-spacing:-.03em;display:block}.inf span{font-size:13.500px;color:#A89B86}
+.inf .pl{font:500 13px 'Martian Mono';padding:7px 12px;border-radius:99px;background:rgba(251,146,60,.14);color:#FDBA74;white-space:nowrap}
+.hint{margin-top:14px;font-size:13px;color:#7B6F5F}.hint kbd{font:700 11px 'Manrope';padding:2px 7px;border-radius:6px;background:#2A231F;box-shadow:0 1px 0 #3A302A;color:#C9BBA5}
+@media(max-width:460px){.sg.d,.sg.m{min-width:64px}.sg.y{min-width:104px}.sg .v{font-size:38px}.bt{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><label id="lb">Check-in date</label>
+<div class="seg" role="group" aria-labelledby="lb"><div class="sg d" tabindex="0" role="spinbutton" aria-label="Day"><small>Day</small><div class="v" id="vd"></div></div><span class="sp">/</span><div class="sg m" tabindex="0" role="spinbutton" aria-label="Month"><small>Month</small><div class="v" id="vm"></div></div><span class="sp">/</span><div class="sg y" tabindex="0" role="spinbutton" aria-label="Year"><small>Year</small><div class="v" id="vy"></div></div>
+<div class="bt"><button type="button" id="up" aria-label="Increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button><button type="button" id="dn" aria-label="Decrease"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button></div></div>
+<div class="inf"><div><b id="wd"></b><span id="rl"></span></div><span class="pl" id="pl"></span></div>
+<div class="hint"><kbd>&uarr;</kbd> <kbd>&darr;</kbd> change a part, <kbd>&larr;</kbd> <kbd>&rarr;</kbd> move, or just type digits.</div></div>
+<script>
+const SG=[...document.querySelectorAll('.sg')],V=['vd','vm','vy'].map(i=>document.getElementById(i));let D=new Date(2026,10,14),act=0;
+const MN=['January','February','March','April','May','June','July','August','September','October','November','December'],WD=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const lay=[2,2,4];let cols=[[],[],[]];
+function build(i,str){V[i].innerHTML='';cols[i]=[];[...str].forEach(()=>{const d=document.createElement('span');d.className='dg';d.innerHTML='<span class="st">'+[...'0123456789'].map(n=>'<b>'+n+'</b>').join('')+'</span>';V[i].appendChild(d);cols[i].push(d.firstChild)})}
+function paint(){const parts=[String(D.getDate()).padStart(2,'0'),String(D.getMonth()+1).padStart(2,'0'),String(D.getFullYear())];
+ parts.forEach((p,i)=>{if(cols[i].length!==p.length)build(i,p);[...p].forEach((c,k)=>cols[i][k].style.transform='translateY(-'+(+c*1.1)+'em)')});
+ SG.forEach((s,i)=>s.classList.toggle('hl',i===act&&!s.matches(':focus')&&hlOn));
+ document.getElementById('wd').textContent=WD[D.getDay()]+', '+D.getDate()+' '+MN[D.getMonth()];const today=new Date(2026,10,14),n=Math.round((D-today)/864e5);
+ document.getElementById('rl').textContent=n===0?'Today':n>0?'In '+n+' day'+(n===1?'':'s'):Math.abs(n)+' day'+(Math.abs(n)===1?'':'s')+' ago';document.getElementById('pl').textContent=D.getFullYear()+'-'+String(D.getMonth()+1).padStart(2,'0')+'-'+String(D.getDate()).padStart(2,'0')}
+let hlOn=true;
+function step(dir,i=act){const y=D.getFullYear(),m=D.getMonth(),d=D.getDate();if(i===0)D=new Date(y,m,d+dir);else if(i===1){const nd=new Date(y,m+dir,1);nd.setDate(Math.min(d,new Date(nd.getFullYear(),nd.getMonth()+1,0).getDate()));D=nd}else D=new Date(y+dir,m,Math.min(d,new Date(y+dir,m+1,0).getDate()));paint()}
+SG.forEach((s,i)=>{s.addEventListener('focus',()=>{act=i;hlOn=false;paint()});s.addEventListener('blur',()=>{hlOn=true;paint()});s.addEventListener('click',()=>{act=i;s.focus()});
+ s.addEventListener('keydown',e=>{if(e.key==='ArrowUp'){step(1,i);e.preventDefault()}else if(e.key==='ArrowDown'){step(-1,i);e.preventDefault()}else if(e.key==='ArrowRight'){SG[(i+1)%3].focus();e.preventDefault()}else if(e.key==='ArrowLeft'){SG[(i+2)%3].focus();e.preventDefault()}
+  else if(/\d/.test(e.key)){const y=D.getFullYear(),m=D.getMonth(),d=D.getDate();if(i===0){const nv=Math.min(31,+(String(d)+e.key).slice(-2)||+e.key);D=new Date(y,m,nv||1)}else if(i===1){const nv=Math.min(12,+(String(m+1)+e.key).slice(-2)||+e.key);D=new Date(y,Math.max(0,nv-1),Math.min(d,28))}else{const nv=+(String(y)+e.key).slice(-4);D=new Date(nv<1900?y:nv,m,Math.min(d,28))}paint();e.preventDefault()}})});
+document.getElementById('up').onclick=()=>step(1);document.getElementById('dn').onclick=()=>step(-1);
+paint();
+/* Idle demo: the highlighted segment hops across day, month and year, stepping up and down so the digit reels roll, until real input. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),plan=[[0,1],[0,1],[0,1],[1,1],[1,1],[2,1],[2,-1],[1,-1],[0,-1],[0,-1]];
+ (async()=>{await sleep(3600);let k=0;while(!off){const[i,dir]=plan[k++%plan.length];act=i;hlOn=true;paint();await sleep(450);if(off)return;step(dir,i);await sleep(1100)}})()}
+</script></body></html>

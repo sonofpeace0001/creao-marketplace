@@ -1,0 +1,40 @@
+ROLE
+You are a senior avatar system designer and front-end engineer with 15+ years of experience. Build "Generated Face Avatars": a procedural avatar maker: every seed builds a unique illustrated face from hair, skin, glasses, smile and colour parts, with trait readouts and a history strip.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper with a white card, saturated pastel backgrounds and flat illustrated faces.
+- Palette: #221B12, #E8590C, #F4EFE6, #9C917D, #F7F2E9, #8F846F
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with combination count; large avatar with trait list (hair, skin, glasses, smile); Randomise and Use this one buttons; history thumbnails.
+
+INTERACTION & STATES
+- Randomise rolls a new seed: the old face spins out and the new one springs in; traits re-read; thumbnails keep the last seven and are clickable.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Face in: scale 1.18 and rotate 6 degrees to rest over 550ms spring; out: scale .86 and rotate -6 degrees over 350ms; refresh icon spins 360 degrees over 600ms.
+
+IDLE AUTOPLAY
+- A new face is rolled every 2 seconds.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Stock photos or real people; faces are generated SVG.
+- Combination counts that are not computed from the real parts.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

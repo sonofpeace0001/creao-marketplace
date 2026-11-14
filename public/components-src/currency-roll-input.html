@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Currency Roll Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0F14;color:#E9F1EE;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(520px 360px at 50% 0,rgba(45,212,191,.16),transparent 70%)}
+.w{width:100%;max-width:460px;border-radius:28px;padding:26px;background:#101820;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 40px 60px -34px rgba(0,0,0,.9)}
+.lb{display:flex;justify-content:space-between;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6E8A84}
+.cur-sw{display:flex;gap:6px;margin:16px 0 8px;background:#0A0F14;border-radius:16px;padding:4px;position:relative}
+.cur-sw .th{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/4);border-radius:12px;background:#2DD4BF;transition:transform .35s cubic-bezier(.3,1.3,.4,1)}
+.cur-sw button{position:relative;z-index:1;flex:1;border:0;background:none;color:#7C9892;font:700 14px 'Sora';padding:11px 0;cursor:pointer;border-radius:12px;transition:color .2s}.cur-sw button[aria-pressed=true]{color:#04201C}.cur-sw button:focus-visible{outline:2px solid #fff;outline-offset:-3px}
+.amt{position:relative;display:flex;align-items:center;justify-content:center;height:112px;font:800 64px/1 'Sora';letter-spacing:-.06em;cursor:text;overflow:hidden;border-radius:18px}
+.amt:focus-within{background:rgba(45,212,191,.06)}
+.amt input{position:absolute;inset:0;opacity:0;cursor:text}
+.sym{font-size:.5em;color:#2DD4BF;margin-right:6px;align-self:flex-start;margin-top:.55em;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+.dg{display:inline-block;height:1em;width:.62em;overflow:hidden;position:relative;vertical-align:top}.dg .st{display:block;transition:transform .55s cubic-bezier(.3,1.2,.4,1)}.dg .st b{display:block;height:1em;line-height:1em;font-weight:800;text-align:center}
+.sp{display:inline-block;height:1em;line-height:1em;width:.3em;text-align:center;color:#6E8A84}.sp.pt{width:.28em}
+.cr{display:inline-block;width:2px;height:.8em;background:#2DD4BF;margin-left:3px;animation:bl 1s steps(1) infinite;align-self:center}@keyframes bl{50%{opacity:0}}
+.cv{display:flex;align-items:center;justify-content:space-between;margin-top:6px;padding:14px 16px;border-radius:16px;background:#0A0F14;font:500 14px 'Geist Mono';color:#7C9892}
+.cv b{color:#E9F1EE;font-size:18px;letter-spacing:-.02em}.cv i{font-style:normal;font-size:12px;padding:4px 9px;border-radius:99px;background:rgba(45,212,191,.12);color:#2DD4BF}
+.qk{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.qk button{border:0;border-radius:12px;padding:11px 0;background:#18242D;color:#B7CCC7;font:600 13.500px 'Sora';cursor:pointer;transition:background .2s,transform .1s}.qk button:hover{background:#1F313C}.qk button:active{transform:scale(.95)}.qk button:focus-visible{outline:2px solid #2DD4BF}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w"><div class="lb"><span>You send</span><span id="tt">Mid-market rate</span></div>
+<div class="cur-sw" id="sw" role="group" aria-label="Currency"><span class="th" id="th"></span><button aria-pressed="true">USD</button><button aria-pressed="false">EUR</button><button aria-pressed="false">GBP</button><button aria-pressed="false">NGN</button></div>
+<label class="amt" id="am"><span class="sym" id="sy">$</span><span id="ds" style="display:inline-flex"></span><span class="cr"></span><input id="in" inputmode="decimal" aria-label="Amount to send" autocomplete="off"></label>
+<div class="cv"><span>Recipient gets</span><div><b id="cvv">0</b> <i id="cvc">EUR</i></div></div>
+<div class="qk" id="qk"><button data-v="100">+100</button><button data-v="250">+250</button><button data-v="500">+500</button><button data-v="0">Clear</button></div></div>
+<script>
+const CU=[['USD','$',1],['EUR','&euro;',.92],['GBP','&pound;',.79],['NGN','&#8358;',1540]];
+const ds=document.getElementById('ds'),inp=document.getElementById('in'),sw=document.getElementById('sw'),th=document.getElementById('th'),sy=document.getElementById('sy');let ci=0,raw='1250',cols=[];
+const fmt=r=>{const [i,d]=r.split('.');const s=(+i||0).toLocaleString('en-US');return d!==undefined?s+'.'+d:s};
+function build(str){ds.innerHTML='';cols=[];for(const c of str){if(/\d/.test(c)){const d=document.createElement('span');d.className='dg';d.innerHTML='<span class="st">'+[...'0123456789'].map(n=>'<b>'+n+'</b>').join('')+'</span>';ds.appendChild(d);cols.push(d.firstChild)}else{const s=document.createElement('span');s.className='sp'+(c==='.'?' pt':'');s.textContent=c;ds.appendChild(s);cols.push(null)}}}
+function paint(){const str=fmt(raw),ns=[...str].map((c,i)=>/\d/.test(c)).join(),ex=[...ds.children].map(e=>e.classList.contains('dg')).join();
+ if(ns!==ex||ds.children.length!==str.length){build(str);cols.forEach((c,i)=>{if(c)c.style.transition='none'});}
+ [...str].forEach((c,i)=>{if(cols[i]){cols[i].style.transform='translateY(-'+(+c)+'em)'}else if(ds.children[i])ds.children[i].textContent=c});
+ requestAnimationFrame(()=>cols.forEach(c=>{if(c)c.style.transition=''}));
+ const v=parseFloat(raw)||0,t=CU[(ci+1)%4];document.getElementById('cvv').textContent=(v*t[2]/CU[ci][2]).toLocaleString('en-US',{maximumFractionDigits:2});document.getElementById('cvc').textContent=t[0]}
+function cur(i){ci=i;sy.innerHTML=CU[i][1];sy.style.transform='scale(1.25)';setTimeout(()=>sy.style.transform='',200);[...sw.querySelectorAll('button')].forEach((b,k)=>b.setAttribute('aria-pressed',k===i));th.style.transform='translateX('+i*100+'%)';paint()}
+sw.querySelectorAll('button').forEach((b,i)=>b.onclick=()=>cur(i));
+inp.addEventListener('input',()=>{let v=inp.value.replace(/[^0-9.]/g,'');const p=v.split('.');v=p[0].replace(/^0+(?=\d)/,'')+(p.length>1?'.'+p[1].slice(0,2):'');raw=v||'0';inp.value=raw;paint()});
+inp.addEventListener('focus',()=>{inp.value=raw});
+document.querySelectorAll('#qk button').forEach(b=>b.onclick=()=>{raw=+b.dataset.v?String((parseFloat(raw)||0)+ +b.dataset.v):'0';paint()});
+cur(0);paint();
+/* Idle demo: amounts and currencies change on their own so the digit reels keep rolling, until the first real interaction. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),plan=[['4380.50',1],['75',2],['12900',3],['1250.00',0],['860',1]];
+ (async()=>{await sleep(3600);let k=0;while(!off){const[a,c]=plan[k++%plan.length];raw=a;cur(c);await sleep(2300)}})()}
+</script></body></html>

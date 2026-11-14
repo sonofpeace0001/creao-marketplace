@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Water Ripple Image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter+Tight:wght@500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050A14;color:#E8F1FF;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:700px;display:grid;gap:14px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font:700 32px/1 'Fraunces';letter-spacing:-.02em}.hd span{font:500 12px 'Geist Mono';letter-spacing:.1em;text-transform:uppercase;color:#6F86B3}
+.fr{position:relative;aspect-ratio:16/10;border-radius:28px;overflow:hidden;cursor:crosshair;touch-action:none;box-shadow:0 44px 70px -30px rgba(0,0,0,.95),0 0 0 1px rgba(150,190,255,.18)}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cp{position:absolute;left:22px;bottom:18px;z-index:2;pointer-events:none;text-shadow:0 2px 14px rgba(0,0,0,.5)}.cp small{font:500 11px 'Geist Mono';letter-spacing:.2em;text-transform:uppercase;color:#BFD6FF}.cp b{display:block;font:700 26px 'Fraunces';letter-spacing:-.01em}
+.ft{display:flex;justify-content:space-between;font:500 12px 'Geist Mono';color:#6F86B3}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Touch the water</h1><span>Real-time displacement</span></div><div class="fr" id="fr"><canvas id="cv" aria-label="Picture of a mountain lake that ripples when touched"></canvas><div class="cp"><small>Lago di Braies</small><b>Still water, until you touch it</b></div></div><div class="ft"><span id="rc">0 ripples</span><span>Click, tap or drag</span></div></div>
+<script>
+const CW=420,CH=262,cv=document.getElementById('cv'),fr=document.getElementById('fr');cv.width=CW;cv.height=CH;const g=cv.getContext('2d',{willReadFrequently:true});
+function svg(){let h='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 262" width="420" height="262"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#101A46"/><stop offset=".5" stop-color="#4A5BC4"/><stop offset="1" stop-color="#F4A98B"/></linearGradient><linearGradient id="wt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9A092"/><stop offset=".25" stop-color="#4A5BC4"/><stop offset="1" stop-color="#0A1238"/></linearGradient></defs><rect width="420" height="131" fill="url(#sk)"/><rect y="131" width="420" height="131" fill="url(#wt)"/><circle cx="300" cy="62" r="24" fill="#FFF3D1"/>';
+ const m=(y,c,o,ph,a,f)=>{let d='M0 '+y;for(let x=0;x<=420;x+=6)d+=' L'+x+' '+(y-a*Math.abs(Math.sin(x*f+ph))-a*.3*Math.sin(x*f*2.7)).toFixed(1);return '<path d="'+d+' L420 '+y+' L0 '+y+'Z" fill="'+c+'" opacity="'+o+'"/>'};
+ h+=m(131,'#22275E',.75,1,34,.011)+m(131,'#14183F',.95,2.600,22,.018);
+ /* reflections */ h+='<g transform="translate(0 262) scale(1 -1)" opacity=".6"><rect x="0" y="131" width="420" height="0" fill="none"/>'+m(131,'#22275E',.75,1,34,.011)+m(131,'#14183F',.95,2.600,22,.018)+'</g>';
+ h+='<ellipse cx="300" cy="200" rx="22" ry="40" fill="#FFF3D1" opacity=".35"/>';
+ for(let i=0;i<40;i++){h+='<rect x="'+((i*47)%420)+'" y="'+(140+(i*29)%118)+'" width="'+(10+(i*13)%40)+'" height="1.200" fill="#fff" opacity="'+(.05+(i%5)*.03)+'"/>'}
+ return h+'</svg>'}
+const img=new Image();let src=null;img.onload=()=>{g.drawImage(img,0,0,CW,CH);src=g.getImageData(0,0,CW,CH);start()};img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg());
+const out=g.createImageData(CW,CH);const R=[];const dd=document.getElementById('rc');let total=0;
+function drop(x,y,a=1){R.push({x,y,t:performance.now(),a});if(R.length>6)R.shift();total++;dd.textContent=total+' ripple'+(total===1?'':'s')}
+function frame(n){if(!src)return;const s=src.data,o=out.data,live=R.filter(r=>n-r.t<4200);
+ for(let y=0;y<CH;y++){for(let x=0;x<CW;x++){let dx=0,dy=0;
+  for(const r of live){const t=(n-r.t)/1000,ddx=x-r.x,ddy=y-r.y,d=Math.sqrt(ddx*ddx+ddy*ddy)+.001,front=t*120,w=d-front;if(w<-90||w>28)continue;const env=Math.exp(-t*.9)*Math.exp(-(w*w)/1500)*r.a,k=Math.sin(w*.34)*env*7;dx+=ddx/d*k;dy+=ddy/d*k}
+  let sx=Math.round(x+dx),sy=Math.round(y+dy);sx=sx<0?0:sx>=CW?CW-1:sx;sy=sy<0?0:sy>=CH?CH-1:sy;const i=(y*CW+x)*4,j=(sy*CW+sx)*4,sh=1+(dx+dy)*.04;o[i]=Math.min(255,s[j]*sh);o[i+1]=Math.min(255,s[j+1]*sh);o[i+2]=Math.min(255,s[j+2]*sh);o[i+3]=255}}
+ g.putImageData(out,0,0)}
+function pos(e){const r=fr.getBoundingClientRect();return[(e.clientX-r.left)/r.width*CW,(e.clientY-r.top)/r.height*CH]}
+let lastDrop=0;fr.addEventListener('pointerdown',e=>{off=true;const[x,y]=pos(e);drop(x,y)});fr.addEventListener('pointermove',e=>{if(e.buttons||e.pointerType==='mouse'){const n=performance.now();if(n-lastDrop>180){off=true;lastDrop=n;const[x,y]=pos(e);drop(x,y,.7)}}});
+function start(){if(matchMedia('(prefers-reduced-motion: reduce)').matches){drop(240,170);frame(performance.now()+500);return}
+ drop(290,175);drop(130,200,.8);requestAnimationFrame(function loop(n){frame(n);requestAnimationFrame(loop)});
+/* Idle demo: raindrops fall on the lake at random points every 1.1 seconds; each one sends out a decaying circular wave that bends the reflection of the mountains and the moon, until you touch the water yourself. */
+ setTimeout(function rain(){if(!off){drop(40+Math.random()*340,120+Math.random()*120,.9)}setTimeout(rain,1100)},2400)}
+let off=false;
+</script></body></html>

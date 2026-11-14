@@ -1,0 +1,41 @@
+ROLE
+You are a senior launch campaign designer and front-end engineer with 15+ years of experience. Build "Launch Countdown Hero": a pre-launch hero with a live four-unit countdown of rolling digits, a glowing ember backdrop and an early-access email field.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black with an ember-orange glow, mono rolling digits on split-tone tiles and a social proof avatar stack.
+- Palette: #FF5630, #0B0A0F, #7A7468, #F6F2EA, #FFB4A2, #A8A196
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Launching-soon tag with a pulsing dot; headline; copy; countdown (days, hours, minutes, seconds); email form; waitlist count.
+
+INTERACTION & STATES
+- The countdown is real: digits tick every second and each changed digit rolls out upward while the new one rises in.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Digit roll: old digit translateY 0 to -100% with fade, new one 100% to 0, 500ms cubic-bezier(.6,0,.2,1).
+- A 2px seam sits at each tile midline; glow breathes scale 1 to 1.15 over 5s; tag dot pulses 1.8s.
+
+IDLE AUTOPLAY
+- The clock counts down continuously from a target set 12 days 7 hours ahead of page load.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static number graphic.
+- Digits that cross-fade without direction; the roll gives the sense of time moving.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Terminal Onboarding Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0C10;color:#D7E0EA;font-family:'JetBrains Mono',monospace;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(600px 400px at 85% 0,rgba(56,189,248,.14),transparent 70%)}
+.w{width:100%;max-width:620px;display:grid;gap:18px}
+.w h1{font:700 26px 'Inter Tight';letter-spacing:-.035em;text-align:center}.w h1 span{color:#38BDF8}
+.tm{border-radius:16px;overflow:hidden;background:#0F131A;box-shadow:0 40px 60px -34px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,255,255,.08)}
+.bar{display:flex;align-items:center;gap:7px;padding:12px 14px;background:#151A23;border-bottom:1px solid rgba(255,255,255,.06)}
+.bar i{width:11px;height:11px;border-radius:50%;background:#2C3442}.bar i:nth-child(1){background:#FB7185}.bar i:nth-child(2){background:#FBBF24}.bar i:nth-child(3){background:#34D399}.bar span{margin-left:10px;font-size:12px;color:#6B7A8F}
+.sc{padding:18px 20px 22px;min-height:300px;font-size:14.500px;line-height:1.7;cursor:text}
+.ln{white-space:pre-wrap}.ok{color:#34D399}.dm{color:#6B7A8F}.q{color:#E8EEF5;font-weight:700}.ans{color:#38BDF8}.pr{color:#38BDF8}
+.cur{display:inline-block;width:8px;height:17px;background:#38BDF8;vertical-align:-3px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.opt{display:block;padding-left:2ch}.opt.on{color:#38BDF8;font-weight:700}.opt.on::before{content:"> ";margin-left:-2ch}
+.bd{display:inline-block;height:10px;width:200px;background:#1B2230;border-radius:5px;overflow:hidden;vertical-align:middle;margin-right:10px}.bd b{display:block;height:100%;background:linear-gradient(90deg,#38BDF8,#34D399);width:0;transition:width .3s}
+.hide{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.hint{text-align:center;font-size:12px;color:#5B6A7E}
+@media(prefers-reduced-motion:reduce){.cur{animation:none}.bd b{transition:none}}
+</style></head><body>
+<div class="w"><h1>Onboarding in the <span>terminal</span></h1>
+<div class="tm" id="tm"><div class="bar"><i></i><i></i><i></i><span>~/projects  create-atlas</span></div><div class="sc" id="sc" role="log" aria-live="polite"></div></div>
+<input class="hide" id="kb" aria-label="Terminal input" autocomplete="off" autocapitalize="off" spellcheck="false">
+<div class="hint">Click the terminal and answer, or just watch it run.</div></div>
+<script>
+const Q=[{k:'name',q:'Project name',t:'text',def:'atlas-web'},{k:'fw',q:'Framework',t:'sel',o:['React','Next.js','SvelteKit','Astro']},{k:'rg',q:'Deploy region',t:'sel',o:['us-east','eu-west','ap-south']},{k:'ts',q:'Add TypeScript?',t:'sel',o:['Yes','No']}];
+const sc=document.getElementById('sc'),kb=document.getElementById('kb');let st={i:2,a:['atlas-web','Next.js'],buf:'',sel:1,prog:-1,auto:true};
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function render(){let h='<div class="ln dm">create-atlas 4.2.0  scaffold a production app in under a minute</div>\n';
+ for(let i=0;i<st.i;i++)h+='<div class="ln"><span class="ok">&#10003;</span> <span class="q">'+Q[i].q+'</span> <span class="dm">&rsaquo;</span> <span class="ans">'+esc(st.a[i])+'</span></div>';
+ if(st.i<Q.length){const q=Q[st.i];h+='<div class="ln"><span class="pr">?</span> <span class="q">'+q.q+'</span> <span class="dm">&rsaquo;</span> ';
+  if(q.t==='text')h+='<span class="ans">'+esc(st.buf)+'</span><span class="cur"></span></div>';
+  else{h+='<span class="dm">use arrows, Enter to confirm</span></div>'+q.o.map((o,k)=>'<span class="opt'+(k===st.sel?' on':'')+'">'+o+'</span>').join('')}}
+ else if(st.prog>=0){h+='<div class="ln"><span class="bd"><b style="width:'+Math.min(100,st.prog)+'%"></b></span>'+(st.prog>=100?'<span class="ok">&#10003; Done in 41s</span>':'Installing dependencies')+'</div>';
+  if(st.prog>=100)h+='<div class="ln dm">\n  cd '+esc(st.a[0])+' &amp;&amp; npm run dev\n  Ready on http://localhost:3000</div>'}
+ sc.innerHTML=h}
+function next(v){st.a[st.i]=v;st.i++;st.buf='';st.sel=0;render()}
+function finish(){st.prog=0;render();const t=setInterval(()=>{st.prog+=9;render();if(st.prog>=100)clearInterval(t)},180)}
+function key(e){const q=Q[st.i];if(!q){return}
+ if(q.t==='text'){if(e.key==='Enter'){next(st.buf||q.def);if(st.i>=Q.length)finish()}else if(e.key==='Backspace')st.buf=st.buf.slice(0,-1);else if(e.key.length===1&&!e.ctrlKey&&!e.metaKey)st.buf+=e.key;else return}
+ else{if(e.key==='ArrowDown')st.sel=(st.sel+1)%q.o.length;else if(e.key==='ArrowUp')st.sel=(st.sel+q.o.length-1)%q.o.length;else if(e.key==='Enter'){next(q.o[st.sel]);if(st.i>=Q.length)finish()}else return}
+ e.preventDefault();render()}
+let off=false;const stop=()=>{if(!off){off=true;st={i:0,a:[],buf:'',sel:0,prog:-1,auto:false};render()}};
+document.getElementById('tm').addEventListener('pointerdown',()=>{stop();kb.focus()});addEventListener('keydown',e=>{if(!off&&['Tab','Shift'].includes(e.key))return;if(!off)stop();key(e)});
+render();
+/* Idle demo: an autopilot answers every prompt, picks options with arrow keys and runs the install, then loops. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+ (async()=>{await sleep(3600);while(!off){st={i:0,a:[],buf:'',sel:0,prog:-1};render();await sleep(500);
+  for(const ch of 'atlas-web'){if(off)return;st.buf+=ch;render();await sleep(85)}await sleep(300);next('atlas-web');
+  for(const [i,pick] of [[1,1],[2,1],[3,0]]){if(off)return;await sleep(500);for(let s=0;s<pick;s++){if(off)return;st.sel++;render();await sleep(420)}await sleep(350);next(Q[i].o[pick])}
+  if(off)return;st.prog=0;render();for(let p=0;p<=100&&!off;p+=8){st.prog=p;render();await sleep(170)}st.prog=100;render();await sleep(3800)}})()}
+</script></body></html>

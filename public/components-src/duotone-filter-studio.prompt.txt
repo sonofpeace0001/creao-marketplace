@@ -1,0 +1,40 @@
+ROLE
+You are a senior creative tools designer and front-end engineer with 15+ years of experience. Build "Duotone Filter Studio": a photo that goes greyscale and re-maps to a chosen shadow and highlight colour pair with an 800ms cross-fade, using multiply and lighten blends and registered colour properties.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Night UI with luminous preset swatches and a poster-like generated landscape.
+- Palette: #1B1464, #FF8AC8, #0D0E16, #EEF0FA, #8A8FAD, #151724
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Image with name chip; six preset buttons (Midnight, Ember, Lagoon, Candy, Forest, Original) showing gradient swatches; spec readout of shadows, highlights and blend.
+
+INTERACTION & STATES
+- Selecting a preset changes two CSS custom properties; Original removes the filter and overlays.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- @property --s and --h typed as colours transition 800ms so the gradient between presets is true colour interpolation; chip swatch follows; panel buttons ease 250ms.
+
+IDLE AUTOPLAY
+- Presets are applied in turn every 2.2s, ending on Original.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Tinting with a single overlay; a duotone needs separate shadow and highlight mapping.
+- Animating filter strings, which cannot interpolate colours smoothly.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

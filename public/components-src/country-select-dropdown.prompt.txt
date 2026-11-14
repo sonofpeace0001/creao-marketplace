@@ -1,0 +1,40 @@
+ROLE
+You are a senior checkout designer and front-end engineer with 15+ years of experience. Build "Country Select Dropdown": a searchable country listbox with code tiles, matched-text highlighting, suggested group, dial codes, keyboard navigation and a trigger that morphs to the chosen country.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft grey-blue page, a white popover with an indigo focus ring and coloured two-letter tiles.
+- Palette: #8A90AB, #4F46E5, #141830, #7C829E, #EEF0F7, #A3A9C4
+- Type: Plus Jakarta Sans, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Label; trigger with tile, country, currency and dial code; popover with search input and Esc hint, grouped list, selected tick and key hints.
+
+INTERACTION & STATES
+- Typing filters and bolds matches; arrows move the highlight; Enter or click chooses; Escape closes; empty search shows a helpful message.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Rows enter with a 22ms stagger and a 6px rise; tick scales in on a 300ms spring; popover opens on a 350ms spring; flag tile colour transitions 350ms.
+
+IDLE AUTOPLAY
+- Queries (ni, ja, br, ken) are typed one letter at a time, matched, chosen and the menu reopens.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Real national flags or emoji; tiles use country codes.
+- Search that does not highlight why a row matched.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

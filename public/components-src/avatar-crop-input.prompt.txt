@@ -1,0 +1,40 @@
+ROLE
+You are a senior profile settings designer and front-end engineer with 15+ years of experience. Build "Avatar Crop Input": a profile photo cropper with a draggable photo under a circular mask, a zoom slider, thirds guides and live previews at three sizes.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Light settings card with a dark photo stage, white circular mask and dim surround.
+- Palette: #12141C, #838899, #1C1F2B, #6366F1, #EEF0F4, #4D5163
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with zoom and position readout; photo viewport with circular crop and rule-of-thirds guides; three live previews (72, 44, 28 px); zoom slider; hint; Cancel and Save.
+
+INTERACTION & STATES
+- Drag to pan, scroll or use the slider to zoom around the frame centre; the image is clamped so the circle is always filled; previews update continuously.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Transform updates every frame with no easing so the preview stays exact; slider track fill follows the value.
+
+IDLE AUTOPLAY
+- The photo pans and zooms on slow sine paths while the previews follow, until the first touch.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Letting the photo leave the circle; clamp the pan.
+- Previews rendered from a separate scaled copy that drifts out of sync.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

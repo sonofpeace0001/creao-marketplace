@@ -1,0 +1,40 @@
+ROLE
+You are a senior fintech product designer and front-end engineer with 15+ years of experience. Build "Currency Roll Input": a transfer amount field with odometer-style digit reels, a sliding currency selector, a live converted amount and quick-add chips.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep teal-black card, mint accent and heavy rounded display numerals.
+- Palette: #2DD4BF, #0A0F14, #E9F1EE, #6E8A84, #7C9892, #101820
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; four-currency switch with a sliding thumb; giant amount with symbol and reels; converted amount row; quick-add buttons.
+
+INTERACTION & STATES
+- Click the amount and type to edit; each digit is a reel that rolls to its value; the symbol pops on currency change; the converted row recalculates using fixed demo rates.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Digit reel: translateY to -digit em over 550ms cubic-bezier(.3,1.2,.4,1); currency thumb 350ms spring; symbol scales 1.25 for 200ms.
+
+IDLE AUTOPLAY
+- Amounts and currencies cycle every 2.3s so the reels roll and the thumb slides.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Fading numbers; they must physically roll.
+- Fake live rates implied as real; label the rate source.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

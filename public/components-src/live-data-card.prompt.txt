@@ -1,0 +1,41 @@
+ROLE
+You are a senior data visualisation designer and front-end engineer with 15+ years of experience. Build "Live Data Card": streaming metric cards with a redrawing area chart, an easing counter, a pulsing live dot and a rolling latency histogram.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black with emerald and indigo data colours, Geist and Geist Mono, restrained glows.
+- Palette: #8E8E99, #34D399, #FAFAFA, #FB7185, #09090B, #111114
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Throughput card: title, live badge, big counter with delta, 40-point area chart, axis labels; latency card: counter, 18-bar histogram that turns red above target, target and error rate.
+
+INTERACTION & STATES
+- Each 900ms a new point enters; the chart redraws, the counter eases to the new value and the delta recomputes.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Counter eases 12% of the gap per frame; bars animate height 600ms cubic-bezier(.3,1.2,.4,1).
+- Live dot pulses a 9px ring over 1.6s; random walk is seeded so the first frame is deterministic.
+
+IDLE AUTOPLAY
+- The data streams on its own from the first frame; nothing needs input.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Random jumps that make the chart jitter; use a bounded random walk.
+- Unformatted numbers; use thousands separators and tabular figures.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

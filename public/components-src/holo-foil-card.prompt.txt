@@ -1,0 +1,42 @@
+ROLE
+You are a senior creative developer and illustrator with 15+ years of experience. Build "Holo Foil Card": a collectible trading card in a gold frame whose rainbow foil and glare slide across the artwork as the card tilts in the light.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep teal night, gold bevel frame, prismatic foil over a moonlit seascape.
+- Palette: #F3D58A, #FF6B8B, #10333F, #061018, #E6F6F5, #B8862F
+- Type: Space Grotesk, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Name and HP header; framed SVG artwork with foil and glare layers; ability text; three stat tiles; hint line.
+
+INTERACTION & STATES
+- Pointer position sets rotateX/Y and the foil and glare centre; releasing eases back.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Max tilt 15 degrees on Y and 12 on X under perspective 900px; tracking 80ms linear, release 500ms cubic-bezier(.2,1.2,.4,1).
+- Foil: 115 degree repeating rainbow gradient, size 260%, offset by pointer, color-dodge at .6 opacity, masked to the artwork box.
+- Glare: 260px radial white at .55 with soft-light blend over card and art.
+
+IDLE AUTOPLAY
+- The card sways on a Lissajous path (x: sin(0.8t), y: cos(0.6t)) so the foil is always shifting.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Foil laid over the whole card including text; keep it on the art only.
+- A flat rainbow gradient that does not move with the tilt.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

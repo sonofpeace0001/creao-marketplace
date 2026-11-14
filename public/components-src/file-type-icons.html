@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>File Type Icons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F0EB;color:#1B1A17;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:680px;display:grid;gap:22px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font-size:28px;font-weight:800;letter-spacing:-.045em}.hd span{font:500 12px 'JetBrains Mono';letter-spacing:.1em;text-transform:uppercase;color:#98927F}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.f{--c:#EF4444;position:relative;border:0;background:none;padding:10px 0 0;display:grid;justify-items:center;gap:12px;cursor:pointer;font:inherit;color:inherit}
+.f:focus-visible{outline:3px solid #1B1A17;outline-offset:4px;border-radius:16px}
+.pp{position:relative;width:78px;height:98px;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.sh{position:absolute;left:8px;right:8px;bottom:-8px;height:14px;border-radius:50%;background:rgba(27,26,23,.25);filter:blur(7px);transition:all .45s}
+.s{position:absolute;inset:0;border-radius:10px 22px 10px 10px;background:#fff;box-shadow:inset 0 0 0 1.500px rgba(27,26,23,.12),0 6px 10px -6px rgba(27,26,23,.35);overflow:hidden;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%)}
+.s.b{transform:translate(-5px,-4px) rotate(-6deg);background:#F6F4EE;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}.s.b2{transform:translate(5px,-3px) rotate(5deg);background:#FBFAF6;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.fd{position:absolute;right:0;top:0;width:22px;height:22px;background:linear-gradient(225deg,#E4E0D4 50%,transparent 50%);border-radius:0 0 0 6px;filter:drop-shadow(-1px 1px 1px rgba(0,0,0,.12));z-index:2}
+.ln{position:absolute;left:12px;right:12px;height:5px;border-radius:3px;background:#E8E4D8}.ln:nth-of-type(1){top:30px}.ln:nth-of-type(2){top:41px;right:26px}.ln:nth-of-type(3){top:52px;right:18px}
+.lb{position:absolute;left:-1px;bottom:12px;padding:5px 9px 5px 8px;border-radius:0 7px 7px 0;background:var(--c);color:#fff;font:700 12.500px 'JetBrains Mono';letter-spacing:.04em;box-shadow:0 5px 8px -4px var(--c);transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.nm{text-align:center}.nm b{display:block;font-size:13.500px;font-weight:700}.nm span{font:500 11px 'JetBrains Mono';color:#98927F}
+.f:hover .pp,.f.up .pp{transform:translateY(-10px) rotate(-2deg)}.f:hover .sh,.f.up .sh{transform:scale(.8);opacity:.7}
+.f:hover .s.b,.f.up .s.b{transform:translate(-14px,-6px) rotate(-12deg)}.f:hover .s.b2,.f.up .s.b2{transform:translate(14px,-4px) rotate(11deg)}
+.f:hover .lb,.f.up .lb{transform:translateX(4px)}
+@media(max-width:520px){.g{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Files that look like files</h1><span>8 types, 78 x 98</span></div><div class="g" id="g"></div></div>
+<script>
+const F=[['PDF','#EF4444','Annual report','2.4 MB'],['DOC','#2563EB','Brand brief','184 KB'],['XLS','#16A34A','Q3 forecast','612 KB'],['FIG','#A855F7','App screens','18 MB'],['ZIP','#F59E0B','Release build','46 MB'],['MP4','#EC4899','Launch film','240 MB'],['PNG','#06B6D4','Hero artwork','3.1 MB'],['JS','#EAB308','bundle.min','88 KB']];
+const g=document.getElementById('g');
+F.forEach(([t,c,n,s])=>{const b=document.createElement('button');b.className='f';b.style.setProperty('--c',c);b.setAttribute('aria-label',n+', '+t+' file, '+s);b.innerHTML='<span class="pp"><i class="sh"></i><i class="s b"></i><i class="s b2"></i><span class="s"><i class="ln"></i><i class="ln"></i><i class="ln"></i></span><i class="fd"></i><span class="lb">'+t+'</span></span><span class="nm"><b>'+n+'</b><span>'+s+'</span></span>';b.addEventListener('pointerenter',()=>off=true);g.appendChild(b)});
+const fs=[...g.children];fs[3].classList.add('up');
+/* Idle demo: files lift in a travelling wave, fanning their stacked pages and sliding the type tab, until a pointer arrives. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3600);let i=0;while(!off){fs.forEach(f=>f.classList.remove('up'));fs[i++%8].classList.add('up');await sleep(650)}fs.forEach(f=>f.classList.remove('up'))})()}
+</script></body></html>

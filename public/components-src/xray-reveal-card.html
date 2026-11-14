@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>X-Ray Reveal Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9EEF7;color:#12203A;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.w{display:grid;gap:20px;justify-items:center;text-align:center}
+.w h1{font-weight:800;font-size:clamp(22px,4vw,30px);letter-spacing:-.04em}.w p{color:#5C6B88;font-size:14px;margin-top:6px}
+.cd{--x:62%;--y:44%;--r:92px;position:relative;width:min(340px,88vw);height:min(500px,66vh);border-radius:30px;overflow:hidden;cursor:none;box-shadow:0 40px 60px -30px rgba(18,32,58,.55),0 0 0 1px rgba(18,32,58,.08);touch-action:none}
+.ly{position:absolute;inset:0;padding:22px;display:flex;flex-direction:column;gap:14px}
+.design{background:linear-gradient(180deg,#FFFFFF,#F4F1FF)}
+.spec{background:#0B2A66;clip-path:circle(var(--r) at var(--x) var(--y));color:#9CD2FF;background-image:linear-gradient(rgba(156,210,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(156,210,255,.14) 1px,transparent 1px);background-size:16px 16px}
+.lens{position:absolute;left:var(--x);top:var(--y);width:calc(var(--r)*2);height:calc(var(--r)*2);margin:calc(var(--r)*-1) 0 0 calc(var(--r)*-1);border-radius:50%;border:2px solid rgba(255,255,255,.9);box-shadow:0 0 0 6px rgba(124,58,237,.18),0 10px 30px rgba(11,42,102,.4);pointer-events:none;z-index:5}
+.lens::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#7C3AED}
+.bar{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px}.bar i{width:34px;height:34px;border-radius:50%;background:#7C3AED;display:block}
+.hero{border-radius:22px;padding:20px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;height:150px;display:flex;flex-direction:column;justify-content:flex-end}.hero small{font-size:12px;font-weight:700;opacity:.85}.hero b{font-size:32px;font-weight:800;letter-spacing:-.04em}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.tile{border-radius:18px;padding:14px;background:#fff;box-shadow:0 0 0 1px rgba(18,32,58,.08);height:92px;display:flex;flex-direction:column;justify-content:space-between}.tile small{font-size:11px;font-weight:700;color:#6B7A99}.tile b{font-size:22px;font-weight:800;letter-spacing:-.03em}
+.btn{margin-top:auto;border-radius:16px;background:#12203A;color:#fff;text-align:center;padding:16px;font-weight:800;font-size:15px}
+.spec *{background:none!important;color:#9CD2FF!important;box-shadow:none!important;outline:1px dashed rgba(156,210,255,.85);outline-offset:-1px;border-radius:6px!important}
+.spec .hero,.spec .tile,.spec .btn{border-radius:10px!important}.spec .bar i{border-radius:50%!important}
+.spec *::before{font:500 9px 'JetBrains Mono';position:absolute;color:#FDE68A;background:none}
+.tag{position:absolute;font:500 10px 'JetBrains Mono';color:#FDE68A;background:#0B2A66;padding:1px 5px;border:1px solid rgba(253,230,138,.6);border-radius:4px;white-space:nowrap}
+.spec .rel{position:relative}
+.dim{position:absolute;font:500 9px 'JetBrains Mono';color:#FDE68A}
+@media(prefers-reduced-motion:reduce){.cd{cursor:default}}
+</style></head><body>
+<div class="w"><div><h1>See how it is built</h1><p>Move over the screen to read its layout spec.</p></div>
+<div class="cd" id="c">
+<div class="ly design"><div class="bar"><span>Good evening, Noor</span><i></i></div><div class="hero"><small>Balance</small><b>$12,480.20</b></div><div class="row"><div class="tile"><small>Savings</small><b>$8,120</b></div><div class="tile"><small>Spending</small><b>$1,940</b></div></div><div class="btn">Send money</div></div>
+<div class="ly spec" aria-hidden="true"><div class="bar"><span>Good evening, Noor</span><i></i></div><div class="hero rel"><small>Balance</small><b>$12,480.20</b><span class="tag" style="right:10px;top:10px">r 22  #7C3AED</span></div><div class="row"><div class="tile rel"><small>Savings</small><b>$8,120</b><span class="tag" style="right:6px;top:6px">92 x 1fr</span></div><div class="tile rel"><small>Spending</small><b>$1,940</b><span class="tag" style="right:6px;top:6px">gap 12</span></div></div><div class="btn rel">Send money<span class="tag" style="left:8px;top:-9px">h 52  #12203A</span></div></div>
+<div class="lens"></div></div></div>
+<script>
+const c=document.getElementById('c');let real=0;
+function put(px,py){c.style.setProperty('--x',px.toFixed(1)+'px');c.style.setProperty('--y',py.toFixed(1)+'px')}
+c.addEventListener('pointermove',e=>{real=performance.now();const r=c.getBoundingClientRect();put(e.clientX-r.left,e.clientY-r.top)});
+c.addEventListener('pointerleave',()=>{real=0});
+/* Idle demo: the lens glides over the layout on a Lissajous path until a pointer enters the card. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)(function loop(n){if(!real||n-real>2200){const r=c.getBoundingClientRect(),t=n/1000+.9;put(r.width*(.5+.32*Math.sin(t*.8)),r.height*(.48+.34*Math.sin(t*.55+1)))}requestAnimationFrame(loop)})(0);
+else put(c.clientWidth*.6,c.clientHeight*.4);
+put(c.clientWidth*.62,c.clientHeight*.44);
+</script></body></html>

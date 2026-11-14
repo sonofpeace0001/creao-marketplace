@@ -1,0 +1,40 @@
+ROLE
+You are a senior travel product designer and front-end engineer with 15+ years of experience. Build "Guest Counter Dropdown": a booking guest popover with three steppers whose numbers roll vertically, limits that disable buttons, a pet switch and a summary that updates and bumps on the search bar.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm sand page, a white pill search bar with an orange search chip and a sunset property card.
+- Palette: #E8590C, #241C10, #F0E8D8, #F3ECDD, #F3EDE2, #A39578
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Search bar with check in, check out and guests; popover with Adults, Children and Infants steppers, a pet switch and a Done button; property image.
+
+INTERACTION & STATES
+- Plus and minus buttons step within per-row limits and disable at the bounds; the summary re-reads the totals (infants and pets separately).
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Digits roll 400ms cubic-bezier(.3,1.3,.4,1); summary text lifts 3px and tints orange for 450ms on change; switch knob 400ms spring; popover on a 350ms spring.
+
+IDLE AUTOPLAY
+- Counters step up and down, the pet switch flips, then the popover closes and reopens reset.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Allowing zero adults.
+- Counters that change without any motion.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

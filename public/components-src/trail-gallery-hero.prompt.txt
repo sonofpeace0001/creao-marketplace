@@ -1,0 +1,41 @@
+ROLE
+You are a senior creative developer and art director with 15+ years of experience. Build "Trail Gallery Hero": a studio portfolio hero where moving the cursor leaves a trail of rotated artwork tiles that float up and fade, never covering the headline.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm off-white, ink black and tangerine, with generative gradient tiles in circles, pills and slabs labelled like case studies.
+- Palette: #FF5A1F, #F4F1EA, #151412, #6F6A5E, #7A7467, #5C574B
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Nav; mono eyebrow; huge two-colour headline with multiply blend; copy; call to action; hint; transient tile layer.
+
+INTERACTION & STATES
+- A tile is dropped every 95px of pointer travel, at a random size and tilt, cycling through six artworks and three corner radii.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Tile life 1.7s: scale .2 to 1 by 12%, hold with a 10px rise to 70%, then rise 40px, rotate 8 degrees further, scale .85 and fade.
+- Tiles sit below the headline and ignore pointer events.
+
+IDLE AUTOPLAY
+- A ghost cursor traces a looping Lissajous figure across the hero, and five tiles are pre-seeded so the first frame already shows the effect.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Tiles that spawn on every mouse event; distance-gate them.
+- Stock photos; the artworks are generated gradients.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

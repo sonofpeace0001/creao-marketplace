@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Delivery Truck Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EAF0F8;color:#0F1A33;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:640px;border-radius:30px;background:#fff;padding:28px 28px 26px;box-shadow:0 36px 50px -34px rgba(15,26,51,.55),inset 0 0 0 1px rgba(15,26,51,.07)}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:30px}.hd small{font:600 11.500px 'Geist Mono';letter-spacing:.14em;color:#8A97B5;text-transform:uppercase}.hd h1{font-size:24px;font-weight:800;letter-spacing:-.045em;margin-top:4px}
+.eta{text-align:right}.eta b{display:block;font:800 30px/1 'Sora';letter-spacing:-.05em;font-variant-numeric:tabular-nums}.eta span{font:500 12px 'Geist Mono';color:#8A97B5}
+.tk{position:relative;height:96px;margin:0 22px}
+.ln{position:absolute;left:0;right:0;top:56px;height:8px;border-radius:4px;background:#E6ECF6;overflow:hidden}
+.ln i{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p,0)*100%);border-radius:4px;background:linear-gradient(90deg,#3B82F6,#22D3EE);transition:width .1s linear}
+.ln::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 14px,rgba(255,255,255,.55) 14px 24px);animation:rd .6s linear infinite;opacity:.5}@keyframes rd{to{background-position:24px 0}}
+.nd{position:absolute;top:50px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 3px #D5DDEC;transition:all .45s cubic-bezier(.3,1.8,.5,1);display:grid;place-items:center}
+.nd svg{width:11px;height:11px;stroke-dasharray:18;stroke-dashoffset:18;transition:stroke-dashoffset .35s .1s}.nd svg *{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.nd.dn{background:#3B82F6;box-shadow:none;transform:scale(1.15)}.nd.dn svg{stroke-dashoffset:0}
+.lb{position:absolute;top:78px;transform:translateX(-50%);text-align:center;white-space:nowrap}.lb b{display:block;font-size:12.500px;font-weight:700;color:#8A97B5;transition:color .3s}.lb span{font:500 11px 'Geist Mono';color:#B0BAD0}.lb.dn b{color:#0F1A33}
+.tr{position:absolute;top:0;left:calc(var(--p,0)*100%);width:0;height:60px;transition:left .1s linear}
+.tr svg{position:absolute;left:-34px;top:0;width:68px;height:56px;overflow:visible;filter:drop-shadow(0 8px 6px rgba(15,26,51,.25))}
+.wh{transform-box:fill-box;transform-origin:center;animation:sp .5s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.tr.stop .wh{animation-play-state:paused}.tr.stop svg{animation:none}.tr:not(.stop) svg{animation:bn .5s ease-in-out infinite}@keyframes bn{50%{transform:translateY(-2px)}}
+.sm{display:flex;gap:22px;margin-top:26px;padding-top:20px;border-top:1px solid #EEF2F9;flex-wrap:wrap;align-items:center}
+.st{display:flex;align-items:center;gap:12px;flex:1;min-width:200px}.st .ic{width:44px;height:44px;border-radius:14px;background:#EAF2FF;display:grid;place-items:center;flex:none}.st .ic svg{width:22px;height:22px}.st .ic svg *{fill:none;stroke:#3B82F6;stroke-width:2.100;stroke-linecap:round;stroke-linejoin:round}
+.st b{display:block;font-size:15.500px;font-weight:700;transition:opacity .25s}.st span{font-size:13px;color:#8A97B5}
+.dr{display:flex;align-items:center;gap:10px}.dr i{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#FDBA74,#F472B6);display:block}.dr b{display:block;font-size:14px}.dr span{font-size:12px;color:#8A97B5}
+@media(max-width:520px){.tk{margin:0 10px}.lb b{font-size:11px}.lb span{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd" id="cd"><div class="hd"><div><small>Order 48213</small><h1>Your lamp is on its way</h1></div><div class="eta"><b id="et">18 min</b><span>estimated arrival</span></div></div>
+<div class="tk" id="tk"><div class="ln"><i id="fl"></i></div><div class="tr" id="tr"><svg viewBox="0 0 68 56"><rect x="4" y="8" width="36" height="28" rx="4" fill="#3B82F6"/><path d="M40 16h14l10 10v10H40Z" fill="#60A5FA"/><path d="M46 20h7l6 6H46Z" fill="#DBEAFE"/><rect x="10" y="14" width="24" height="4" rx="2" fill="rgba(255,255,255,.55)"/><g><circle class="wh" cx="18" cy="40" r="7" fill="#1E293B"/><circle cx="18" cy="40" r="2.500" fill="#94A3B8"/><circle class="wh" cx="52" cy="40" r="7" fill="#1E293B"/><circle cx="52" cy="40" r="2.500" fill="#94A3B8"/></g></svg></div></div>
+<div class="sm"><div class="st"><span class="ic"><svg viewBox="0 0 24 24" id="si"></svg></span><div><b id="sb">Out for delivery</b><span id="ss">Marcus is 2.4 km away</span></div></div><div class="dr"><i></i><div><b>Marcus, driver</b><span>White van, KX 21 PTO</span></div></div></div></div>
+<script>
+const N=[['Confirmed','09:02',0],['Packed','09:40',1/3],['Out for delivery','11:15',2/3],['Delivered','11:50',1]];
+const tk=document.getElementById('tk'),fl=document.getElementById('fl'),tr=document.getElementById('tr');const nodes=[];
+N.forEach(([n,t,p])=>{const d=document.createElement('div');d.className='nd';d.style.left=(p*100)+'%';d.innerHTML='<svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg>';tk.appendChild(d);const l=document.createElement('div');l.className='lb';l.style.left=(p*100)+'%';l.innerHTML='<b>'+n+'</b><span>'+t+'</span>';tk.appendChild(l);nodes.push([d,l,p])});
+const IC=['<path d="M5 12.500 10 17.500 19 7"/>','<path d="M3 8l9-5 9 5v9l-9 5-9-5ZM3 8l9 5 9-5M12 13v9"/>','<path d="M3 7h11v9H3ZM14 10h4l3 3v3h-7M7 19a1.800 1.800 0 1 0 0-3.600A1.800 1.800 0 0 0 7 19ZM17 19a1.800 1.800 0 1 0 0-3.600A1.800 1.800 0 0 0 17 19Z"/>','<path d="M3 11l9-8 9 8v10H3ZM9 21v-6h6v6"/>'];
+const MS=[['Order confirmed','We have your payment'],['Packed with care','Leaves the warehouse shortly'],['Out for delivery','Marcus is {d} km away'],['Delivered','Left with the concierge, 11:50']];
+const si=document.getElementById('si'),sb=document.getElementById('sb'),ss=document.getElementById('ss'),et=document.getElementById('et');let last=-1;
+function set(p){tk.style.setProperty('--p',p);fl.style.setProperty('--p',p);tr.style.left=(p*100)+'%';const st=p>=1?3:p>=2/3?2:p>=1/3?1:0;nodes.forEach(([d,l,q],i)=>{const on=p>=q-.005;d.classList.toggle('dn',on);l.classList.toggle('dn',on)});tr.classList.toggle('stop',p>=1);
+ if(st!==last){last=st;si.innerHTML=IC[st];sb.textContent=MS[st][0]}ss.textContent=MS[st][1].replace('{d}',(Math.max(.2,(1-p)*7.2)).toFixed(1));const m=Math.max(0,Math.round((1-p)*54));et.textContent=p>=1?'Arrived':m+' min'}
+set(.78);
+/* Idle demo: the order progresses from confirmed to delivered; the truck drives along the track with turning wheels and a bounce, the blue line fills behind it, each stop pops a tick, the status text and the countdown to arrival update, and then a new order starts, until you refresh. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2600);while(true){set(0);await sleep(900);const stops=[0,1/3,2/3,1];for(let i=1;i<4;i++){const a=stops[i-1],b=stops[i],dur=1900;const t0=performance.now();await new Promise(res=>{(function f(n){const k=Math.min(1,(n-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;set(a+(b-a)*e);k<1?requestAnimationFrame(f):res()})(t0)});await sleep(900)}await sleep(2800)}})()}
+</script></body></html>

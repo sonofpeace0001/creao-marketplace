@@ -1,0 +1,40 @@
+ROLE
+You are a senior data storytelling designer and front-end engineer with 15+ years of experience. Build "Bar Race Progress": an animated ranking race where six product bars grow year by year, overtake each other and glide into new ranks with a mono value counter and a ghost year.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight card, glowing gradient bars in distinct hues, oversized translucent year.
+- Palette: #151827, #0E1018, #ECEEF8, #7C84A6, #B3B9D4, #7C8CFF
+- Type: Space Grotesk, Space Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; six ranked rows with label, glowing bar and value; ghost year; play control and timeline.
+
+INTERACTION & STATES
+- Pause or play the race.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Rows swap rank with a springy translate; bars lengthen smoothly; values count; the timeline fills.
+
+IDLE AUTOPLAY
+- After a short hold the race runs from 2018 to 2026 and loops.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Instant row swaps; ranks must glide.
+- One colour for all bars.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

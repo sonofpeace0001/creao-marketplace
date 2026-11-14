@@ -1,0 +1,40 @@
+ROLE
+You are a senior performance-minded front-end engineer and designer with 15+ years of experience. Build "Blur Up Loader": a three-stage progressive image load: shimmering skeletons, a heavily blurred colour preview, then the sharp image settling in, shown on three staggered cards with a stage tracker.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cool grey page with white cards, an indigo stage tracker and mono timings.
+- Palette: #12141F, #6366F1, #8A90A8, #E8EAF2, #F1F2F6, #E1E4EE
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with Replay; stage tracker (Skeleton, Blur preview, Sharp image); three cards each with skeleton, blur layer, sharp layer, SHARP tag and metadata; status line with measured time.
+
+INTERACTION & STATES
+- Replay restarts the sequence; the card text swaps from skeleton bars to the title and file size when sharp.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Skeleton shimmer 1.2s linear; blur layer scale 1.2 and blur 22px fading in over 600ms; sharp layer opacity 700ms with a 1.04 to 1 settle over 1s; cards stagger 380 to 420ms.
+
+IDLE AUTOPLAY
+- The whole sequence replays on a loop with a 3.2s hold on the finished state.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Jumping from empty to sharp; the blur stage is the point.
+- Placeholders that do not share the final image's colours.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Level Up Badge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(640px 440px at 50% 40%,#2B1A5E,#0D0A22 75%);color:#F3EEFF;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.w{width:100%;max-width:420px;display:grid;justify-items:center;gap:22px;text-align:center}
+.bw{position:relative;width:min(240px,66vw);aspect-ratio:1}
+.bw svg.rg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.rg .tr{fill:none;stroke:rgba(255,255,255,.1);stroke-width:9}.rg .v{fill:none;stroke:url(#gr);stroke-width:9;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p,0));transition:stroke-dashoffset .5s cubic-bezier(.3,1,.4,1);filter:drop-shadow(0 0 8px rgba(167,139,250,.8))}
+.hx{position:absolute;inset:15%;display:grid;place-items:center;filter:drop-shadow(0 16px 20px rgba(124,58,237,.6));transition:transform .5s cubic-bezier(.3,1.8,.5,1)}
+.hx svg{position:absolute;inset:0;width:100%;height:100%}
+.hx .lv{position:relative;display:grid;justify-items:center;line-height:1}.hx small{font:700 11px 'Manrope';letter-spacing:.24em;color:#E4D8FF;margin-bottom:2px}.hx .n{height:1em;overflow:hidden;font:800 clamp(42px,12vw,66px)/1 'Unbounded';letter-spacing:-.06em;color:#fff;text-shadow:0 3px 0 rgba(60,20,120,.6)}.hx .n span{display:block;transition:transform .55s cubic-bezier(.3,1.4,.4,1);height:1em}
+.bw.pop .hx{animation:pp .8s cubic-bezier(.3,1.8,.5,1)}@keyframes pp{0%{transform:scale(1)}30%{transform:scale(.88)}60%{transform:scale(1.2) rotate(-4deg)}100%{transform:scale(1)}}
+.bw.pop::before{content:"";position:absolute;inset:-12%;border-radius:50%;background:radial-gradient(circle,rgba(196,181,253,.55),transparent 65%);animation:fl .9s ease-out forwards}@keyframes fl{from{transform:scale(.6);opacity:1}to{transform:scale(1.5);opacity:0}}
+.pt{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:2px;background:var(--c);animation:bs .9s cubic-bezier(.2,.8,.3,1) forwards}@keyframes bs{from{transform:translate(0,0) rotate(0) scale(1)}to{transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.2);opacity:0}}
+.lu{position:absolute;left:50%;top:-14px;transform:translate(-50%,10px) scale(.8);padding:7px 16px;border-radius:99px;background:linear-gradient(90deg,#F59E0B,#EC4899);font:800 12px 'Manrope';letter-spacing:.2em;color:#fff;opacity:0;white-space:nowrap;box-shadow:0 10px 18px -6px rgba(236,72,153,.7)}
+.bw.pop .lu{animation:lu 1.900s cubic-bezier(.3,1.6,.5,1) forwards}@keyframes lu{0%{opacity:0;transform:translate(-50%,10px) scale(.8)}18%,78%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-8px) scale(.95)}}
+.xp{width:100%;max-width:320px;display:grid;gap:9px}.xp .t{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:#BFB3E8}.xp .t b{color:#fff;font-variant-numeric:tabular-nums}
+.xp .b{height:12px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden}.xp .b i{display:block;height:100%;width:calc(var(--p,0)*100%);border-radius:6px;background:linear-gradient(90deg,#8B5CF6,#EC4899,#F59E0B);transition:width .5s cubic-bezier(.3,1,.4,1)}
+.ttl{font:800 22px 'Unbounded';letter-spacing:-.04em}.sub{font-size:14px;color:#9B8FC9;margin-top:-14px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="bw" id="bw"><svg class="rg" viewBox="0 0 120 120"><defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8B5CF6"/><stop offset=".6" stop-color="#EC4899"/><stop offset="1" stop-color="#F59E0B"/></linearGradient></defs><circle class="tr" cx="60" cy="60" r="54"/><circle class="v" id="rv" cx="60" cy="60" r="54" pathLength="1"/></svg>
+<div class="hx"><svg viewBox="0 0 100 100"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A78BFA"/><stop offset=".55" stop-color="#6D28D9"/><stop offset="1" stop-color="#3B0F8C"/></linearGradient></defs><path d="M50 4 90 27v46L50 96 10 73V27Z" fill="url(#hg)"/><path d="M50 4 90 27v46L50 96 10 73V27Z" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.600"/><path d="M50 10 84 30v40L50 90 16 70V30Z" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"/><path d="M50 4 90 27 50 50 10 27Z" fill="rgba(255,255,255,.14)"/></svg><div class="lv"><small>LEVEL</small><div class="n" id="nn"><span>7</span></div></div></div><div class="lu">LEVEL UP</div></div>
+<div class="ttl" id="tt">Pathfinder</div><div class="sub" id="sb">Keep going. Next rank at level 8.</div>
+<div class="xp"><div class="t"><span>Experience</span><b id="xt">0 / 1,000 XP</b></div><div class="b"><i id="xb"></i></div></div></div>
+<script>
+const bw=document.getElementById('bw'),rv=document.getElementById('rv'),xb=document.getElementById('xb'),xt=document.getElementById('xt'),nn=document.getElementById('nn'),tt=document.getElementById('tt'),sb=document.getElementById('sb');
+const RK=['Wanderer','Scout','Pathfinder','Trailblazer','Vanguard','Champion','Legend'];let lvl=7,xp=720;
+const set=p=>{bw.style.setProperty('--p',p);rv.style.setProperty('--p',p);xb.style.setProperty('--p',p);xt.textContent=Math.round(p*1000).toLocaleString('en-US')+' / 1,000 XP'};
+function setLevel(n){const old=nn.firstChild;const nw=document.createElement('span');nw.textContent=n;nn.appendChild(nw);old.style.transform='translateY(-100%)';nw.style.transform='translateY(100%)';requestAnimationFrame(()=>requestAnimationFrame(()=>{nw.style.transform='translateY(-100%)';}));
+ setTimeout(()=>{old.remove();nw.style.transition='none';nw.style.transform='none';setTimeout(()=>nw.style.transition='',30)},600);tt.textContent=RK[Math.min(6,Math.floor(n/2))];sb.textContent='Keep going. Next rank at level '+(n+1)+'.'}
+function burst(){bw.classList.remove('pop');void bw.offsetWidth;bw.classList.add('pop');const C=['#F59E0B','#EC4899','#A78BFA','#FDE68A','#60A5FA'];for(let i=0;i<22;i++){const p=document.createElement('i');p.className='pt';const a=i/22*Math.PI*2+Math.random()*.3,d=110+Math.random()*60;p.style.cssText='--c:'+C[i%5]+';--x:'+Math.cos(a)*d+'px;--y:'+Math.sin(a)*d+'px;--r:'+(Math.random()*540-270)+'deg;'+(i%3?'':'border-radius:50%');bw.appendChild(p);setTimeout(()=>p.remove(),950)}}
+set(xp/1000);
+/* Idle demo: XP climbs in steps, the ring and bar fill, and at 1,000 the badge pops, the number rolls to the next level and confetti bursts, then it repeats. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);while(true){while(xp<1000){xp=Math.min(1000,xp+90+Math.random()*60);set(xp/1000);await sleep(650)}await sleep(500);burst();lvl++;setLevel(lvl);await sleep(2600);xp=0;set(0);await sleep(1000);xp=150;set(.15);await sleep(700)}})()}
+</script></body></html>

@@ -1,0 +1,40 @@
+ROLE
+You are a senior industrial UI designer and front-end engineer with 15+ years of experience. Build "Pull Lever Toggle": a control panel with three industrial levers: the arm swings through an arc with a spring stop, and a lamp, knob and status text answer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Gunmetal panel with chrome arms, black slots, glossy red and green knobs and phosphor-green lamps.
+- Palette: #14161B, #8E96A6, #1B1D23, #4ADE80, #3A3F4A, #1A1C22
+- Type: Space Grotesk, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; riveted panel with three units each having a lamp, a slotted track with a chrome lever and knob, a label and a status.
+
+INTERACTION & STATES
+- Click, drag the lever up or down, or press Space or Enter; releasing past centre commits the state; each lever is a keyboard-operable switch.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Arm rotation from +35 to -35 degrees over 600ms cubic-bezier(.3,1.6,.45,.9) so it bounces off the stop; lamp glows with a 12px bloom; knob colour swaps red to green.
+
+IDLE AUTOPLAY
+- A lever is thrown every 1.5s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A flat slider with a handle; it must read as a lever with a pivot.
+- Lamps that change without any glow.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

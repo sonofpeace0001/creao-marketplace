@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tilt Glare Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(800px 500px at 50% 100%,#2A1A55 0,#0B0A18 65%);color:#F1EEFF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:680px;display:grid;gap:40px;justify-items:center;text-align:center}
+.w h1{font-size:clamp(26px,4.8vw,42px);font-weight:800;letter-spacing:-.045em;line-height:1.05}.w p{color:#8E86B8;font-size:15px;margin-top:10px}
+.sc{perspective:700px;display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+.tb{--rx:-9deg;--ry:12deg;--gx:68%;--gy:26%;position:relative;border:0;border-radius:22px;padding:24px 40px;min-width:230px;color:#fff;font:800 20px 'Sora';letter-spacing:-.02em;cursor:pointer;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .5s cubic-bezier(.2,1.2,.4,1);background:linear-gradient(135deg,#7C3AED,#EC4899 55%,#F59E0B);box-shadow:0 30px 40px -20px rgba(236,72,153,.55),inset 0 0 0 1px rgba(255,255,255,.25);overflow:hidden}
+.tb.live{transition:transform .08s linear}
+.tb::before{content:"";position:absolute;inset:0;background:radial-gradient(240px circle at var(--gx) var(--gy),rgba(255,255,255,.55),transparent 55%);mix-blend-mode:soft-light;pointer-events:none}
+.tb::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.35) 46%,transparent 62%);background-size:260% 100%;background-position:calc(var(--gx)*-1 + 120%) 0;mix-blend-mode:overlay;pointer-events:none}
+.tb span{position:relative;display:inline-flex;align-items:center;gap:12px;transform:translateZ(40px);text-shadow:0 4px 14px rgba(0,0,0,.28)}
+.tb svg{width:22px;height:22px}
+.tb:focus-visible{outline:3px solid #fff;outline-offset:6px}
+.tb.dk{background:linear-gradient(135deg,#1E1B3A,#2F2A63);box-shadow:0 30px 40px -22px rgba(124,58,237,.5),inset 0 0 0 1px rgba(167,139,250,.35);--rx:-6deg;--ry:-10deg;--gx:30%;--gy:30%}
+.tb.dk::before{background:radial-gradient(220px circle at var(--gx) var(--gy),rgba(167,139,250,.55),transparent 60%);mix-blend-mode:screen}
+@media(prefers-reduced-motion:reduce){.tb{transition:none!important;transform:none!important}}
+</style></head><body>
+<div class="w"><div><h1>Hold the light in your hand</h1><p>The button tilts toward your cursor in 3D while a glare and a holographic sheen slide across its face.</p></div>
+<div class="sc">
+<button class="tb" data-t><span>Claim early access<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+<button class="tb dk" data-t><span>Watch the film<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.500v13a1 1 0 0 0 1.500.9l10.500-6.500a1 1 0 0 0 0-1.800L9.500 4.600A1 1 0 0 0 8 5.500Z"/></svg></span></button>
+</div></div>
+<script>
+document.querySelectorAll('[data-t]').forEach(b=>{const d={rx:b.style.getPropertyValue('--rx'),ry:b.style.getPropertyValue('--ry')};
+ b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;b.classList.add('live');
+  b.style.setProperty('--ry',((px-.5)*26).toFixed(1)+'deg');b.style.setProperty('--rx',((.5-py)*22).toFixed(1)+'deg');b.style.setProperty('--gx',(px*100).toFixed(0)+'%');b.style.setProperty('--gy',(py*100).toFixed(0)+'%')});
+ b.addEventListener('pointerleave',()=>{b.classList.remove('live');['--rx','--ry','--gx','--gy'].forEach(p=>b.style.removeProperty(p));b._idle=0})
+ b.addEventListener('pointerenter',()=>b._idle=1)});
+/* Idle demo: each button slowly sways and sweeps its glare, out of phase with its neighbour. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const bs=[...document.querySelectorAll('[data-t]')];bs.forEach(b=>b._idle=0);
+ (function loop(n){bs.forEach((b,i)=>{if(b._idle)return;const t=n/1000+i*2.1;b.classList.add('live');
+  b.style.setProperty('--ry',(Math.sin(t*.9)*14).toFixed(1)+'deg');b.style.setProperty('--rx',(Math.cos(t*.7)*9).toFixed(1)+'deg');
+  b.style.setProperty('--gx',(50+Math.sin(t*.9)*42).toFixed(0)+'%');b.style.setProperty('--gy',(50-Math.cos(t*.7)*36).toFixed(0)+'%')});requestAnimationFrame(loop)})(0)}
+</script></body></html>

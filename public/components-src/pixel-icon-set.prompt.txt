@@ -1,0 +1,40 @@
+ROLE
+You are a senior pixel artist and front-end engineer with 15+ years of experience. Build "Pixel Icon Set": six 8 by 8 pixel-art icons built from rect grids that flip between two frames on a stepped timer while they bob, in beveled arcade cards.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Purple arcade night with beveled tiles, hard shadows, a yellow and magenta title and Press Start 2P labels.
+- Palette: #0E0A1F, #F4EEFF, #FFD23F, #5B4B99, #7B6EAA, #1B1530
+- Type: Press Start 2P, Space Grotesk (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Title and spec; three-by-two beveled cards (heart, coin, ghost, mushroom, potion, gem) with frame counter and label; pause hint.
+
+INTERACTION & STATES
+- Click a tile to pause or resume its animation (aria-pressed); hover lifts the card, press sinks it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Frame swap every 520ms; icon bobs 4px on steps(2); card hover translates -2px with a hard shadow growth; shape-rendering crispEdges and image-rendering pixelated.
+
+IDLE AUTOPLAY
+- All six animate continuously from load.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Smoothed pixel edges; keep rect geometry crisp.
+- More than two frames of fake smoothness.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

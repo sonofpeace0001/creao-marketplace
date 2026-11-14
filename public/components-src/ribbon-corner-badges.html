@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ribbon Corner Badges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECE8DF;color:#1E1B16;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:700px;display:grid;gap:22px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font-size:28px;font-weight:800;letter-spacing:-.045em}.hd span{font:500 12px 'DM Mono';letter-spacing:.1em;text-transform:uppercase;color:#9A917D}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.c{position:relative;border-radius:24px;background:#fff;overflow:hidden;box-shadow:0 22px 28px -22px rgba(30,27,22,.5),inset 0 0 0 1px rgba(30,27,22,.07);transition:transform .35s cubic-bezier(.3,1.4,.4,1)}
+.c:hover{transform:translateY(-5px)}
+.im{height:150px;position:relative;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center}.im svg{width:64px;height:64px;opacity:.95}.im svg *{fill:none;stroke:#fff;stroke-width:1.600;stroke-linecap:round;stroke-linejoin:round}
+.bd{padding:14px 16px 16px}.bd b{display:block;font-size:17px;letter-spacing:-.03em}.bd span{font-size:13px;color:#8F8672}.bd .pr{display:flex;align-items:baseline;gap:8px;margin-top:10px;font-size:22px;font-weight:800;letter-spacing:-.04em}.bd .pr s{font-size:14px;font-weight:500;color:#A59C88}
+.rb{position:absolute;top:0;right:0;width:110px;height:110px;overflow:hidden;pointer-events:none;z-index:3}
+.rb .t{position:absolute;top:24px;right:-36px;width:150px;padding:6px 0;text-align:center;transform:rotate(45deg);background:var(--r);color:#fff;font:800 12.500px 'Bricolage Grotesque';letter-spacing:.14em;overflow:hidden;box-shadow:0 6px 8px -4px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35);animation:fl 3.600s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes fl{0%,100%{transform:rotate(45deg) skewX(0)}50%{transform:rotate(45deg) skewX(-3deg) translateY(1px)}}
+.rb .t::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);animation:sw 3.600s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes sw{0%,55%{left:-60%}100%{left:130%}}
+.rb::before{content:"";position:absolute;top:0;right:0;width:100%;height:100%;background:linear-gradient(225deg,rgba(0,0,0,.18),transparent 40%);pointer-events:none}
+.l{position:absolute;top:0;left:0;z-index:3}
+.tag{position:absolute;left:14px;top:14px;z-index:3;display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.92);font:700 11.500px 'DM Mono';letter-spacing:.06em;color:#1E1B16}.tag i{width:7px;height:7px;border-radius:50%;background:var(--r);display:block}
+@media(max-width:560px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Corner ribbons with some wind</h1><span>Fluttering, glinting, folded</span></div>
+<div class="g">
+<article class="c" style="--a:#6EE7B7;--b:#059669;--r:#16A34A"><div class="rb"><div class="t">NEW</div></div><div class="im"><svg viewBox="0 0 24 24"><path d="M4 9h16v11H4ZM2 5h20v4H2ZM12 5v15M8 5C8 2 12 2 12 5M16 5c0-3-4-3-4 0"/></svg></div><div class="bd"><b>Studio Gift Box</b><span>Hand-finished, ships Monday</span><div class="pr">$48</div></div></article>
+<article class="c" style="--a:#FDA4AF;--b:#E11D48;--r:#DC2626"><div class="rb"><div class="t" style="--d:.5s">-30%</div></div><div class="im"><svg viewBox="0 0 24 24"><path d="M3 12l9-9h8v8l-9 9ZM15.500 8.500h.01"/></svg></div><div class="bd"><b>Autumn Tote</b><span>Waxed canvas, leather straps</span><div class="pr">$63 <s>$90</s></div></div></article>
+<article class="c" style="--a:#FCD34D;--b:#B45309;--r:linear-gradient(90deg,#B8860B,#F5D76E 50%,#B8860B)"><div class="rb"><div class="t" style="--d:1s;color:#3B2A00">PRO</div></div><div class="im"><svg viewBox="0 0 24 24"><path d="m12 3 2.600 5.400 5.900.8-4.300 4.200 1 5.900-5.200-2.800-5.200 2.800 1-5.900-4.300-4.200 5.900-.8Z"/></svg></div><div class="bd"><b>Atelier Membership</b><span>Early access and studio days</span><div class="pr">$19<span style="font-size:13px;font-weight:600;color:#8F8672">/mo</span></div></div></article>
+</div></div></body></html>

@@ -1,0 +1,42 @@
+ROLE
+You are a senior UI engineer and motion designer with 15+ years of experience. Build "Border Beam Button": dark buttons with a conic-gradient light that orbits the edge and a blurred bloom underneath, each on its own speed and colour pair.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight navy with violet, cyan, emerald and coral beams.
+- Palette: #0C1020, #17203A, #080B14, #E7ECF8, #7F8AA8, #7C5CFF
+- Type: Sora (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Headline and intro; three buttons: AI action with shortcut chip, deploy action, pill call to action.
+
+INTERACTION & STATES
+- An @property angle animates a masked conic gradient around the border; the bloom brightens on hover; each button has its own orbit duration; static beam angle for reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Register --a with @property (syntax <angle>) and animate 0deg to 360deg linear, durations 2.6s, 3.4s and 4.4s.
+- Beam arc spans 62% to 100% of the cone: transparent to colour 1 at 80% to colour 2 at 94%.
+- Bloom: same gradient, blur 22px, opacity .38 resting and .7 on hover.
+
+IDLE AUTOPLAY
+- The beams orbit continuously; each button starts at a different angle so they never line up.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static gradient border.
+- A bloom so strong it washes out the label.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

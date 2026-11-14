@@ -1,0 +1,40 @@
+ROLE
+You are a senior multiplayer product designer and front-end engineer with 15+ years of experience. Build "Live Cursor Presence": a multiplayer canvas where four collaborators' cursors glide between elements, outline what they edit with name tags, and drop short comments.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Pale design-tool canvas on a dot grid with violet, sky, amber and pink collaborators and green online dots.
+- Palette: #12141F, #8B90A6, #E7E9F0, #EEF0F5, #22C55E, #F6F7FB
+- Type: Inter Tight, Instrument Serif (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Top bar with file name, page, presence avatars and Share; canvas with header, image, card, button and tag elements; per-user cursor, selection box and comment bubble.
+
+INTERACTION & STATES
+- Each user cycles through elements: the cursor eases to a random point inside, a coloured selection box with an is-editing tag springs onto it, and a comment bubble pops after a beat.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Cursor easing uses 1 - 0.0012^dt each frame; selection box transitions position and size over 450ms; comment bubble springs from scale .9 over 300ms; each user dwells 1.9 to 2.9s.
+
+IDLE AUTOPLAY
+- All four collaborators move continuously from the first frame, with two comments already visible.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Cursors that move in straight linear paths; use easing.
+- Name flags that overlap the arrow.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

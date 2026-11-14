@@ -1,0 +1,43 @@
+ROLE
+You are a senior brand designer and front-end engineer with 15+ years of experience. Build "Horizon Grid Hero": a full-viewport hero set on an endless neon grid that rushes toward a striped sunset, with a gradient headline that reveals word by word.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep violet sky burning to apricot at the horizon, a striped sun, magenta grid lines with a glow, and a wide geometric display face.
+- Palette: #FF8A4C, #FF2E7E, #080414, #FFE27A, #F2ECFF, #1A0B3D
+- Type: Unbounded, Manrope (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Nav with logo, four links and a ghost button; announcement pill; gradient headline; supporting copy; primary and secondary buttons; sky, twinkling stars, striped sun, perspective floor grid.
+
+INTERACTION & STATES
+- Headline words rise in with a 70ms stagger on load; every other motion is ambient.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Grid: a 90px tile on a 220% wide plane, rotateX(72deg) about its top edge under perspective 260px, background-position-y 0 to 90px linear every 1.6s.
+- Sun: repeating 14px stripe mask with 4px gaps, drop-shadow glow pulsing between 60px and 90px over 6s alternate.
+- Stars twinkle opacity .45 to 1 over 5s alternate; headline words rise 24px over 500ms cubic-bezier(.2,.9,.3,1).
+
+IDLE AUTOPLAY
+- The grid scrolls forever, the sun breathes and the stars twinkle with no input at all.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A flat grid image; it must have real perspective and forward motion.
+- Sun overlapping the call-to-action buttons.
+- Low-contrast pink text on the sun.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

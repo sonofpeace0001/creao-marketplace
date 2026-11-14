@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Reveal Transition Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2EEE6;color:#1D1A14;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:640px;display:grid;gap:18px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font-size:28px;font-weight:800;letter-spacing:-.05em}.hd span{font:500 12px 'DM Mono';letter-spacing:.1em;text-transform:uppercase;color:#9A9179}
+.st{position:relative;aspect-ratio:16/10;border-radius:26px;overflow:hidden;background:#222;box-shadow:0 36px 50px -30px rgba(29,26,20,.7)}
+.ly{position:absolute;inset:0}.ly svg{width:100%;height:100%;display:block}
+.cl{position:absolute;overflow:hidden}.cl svg{position:absolute;width:var(--W);height:var(--H);left:calc(var(--x)*-1);top:calc(var(--y)*-1);max-width:none}
+.nm{position:absolute;left:16px;bottom:16px;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:99px;background:rgba(16,14,10,.62);backdrop-filter:blur(8px);color:#fff;font:700 13px 'Bricolage Grotesque';z-index:5;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}.nm i{width:8px;height:8px;border-radius:50%;background:#FFD23F;animation:pu 1.200s ease-out infinite}@keyframes pu{70%{box-shadow:0 0 0 8px rgba(255,210,63,0)}100%{box-shadow:0 0 0 0 rgba(255,210,63,0)}}
+.ch{display:flex;gap:8px;flex-wrap:wrap}.ch button{border:0;border-radius:99px;padding:9px 16px;background:#fff;color:#4C4638;font:700 13px 'Bricolage Grotesque';cursor:pointer;box-shadow:inset 0 0 0 1.500px #DED6C3;transition:all .2s}.ch button:hover{box-shadow:inset 0 0 0 1.500px #1D1A14}.ch button[aria-pressed=true]{background:#1D1A14;color:#fff;box-shadow:none}.ch button:focus-visible{outline:3px solid #E8590C;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Six ways to reveal</h1><span>Pure CSS clip-paths</span></div><div class="st" id="st"><div class="ly" id="la"></div><div class="ly" id="lb"></div><div class="nm"><i></i><span id="nm">Vertical blinds</span></div></div><div class="ch" id="ch"></div></div>
+<script>
+function scene(s){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};const P=[['#FFB27A','#F472B6','#6366F1','#2B1B5E'],['#FDE68A','#FDBA74','#F97316','#7C2D12'],['#A7F3D0','#34D399','#059669','#064E3B'],['#BAE6FD','#38BDF8','#0369A1','#0C2A4A'],['#FBCFE8','#C084FC','#7C3AED','#2E1065'],['#FEF3C7','#FCA5A5','#E11D48','#4C0519']],c=P[Math.floor(r(6))];
+ const id='g'+Math.floor(r(1e6));let h='<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c[2]+'"/><stop offset=".55" stop-color="'+c[1]+'"/><stop offset="1" stop-color="'+c[0]+'"/></linearGradient></defs><rect width="400" height="250" fill="url(#'+id+')"/>';
+ h+='<circle cx="'+(70+r(260))+'" cy="'+(60+r(50))+'" r="'+(26+r(18))+'" fill="#FFF6D6" opacity=".92"/>';
+ for(let l=0;l<3;l++){let d='M0 250 L0 '+(150+l*28);const a=18+r(22),f=.012+r(.02),ph=r(6);for(let x=0;x<=400;x+=8)d+=' L'+x+' '+(150+l*28-a*Math.sin(x*f+ph)-a*.5*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L400 250Z';h+='<path d="'+d+'" fill="'+c[3]+'" opacity="'+(.35+l*.3)+'"/>'}
+ return h+'</svg>'}
+const SC=[16,1,8,20,12,4],st=document.getElementById('st'),la=document.getElementById('la'),lb=document.getElementById('lb'),nm=document.getElementById('nm'),chw=document.getElementById('ch');
+let cur=0,busy=false;const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const FX=[['Vertical blinds',async(B,W,H)=>{const n=10,w=W/n;for(let i=0;i<n;i++){const c=cell(B,i*w,0,w,H,W,H);c.style.clipPath='inset(0 0 100% 0)';c.style.transition='clip-path .6s cubic-bezier(.6,0,.3,1) '+(i*70)+'ms';requestAnimationFrame(()=>requestAnimationFrame(()=>c.style.clipPath='inset(0 0 0 0)'))}await sleep(1400)}],
+['Circle iris',async(B)=>{B.style.clipPath='circle(0% at 50% 50%)';B.style.transition='clip-path 1.2s cubic-bezier(.6,0,.2,1)';requestAnimationFrame(()=>requestAnimationFrame(()=>B.style.clipPath='circle(80% at 50% 50%)'));await sleep(1350)}],
+['Diagonal wipe',async(B)=>{B.style.clipPath='polygon(0 0,0 0,0 0)';B.style.transition='clip-path 1.1s cubic-bezier(.6,0,.2,1)';requestAnimationFrame(()=>requestAnimationFrame(()=>B.style.clipPath='polygon(0 0,230% 0,0 230%)'));await sleep(1300)}],
+['Tile dissolve',async(B,W,H)=>{const cx=8,cy=5,w=W/cx,h=H/cy,cs=[];for(let y=0;y<cy;y++)for(let x=0;x<cx;x++){const c=cell(B,x*w,y*h,w,h,W,H);c.style.transform='scale(0)';c.style.transition='transform .5s cubic-bezier(.3,1.5,.5,1) '+((x+y)*55+Math.random()*120)+'ms';cs.push(c)}requestAnimationFrame(()=>requestAnimationFrame(()=>cs.forEach(c=>c.style.transform='scale(1)')));await sleep(1500)}],
+['Curtain split',async(B)=>{B.style.clipPath='inset(0 50% 0 50%)';B.style.transition='clip-path 1.1s cubic-bezier(.6,0,.2,1)';requestAnimationFrame(()=>requestAnimationFrame(()=>B.style.clipPath='inset(0 0 0 0)'));await sleep(1300)}],
+['Rising shutter',async(B)=>{B.style.clipPath='inset(100% 0 0 0)';B.style.transition='clip-path 1s cubic-bezier(.7,0,.2,1)';requestAnimationFrame(()=>requestAnimationFrame(()=>B.style.clipPath='inset(0 0 0 0)'));await sleep(1200)}]];
+function cell(B,x,y,w,h,W,H){const c=document.createElement('div');c.className='cl';c.style.cssText='left:'+x+'px;top:'+y+'px;width:'+w+'px;height:'+h+'px;--x:'+x+'px;--y:'+y+'px;--W:'+W+'px;--H:'+H+'px';c.innerHTML=B._svg;B.appendChild(c);return c}
+async function play(i){if(busy)return;busy=true;[...chw.children].forEach((b,k)=>b.setAttribute('aria-pressed',k===i));nm.textContent=FX[i][0];const W=st.clientWidth,H=st.clientHeight,nx=(cur+1)%SC.length;
+ lb.innerHTML='';lb.style.clipPath='';lb.style.transition='none';lb._svg=scene(SC[nx]);lb.style.opacity=1;
+ if(![0,3].includes(i))lb.innerHTML=lb._svg;
+ await FX[i][1](lb,W,H);cur=nx;la.innerHTML=lb._svg;lb.innerHTML='';lb.style.clipPath='';lb.style.transition='none';await sleep(200);busy=false}
+FX.forEach(([n],i)=>{const b=document.createElement('button');b.textContent=n;b.setAttribute('aria-pressed','false');b.onclick=()=>{off=true;play(i)};chw.appendChild(b)});
+la.innerHTML=scene(SC[0]);lb.innerHTML='';lb._svg=scene(SC[1]);{const W=st.clientWidth,H=st.clientHeight;[...chw.children][0].setAttribute('aria-pressed','true');
+ const cs=[];for(let i=0;i<10;i++){const w=W/10,c=document.createElement('div');c.className='cl';c.style.cssText='left:'+i*w+'px;top:0;width:'+w+'px;height:'+H+'px;--x:'+i*w+'px;--y:0px;--W:'+W+'px;--H:'+H+'px;clip-path:inset(0 0 '+(i<6?0:100)+'% 0)';c.innerHTML=lb._svg;lb.appendChild(c)}}
+/* Idle demo: the scene changes to a new picture every 3 seconds with a different transition each time (blinds, iris, wipe, tile dissolve, curtain, shutter), and the active effect's name is shown, until you pick one. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sleep(3200);lb.innerHTML='';cur=1;la.innerHTML=scene(SC[1]);let k=1;while(!off){await play(k++%6);await sleep(1300)}})()}
+</script></body></html>

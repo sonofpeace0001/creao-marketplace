@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Streak Flame Badge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFF6EC;color:#2A1708;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(520px 340px at 50% 0,rgba(255,138,76,.22),transparent 70%)}
+.cd{width:100%;max-width:400px;border-radius:32px;background:#fff;padding:28px 24px 24px;text-align:center;box-shadow:0 36px 50px -30px rgba(122,52,6,.45),inset 0 0 0 1px rgba(42,23,8,.07);display:grid;justify-items:center;gap:16px}
+.fl{position:relative;width:132px;height:150px;filter:drop-shadow(0 16px 20px rgba(255,100,20,.45))}
+.fl svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.f1{transform-origin:50% 100%;animation:fk1 1.300s ease-in-out infinite alternate}.f2{transform-origin:50% 100%;animation:fk2 .9s ease-in-out infinite alternate}.f3{transform-origin:50% 100%;animation:fk3 .7s ease-in-out infinite alternate}
+@keyframes fk1{0%{transform:scaleY(1) scaleX(1) skewX(0)}100%{transform:scaleY(1.06) scaleX(.96) skewX(-2deg)}}@keyframes fk2{0%{transform:scaleY(.98) skewX(1deg)}100%{transform:scaleY(1.1) scaleX(.94) skewX(-3deg)}}@keyframes fk3{0%{transform:scaleY(.94)}100%{transform:scaleY(1.16) scaleX(.9)}}
+.sp{position:absolute;left:50%;bottom:34px;width:5px;height:5px;margin-left:-2px;border-radius:50%;background:#FFD27A;opacity:0;animation:sp 2.200s ease-out infinite;animation-delay:var(--d)}
+@keyframes sp{0%{transform:translate(var(--x0),0) scale(1);opacity:0}15%{opacity:1}100%{transform:translate(var(--x1),-100px) scale(.2);opacity:0}}
+.cn{position:absolute;left:0;right:0;top:56px;display:grid;justify-items:center;line-height:1}
+.cn .n{height:1em;overflow:hidden;font:800 46px/1 'Outfit';letter-spacing:-.05em;color:#fff;text-shadow:0 2px 0 rgba(150,40,0,.5)}.cn .n span{display:block;height:1em;transition:transform .55s cubic-bezier(.3,1.4,.4,1)}
+.cn.pop .n{animation:np .6s cubic-bezier(.3,1.8,.5,1)}@keyframes np{40%{transform:scale(1.35)}}
+.tt{font-size:25px;font-weight:800;letter-spacing:-.04em}.tt b{color:#E8590C}.sb{font-size:14.500px;color:#8B6B50;margin-top:-10px}
+.wk{display:flex;gap:9px;justify-content:center;margin-top:4px}
+.d{display:grid;justify-items:center;gap:7px;font-size:11.500px;font-weight:700;letter-spacing:.06em;color:#A58769}
+.d i{position:relative;width:38px;height:38px;border-radius:50%;background:#F5EBDD;display:grid;place-items:center;transition:background .4s,transform .45s cubic-bezier(.3,1.9,.5,1)}
+.d i svg{width:20px;height:20px;transform:scale(0);transition:transform .45s cubic-bezier(.3,1.9,.5,1)}
+.d.on i{background:linear-gradient(160deg,#FFB347,#F2570C)}.d.on i svg{transform:scale(1)}
+.d.today i{box-shadow:0 0 0 3px #fff,0 0 0 5px #F2570C}
+.d.pp i{animation:dp .6s cubic-bezier(.3,1.9,.5,1)}@keyframes dp{40%{transform:scale(1.3)}}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:99px;background:#FFF1E2;color:#B14A0A;font-size:13.500px;font-weight:700}.pill svg{width:18px;height:18px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="cd"><div class="fl" role="img" aria-label="Streak flame"><svg viewBox="0 0 132 150"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF5A1F"/><stop offset="1" stop-color="#D4380D"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3D"/><stop offset="1" stop-color="#FF5A1F"/></linearGradient><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE27A"/><stop offset="1" stop-color="#FFA52B"/></linearGradient></defs>
+<path class="f1" d="M66 6c8 22 36 38 36 76 0 30-16 56-36 62-20-6-36-32-36-62 0-20 10-26 14-40 6 10 10 14 14 14C58 40 62 26 66 6Z" fill="url(#g1)"/>
+<path class="f2" d="M66 40c6 16 26 28 26 54 0 22-12 40-26 44-14-4-26-22-26-44 0-14 8-18 10-28 6 6 10 8 12 8 2-10 2-20 4-34Z" fill="url(#g2)"/>
+<path class="f3" d="M66 74c4 10 16 18 16 34 0 14-8 26-16 28-8-2-16-14-16-28 0-8 4-12 6-18 4 4 6 4 8 4 0-6 0-12 2-20Z" fill="url(#g3)"/></svg>
+<i class="sp" style="--d:0s;--x0:-14px;--x1:-34px"></i><i class="sp" style="--d:.7s;--x0:10px;--x1:30px"></i><i class="sp" style="--d:1.400s;--x0:0;--x1:-10px"></i><i class="sp" style="--d:1.900s;--x0:18px;--x1:44px"></i>
+<div class="cn" id="cn"><div class="n"><span id="nv">12</span></div></div></div>
+<div class="tt"><b id="tn">12 day</b> streak</div><div class="sb" id="sb">Study today to keep it burning.</div>
+<div class="wk" id="wk" aria-label="This week"></div>
+<span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Longest streak: 31 days</span></div>
+<script>
+const D=['M','T','W','T','F','S','S'],wk=document.getElementById('wk'),cn=document.getElementById('cn'),nv=document.getElementById('nv'),tn=document.getElementById('tn'),sb=document.getElementById('sb');let n=12,today=4;
+const flm='<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2c1 4.500 6 6.500 6 12a6 6 0 0 1-12 0c0-2.500 1.200-3.800 2-5 .8 1.400 1.600 2 2.400 2C10.500 8 11.500 5.500 12 2Z"/></svg>';
+D.forEach((d,i)=>{wk.insertAdjacentHTML('beforeend','<div class="d'+(i<today?' on':'')+(i===today?' today':'')+'"><i>'+flm+'</i>'+d+'</div>')});
+const ds=[...wk.children];
+function roll(v){const o=nv,nw=document.createElement('span');nw.textContent=v;nw.style.cssText='display:block;height:1em;position:absolute;left:0;right:0;text-align:center;transform:translateY(100%);transition:transform .55s cubic-bezier(.3,1.4,.4,1)';o.parentNode.style.position='relative';o.parentNode.appendChild(nw);o.style.transform='translateY(-100%)';requestAnimationFrame(()=>requestAnimationFrame(()=>nw.style.transform='none'));
+ setTimeout(()=>{o.textContent=v;o.style.transition='none';o.style.transform='none';nw.remove();setTimeout(()=>o.style.transition='',30)},620);cn.classList.remove('pop');void cn.offsetWidth;cn.classList.add('pop')}
+function done(i){ds[i].classList.add('on','pp');setTimeout(()=>ds[i].classList.remove('pp'),700);n++;roll(n);tn.textContent=n+' day';sb.textContent='Nice. '+(i<6?'Come back tomorrow to keep it going.':'A full week, well done.')}
+ds[today].classList.remove('on');
+/* Idle demo: the day's lesson completes, the flame badge flares, the counter rolls up and the weekday ring lights with a flame; then the week rewinds and repeats. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);while(true){for(let i=today;i<7;i++){ds.forEach((d,k)=>d.classList.toggle('today',k===i));await sleep(1000);done(i);await sleep(1900)}await sleep(1500);n=12;nv.textContent='12';tn.textContent='12 day';sb.textContent='Study today to keep it burning.';ds.forEach((d,k)=>d.classList.toggle('on',k<today));ds.forEach((d,k)=>d.classList.toggle('today',k===today));await sleep(1200)}})()}
+</script></body></html>

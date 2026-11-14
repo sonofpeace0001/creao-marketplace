@@ -1,0 +1,41 @@
+ROLE
+You are a senior e-commerce designer and front-end engineer with 15+ years of experience. Build "Ribbon Corner Badges": product cards with diagonal corner ribbons (New, discount, Pro) that flutter on a slow skew and carry a travelling glint.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper table, white product cards over saturated gradient art, and ribbons in green, red and brushed gold.
+- Palette: #1E1B16, #ECE8DF, #9A917D, #8F8672, #A59C88
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; three product cards each with a clipped corner ribbon, gradient artwork with a line glyph, title, note and price (with strike-through or per-month unit).
+
+INTERACTION & STATES
+- Cards lift 5px on hover with a spring; ribbons are decorative and labelled in the card text.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ribbon flutter: skewX 0 to -3 degrees with a 1px drop over 3.6s ease-in-out, offset per card; glint: a 40% wide highlight sweeps -60% to 130% every 3.6s.
+- The ribbon box is clipped by an overflow-hidden 110px corner so the ends never spill.
+
+IDLE AUTOPLAY
+- Ribbons flutter and glint continuously, offset by half a second each.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A ribbon drawn outside the card; it must be clipped to the corner.
+- Ribbon text smaller than 12px or low contrast on the colour.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

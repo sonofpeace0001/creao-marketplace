@@ -1,0 +1,41 @@
+ROLE
+You are a senior voice interface designer and front-end engineer with 15+ years of experience. Build "Voice Wave Input": a message field with a microphone button that starts recording, animates a live waveform, streams a transcript and drops the text into the field on stop.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Ink navy pill with indigo idle state turning rose while recording, with pulsing rings.
+- Palette: #F43F5E, #E9ECF8, #7C84A8, #0A0C14, #12162A, #1A1224
+- Type: Plus Jakarta Sans, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading and instruction; pill field with text input or waveform, timer and mic button; transcript caption with caret.
+
+INTERACTION & STATES
+- Tap the mic to record: the placeholder is replaced by a 46-bar waveform and a running timer, the button becomes a stop square with two expanding rings, and words appear in the caption; stopping moves the transcript into the field.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Waveform: three summed sine waves per bar with a bell envelope, updated every frame; rings expand to 1.9x over 1.6s, offset .8s.
+- Field glow fades in over 300ms.
+
+IDLE AUTOPLAY
+- Recording starts, words appear at about 300ms each, recording stops and the text lands in the input, with three phrases cycling.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A static microphone icon; recording must be visibly alive.
+- Claiming real speech recognition in a demo.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

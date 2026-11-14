@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Padlock Toggle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#F43F5E;background:#0D0F16;color:#EEF0F8;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(520px 360px at 50% 0,color-mix(in srgb,var(--c) 18%,transparent),transparent 70%);transition:background-image .6s}
+.w{width:100%;max-width:560px;display:grid;gap:18px;justify-items:center;text-align:center}
+.w h1{font-size:26px;font-weight:800;letter-spacing:-.045em}.w p{color:#7C839B;font-size:14px;margin-top:6px}
+.bg{position:relative;width:min(220px,56vw);aspect-ratio:1;border:0;background:none;cursor:pointer;display:grid;place-items:center;padding:0;-webkit-tap-highlight-color:transparent}
+.bg:focus-visible{outline:3px solid #fff;outline-offset:8px;border-radius:50%}
+.bg::before{content:"";position:absolute;inset:6%;border-radius:50%;border:2px solid var(--c);opacity:0}.bg.ping::before{animation:pg .9s ease-out}@keyframes pg{from{transform:scale(.7);opacity:.9}to{transform:scale(1.35);opacity:0}}
+.hl{position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--c) 40%,transparent),transparent 65%);transition:background .6s}
+.bg svg{position:relative;width:78%;height:78%;overflow:visible;filter:drop-shadow(0 22px 22px rgba(0,0,0,.55))}
+.sh{transform-origin:62px 60px;transform:translateY(var(--sy,0px)) rotate(var(--sr,0deg));transition:transform .75s cubic-bezier(.3,1.5,.4,1)}
+.bg[aria-pressed=false] .sh{--sy:0px;--sr:0deg}.bg[aria-pressed=true] .sh{--sy:-17px;--sr:-28deg}
+.bd{fill:url(#bg1);transition:fill .5s}.kh{fill:#1A1C26}.kh2{fill:#1A1C26}
+.sk{fill:none;stroke:url(#sg1);stroke-width:11;stroke-linecap:round}
+.ck{opacity:0;transform-origin:100px 118px;transform:scale(.4);transition:all .5s cubic-bezier(.3,1.8,.5,1)}.bg[aria-pressed=true] .ck{opacity:1;transform:none;transition-delay:.3s}.ck path{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.st{display:grid;gap:5px}.st b{font:800 22px 'Manrope';letter-spacing:-.04em;color:var(--c);transition:color .5s}.st span{font:500 12.500px 'JetBrains Mono';color:#7C839B;letter-spacing:.06em}
+.ls{display:grid;gap:10px;width:100%;margin-top:8px}.r{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:18px;background:#131622;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);text-align:left}
+.r .ic{width:40px;height:40px;border-radius:12px;background:#1B1F31;display:grid;place-items:center;flex:none}.r .ic svg{width:20px;height:20px}.r .ic svg *{fill:none;stroke:#AAB1CC;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.r div.t{flex:1}.r b{display:block;font-size:15px;font-weight:700}.r small{font:500 11.500px 'JetBrains Mono';color:#6F7690}
+.mn{width:32px;height:32px;border-radius:50%;border:0;background:#1B1F31;display:grid;place-items:center;cursor:pointer;transition:background .3s}.mn svg{width:16px;height:16px;overflow:visible}.mn svg *{fill:none;stroke:#F43F5E;stroke-width:2.400;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.mn .s2{transform-origin:12px 12px;transition:transform .45s cubic-bezier(.3,1.6,.5,1)}.mn.u .s2{transform:translate(1px,-3px) rotate(-26deg)}.mn.u svg *{stroke:#4ADE80}.mn:focus-visible{outline:2px solid #fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w"><div><h1>Lock it, unlock it</h1><p>The shackle lifts, swings and clicks. The whole page takes on the state.</p></div>
+<button class="bg" id="bg" aria-pressed="false" aria-label="Vault lock"><span class="hl"></span><svg viewBox="0 0 200 200"><defs><linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C25B"/><stop offset="1" stop-color="#C98A1F"/></linearGradient><linearGradient id="sg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8ECF5"/><stop offset="1" stop-color="#8F98AD"/></linearGradient></defs>
+<g class="sh"><path class="sk" d="M62 94V68a38 38 0 0 1 76 0v26"/></g><rect class="bd" x="38" y="88" width="124" height="92" rx="20"/><rect x="38" y="88" width="124" height="14" rx="7" fill="rgba(255,255,255,.28)"/><circle class="kh" cx="100" cy="124" r="11"/><path class="kh2" d="M95 130h10l3 20H92Z"/>
+<g class="ck"><circle cx="100" cy="118" r="26" fill="#16A34A"/><path d="m88 118 8 8 17-18"/></g></svg></button>
+<div class="st"><b id="sb">Locked</b><span id="ss">Encrypted with a hardware key</span></div>
+<div class="ls" id="ls"></div></div>
+<script>
+const bg=document.getElementById('bg'),sb=document.getElementById('sb'),ss=document.getElementById('ss'),ls=document.getElementById('ls'),root=document.body;
+function setMain(u){bg.setAttribute('aria-pressed',u);root.style.setProperty('--c',u?'#22C55E':'#F43F5E');sb.textContent=u?'Unlocked':'Locked';ss.textContent=u?'Open for 5 minutes, then it re-locks':'Encrypted with a hardware key';bg.classList.remove('ping');void bg.offsetWidth;bg.classList.add('ping')}
+bg.onclick=()=>{off=true;setMain(bg.getAttribute('aria-pressed')!=='true')};
+const L=[['Documents','248 files, 3 shared','<path d="M7 3h8l4 4v14H7ZM15 3v4h4"/>',1],['Photo vault','1,204 photos','<rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.500"/><path d="M8 6l1.500-2h5L16 6"/>',1],['Passwords','86 logins','<circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3M15 12v2"/>',0]];
+L.forEach(([n,d,p,u])=>{const r=document.createElement('div');r.className='r';r.innerHTML='<span class="ic"><svg viewBox="0 0 24 24">'+p+'</svg></span><div class="t"><b>'+n+'</b><small>'+d+'</small></div><button class="mn'+(u?' u':'')+'" aria-label="Toggle '+n+' lock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2.500"/><path class="s2" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>';ls.appendChild(r);r.querySelector('.mn').onclick=e=>{off=true;e.currentTarget.classList.toggle('u')}});
+const mn=[...ls.querySelectorAll('.mn')];
+/* Idle demo: the big padlock opens and closes every 2.8s, the shackle lifting and swinging on its hinge with a tick drawing in and the page tint changing red to green, while the small locks below flip in turn, until a real click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2600);let k=0;while(!off){setMain(bg.getAttribute('aria-pressed')!=='true');await sleep(700);mn[k++%3].classList.toggle('u');await sleep(2100)}})()}
+</script></body></html>

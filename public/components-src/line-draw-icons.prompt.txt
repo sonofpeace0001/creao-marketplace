@@ -1,0 +1,41 @@
+ROLE
+You are a senior icon designer and front-end engineer with 15+ years of experience. Build "Line Draw Icons": eight outline icons that erase and redraw themselves stroke by stroke in a staggered wave, with an accent stroke on each icon's key detail.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper, ink strokes and a single vermilion accent, with an editorial serif headline and mono captions.
+- Palette: #E8590C, #1D1A16, #F4F0E8, #8C8473, #9B9382
+- Type: Instrument Serif, Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with serif title and Replay button; four-by-two grid of icon tiles (home, alerts, mail, saved, camera, places, secure, rated); spec footer.
+
+INTERACTION & STATES
+- Each tile replays its own drawing on click; Replay redraws the whole set.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Every shape uses pathLength 1 with stroke-dasharray 1 and dashoffset 1 to 0 over 1.5s cubic-bezier(.6,0,.2,1), delayed 50ms per tile index.
+- Tiles lift 4px on hover with a spring.
+
+IDLE AUTOPLAY
+- After 3.6s the whole set redraws itself every 4.8s; the first frame is fully drawn so thumbnails are complete.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Icons that fade in; the draw is the point.
+- Mixed stroke widths; one 1.7 px weight throughout.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

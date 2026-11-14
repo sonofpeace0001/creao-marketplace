@@ -1,0 +1,41 @@
+ROLE
+You are a senior design engineer with 15+ years of experience. Build "Cursor Spotlight Buttons": a tray of buttons lit by one shared cursor spotlight that also paints each button's own border and fill.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black graphite with indigo light, in the manner of premium developer tools.
+- Palette: #0A0A0B, #EDEDEF, #A5B4FC, #85858F, #111114, #16161A
+- Type: DM Sans (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Headline and intro; a tray holding a light primary button and three icon buttons with a count chip.
+
+INTERACTION & STATES
+- One pointer position is converted into per-button offsets so a radial gradient continues seamlessly across the tray, borders and fills; the preset light rests on the Comments button.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Convert the single pointer position into per-button offsets so the radial gradient is continuous across gaps.
+- Tray glow 320px radius at 20% indigo; border light 160px at 95%; fill light 140px at 22%.
+
+IDLE AUTOPLAY
+- The light drifts across the tray on a slow sine path (x: sin(0.8t), y: sin(1.7t)) until a real pointer moves.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Independent per-button hover glows that restart at each edge.
+- Hard-edged circles; every gradient must fall off smoothly.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

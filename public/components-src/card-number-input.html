@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Card Number Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFEDE7;color:#1C1A17;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{--c:#6B7280;width:100%;max-width:430px;display:grid;gap:16px}
+.pv{position:relative;aspect-ratio:1.7;border-radius:22px;padding:22px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:linear-gradient(135deg,#3A3A42,#1B1B20);box-shadow:0 30px 40px -24px rgba(28,26,23,.7);transition:background .5s}
+.pv::before{content:"";position:absolute;right:-70px;top:-70px;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.1)}
+.pv .nw{display:flex;justify-content:space-between;align-items:center;position:relative}.pv .nw b{font-size:18px;letter-spacing:-.03em}.pv .ch{width:40px;height:30px;border-radius:6px;background:linear-gradient(135deg,#F3D98B,#C79A33)}
+.pv .no{font:500 20px 'Martian Mono';letter-spacing:.06em;display:flex;gap:12px;position:relative}.pv .no span{display:inline-block;min-width:4ch}
+.pv .ft{display:flex;justify-content:space-between;font-size:13px;position:relative;opacity:.9}.pv .ft small{display:block;font-size:9.500px;letter-spacing:.14em;opacity:.6}
+.pv.arc{background:linear-gradient(135deg,#2563EB,#1E3A8A)}.pv.nova{background:linear-gradient(135deg,#F97316,#9A3412)}.pv.orbit{background:linear-gradient(135deg,#059669,#064E3B)}
+.fm{border-radius:22px;background:#fff;padding:18px;display:grid;gap:12px;box-shadow:0 20px 30px -22px rgba(28,26,23,.45),inset 0 0 0 1px rgba(28,26,23,.07)}
+.fm label{font-size:11.500px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7C766B}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.in{position:relative;display:flex;align-items:center;border-radius:14px;background:#F6F4EF;box-shadow:inset 0 0 0 1.500px transparent;transition:box-shadow .2s,background .2s}
+.in:focus-within{background:#fff;box-shadow:inset 0 0 0 2px #1C1A17}
+.in input{flex:1;min-width:0;border:0;outline:0;background:none;font:500 17px 'Martian Mono';letter-spacing:.04em;color:#1C1A17;padding:15px 14px}
+.in input::placeholder{color:#B3AD9F}
+.bd{width:44px;height:28px;margin-left:10px;border-radius:7px;display:grid;place-items:center;font:800 9px 'Manrope';letter-spacing:.06em;color:#fff;background:#C9C4B8;transition:all .35s cubic-bezier(.3,1.5,.5,1);transform:scale(.9)}
+.bd.arc{background:#2563EB;transform:none}.bd.nova{background:#F97316;transform:none}.bd.orbit{background:#059669;transform:none}
+.ok{width:22px;height:22px;margin-right:12px;border-radius:50%;background:#16A34A;display:grid;place-items:center;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.8,.5,1)}.ok svg{width:12px;height:12px;stroke-dasharray:18;stroke-dashoffset:18;transition:stroke-dashoffset .3s .1s}
+.in.good .ok{transform:scale(1)}.in.good .ok svg{stroke-dashoffset:0}
+.in.bad{box-shadow:inset 0 0 0 2px #DC2626;animation:sh .3s}@keyframes sh{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.msg{font-size:12.500px;min-height:16px;color:#DC2626;font-weight:600}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w"><div class="pv" id="pv"><div class="nw"><b id="nm">Card</b><div class="ch"></div></div><div class="no" id="no"><span>0000</span><span>0000</span><span>0000</span><span>0000</span></div><div class="ft"><div><small>CARDHOLDER</small>Your name</div><div><small>EXPIRES</small><span id="pe">MM/YY</span></div></div></div>
+<form class="fm" onsubmit="return false" novalidate><label for="cn">Card number</label><div class="in" id="ib"><span class="bd" id="bd"></span><input id="cn" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="0000 0000 0000 0000" aria-describedby="ms"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span></div><div class="msg" id="ms" role="alert"></div>
+<div class="row"><div><label for="ex">Expiry</label><div class="in"><input id="ex" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/YY"></div></div><div><label for="cv">CVC</label><div class="in"><input id="cv" inputmode="numeric" autocomplete="cc-csc" maxlength="4" placeholder="123"></div></div></div></form></div>
+<script>
+const cn=document.getElementById('cn'),ex=document.getElementById('ex'),cv=document.getElementById('cv'),pv=document.getElementById('pv'),bd=document.getElementById('bd'),ib=document.getElementById('ib'),ms=document.getElementById('ms'),nm=document.getElementById('nm'),no=[...document.querySelectorAll('#no span')],pe=document.getElementById('pe');
+const NET={4:['arc','ARC','Arc'],5:['nova','NOVA','Nova'],3:['orbit','ORB','Orbit']};
+const luhn=s=>{let t=0,a=false;for(let i=s.length-1;i>=0;i--){let d=+s[i];if(a){d*=2;if(d>9)d-=9}t+=d;a=!a}return t%10===0};
+function paint(){const d=cn.value.replace(/\D/g,'').slice(0,16),n=NET[d[0]];cn.value=d.replace(/(.{4})/g,'$1 ').trim();
+ pv.className='pv '+(n?n[0]:'');bd.className='bd '+(n?n[0]:'');bd.textContent=n?n[1]:'';nm.textContent=n?n[2]:'Card';
+ const g=(d+'0000000000000000').slice(0,16).match(/.{4}/g);no.forEach((s,i)=>{s.textContent=g[i];s.style.opacity=(i*4<d.length)?1:.4});
+ const full=d.length===16,v=full&&luhn(d);ib.classList.toggle('good',v);ib.classList.toggle('bad',full&&!v);ms.textContent=full&&!v?'That number does not look right. Check each digit.':''}
+ex.addEventListener('input',()=>{let v=ex.value.replace(/\D/g,'').slice(0,4);if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);ex.value=v;pe.textContent=v||'MM/YY'});
+cv.addEventListener('input',()=>cv.value=cv.value.replace(/\D/g,''));cn.addEventListener('input',paint);
+cn.value='4242 4242 4242 4242';ex.value='09/29';pe.textContent='09/29';cv.value='314';paint();
+/* Idle demo: a card is typed in digit by digit, validated with the Luhn check, then the form clears and repeats. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+ const type=async(el,s)=>{for(const c of s){if(off)return false;el.value+=c;el.dispatchEvent(new Event('input'));await sleep(85)}return true};
+ (async()=>{await sleep(3600);const sets=[['5555 5555 5555 4444','11/28','908'],['3782 8224 6310 005'.replace(/ /g,''),'02/30','4521'],['4242 4242 4242 4242','09/29','314']];let k=0;
+  while(!off){const[c,e,v]=sets[k++%sets.length];cn.value=ex.value=cv.value='';paint();pe.textContent='MM/YY';await sleep(700);if(!await type(cn,c.replace(/ /g,'')))return;await sleep(500);if(!await type(ex,e.replace('/','')))return;if(!await type(cv,v))return;await sleep(2600)}})()}
+</script></body></html>

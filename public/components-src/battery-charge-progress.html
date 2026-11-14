@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Battery Charge Progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#34D399;background:radial-gradient(700px 480px at 50% 0,color-mix(in srgb,var(--c) 20%,#0B1117),#0B1117 70%);color:#E9F4EE;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;transition:background .8s}
+.w{width:100%;max-width:560px;display:grid;gap:22px;justify-items:center;text-align:center}
+.pc{font:700 clamp(56px,14vw,96px)/1 'Unbounded';letter-spacing:-.06em;font-variant-numeric:tabular-nums;color:var(--c);transition:color .6s;text-shadow:0 0 40px color-mix(in srgb,var(--c) 50%,transparent)}.pc small{font-size:.4em;opacity:.7}
+.bt{position:relative;display:flex;align-items:center;width:min(440px,92%)}
+.bd{position:relative;flex:1;height:130px;border-radius:30px;padding:10px;background:#111A22;box-shadow:inset 0 0 0 4px #25323E,0 30px 50px -26px rgba(0,0,0,.9);display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.tp{width:14px;height:52px;border-radius:0 10px 10px 0;background:#25323E;margin-left:-2px}
+.sg{border-radius:12px;background:#17222C;position:relative;overflow:hidden;transition:background .3s,box-shadow .3s}
+.sg.on{background:var(--c);box-shadow:0 0 22px color-mix(in srgb,var(--c) 70%,transparent),inset 0 -8px 12px rgba(0,0,0,.18),inset 0 2px 0 rgba(255,255,255,.35)}
+.sg.part::before{content:"";position:absolute;inset:0;background:var(--c);transform-origin:bottom;transform:scaleY(var(--f,1));opacity:.85}
+.sg.on::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateY(-100%);animation:sh 1.800s ease-in-out infinite;animation-delay:calc(var(--i)*.09s)}@keyframes sh{60%,100%{transform:translateY(100%)}}
+.bz{position:absolute;left:50%;top:50%;width:46px;height:70px;margin:-35px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6));animation:bz 1.200s ease-in-out infinite;opacity:0;transition:opacity .4s}.ch .bz{opacity:1}@keyframes bz{50%{transform:scale(1.14)}}
+.bz path{fill:#fff;stroke:rgba(0,0,0,.25);stroke-width:1.500;stroke-linejoin:round}
+.inf{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.chip{display:flex;align-items:center;gap:9px;padding:10px 16px 10px 12px;border-radius:99px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);font-size:14px;font-weight:700}.chip svg{width:16px;height:16px}.chip svg *{fill:none;stroke:var(--c);stroke-width:2.400;stroke-linecap:round;stroke-linejoin:round;transition:stroke .6s}
+.chip span{color:#8EA39A;font-weight:600}
+.lbl{font:700 13px 'Manrope';letter-spacing:.2em;text-transform:uppercase;color:var(--c);transition:color .6s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w ch" id="w"><div class="lbl" id="lb">Fast charging</div><div class="pc" id="pc">82<small>%</small></div>
+<div class="bt"><div class="bd" id="bd"></div><div class="tp"></div><svg class="bz" viewBox="0 0 46 70" style="left:calc(50% - 7px)"><path d="M28 2 6 40h16l-4 28 22-40H24Z"/></svg></div>
+<div class="inf"><div class="chip"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6Z"/></svg>45 W <span>fast charge</span></div><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b id="tm">12 min</b><span>to full</span></div><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 4 5 6 5 9a5 5 0 0 1-10 0c0-3 2-5 5-9Z"/></svg><b id="tp">34&deg;C</b><span>temp</span></div></div></div>
+<script>
+const bd=document.getElementById('bd'),w=document.getElementById('w'),pc=document.getElementById('pc'),lb=document.getElementById('lb');const sg=[];
+for(let i=0;i<10;i++){const s=document.createElement('i');s.className='sg';s.style.setProperty('--i',i);bd.appendChild(s);sg.push(s)}
+function set(p){const f=p/100*10;sg.forEach((s,i)=>{const full=f>=i+1,part=f>i&&f<i+1;s.classList.toggle('on',full);s.classList.toggle('part',part);if(part)s.style.setProperty('--f',(f-i).toFixed(2))});
+ const col=p<20?'#F87171':p<50?'#FBBF24':'#34D399';document.body.style.setProperty('--c',col);pc.innerHTML=Math.round(p)+'<small>%</small>';
+ document.getElementById('tm').textContent=p>=100?'full':Math.max(1,Math.round((100-p)*.52))+' min';document.getElementById('tp').innerHTML=(30+Math.round(p*.08))+'&deg;C';
+ const ch=w.classList.contains('ch');lb.textContent=p>=100?'Fully charged':ch?(p>80?'Trickle charging':'Fast charging'):'Discharging'}
+let cur=82;set(cur);
+/* Idle demo: the battery charges from low to full, its ten cells lighting one by one with a travelling shine, the colour moving from red through amber to green, the bolt pulsing and the time to full counting down, then it drains quickly and starts again, until you refresh. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2200);while(true){w.classList.add('ch');while(cur<100){cur=Math.min(100,cur+.8);set(cur);await sleep(26)}await sleep(2200);w.classList.remove('ch');while(cur>8){cur-=1.4;set(cur);await sleep(18)}await sleep(600);w.classList.add('ch');set(cur)}})()}
+</script></body></html>

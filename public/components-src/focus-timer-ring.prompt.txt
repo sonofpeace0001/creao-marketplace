@@ -1,0 +1,40 @@
+ROLE
+You are a senior productivity app designer and front-end engineer with 15+ years of experience. Build "Focus Timer Ring": a Pomodoro timer with a draining glowing ring, lit minute ticks, mode switch that recolours the whole scheme, session dots and pause and skip controls.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Charcoal stage with a coral glow that becomes mint or blue per mode, rounded geometric type.
+- Palette: #0E0F14, #FF5A5F, #FF9A6B, #F3EFEF, #B3AAAA, #E8DEDE
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Mode switch with sliding thumb; 60-tick ring with head dot; big countdown and label; four session dots; controls.
+
+INTERACTION & STATES
+- Switch modes, pause or skip; colours transition together.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ring drains with a glowing head; ticks extinguish; theme colours cross-fade; session dot lights with a spring.
+
+IDLE AUTOPLAY
+- Runs at 60x speed so rounds complete, cycling focus to short break to long break with colour changes.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A digital clock only; the ring is the interface.
+- Colour changes that are abrupt.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

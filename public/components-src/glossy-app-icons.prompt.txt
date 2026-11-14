@@ -1,0 +1,40 @@
+ROLE
+You are a senior app icon designer and front-end engineer with 15+ years of experience. Build "Glossy App Icons": eight glossy squircle app icons with highlights, sweeping glints, launch bounces and an iOS-style jiggle edit mode with delete badges.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep violet-to-teal wallpaper with saturated gradient icons, white glyphs and soft coloured shadows.
+- Palette: #2B1B5A, #0F2A5C, #0B3B52, #FF6B6B, #C9184A, #E5E7EB
+- Type: Outfit (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with Edit layout toggle; four-by-two icon grid with labels; delete badges in edit mode.
+
+INTERACTION & STATES
+- Hover lifts and tilts; click plays a launch bounce; Edit layout makes icons jiggle out of phase and shows minus badges.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Launch: scale .88, then 1.18 with -10px lift over 700ms spring; glint sweeps across every 6s offset per icon; jiggle plus or minus 2.6 degrees at 220ms and 260ms alternating.
+
+IDLE AUTOPLAY
+- Icons lift and launch in turn, and every eighth step the grid jiggles for 2.4s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Flat gradients with no highlight or inner shadow.
+- Brand app logos; glyphs are generic.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

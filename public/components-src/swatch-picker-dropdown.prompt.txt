@@ -1,0 +1,40 @@
+ROLE
+You are a senior design tools designer and front-end engineer with 15+ years of experience. Build "Swatch Picker Dropdown": a colour dropdown whose swatches pop in with a ripple stagger, with a spring selection ring, a hex field, recents and a live brand card that re-tints with the page.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black popover over a glowing gradient card; the accent colour drives glow, card and page.
+- Palette: #7C839B, #8B5CF6, #0C0D14, #EEF0FA, #14161F, #171A25
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Brand preview card; labelled trigger with swatch, name and hex; popover with 18 swatches in a six-column grid, hex input and three recent colours.
+
+INTERACTION & STATES
+- Click a swatch or type a six-digit hex: the card, glow, trigger chip and page background accent update; Escape closes.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Swatches scale 0 to 1 over 450ms spring with a 14ms index stagger; selected ring scales from .6 with a 400ms spring; card gradient and shadow transition 500ms.
+
+IDLE AUTOPLAY
+- Colours are picked in turn, then a custom hex is typed digit by digit.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A flat grid with no entrance.
+- Applying a hex before it has six valid digits.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>URL Unfurl Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3EFE8;color:#1F1B16;font-family:'Instrument Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:500px;display:grid;gap:14px}
+.w>label{font:400 26px 'Instrument Serif';letter-spacing:-.01em}
+.in{display:flex;align-items:center;gap:10px;border-radius:18px;background:#fff;padding:6px 8px 6px 16px;box-shadow:inset 0 0 0 1.500px #DDD6C8;transition:box-shadow .2s}
+.in:focus-within{box-shadow:inset 0 0 0 2px #1F1B16,0 0 0 5px rgba(31,27,22,.08)}
+.in svg.l{width:20px;height:20px;color:#9A917F;flex:none;transition:color .3s}.in.ld svg.l{color:#E8590C;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.in input{flex:1;min-width:0;border:0;outline:0;background:none;font:500 16px 'Geist Mono';color:#1F1B16;padding:14px 0}.in input::placeholder{color:#B8AF9E}
+.in button{border:0;border-radius:12px;padding:12px 18px;background:#1F1B16;color:#fff;font:700 14px 'Instrument Sans';cursor:pointer}.in button:disabled{opacity:.3;cursor:default}.in button:focus-visible{outline:3px solid #E8590C;outline-offset:2px}
+.slot{min-height:150px}
+.sk,.card{border-radius:20px;overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1px rgba(31,27,22,.09),0 24px 34px -24px rgba(31,27,22,.4);display:grid;grid-template-columns:150px 1fr;animation:in .5s cubic-bezier(.3,1.2,.4,1)}
+@keyframes in{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.sk .im,.sk i{background:linear-gradient(90deg,#EFE9DC 0,#F8F4EA 50%,#EFE9DC 100%);background-size:220% 100%;animation:sh 1.200s linear infinite}@keyframes sh{to{background-position:-220% 0}}
+.sk .bd{padding:16px;display:grid;gap:10px;align-content:center}.sk i{display:block;height:12px;border-radius:6px}
+.card .im{position:relative;min-height:140px}
+.card .im svg{position:absolute;inset:0;width:100%;height:100%}
+.card .bd{padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px}
+.card .st{display:flex;align-items:center;gap:8px;font:500 12px 'Geist Mono';color:#8C8370}.card .st i{width:16px;height:16px;border-radius:5px;background:var(--c);display:block}
+.card h3{font:400 24px/1.1 'Instrument Serif';letter-spacing:-.01em}.card p{font-size:13.500px;line-height:1.45;color:#6B6353;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .rm{margin-top:auto;align-self:flex-start;border:0;background:none;color:#9A917F;font:600 12.500px 'Instrument Sans';cursor:pointer;padding:4px 0}.card .rm:hover{color:#B91C1C}.card .rm:focus-visible{outline:2px solid #E8590C}
+.card .im{animation:zoom 6s ease-out forwards}@keyframes zoom{from{transform:scale(1.08)}to{transform:none}}
+.hint{font-size:13px;color:#9A917F}
+@media(max-width:480px){.sk,.card{grid-template-columns:1fr}.card .im,.sk .im{min-height:110px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><label for="u">Add a reference link</label>
+<form class="in" id="in" onsubmit="return false"><svg class="l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><input id="u" type="url" placeholder="Paste a link" autocomplete="off" aria-label="Link URL"><button id="go" disabled>Add</button></form>
+<div class="slot" id="slot" aria-live="polite"></div><div class="hint">We fetch the title, image and description for you.</div></div>
+<script>
+const S={'northwind.studio/journal/designing-calm':['Northwind Journal','Designing for calm: ten rules for software that does not shout','A long read on restraint, motion budgets and why the best interfaces feel quiet.','#E8590C','M0 60C40 20 80 100 150 50V150H0Z','#FCD9B6','#F59E5B'],'atlas.dev/blog/edge-rendering':['Atlas Blog','How we cut cold starts to 9 ms with edge rendering','The architecture notes behind our fastest release, with benchmarks and the mistakes we made.','#2563EB','M0 90C50 50 90 110 150 60V150H0Z','#BFD4FF','#4F7DF0'],'ledgerly.co/guides/runway':['Ledgerly Guides','The founder\'s guide to reading your runway','A plain-English walkthrough of burn, net new ARR and the three numbers investors actually ask about.','#059669','M0 70C40 30 100 100 150 40V150H0Z','#BDEBD6','#34B27F']};
+const inp=document.getElementById('u'),go=document.getElementById('go'),slot=document.getElementById('slot'),box=document.getElementById('in');let t;
+const key=v=>Object.keys(S).find(k=>v.includes(k.split('/')[0]));
+function skel(){slot.innerHTML='<div class="sk"><div class="im"></div><div class="bd"><i style="width:40%"></i><i style="width:92%;height:18px"></i><i style="width:78%"></i></div></div>'}
+function card(k){const d=S[k];slot.innerHTML='<div class="card"><div class="im"><svg viewBox="0 0 150 150" preserveAspectRatio="xMidYMid slice"><rect width="150" height="150" fill="'+d[5]+'"/><circle cx="108" cy="36" r="22" fill="#fff" opacity=".55"/><path d="'+d[4]+'" fill="'+d[6]+'"/><path d="M0 110C40 90 90 130 150 100V150H0Z" fill="#000" opacity=".16"/></svg></div><div class="bd"><div class="st" style="--c:'+d[3]+'"><i></i>'+k.split('/')[0]+'</div><h3>'+d[1]+'</h3><p>'+d[2]+'</p><button class="rm" type="button">Remove link</button></div></div>';slot.querySelector('.rm').onclick=clear}
+function clear(){slot.innerHTML='';inp.value='';go.disabled=true}
+function unfurl(){const v=inp.value.trim();if(!v)return;box.classList.add('ld');skel();clearTimeout(t);t=setTimeout(()=>{box.classList.remove('ld');const k=key(v)||Object.keys(S)[0];card(k)},1300)}
+inp.addEventListener('input',()=>go.disabled=!inp.value.trim());inp.addEventListener('paste',()=>setTimeout(unfurl,50));box.addEventListener('submit',unfurl);inp.addEventListener('keydown',e=>{if(e.key==='Enter')unfurl()});
+inp.value='atlas.dev/blog/edge-rendering';go.disabled=false;card('atlas.dev/blog/edge-rendering');
+/* Idle demo: a link is typed, a skeleton shimmers while it loads, the preview card unfurls, then it clears and repeats with the next link. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),ks=Object.keys(S);
+ (async()=>{await sleep(3800);let k=0;while(!off){clear();await sleep(600);const u=ks[k++%ks.length];for(const c of u){if(off)return;inp.value+=c;go.disabled=false;await sleep(42)}await sleep(350);unfurl();await sleep(4600)}})()}
+</script></body></html>

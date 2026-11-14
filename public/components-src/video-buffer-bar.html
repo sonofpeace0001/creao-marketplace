@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Video Buffer Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08090E;color:#F1F3FA;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.pl{position:relative;width:100%;max-width:760px;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#000;box-shadow:0 44px 70px -34px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.1);user-select:none}
+.vd{position:absolute;inset:0}.vd svg{width:100%;height:100%;display:block;transform:scale(1.04);animation:pn 20s ease-in-out infinite alternate}@keyframes pn{to{transform:scale(1.12) translate(-1.500%,-1%)}}
+.pl::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 25%,transparent 55%,rgba(5,6,12,.88))}
+.ti{position:absolute;left:24px;top:20px;z-index:3;font-size:15px;font-weight:700;text-shadow:0 2px 12px rgba(0,0,0,.6)}.ti small{display:block;font:500 11.500px 'Geist Mono';letter-spacing:.14em;text-transform:uppercase;color:#FFD9A0;margin-bottom:3px}
+.bf{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px;border-radius:50%;border:5px solid rgba(255,255,255,.25);border-top-color:#fff;animation:sp .8s linear infinite;z-index:4;opacity:0;transition:opacity .25s}.pl.bfg .bf{opacity:1}@keyframes sp{to{transform:rotate(360deg)}}
+.bg{position:absolute;left:50%;top:calc(50% + 52px);transform:translateX(-50%);padding:6px 14px;border-radius:99px;background:rgba(10,12,20,.7);backdrop-filter:blur(6px);font:600 12px 'Geist Mono';letter-spacing:.1em;z-index:4;opacity:0;transition:opacity .25s}.pl.bfg .bg{opacity:1}
+.cn{position:absolute;left:0;right:0;bottom:0;z-index:5;padding:0 22px 16px}
+.bar{position:relative;height:30px;display:flex;align-items:center;cursor:pointer}
+.tr{position:absolute;left:0;right:0;height:5px;border-radius:3px;background:rgba(255,255,255,.2);transition:height .2s;overflow:hidden}.bar:hover .tr,.pl.hv .tr{height:9px}
+.tr i{position:absolute;top:0;bottom:0;border-radius:3px}.tr .b{background:rgba(255,255,255,.38)}.tr .p{background:linear-gradient(90deg,#FF5A36,#FF2E7E)}
+.kn{position:absolute;left:var(--p,0%);top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.6),0 0 0 4px rgba(255,90,54,.35);transform:scale(.85);transition:transform .2s}.bar:hover .kn,.pl.hv .kn{transform:scale(1.15)}
+.tp{position:absolute;bottom:34px;left:var(--x,50%);transform:translateX(-50%);width:132px;border-radius:12px;overflow:hidden;background:#12141E;box-shadow:0 14px 26px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.15);opacity:0;transform:translateX(-50%) translateY(6px);transition:opacity .2s,transform .25s cubic-bezier(.3,1.5,.5,1);pointer-events:none}.pl.hv .tp{opacity:1;transform:translateX(-50%)}
+.tp .th{height:74px;overflow:hidden}.tp .th svg{width:100%;height:100%;display:block}.tp span{display:block;text-align:center;font:600 12px 'Geist Mono';padding:6px}
+.rw{display:flex;align-items:center;gap:14px;margin-top:2px;font:600 12.500px 'Geist Mono';font-variant-numeric:tabular-nums}.rw button{width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .2s}.rw button:hover{background:rgba(255,255,255,.28)}.rw button:focus-visible{outline:2px solid #fff}.rw svg{width:15px;height:15px}.rw svg *{fill:currentColor;stroke:none}
+.rw .sp{flex:1}.rw .ld{color:#9AA3C0;display:flex;align-items:center;gap:6px}.rw .ld i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.38)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="pl" id="pl"><div class="vd" id="vd"></div><div class="ti"><small>Chapter 3 of 5</small>Above the clouds, full film</div><div class="bf"></div><div class="bg">BUFFERING</div>
+<div class="cn"><div class="bar" id="bar"><div class="tr"><i class="b" id="bf" style="left:0;width:0"></i><i class="p" id="pf" style="left:0;width:0"></i></div><i class="kn" id="kn"></i><div class="tp" id="tp"><div class="th" id="th"></div><span id="tt">0:00</span></div></div>
+<div class="rw"><button id="pp" aria-label="Pause"><svg viewBox="0 0 24 24" id="pi"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button><span id="tm">0:00 / 4:32</span><span class="sp"></span><span class="ld"><i></i><span id="ls">Loaded to 0:00</span></span></div></div></div>
+<script>
+function scene(s){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};const c=['#BAE6FD','#38BDF8','#0369A1','#0C2A4A'];let h='<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g'+s+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E2A78"/><stop offset=".5" stop-color="#F472B6"/><stop offset="1" stop-color="#FFB27A"/></linearGradient></defs><rect width="400" height="225" fill="url(#g'+s+')"/><circle cx="'+(90+r(220))+'" cy="'+(55+r(30))+'" r="'+(22+r(14))+'" fill="#FFF6D6"/>';
+ for(let l=0;l<3;l++){let d='M0 225 L0 '+(140+l*26);const a=18+r(20),f=.012+r(.02),ph=r(6);for(let x=0;x<=400;x+=8)d+=' L'+x+' '+(140+l*26-a*Math.abs(Math.sin(x*f+ph))-a*.4*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L400 225Z';h+='<path d="'+d+'" fill="#1A1040" opacity="'+(.35+l*.3)+'"/>'}return h+'</svg>'}
+document.getElementById('vd').innerHTML=scene(31);document.getElementById('th').innerHTML=scene(31);
+const DUR=272,pl=document.getElementById('pl'),bf=document.getElementById('bf'),pf=document.getElementById('pf'),kn=document.getElementById('kn'),tm=document.getElementById('tm'),ls=document.getElementById('ls'),bar=document.getElementById('bar'),tp=document.getElementById('tp'),tt=document.getElementById('tt');
+let play=64,buf=118,paused=false,stall=false,off=false;const f=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function paint(){const p=play/DUR*100,b=buf/DUR*100;pf.style.width=p+'%';bf.style.width=b+'%';kn.style.setProperty('--p',p+'%');tm.textContent=f(play)+' / '+f(DUR);ls.textContent='Loaded to '+f(buf)}
+function pos(e){const r=bar.getBoundingClientRect();return Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))}
+bar.addEventListener('pointermove',e=>{off=true;const k=pos(e);tp.style.setProperty('--x',(k*100)+'%');tt.textContent=f(k*DUR);pl.classList.add('hv')});bar.addEventListener('pointerleave',()=>pl.classList.remove('hv'));bar.addEventListener('click',e=>{off=true;play=pos(e)*DUR;if(play>buf)buf=Math.min(DUR,play+30);paint()});
+document.getElementById('pp').onclick=()=>{off=true;paused=!paused;document.getElementById('pi').innerHTML=paused?'<path d="M7 4l13 8-13 8Z"/>':'<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>'};
+paint();
+/* Idle demo: the film plays; the lighter buffered range races ahead in uneven bursts, and sometimes falls behind so the player stalls with a spinner and BUFFERING until data arrives; every so often a ghost cursor scrubs along the bar and a thumbnail tooltip with a timestamp follows it, until you touch the bar. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0;requestAnimationFrame(function loop(n){const dt=Math.min(.06,(n-last)/1000||0);last=n;
+ if(!paused){if(play<buf-.4){stall=false;play=Math.min(DUR,play+dt*14)}else stall=true}
+ if(Math.random()<.03)buf=Math.min(DUR,buf+Math.random()*(stall?9:5));if(play>=DUR-1){play=2;buf=40}
+ pl.classList.toggle('bfg',stall&&!paused);paint();requestAnimationFrame(loop)});
+ const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);while(!off){const w=bar.getBoundingClientRect().width;for(let k=.2;k<=.8&&!off;k+=.012){const r=bar.getBoundingClientRect();tp.style.setProperty('--x',(k*100)+'%');tt.textContent=f(k*DUR);pl.classList.add('hv');await sleep(24)}pl.classList.remove('hv');await sleep(4200)}})();setTimeout(()=>{buf=play+.1},5500)}
+</script></body></html>

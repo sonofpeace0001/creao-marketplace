@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Code to UI Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B1018;color:#E6EDF6;font-family:'Inter Tight',sans-serif;min-height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased}
+.hero{min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(800px 500px at 80% 30%,rgba(52,211,153,.12),transparent 70%),radial-gradient(700px 500px at 0 100%,rgba(99,102,241,.14),transparent 70%)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px clamp(18px,4vw,48px)}.lg{font-weight:800;font-size:19px;letter-spacing:-.05em;display:flex;gap:9px;align-items:center}.lg i{width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,#34D399,#6366F1);display:block}
+nav ul{display:flex;gap:26px;list-style:none;font-size:14px;font-weight:600;color:#8294AD}nav a{color:inherit;text-decoration:none}
+.nb{border:0;border-radius:10px;padding:10px 16px;background:#E6EDF6;color:#0B1018;font:700 13px 'Inter Tight';cursor:pointer}.nb:focus-visible,.b1:focus-visible,.b2:focus-visible{outline:3px solid #34D399;outline-offset:3px}
+.body{flex:1;display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(20px,4vw,56px);align-items:center;padding:0 clamp(18px,5vw,70px) 40px}
+.eb{display:inline-flex;gap:8px;align-items:center;font:500 12px 'JetBrains Mono';color:#34D399;padding:6px 12px;border-radius:99px;background:rgba(52,211,153,.1);box-shadow:inset 0 0 0 1px rgba(52,211,153,.3)}
+h1{font-size:clamp(34px,5vw,64px);line-height:1;font-weight:800;letter-spacing:-.055em;margin:18px 0}h1 span{color:#34D399}
+.sb{font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:#8EA0BA;max-width:460px}
+.ct{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}.b1{border:0;border-radius:12px;padding:15px 24px;background:#34D399;color:#04261A;font:700 15px 'Inter Tight';cursor:pointer}.b2{border:0;border-radius:12px;padding:15px 24px;background:rgba(255,255,255,.06);color:#E6EDF6;font:700 15px 'JetBrains Mono';cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.stage{display:grid;grid-template-columns:1fr 1fr;border-radius:20px;overflow:hidden;box-shadow:0 40px 70px -30px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,255,255,.1);min-height:380px}
+.ed{background:#0F1520;padding:0 0 14px}.tab{display:flex;gap:6px;align-items:center;padding:11px 14px;background:#131B28;border-bottom:1px solid rgba(255,255,255,.06);font:500 12px 'JetBrains Mono';color:#8294AD}.tab i{width:9px;height:9px;border-radius:50%;background:#2A3548}.tab i:nth-child(1){background:#FB7185}.tab i:nth-child(2){background:#FBBF24}.tab i:nth-child(3){background:#34D399}.tab span{margin-left:8px}
+.code{padding:14px;font:400 12.500px/1.75 'JetBrains Mono';white-space:pre;overflow:hidden}.code .l{display:block;min-height:1.75em}.code .ln{color:#3E4C63;display:inline-block;width:2ch;margin-right:12px;text-align:right}
+.k{color:#C792EA}.t{color:#7DD3FC}.s{color:#A7F3D0}.p{color:#FDBA74}.c{color:#5B6B84}
+.cur{display:inline-block;width:7px;height:14px;background:#34D399;vertical-align:-2px;animation:bl 1s steps(1) infinite}@keyframes bl{50%{opacity:0}}
+.pv{background:linear-gradient(160deg,#F4F7FB,#E4EBF5);display:grid;place-items:center;padding:20px;position:relative}
+.pv::before{content:"Live preview";position:absolute;top:12px;left:16px;font:600 10px 'Inter Tight';letter-spacing:.16em;text-transform:uppercase;color:#7C8CA4}
+.pl{width:100%;max-width:230px;border-radius:18px;background:#fff;padding:16px;box-shadow:0 20px 34px -18px rgba(15,21,32,.45);display:grid;gap:10px;color:#101828}
+.pl>*{opacity:0;transform:translateY(10px) scale(.96);transition:all .45s cubic-bezier(.3,1.3,.4,1)}.pl>.on{opacity:1;transform:none}
+.pl .av{display:flex;align-items:center;gap:10px}.pl .av i{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#34D399,#6366F1);display:block}.pl .av b{font-size:14px;display:block}.pl .av span{font-size:11.500px;color:#6B7A90}
+.pl h4{font-size:19px;letter-spacing:-.03em;line-height:1.1}.pl .bar{height:8px;border-radius:4px;background:#E7ECF4;overflow:hidden}.pl .bar i{display:block;height:100%;width:72%;background:linear-gradient(90deg,#34D399,#6366F1)}
+.pl .btn{border-radius:11px;background:#101828;color:#fff;text-align:center;padding:11px;font:700 13px 'Inter Tight'}
+@media(max-width:900px){.body{grid-template-columns:1fr}nav ul{display:none}}
+@media(prefers-reduced-motion:reduce){.pl>*{transition:none}.cur{animation:none}}
+</style></head><body>
+<section class="hero"><nav><div class="lg"><i></i>Patchwork</div><ul><li><a href="#">Components</a></li><li><a href="#">Docs</a></li><li><a href="#">Pricing</a></li></ul><button class="nb">Install</button></nav>
+<div class="body"><div><span class="eb">v4.0  |  now with live preview</span><h1>Describe it in code. <span>See it ship.</span></h1><p class="sb">Patchwork compiles your component as you type, so the feedback loop between an idea and a pixel is measured in milliseconds, not builds.</p>
+<div class="ct"><button class="b1">Start building</button><button class="b2">npm i patchwork</button></div></div>
+<div class="stage" aria-hidden="true"><div class="ed"><div class="tab"><i></i><i></i><i></i><span>ProfileCard.tsx</span></div><div class="code" id="code"></div></div><div class="pv"><div class="pl" id="pl"><div class="av" data-e="0"><i></i><div><b>Imani Cole</b><span>Staff designer</span></div></div><h4 data-e="1">Design systems that scale</h4><div class="bar" data-e="2"><i></i></div><div class="btn" data-e="3">Follow</div></div></div></div></div></section>
+<script>
+const L=[['<span class="k">export function</span> <span class="t">ProfileCard</span>() {',null],['  <span class="k">return</span> (',null],['    &lt;<span class="t">Card</span>&gt;',null],['      &lt;<span class="t">Avatar</span> <span class="p">name</span>=<span class="s">"Imani Cole"</span> /&gt;',0],['      &lt;<span class="t">Heading</span>&gt;<span class="s">Design systems</span>&lt;/<span class="t">Heading</span>&gt;',1],['      &lt;<span class="t">Progress</span> <span class="p">value</span>={<span class="s">72</span>} /&gt;',2],['      &lt;<span class="t">Button</span>&gt;<span class="s">Follow</span>&lt;/<span class="t">Button</span>&gt;',3],['    &lt;/<span class="t">Card</span>&gt;',null],['  )','null'],['}',null]];
+const code=document.getElementById('code'),pl=document.getElementById('pl'),els=[...pl.children];
+function plain(h){return h.replace(/<[^>]+>/g,'').replace(/&lt;/g,'<').replace(/&gt;/g,'>')}
+function draw(upto,partial){let h='';for(let i=0;i<L.length;i++){if(i>upto)break;let line=L[i][0];if(i===upto&&partial!=null){const txt=plain(line);let cut=partial,out='',inTag=false,seen=0;line.replace(/(<[^>]+>)|(&lt;|&gt;)|([^<&])/g,(m,tag,ent)=>{if(tag){out+=tag}else if(seen<cut){out+=m;seen++}return m});line=out+'<span class="cur"></span>'}h+='<span class="l"><span class="ln">'+(i+1)+'</span>'+line+'</span>'}code.innerHTML=h}
+function show(n){els.forEach((e,i)=>e.classList.toggle('on',i<=n))}
+draw(L.length-1);show(3);
+/* The editor types itself line by line; each finished line mounts its component in the live preview. Loops forever. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+ (async()=>{await sleep(3200);while(true){show(-1);code.innerHTML='';for(let i=0;i<L.length;i++){const len=plain(L[i][0]).length;for(let c=0;c<=len;c+=2){draw(i,c);await sleep(22)}draw(i);if(typeof L[i][1]==='number')show(L[i][1]);await sleep(160)}await sleep(4200)}})()}
+</script></body></html>

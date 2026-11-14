@@ -1,0 +1,41 @@
+ROLE
+You are a senior mobile interaction designer and front-end engineer with 15+ years of experience. Build "Swipe Stack Cards": a draggable destination deck with rotation, SAVE and PASS stamps and a spring fly-off, plus button and arrow-key controls.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Lavender canvas with sunset-gradient destination cards, white circular controls and mono captions.
+- Palette: #4ADE80, #FB7185, #F6F1FF, #1D1530, #7C3AED, #8C7FAE
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Three-card stack with scaled cards beneath; destination name, country and tags; pass and save buttons; hint.
+
+INTERACTION & STATES
+- Pointer drag moves, rotates (dx/18 degrees) and reveals a stamp; release past 110px flies the card off, else it springs back; arrow keys and buttons do the same.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Fly-off: translateX 520px, rotate 24 degrees, fade 300ms; return spring 450ms cubic-bezier(.3,1.2,.4,1).
+- Cards beneath: scale 1 - 0.06k and translateY 16k px.
+
+IDLE AUTOPLAY
+- An unseen hand nudges the top card, then swipes it away, alternating right and left every 2.4s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Photos from stock sites; use generated gradient scenes.
+- Swipe without a visible commit threshold or stamp feedback.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

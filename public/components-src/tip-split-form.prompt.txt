@@ -1,0 +1,41 @@
+ROLE
+You are a senior fintech product designer and front-end engineer with 15+ years of experience. Build "Tip Split Form": a bill splitter with a sliding tip selector, a headcount stepper with growing avatars and a per-person total that counts to each new value.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep forest green with a vivid mint result card and IBM Plex Mono figures.
+- Palette: #4ADE80, #0D1B16, #06281A, #E8F5EE, #12261E, #7FA395
+- Type: Sora, IBM Plex Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Bill input with currency prefix; four-option tip pill with a sliding thumb; people stepper with avatar stack; result card with per-person total, tip, total and round-up, plus a bill versus tip bar.
+
+INTERACTION & STATES
+- Typing a bill, choosing a tip or changing the headcount recomputes everything; the total eases to its new value; the bar re-proportions.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Tip thumb 350ms cubic-bezier(.3,1.3,.4,1); avatars pop in with a 300ms spring.
+- Total eases 14% of the remaining gap per frame; bar widths 400ms.
+
+IDLE AUTOPLAY
+- Four scenarios cycle every 2s (15% and 2 people, 25% and 4, 10% and 6, 20% and 3).
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Totals that jump; they must count.
+- Floating point artefacts such as 73.8399999; always format to two decimals.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

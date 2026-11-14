@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Duotone Icon Switcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--bg:#EAF3FB;--ink:#0B2540;--a:#2F80ED;--b:#9BD0FF;--card:#fff;background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;transition:background .6s}
+.w{width:100%;max-width:620px;display:grid;gap:20px}
+.hd{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}.hd h1{font-size:26px;font-weight:800;letter-spacing:-.04em}
+.pal{display:flex;gap:8px;background:var(--card);padding:5px;border-radius:99px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07);transition:background .6s}
+.pal button{display:flex;align-items:center;gap:8px;border:0;background:none;padding:8px 14px 8px 8px;border-radius:99px;font:700 13px 'Plus Jakarta Sans';color:var(--ink);cursor:pointer;transition:background .25s,color .25s}
+.pal button i{width:18px;height:18px;border-radius:50%;display:block;background:linear-gradient(135deg,var(--c1),var(--c2))}
+.pal button[aria-pressed=true]{background:var(--ink);color:var(--card)}.pal button:focus-visible{outline:2px solid var(--a)}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.t{border-radius:24px;background:var(--card);padding:22px 18px 18px;display:grid;justify-items:start;gap:16px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);transition:background .6s,transform .3s cubic-bezier(.3,1.4,.4,1)}
+.t:hover{transform:translateY(-4px) rotate(-1deg)}
+.t svg{width:52px;height:52px;overflow:visible}
+.t svg .f{fill:var(--b);opacity:.55;transition:fill .6s}.t svg .s{fill:none;stroke:var(--a);stroke-width:1.800;stroke-linecap:round;stroke-linejoin:round;transition:stroke .6s}.t svg .d{fill:var(--a);transition:fill .6s}
+.t b{font-size:15px;font-weight:700}.t span{font:500 11.500px 'Geist Mono';color:color-mix(in srgb,var(--ink) 50%,transparent);margin-top:-10px}
+.sw{display:flex;gap:6px;margin-top:2px}.sw i{width:12px;height:12px;border-radius:50%;display:block}.sw i:nth-child(1){background:var(--a)}.sw i:nth-child(2){background:var(--b)}.sw i:nth-child(3){background:var(--ink)}
+@media(max-width:480px){.g{grid-template-columns:repeat(2,1fr)}.pal button span{display:none}.pal button{padding:8px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Duotone, your palette</h1><div class="pal" id="pal" role="group" aria-label="Icon palette"></div></div><div class="g" id="g"></div></div>
+<script>
+const PAL=[['Ocean','#EAF3FB','#0B2540','#2F80ED','#9BD0FF'],['Ember','#FBEFE6','#3A1604','#F2570C','#FFC29A'],['Forest','#E9F3EA','#0F2A17','#15803D','#9BE3B0'],['Orchid','#F3ECFB','#2A0F45','#8B3CF0','#D5B6FF']];
+const I=[['Analytics','Chart / 24','<rect class="f" x="3" y="12" width="4.500" height="8" rx="1.500"/><rect class="f" x="9.800" y="7" width="4.500" height="13" rx="1.500"/><rect class="f" x="16.500" y="3.500" width="4.500" height="16.500" rx="1.500"/><path class="s" d="M3 20.500h18M5.200 12v8M12 7v13M18.800 3.500V20"/>'],['Messages','Chat / 24','<path class="f" d="M4 5h16v11H10l-4.500 3.500V16H4Z"/><path class="s" d="M4 5h16v11H10l-4.500 3.500V16H4Z"/><circle class="d" cx="9" cy="10.500" r="1.100"/><circle class="d" cx="12.500" cy="10.500" r="1.100"/><circle class="d" cx="16" cy="10.500" r="1.100"/>'],['Calendar','Date / 24','<rect class="f" x="3.500" y="5" width="17" height="15" rx="3"/><path class="s" d="M3.500 10h17M8 3v4M16 3v4"/><rect class="s" x="3.500" y="5" width="17" height="15" rx="3"/><circle class="d" cx="8.500" cy="14.500" r="1.200"/><circle class="d" cx="12" cy="14.500" r="1.200"/>'],['Wallet','Money / 24','<rect class="f" x="3" y="6.500" width="18" height="13" rx="3"/><path class="s" d="M5 6.500 16 4v2.500"/><rect class="s" x="3" y="6.500" width="18" height="13" rx="3"/><path class="f" style="opacity:.9" d="M14 11.500h7v4h-7a2 2 0 0 1 0-4Z"/><circle class="d" cx="16.500" cy="13.500" r="1.100"/>'],['Security','Shield / 24','<path class="f" d="M12 3 4.500 6v5.500c0 4.700 3.200 8 7.500 9.500 4.300-1.500 7.500-4.800 7.500-9.500V6Z"/><path class="s" d="M12 3 4.500 6v5.500c0 4.700 3.200 8 7.500 9.500 4.300-1.500 7.500-4.800 7.500-9.500V6Z"/><path class="s" d="m8.800 12 2.400 2.400 4-4.600"/>'],['Launch','Rocket / 24','<path class="f" d="M12 3c3.500 2 5.500 5.500 5.500 9.500l-2.500 3h-6l-2.500-3C6.500 8.500 8.500 5 12 3Z"/><path class="s" d="M12 3c3.500 2 5.500 5.500 5.500 9.500l-2.500 3h-6l-2.500-3C6.500 8.500 8.500 5 12 3ZM9 15.500 7 19l3.200-1M15 15.500l2 3.500-3.200-1"/><circle class="d" cx="12" cy="10" r="1.800"/>']];
+const g=document.getElementById('g'),pal=document.getElementById('pal');
+I.forEach(([n,c,p])=>{g.insertAdjacentHTML('beforeend','<div class="t"><svg viewBox="0 0 24 24" aria-hidden="true">'+p+'</svg><b>'+n+'</b><span>'+c+'</span><div class="sw"><i></i><i></i><i></i></div></div>')});
+function use(i){const p=PAL[i],r=document.body.style;r.setProperty('--bg',p[1]);r.setProperty('--ink',p[2]);r.setProperty('--a',p[3]);r.setProperty('--b',p[4]);[...pal.children].forEach((b,k)=>b.setAttribute('aria-pressed',k===i))}
+PAL.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-pressed','false');b.style.setProperty('--c1',p[3]);b.style.setProperty('--c2',p[4]);b.innerHTML='<i></i><span>'+p[0]+'</span>';b.onclick=()=>{off=true;use(i)};pal.appendChild(b)});
+use(0);
+/* Idle demo: the whole set re-tints through the four palettes in turn, with every colour easing over 600ms, until a palette is chosen. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3600);let k=1;while(!off){use(k++%4);await sleep(2400)}})()}
+</script></body></html>

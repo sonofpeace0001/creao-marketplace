@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Swipe Stack Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F6F1FF;color:#1D1530;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden;user-select:none}
+.w{display:grid;justify-items:center;gap:22px}
+.deck{position:relative;width:min(320px,84vw);height:min(440px,60vh);touch-action:none}
+.cd{--x:0px;--r:0deg;--k:0;position:absolute;inset:0;border-radius:26px;overflow:hidden;color:#fff;cursor:grab;transform:translate(var(--x),calc(var(--y,0px) + var(--ty,0px))) rotate(var(--r)) scale(var(--sc,1));transition:transform .45s cubic-bezier(.3,1.2,.4,1),opacity .3s;box-shadow:0 26px 36px -22px rgba(29,21,48,.55);will-change:transform}
+.cd.drag{transition:none;cursor:grabbing}
+.cd svg.bg{position:absolute;inset:0;width:100%;height:100%}
+.cd .tx{position:absolute;left:0;right:0;bottom:0;padding:70px 22px 22px;background:linear-gradient(180deg,transparent,rgba(15,8,32,.78))}
+.cd h2{font-weight:800;font-size:34px;letter-spacing:-.04em;line-height:1}.cd p{font:500 12px 'DM Mono';letter-spacing:.08em;text-transform:uppercase;opacity:.8;margin-top:8px}
+.cd .tg{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.cd .tg span{font-size:12px;font-weight:600;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.2);backdrop-filter:blur(6px)}
+.st{position:absolute;top:26px;font:800 24px 'Bricolage Grotesque';letter-spacing:.04em;padding:6px 14px;border:3px solid;border-radius:10px;opacity:0;transform:rotate(-12deg)}
+.st.y{left:22px;color:#4ADE80;border-color:#4ADE80}.st.n{right:22px;color:#FB7185;border-color:#FB7185;transform:rotate(12deg)}
+.cd.top .st.y{opacity:clamp(0,calc(var(--k)*1.6),1)}.cd.top .st.n{opacity:clamp(0,calc(var(--k)*-1.6),1)}
+.ctl{display:flex;gap:18px}
+.ctl button{width:62px;height:62px;border-radius:50%;border:0;background:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 14px 22px -12px rgba(29,21,48,.5);transition:transform .15s}
+.ctl button:hover{transform:scale(1.08)}.ctl button:active{transform:scale(.94)}.ctl button:focus-visible{outline:3px solid #7C3AED;outline-offset:3px}
+.ctl svg{width:26px;height:26px}
+.hint{font:500 12px 'DM Mono';letter-spacing:.12em;text-transform:uppercase;color:#8C7FAE}
+@media(prefers-reduced-motion:reduce){.cd{transition:none}}
+</style></head><body>
+<div class="w"><div class="deck" id="deck" aria-live="polite"></div>
+<div class="ctl"><button id="no" aria-label="Pass"><svg viewBox="0 0 24 24" fill="none" stroke="#FB7185" stroke-width="3" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button><button id="yes" aria-label="Save to trip"><svg viewBox="0 0 24 24" fill="#4ADE80"><path d="M12 21s-8-5.300-8-11a4.500 4.500 0 0 1 8-2.800A4.500 4.500 0 0 1 20 10c0 5.700-8 11-8 11Z"/></svg></button></div>
+<div class="hint">Drag, or use the arrow keys</div></div>
+<script>
+const D=[['Lisbon','Portugal','#FF9A5A','#C2305B',['Tiles','Trams','Pastel de nata']],['Kyoto','Japan','#7DD3C0','#1E5C6E',['Temples','Matcha','Autumn']],['Oaxaca','Mexico','#FFD25A','#C2410C',['Mezcal','Markets','Mole']],['Reykjavik','Iceland','#9DB8FF','#2B2E7F',['Aurora','Geothermal','Midnight sun']],['Marrakech','Morocco','#FF8A7A','#7A1F3D',['Souks','Riads','Mint tea']],['Hobart','Australia','#8FE0A8','#14532D',['Harbour','Whisky','Wilderness']]];
+const deck=document.getElementById('deck');let i=0,cards=[],drag=null,off=false;
+function art(a,b,s){return `<svg class="bg" viewBox="0 0 320 440" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g${s}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="320" height="440" fill="url(#g${s})"/><circle cx="${90+s*28%160}" cy="130" r="54" fill="#fff" opacity=".22"/><path d="M0 300c60-50 110-40 160-10s110 30 160-30v180H0Z" fill="#000" opacity=".16"/><path d="M0 340c70-40 120-30 170 0s100 20 150-10v110H0Z" fill="#000" opacity=".2"/></svg>`}
+function make(n){const d=D[n%D.length];const el=document.createElement('article');el.className='cd';el.dataset.n=n;el.innerHTML=art(d[2],d[3],n%D.length)+`<div class="st y">SAVE</div><div class="st n">PASS</div><div class="tx"><h2>${d[0]}</h2><p>${d[1]}</p><div class="tg">${d[4].map(t=>'<span>'+t+'</span>').join('')}</div></div>`;el.addEventListener('pointerdown',e=>start(e,el));return el}
+function layout(){cards.forEach((c,k)=>{c.classList.toggle('top',k===0);c.style.zIndex=10-k;if(k>0){c.style.setProperty('--sc',(1-k*.06).toFixed(2));c.style.setProperty('--ty',(k*16)+'px')}else{c.style.setProperty('--sc',1);c.style.setProperty('--ty','0px')}})}
+function fill(){while(cards.length<3){const c=make(i++);cards.push(c);deck.appendChild(c)}layout()}
+function fly(dir){const c=cards[0];if(!c)return;c.classList.remove('drag');c.style.setProperty('--x',(dir*520)+'px');c.style.setProperty('--r',(dir*24)+'deg');c.style.setProperty('--k',dir);c.style.opacity=0;cards.shift();layout();setTimeout(()=>{c.remove();fill()},380)}
+function start(e,el){if(el!==cards[0])return;off=true;drag={x:e.clientX,y:e.clientY,el};el.classList.add('drag');el.setPointerCapture(e.pointerId)}
+addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.el.style.setProperty('--x',dx+'px');drag.el.style.setProperty('--y',dy*.4+'px');drag.el.style.setProperty('--r',(dx/18)+'deg');drag.el.style.setProperty('--k',Math.max(-1,Math.min(1,dx/110)))});
+addEventListener('pointerup',e=>{if(!drag)return;const dx=e.clientX-drag.x,el=drag.el;drag=null;if(Math.abs(dx)>110)fly(dx>0?1:-1);else{el.classList.remove('drag');['--x','--y','--r','--k'].forEach(p=>el.style.removeProperty(p))}});
+document.getElementById('yes').onclick=()=>{off=true;fly(1)};document.getElementById('no').onclick=()=>{off=true;fly(-1)};
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'){off=true;fly(1)}if(e.key==='ArrowLeft'){off=true;fly(-1)}});
+fill();
+/* Idle demo: an unseen hand swipes the top card left and right every 2.4s until you interact. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let s=1;setTimeout(function go(){if(off)return;const c=cards[0];c.style.setProperty('--k',s*.9);c.style.setProperty('--x',(s*70)+'px');c.style.setProperty('--r',(s*5)+'deg');setTimeout(()=>{if(off)return;fly(s);s=-s;setTimeout(go,1700)},650)},3600)}
+</script></body></html>

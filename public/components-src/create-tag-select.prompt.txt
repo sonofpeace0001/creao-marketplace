@@ -1,0 +1,40 @@
+ROLE
+You are a senior workspace-tool designer and front-end engineer with 15+ years of experience. Build "Create Tag Select": a property select where typing a new name offers Create with the next colour swatch, and choosing it makes the tag and drops it into the field with a pop.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm off-white document with a serif title, soft coloured tags and a blue focus ring.
+- Palette: #2A2823, #2F6BFF, #8D897F, #F7F6F3, #F3F2EE, #E8E6DE
+- Type: Inter Tight, Newsreader (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Document page with Status, Tags and Due properties; tag field with chips and inline input; popover listing tags with ticks and a Create row.
+
+INTERACTION & STATES
+- Typing filters existing tags; a name with no exact match adds a Create row; Enter creates it with the next palette colour; Backspace on empty input removes the last chip.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Chips pop from scale .5 on a 400ms spring; rows enter with a 25ms stagger; ticks scale in on a spring; popover opens on a 300ms spring.
+
+IDLE AUTOPLAY
+- New tag names are typed, created and added, then existing tags are toggled and removed, looping with fresh names.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Letting users create duplicate names.
+- Chips without a remove button.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

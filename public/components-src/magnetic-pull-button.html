@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Magnetic Pull Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F4EFE6;color:#1B1712;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.stage{width:100%;max-width:640px;display:grid;gap:40px;justify-items:center;text-align:center}
+.stage h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.045em;line-height:1}
+.stage h1 em{font-style:normal;color:#E5482B}
+.stage p{color:#6F665A;font-size:16px;margin-top:12px;max-width:420px;margin-inline:auto}
+.row{display:flex;gap:34px;flex-wrap:wrap;justify-content:center;align-items:center}
+.mag{position:relative;display:inline-grid;place-items:center;padding:26px;margin:-26px}
+.mag button{--x:0px;--y:0px;position:relative;display:inline-flex;align-items:center;gap:12px;border:0;border-radius:99px;background:#1B1712;color:#F4EFE6;font:700 18px 'Bricolage Grotesque';padding:20px 30px 20px 34px;cursor:pointer;transform:translate(var(--x),var(--y));transition:transform .5s cubic-bezier(.2,1.6,.4,1),box-shadow .3s;box-shadow:0 22px 34px -18px rgba(27,23,18,.6)}
+.mag.on button{transition:transform .12s linear;box-shadow:0 30px 40px -18px rgba(27,23,18,.55)}
+.mag button .lb{display:inline-block;transform:translate(calc(var(--x)*.35),calc(var(--y)*.35));transition:inherit}
+.mag button .ar{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#E5482B;color:#fff;transform:translate(calc(var(--x)*.6),calc(var(--y)*.6));transition:inherit}
+.mag button .ar svg{width:16px;height:16px}
+.mag button:focus-visible{outline:3px solid #E5482B;outline-offset:5px}
+.mag.o button{background:transparent;color:#1B1712;box-shadow:inset 0 0 0 2px #1B1712}
+.mag.o button .ar{background:#1B1712}
+.mag.i button{width:84px;height:84px;padding:0;justify-content:center;background:#E5482B;color:#fff}
+.mag.i button svg{width:30px;height:30px;transform:translate(calc(var(--x)*.5),calc(var(--y)*.5))}
+.hint{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9A9080}
+@media(prefers-reduced-motion:reduce){.mag button,.mag button *{transition:none!important;transform:none!important}}
+</style></head><body>
+<div class="stage"><div><h1>Pull people <em>in</em></h1><p>Buttons that lean toward the cursor, with the label and icon travelling further than the shell.</p></div>
+<div class="row">
+<div class="mag"><button style="--x:9px;--y:-6px"><span class="lb">Start building</span><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button></div>
+<div class="mag o"><button><span class="lb">See pricing</span><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button></div>
+<div class="mag i"><button aria-label="Play the product tour"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.500v13a1 1 0 0 0 1.500.9l10.500-6.500a1 1 0 0 0 0-1.800L9.500 4.600A1 1 0 0 0 8 5.500Z"/></svg></button></div>
+</div>
+<div class="hint">Move your cursor near a button</div></div>
+<script>
+const mags=[...document.querySelectorAll('.mag')],reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function aim(x,y){for(const m of mags){const b=m.querySelector('button'),r=m.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,dx=x-cx,dy=y-cy,d=Math.hypot(dx,dy),reach=Math.max(r.width,r.height)*.85;
+ if(d<reach){m.classList.add('on');const k=(1-d/reach)*.55+.12,ox=dx*k,oy=dy*k,mag=Math.hypot(ox,oy),cap=Math.min(1,15/(mag||1));b.style.setProperty('--x',(ox*cap).toFixed(1)+'px');b.style.setProperty('--y',(oy*cap).toFixed(1)+'px')}else if(m.classList.contains('on')){m.classList.remove('on');b.style.setProperty('--x','0px');b.style.setProperty('--y','0px')}}}
+function rest(){mags.forEach(m=>{m.classList.remove('on');const b=m.querySelector('button');b.style.setProperty('--x','0px');b.style.setProperty('--y','0px')})}
+let real=performance.now()+3600;addEventListener('pointermove',e=>{real=performance.now();aim(e.clientX,e.clientY)});document.addEventListener('pointerleave',()=>{real=0;rest()});
+/* Idle demo: a ghost cursor glides along the row of buttons until a real pointer shows up. */
+if(!reduce){const t0=performance.now();(function loop(n){if(n-real>2200){const r=document.querySelector('.row').getBoundingClientRect(),t=(n-t0)/1000;aim(r.left+r.width*(.5+.46*Math.sin(t*.7)),r.top+r.height*(.5+.3*Math.sin(t*1.3+1)))}requestAnimationFrame(loop)})(t0)}
+</script></body></html>

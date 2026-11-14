@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Team Constellation Avatars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(800px 560px at 50% 40%,#16204A,#080A18 75%);color:#EAF0FF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.w{width:100%;max-width:700px;display:grid;gap:14px;justify-items:center;text-align:center}
+.w h1{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.05em}.w p{color:#8190C0;font-size:14px}
+.cv{position:relative;width:100%;aspect-ratio:16/10;max-height:62vh}
+.cv svg.ln{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.ln line{stroke:rgba(140,160,255,.22);stroke-width:1.200;transition:stroke .4s,stroke-width .4s}.ln line.hot{stroke:#7DD3FC;stroke-width:2}
+.ln circle{fill:#7DD3FC;opacity:.9}
+.nd{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);margin:calc(var(--s)/-2) 0 0 calc(var(--s)/-2);border-radius:50%;animation:fl var(--t) ease-in-out infinite alternate;animation-delay:var(--d);cursor:pointer;border:0;padding:0;background:none}
+@keyframes fl{from{transform:translate(-5px,-4px)}to{transform:translate(6px,5px)}}
+.nd .im{position:absolute;inset:0;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px #0A0E22,0 0 0 4.500px rgba(140,160,255,.35),0 14px 20px -8px rgba(0,0,0,.8);transition:box-shadow .4s,transform .4s cubic-bezier(.3,1.6,.5,1)}.nd .im svg{width:100%;height:100%;display:block}
+.nd.on .im,.nd:hover .im{box-shadow:0 0 0 3px #0A0E22,0 0 0 5px #7DD3FC,0 0 30px 6px rgba(125,211,252,.55);transform:scale(1.16)}.nd:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.nd .lb{position:absolute;left:50%;top:calc(100% + 8px);transform:translateX(-50%) translateY(-4px);padding:4px 10px;border-radius:99px;background:rgba(10,14,34,.9);box-shadow:inset 0 0 0 1px rgba(140,160,255,.3);font-size:11.500px;font-weight:600;white-space:nowrap;opacity:0;transition:all .3s}.nd.on .lb,.nd:hover .lb{opacity:1;transform:translateX(-50%)}
+.nd .lb small{display:block;font:500 9.500px 'Geist Mono';letter-spacing:.1em;color:#7DD3FC;text-transform:uppercase}
+.hub{position:absolute;left:50%;top:50%;width:88px;height:88px;margin:-44px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#8B5CF6);display:grid;place-items:center;font:800 13px 'Sora';letter-spacing:-.02em;box-shadow:0 0 0 10px rgba(99,102,241,.14),0 0 0 22px rgba(99,102,241,.07),0 0 60px rgba(99,102,241,.6);z-index:2}
+.hub::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(125,211,252,.6);animation:pu 2.600s ease-out infinite}@keyframes pu{to{transform:scale(1.8);opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div><h1>Everyone, connected</h1><p>Hover a teammate to light up who they work with.</p></div><div class="cv" id="cv"><svg class="ln" id="ln"></svg><div class="hub">Atlas<br>Team</div></div></div>
+<script>
+function face(s){const r=n=>{s=(s*9301+49297)%233280;return Math.floor(s/233280*n)};const sk=['#F2C9A5','#E0A57A','#B9784B','#8A5230','#5B3420','#F7D9C1'][r(6)],hr=['#1B1410','#3B2314','#7A4A21','#C9A15E','#B5361F','#6B6B73','#2D2A6B'][r(7)],bg=['#FFD6A5','#CAFFBF','#9BF6FF','#BDB2FF','#FFC6FF','#FDFFB6','#A0C4FF','#FFADAD'][r(8)],sh=['#6366F1','#EC4899','#0EA5E9','#10B981','#F59E0B','#8B5CF6'][r(6)],st=r(5),gl=r(3)===0,sm=r(3);
+ let h='';if(st===1)h+='<path d="M24 52c-2-24 8-34 26-34s28 10 26 34c-2 12-6 16-6 16H30s-4-4-6-16Z" fill="'+hr+'"/>';
+ let top='';if(st===0)top='<path d="M27 46c0-16 9-22 23-22s23 6 23 22c-6-8-14-10-23-10s-17 2-23 10Z" fill="'+hr+'"/>';else if(st===1)top='<path d="M27 48c0-17 9-24 23-24s23 7 23 24c-7-7-14-11-23-11s-16 4-23 11Z" fill="'+hr+'"/>';else if(st===2)top='<g fill="'+hr+'"><circle cx="31" cy="40" r="9"/><circle cx="42" cy="31" r="10"/><circle cx="56" cy="30" r="10"/><circle cx="68" cy="39" r="9"/><circle cx="50" cy="27" r="9"/></g>';else if(st===3)top='<g fill="'+hr+'"><path d="M28 46c0-14 8-20 22-20s22 6 22 20c-5-6-13-9-22-9s-17 3-22 9Z"/><circle cx="50" cy="20" r="8"/></g>';
+ return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="'+bg+'"/>'+h+'<path d="M14 100c2-18 16-26 36-26s34 8 36 26Z" fill="'+sh+'"/><rect x="43" y="62" width="14" height="14" rx="6" fill="'+sk+'"/><ellipse cx="50" cy="48" rx="21" ry="24" fill="'+sk+'"/>'+top+'<circle cx="42" cy="50" r="2.200" fill="#2A1A12"/><circle cx="58" cy="50" r="2.200" fill="#2A1A12"/>'+(gl?'<g fill="none" stroke="#2A1A12" stroke-width="1.800"><circle cx="42" cy="50" r="6.500"/><circle cx="58" cy="50" r="6.500"/><path d="M48.500 50h3"/></g>':'')+'<path d="'+(sm===0?'M43 60q7 6 14 0':sm===1?'M44 60q6 4 12 0':'M43 59q7 8 14 0')+'" fill="none" stroke="#2A1A12" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/><circle cx="64" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/></svg>'}
+const N=[['Priya Nair','Design',22,26,60,.2],['Marcus Webb','Engineering',78,24,64,.9],['Amara Diallo','Product',90,56,56,.4],['Hannah Cho','Brand',70,86,58,1.1],['Tomas Novak','DevOps',28,84,60,.6],['Lucas Ferreira','Data',8,52,54,1.4],['Imani Cole','Support',50,12,52,.3],['Sana Iyer','Research',50,90,52,1.2]];
+const E=[[0,1],[0,6],[1,2],[1,6],[2,3],[3,7],[7,4],[4,5],[5,0],[0,2],[1,3],[4,7],[6,2]];
+const cv=document.getElementById('cv'),ln=document.getElementById('ln'),nds=[];
+N.forEach(([n,r,x,y,s,d],i)=>{const b=document.createElement('button');b.className='nd';b.style.cssText='--x:'+x+'%;--y:'+y+'%;--s:'+s+'px;--d:-'+d*3+'s;--t:'+(4+d*2)+'s';b.setAttribute('aria-label',n+', '+r);b.innerHTML='<span class="im">'+face(i*61+5)+'</span><span class="lb"><small>'+r+'</small>'+n+'</span>';b.addEventListener('pointerenter',()=>{off=true;hot(i)});b.addEventListener('pointerleave',()=>hot(-1));b.addEventListener('focus',()=>{off=true;hot(i)});b.addEventListener('blur',()=>hot(-1));cv.appendChild(b);nds.push(b)});
+const hubEl=cv.querySelector('.hub');const lines=E.map(([a,b])=>{const l=document.createElementNS('http://www.w3.org/2000/svg','line');ln.appendChild(l);const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('r','2.500');ln.appendChild(c);return{l,c,a,b,t:Math.random()}});
+let act=-1;function hot(i){act=i;nds.forEach((n,k)=>n.classList.toggle('on',k===i))}
+function pos(el){const r=el.getBoundingClientRect(),c=cv.getBoundingClientRect();return[r.left-c.left+r.width/2,r.top-c.top+r.height/2]}
+let last=0;(function loop(n){const dt=Math.min(50,n-last)/1000;last=n;const P=nds.map(pos);lines.forEach(L=>{const[ax,ay]=P[L.a],[bx,by]=P[L.b];L.l.setAttribute('x1',ax);L.l.setAttribute('y1',ay);L.l.setAttribute('x2',bx);L.l.setAttribute('y2',by);const on=act>=0&&(L.a===act||L.b===act);L.l.classList.toggle('hot',on);L.t=(L.t+dt*(on?.9:.25))%1;const fw=L.a<L.b;L.c.setAttribute('cx',ax+(bx-ax)*L.t);L.c.setAttribute('cy',ay+(by-ay)*L.t);L.c.style.opacity=on?1:.35});requestAnimationFrame(loop)})(0);
+hot(0);
+/* Idle demo: a highlight walks around the team, each person's links lighting up with data dots racing along them while every node floats on its own drift, until a pointer arrives. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3000);let k=1;while(!off){hot(k++%8);await sleep(1500)}hot(-1)})()}
+</script></body></html>

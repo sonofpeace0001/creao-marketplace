@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Focus Timer Ring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#FF5A5F;--c2:#FF9A6B;background:radial-gradient(700px 480px at 50% 0,color-mix(in srgb,var(--c) 22%,#0E0F14),#0E0F14 70%);color:#F3EFEF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;transition:background .8s}
+.w{width:100%;max-width:420px;display:grid;gap:22px;justify-items:center;text-align:center}
+.md{display:flex;gap:6px;padding:5px;border-radius:99px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);position:relative}
+.md .th{position:absolute;top:5px;bottom:5px;left:5px;border-radius:99px;background:var(--c);box-shadow:0 8px 18px -6px var(--c);transition:transform .5s cubic-bezier(.3,1.4,.4,1),width .5s,background .6s}
+.md button{position:relative;z-index:1;border:0;background:none;padding:10px 16px;font:700 13px 'Sora';color:#B3AAAA;cursor:pointer;border-radius:99px;transition:color .3s;white-space:nowrap}.md button[aria-pressed=true]{color:#fff}.md button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+.rg{position:relative;width:min(320px,80vw);aspect-ratio:1}
+.rg svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.tk{stroke:rgba(255,255,255,.14);stroke-width:2;stroke-linecap:round}.tk.on{stroke:var(--c)}
+.v{fill:none;stroke:url(#gr);stroke-width:12;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--r,1));transform:rotate(-90deg);transform-origin:160px 160px;filter:drop-shadow(0 0 12px var(--c))}
+.bg2{fill:none;stroke:rgba(255,255,255,.08);stroke-width:12}
+.hd{transform-origin:160px 160px;transform:rotate(calc(var(--r)*360deg - 0deg))}.hd circle{fill:#fff;stroke:var(--c);stroke-width:5}
+.ct{position:absolute;inset:0;display:grid;place-items:center;align-content:center}.ct b{font:800 clamp(54px,14vw,76px)/1 'Sora';letter-spacing:-.06em;font-variant-numeric:tabular-nums}.ct span{font:600 12.500px 'Geist Mono';letter-spacing:.2em;text-transform:uppercase;color:var(--c);margin-top:6px;transition:color .6s}
+.ds{display:flex;gap:10px}.ds i{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.14);transition:all .45s cubic-bezier(.3,1.8,.5,1)}.ds i.on{background:var(--c);box-shadow:0 0 12px var(--c);transform:scale(1.2)}
+.bt{display:flex;gap:12px}.bt button{border:0;border-radius:99px;padding:14px 32px;background:var(--c);color:#fff;font:700 15px 'Sora';cursor:pointer;box-shadow:0 12px 24px -8px var(--c);transition:transform .15s,background .6s}.bt button:active{transform:scale(.96)}.bt .sk{background:rgba(255,255,255,.1);box-shadow:none;color:#E8DEDE;padding:14px 22px}.bt button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.nt{font:500 12px 'Geist Mono';color:#8F8585;letter-spacing:.06em}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="md" id="md" role="group" aria-label="Mode"><span class="th" id="th"></span><button aria-pressed="true">Focus</button><button aria-pressed="false">Short break</button><button aria-pressed="false">Long break</button></div>
+<div class="rg"><svg viewBox="0 0 320 320"><defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--c)"/><stop offset="1" stop-color="var(--c2)"/></linearGradient></defs><g id="tk"></g><circle class="bg2" cx="160" cy="160" r="128"/><circle class="v" id="v" cx="160" cy="160" r="128" pathLength="1"/><g class="hd" id="hd" style="--r:1"><circle cx="160" cy="32" r="11"/></g></svg><div class="ct"><b id="tm">25:00</b><span id="lb">Focus</span></div></div>
+<div class="ds" id="ds"><i></i><i></i><i></i><i></i></div><div class="bt"><button id="go">Pause</button><button class="sk" id="sk">Skip</button></div><div class="nt">Demo runs at 60x speed</div></div>
+<script>
+const M=[['Focus',25,'#FF5A5F','#FF9A6B'],['Short break',5,'#34D399','#2DD4BF'],['Long break',15,'#60A5FA','#A78BFA']];
+const NS='http://www.w3.org/2000/svg',tk=document.getElementById('tk');for(let i=0;i<60;i++){const a=i*6*Math.PI/180,m=i%5===0,l=document.createElementNS(NS,'line');l.setAttribute('class','tk');l.setAttribute('x1',160+Math.sin(a)*(m?146:150));l.setAttribute('y1',160-Math.cos(a)*(m?146:150));l.setAttribute('x2',160+Math.sin(a)*156);l.setAttribute('y2',160-Math.cos(a)*156);tk.appendChild(l)}
+const tks=[...tk.children],bs=[...document.querySelectorAll('#md button')],th=document.getElementById('th'),v=document.getElementById('v'),hd=document.getElementById('hd'),tm=document.getElementById('tm'),lb=document.getElementById('lb'),ds=[...document.querySelectorAll('#ds i')];
+let mode=0,r=.62,run=true,sess=2,off=false,SPEED=60;
+function setMode(i){mode=i;const m=M[i];document.body.style.setProperty('--c',m[2]);document.body.style.setProperty('--c2',m[3]);bs.forEach((b,k)=>b.setAttribute('aria-pressed',k===i));const b=bs[i];th.style.width=b.offsetWidth+'px';th.style.transform='translateX('+(b.offsetLeft-5)+'px)';lb.textContent=m[0];r=1;ds.forEach((d,k)=>d.classList.toggle('on',k<sess))}
+function paint(){v.style.setProperty('--r',r);hd.style.setProperty('--r',r);const secs=Math.round(r*M[mode][1]*60);tm.textContent=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');tks.forEach((t,i)=>t.classList.toggle('on',i/60<r))}
+bs.forEach((b,i)=>b.onclick=()=>{off=true;setMode(i)});document.getElementById('go').onclick=e=>{off=true;run=!run;e.target.textContent=run?'Pause':'Resume'};document.getElementById('sk').onclick=()=>{off=true;next()};
+function next(){if(mode===0){sess=Math.min(4,sess+1);setMode(sess>=4?2:1)}else{if(mode===2)sess=0;setMode(0)}}
+setMode(0);r=.62;paint();document.fonts.ready.then(()=>setMode(0)&&0);
+/* Idle demo: the timer runs at 60 times speed; the ring drains with a glowing head and lit minute ticks, the clock counts down, and when it reaches zero the colour scheme changes (red focus, green short break, blue long break), a session dot lights up and the next round begins, until you press a control. */
+let last=0;
+function tick(n){const dt=Math.min(.05,(n-last)/1000||0);last=n;if(run&&!matchMedia('(prefers-reduced-motion: reduce)').matches){r-=dt*SPEED/(M[mode][1]*60);if(r<=0){next()}}paint();requestAnimationFrame(tick)}
+requestAnimationFrame(n=>{last=n;tick(n)});
+</script></body></html>

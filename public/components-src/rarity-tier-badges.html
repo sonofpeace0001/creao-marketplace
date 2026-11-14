@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Rarity Tier Badges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0B12;color:#EEF0FA;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(560px 380px at 50% 100%,rgba(124,58,237,.18),transparent 70%)}
+.w{width:100%;max-width:680px;display:grid;gap:22px}
+.hd h1{font-size:28px;font-weight:800;letter-spacing:-.05em}.hd p{color:#767A98;font-size:14px;margin-top:6px}
+.g{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.c{position:relative;border-radius:24px;padding:20px;background:#12131E;display:grid;gap:16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);overflow:hidden}
+.it{display:flex;align-items:center;gap:14px}.it i{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center;box-shadow:0 10px 16px -8px var(--b)}.it i svg{width:28px;height:28px}.it i svg *{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.it b{display:block;font-size:16px;letter-spacing:-.02em}.it span{font:500 12px 'Geist Mono';color:#767A98}
+.bg{--c:#9CA3AF;position:relative;display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;border-radius:99px;font:700 12.500px 'Geist Mono';letter-spacing:.14em;text-transform:uppercase;color:var(--c);width:max-content;isolation:isolate}
+.bg::before{content:"";width:9px;height:9px;border-radius:2px;transform:rotate(45deg);background:var(--c)}
+.cm .bg{background:#1B1D2A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.rr{--c:#5EB0FF}.rr .bg{background:rgba(59,130,246,.14);box-shadow:inset 0 0 0 1px rgba(94,176,255,.5),0 0 0 0 rgba(94,176,255,.5);animation:pr 2.400s ease-out infinite}@keyframes pr{70%{box-shadow:inset 0 0 0 1px rgba(94,176,255,.5),0 0 0 12px rgba(94,176,255,0)}100%{box-shadow:inset 0 0 0 1px rgba(94,176,255,.5),0 0 0 0 rgba(94,176,255,0)}}
+.ep{--c:#E0B3FF}.ep .bg{background:#1A1030;box-shadow:inset 0 0 0 1px transparent;color:#F1DCFF}
+.ep .bg::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.500px;background:conic-gradient(from var(--a),#A855F7,#EC4899,#6366F1,#A855F7);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:rot 3.500s linear infinite;z-index:-1}
+@keyframes rot{to{--a:360deg}}
+.lg{--c:#3A2600}.lg .bg{background:linear-gradient(110deg,#B8860B,#FFE27A 40%,#F5C542 55%,#B8860B);background-size:220% 100%;animation:gs 3s linear infinite;box-shadow:0 8px 20px -6px rgba(245,197,66,.65),inset 0 1px 0 rgba(255,255,255,.7);color:#3A2600}
+@keyframes gs{to{background-position:-220% 0}}
+.lg .bg::before{background:#3A2600}
+.sk{position:absolute;width:10px;height:10px;opacity:0;animation:tw 2.200s ease-in-out infinite;animation-delay:var(--d)}.sk::before,.sk::after{content:"";position:absolute;left:50%;top:50%;background:#FFE27A;border-radius:2px}.sk::before{width:10px;height:2px;margin:-1px -5px}.sk::after{width:2px;height:10px;margin:-5px -1px}
+@keyframes tw{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+.ab{display:flex;justify-content:space-between;align-items:center;font:500 12px 'Geist Mono';color:#6E7290}.ab b{color:#EEF0FA;font-weight:600}
+.dr{height:6px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}.dr i{display:block;height:100%;width:var(--w);border-radius:3px;background:var(--c2);position:relative;overflow:hidden}.dr i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:ds 2.400s ease-in-out infinite;transform:translateX(-100%)}@keyframes ds{60%,100%{transform:translateX(100%)}}
+@media(max-width:520px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Four tiers, four temperaments</h1><p>Quiet, glowing, orbiting, radiant. Rarity you can feel before you read it.</p></div>
+<div class="g">
+<article class="c cm"><div class="it"><i style="--a:#6B7280;--b:#374151"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v6c0 4 3.200 7 8 8 4.800-1 8-4 8-8V7Z"/></svg></i><div><b>Oak Shield</b><span>Defence +4</span></div></div><span class="bg">Common</span><div class="ab"><span>Drop rate</span><b>62%</b></div><div class="dr"><i style="--w:62%;--c2:#6B7280"></i></div></article>
+<article class="c rr"><div class="it"><i style="--a:#60A5FA;--b:#2563EB"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v6c0 4 3.200 7 8 8 4.800-1 8-4 8-8V7ZM12 8v8M8.500 12h7"/></svg></i><div><b>Tideguard</b><span>Defence +11</span></div></div><span class="bg">Rare</span><div class="ab"><span>Drop rate</span><b>24%</b></div><div class="dr"><i style="--w:24%;--c2:#3B82F6"></i></div></article>
+<article class="c ep"><div class="it"><i style="--a:#C084FC;--b:#7C3AED"><svg viewBox="0 0 24 24"><path d="m12 3 2.400 5 5.600.8-4 4 1 5.600-5-2.700L7 18.400l1-5.600-4-4L9.600 8Z"/></svg></i><div><b>Voidcaller Crest</b><span>Defence +24</span></div></div><span class="bg">Epic</span><div class="ab"><span>Drop rate</span><b>9%</b></div><div class="dr"><i style="--w:9%;--c2:#A855F7"></i></div></article>
+<article class="c lg"><div class="it"><i style="--a:#FFE27A;--b:#D97706"><svg viewBox="0 0 24 24"><path d="m3 8 4 4 5-7 5 7 4-4-2 11H5Z"/></svg></i><div><b>Sunwarden Crown</b><span>Defence +60</span></div></div><span class="bg">Legendary</span><span class="sk" style="right:22px;top:20px;--d:0s"></span><span class="sk" style="right:70px;top:48px;--d:.8s"></span><span class="sk" style="left:150px;top:18px;--d:1.500s"></span><div class="ab"><span>Drop rate</span><b>1%</b></div><div class="dr"><i style="--w:1%;--c2:#FFE27A"></i></div></article>
+</div></div></body></html>

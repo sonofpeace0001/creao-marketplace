@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Before After Slider</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E1017;color:#EEF0F8;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(600px 400px at 50% 0,rgba(99,102,241,.16),transparent 70%)}
+.w{width:100%;max-width:700px;display:grid;gap:18px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font-size:28px;font-weight:800;letter-spacing:-.05em}.hd span{font:500 12px 'Geist Mono';letter-spacing:.1em;text-transform:uppercase;color:#7C8299}
+.cp{--p:50%;position:relative;aspect-ratio:16/10;border-radius:26px;overflow:hidden;cursor:ew-resize;touch-action:none;user-select:none;box-shadow:0 40px 60px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.1)}
+.ly{position:absolute;inset:0}.ly svg{width:100%;height:100%;display:block}
+.bf{clip-path:inset(0 calc(100% - var(--p)) 0 0)}.bf svg{filter:grayscale(1) contrast(.82) brightness(.82) blur(1.2px)}
+.bf::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,transparent 45%,rgba(0,0,0,.4));mix-blend-mode:multiply}
+.hn{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1.500px;background:#fff;box-shadow:0 0 18px rgba(255,255,255,.7)}
+.kn{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px;border-radius:50%;background:#fff;color:#0E1017;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.5),0 0 0 6px rgba(255,255,255,.22);transition:transform .25s cubic-bezier(.3,1.7,.5,1)}
+.cp.dr .kn{transform:scale(1.14)}.kn svg{width:26px;height:26px}.kn svg *{fill:none;stroke:currentColor;stroke-width:2.800;stroke-linecap:round;stroke-linejoin:round}
+.lb{position:absolute;top:16px;padding:7px 14px;border-radius:99px;background:rgba(10,12,20,.6);backdrop-filter:blur(8px);font:700 12px 'Geist Mono';letter-spacing:.14em;text-transform:uppercase;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);transition:opacity .25s}.lb.b{left:16px}.lb.a{right:16px}
+.cp[data-s=b] .lb.a,.cp[data-s=a] .lb.b{opacity:.35}
+.sl{position:absolute;left:0;right:0;bottom:0;height:100%;opacity:0;cursor:ew-resize;width:100%}.sl:focus-visible+.nope{outline:0}
+.ft{display:flex;justify-content:space-between;gap:12px;font:500 12.500px 'Geist Mono';color:#7C8299}.ft b{color:#EEF0F8;font-weight:600}
+input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.cp:focus-within{box-shadow:0 40px 60px -30px rgba(0,0,0,.9),0 0 0 3px #818CF8}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Drag to see the grade</h1><span>Colour grade, v3</span></div>
+<div class="cp" id="cp" data-s="a"><div class="ly" id="af"></div><div class="ly bf" id="bf"></div><span class="lb b">Before</span><span class="lb a">After</span><div class="hn"><div class="kn"><svg viewBox="0 0 24 24"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></div></div><input type="range" id="rg" min="0" max="100" value="50" aria-label="Comparison position"></div>
+<div class="ft"><span>Left: <b>flat log footage</b></span><span id="pc">Right: <b>graded, 50% revealed</b></span></div></div>
+<script>
+function scene(s){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};const P=[['#FFB27A','#F472B6','#6366F1','#2B1B5E'],['#FDE68A','#FDBA74','#F97316','#7C2D12'],['#A7F3D0','#34D399','#059669','#064E3B'],['#BAE6FD','#38BDF8','#0369A1','#0C2A4A'],['#FBCFE8','#C084FC','#7C3AED','#2E1065'],['#FEF3C7','#FCA5A5','#E11D48','#4C0519']],c=P[Math.floor(r(6))];
+ const id='g'+Math.floor(r(1e6));let h='<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c[2]+'"/><stop offset=".55" stop-color="'+c[1]+'"/><stop offset="1" stop-color="'+c[0]+'"/></linearGradient></defs><rect width="400" height="250" fill="url(#'+id+')"/>';
+ h+='<circle cx="'+(70+r(260))+'" cy="'+(60+r(50))+'" r="'+(26+r(18))+'" fill="#FFF6D6" opacity=".92"/>';
+ for(let l=0;l<3;l++){let d='M0 250 L0 '+(150+l*28);const a=18+r(22),f=.012+r(.02),ph=r(6);for(let x=0;x<=400;x+=8)d+=' L'+x+' '+(150+l*28-a*Math.sin(x*f+ph)-a*.5*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L400 250Z';h+='<path d="'+d+'" fill="'+c[3]+'" opacity="'+(.35+l*.3)+'"/>'}
+ return h+'</svg>'}
+const af=document.getElementById('af'),bf=document.getElementById('bf'),cp=document.getElementById('cp'),rg=document.getElementById('rg'),pc=document.getElementById('pc');
+af.innerHTML=scene(23);bf.innerHTML=scene(23);
+function set(v){cp.style.setProperty('--p',v+'%');rg.value=v;cp.dataset.s=v>70?'b':v<30?'a':'';pc.innerHTML='Right: <b>graded, '+Math.round(100-v)+'% revealed</b>'}
+rg.addEventListener('input',()=>{off=true;set(+rg.value)});['pointerdown','touchstart'].forEach(e=>cp.addEventListener(e,()=>{off=true;cp.classList.add('dr')}));['pointerup','pointercancel','touchend'].forEach(e=>addEventListener(e,()=>cp.classList.remove('dr')));
+set(52);
+/* Idle demo: the handle sweeps across the picture on a slow sine path, so the flat before image and the graded after image are revealed in turn, until you grab it. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)(function loop(n){if(!off&&n>2800){const t=(n-2800)/1000;set(50+38*Math.sin(t*.9))}requestAnimationFrame(loop)})(0);
+</script></body></html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lightbox Expand Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter+Tight:wght@500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDE9E0;color:#1B1812;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{position:relative;width:100%;max-width:700px;height:min(560px,88vh);border-radius:28px;background:#FBF8F1;box-shadow:0 36px 50px -34px rgba(27,24,18,.6),inset 0 0 0 1px rgba(27,24,18,.08);overflow:hidden;padding:22px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}.hd h1{font:400 34px/1 'Instrument Serif'}.hd span{font:500 12px 'Geist Mono';letter-spacing:.1em;text-transform:uppercase;color:#9A917B}
+.ms{columns:3;column-gap:10px}
+.t{position:relative;break-inside:avoid;margin-bottom:10px;border-radius:16px;overflow:hidden;cursor:zoom-in;border:0;padding:0;display:block;width:100%;background:none;transition:transform .35s cubic-bezier(.3,1.5,.5,1),opacity .3s,filter .3s;height:var(--h)}
+.t:hover{transform:scale(.98)}.t:focus-visible{outline:3px solid #E8590C;outline-offset:2px}.t svg{width:100%;height:100%;display:block}.t.hid{opacity:0}
+.t::after{content:attr(data-n);position:absolute;left:10px;bottom:8px;font:600 11.500px 'Inter Tight';color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5);opacity:0;transition:opacity .25s}.t:hover::after{opacity:1}
+.sc{position:absolute;inset:0;background:rgba(18,15,10,.72);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .45s;z-index:5}.sc.on{opacity:1;pointer-events:auto}
+.lb{position:absolute;z-index:6;border-radius:16px;overflow:hidden;box-shadow:0 40px 70px -20px rgba(0,0,0,.8);transition:left .6s cubic-bezier(.3,1.1,.3,1),top .6s cubic-bezier(.3,1.1,.3,1),width .6s cubic-bezier(.3,1.1,.3,1),height .6s cubic-bezier(.3,1.1,.3,1),border-radius .6s;display:none}
+.lb svg{width:100%;height:100%;display:block}
+.cp{position:absolute;left:50%;bottom:26px;transform:translate(-50%,14px);z-index:7;padding:12px 20px;border-radius:16px;background:rgba(251,248,241,.96);box-shadow:0 20px 34px -12px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:all .45s cubic-bezier(.3,1.5,.5,1) .25s;text-align:center;min-width:260px}.cp.on{opacity:1;transform:translate(-50%,0)}
+.cp b{display:block;font:400 22px 'Instrument Serif'}.cp span{font:500 11.500px 'Geist Mono';letter-spacing:.08em;color:#8F866F}
+.cl{position:absolute;right:20px;top:20px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(251,248,241,.95);display:grid;place-items:center;cursor:pointer;z-index:8;opacity:0;pointer-events:none;transition:opacity .3s .3s,transform .2s;box-shadow:0 8px 16px rgba(0,0,0,.4)}.cl.on{opacity:1;pointer-events:auto}.cl:hover{transform:rotate(90deg)}.cl:focus-visible{outline:3px solid #E8590C}.cl svg{width:18px;height:18px}.cl svg *{fill:none;stroke:#1B1812;stroke-width:2.800;stroke-linecap:round}
+@media(max-width:520px){.ms{columns:2}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w" id="w"><div class="hd"><h1>Field notes</h1><span id="ct">9 frames</span></div><div class="ms" id="ms"></div><div class="sc" id="sc"></div><div class="lb" id="lb"></div><div class="cp" id="cp"><b id="cn"></b><span id="cs"></span></div><button class="cl" id="cl" aria-label="Close"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+<script>
+function scene(s){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};const P=[['#FFB27A','#F472B6','#6366F1','#2B1B5E'],['#FDE68A','#FDBA74','#F97316','#7C2D12'],['#A7F3D0','#34D399','#059669','#064E3B'],['#BAE6FD','#38BDF8','#0369A1','#0C2A4A'],['#FBCFE8','#C084FC','#7C3AED','#2E1065'],['#FEF3C7','#FCA5A5','#E11D48','#4C0519']],c=P[Math.floor(r(6))];
+ const id='g'+Math.floor(r(1e6));let h='<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c[2]+'"/><stop offset=".55" stop-color="'+c[1]+'"/><stop offset="1" stop-color="'+c[0]+'"/></linearGradient></defs><rect width="400" height="250" fill="url(#'+id+')"/>';
+ h+='<circle cx="'+(70+r(260))+'" cy="'+(60+r(50))+'" r="'+(26+r(18))+'" fill="#FFF6D6" opacity=".92"/>';
+ for(let l=0;l<3;l++){let d='M0 250 L0 '+(150+l*28);const a=18+r(22),f=.012+r(.02),ph=r(6);for(let x=0;x<=400;x+=8)d+=' L'+x+' '+(150+l*28-a*Math.sin(x*f+ph)-a*.5*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L400 250Z';h+='<path d="'+d+'" fill="'+c[3]+'" opacity="'+(.35+l*.3)+'"/>'}
+ return h+'</svg>'}
+const T=[['Ridge at dawn','Dolomites, 06:12',150,41],['Harbour mist','Lisbon, 07:40',200,67],['Salt flats','Uyuni, 11:05',120,12],['Cedar road','Kyoto, 15:30',180,95],['Night market','Taipei, 21:15',140,28],['Glacier lagoon','Iceland, 13:20',210,77],['Terraces','Bali, 09:00',130,53],['Dune line','Namib, 17:45',170,81],['Rooftops','Marrakech, 18:10',150,6]];
+const ms=document.getElementById('ms'),w=document.getElementById('w'),sc=document.getElementById('sc'),lb=document.getElementById('lb'),cp=document.getElementById('cp'),cl=document.getElementById('cl');let openI=-1;const tiles=[];
+T.forEach(([n,m,h,s],i)=>{const b=document.createElement('button');b.className='t';b.style.setProperty('--h',h+'px');b.dataset.n=n;b.setAttribute('aria-label','Open '+n);b.innerHTML=scene(s);b.onclick=()=>{off=true;open(i)};ms.appendChild(b);tiles.push(b)});
+function rel(el){const a=el.getBoundingClientRect(),b=w.getBoundingClientRect();return{l:a.left-b.left,t:a.top-b.top,w:a.width,h:a.height}}
+function open(i){if(openI>=0)return;openI=i;const t=tiles[i],r=rel(t),[n,m,,s]=T[i];lb.innerHTML=scene(s);lb.style.display='block';lb.style.transition='none';Object.assign(lb.style,{left:r.l+'px',top:r.t+'px',width:r.w+'px',height:r.h+'px'});void lb.offsetWidth;lb.style.transition='';t.classList.add('hid');sc.classList.add('on');
+ const W=w.clientWidth,H=w.clientHeight,tw=Math.min(W-60,560),th=Math.min(H-150,tw*.62);requestAnimationFrame(()=>Object.assign(lb.style,{left:(W-tw)/2+'px',top:(H-th)/2-18+'px',width:tw+'px',height:th+'px',borderRadius:'22px'}));document.getElementById('cn').textContent=n;document.getElementById('cs').textContent=m;cp.classList.add('on');cl.classList.add('on')}
+function close(){if(openI<0)return;const t=tiles[openI],r=rel(t);cp.classList.remove('on');cl.classList.remove('on');sc.classList.remove('on');Object.assign(lb.style,{left:r.l+'px',top:r.t+'px',width:r.w+'px',height:r.h+'px',borderRadius:'16px'});const i=openI;openI=-1;setTimeout(()=>{t.classList.remove('hid');lb.style.display='none'},620)}
+sc.onclick=()=>{off=true;close()};cl.onclick=()=>{off=true;close()};addEventListener('keydown',e=>{if(e.key==='Escape'){off=true;close()}});
+/* Idle demo: a frame is expanded out of the masonry into a lightbox, its caption rising beneath it, then it flies back into its slot and the next frame follows, until you click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);const o=[1,5,3,7,0];let k=0;while(!off){open(o[k++%5]);await sleep(2800);if(off)return;close();await sleep(1500)}})()}
+</script></body></html>

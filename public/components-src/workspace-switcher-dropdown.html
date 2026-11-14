@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Workspace Switcher Dropdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E9EBF2;color:#12142A;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.app{display:grid;grid-template-columns:270px 1fr;width:100%;max-width:720px;height:440px;border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 40px 60px -36px rgba(18,20,42,.55),0 0 0 1px rgba(18,20,42,.08)}
+.sb{position:relative;background:#F5F6FA;padding:14px;border-right:1px solid #E8EAF2}
+.tr{width:100%;display:flex;align-items:center;gap:11px;border:0;border-radius:14px;padding:9px 10px;background:#fff;box-shadow:inset 0 0 0 1px #E1E4EF,0 2px 4px rgba(18,20,42,.04);cursor:pointer;text-align:left;font:inherit;color:inherit;transition:box-shadow .2s}
+.tr:hover,.tr[aria-expanded=true]{box-shadow:inset 0 0 0 1.500px #6366F1,0 0 0 4px rgba(99,102,241,.12)}.tr:focus-visible{outline:2px solid #6366F1;outline-offset:2px}
+.lg{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:#fff;font:800 15px 'Inter Tight';flex:none;background:var(--c);transition:background .45s;box-shadow:inset 0 -3px 6px rgba(0,0,0,.18)}
+.tr .t{flex:1;min-width:0}.tr .t b{display:block;font-size:14.500px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tr .t span{font-size:12px;color:#7B8099}
+.tr svg.ch{width:16px;height:16px;color:#8A8FAB;transition:transform .35s cubic-bezier(.3,1.5,.5,1)}.tr[aria-expanded=true] svg.ch{transform:rotate(180deg)}
+.mn{position:absolute;left:14px;right:14px;top:70px;border-radius:18px;background:#fff;padding:6px;box-shadow:0 28px 50px -14px rgba(18,20,42,.45),inset 0 0 0 1px rgba(18,20,42,.09);opacity:0;transform:translateY(-8px) scale(.97);transform-origin:top;pointer-events:none;transition:opacity .22s,transform .35s cubic-bezier(.3,1.5,.5,1);z-index:5}
+.mn.on{opacity:1;transform:none;pointer-events:auto}
+.hd{font:600 11px 'Geist Mono';letter-spacing:.14em;text-transform:uppercase;color:#9AA0BB;padding:8px 10px 6px}
+.it{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:12px;cursor:pointer;opacity:0;transform:translateY(6px);transition:background .15s,opacity .3s,transform .4s cubic-bezier(.3,1.5,.5,1);transition-delay:0s,calc(var(--i)*40ms),calc(var(--i)*40ms)}
+.mn.on .it{opacity:1;transform:none}.it.hl,.it:hover{background:#F0F1FA}
+.it .lg{width:30px;height:30px;font-size:13px;border-radius:9px}.it b{display:block;font-size:14px;font-weight:600}.it span{font-size:11.500px;color:#8A8FAB}
+.it kbd{margin-left:auto;font:500 11px 'Geist Mono';color:#9AA0BB;padding:2px 6px;border-radius:6px;background:#F0F1F7}
+.it .ck{margin-left:auto;width:20px;height:20px;border-radius:50%;background:#6366F1;display:none;place-items:center}.it.act .ck{display:grid}.it.act kbd{display:none}.ck svg{width:11px;height:11px}
+.sp{height:1px;background:#EEF0F7;margin:6px 8px}
+.ac{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;color:#3D4260;opacity:0;transform:translateY(6px);transition:all .35s;transition-delay:calc(var(--i)*40ms)}.mn.on .ac{opacity:1;transform:none}.ac:hover{background:#F0F1FA}.ac svg{width:18px;height:18px;color:#8A8FAB}.ac svg *{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.ac.rd{color:#DC2626}.ac.rd svg{color:#DC2626}
+.mv{padding:26px 30px}.mv small{font:600 11.500px 'Geist Mono';letter-spacing:.14em;color:#9AA0BB;text-transform:uppercase}.mv h2{font-size:28px;font-weight:800;letter-spacing:-.045em;margin:6px 0 18px;transition:opacity .25s}
+.cds{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.cds div{height:96px;border-radius:18px;background:#F5F6FA;padding:14px}.cds i{display:block;height:8px;border-radius:4px;background:#E4E7F2;margin-bottom:9px;width:60%}.cds i:nth-child(2){width:85%}.cds i:nth-child(3){width:40%;background:var(--c);transition:background .45s}
+@media(max-width:620px){.app{grid-template-columns:1fr}.mv{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="app" id="app"><aside class="sb"><button class="tr" id="tr" aria-haspopup="menu" aria-expanded="false"><span class="lg" id="tl">N</span><span class="t"><b id="tn">Northwind</b><span id="tp">Pro plan</span></span><svg class="ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="m7 9 5-5 5 5M7 15l5 5 5-5"/></svg></button>
+<div class="mn" id="mn" role="menu" aria-label="Workspaces"><div class="hd">Workspaces</div><div id="ls"></div><div class="sp"></div>
+<div class="ac" style="--i:5" role="menuitem"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Create workspace</div><div class="ac" style="--i:6" role="menuitem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.400 15a1.700 1.700 0 0 0 .3 1.800l.1.1a2 2 0 1 1-2.800 2.800l-.1-.1a1.700 1.700 0 0 0-1.800-.3 1.700 1.700 0 0 0-1 1.500V21a2 2 0 1 1-4 0v-.1a1.700 1.700 0 0 0-1.100-1.500 1.700 1.700 0 0 0-1.800.3l-.1.1a2 2 0 1 1-2.800-2.800l.1-.1a1.700 1.700 0 0 0 .3-1.800 1.700 1.700 0 0 0-1.500-1H3a2 2 0 1 1 0-4h.1a1.700 1.700 0 0 0 1.500-1.100 1.700 1.700 0 0 0-.3-1.800l-.1-.1a2 2 0 1 1 2.800-2.800l.1.1a1.700 1.700 0 0 0 1.800.3H9a1.700 1.700 0 0 0 1-1.500V3a2 2 0 1 1 4 0v.1a1.700 1.700 0 0 0 1 1.500 1.700 1.700 0 0 0 1.800-.3l.1-.1a2 2 0 1 1 2.800 2.800l-.1.1a1.700 1.700 0 0 0-.3 1.800V9a1.700 1.700 0 0 0 1.500 1H21a2 2 0 1 1 0 4h-.1a1.700 1.700 0 0 0-1.500 1Z"/></svg>Workspace settings</div><div class="ac rd" style="--i:7" role="menuitem"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Log out</div></div></aside>
+<main class="mv"><small id="ms">Northwind overview</small><h2 id="mh">Welcome back, Amara</h2><div class="cds"><div><i></i><i></i><i></i></div><div><i></i><i></i><i></i></div><div><i></i><i></i><i></i></div><div><i></i><i></i><i></i></div></div></main></div>
+<script>
+const W=[['Northwind','Pro plan','N','#6366F1','24 members'],['Fable Studio','Team plan','F','#EC4899','8 members'],['Orbit Labs','Free plan','O','#0EA5E9','3 members'],['Greenhouse','Pro plan','G','#10B981','41 members']];
+const mn=document.getElementById('mn'),tr=document.getElementById('tr'),ls=document.getElementById('ls');let cur=0,hl=-1,open=false;
+const CK='<span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span>';
+W.forEach((w,i)=>{const e=document.createElement('div');e.className='it';e.style.cssText='--i:'+(i+1)+';--c:'+w[3];e.setAttribute('role','menuitemradio');e.innerHTML='<span class="lg">'+w[2]+'</span><div><b>'+w[0]+'</b><span>'+w[4]+'</span></div><kbd>Ctrl '+(i+1)+'</kbd>'+CK;e.onclick=()=>{off=true;pick(i);setOpen(false)};e.onmouseenter=()=>{off=true;hl=i;paint()};ls.appendChild(e)});
+const its=[...ls.children];
+function paint(){its.forEach((e,i)=>{e.classList.toggle('act',i===cur);e.classList.toggle('hl',i===hl);e.setAttribute('aria-checked',i===cur)})}
+function pick(i){cur=i;const w=W[i];document.getElementById('app').style.setProperty('--c',w[3]);const l=document.getElementById('tl');l.textContent=w[2];l.style.setProperty('--c',w[3]);document.getElementById('tn').textContent=w[0];document.getElementById('tp').textContent=w[1];document.getElementById('ms').textContent=w[0]+' overview';document.querySelector('.cds').style.setProperty('--c',w[3]);paint()}
+function setOpen(o){open=o;mn.classList.toggle('on',o);tr.setAttribute('aria-expanded',o);if(!o)hl=-1;paint()}
+tr.onclick=()=>{off=true;setOpen(!open)};addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});document.addEventListener('pointerdown',e=>{if(open&&!mn.contains(e.target)&&!tr.contains(e.target))setOpen(false)});
+pick(0);document.getElementById('tl').style.setProperty('--c','#6366F1');setOpen(true);hl=1;paint();
+/* Idle demo: the menu opens, the highlight steps down the workspaces, one is chosen so the trigger morphs to its colour, initial and plan, then the menu closes and reopens for the next, until a real click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);let k=1;while(!off){setOpen(false);await sleep(900);if(off)return;setOpen(true);await sleep(700);for(let s=0;s<2&&!off;s++){hl=(hl+1)%4;paint();await sleep(520)}hl=k%4;paint();await sleep(700);if(off)return;pick(k%4);setOpen(false);k++;await sleep(1500)}})()}
+</script></body></html>

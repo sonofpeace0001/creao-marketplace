@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Scratch Reveal Image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 480px at 50% 0,#3A2A6E,#120C26 72%);color:#F7F2FF;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.w{width:100%;max-width:520px;display:grid;gap:16px;justify-items:center;text-align:center}
+.w h1{font-size:28px;font-weight:800;letter-spacing:-.05em}.w p{color:#A79CD6;font-size:14px;margin-top:6px}
+.cd{position:relative;width:100%;aspect-ratio:8/5;border-radius:26px;overflow:hidden;box-shadow:0 40px 60px -28px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.14);cursor:grab;touch-action:none;user-select:none}
+.cd:active{cursor:grabbing}
+.pz{position:absolute;inset:0}.pz svg{width:100%;height:100%;display:block}
+.pz .tx{position:absolute;left:0;right:0;bottom:0;padding:44px 24px 20px;background:linear-gradient(180deg,transparent,rgba(10,6,24,.82));text-align:left}.pz small{font:500 11.500px 'DM Mono';letter-spacing:.2em;text-transform:uppercase;color:#FFD9A0}.pz b{display:block;font-size:30px;font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-top:4px}
+canvas{position:absolute;inset:0;width:100%;height:100%;transition:opacity .7s}.cd.done canvas{opacity:0;pointer-events:none}
+.cn{position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF1B8,#E0A93B 55%,#8F6410);box-shadow:0 8px 14px rgba(0,0,0,.5),inset 0 0 0 2px rgba(255,255,255,.35);pointer-events:none;z-index:4;opacity:0;transition:opacity .3s}.cn.on{opacity:1}
+.cn::after{content:"\2605";position:absolute;inset:0;display:grid;place-items:center;color:#8F6410;font-size:18px}
+.st{display:flex;align-items:center;gap:12px;width:100%;font:500 12.500px 'DM Mono';color:#A79CD6}.st .tr{flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden}.st .tr i{display:block;height:100%;width:var(--p,0%);background:linear-gradient(90deg,#8B5CF6,#EC4899,#F59E0B);transition:width .2s}
+.pt{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:2px;background:var(--c);animation:bs 1s cubic-bezier(.2,.8,.3,1) forwards;pointer-events:none;z-index:3}@keyframes bs{from{transform:translate(0,0) rotate(0)}to{transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.2);opacity:0}}
+.rs{border:0;border-radius:99px;padding:10px 20px;background:rgba(255,255,255,.1);color:#fff;font:700 13px 'Bricolage Grotesque';cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}.rs:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w"><div><h1>Scratch to see where</h1><p>Rub the foil away with your finger, or just watch it happen.</p></div>
+<div class="cd" id="cd"><div class="pz" id="pz"></div><canvas id="cv" width="640" height="400" aria-label="Foil layer, scratch to reveal the destination"></canvas><div class="cn" id="cn"></div></div>
+<div class="st"><span>Revealed</span><div class="tr"><i id="bar"></i></div><span id="pc">0%</span></div><button class="rs" id="rs">Reset foil</button></div>
+<script>
+const D=[['Lisbon','Seven nights, rooftop included',[ '#FFB27A','#F472B6','#6366F1','#2B1B5E'],5],['Kyoto','Cherry blossom week',['#FBCFE8','#C084FC','#7C3AED','#2E1065'],9],['Oaxaca','Markets and mezcal',['#FDE68A','#FDBA74','#F97316','#7C2D12'],14]];
+function svg(c,seed){let s=seed;const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};let h='<svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g'+seed+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c[2]+'"/><stop offset=".55" stop-color="'+c[1]+'"/><stop offset="1" stop-color="'+c[0]+'"/></linearGradient></defs><rect width="640" height="400" fill="url(#g'+seed+')"/><circle cx="'+(150+r(340))+'" cy="'+(100+r(60))+'" r="'+(44+r(22))+'" fill="#FFF6D6"/>';
+ for(let l=0;l<4;l++){let d='M0 400 L0 '+(220+l*44);const a=30+r(34),f=.008+r(.012),ph=r(6);for(let x=0;x<=640;x+=8)d+=' L'+x+' '+(220+l*44-a*Math.abs(Math.sin(x*f+ph))-a*.4*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L640 400Z';h+='<path d="'+d+'" fill="'+c[3]+'" opacity="'+(.3+l*.2)+'"/>'}return h+'</svg>'}
+const cd=document.getElementById('cd'),pz=document.getElementById('pz'),cv=document.getElementById('cv'),g=cv.getContext('2d',{willReadFrequently:true}),cn=document.getElementById('cn');let k=0,done=false,drag=false;
+function setPrize(){const[n,t,c,sd]=D[k%3];pz.innerHTML=svg(c,sd)+'<div class="tx"><small>You are going to</small><b>'+n+'</b><small style="color:#fff;opacity:.8">'+t+'</small></div>'}
+function foil(){g.globalCompositeOperation='source-over';const gr=g.createLinearGradient(0,0,640,400);gr.addColorStop(0,'#C9CEDA');gr.addColorStop(.3,'#F1F3F8');gr.addColorStop(.55,'#AEB5C4');gr.addColorStop(.8,'#E8EBF2');gr.addColorStop(1,'#B9BFCE');g.fillStyle=gr;g.fillRect(0,0,640,400);
+ let s=7;for(let i=0;i<1800;i++){s=(s*9301+49297)%233280;const x=s/233280*640;s=(s*9301+49297)%233280;const y=s/233280*400;g.fillStyle='rgba('+(s%2?255:120)+','+(s%2?255:128)+','+(s%2?255:140)+','+(.08+(s%7)*.02)+')';g.fillRect(x,y,2,2)}
+ g.fillStyle='rgba(60,66,84,.55)';g.font='800 40px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('SCRATCH HERE',320,208);g.font='500 15px "DM Mono",monospace';g.fillText('your next trip is underneath',320,240)}
+function scratch(x,y,r=26){g.globalCompositeOperation='destination-out';g.beginPath();g.arc(x,y,r,0,7);g.fill()}
+function line(a,b){const d=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.max(1,Math.ceil(d/8));for(let i=0;i<=n;i++)scratch(a[0]+(b[0]-a[0])*i/n,a[1]+(b[1]-a[1])*i/n)}
+function pct(){const d=g.getImageData(0,0,640,400).data;let c=0,t=0;for(let i=3;i<d.length;i+=4*60){t++;if(d[i]<40)c++}const p=Math.round(c/t*100);document.getElementById('bar').style.setProperty('--p',Math.min(100,p*1.4)+'%');document.getElementById('pc').textContent=Math.min(100,Math.round(p*1.4))+'%';return p}
+function win(){if(done)return;done=true;cd.classList.add('done');const C=['#FFD23F','#EC4899','#8B5CF6','#22D3EE','#fff'];for(let i=0;i<26;i++){const p=document.createElement('i');p.className='pt';const a=i/26*Math.PI*2,dd=120+Math.random()*120;p.style.cssText='--c:'+C[i%5]+';--x:'+Math.cos(a)*dd+'px;--y:'+Math.sin(a)*dd+'px;--r:'+(Math.random()*500-250)+'deg;'+(i%3?'':'border-radius:50%');cd.appendChild(p);setTimeout(()=>p.remove(),1050)}document.getElementById('bar').style.setProperty('--p','100%');document.getElementById('pc').textContent='100%'}
+function reset(){done=false;cd.classList.remove('done');k++;setPrize();foil();document.getElementById('bar').style.setProperty('--p','0%');document.getElementById('pc').textContent='0%'}
+function pos(e){const r=cv.getBoundingClientRect();return[(e.clientX-r.left)/r.width*640,(e.clientY-r.top)/r.height*400]}
+let last=null;cv.addEventListener('pointerdown',e=>{off=true;drag=true;cv.setPointerCapture(e.pointerId);last=pos(e);scratch(...last)});cv.addEventListener('pointermove',e=>{if(!drag)return;const p=pos(e);line(last,p);last=p;if(pct()>38)win()});['pointerup','pointercancel'].forEach(ev=>cv.addEventListener(ev,()=>{drag=false;if(pct()>38)win()}));
+document.getElementById('rs').onclick=()=>{off=true;reset()};
+setPrize();foil();
+/* Idle demo: a golden coin rubs the foil away in long zig-zag strokes, the revealed percentage climbing; at about 55 percent the rest dissolves with a burst of confetti and the destination appears, then a fresh foil and a new destination start again, until you scratch yourself. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2600);while(!off){cn.classList.add('on');const W=cd.clientWidth,H=cd.clientHeight;let prev=null;for(let row=0;row<7&&!done&&!off;row++){const y=60+row*46+Math.sin(row)*8,pts=row%2?[[590,y],[50,y+16]]:[[50,y],[590,y+16]];for(let s=0;s<=34&&!done&&!off;s++){const t=s/34,p=[pts[0][0]+(pts[1][0]-pts[0][0])*t,pts[0][1]+(pts[1][1]-pts[0][1])*t+Math.sin(t*9)*8];if(prev)line(prev,p);else scratch(...p);prev=p;cn.style.transform='translate('+(p[0]/640*W-22)+'px,'+(p[1]/400*H-22)+'px) rotate('+(Math.sin(t*9)*18)+'deg)';await sleep(16)}if(pct()>36)win()}cn.classList.remove('on');if(off)return;if(!done)win();await sleep(3000);if(off)return;reset();await sleep(800)}})()}
+</script></body></html>

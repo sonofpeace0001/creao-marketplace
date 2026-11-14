@@ -1,0 +1,40 @@
+ROLE
+You are a senior design systems engineer and front-end developer with 15+ years of experience. Build "Circle Reveal Theme Toggle": a dashboard whose theme flips by a circle expanding from the sun and moon button across the whole app, with the icon rotating between the two.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: A clean analytics app in light and midnight themes, indigo accents and a round ink button.
+- Palette: #12162C, #6366F1, #EC4899, #CFD3E0, #F6F7FB, #7C829E
+- Type: Plus Jakarta Sans, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- App frame with two stacked copies of the dashboard (light below, dark above) and a theme button; header, four KPI cards, bar chart and order list.
+
+INTERACTION & STATES
+- The dark layer is clipped by a circle centred on the button; its radius animates to cover the farthest corner, and back for light.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- clip-path circle radius 0 to max over 900ms with ease-out cubic via requestAnimationFrame; icon crossfades with a 90 degree rotation and scale .4 over 600ms spring.
+
+IDLE AUTOPLAY
+- The theme flips every 3.4s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain fade between themes.
+- Reveal circles that do not reach the farthest corner.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

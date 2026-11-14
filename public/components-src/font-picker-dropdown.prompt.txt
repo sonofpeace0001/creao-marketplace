@@ -1,0 +1,40 @@
+ROLE
+You are a senior typography tools designer and front-end engineer with 15+ years of experience. Build "Font Picker Dropdown": a font dropdown where each option is set in its own typeface and highlighting a row previews the font live on the headline, paragraph and alphabet beside it.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper with an orange focus ring, a mono caption system and large specimen type.
+- Palette: #988F7A, #E8590C, #1B1812, #F4F1EA, #DDD6C6, #FFF1E6
+- Type: Bricolage Grotesque, Caveat, DM Serif Display, Fraunces, JetBrains Mono, Playfair Display, Space Grotesk, Syne, Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Labelled trigger (Aa tile, font name in its own face, category); popover of eight fonts with category tags; live preview card with label, headline, body and alphabet.
+
+INTERACTION & STATES
+- Hover or arrow to a row to preview that font; click to choose; the trigger re-sets itself in the chosen font; leaving the list reverts the preview to the chosen font.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Rows enter with a 30ms stagger; preview font swaps instantly on highlight; popover on a 350ms spring; selected tick scales in on a spring.
+
+IDLE AUTOPLAY
+- The highlight walks the whole list, changing the preview each time, then one font is chosen.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Showing every option in the same typeface.
+- Preview that only changes after commit.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

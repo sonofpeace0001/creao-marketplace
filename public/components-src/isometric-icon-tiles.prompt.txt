@@ -1,0 +1,40 @@
+ROLE
+You are a senior 3D interface designer and front-end engineer with 15+ years of experience. Build "Isometric Icon Tiles": six isometric slab tiles with side walls, floating top faces, upright glyphs and shadows that stretch as each tile rises in turn.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Indigo night, jewel-coloured slabs with lighter tops and darker walls, and billboarded white glyphs.
+- Palette: #2B2F6E, #0E1030, #EEF0FF, #9AA0D6
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading and intro; a 3 x 2 board rotated rotateX 58 and rotateZ -40 degrees, each tile having shadow, base, two side walls, top, billboarded icon and label.
+
+INTERACTION & STATES
+- Hover or focus lifts a tile by 30px, its glyph by 44px and shows its label; the shadow offsets and blurs further.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Lift 500ms cubic-bezier(.3,1.5,.5,1); shadow translate 14px to 26px and blur 10px to 16px; glyph counter-rotated rotateZ(40) rotateX(-58) inside a preserve-3d layer.
+
+IDLE AUTOPLAY
+- A wave lifts the tiles in sequence every 0.9s, then the labels appear on the active one.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Glyphs that lie flat on the isometric plane.
+- Labels that collide with neighbouring tiles; show only the active label.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

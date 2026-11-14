@@ -1,0 +1,40 @@
+ROLE
+You are a senior project-tool designer and front-end engineer with 15+ years of experience. Build "Filter Chip Popovers": a row of filter chips (Status, Assignee, Priority), each opening a popover of radio or checkbox options, with count badges and a task list that filters live.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: White workspace card, pill chips that turn indigo when active, avatars and priority tags.
+- Palette: #4F46E5, #12141F, #7C8196, #EEF0F5, #F3F4F8, #3E4358
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header with result count; three chips with count badges and a Clear all; popovers with a radio group or checkbox lists; task rows with status dot, title, priority and assignee.
+
+INTERACTION & STATES
+- Opening a chip closes the others; ticking options updates the badge and collapses non-matching rows; Clear all resets; Escape and outside click close.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Badge scales in on a 350ms spring; checkbox tick draws via stroke-dashoffset over 300ms; rows collapse by max-height and fade over 350ms; popovers use a 320ms spring.
+
+IDLE AUTOPLAY
+- Each chip opens in turn, options are ticked, the list shrinks and grows, and Clear all finishes the loop.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Popovers that stay open when another chip is chosen.
+- Filtering without any visible count of active filters.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

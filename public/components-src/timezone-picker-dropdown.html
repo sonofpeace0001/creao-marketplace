@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Timezone Picker Dropdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--bg:#0B1020;background:radial-gradient(700px 480px at 30% 0,#1B2754,var(--bg) 70%);color:#EDF1FF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{position:relative;width:100%;max-width:700px;display:grid;grid-template-columns:1fr 280px;gap:22px;align-items:start}
+.ck{display:grid;justify-items:center;gap:14px;padding:26px;border-radius:30px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.ck svg{width:min(230px,52vw);height:auto;overflow:visible}
+.fc{fill:#121A36;stroke:rgba(255,255,255,.14);stroke-width:2}.tk{stroke:rgba(255,255,255,.25);stroke-width:2;stroke-linecap:round}.tk.h{stroke:rgba(255,255,255,.7);stroke-width:3}
+.hd{stroke:#fff;stroke-linecap:round;transform-origin:100px 100px;transition:transform .9s cubic-bezier(.3,1.3,.4,1)}.hd.mn{stroke-width:4}.hd.hr{stroke-width:6}.hd.sc{stroke:#FB7185;stroke-width:2;transition:none}
+.ck .dg{font:800 44px/1 'Sora';letter-spacing:-.05em;font-variant-numeric:tabular-nums}.ck .dg small{font-size:20px;color:#9AA7DA;margin-left:4px}.ck .dy{font:600 13px 'Geist Mono';letter-spacing:.1em;color:#9AA7DA;text-transform:uppercase}
+.sk{position:absolute;inset:0;border-radius:30px;pointer-events:none;overflow:hidden}
+.dd{position:relative}.dd>label{display:block;font:600 11.500px 'Geist Mono';letter-spacing:.14em;text-transform:uppercase;color:#7F8BBA;margin-bottom:9px}
+.tr{width:100%;display:flex;align-items:center;gap:12px;border:0;border-radius:18px;padding:12px 14px;background:#131A33;color:inherit;font:inherit;cursor:pointer;text-align:left;box-shadow:inset 0 0 0 1.500px rgba(255,255,255,.1);transition:box-shadow .2s}
+.tr:hover,.tr[aria-expanded=true]{box-shadow:inset 0 0 0 2px #7C9CFF}.tr:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;flex:none;background:var(--ic)}.ic svg{width:19px;height:19px}.ic svg *{fill:none;stroke:#fff;stroke-width:2.100;stroke-linecap:round;stroke-linejoin:round}
+.tr .n{flex:1;min-width:0}.tr .n b{display:block;font-size:15px;font-weight:700}.tr .n span{font:500 12px 'Geist Mono';color:#8A96C6}
+.tr>svg{width:16px;height:16px;color:#7F8BBA;transition:transform .3s}.tr[aria-expanded=true]>svg{transform:rotate(180deg)}
+.pp{position:absolute;left:0;right:0;top:calc(100% + 10px);border-radius:20px;background:#151D3A;padding:6px;box-shadow:0 34px 60px -14px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.12);opacity:0;transform:translateY(-8px) scale(.97);transform-origin:top;pointer-events:none;transition:opacity .22s,transform .35s cubic-bezier(.3,1.5,.5,1);z-index:5}
+.pp.on{opacity:1;transform:none;pointer-events:auto}
+.o{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:13px;cursor:pointer;transition:background .12s;animation:in .35s cubic-bezier(.3,1.4,.5,1) both;animation-delay:calc(var(--i)*28ms)}@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.o.hl{background:rgba(124,156,255,.16)}.o.sel{box-shadow:inset 0 0 0 1.500px rgba(124,156,255,.6)}
+.o .ic{width:30px;height:30px;border-radius:9px}.o .ic svg{width:16px;height:16px}.o b{display:block;font-size:14px;font-weight:600}.o span{font:500 11px 'Geist Mono';color:#8A96C6}.o .tm{margin-left:auto;text-align:right;font:700 14.500px 'Geist Mono';font-variant-numeric:tabular-nums}.o .tm span{display:block;font-weight:500}
+@media(max-width:640px){.w{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w"><div class="ck"><svg viewBox="0 0 200 200" aria-hidden="true"><circle class="fc" cx="100" cy="100" r="96"/><g id="tk"></g><line class="hd hr" id="hh" x1="100" y1="100" x2="100" y2="56"/><line class="hd mn" id="hm" x1="100" y1="100" x2="100" y2="36"/><line class="hd sc" id="hs" x1="100" y1="112" x2="100" y2="26"/><circle cx="100" cy="100" r="6" fill="#fff"/></svg><div class="dg" id="dg">00:00<small>AM</small></div><div class="dy" id="dy"></div></div>
+<div class="dd" id="dd"><label>Meeting time zone</label><button class="tr" id="tr" aria-haspopup="listbox" aria-expanded="false" style="--ic:#F59E0B"><span class="ic" id="ti"></span><span class="n"><b id="tn">London</b><span id="tc">GMT+0</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="pp" id="pp" role="listbox"></div></div></div>
+<script>
+const Z=[['Los Angeles','America/Los_Angeles'],['New York','America/New_York'],['London','Europe/London'],['Lagos','Africa/Lagos'],['Dubai','Asia/Dubai'],['Mumbai','Asia/Kolkata'],['Tokyo','Asia/Tokyo'],['Sydney','Australia/Sydney']];
+const SUN='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.500M12 19.500V22M2 12h2.500M19.500 12H22M4.900 4.900l1.800 1.800M17.300 17.300l1.800 1.800M19.100 4.900l-1.800 1.800M6.700 17.300l-1.800 1.800"/></svg>',MOON='<svg viewBox="0 0 24 24"><path d="M20 14.500A8 8 0 0 1 9.500 4 8 8 0 1 0 20 14.500Z"/></svg>';
+const tkg=document.getElementById('tk');for(let i=0;i<60;i++){const a=i*6*Math.PI/180,h=i%5===0,r1=h?82:88,l=document.createElementNS('http://www.w3.org/2000/svg','line');l.setAttribute('class','tk'+(h?' h':''));l.setAttribute('x1',100+Math.sin(a)*r1);l.setAttribute('y1',100-Math.cos(a)*r1);l.setAttribute('x2',100+Math.sin(a)*92);l.setAttribute('y2',100-Math.cos(a)*92);tkg.appendChild(l)}
+const pp=document.getElementById('pp'),tr=document.getElementById('tr');let cur=2,hl=3,open=false,base=Date.now();
+function parts(z,t){const f=new Intl.DateTimeFormat('en-GB',{timeZone:z,hour:'numeric',minute:'numeric',second:'numeric',hour12:false,weekday:'short'}).formatToParts(new Date(t)),g=k=>f.find(p=>p.type===k).value;return{h:+g('hour')%24,m:+g('minute'),s:+g('second'),d:g('weekday')}}
+function offs(z,t){const d=new Date(t),u=new Date(d.toLocaleString('en-US',{timeZone:'UTC'})),l=new Date(d.toLocaleString('en-US',{timeZone:z}));return Math.round((l-u)/36e5*2)/2}
+function fmt(n){return (n>=0?'+':'-')+Math.abs(n)}
+Z.forEach(([n,z],i)=>{const e=document.createElement('div');e.className='o';e.style.cssText='--i:'+i;e.setAttribute('role','option');e.innerHTML='<span class="ic"></span><div><b>'+n+'</b><span></span></div><div class="tm"></div>';e.onclick=()=>{off=true;choose(i)};e.onmouseenter=()=>{off=true;hl=i;paint()};pp.appendChild(e)});
+const os=[...pp.children];
+function tick(){const t=Date.now();os.forEach((e,i)=>{const p=parts(Z[i][1],t),night=p.h<6||p.h>=19;e.querySelector('.ic').innerHTML=night?MOON:SUN;e.querySelector('.ic').style.background=night?'#3B3F8F':'#E8930C';e.querySelector('.tm').innerHTML=String(p.h).padStart(2,'0')+':'+String(p.m).padStart(2,'0')+'<span>'+p.d+', GMT'+fmt(offs(Z[i][1],t))+'</span>';e.querySelector('div>span').textContent=night?'Night':'Daytime'});
+ const p=parts(Z[cur][1],t),a=(p.s)*6;let hh=p.h%12+p.m/60;
+ const set=(id,deg)=>{const el=document.getElementById(id),prev=+el.dataset.a||0;let d=deg;if(id!=='hs'){while(d-prev>180)d-=360;while(d-prev<-180)d+=360}el.dataset.a=d;el.style.transform='rotate('+d+'deg)'};
+ set('hh',hh*30);set('hm',(p.m+p.s/60)*6);document.getElementById('hs').style.transform='rotate('+a+'deg)';
+ document.getElementById('dg').innerHTML=String(p.h%12||12).padStart(2,'0')+':'+String(p.m).padStart(2,'0')+'<small>'+(p.h<12?'AM':'PM')+'</small>';document.getElementById('dy').textContent=p.d+' in '+Z[cur][0]}
+function paint(){os.forEach((o,i)=>{o.classList.toggle('hl',i===hl);o.classList.toggle('sel',i===cur);o.setAttribute('aria-selected',i===cur)})}
+function choose(i){cur=i;const t=Date.now(),p=parts(Z[i][1],t),night=p.h<6||p.h>=19;document.getElementById('tn').textContent=Z[i][0];document.getElementById('tc').textContent='GMT'+fmt(offs(Z[i][1],t));document.getElementById('ti').innerHTML=night?MOON:SUN;document.getElementById('tr').style.setProperty('--ic',night?'#3B3F8F':'#E8930C');document.getElementById('ti').style.background=night?'#3B3F8F':'#E8930C';paint();tick();setOpen(false)}
+function setOpen(o){open=o;pp.classList.toggle('on',o);tr.setAttribute('aria-expanded',o)}
+tr.onclick=()=>{off=true;setOpen(!open)};addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+choose(2);setOpen(true);hl=5;paint();setInterval(tick,1000);
+/* Idle demo: the clock runs live while cities are chosen in turn; the hour and minute hands sweep to the new zone's time, the header icon flips between sun and moon, and every row in the list keeps its own ticking local time, until a real click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);const o=[6,1,4,3,7,2];let k=0;while(!off){setOpen(true);hl=o[k%6];paint();await sleep(900);if(off)return;choose(o[k++%6]);await sleep(2200)}})()}
+</script></body></html>

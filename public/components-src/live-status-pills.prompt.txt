@@ -1,0 +1,40 @@
+ROLE
+You are a senior broadcast UI designer and front-end engineer with 15+ years of experience. Build "Live Status Pills": real-time status pills: Live with a rolling viewer count, Rec with a ticking timer, On air, Syncing, Typing, Now playing and a countdown.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black panel with signal red, amber, sky, emerald and violet, mono caps and soft rings.
+- Palette: #FF4D6A, #0B0C10, #ECEEF4, #767B90, #13151C, #6B7086
+- Type: Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Two groups: Broadcast (solid live pill, live with viewers, rec timer, on-air sign) and Activity (syncing spinner, typing dots, equaliser, countdown).
+
+INTERACTION & STATES
+- Everything updates itself: the timer and countdown tick each second and the viewer count rolls every 2.4s.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Dot ring pulses 1.6s; rec dot blinks on steps(1); on-air glow 2.4s; typing dots bounce 1.2s staggered .15s; equaliser bars loop 1s with negative delays; viewer number rolls 450ms.
+
+IDLE AUTOPLAY
+- The clocks and counters run live from the first frame.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Pulses on every pill at the same phase.
+- Timers that do not use tabular numerals, which makes them jitter.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,40 @@
+ROLE
+You are a senior photo retouching product designer and front-end engineer with 15+ years of experience. Build "Before After Slider": a comparison slider with a glowing divider and round handle that sweeps across a flat desaturated before image and a vivid graded after image.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Ink dark stage with a violet glow, a white divider line and mono labels over a generated sunset landscape.
+- Palette: #0E1017, #EEF0F8, #7C8299, #818CF8
+- Type: Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; 16:10 frame with an after layer, a clip-pathed before layer (greyscale, low contrast, soft blur, vignette), Before and After chips, divider with handle; footer with live percent revealed.
+
+INTERACTION & STATES
+- Drag anywhere on the frame or use the hidden range input with arrow keys; the clip position, handle and labels update; the labels dim when one side is almost fully shown.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Clip inset follows the pointer with no easing so it feels attached; handle scales 1.14 with a 250ms spring while dragging.
+
+IDLE AUTOPLAY
+- After 2.8s the handle sweeps on a slow sine path (50 plus or minus 38 percent) until the user grabs it.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A cross-fade between the images; the hard divider is what reads as a comparison.
+- A before image that is merely darker; it needs lower contrast and no colour.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

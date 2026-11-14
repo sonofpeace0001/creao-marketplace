@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Blur Up Loader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F1F2F6;color:#12141F;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:720px;display:grid;gap:18px}
+.hd{display:flex;justify-content:space-between;align-items:end;gap:12px}.hd h1{font-size:26px;font-weight:800;letter-spacing:-.045em}.hd button{border:0;border-radius:99px;padding:10px 18px;background:#12141F;color:#fff;font:700 13px 'Inter Tight';cursor:pointer}.hd button:focus-visible{outline:3px solid #6366F1;outline-offset:3px}
+.tl{display:flex;gap:10px;flex-wrap:wrap}
+.tl span{display:flex;align-items:center;gap:8px;padding:7px 13px 7px 9px;border-radius:99px;background:#fff;font:600 12px 'Geist Mono';color:#8A90A8;box-shadow:inset 0 0 0 1.500px #E1E4EE;transition:all .3s}.tl span i{width:10px;height:10px;border-radius:50%;background:#D5D9E6;transition:background .3s}
+.tl span.on{color:#12141F;box-shadow:inset 0 0 0 1.500px #6366F1;background:#EEF0FF}.tl span.on i{background:#6366F1}.tl span.dn i{background:#16A34A}.tl span.dn{color:#12141F}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.c{border-radius:22px;background:#fff;overflow:hidden;box-shadow:0 18px 26px -22px rgba(18,20,31,.5),inset 0 0 0 1px rgba(18,20,31,.07)}
+.ph{position:relative;aspect-ratio:4/5;background:#E8EAF2;overflow:hidden}
+.ph .sk{position:absolute;inset:0;background:linear-gradient(100deg,#E8EAF2 30%,#F6F7FB 50%,#E8EAF2 70%);background-size:220% 100%;animation:sh 1.200s linear infinite;transition:opacity .5s}@keyframes sh{to{background-position:-220% 0}}
+.ph .bl,.ph .sp{position:absolute;inset:0;opacity:0}.ph .bl svg,.ph .sp svg{width:100%;height:100%;display:block}
+.ph .bl{filter:blur(22px) saturate(1.3);transform:scale(1.2);transition:opacity .6s,filter .9s cubic-bezier(.3,0,.2,1),transform .9s cubic-bezier(.3,0,.2,1)}
+.ph .sp{transition:opacity .7s;transform:scale(1.04)}
+.c.s2 .sk{opacity:0}.c.s2 .bl{opacity:1}.c.s3 .sk{opacity:0}.c.s3 .bl{opacity:0;filter:blur(0);transform:none}.c.s3 .sp{opacity:1;transform:none;transition:opacity .7s,transform 1s cubic-bezier(.3,.8,.2,1)}
+.ph .bg{position:absolute;left:10px;top:10px;padding:5px 10px;border-radius:99px;background:rgba(18,20,31,.7);color:#fff;font:600 10.500px 'Geist Mono';letter-spacing:.06em;opacity:0;transform:translateY(-4px);transition:all .4s .3s}.c.s3 .bg{opacity:1;transform:none}
+.mt{padding:12px 14px 14px}.mt b{display:block;font-size:14px;font-weight:700}.mt small{font:500 11px 'Geist Mono';color:#8A90A8}
+.sk2{height:10px;border-radius:5px;background:#EAECF3;margin-bottom:8px}.sk2:last-child{width:55%;margin-bottom:0}
+.mt .rl{display:none}.c.s3 .mt .rl{display:block}.c.s3 .mt .sk2{display:none}.c:not(.s3) .mt .rl{display:none}
+.st{font:500 12.500px 'Geist Mono';color:#8A90A8;display:flex;justify-content:space-between}.st b{color:#12141F;font-weight:600}
+@media(max-width:560px){.g{grid-template-columns:repeat(2,1fr)}.c:nth-child(3){display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Load it in three steps</h1><button id="rp">Replay</button></div>
+<div class="tl" id="tl"><span><i></i>1 Skeleton</span><span><i></i>2 Blur preview</span><span><i></i>3 Sharp image</span></div>
+<div class="g" id="g"></div><div class="st"><span id="s1">Waiting for the network</span><span id="s2"></span></div></div>
+<script>
+function scene(s){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};const P=[['#FFB27A','#F472B6','#6366F1','#2B1B5E'],['#FDE68A','#FDBA74','#F97316','#7C2D12'],['#A7F3D0','#34D399','#059669','#064E3B'],['#BAE6FD','#38BDF8','#0369A1','#0C2A4A'],['#FBCFE8','#C084FC','#7C3AED','#2E1065'],['#FEF3C7','#FCA5A5','#E11D48','#4C0519']],c=P[Math.floor(r(6))];
+ const id='g'+Math.floor(r(1e6));let h='<svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c[2]+'"/><stop offset=".55" stop-color="'+c[1]+'"/><stop offset="1" stop-color="'+c[0]+'"/></linearGradient></defs><rect width="400" height="500" fill="url(#'+id+')"/>';
+ h+='<circle cx="'+(100+r(200))+'" cy="'+(110+r(60))+'" r="'+(36+r(20))+'" fill="#FFF6D6" opacity=".95"/>';
+ for(let l=0;l<4;l++){let d='M0 500 L0 '+(250+l*50);const a=26+r(30),f=.012+r(.02),ph=r(6);for(let x=0;x<=400;x+=8)d+=' L'+x+' '+(250+l*50-a*Math.sin(x*f+ph)-a*.5*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L400 500Z';h+='<path d="'+d+'" fill="'+c[3]+'" opacity="'+(.3+l*.22)+'"/>'}
+ return h+'</svg>'}
+const CD=[['Ridge walk','1.2 MB',20,[900,1700]],['Harbour light','840 KB',1,[1300,2300]],['Pine road','1.6 MB',8,[1700,2900]]];
+const g=document.getElementById('g'),tl=[...document.querySelectorAll('#tl span')];const cs=[];
+CD.forEach(([n,sz,sd])=>{const c=document.createElement('article');c.className='c';c.innerHTML='<div class="ph"><div class="sk"></div><div class="bl">'+scene(sd)+'</div><div class="sp">'+scene(sd)+'</div><span class="bg">SHARP</span></div><div class="mt"><div class="sk2" style="width:70%"></div><div class="sk2"></div><div class="rl"><b>'+n+'</b><small>'+sz+', loaded</small></div></div>';g.appendChild(c);cs.push(c)});
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));let run=0;
+function stage(n){tl.forEach((t,i)=>{t.classList.toggle('on',i===n-1);t.classList.toggle('dn',i<n-1)})}
+async function play(){const my=++run;cs.forEach(c=>c.classList.remove('s2','s3'));stage(1);document.getElementById('s1').textContent='Waiting for the network';document.getElementById('s2').textContent='';
+ const t0=performance.now();
+ await sleep(900);if(my!==run)return;cs.forEach((c,i)=>setTimeout(()=>c.classList.add('s2'),i*380));stage(2);document.getElementById('s1').innerHTML='Blur preview, <b>2 KB</b> inline';document.getElementById('s2').textContent='first paint in 0.9 s';
+ await sleep(1500);if(my!==run)return;cs.forEach((c,i)=>setTimeout(()=>c.classList.add('s3'),i*420));stage(3);document.getElementById('s1').innerHTML='Sharp image <b>swapped in</b>';document.getElementById('s2').textContent='fully loaded in '+((performance.now()-t0)/1000).toFixed(1)+' s'}
+document.getElementById('rp').onclick=()=>{off=true;play()};
+cs.forEach(c=>c.classList.add('s2'));stage(2);document.getElementById('s1').innerHTML='Blur preview, <b>2 KB</b> inline';
+/* Idle demo: the loading sequence replays on a loop: grey shimmering skeletons, then a heavily blurred colour preview fading in, then each sharp image resolving over it with a slight zoom-settle and a SHARP tag, staggered card by card, until you press Replay. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){(async()=>{await sleep(2800);while(!off){await play();await sleep(3200)}})()}
+</script></body></html>

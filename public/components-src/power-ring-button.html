@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Power Ring Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05080C;color:#DDF3F6;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.w{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(14px,4vw,40px);align-items:center;width:100%;max-width:760px}
+.rd{display:grid;gap:12px}.rd.r{justify-items:start}.rd.l{justify-items:end;text-align:right}
+.m{width:100%;max-width:170px;padding:12px 14px;border-radius:14px;background:#0C1218;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}.m small{display:block;font:600 10.500px 'JetBrains Mono';letter-spacing:.14em;color:#4F6C74}.m b{display:block;font:700 24px 'JetBrains Mono';letter-spacing:-.04em;color:#4F6C74;transition:color .5s;font-variant-numeric:tabular-nums}.m .bar{height:4px;border-radius:2px;background:#16212A;margin-top:8px;overflow:hidden}.m .bar i{display:block;height:100%;width:var(--w,0%);background:linear-gradient(90deg,#22D3EE,#34D399);transition:width .5s}
+.on .m b{color:#7CF0FF}
+.ct{display:grid;justify-items:center;gap:20px}
+.pb{--p:0;position:relative;width:min(230px,52vw);aspect-ratio:1;border:0;background:none;cursor:pointer;display:grid;place-items:center;padding:0;-webkit-tap-highlight-color:transparent}
+.pb:focus-visible{outline:3px solid #7CF0FF;outline-offset:8px;border-radius:50%}
+.pb svg.rg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.rg .t{fill:none;stroke:#12202A;stroke-width:6}.rg .v{fill:none;stroke:url(#pg);stroke-width:6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p));filter:drop-shadow(0 0 8px rgba(34,211,238,.8))}
+.rg .tk{fill:none;stroke:#1B2C36;stroke-width:3;stroke-dasharray:1.200 7.900}
+.cr{position:relative;width:74%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 25%,#222B34,#0C1218 70%);box-shadow:0 20px 30px -10px rgba(0,0,0,.9),inset 0 2px 0 rgba(255,255,255,.12),inset 0 -6px 12px rgba(0,0,0,.6);display:grid;place-items:center;transition:box-shadow .6s,transform .2s}
+.pb:active .cr{transform:scale(.96)}
+.cr svg{width:42%;height:42%;overflow:visible}.cr svg *{fill:none;stroke:#2F4650;stroke-width:2.600;stroke-linecap:round;stroke-linejoin:round;transition:stroke .5s,filter .5s}
+.on .cr{box-shadow:0 20px 30px -10px rgba(0,0,0,.9),inset 0 2px 0 rgba(255,255,255,.12),inset 0 -6px 12px rgba(0,0,0,.6),0 0 60px rgba(34,211,238,.45),inset 0 0 30px rgba(34,211,238,.18)}
+.on .cr svg *{stroke:#7CF0FF;filter:drop-shadow(0 0 5px #22D3EE)}
+.pb::after{content:"";position:absolute;inset:-14%;border-radius:50%;border:2px solid rgba(34,211,238,.6);opacity:0;pointer-events:none}.on .pb::after{animation:pl 2.400s ease-out infinite}@keyframes pl{from{transform:scale(.78);opacity:.8}to{transform:scale(1.1);opacity:0}}
+.sx{text-align:center}.sx b{display:block;font:700 15px 'JetBrains Mono';letter-spacing:.2em;color:#6C8C94;text-transform:uppercase;transition:color .4s}.on .sx b{color:#7CF0FF}.sx span{font:500 12px 'JetBrains Mono';color:#4F6C74;letter-spacing:.06em}
+@media(max-width:620px){.w{grid-template-columns:1fr;justify-items:center}.rd{grid-template-columns:1fr 1fr;justify-items:stretch!important;order:2;width:100%}.m{max-width:none}.ct{order:1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w" id="w"><div class="rd l"><div class="m"><small>CPU LOAD</small><b id="c1">0%</b><div class="bar"><i id="b1"></i></div></div><div class="m"><small>TEMPERATURE</small><b id="c2">--</b><div class="bar"><i id="b2"></i></div></div></div>
+<div class="ct"><button class="pb" id="pb" aria-pressed="false" aria-label="Power"><svg class="rg" viewBox="0 0 100 100"><defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#34D399"/></linearGradient></defs><circle class="tk" cx="50" cy="50" r="47" pathLength="100"/><circle class="t" cx="50" cy="50" r="44"/><circle class="v" id="rv" cx="50" cy="50" r="44" pathLength="1"/></svg><span class="cr"><svg viewBox="0 0 24 24"><path d="M12 3v8"/><path d="M6.300 6.300a8 8 0 1 0 11.400 0"/></svg></span></button><div class="sx"><b id="st">Standby</b><span id="sb">Tap to power on</span></div></div>
+<div class="rd r"><div class="m"><small>MEMORY</small><b id="c3">0 GB</b><div class="bar"><i id="b3"></i></div></div><div class="m"><small>UPTIME</small><b id="c4">00:00</b><div class="bar"><i id="b4" style="--w:0%"></i></div></div></div></div>
+<script>
+const w=document.getElementById('w'),pb=document.getElementById('pb'),rv=document.getElementById('rv'),st=document.getElementById('st'),sb=document.getElementById('sb');let on=false,busy=false,tm=null,up=0;
+const $=i=>document.getElementById(i);
+function setP(p){rv.style.setProperty('--p',p)}
+async function boot(){if(busy)return;busy=true;const to=!on;pb.setAttribute('aria-pressed',to);
+ if(to){const L=['Checking memory','Loading kernel','Starting services','Linking network'];for(let p=0;p<=100;p+=4){setP(p/100);st.textContent='Booting '+p+'%';sb.textContent=L[Math.min(3,Math.floor(p/26))];await new Promise(r=>setTimeout(r,34))}
+  on=true;w.classList.add('on');st.textContent='Online';sb.textContent='All systems nominal';up=0;clearInterval(tm);tm=setInterval(()=>{up++;$('c4').textContent=String(Math.floor(up/60)).padStart(2,'0')+':'+String(up%60).padStart(2,'0');$('b4').style.setProperty('--w',Math.min(100,up*1.5)+'%');const c=22+Math.round(Math.random()*34),t=44+Math.round(Math.random()*10),m=(5.2+Math.random()*1.8).toFixed(1);$('c1').textContent=c+'%';$('b1').style.setProperty('--w',c+'%');$('c2').textContent=t+'°C';$('b2').style.setProperty('--w',t+'%');$('c3').textContent=m+' GB';$('b3').style.setProperty('--w',(m/16*100)+'%')},800)}
+ else{clearInterval(tm);on=false;w.classList.remove('on');for(let p=100;p>=0;p-=6){setP(p/100);st.textContent='Shutting down';sb.textContent='Saving state '+p+'%';await new Promise(r=>setTimeout(r,22))}st.textContent='Standby';sb.textContent='Tap to power on';['c1','c3'].forEach(i=>$(i).textContent=i==='c1'?'0%':'0 GB');$('c2').textContent='--';$('c4').textContent='00:00';['b1','b2','b3','b4'].forEach(i=>$(i).style.setProperty('--w','0%'))}
+ busy=false}
+pb.onclick=()=>{off=true;boot()};
+on=true;w.classList.add('on');setP(1);pb.setAttribute('aria-pressed','true');st.textContent='Online';sb.textContent='All systems nominal';$('c1').textContent='34%';$('b1').style.setProperty('--w','34%');$('c2').textContent='48°C';$('b2').style.setProperty('--w','48%');$('c3').textContent='6.1 GB';$('b3').style.setProperty('--w','38%');$('c4').textContent='02:14';$('b4').style.setProperty('--w','55%');
+/* Idle demo: the unit shuts down and boots up on repeat; the ring drains and refills with a boot log, the core glows and pulses, and the CPU, temperature, memory and uptime readouts tick live, until a real click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);while(!off){await boot();await sleep(2600);if(off)return;await boot();await sleep(5200)}})()}
+</script></body></html>

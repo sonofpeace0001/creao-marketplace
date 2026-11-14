@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Live Data Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#09090B;color:#FAFAFA;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.g{width:100%;max-width:640px;display:grid;grid-template-columns:1.5fr 1fr;gap:14px}
+.c{position:relative;border-radius:20px;background:#111114;padding:20px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);overflow:hidden}
+.c::before{content:"";position:absolute;inset:0;background:radial-gradient(260px 160px at 100% 0,rgba(52,211,153,.12),transparent 70%);pointer-events:none}
+.hd{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#8E8E99;font-weight:500}
+.live{display:flex;align-items:center;gap:7px;font:500 11px 'Geist Mono';letter-spacing:.1em;color:#34D399}.live i{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:pu 1.6s ease-out infinite}
+@keyframes pu{70%{box-shadow:0 0 0 9px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+.big{font:500 44px 'Geist Mono';letter-spacing:-.05em;margin:12px 0 2px;display:flex;align-items:baseline;gap:8px}.big small{font-size:14px;letter-spacing:0;color:#8E8E99}
+.dl{display:inline-flex;align-items:center;gap:4px;font:500 12px 'Geist Mono';padding:3px 8px;border-radius:99px;background:rgba(52,211,153,.14);color:#34D399}.dl.dn{background:rgba(251,113,133,.14);color:#FB7185}
+.ch{position:relative;margin-top:14px;height:120px}.ch svg{width:100%;height:100%;display:block;overflow:visible}
+.ax{display:flex;justify-content:space-between;font:400 10px 'Geist Mono';color:#5E5E69;margin-top:6px}
+.bars{display:flex;align-items:end;gap:5px;height:100px;margin-top:18px}.bars i{flex:1;border-radius:4px 4px 2px 2px;background:linear-gradient(180deg,#818CF8,#4338CA);transition:height .6s cubic-bezier(.3,1.2,.4,1);min-height:6px}
+.bars i.hot{background:linear-gradient(180deg,#FB7185,#BE123C)}
+.rw{display:flex;justify-content:space-between;font:500 12px 'Geist Mono';color:#8E8E99;margin-top:14px}.rw b{color:#FAFAFA}
+@media(max-width:560px){.g{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.live i{animation:none}.bars i{transition:none}}
+</style></head><body>
+<div class="g">
+<section class="c" aria-label="Requests per second"><div class="hd"><span>Requests per second</span><span class="live"><i></i>LIVE</span></div>
+<div class="big"><span id="n">48,213</span><small>req/s</small><span class="dl" id="d">+4.2%</span></div>
+<div class="ch"><svg id="sv" viewBox="0 0 400 120" preserveAspectRatio="none"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34D399" stop-opacity=".35"/><stop offset="1" stop-color="#34D399" stop-opacity="0"/></linearGradient></defs><path id="fa" fill="url(#ar)"/><path id="ln" fill="none" stroke="#34D399" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/><circle id="dot" r="4" fill="#34D399"/></svg></div>
+<div class="ax"><span>60s ago</span><span>30s</span><span>now</span></div></section>
+<section class="c" aria-label="p95 latency"><div class="hd"><span>p95 latency</span><span class="live" style="color:#818CF8"><i style="background:#818CF8;animation-name:pu2"></i>1s</span></div>
+<div class="big" style="font-size:36px"><span id="l">142</span><small>ms</small></div>
+<div class="bars" id="bars"></div>
+<div class="rw"><span>Target <b>&lt; 200</b></span><span>Errors <b id="e">0.02%</b></span></div></section></div>
+<style>@keyframes pu2{70%{box-shadow:0 0 0 9px rgba(129,140,248,0)}100%{box-shadow:0 0 0 0 rgba(129,140,248,0)}}.live i{box-shadow:0 0 0 0 rgba(129,140,248,.6)}</style>
+<script>
+const N=40,W=400,H=120;let v=[],b=[];let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+let cur=48000;for(let i=0;i<N;i++){cur+=(rnd()-.45)*1800;cur=Math.max(36000,Math.min(62000,cur));v.push(cur)}
+const bars=document.getElementById('bars');for(let i=0;i<18;i++){b.push(100+rnd()*70);const e=document.createElement('i');bars.appendChild(e)}
+const ln=document.getElementById('ln'),fa=document.getElementById('fa'),dot=document.getElementById('dot'),nEl=document.getElementById('n'),dEl=document.getElementById('d'),lEl=document.getElementById('l'),eEl=document.getElementById('e');
+let shown=v[N-1];
+function draw(){const mn=Math.min(...v)-2000,mx=Math.max(...v)+2000,pts=v.map((y,i)=>[i/(N-1)*W,H-(y-mn)/(mx-mn)*(H-10)-5]);
+ const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');ln.setAttribute('d',d);fa.setAttribute('d',d+` L${W} ${H} L0 ${H}Z`);dot.setAttribute('cx',pts[N-1][0]);dot.setAttribute('cy',pts[N-1][1]);
+ const prev=v[N-8],ch=(v[N-1]-prev)/prev*100;dEl.textContent=(ch>=0?'+':'')+ch.toFixed(1)+'%';dEl.className='dl'+(ch<0?' dn':'');
+ [...bars.children].forEach((e,i)=>{e.style.height=Math.min(100,b[i]/2.2)+'%';e.className=b[i]>170?'hot':''});
+ lEl.textContent=Math.round(b[b.length-1]);eEl.textContent=(b[b.length-1]>170?0.09:0.02).toFixed(2)+'%'}
+function tick(){cur+=(rnd()-.48)*2400;cur=Math.max(36000,Math.min(62000,cur));v.push(cur);v.shift();b.push(100+rnd()*85);b.shift();draw()}
+function tween(){shown+=(v[N-1]-shown)*.12;nEl.textContent=Math.round(shown).toLocaleString('en-US');requestAnimationFrame(tween)}
+draw();tween();
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(tick,900);
+</script></body></html>

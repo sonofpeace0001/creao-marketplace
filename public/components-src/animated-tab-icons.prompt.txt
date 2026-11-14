@@ -1,0 +1,40 @@
+ROLE
+You are a senior mobile interaction designer and front-end engineer with 15+ years of experience. Build "Animated Tab Icons": a phone tab bar whose selected icon plays its own entrance: roof bounce, search pop, plus spin, bell swing and avatar hop, with a sliding pill indicator.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft periwinkle backdrop, a dark device frame, a white floating bar and an ink pill.
+- Palette: #15172A, #0F1020, #C9D6FF, #E2E2E2, #2A2C45, #F5F6FB
+- Type: Outfit (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Phone frame with notch; five content panels; floating tab bar with indicator and five icon tabs with labels and an alert dot.
+
+INTERACTION & STATES
+- Tabs are real ARIA tabs with arrow-key support; selecting one slides the pill, reveals its label, switches the panel and plays that icon's animation.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Pill slides 500ms cubic-bezier(.3,1.3,.4,1); bell swing 900ms with decaying rotation about its top; plus rotates from -135 degrees with a spring; search scales .7 to 1.15; roof lifts 3px; avatar head hops with scale 1.12.
+
+IDLE AUTOPLAY
+- The selection travels along the bar every 1.8s so each icon's animation is seen.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- One generic bounce for every icon.
+- A selected state that only changes colour.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

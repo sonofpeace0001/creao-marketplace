@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Line Draw Icons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F4F0E8;color:#1D1A16;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:640px;display:grid;gap:26px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font:400 38px/1 'Instrument Serif';letter-spacing:-.02em}.hd h1 i{color:#E8590C}.hd button{border:0;border-radius:99px;padding:10px 18px;background:#1D1A16;color:#F4F0E8;font:700 13px 'Inter Tight';cursor:pointer}.hd button:focus-visible{outline:3px solid #E8590C;outline-offset:3px}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.t{position:relative;border:0;border-radius:22px;background:#fff;aspect-ratio:1;display:grid;place-items:center;align-content:center;gap:12px;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(29,26,22,.08);transition:transform .25s cubic-bezier(.3,1.4,.4,1),box-shadow .25s,background .25s;font:inherit;color:inherit}
+.t:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1px rgba(29,26,22,.08),0 18px 24px -16px rgba(29,26,22,.4)}.t:focus-visible{outline:3px solid #E8590C;outline-offset:3px}
+.t svg{width:52%;height:52%;overflow:visible}
+.t svg *{fill:none;stroke:#1D1A16;stroke-width:1.700;stroke-linecap:round;stroke-linejoin:round}
+.t svg .ac{stroke:#E8590C}
+.t span{font:500 11.500px 'JetBrains Mono';letter-spacing:.06em;color:#8C8473}
+.t.dr svg path,.t.dr svg circle,.t.dr svg rect,.t.dr svg line{stroke-dasharray:1;stroke-dashoffset:1;animation:dw 1.500s cubic-bezier(.6,0,.2,1) forwards;animation-delay:calc(var(--i)*.05s)}
+@keyframes dw{to{stroke-dashoffset:0}}
+.ft{display:flex;justify-content:space-between;font:500 12px 'JetBrains Mono';letter-spacing:.1em;text-transform:uppercase;color:#9B9382}
+@media(max-width:520px){.g{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.t.dr svg *{stroke-dashoffset:0}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Icons that <i>draw</i> themselves</h1><button id="rp">Replay</button></div><div class="g" id="g"></div><div class="ft"><span>24 px grid</span><span>1.7 px stroke</span><span>8 icons</span></div></div>
+<script>
+const I=[['Home','<path pathLength="1" d="M3 11.500 12 4l9 7.500"/><path pathLength="1" d="M5.500 10.200V20h13V10.200"/><path class="ac" pathLength="1" d="M10 20v-5.500h4V20"/>'],['Alerts','<path pathLength="1" d="M6 9a6 6 0 0 1 12 0c0 6 2.500 7.500 2.500 7.500h-17S6 15 6 9Z"/><path class="ac" pathLength="1" d="M10 20a2 2 0 0 0 4 0"/>'],['Mail','<rect pathLength="1" x="3" y="5.500" width="18" height="13" rx="2.500"/><path class="ac" pathLength="1" d="m3.500 7.500 8.500 6 8.500-6"/>'],['Saved','<path pathLength="1" d="M12 20s-7.500-4.600-7.500-10A4.300 4.300 0 0 1 12 7.300 4.300 4.300 0 0 1 19.500 10c0 5.400-7.500 10-7.500 10Z"/><path class="ac" pathLength="1" d="M8.500 10.500a2 2 0 0 1 2-2"/>'],['Camera','<path pathLength="1" d="M4 8h3l1.500-2.500h7L17 8h3v11H4Z"/><circle class="ac" pathLength="1" cx="12" cy="13" r="3.500"/>'],['Places','<path pathLength="1" d="M12 21s-6.500-5.800-6.500-11a6.500 6.500 0 0 1 13 0c0 5.200-6.500 11-6.500 11Z"/><circle class="ac" pathLength="1" cx="12" cy="10" r="2.400"/>'],['Secure','<rect pathLength="1" x="5" y="10.500" width="14" height="10" rx="2.500"/><path class="ac" pathLength="1" d="M8 10.500V8a4 4 0 0 1 8 0v2.500"/>'],['Rated','<path pathLength="1" d="m12 3.500 2.600 5.400 5.900.8-4.300 4.200 1 5.900-5.200-2.800-5.200 2.800 1-5.900-4.300-4.200 5.900-.8Z"/><path class="ac" pathLength="1" d="M12 8.500v3.200"/>']];
+const g=document.getElementById('g');I.forEach(([n,p],i)=>{const b=document.createElement('button');b.className='t';b.style.setProperty('--i',i);b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+p+'</svg><span>'+n+'</span>';b.setAttribute('aria-label',n+' icon, replay drawing');g.appendChild(b);b.onclick=()=>redraw([b])});
+const tiles=[...g.children];function redraw(ts){ts.forEach(t=>{t.classList.remove('dr');void t.offsetWidth;t.classList.add('dr')})}
+document.getElementById('rp').onclick=()=>redraw(tiles);
+/* Idle demo: every icon erases and redraws itself in a staggered wave, then holds, forever. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setTimeout(()=>{redraw(tiles);setInterval(()=>redraw(tiles),4800)},3600);
+</script></body></html>

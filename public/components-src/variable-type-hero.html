@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Variable Type Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Instrument+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F1ECE2;color:#14110D;font-family:'Instrument Sans',sans-serif;min-height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased}
+.hero{min-height:100vh;display:flex;flex-direction:column;padding:22px clamp(18px,4vw,44px) 30px}
+nav{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600}
+nav .lg{font:800 20px 'Anybody';font-stretch:120%;letter-spacing:-.02em}nav ul{display:flex;gap:26px;list-style:none;color:#6B6458}nav a{color:inherit;text-decoration:none}nav a:hover{color:#14110D}
+.nb{border:0;border-radius:99px;padding:11px 20px;background:#14110D;color:#F1ECE2;font:700 13px 'Instrument Sans';cursor:pointer}.nb:focus-visible{outline:3px solid #FF4D1C;outline-offset:3px}
+.mid{flex:1;display:flex;flex-direction:column;justify-content:center;gap:0}
+.big{font-family:'Anybody',sans-serif;line-height:.86;letter-spacing:-.045em;text-transform:uppercase;font-size:clamp(48px,12.5vw,190px);user-select:none;cursor:default}
+.big .row{display:block;white-space:nowrap}.big .ch{display:inline-block;font-variation-settings:'wght' var(--w,300),'wdth' var(--d,100);transition:font-variation-settings .12s linear}
+.big .row:nth-child(2){color:#FF4D1C}
+.foot{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;margin-top:26px}
+.foot p{max-width:440px;font-size:clamp(15px,1.7vw,19px);line-height:1.5;color:#4A443A}
+.ct{display:flex;gap:10px;flex-wrap:wrap}
+.b1{border:0;border-radius:99px;padding:16px 26px;background:#FF4D1C;color:#fff;font:700 15px 'Instrument Sans';cursor:pointer}.b2{border:0;border-radius:99px;padding:16px 26px;background:none;color:#14110D;font:700 15px 'Instrument Sans';cursor:pointer;box-shadow:inset 0 0 0 1.500px #14110D}
+.b1:focus-visible,.b2:focus-visible{outline:3px solid #14110D;outline-offset:3px}
+.meta{display:flex;justify-content:space-between;font:600 12px 'Instrument Sans';letter-spacing:.14em;text-transform:uppercase;color:#8B8374;border-top:1.500px solid #14110D;padding-top:12px;margin-top:22px}
+@media(max-width:680px){nav ul{display:none}.foot{grid-template-columns:1fr}.meta span:nth-child(2){display:none}}
+@media(prefers-reduced-motion:reduce){.big .ch{transition:none}}
+</style></head><body>
+<section class="hero"><nav><div class="lg">Variable &amp; Co.</div><ul><li><a href="#">Foundry</a></li><li><a href="#">Specimens</a></li><li><a href="#">Licensing</a></li></ul><button class="nb">Buy a licence</button></nav>
+<div class="mid"><h1 class="big" id="big" aria-label="Type that moves with you"><span class="row">Type that</span><span class="row">moves with</span><span class="row">you</span></h1>
+<div class="foot"><p>A variable typeface drawn for screens: 900 weights, 100 widths and one axis that responds to the reader. Licensed once, shipped everywhere.</p><div class="ct"><button class="b1">Try the tester</button><button class="b2">Download specimen</button></div></div></div>
+<div class="meta"><span>Anybody Pro 2.0</span><span>Weight 100 to 900</span><span>Width 50 to 150</span></div></section>
+<script>
+const big=document.getElementById('big');big.querySelectorAll('.row').forEach(r=>{r.setAttribute('aria-hidden','true');r.innerHTML=[...r.textContent].map(c=>c===' '?'<span class="ch" style="width:.22em">&nbsp;</span>':'<span class="ch">'+c+'</span>').join('')});
+const ch=[...big.querySelectorAll('.ch')];let real=0,mx=0,my=0;
+function apply(x,y){const R=Math.max(innerWidth*.34,220);ch.forEach(c=>{const r=c.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,d=Math.hypot(x-cx,(y-cy)*.55),k=Math.max(0,1-d/R),e=k*k*(3-2*k);c.style.setProperty('--w',Math.round(200+700*e));c.style.setProperty('--d',Math.round(82+68*e))})}
+function box(){let l=1e9,r=0,t=1e9,b=0;ch.forEach(c=>{const q=c.getBoundingClientRect();l=Math.min(l,q.left);r=Math.max(r,q.right);t=Math.min(t,q.top);b=Math.max(b,q.bottom)});return{left:l,width:r-l,top:t,height:b-t}}
+addEventListener('pointermove',e=>{real=performance.now();apply(e.clientX,e.clientY)});
+/* Idle demo: an invisible pointer sweeps across the three lines so the weight and width ripple through the letters. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)(function loop(n){if(n-real>2200){const t=n/1000+1.2,b=box();apply(b.left+b.width*(.5+.5*Math.sin(t*.9)),b.top+b.height*(.5+.45*Math.sin(t*.55+1)))}requestAnimationFrame(loop)})(0);
+const seed=()=>{const b=box();apply(b.left+b.width*.58,b.top+b.height*.4)};
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)seed();document.fonts.ready.then(seed);seed();
+</script></body></html>

@@ -1,0 +1,40 @@
+ROLE
+You are a senior editor-tools designer and front-end engineer with 15+ years of experience. Build "Slash Command Input": a block editor line where typing a slash opens a filterable command menu with icons and shortcuts, and choosing a command converts the block.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper document with a serif title, ink text and a crisp floating menu.
+- Palette: #27231E, #A19B8D, #B8B2A4, #FBFAF7, #16A34A, #4A453C
+- Type: Newsreader, Inter, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Document card with title and blocks (heading, paragraph, to-do with done state); caret placeholder; floating menu with header, six block types, icons and shortcut hints.
+
+INTERACTION & STATES
+- Typing / opens the menu at the caret; further letters filter and highlight the match; arrows and Enter pick; the block becomes a heading, to-do, bullet, quote or code block and typing continues in it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Menu: 200ms spring from translateY -6px and scale .97; new blocks rise 8px over 350ms; caret blinks on a 1s steps(1) loop.
+
+IDLE AUTOPLAY
+- Commands are typed and filtered, the selection moves, a quote and a bullet block are inserted with text, then the document resets.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A menu that does not follow the caret.
+- Commands that fire without a visible highlight.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,40 @@
+ROLE
+You are a senior creative developer with 15+ years of experience. Build "Water Ripple Image": a mountain lake rendered to canvas whose reflection bends with real decaying circular ripples from every click, drag or raindrop.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Twilight indigo lake, glowing moon and mirrored peaks with a serif caption.
+- Palette: #6F86B3, #050A14, #E8F1FF, #BFD6FF
+- Type: Fraunces, Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; canvas frame with caption; ripple counter and hint line.
+
+INTERACTION & STATES
+- Click, tap or drag to create ripples; each ripple displaces the pixels along its radius using a travelling sine wave with exponential decay.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Per pixel displacement from up to six live ripples, wave front speed 120px per second, envelope exp(-0.9t) and a gaussian band; light shading follows the displacement; 4.2s lifetime.
+
+IDLE AUTOPLAY
+- A raindrop lands at a random spot every 1.1s, starting after 2.4s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A CSS blur or scale pretending to be a ripple; the wave must travel outward.
+- More than six simultaneous ripples, which is slow and noisy.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

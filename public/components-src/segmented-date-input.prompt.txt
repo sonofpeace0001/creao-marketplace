@@ -1,0 +1,40 @@
+ROLE
+You are a senior travel product designer and front-end engineer with 15+ years of experience. Build "Segmented Date Input": a day, month and year field built from three spin segments with rolling digit reels, arrow-key stepping, typed entry and a relative date readout.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Charcoal brown with an orange active segment and heavy rounded numerals.
+- Palette: #FB923C, #F3EBDD, #A89B86, #1D1815, #2A231F, #3A302A
+- Type: Syne, Manrope, Martian Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Label; segmented field with day, month and year spin buttons and step arrows; info panel with weekday, relative days and ISO date; keyboard hint.
+
+INTERACTION & STATES
+- Up and Down change the focused part with proper month and leap-year rollover, Left and Right move between parts, digits type directly; the readout updates instantly.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Each digit is a reel rolling 400ms cubic-bezier(.3,1.2,.4,1); the active segment fills orange.
+
+IDLE AUTOPLAY
+- The highlight hops across day, month and year, stepping up and down so the reels keep rolling.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Wide display faces for reels; fixed-width columns need a font that fits.
+- Impossible dates such as 31 February; clamp the day.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

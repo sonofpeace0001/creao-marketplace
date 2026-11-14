@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Generated Face Avatars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F4EFE6;color:#221B12;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:560px;border-radius:30px;background:#fff;padding:28px;display:grid;gap:22px;box-shadow:0 30px 44px -30px rgba(34,27,18,.5),inset 0 0 0 1px rgba(34,27,18,.07)}
+.hd{display:flex;justify-content:space-between;align-items:center}.hd h1{font-size:26px;font-weight:800;letter-spacing:-.045em}.hd span{font:500 12px 'DM Mono';letter-spacing:.1em;text-transform:uppercase;color:#9C917D}
+.mn{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center}
+.big{position:relative;width:176px;height:176px;border-radius:50%;overflow:hidden;box-shadow:0 20px 28px -14px rgba(34,27,18,.45),0 0 0 6px #fff,0 0 0 7.500px rgba(34,27,18,.1)}
+.big svg{position:absolute;inset:0;width:100%;height:100%;display:block}.big svg.in{animation:fi .55s cubic-bezier(.3,1.5,.5,1)}.big svg.out{animation:fo .35s ease-in forwards}
+@keyframes fi{from{transform:scale(1.18) rotate(6deg);opacity:0}}@keyframes fo{to{transform:scale(.86) rotate(-6deg);opacity:0}}
+.tr{display:grid;gap:9px}.tr div{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-radius:12px;background:#F7F2E9;font-size:13.500px}.tr span{color:#8F846F;font-weight:500}.tr b{font:500 13px 'DM Mono';color:#221B12}
+.bt{display:flex;gap:10px}
+.rn{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:16px;padding:15px;background:#221B12;color:#FBF6EC;font:700 15px 'Bricolage Grotesque';cursor:pointer;transition:transform .15s}.rn:active{transform:scale(.97)}.rn:focus-visible{outline:3px solid #E8590C;outline-offset:3px}
+.rn svg{width:18px;height:18px;transition:transform .6s cubic-bezier(.3,1.5,.5,1)}.rn.sp svg{transform:rotate(360deg)}.rn svg *{fill:none;stroke:currentColor;stroke-width:2.400;stroke-linecap:round;stroke-linejoin:round}
+.sv{border:0;border-radius:16px;padding:15px 20px;background:#F1EADD;color:#221B12;font:700 15px 'Bricolage Grotesque';cursor:pointer}.sv:focus-visible{outline:3px solid #E8590C;outline-offset:3px}
+.hs{display:flex;gap:10px;flex-wrap:wrap}.hs .th{position:relative;width:54px;height:54px;border-radius:50%;overflow:hidden;border:0;padding:0;cursor:pointer;box-shadow:0 0 0 2.500px #fff,0 0 0 4px transparent;transition:transform .3s cubic-bezier(.3,1.6,.5,1),box-shadow .2s;flex:none;background:none}
+.hs .th svg{width:100%;height:100%;display:block}.hs .th:hover{transform:translateY(-4px) scale(1.08)}.hs .th.on{box-shadow:0 0 0 2.500px #fff,0 0 0 4.500px #E8590C}.hs .th:focus-visible{outline:3px solid #E8590C;outline-offset:3px}
+@media(max-width:480px){.mn{grid-template-columns:1fr;justify-items:center}.tr{width:100%}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h1>Make a face</h1><span>60,480 combinations</span></div>
+<div class="mn"><div class="big" id="big"></div><div class="tr" id="tr"></div></div>
+<div class="bt"><button class="rn" id="rn"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.700L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.700L3 16M3 21v-5h5"/></svg>Randomise</button><button class="sv" id="sv">Use this one</button></div>
+<div class="hs" id="hs" aria-label="History"></div></div>
+<script>
+const NAMES={hair:['Short','Long','Curly','Bun','Cropped'],skin:['Porcelain','Honey','Amber','Walnut','Espresso','Sand'],glasses:['None','None','Round'],smile:['Soft','Gentle','Wide']};
+function parts(s0){let s=s0;const r=n=>{s=(s*9301+49297)%233280;return Math.floor(s/233280*n)};return{sk:r(6),hr:r(7),bg:r(8),sh:r(6),st:r(5),gl:r(3)===0,sm:r(3)}}
+function face(s){const p=parts(s),sk=['#F2C9A5','#E0A57A','#B9784B','#8A5230','#5B3420','#F7D9C1'][p.sk],hr=['#1B1410','#3B2314','#7A4A21','#C9A15E','#B5361F','#6B6B73','#2D2A6B'][p.hr],bg=['#FFD6A5','#CAFFBF','#9BF6FF','#BDB2FF','#FFC6FF','#FDFFB6','#A0C4FF','#FFADAD'][p.bg],sh=['#6366F1','#EC4899','#0EA5E9','#10B981','#F59E0B','#8B5CF6'][p.sh],st=p.st,gl=p.gl,sm=p.sm;
+ let h='';if(st===1)h+='<path d="M24 52c-2-24 8-34 26-34s28 10 26 34c-2 12-6 16-6 16H30s-4-4-6-16Z" fill="'+hr+'"/>';
+ let top='';if(st===0)top='<path d="M27 46c0-16 9-22 23-22s23 6 23 22c-6-8-14-10-23-10s-17 2-23 10Z" fill="'+hr+'"/>';else if(st===1)top='<path d="M27 48c0-17 9-24 23-24s23 7 23 24c-7-7-14-11-23-11s-16 4-23 11Z" fill="'+hr+'"/>';else if(st===2)top='<g fill="'+hr+'"><circle cx="31" cy="40" r="9"/><circle cx="42" cy="31" r="10"/><circle cx="56" cy="30" r="10"/><circle cx="68" cy="39" r="9"/><circle cx="50" cy="27" r="9"/></g>';else if(st===3)top='<g fill="'+hr+'"><path d="M28 46c0-14 8-20 22-20s22 6 22 20c-5-6-13-9-22-9s-17 3-22 9Z"/><circle cx="50" cy="20" r="8"/></g>';
+ return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="'+bg+'"/>'+h+'<path d="M14 100c2-18 16-26 36-26s34 8 36 26Z" fill="'+sh+'"/><rect x="43" y="62" width="14" height="14" rx="6" fill="'+sk+'"/><ellipse cx="50" cy="48" rx="21" ry="24" fill="'+sk+'"/>'+top+'<circle cx="42" cy="50" r="2.200" fill="#2A1A12"/><circle cx="58" cy="50" r="2.200" fill="#2A1A12"/>'+(gl?'<g fill="none" stroke="#2A1A12" stroke-width="1.800"><circle cx="42" cy="50" r="6.500"/><circle cx="58" cy="50" r="6.500"/><path d="M48.500 50h3"/></g>':'')+'<path d="'+(sm===0?'M43 60q7 6 14 0':sm===1?'M44 60q6 4 12 0':'M43 59q7 8 14 0')+'" fill="none" stroke="#2A1A12" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/><circle cx="64" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/></svg>'}
+const big=document.getElementById('big'),tr=document.getElementById('tr'),hs=document.getElementById('hs'),rn=document.getElementById('rn');let cur=0,hist=[];
+function setFace(s,anim=true){cur=s;const o=big.firstElementChild;if(anim&&o){o.classList.add('out');setTimeout(()=>o.remove(),340)}else if(o)o.remove();big.insertAdjacentHTML('beforeend',face(s));big.lastElementChild.classList.add('in');const p=parts(s);
+ tr.innerHTML=[['Hair',NAMES.hair[p.st]],['Skin',NAMES.skin[p.sk]],['Glasses',p.gl?'Round':'None'],['Smile',NAMES.smile[p.sm]]].map(([a,b])=>'<div><span>'+a+'</span><b>'+b+'</b></div>').join('');
+ hist=[s,...hist.filter(x=>x!==s)].slice(0,7);hs.innerHTML='';hist.forEach(h=>{const b=document.createElement('button');b.className='th'+(h===s?' on':'');b.setAttribute('aria-label','Use face '+h);b.innerHTML=face(h);b.onclick=()=>{off=true;setFace(h)};hs.appendChild(b)})}
+function roll(){rn.classList.remove('sp');void rn.offsetWidth;rn.classList.add('sp');setFace(Math.floor(Math.random()*90000)+100)}
+rn.onclick=()=>{off=true;roll()};document.getElementById('sv').onclick=()=>{off=true};
+[311,5207,1789,4231,2766].forEach(s=>{hist.push(s)});setFace(8841,false);
+/* Idle demo: a new face is rolled every 2s, the old one spinning out and the new one springing in, the traits re-reading and the history strip filling, until the first click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);while(!off){roll();await sleep(2000)}})()}
+</script></body></html>

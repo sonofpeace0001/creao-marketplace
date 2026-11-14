@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Story Ring Avatars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0C0D14;color:#EEF0FA;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(560px 380px at 50% 0,rgba(236,72,153,.16),transparent 70%)}
+.w{width:100%;max-width:640px;display:grid;gap:26px}
+.hd h1{font-size:26px;font-weight:800;letter-spacing:-.045em}.hd p{color:#767A98;font-size:14px;margin-top:6px}
+.row{display:flex;gap:16px;overflow-x:auto;padding:6px 4px 10px;scrollbar-width:none}.row::-webkit-scrollbar{display:none}
+.s{--a:0deg;position:relative;border:0;background:none;display:grid;justify-items:center;gap:9px;cursor:pointer;color:inherit;font:inherit;flex:none;width:76px}
+.s:focus-visible{outline:3px solid #fff;outline-offset:4px;border-radius:20px}
+.rg{position:relative;width:72px;height:72px;border-radius:50%;padding:3.500px;background:conic-gradient(from var(--a),#F59E0B,#EC4899,#8B5CF6,#F59E0B);animation:sp 3.200s linear infinite;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+@keyframes sp{to{--a:360deg}}
+.rg::before{content:"";position:absolute;inset:3.500px;border-radius:50%;background:#0C0D14}
+.rg .im{position:absolute;inset:7px;border-radius:50%;overflow:hidden;background:var(--bg)}.rg .im svg{width:100%;height:100%;display:block}
+.s.seen .rg{background:#343748;animation:none}
+.s.seen .rg{transform:scale(.96)}
+.s:hover .rg{transform:scale(1.06)}
+.s b{font-size:12.500px;font-weight:600;color:#C5C8DE;max-width:76px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.s.seen b{color:#7A7E99}
+.s.you .rg{background:none;animation:none;padding:0}.s.you .rg::before{display:none}.s.you .im{inset:0;background:#1A1C29;box-shadow:inset 0 0 0 2px #343748}
+.s.you .pl{position:absolute;right:-2px;bottom:-2px;width:24px;height:24px;border-radius:50%;background:#3B82F6;border:3px solid #0C0D14;display:grid;place-items:center;z-index:2}.s.you .pl svg{width:12px;height:12px}
+.pb{position:absolute;right:0;top:0;width:20px;height:20px;border-radius:50%;background:#16A34A;border:3px solid #0C0D14;display:grid;place-items:center;transform:scale(0);transition:transform .4s cubic-bezier(.3,1.9,.5,1);z-index:2}.pb svg{width:10px;height:10px}.s.seen .pb{transform:scale(1)}
+.s.new .rg{animation:sp 3.200s linear infinite,np .7s cubic-bezier(.3,1.9,.5,1)}@keyframes np{from{transform:scale(.3);opacity:0}}
+.vw{position:relative;border-radius:26px;background:#12141F;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);padding:20px;display:flex;align-items:center;gap:18px;min-height:130px}
+.vw .big{position:relative;width:76px;height:76px;border-radius:50%;overflow:hidden;flex:none;background:var(--bg)}.vw .big svg{width:100%;height:100%}
+.vw b{display:block;font-size:19px;letter-spacing:-.02em}.vw span{font-size:13.500px;color:#8F94B5}.vw .pr{display:flex;gap:5px;margin-top:12px}.vw .pr i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden;width:34px}.vw .pr i::after{content:"";display:block;height:100%;width:var(--w,0);background:#fff;border-radius:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Stories, ringed</h1><p>A turning gradient for unseen, a quiet grey for seen, a tick when you are done.</p></div>
+<div class="row" id="row"></div>
+<div class="vw" id="vw"><div class="big" id="vb"></div><div><b id="vn">Priya Nair</b><span id="vs">Posted 2h ago, 3 updates</span><div class="pr" id="pr"><i></i><i></i><i></i></div></div></div></div>
+<script>
+function face(s){const r=n=>{s=(s*9301+49297)%233280;return Math.floor(s/233280*n)};const sk=['#F2C9A5','#E0A57A','#B9784B','#8A5230','#5B3420','#F7D9C1'][r(6)],hr=['#1B1410','#3B2314','#7A4A21','#C9A15E','#B5361F','#6B6B73','#2D2A6B'][r(7)],bg=['#FFD6A5','#CAFFBF','#9BF6FF','#BDB2FF','#FFC6FF','#FDFFB6','#A0C4FF','#FFADAD'][r(8)],sh=['#6366F1','#EC4899','#0EA5E9','#10B981','#F59E0B','#8B5CF6'][r(6)],st=r(5),gl=r(3)===0,sm=r(3);
+ let h='';if(st===1)h+='<path d="M24 52c-2-24 8-34 26-34s28 10 26 34c-2 12-6 16-6 16H30s-4-4-6-16Z" fill="'+hr+'"/>';
+ let top='';if(st===0)top='<path d="M27 46c0-16 9-22 23-22s23 6 23 22c-6-8-14-10-23-10s-17 2-23 10Z" fill="'+hr+'"/>';else if(st===1)top='<path d="M27 48c0-17 9-24 23-24s23 7 23 24c-7-7-14-11-23-11s-16 4-23 11Z" fill="'+hr+'"/>';else if(st===2)top='<g fill="'+hr+'"><circle cx="31" cy="40" r="9"/><circle cx="42" cy="31" r="10"/><circle cx="56" cy="30" r="10"/><circle cx="68" cy="39" r="9"/><circle cx="50" cy="27" r="9"/></g>';else if(st===3)top='<g fill="'+hr+'"><path d="M28 46c0-14 8-20 22-20s22 6 22 20c-5-6-13-9-22-9s-17 3-22 9Z"/><circle cx="50" cy="20" r="8"/></g>';
+ return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="'+bg+'"/>'+h+'<path d="M14 100c2-18 16-26 36-26s34 8 36 26Z" fill="'+sh+'"/><rect x="43" y="62" width="14" height="14" rx="6" fill="'+sk+'"/><ellipse cx="50" cy="48" rx="21" ry="24" fill="'+sk+'"/>'+top+'<circle cx="42" cy="50" r="2.200" fill="#2A1A12"/><circle cx="58" cy="50" r="2.200" fill="#2A1A12"/>'+(gl?'<g fill="none" stroke="#2A1A12" stroke-width="1.800"><circle cx="42" cy="50" r="6.500"/><circle cx="58" cy="50" r="6.500"/><path d="M48.500 50h3"/></g>':'')+'<path d="'+(sm===0?'M43 60q7 6 14 0':sm===1?'M44 60q6 4 12 0':'M43 59q7 8 14 0')+'" fill="none" stroke="#2A1A12" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/><circle cx="64" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/></svg>'}
+const P=[['Priya',11,0],['Marcus',48,0],['Amara',85,1],['Hannah',122,0],['Tomas',159,0],['Lucas',196,1],['Imani',233,0]];
+const row=document.getElementById('row'),vb=document.getElementById('vb'),vn=document.getElementById('vn'),pr=[...document.querySelectorAll('#pr i')];
+row.insertAdjacentHTML('beforeend','<button class="s you" aria-label="Add your story"><span class="rg"><span class="im"><svg viewBox="0 0 100 100"><circle cx="50" cy="38" r="15" fill="#3A3E57"/><path d="M20 90c2-20 14-28 30-28s28 8 30 28Z" fill="#3A3E57"/></svg></span></span><span class="pl"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><b>Your story</b></button>');
+P.forEach(([n,s,seen])=>{const b=document.createElement('button');b.className='s'+(seen?' seen':'');b.setAttribute('aria-label',n+"'s story"+(seen?', seen':''));b.innerHTML='<span class="rg"><span class="im">'+face(s)+'</span></span><span class="pb"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span><b>'+n+'</b>';b._n=n;b._s=s;b.onclick=()=>{off=true;view(b)};row.appendChild(b)});
+const items=[...row.querySelectorAll('.s:not(.you)')];
+function show(b){vb.innerHTML=face(b._s);vn.textContent=b._n+' '+['Nair','Webb','Diallo','Cho','Novak','Ferreira','Cole'][items.indexOf(b)]}
+async function view(b){show(b);for(let i=0;i<3;i++){pr.forEach((p,k)=>p.style.setProperty('--w',k<i?'100%':'0%'));for(let w=0;w<=100&&!cancel;w+=10){pr[i].style.setProperty('--w',w+'%');await new Promise(r=>setTimeout(r,45))}}pr.forEach(p=>p.style.setProperty('--w','100%'));b.classList.add('seen')}
+let cancel=false;show(items[0]);pr.forEach((p,k)=>p.style.setProperty('--w',k<1?'100%':'0%'));
+/* Idle demo: stories are opened in turn, with progress bars filling and the spinning gradient ring collapsing to grey with a tick, then fresh stories arrive with a pop and the cycle repeats. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3200);while(!off){for(const b of items){if(off)return;if(b.classList.contains('seen'))continue;await view(b);await sleep(500)}await sleep(1200);items.forEach((b,i)=>{b.classList.remove('seen');if(i%2===0){b.classList.remove('new');void b.offsetWidth;b.classList.add('new')}else b.classList.add('seen')});await sleep(1600)}})()}
+</script></body></html>

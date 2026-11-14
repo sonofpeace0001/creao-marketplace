@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ken Burns Slideshow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter+Tight:wght@500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0A10;color:#F5F1FF;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.sl{position:relative;width:100%;max-width:760px;aspect-ratio:16/10;border-radius:30px;overflow:hidden;background:#000;box-shadow:0 44px 70px -34px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.1)}
+.sd{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}.sd.on{opacity:1}.sd .im{position:absolute;inset:-4%;transform-origin:var(--o,50% 50%)}.sd.on .im{animation:kb 7.500s linear forwards}
+.sd .im svg{width:100%;height:100%;display:block}
+@keyframes kb{from{transform:scale(1) translate(0,0)}to{transform:scale(var(--z,1.18)) translate(var(--tx,-2%),var(--ty,-1.500%))}}
+.sd::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18),transparent 30%,rgba(8,6,16,.78))}
+.cp{position:absolute;left:34px;bottom:62px;right:34px;z-index:3;opacity:0;transform:translateY(16px);transition:all .8s cubic-bezier(.3,1.2,.4,1)}.sd.on .cp{opacity:1;transform:none;transition-delay:.5s}
+.cp small{font:500 11.500px 'Geist Mono';letter-spacing:.2em;text-transform:uppercase;color:#FFD9A0}.cp h2{font:700 clamp(26px,5vw,44px)/1.05 'Fraunces';letter-spacing:-.02em;margin:8px 0 6px;max-width:16ch}.cp p{font-size:14.500px;color:#D9D2EC;max-width:44ch;line-height:1.5}
+.pr{position:absolute;left:34px;right:34px;bottom:24px;display:flex;gap:8px;z-index:4}
+.pr button{flex:1;height:22px;border:0;background:none;cursor:pointer;display:grid;align-items:center;padding:0}.pr button::before{content:"";height:4px;border-radius:2px;background:rgba(255,255,255,.28)}
+.pr button i{grid-area:1/1;height:4px;border-radius:2px;background:#fff;transform-origin:left;transform:scaleX(var(--w,0));pointer-events:none}
+.pr button:focus-visible{outline:2px solid #fff;outline-offset:1px}
+.ct{position:absolute;right:34px;top:26px;z-index:4;font:600 12px 'Geist Mono';letter-spacing:.14em;padding:6px 12px;border-radius:99px;background:rgba(10,8,18,.5);backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.ar{position:absolute;top:50%;margin-top:-24px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(10,8,18,.45);backdrop-filter:blur(8px);color:#fff;display:grid;place-items:center;cursor:pointer;z-index:4;opacity:0;transition:opacity .3s,background .2s;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}.sl:hover .ar,.ar:focus-visible{opacity:1}.ar:hover{background:rgba(10,8,18,.7)}.ar.l{left:18px}.ar.r{right:18px}.ar svg{width:22px;height:22px}.ar svg *{fill:none;stroke:currentColor;stroke-width:2.600;stroke-linecap:round;stroke-linejoin:round}.ar:focus-visible{outline:3px solid #fff}
+@media(prefers-reduced-motion:reduce){.sd .im{animation:none!important}*{transition:none!important}}
+</style></head><body>
+<div class="sl" id="sl" aria-roledescription="carousel" aria-label="Featured places"><div id="sds"></div><div class="ct" id="ct">1 / 4</div><button class="ar l" id="pv" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button><button class="ar r" id="nx" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button><div class="pr" id="pr"></div></div>
+<script>
+function scene(s){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};const P=[['#FFB27A','#F472B6','#6366F1','#2B1B5E'],['#FDE68A','#FDBA74','#F97316','#7C2D12'],['#A7F3D0','#34D399','#059669','#064E3B'],['#BAE6FD','#38BDF8','#0369A1','#0C2A4A'],['#FBCFE8','#C084FC','#7C3AED','#2E1065'],['#FEF3C7','#FCA5A5','#E11D48','#4C0519']],c=P[Math.floor(r(6))];
+ const id='g'+Math.floor(r(1e6));let h='<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c[2]+'"/><stop offset=".55" stop-color="'+c[1]+'"/><stop offset="1" stop-color="'+c[0]+'"/></linearGradient></defs><rect width="400" height="250" fill="url(#'+id+')"/>';
+ h+='<circle cx="'+(70+r(260))+'" cy="'+(60+r(50))+'" r="'+(26+r(18))+'" fill="#FFF6D6" opacity=".92"/>';
+ for(let l=0;l<3;l++){let d='M0 250 L0 '+(150+l*28);const a=18+r(22),f=.012+r(.02),ph=r(6);for(let x=0;x<=400;x+=8)d+=' L'+x+' '+(150+l*28-a*Math.sin(x*f+ph)-a*.5*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L400 250Z';h+='<path d="'+d+'" fill="'+c[3]+'" opacity="'+(.35+l*.3)+'"/>'}
+ return h+'</svg>'}
+const S=[['Dolomites, Italy','Above the clouds','Three days of ridge walking, one refuge with the best polenta in the Alps.',20,'30% 40%',1.2,'-3%','-2%'],['Oaxaca, Mexico','Markets before sunrise','Mole, mezcal and the colours of the Tuesday market, before the heat arrives.',1,'70% 60%',1.22,'3%','-1%'],['Hokkaido, Japan','Powder season','Quiet onsen towns, cedar forests and snow that squeaks underfoot at dawn.',8,'50% 30%',1.18,'-2%','2%'],['Reykjavik, Iceland','Midnight sun','Long amber evenings, black sand beaches and a pool at every corner.',4,'40% 70%',1.24,'2%','-3%']];
+const sds=document.getElementById('sds'),pr=document.getElementById('pr'),ct=document.getElementById('ct');let cur=0,start=0,raf,D=6500,off=false;
+S.forEach(([a,b,c,sd,o,z,tx,ty],i)=>{const e=document.createElement('div');e.className='sd';e.style.cssText='--o:'+o+';--z:'+z+';--tx:'+tx+';--ty:'+ty;e.innerHTML='<div class="im">'+scene(sd)+'</div><div class="cp"><small>'+a+'</small><h2>'+b+'</h2><p>'+c+'</p></div>';sds.appendChild(e);
+ const bt=document.createElement('button');bt.setAttribute('aria-label','Go to slide '+(i+1));bt.innerHTML='<i></i>';bt.onclick=()=>{off=true;go(i)};pr.appendChild(bt)});
+const ss=[...sds.children],bs=[...pr.children];
+function go(i){cur=(i+S.length)%S.length;ss.forEach((s,k)=>{s.classList.remove('on');if(k===cur){const im=s.querySelector('.im');im.style.animation='none';void im.offsetWidth;im.style.animation='';s.classList.add('on')}});ct.textContent=(cur+1)+' / '+S.length;start=performance.now();bs.forEach((b,k)=>b.firstChild.style.setProperty('--w',k<cur?1:0))}
+document.getElementById('nx').onclick=()=>{off=true;go(cur+1)};document.getElementById('pv').onclick=()=>{off=true;go(cur-1)};addEventListener('keydown',e=>{if(e.key==='ArrowRight'){off=true;go(cur+1)}if(e.key==='ArrowLeft'){off=true;go(cur-1)}});
+go(0);
+/* Idle demo: the slideshow plays itself; each picture crossfades over 1.2s while slowly zooming and drifting in its own direction, its caption rises in, and a segmented progress bar fills, until you take over with an arrow or key. */
+function tick(n){const k=Math.min(1,(n-start)/D);bs[cur].firstChild.style.setProperty('--w',k);if(k>=1&&!off)go(cur+1);if(k>=1&&off){bs[cur].firstChild.style.setProperty('--w',1)}requestAnimationFrame(tick)}
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)requestAnimationFrame(tick);else bs[0].firstChild.style.setProperty('--w',1);
+</script></body></html>

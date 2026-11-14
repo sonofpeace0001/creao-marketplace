@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Billing Period Toggle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E1117;color:#EEF1F8;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(560px 380px at 50% 0,rgba(99,102,241,.2),transparent 70%)}
+.w{width:100%;max-width:680px;display:grid;gap:30px;justify-items:center;text-align:center}
+.w h1{font-size:clamp(26px,4.4vw,38px);font-weight:800;letter-spacing:-.05em}.w p{color:#8B93A8;font-size:14.500px;margin-top:8px}
+.tg{position:relative;display:inline-flex;padding:5px;border-radius:99px;background:#161A23;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.tg .th{position:absolute;top:5px;bottom:5px;left:5px;border-radius:99px;background:linear-gradient(135deg,#6366F1,#8B5CF6);box-shadow:0 8px 16px -6px rgba(99,102,241,.8);transition:transform .5s cubic-bezier(.3,1.3,.4,1),width .5s cubic-bezier(.3,1.3,.4,1)}
+.tg button{position:relative;z-index:1;border:0;background:none;padding:12px 26px;border-radius:99px;font:700 14.500px 'Sora';color:#8B93A8;cursor:pointer;transition:color .3s}.tg button[aria-pressed=true]{color:#fff}.tg button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+.sv{position:absolute;left:calc(100% + 8px);top:-24px;display:flex;align-items:flex-start;gap:4px;font:700 22px 'Caveat';color:#4ADE80;white-space:nowrap;transform:rotate(-6deg);transition:transform .5s cubic-bezier(.3,1.6,.5,1),opacity .4s}
+.sv svg{width:38px;height:30px;margin-top:14px;transform:scaleX(-1) rotate(10deg)}.sv svg path{fill:none;stroke:#4ADE80;stroke-width:2.200;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .6s .1s}.tg.yr .sv svg path{stroke-dashoffset:0}
+.tg:not(.yr) .sv{opacity:.45;transform:rotate(-6deg) scale(.92)}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%}
+.p{position:relative;border-radius:26px;padding:24px 20px 22px;background:#141821;text-align:left;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);display:grid;gap:14px}
+.p.hi{background:linear-gradient(170deg,#1D1F45,#141821 60%);box-shadow:inset 0 0 0 1.500px rgba(129,140,248,.6),0 24px 40px -22px rgba(99,102,241,.7)}
+.p .nm{font-size:14px;font-weight:700;color:#A5ADC4;display:flex;justify-content:space-between;align-items:center}.p .tag{font-size:10.500px;letter-spacing:.14em;padding:4px 9px;border-radius:99px;background:rgba(129,140,248,.2);color:#C7CDFF}
+.pr{display:flex;align-items:baseline;gap:4px;height:56px}.pr .cu{font-size:22px;font-weight:700;color:#A5ADC4}.pr .am{display:inline-flex;font-size:48px;font-weight:800;letter-spacing:-.06em;height:1em;line-height:1;overflow:hidden}
+.dg{display:block;height:1em;overflow:hidden;width:.62em}.dg .st{display:block;transition:transform .7s cubic-bezier(.3,1.2,.4,1)}.dg .st b{display:block;height:1em;line-height:1em;text-align:center;font-weight:800}
+.pr .pt{font-size:13px;color:#7C849A;font-weight:600;margin-left:4px;align-self:flex-end;margin-bottom:6px}
+.p .bl{font-size:13.500px;color:#8B93A8;min-height:20px;display:flex;align-items:center;gap:8px}.p .bl b{color:#4ADE80;font-weight:700}
+.p ul{list-style:none;display:grid;gap:9px;font-size:13.500px;color:#C3C9DB}.p li{display:flex;gap:9px;align-items:center}.p li::before{content:"";width:16px;height:16px;border-radius:50%;background:rgba(74,222,128,.18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234ADE80' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.500 4 4L18 8'/%3E%3C/svg%3E") center/10px no-repeat;flex:none}
+@media(max-width:640px){.g{grid-template-columns:1fr}.sv{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div><h1>Pay yearly, keep two months</h1><p>Flip the switch and watch every price roll to its new number.</p></div>
+<div class="tg" id="tg" role="group" aria-label="Billing period"><span class="th" id="th"></span><button aria-pressed="true" data-y="0">Monthly</button><button aria-pressed="false" data-y="1">Yearly</button><span class="sv"><svg viewBox="0 0 38 30"><path pathLength="1" d="M4 24C10 8 24 4 33 6M33 6l-8-2M33 6l-3 8"/></svg>Save 20%</span></div>
+<div class="g" id="g"></div></div>
+<script>
+const PL=[['Starter',12,'For side projects',['3 projects','Community support','7-day history']],['Pro',29,'For growing teams',['Unlimited projects','Priority support','90-day history','Custom domains']],['Scale',79,'For serious volume',['Everything in Pro','SSO and audit log','Dedicated manager','99.99% SLA']]];
+const g=document.getElementById('g'),tg=document.getElementById('tg'),th=document.getElementById('th'),bs=[...tg.querySelectorAll('button')];let yr=false;
+PL.forEach(([n,p,d,f],i)=>{const e=document.createElement('article');e.className='p'+(i===1?' hi':'');e.innerHTML='<div class="nm">'+n+(i===1?'<span class="tag">POPULAR</span>':'')+'</div><div class="pr"><span class="cu">$</span><span class="am"></span><span class="pt">/mo</span></div><div class="bl"></div><ul>'+f.map(x=>'<li>'+x+'</li>').join('')+'</ul>';g.appendChild(e);e._p=p;e._cols=[]});
+const cards=[...g.children];
+function setAmt(e,v){const s=String(v),am=e.querySelector('.am');if(am.children.length!==s.length){am.innerHTML='';e._cols=[];[...s].forEach(()=>{const d=document.createElement('span');d.className='dg';d.innerHTML='<span class="st">'+[...'0123456789'].map(n=>'<b>'+n+'</b>').join('')+'</span>';am.appendChild(d);e._cols.push(d.firstChild)});}
+ [...s].forEach((c,i)=>e._cols[i].style.transform='translateY(-'+(+c)+'em)')}
+function paint(){cards.forEach(e=>{const m=e._p,v=yr?Math.round(m*.8):m;setAmt(e,v);e.querySelector('.pt').textContent='/mo';e.querySelector('.bl').innerHTML=yr?'Billed <b>$'+(v*12)+'</b> yearly, you save <b>$'+(m*12-v*12)+'</b>':'Billed monthly, cancel any time'});
+ bs.forEach(b=>b.setAttribute('aria-pressed',(+b.dataset.y===1)===yr));tg.classList.toggle('yr',yr);const b=bs[yr?1:0];th.style.width=b.offsetWidth+'px';th.style.transform='translateX('+(b.offsetLeft-5)+'px)'}
+bs.forEach(b=>b.onclick=()=>{off=true;yr=b.dataset.y==='1';paint()});
+paint();document.fonts.ready.then(paint);addEventListener('resize',paint);
+/* Idle demo: the billing period flips every 2.8s; the highlight slides across, the hand-drawn arrow redraws, and every price digit rolls to its new value with its savings line updating, until a real click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2600);while(!off){yr=!yr;paint();await sleep(2800)}})()}
+</script></body></html>

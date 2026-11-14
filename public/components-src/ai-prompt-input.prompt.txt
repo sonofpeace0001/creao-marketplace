@@ -1,0 +1,41 @@
+ROLE
+You are a senior AI product designer and front-end engineer with 15+ years of experience. Build "AI Prompt Input": an AI composer with attachment chips, tool toggles, a model badge, an orbiting gradient border while the model works and a streaming answer.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black violet with a violet-to-cyan conic border, mono model label and crisp white send button.
+- Palette: #7C7F99, #A78BFA, #08090D, #ECEDF3, #6B6F8C, #181A25
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Answer panel with query label, thinking shimmer and streaming text; composer with attachment chips, auto-growing textarea, Search and Think toggles, Attach, model badge and send.
+
+INTERACTION & STATES
+- Enter sends, Shift+Enter adds a line; toggles are real pressed states; attaching adds a chip; sending clears the box, starts the border orbit and shimmering Thinking status, then streams the answer word by word.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Border: a registered @property angle animating 0 to 360 degrees over 2.2s on a conic gradient; Thinking text shimmers over 1.6s; words stream at 55ms.
+- Textarea grows to 160px then scrolls.
+
+IDLE AUTOPLAY
+- A prompt is typed, a file attached, sent, thought about and answered, then it resets with the next prompt.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A spinner alone for thinking; use the shimmer plus the border.
+- Sending on Enter during IME composition.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Liquid Text Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0B12;color:#EEF0FA;font-family:'Figtree',sans-serif;min-height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;isolation:isolate;overflow:hidden}
+.bg{position:absolute;inset:0;z-index:-1;background:radial-gradient(700px 500px at 20% 90%,rgba(109,40,217,.35),transparent 70%),radial-gradient(700px 500px at 90% 10%,rgba(14,165,233,.3),transparent 70%)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px clamp(18px,4vw,48px)}
+.lg{font:800 20px 'Syne';letter-spacing:-.04em}nav ul{display:flex;gap:28px;list-style:none;font-size:14px;font-weight:600;color:#9CA2C4}nav a{color:inherit;text-decoration:none}
+.nb{border:0;border-radius:99px;padding:11px 20px;background:rgba(255,255,255,.1);color:#fff;font:700 13px 'Figtree';cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}.nb:focus-visible,.b1:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.c{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 20px 36px}
+.eb{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#A5B4FC}
+.liq{font:800 clamp(80px,21vw,330px)/.84 'Syne';letter-spacing:-.07em;margin:12px 0 4px;background:
+ radial-gradient(circle at var(--a1,20%) 30%,#F472B6 0,transparent 38%),
+ radial-gradient(circle at var(--a2,80%) 60%,#38BDF8 0,transparent 40%),
+ radial-gradient(circle at var(--a3,50%) 90%,#FBBF24 0,transparent 36%),
+ linear-gradient(120deg,#7C3AED,#2563EB);
+ background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;filter:url(#wob) drop-shadow(0 20px 50px rgba(124,58,237,.5));animation:flow 9s ease-in-out infinite alternate;user-select:none;padding:0 .04em}
+@keyframes flow{0%{--a1:15%;--a2:85%;--a3:40%}100%{--a1:80%;--a2:15%;--a3:70%}}
+@property --a1{syntax:'<percentage>';inherits:true;initial-value:20%}@property --a2{syntax:'<percentage>';inherits:true;initial-value:80%}@property --a3{syntax:'<percentage>';inherits:true;initial-value:50%}
+.sb{max-width:500px;font-size:clamp(15px,1.7vw,19px);line-height:1.5;color:#B4B9D6;margin-top:10px}
+.b1{margin-top:26px;border:0;border-radius:99px;padding:17px 30px;background:#EEF0FA;color:#0A0B12;font:700 16px 'Figtree';cursor:pointer;display:inline-flex;gap:10px;align-items:center}.b1 svg{width:18px;height:18px}
+.tk{position:absolute;left:0;right:0;bottom:0;border-top:1px solid rgba(255,255,255,.08);padding:14px 0;overflow:hidden;white-space:nowrap;font:600 12px 'Figtree';letter-spacing:.24em;text-transform:uppercase;color:#6B7194}
+.tk div{display:inline-block;animation:mq 26s linear infinite}.tk span{margin:0 26px}.tk i{color:#7C3AED;font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(max-width:680px){nav ul{display:none}}
+@media(prefers-reduced-motion:reduce){.liq,.tk div{animation:none}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="wob" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.012" numOctaves="2" seed="4" result="n"><animate attributeName="baseFrequency" dur="14s" values="0.006 0.012;0.010 0.018;0.006 0.012" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="15" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+<section class="hero"><div class="bg"></div>
+<nav><div class="lg">Lumen&nbsp;Studio</div><ul><li><a href="#">Films</a></li><li><a href="#">Motion</a></li><li><a href="#">Contact</a></li></ul><button class="nb">Say hello</button></nav>
+<div class="c"><div class="eb">Motion design collective</div><h1 class="liq" aria-label="Fluid">Fluid</h1><p class="sb">We make brand films, title sequences and interface motion that feel like they were poured, not keyframed.</p><button class="b1">Watch the 2026 reel<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.500v13a1 1 0 0 0 1.500.9l10.500-6.500a1 1 0 0 0 0-1.800L9.500 4.600A1 1 0 0 0 8 5.500Z"/></svg></button></div>
+<div class="tk" aria-hidden="true"><div><span>Brand films</span><i>&bull;</i><span>Title sequences</span><i>&bull;</i><span>Product motion</span><i>&bull;</i><span>Live visuals</span><i>&bull;</i><span>Generative identity</span><i>&bull;</i><span>Brand films</span><i>&bull;</i><span>Title sequences</span><i>&bull;</i><span>Product motion</span><i>&bull;</i><span>Live visuals</span><i>&bull;</i><span>Generative identity</span><i>&bull;</i></div></div></section>
+</body></html>

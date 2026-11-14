@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Slash Command Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FBFAF7;color:#27231E;font-family:'Inter',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.doc{position:relative;width:100%;max-width:560px;min-height:470px;border-radius:20px;background:#fff;padding:38px 42px;box-shadow:0 30px 50px -30px rgba(39,35,30,.35),inset 0 0 0 1px rgba(39,35,30,.08)}
+.ti{font:600 36px/1.1 'Newsreader';letter-spacing:-.02em;margin-bottom:18px}
+.blk{position:relative;min-height:30px;font-size:16.500px;line-height:1.65;margin:2px 0;border-radius:6px;outline:0;padding:0 2px}
+.blk.h1{font:600 28px/1.2 'Newsreader';margin-top:14px}.blk.h2{font:600 21px/1.3 'Newsreader';margin-top:8px}
+.blk.todo{display:flex;gap:10px;align-items:flex-start}.blk.todo::before{content:"";width:18px;height:18px;margin-top:5px;border-radius:5px;box-shadow:inset 0 0 0 1.800px #B8B2A4;flex:none}
+.blk.todo.done::before{background:#16A34A;box-shadow:none}.blk.todo.done span{text-decoration:line-through;color:#A19B8D}
+.blk.quote{border-left:3px solid #27231E;padding-left:16px;font:italic 500 19px/1.5 'Newsreader';color:#4A453C}
+.blk.code{font:500 14px/1.6 'JetBrains Mono';background:#F4F1EA;padding:12px 14px;border-radius:10px}
+.blk.bul{display:flex;gap:12px}.blk.bul::before{content:"";width:6px;height:6px;border-radius:50%;background:#27231E;margin-top:12px;flex:none}
+.blk.in{animation:blk .35s cubic-bezier(.3,1.3,.4,1)}@keyframes blk{from{opacity:0;transform:translateY(8px)}}
+.blk .ph{color:#B8B2A4}
+.cur{display:inline-block;width:2px;height:1.2em;background:#27231E;vertical-align:-3px;animation:bl 1s steps(1) infinite;margin-left:1px}@keyframes bl{50%{opacity:0}}
+.menu{position:absolute;width:290px;border-radius:16px;background:#fff;padding:6px;box-shadow:0 26px 50px -14px rgba(39,35,30,.45),inset 0 0 0 1px rgba(39,35,30,.1);opacity:0;transform:translateY(-6px) scale(.97);pointer-events:none;transition:all .2s cubic-bezier(.3,1.3,.4,1);z-index:6;transform-origin:top left}
+.menu.on{opacity:1;transform:none;pointer-events:auto}
+.menu .hd{font:600 11px 'Inter';letter-spacing:.1em;text-transform:uppercase;color:#A19B8D;padding:8px 10px 4px}
+.it{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:10px;cursor:pointer}.it.hl{background:#F3F0E8}
+.it .ic{width:36px;height:36px;border-radius:9px;background:#fff;box-shadow:inset 0 0 0 1px #E6E1D5;display:grid;place-items:center;font:600 14px 'Newsreader';color:#27231E}
+.it b{display:block;font-size:14px;font-weight:600}.it span{font-size:12px;color:#968F80}.it kbd{margin-left:auto;font:500 11px 'JetBrains Mono';color:#A19B8D}
+.it mark{background:none;color:#B45309;font-weight:700}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="doc" id="doc"><h1 class="ti">Launch plan, Q3</h1><div id="blocks"></div><div class="menu" id="mn" role="listbox" aria-label="Insert block"></div></div>
+<script>
+const T=[['h1','Heading 1','Big section heading','H1','#'],['h2','Heading 2','Medium heading','H2','##'],['todo','To-do list','Track tasks with a checkbox','[ ]','[]'],['bul','Bulleted list','Simple bullet points','&bull;','-'],['quote','Quote','Capture a pull quote','&ldquo;','"'],['code','Code','A monospaced snippet','&lt;/&gt;','```']];
+const bl=document.getElementById('blocks'),mn=document.getElementById('mn'),doc=document.getElementById('doc');let cur,hl=0,flt=[];
+function mk(type,txt){const d=document.createElement('div');d.className='blk in '+(type||'');d.innerHTML='<span>'+(txt||'')+'</span>';d.dataset.t=type||'p';return d}
+function newBlk(type,txt){const b=mk(type,txt);bl.appendChild(b);cur=b;return b}
+function caret(){document.querySelectorAll('.cur').forEach(c=>c.remove());const s=cur.querySelector('span');if(!s.textContent&&!cur.classList.contains('typing'))s.innerHTML='<span class="ph">Type / for commands</span>';else if(s.querySelector('.ph')&&s.textContent!=='Type / for commands')s.innerHTML='';const c=document.createElement('i');c.className='cur';s.appendChild(c)}
+function txt(){const s=cur.querySelector('span'),c=s.querySelector('.cur'),p=s.querySelector('.ph');return [...s.childNodes].filter(n=>n!==c&&n!==p).map(n=>n.textContent).join('')}
+function setTxt(v){const s=cur.querySelector('span');s.textContent=v;caret()}
+function menu(){const v=txt(),q=v.startsWith('/')?v.slice(1).toLowerCase():null;if(q===null){mn.classList.remove('on');return}
+ flt=T.filter(t=>t[1].toLowerCase().includes(q)||t[0].includes(q));hl=Math.min(hl,Math.max(0,flt.length-1));
+ mn.innerHTML=flt.length?'<div class="hd">Basic blocks</div>'+flt.map((t,i)=>{let n=t[1];const a=q?n.toLowerCase().indexOf(q):-1;if(a>=0)n=n.slice(0,a)+'<mark>'+n.slice(a,a+q.length)+'</mark>'+n.slice(a+q.length);return '<div class="it'+(i===hl?' hl':'')+'" role="option" data-i="'+i+'"><span class="ic">'+t[3]+'</span><div><b>'+n+'</b><span>'+t[2]+'</span></div><kbd>'+t[4]+'</kbd></div>'}).join(''):'<div class="hd">No results</div>';
+ const r=cur.getBoundingClientRect(),d=doc.getBoundingClientRect();mn.style.left=(r.left-d.left+4)+'px';mn.style.top=(r.bottom-d.top+6)+'px';mn.classList.add('on');mn.querySelectorAll('.it').forEach(o=>o.onmousedown=e=>{e.preventDefault();apply(flt[+o.dataset.i])})}
+function apply(t){mn.classList.remove('on');cur.className='blk in '+t[0];cur.dataset.t=t[0];cur.querySelector('span').textContent='';caret()}
+function key(e){const k=e.key;if(mn.classList.contains('on')&&flt.length){if(k==='ArrowDown'){hl=(hl+1)%flt.length;menu();e.preventDefault();return}if(k==='ArrowUp'){hl=(hl+flt.length-1)%flt.length;menu();e.preventDefault();return}if(k==='Enter'){apply(flt[hl]);e.preventDefault();return}if(k==='Escape'){mn.classList.remove('on');return}}
+ if(k==='Enter'){newBlk('');caret();e.preventDefault()}else if(k==='Backspace'){const v=txt();setTxt(v.slice(0,-1));menu()}else if(k.length===1&&!e.metaKey&&!e.ctrlKey){setTxt(txt()+k);hl=0;menu();e.preventDefault()}}
+newBlk('h2','Goals');newBlk('','Ship the new onboarding to all workspaces before the quarter closes.');
+const t1=newBlk('todo','Final copy review with legal');t1.classList.add('done');newBlk('todo','Record the launch walkthrough');newBlk('');cur.classList.add('typing');caret();
+bl.querySelectorAll('.blk').forEach(b=>b.classList.remove('in'));
+setTxt('/he');menu();document.fonts.ready.then(menu);
+/* Idle demo: slash commands are typed, the menu filters, the selection moves, and blocks are inserted, then the page resets. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>{if(!off){off=true;mn.classList.remove('on')}},{once:true}));addEventListener('keydown',key);
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+ async function ty(s){for(const c of s){if(off)return false;setTxt(txt()+c);menu();await sleep(100)}return true}
+ (async()=>{await sleep(3600);while(!off){while(bl.children.length>5)bl.lastChild.remove();cur=bl.lastChild;setTxt('');
+  if(!await ty('/q'))return;await sleep(800);if(off)return;apply(flt[0]);await sleep(300);if(!await ty('Make onboarding feel like a conversation.'))return;await sleep(700);if(off)return;newBlk('');cur.classList.add('typing');caret();
+  await sleep(500);if(!await ty('/'))return;await sleep(900);hl=2;menu();await sleep(600);hl=3;menu();await sleep(600);if(off)return;apply(flt[hl]);await sleep(300);if(!await ty('Owner: Priya, reviewer: Marcus'))return;await sleep(2600)}})()}
+</script></body></html>

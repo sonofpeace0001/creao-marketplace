@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Spring Squash Switch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E8ECF5;color:#10142B;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:480px;display:grid;gap:18px}
+.hd h1{font-size:28px;font-weight:800;letter-spacing:-.05em}.hd p{color:#6C7396;font-size:14px;margin-top:6px}
+.cd{border-radius:28px;background:#fff;padding:6px 22px;box-shadow:0 26px 36px -28px rgba(16,20,43,.5),inset 0 0 0 1px rgba(16,20,43,.06)}
+.r{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #EFF1F8}.r:last-child{border:0}
+.ic{width:44px;height:44px;border-radius:13px;background:var(--c);display:grid;place-items:center;flex:none}.ic svg{width:22px;height:22px}.ic svg *{fill:none;stroke:#fff;stroke-width:2.100;stroke-linecap:round;stroke-linejoin:round}
+.r div.t{flex:1}.r b{display:block;font-size:17px;font-weight:600;letter-spacing:-.02em}.r span{font:500 12px 'Geist Mono';color:#8A90B0;transition:color .3s}
+.sw{--c:#34C759;position:relative;width:62px;height:38px;border:0;background:none;cursor:pointer;flex:none;padding:0;-webkit-tap-highlight-color:transparent}
+.sw:focus-visible{outline:3px solid #10142B;outline-offset:4px;border-radius:30px}
+.tr{position:absolute;inset:0;border-radius:99px;background:#DADDEA;transition:background .35s}
+.sw[aria-checked=true] .tr{background:var(--c)}
+.th{position:absolute;top:3px;left:3px;width:32px;height:32px;border-radius:99px;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.25),0 1px 1px rgba(0,0,0,.1);transition:transform .5s cubic-bezier(.3,1.9,.45,.9),width .22s cubic-bezier(.3,1.4,.5,1)}
+.sw[aria-checked=true] .th{transform:translateX(24px)}
+.sw:active .th{width:40px}.sw[aria-checked=true]:active .th{transform:translateX(16px)}
+.sw.pr .th{width:40px}.sw[aria-checked=true].pr .th{transform:translateX(16px)}
+.sw .rp{position:absolute;left:50%;top:50%;width:38px;height:38px;margin:-19px;border-radius:50%;border:2px solid var(--c);opacity:0;pointer-events:none}.sw.ping .rp{animation:pg .6s ease-out}@keyframes pg{from{transform:scale(.8);opacity:.7}to{transform:scale(1.9);opacity:0}}
+.r.on span{color:#16A34A}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>A switch with some give</h1><p>Press and the knob stretches, release and it overshoots, then settles.</p></div><div class="cd" id="cd"></div></div>
+<script>
+const R=[['Airplane mode','#FF9F0A','<path d="M21 15v-1.500L13 9V4a1 1 0 0 0-2 0v5l-8 4.500V15l8-2.200V18l-2 1.500V21l3-1 3 1v-1.500L13 18v-5.200Z"/>',0],['Wi-Fi','#0A84FF','<path d="M2 9a15 15 0 0 1 20 0M5 12.500a10 10 0 0 1 14 0M8.500 16a5 5 0 0 1 7 0M12 19.500h.01"/>',1],['Bluetooth','#5E5CE6','<path d="m7 7 10 10-5 4V3l5 4L7 17"/>',1],['Do not disturb','#BF5AF2','<path d="M20 14.500A8 8 0 0 1 9.500 4 8 8 0 1 0 20 14.500Z"/>',0],['Location','#34C759','<path d="M12 21s-6.500-5.800-6.500-11a6.500 6.500 0 0 1 13 0c0 5.200-6.500 11-6.500 11Z"/><circle cx="12" cy="10" r="2.400"/>',1]];
+const cd=document.getElementById('cd'),sw=[];
+R.forEach(([n,c,p,on],i)=>{const r=document.createElement('div');r.className='r'+(on?' on':'');r.innerHTML='<span class="ic" style="--c:'+c+'"><svg viewBox="0 0 24 24">'+p+'</svg></span><div class="t"><b>'+n+'</b><span>'+(on?'On':'Off')+'</span></div><button class="sw" role="switch" aria-checked="'+(on?'true':'false')+'" aria-label="'+n+'" style="--c:'+(c==='#FF9F0A'?'#FF9F0A':'#34C759')+'"><span class="tr"></span><span class="th"></span><i class="rp"></i></button>';cd.appendChild(r);const b=r.querySelector('.sw');
+ b.onclick=()=>{off=true;t(b,r)};b.addEventListener('pointerdown',()=>b.classList.add('pr'));['pointerup','pointerleave','pointercancel'].forEach(e=>b.addEventListener(e,()=>b.classList.remove('pr')));sw.push([b,r])});
+function t(b,r){const on=b.getAttribute('aria-checked')!=='true';b.setAttribute('aria-checked',on);r.classList.toggle('on',on);r.querySelector('.t span').textContent=on?'On':'Off';b.classList.remove('ping');void b.offsetWidth;b.classList.add('ping')}
+/* Idle demo: the switches flip in turn; for each one the knob first stretches wide as if pressed, then springs across with overshoot, with a ripple ring, until a real click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2800);let k=0;while(!off){const[b,r]=sw[k++%5];b.classList.add('pr');await sleep(260);b.classList.remove('pr');t(b,r);await sleep(1400)}})()}
+</script></body></html>

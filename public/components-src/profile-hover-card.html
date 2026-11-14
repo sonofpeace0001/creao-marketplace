@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Profile Hover Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F3F1EC;color:#1B1A17;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.doc{position:relative;width:100%;max-width:560px;min-height:560px;border-radius:26px;background:#fff;padding:34px 34px 40px;box-shadow:0 30px 44px -30px rgba(27,26,23,.45),inset 0 0 0 1px rgba(27,26,23,.07)}
+.doc small{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#A29A86}
+.doc h1{font:600 34px/1.1 'Newsreader';letter-spacing:-.02em;margin:10px 0 16px}
+.doc p{font-size:16px;line-height:1.75;color:#4E4A40}
+.mt{display:inline-flex;align-items:center;gap:7px;padding:1px 10px 1px 3px;margin:0 1px;border-radius:99px;background:#EFEBFF;color:#4B36C7;font-weight:700;font-size:14.500px;cursor:pointer;vertical-align:middle;transition:background .2s;border:0;font-family:inherit}
+.mt:hover,.mt.on{background:#DCD4FF}.mt:focus-visible{outline:2px solid #4B36C7}
+.mt i{width:22px;height:22px;border-radius:50%;overflow:hidden;display:block}.mt i svg{width:100%;height:100%;display:block}
+.hc{position:absolute;width:310px;border-radius:22px;background:#fff;box-shadow:0 30px 50px -16px rgba(27,26,23,.5),inset 0 0 0 1px rgba(27,26,23,.09);overflow:hidden;opacity:0;transform:translateY(10px) scale(.94);transform-origin:top left;pointer-events:none;transition:opacity .25s,transform .35s cubic-bezier(.3,1.5,.5,1);z-index:10}
+.hc.on{opacity:1;transform:none;pointer-events:auto}
+.bn{height:76px;position:relative;overflow:hidden;background:linear-gradient(120deg,var(--a),var(--b))}.bn::before,.bn::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.2)}.bn::before{width:120px;height:120px;right:-30px;top:-50px}.bn::after{width:70px;height:70px;left:30px;top:30px}
+.ab{position:relative;padding:0 18px 18px;margin-top:-34px}.pf{display:flex;justify-content:space-between;align-items:flex-end}
+.pf .av{width:68px;height:68px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 4px #fff;background:#fff}.pf .av svg{width:100%;height:100%;display:block}
+.fl{border:0;border-radius:99px;padding:9px 18px;background:#1B1A17;color:#fff;font:700 13.500px 'Plus Jakarta Sans';cursor:pointer;transition:all .3s cubic-bezier(.3,1.5,.5,1);display:inline-flex;gap:7px;align-items:center}.fl:focus-visible{outline:3px solid #4B36C7;outline-offset:2px}
+.fl svg{width:14px;height:14px;display:none}.fl.on{background:#E9E6DD;color:#1B1A17}.fl.on svg{display:block}.fl svg *{fill:none;stroke:currentColor;stroke-width:3.200;stroke-linecap:round;stroke-linejoin:round}
+.hc h3{font-size:18px;letter-spacing:-.03em;margin-top:12px;display:flex;align-items:center;gap:6px}.hc h3 svg{width:16px;height:16px}
+.hc .rl{font-size:13px;color:#8A8470;font-weight:500}
+.hc .bio{font-size:14px;line-height:1.55;color:#4E4A40;margin-top:10px}
+.hc .st{display:flex;gap:18px;margin-top:14px;padding-top:14px;border-top:1px solid #F0EDE4;font-size:13px;color:#8A8470}.hc .st b{color:#1B1A17;font-weight:800;font-size:15px;margin-right:4px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="doc" id="doc"><small>Design critique</small><h1>Round two on the new onboarding</h1>
+<p>Big thanks to <button class="mt" data-i="0"><i></i>Priya Nair</button> for the motion pass and to <button class="mt" data-i="1"><i></i>Marcus Webb</button> for catching the focus-order bug. Still open: <button class="mt" data-i="2"><i></i>Amara Diallo</button> will confirm the final headline before we hand off to engineering on Friday.</p>
+<div class="hc" id="hc" role="dialog" aria-label="Profile preview"></div></div>
+<script>
+function face(s){const r=n=>{s=(s*9301+49297)%233280;return Math.floor(s/233280*n)};const sk=['#F2C9A5','#E0A57A','#B9784B','#8A5230','#5B3420','#F7D9C1'][r(6)],hr=['#1B1410','#3B2314','#7A4A21','#C9A15E','#B5361F','#6B6B73','#2D2A6B'][r(7)],bg=['#FFD6A5','#CAFFBF','#9BF6FF','#BDB2FF','#FFC6FF','#FDFFB6','#A0C4FF','#FFADAD'][r(8)],sh=['#6366F1','#EC4899','#0EA5E9','#10B981','#F59E0B','#8B5CF6'][r(6)],st=r(5),gl=r(3)===0,sm=r(3);
+ let h='';if(st===1)h+='<path d="M24 52c-2-24 8-34 26-34s28 10 26 34c-2 12-6 16-6 16H30s-4-4-6-16Z" fill="'+hr+'"/>';
+ let top='';if(st===0)top='<path d="M27 46c0-16 9-22 23-22s23 6 23 22c-6-8-14-10-23-10s-17 2-23 10Z" fill="'+hr+'"/>';else if(st===1)top='<path d="M27 48c0-17 9-24 23-24s23 7 23 24c-7-7-14-11-23-11s-16 4-23 11Z" fill="'+hr+'"/>';else if(st===2)top='<g fill="'+hr+'"><circle cx="31" cy="40" r="9"/><circle cx="42" cy="31" r="10"/><circle cx="56" cy="30" r="10"/><circle cx="68" cy="39" r="9"/><circle cx="50" cy="27" r="9"/></g>';else if(st===3)top='<g fill="'+hr+'"><path d="M28 46c0-14 8-20 22-20s22 6 22 20c-5-6-13-9-22-9s-17 3-22 9Z"/><circle cx="50" cy="20" r="8"/></g>';
+ return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="'+bg+'"/>'+h+'<path d="M14 100c2-18 16-26 36-26s34 8 36 26Z" fill="'+sh+'"/><rect x="43" y="62" width="14" height="14" rx="6" fill="'+sk+'"/><ellipse cx="50" cy="48" rx="21" ry="24" fill="'+sk+'"/>'+top+'<circle cx="42" cy="50" r="2.200" fill="#2A1A12"/><circle cx="58" cy="50" r="2.200" fill="#2A1A12"/>'+(gl?'<g fill="none" stroke="#2A1A12" stroke-width="1.800"><circle cx="42" cy="50" r="6.500"/><circle cx="58" cy="50" r="6.500"/><path d="M48.500 50h3"/></g>':'')+'<path d="'+(sm===0?'M43 60q7 6 14 0':sm===1?'M44 60q6 4 12 0':'M43 59q7 8 14 0')+'" fill="none" stroke="#2A1A12" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/><circle cx="64" cy="57" r="3.200" fill="#FF8A8A" opacity=".35"/></svg>'}
+const P=[['Priya Nair','Design lead, Motion','Obsessed with easing curves and the half-second after a click. Previously at two startups you have used.','2,418','312','#7C3AED','#EC4899',11,1],['Marcus Webb','Staff engineer','Accessibility, performance and the occasional hot take about focus rings. Maintains the component library.','1,206','184','#0EA5E9','#6366F1',48,0],['Amara Diallo','Product manager','Turns ambiguity into roadmaps. Writes the headline first and the spec second.','3,774','455','#F59E0B','#EF4444',85,0]];
+const mt=[...document.querySelectorAll('.mt')],hc=document.getElementById('hc'),doc=document.getElementById('doc');let cur=-1,fol=[0,0,0];
+mt.forEach((m,i)=>m.firstChild.innerHTML=face(P[i][7]));
+function render(i){const p=P[i];hc.innerHTML='<div class="bn" style="--a:'+p[5]+';--b:'+p[6]+'"></div><div class="ab"><div class="pf"><div class="av">'+face(p[7])+'</div><button class="fl'+(fol[i]?' on':'')+'" id="fb"><svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg><span>'+(fol[i]?'Following':'Follow')+'</span></button></div><h3>'+p[0]+'</h3><div class="rl">'+p[1]+'</div><div class="bio">'+p[2]+'</div><div class="st"><span><b>'+p[3]+'</b>followers</span><span><b>'+p[4]+'</b>following</span></div></div>';
+ hc.querySelector('#fb').onclick=()=>{off=true;tgl(i)}}
+function tgl(i){fol[i]=fol[i]?0:1;const b=hc.querySelector('#fb');if(!b)return;b.classList.toggle('on',!!fol[i]);b.querySelector('span').textContent=fol[i]?'Following':'Follow'}
+function open(i){if(cur===i)return;cur=i;mt.forEach((m,k)=>m.classList.toggle('on',k===i));render(i);const m=mt[i].getBoundingClientRect(),d=doc.getBoundingClientRect();hc.style.left=Math.min(d.width-330,Math.max(14,m.left-d.left-10))+'px';hc.style.top=(m.bottom-d.top+10)+'px';hc.classList.add('on')}
+function close(){cur=-1;mt.forEach(m=>m.classList.remove('on'));hc.classList.remove('on')}
+mt.forEach((m,i)=>{m.addEventListener('pointerenter',()=>{off=true;open(i)});m.addEventListener('focus',()=>{off=true;open(i)})});doc.addEventListener('pointerleave',()=>{if(off)close()});addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+document.fonts.ready.then(()=>{if(cur===1){const i=cur;cur=-1;open(i)}});open(1);
+/* Idle demo: each mention is hovered in turn so its card springs open beneath it, the Follow button toggles to Following, then the card closes and the next opens, until a pointer arrives. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3400);let k=2;while(!off){close();await sleep(500);if(off)return;open(k%3);await sleep(1100);if(off)return;tgl(k%3);await sleep(1700);k++}})()}
+</script></body></html>

@@ -1,0 +1,40 @@
+ROLE
+You are a senior editorial product designer and front-end engineer with 15+ years of experience. Build "Profile Hover Card": inline @mention chips in an article that open a springing profile card with banner, avatar, bio, stats and a working Follow toggle.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper document with a serif title and a crisp white card with a gradient banner per person.
+- Palette: #1B1A17, #4B36C7, #4E4A40, #8A8470, #F3F1EC, #A29A86
+- Type: Plus Jakarta Sans, Newsreader (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Document with three mention chips; floating card: banner, overlapping avatar, follow button, name, role, bio, follower stats.
+
+INTERACTION & STATES
+- Hover or focus a mention to open its card anchored beneath it; Follow toggles to Following with a tick; Escape closes.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Card enters opacity and translateY 10px with scale .94 over a 350ms spring; follow button morphs colour and label over 300ms.
+
+IDLE AUTOPLAY
+- Each mention opens in turn, its Follow button toggles, then it closes and the next opens.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Cards that cover the mention that triggered them.
+- A banner painting over the avatar; the avatar needs its own stacking context.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,40 @@
+ROLE
+You are a senior 3D interface designer and front-end engineer with 15+ years of experience. Build "Avatar Coverflow": a 3D coverflow of team portraits where the centre card slides forward with a glint while neighbours swing back on the Y axis with reflections.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Plum night with a lavender glow, tall rounded portrait cards and a pill pager.
+- Palette: #2A1B57, #0B0818, #F1EDFF, #A89DDE
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading; coverflow of seven cards in a perspective stage; name and role; pager dots; previous and next buttons.
+
+INTERACTION & STATES
+- Click a card, press arrows or use the buttons; cards wrap around; unseen cards beyond two steps fade out.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Each card eases 700ms cubic-bezier(.3,1.1,.4,1) to translateX, translateZ (+90px centre, -70px per step) and rotateY (+-52 degrees); brightness drops .18 per step; a mirrored reflection fades below each card.
+
+IDLE AUTOPLAY
+- The coverflow advances every 2s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Neighbours that overlap the centre card's face.
+- Perspective so strong that side cards become unreadable.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

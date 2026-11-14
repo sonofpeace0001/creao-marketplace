@@ -1,0 +1,40 @@
+ROLE
+You are a senior logistics product designer and front-end engineer with 15+ years of experience. Build "Delivery Truck Tracker": a four-stop delivery timeline where a small truck drives along a dashed track between Confirmed, Packed, Out for delivery and Delivered, with a live ETA countdown and a driver card.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Airy cool-grey stage, white card, blue truck and track, tiny mono timestamps under each stop.
+- Palette: #8A97B5, #3B82F6, #0F1A33, #EAF0F8, #E6ECF6, #22D3EE
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Card with order number, title and large ETA; a four-node track with timestamps; footer with courier status icon and driver chip.
+
+INTERACTION & STATES
+- Hovering a node shows its timestamp state; the truck and ETA are driven by one eased timeline so they never disagree.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Truck travels each segment on an eased rAF curve and pauses briefly at nodes; completed segments turn solid blue; nodes pop with a spring when reached.
+
+IDLE AUTOPLAY
+- After 2.6s the truck runs the full route, the ETA counts down in minutes, and the journey loops after a short rest at Delivered.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain progress bar with a truck icon on top; the truck must follow the track and stop at nodes.
+- An ETA that counts down independently of the truck position.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

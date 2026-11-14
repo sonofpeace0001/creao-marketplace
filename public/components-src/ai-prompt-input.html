@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI Prompt Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08090D;color:#ECEDF3;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(600px 380px at 50% 0,rgba(139,92,246,.2),transparent 70%)}
+.w{width:100%;max-width:620px;display:grid;gap:16px}
+.out{min-height:120px;border-radius:20px;padding:18px 20px;background:#0F1017;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);font-size:15px;line-height:1.65;color:#C9CBDA;display:none}
+.out.on{display:block;animation:in .4s cubic-bezier(.3,1.2,.4,1)}@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.out .q{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#7C7F99;margin-bottom:8px}
+.th{display:inline-flex;align-items:center;gap:10px;font-weight:600;background:linear-gradient(90deg,#6B6F8C 0,#fff 45%,#6B6F8C 90%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 1.600s linear infinite}
+@keyframes sh{to{background-position:-220% 0}}
+.th i{width:14px;height:14px;border-radius:50%;border:2px solid #7C7F99;border-top-color:#A78BFA;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.out p{margin-top:2px}.out p b{color:#fff}.out .cr{display:inline-block;width:8px;height:15px;background:#A78BFA;vertical-align:-2px;animation:bl 1s steps(1) infinite;margin-left:2px}@keyframes bl{50%{opacity:0}}
+.bx{--a:0deg;position:relative;border-radius:24px;padding:1.500px;background:rgba(255,255,255,.1);transition:background .3s}
+.bx.busy{background:conic-gradient(from var(--a),transparent 0 55%,#8B5CF6 75%,#22D3EE 92%,transparent);animation:rot 2.2s linear infinite}
+@keyframes rot{to{--a:360deg}}
+.bx:focus-within:not(.busy){background:linear-gradient(135deg,rgba(139,92,246,.7),rgba(34,211,238,.5))}
+.in{border-radius:22.500px;background:#101119;padding:16px 16px 12px}
+.at{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.at:empty{display:none}
+.fl{display:inline-flex;align-items:center;gap:8px;padding:6px 8px 6px 6px;border-radius:11px;background:#181A25;font-size:13px;font-weight:600;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);animation:pop .35s cubic-bezier(.3,1.6,.5,1)}@keyframes pop{from{transform:scale(.6);opacity:0}}
+.fl i{width:26px;height:26px;border-radius:8px;background:#7C3AED;display:grid;place-items:center;font:600 9px 'Geist Mono';font-style:normal;color:#fff}.fl small{color:#7C7F99;font-weight:500}
+textarea{display:block;width:100%;border:0;outline:0;background:none;color:#ECEDF3;font:400 16.500px/1.55 'Geist';resize:none;min-height:50px;max-height:160px;overflow:hidden}textarea::placeholder{color:#5C5F78}
+.bar{display:flex;align-items:center;gap:8px;margin-top:8px}
+.tl{display:inline-flex;align-items:center;gap:7px;border:0;border-radius:99px;padding:8px 13px;background:#181A25;color:#9A9DB5;font:600 13px 'Geist';cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);transition:all .2s}.tl svg{width:15px;height:15px}.tl:hover{color:#fff}
+.tl[aria-pressed=true]{background:rgba(139,92,246,.18);color:#C4B5FD;box-shadow:inset 0 0 0 1px rgba(139,92,246,.5)}.tl:focus-visible,.sn:focus-visible{outline:2px solid #A78BFA;outline-offset:2px}
+.md{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font:500 12.500px 'Geist Mono';color:#7C7F99;padding:0 8px}.md i{width:8px;height:8px;border-radius:50%;background:#34D399;display:block}
+.sn{width:42px;height:42px;border:0;border-radius:14px;background:#fff;color:#08090D;display:grid;place-items:center;cursor:pointer;transition:transform .2s cubic-bezier(.3,1.5,.5,1),background .2s;flex:none}.sn:active{transform:scale(.9)}.sn:disabled{background:#232536;color:#5C5F78}.sn svg{width:19px;height:19px}.sn.stop{background:#232536;color:#fff}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="out" id="out" aria-live="polite"><div class="q" id="oq"></div><div id="ob"></div></div>
+<div class="bx" id="bx"><div class="in"><div class="at" id="at"></div><textarea id="ta" rows="2" placeholder="Ask anything, or describe what to build" aria-label="Prompt"></textarea>
+<div class="bar"><button class="tl" id="t1" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Search</button><button class="tl" id="t2" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.700V17h8v-2.300A7 7 0 0 0 12 2Z"/></svg>Think</button><button class="tl" id="t3" aria-label="Attach a file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="m21 12-8.500 8.500a5.500 5.500 0 0 1-8-8L13 4a3.500 3.500 0 0 1 5 5l-8.500 8.500a1.500 1.500 0 0 1-2-2L15 8"/></svg>Attach</button><span class="md"><i></i>Atlas 2 Pro</span><button class="sn" id="sn" aria-label="Send" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div></div></div></div>
+<script>
+const ta=document.getElementById('ta'),sn=document.getElementById('sn'),bx=document.getElementById('bx'),out=document.getElementById('out'),oq=document.getElementById('oq'),ob=document.getElementById('ob'),at=document.getElementById('at'),t2=document.getElementById('t2'),t3=document.getElementById('t3');
+const grow=()=>{ta.style.height='auto';ta.style.height=Math.min(160,ta.scrollHeight)+'px';sn.disabled=!ta.value.trim()};
+ta.addEventListener('input',grow);[document.getElementById('t1'),t2].forEach(b=>b.onclick=()=>b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true'));
+function attach(n,s){const f=document.createElement('div');f.className='fl';f.innerHTML='<i>'+n.split('.').pop().toUpperCase().slice(0,3)+'</i>'+n+'<small>'+s+'</small>';at.appendChild(f)}
+t3.onclick=()=>attach('brief.pdf','2.4 MB');
+let run=0;
+async function submit(answer){if(!ta.value.trim())return;const my=++run,q=ta.value.trim();oq.textContent=q;out.classList.add('on');ob.innerHTML='<span class="th"><i></i>Thinking through the brief</span>';bx.classList.add('busy');ta.value='';at.innerHTML='';grow();sn.disabled=true;
+ await new Promise(r=>setTimeout(r,1700));if(my!==run)return;const words=answer.split(' ');let h='';ob.innerHTML='<p></p>';const p=ob.firstChild;
+ for(let i=0;i<words.length;i++){if(my!==run)return;h+=(i?' ':'')+words[i];p.innerHTML=h.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')+'<i class="cr"></i>';await new Promise(r=>setTimeout(r,55))}
+ p.innerHTML=h.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');bx.classList.remove('busy')}
+sn.onclick=()=>submit('Here is a first pass: lead with the **one-line promise**, show the product in motion within three seconds, then earn the scroll with proof. I would cut the hero copy to twelve words and move pricing above the fold.');
+ta.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sn.click()}});
+oq.textContent='Tighten the hero for our fintech landing page';out.classList.add('on');out.style.animation='none';ob.innerHTML='<p>Here is a first pass: lead with the <b>one-line promise</b>, show the product in motion within three seconds, then earn the scroll with proof. I would cut the hero copy to twelve words<i class="cr"></i></p>';bx.classList.add('busy');attach('brief.pdf','2.4 MB');grow();
+/* Idle demo: a prompt is typed, a file is attached, the gradient border starts orbiting while it thinks, and the answer streams in, in a loop. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>{off=true},{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),P=[['Draft three headline options for the pricing page','pricing-notes.md','1.1 KB','Three directions: **Plain and honest** ("Pay for what you ship"), **Outcome first** ("Cut your invoice cycle to two days") and **Playful** ("Pricing that fits on a napkin"). I would test the first two against each other.'],['Summarise what changed in the onboarding flow','changelog.pdf','184 KB','Three changes matter: the **account step now takes one field**, bank linking moved to day two, and the **checklist collapses once complete**. Activation rose six points in the first week.']];
+ (async()=>{await sleep(3600);let k=0;while(!off){const[q,fn,sz,ans]=P[k++%P.length];run++;out.classList.remove('on');bx.classList.remove('busy');ta.value='';at.innerHTML='';grow();await sleep(500);for(const c of q){if(off)return;ta.value+=c;grow();await sleep(38)}await sleep(300);attach(fn,sz);await sleep(600);if(off)return;await submit(ans);await sleep(3600)}})()}
+</script></body></html>

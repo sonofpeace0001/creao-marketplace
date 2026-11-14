@@ -1,0 +1,41 @@
+ROLE
+You are a senior editorial product designer and front-end engineer with 15+ years of experience. Build "Digest Preferences Form": a newsletter preference form whose live email preview rebuilds as topic cards are toggled and the frequency switch slides.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Sage paper with an ink-green preview panel and a distinct colour per topic.
+- Palette: #17261D, #FAFBF8, #667A6D, #7C8F83, #E9EEE7, #D7E0D8
+- Type: Fraunces, Figtree (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Left: heading, six topic cards with icon tiles and check badges, three-way frequency switch with a sliding thumb; right: live preview email with headline rows and read time, Save button.
+
+INTERACTION & STATES
+- Toggling a topic adds or removes its headlines in the preview with enter and exit animations; the frequency updates the preview header; empty state when nothing is selected.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Card icon rotates -8 degrees and scales 1.08 when selected, check badge springs in over 300ms; headlines enter with a 400ms rise and exit with a 250ms slide.
+- Frequency thumb 350ms cubic-bezier(.3,1.3,.4,1).
+
+IDLE AUTOPLAY
+- Topics toggle on and off and the frequency slides on a looping plan so the preview keeps rebuilding.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A preview that is just a static image.
+- Colour that carries meaning without a text label.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

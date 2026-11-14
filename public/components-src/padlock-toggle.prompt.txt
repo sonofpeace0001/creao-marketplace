@@ -1,0 +1,40 @@
+ROLE
+You are a senior security UX designer and front-end engineer with 15+ years of experience. Build "Padlock Toggle": a large gold padlock whose shackle lifts and swings open on a hinge, a tick drawing into the keyhole, while the page tint shifts from red to green, with smaller locks below.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Dark vault with a warm gold lock, rose for locked, emerald for unlocked and soft coloured halos.
+- Palette: #F43F5E, #7C839B, #1A1C26, #1B1F31, #0D0F16, #EEF0F8
+- Type: Manrope, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading; padlock button with halo, shackle, body, keyhole, tick; state and caption; three small lock rows (Documents, Photo vault, Passwords).
+
+INTERACTION & STATES
+- Click toggles the big lock; each small row has its own lock toggle with a hinged shackle.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Shackle: translateY -17px and rotate -28 degrees about its left leg over 750ms cubic-bezier(.3,1.5,.4,1); tick scales in after a 300ms delay; ring ping 900ms; page tint 600ms.
+
+IDLE AUTOPLAY
+- The main padlock opens and closes every 2.8s while the small locks flip in turn.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A lock icon swap with no mechanical motion.
+- Green and red as the only state cue; the text also changes.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

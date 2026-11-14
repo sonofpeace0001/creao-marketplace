@@ -1,0 +1,40 @@
+ROLE
+You are a senior messaging product designer and front-end engineer with 15+ years of experience. Build "Mention Input": a chat composer where typing @ opens a people picker with presence dots, and a chosen name becomes an inline pill, ready to send.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Soft lavender app card, indigo send button, coloured avatars and rounded message bubbles.
+- Palette: #4F46E5, #171B2E, #8A90AE, #ECEFF8, #EEF0F7, #22C55E
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Channel header; thread with a previous message; composer with rich text area and send button; popover with People heading, avatars, roles and presence.
+
+INTERACTION & STATES
+- @ opens the picker anchored above the composer; letters filter; arrows, Enter or Tab insert a pill and a trailing space; Backspace removes a whole pill; Enter sends and the message appears as a bubble with pills.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Popover 200ms spring from below; new message rises 10px over 400ms; caret blinks.
+
+IDLE AUTOPLAY
+- A message is composed with two mentions picked from the filtered list, with arrow-key moves, then sent into the thread and repeated.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Mentions stored as plain text; they must be atomic pills.
+- Popover covering the text being typed.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

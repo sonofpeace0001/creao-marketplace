@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Animated Tab Icons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#C9D6FF,#E2E2E2);color:#15172A;font-family:'Outfit',sans-serif;min-height:100vh;display:grid;place-items:center;padding:20px 14px;-webkit-font-smoothing:antialiased}
+.ph{position:relative;width:min(340px,92vw);height:min(640px,88vh);border-radius:44px;background:#0F1020;padding:10px;box-shadow:0 50px 70px -30px rgba(21,23,42,.6),inset 0 0 0 2px #2A2C45}
+.sc{position:relative;height:100%;border-radius:36px;overflow:hidden;background:#F5F6FB;display:flex;flex-direction:column}
+.nt{position:absolute;left:50%;top:10px;width:96px;height:26px;margin-left:-48px;border-radius:99px;background:#0F1020;z-index:5}
+.pg{flex:1;padding:58px 22px 0;overflow:hidden;position:relative}
+.pn{position:absolute;inset:58px 22px 0;opacity:0;transform:translateY(16px);transition:all .45s cubic-bezier(.3,1.2,.4,1);pointer-events:none}.pn.on{opacity:1;transform:none}
+.pn small{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#7A7FA6}.pn h2{font-size:34px;font-weight:800;letter-spacing:-.05em;line-height:1;margin:8px 0 16px}
+.pn .cd{height:92px;border-radius:22px;background:#fff;margin-bottom:10px;box-shadow:0 12px 20px -16px rgba(21,23,42,.4);display:flex;align-items:center;gap:14px;padding:0 16px}.pn .cd i{width:46px;height:46px;border-radius:15px;background:var(--c);display:block;flex:none}.pn .cd b{display:block;font-size:15px}.pn .cd s{display:block;text-decoration:none;height:8px;border-radius:4px;background:#E6E8F3;margin-top:8px;width:150px}
+.tb{position:relative;margin:0 14px 14px;height:72px;border-radius:26px;background:#fff;box-shadow:0 18px 30px -14px rgba(21,23,42,.45),inset 0 0 0 1px rgba(21,23,42,.05);display:grid;grid-template-columns:repeat(5,1fr);padding:0 6px}
+.ind{position:absolute;top:8px;bottom:8px;left:6px;width:calc((100% - 12px)/5);border-radius:20px;background:#15172A;transition:transform .5s cubic-bezier(.3,1.3,.4,1)}
+.tab{position:relative;z-index:1;border:0;background:none;display:grid;place-items:center;align-content:center;gap:3px;cursor:pointer;color:#8A8FB0;font:600 10.500px 'Outfit';letter-spacing:.04em;transition:color .3s}
+.tab svg{width:26px;height:26px;overflow:visible}.tab svg *{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tab[aria-selected=true]{color:#fff}.tab:focus-visible{outline:2px solid #6366F1;outline-offset:-4px;border-radius:20px}
+.tab .lb{opacity:0;height:0;overflow:hidden;transition:all .3s}.tab[aria-selected=true] .lb{opacity:1;height:12px}
+/* per-icon motion on select */
+.tab[aria-selected=true][data-k=home] .roof{animation:roof .6s cubic-bezier(.3,1.8,.5,1)}@keyframes roof{40%{transform:translateY(-3px)}}
+.tab[aria-selected=true][data-k=search] svg{animation:srch .7s cubic-bezier(.3,1.6,.5,1)}@keyframes srch{0%{transform:scale(.7) rotate(-20deg)}60%{transform:scale(1.15) rotate(8deg)}}
+.tab[aria-selected=true][data-k=add] svg{animation:add .55s cubic-bezier(.3,1.6,.5,1)}@keyframes add{from{transform:rotate(-135deg) scale(.5)}}
+.tab[aria-selected=true][data-k=bell] svg{animation:bell .9s ease;transform-origin:50% 8%}@keyframes bell{15%{transform:rotate(18deg)}30%{transform:rotate(-16deg)}45%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}75%{transform:rotate(4deg)}}
+.tab[aria-selected=true][data-k=bell] .cl{animation:clap .9s ease}@keyframes clap{30%{transform:translateX(2px)}60%{transform:translateX(-2px)}}
+.tab[aria-selected=true][data-k=user] .hd{animation:head .6s cubic-bezier(.3,1.8,.5,1)}@keyframes head{40%{transform:translateY(-3px) scale(1.12)}}
+.tab .dot{position:absolute;right:calc(50% - 18px);top:14px;width:8px;height:8px;border-radius:50%;background:#F43F5E;box-shadow:0 0 0 2px #fff}.tab[aria-selected=true] .dot{box-shadow:0 0 0 2px #15172A}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="ph"><div class="sc"><div class="nt"></div><div class="pg" id="pg"></div>
+<nav class="tb" role="tablist" aria-label="Main"><span class="ind" id="ind"></span>
+<button class="tab" data-k="home" role="tab"><svg viewBox="0 0 24 24"><g class="roof"><path d="M3.500 11.200 12 4l8.500 7.200"/></g><path d="M5.500 10.500V20h13v-9.500M10 20v-5h4v5"/></svg><span class="lb">Home</span></button>
+<button class="tab" data-k="search" role="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.500"/><path d="m16 16 4.500 4.500"/></svg><span class="lb">Explore</span></button>
+<button class="tab" data-k="add" role="tab"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="M12 8.500v7M8.500 12h7"/></svg><span class="lb">New</span></button>
+<button class="tab" data-k="bell" role="tab"><svg viewBox="0 0 24 24"><path d="M6 9.500a6 6 0 0 1 12 0c0 5.500 2 7 2 7H4s2-1.500 2-7Z"/><path class="cl" d="M10 20a2 2 0 0 0 4 0"/></svg><span class="lb">Alerts</span><i class="dot"></i></button>
+<button class="tab" data-k="user" role="tab"><svg viewBox="0 0 24 24"><circle class="hd" cx="12" cy="8.500" r="3.800"/><path d="M4.500 20a7.500 7.500 0 0 1 15 0"/></svg><span class="lb">Me</span></button></nav></div></div>
+<script>
+const P=[['Today','Home',['#6366F1','#F59E0B','#10B981']],['Discover','Explore',['#EC4899','#3B82F6','#F97316']],['Create','New',['#14B8A6','#8B5CF6','#EF4444']],['Inbox','Alerts',['#F43F5E','#0EA5E9','#84CC16']],['Account','Me',['#A855F7','#22C55E','#FB923C']]];
+const pg=document.getElementById('pg'),tabs=[...document.querySelectorAll('.tab')],ind=document.getElementById('ind');
+P.forEach(([h,k,cs])=>{pg.insertAdjacentHTML('beforeend','<div class="pn" role="tabpanel"><small>'+k+'</small><h2>'+h+'</h2>'+cs.map((c,i)=>'<div class="cd" style="--c:'+c+'"><i></i><div><b>'+['Weekly summary','Saved for later','Suggested next'][i]+'</b><s></s></div></div>').join('')+'</div>')});
+const pn=[...pg.children];let cur=0;
+function sel(i){cur=i;tabs.forEach((t,k)=>{t.setAttribute('aria-selected',k===i);t.setAttribute('tabindex',k===i?0:-1)});pn.forEach((p,k)=>p.classList.toggle('on',k===i));ind.style.transform='translateX('+i*100+'%)'}
+tabs.forEach((t,i)=>{t.onclick=()=>{off=true;sel(i)};t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){off=true;sel((cur+1)%5);tabs[cur].focus()}if(e.key==='ArrowLeft'){off=true;sel((cur+4)%5);tabs[cur].focus()}})});
+sel(3);
+/* Idle demo: the selection moves along the bar and each icon plays its own entrance (roof bounce, search pop, plus spin, bell swing, avatar hop), until a tap. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3600);let k=4;while(!off){sel(k++%5);await sleep(1800)}})()}
+</script></body></html>

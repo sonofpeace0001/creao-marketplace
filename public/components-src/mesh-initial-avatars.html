@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mesh Initial Avatars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0C12;color:#EEF0FA;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:640px;display:grid;gap:22px}
+.hd h1{font-size:26px;font-weight:800;letter-spacing:-.045em}.hd p{color:#767A98;font-size:14px;margin-top:6px}
+.in{display:flex;align-items:center;gap:16px;border-radius:26px;background:#12131C;padding:16px 18px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.in .av{width:80px;height:80px;flex:none;font-size:28px}
+.in input{flex:1;min-width:0;border:0;outline:0;background:none;color:#fff;font:700 22px 'Sora';letter-spacing:-.03em}.in input::placeholder{color:#4F5470}
+.in small{font:500 11.500px 'Geist Mono';letter-spacing:.1em;text-transform:uppercase;color:#6D7290;display:block;margin-bottom:4px}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.t{display:grid;justify-items:center;gap:10px;padding:16px 8px 14px;border-radius:22px;background:#12131C;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);transition:transform .3s cubic-bezier(.3,1.5,.5,1)}.t:hover{transform:translateY(-4px)}
+.t b{font-size:13.500px;font-weight:600}.t span{font:500 10.500px 'Geist Mono';color:#6D7290;margin-top:-6px}
+.av{--h1:200;--h2:280;--h3:340;position:relative;width:64px;height:64px;border-radius:50%;overflow:hidden;display:grid;place-items:center;color:#fff;font:800 22px 'Sora';letter-spacing:-.03em;text-shadow:0 2px 8px rgba(0,0,0,.35);background:hsl(var(--h1) 80% 50%)}
+.av::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 25% 30%,hsl(var(--h2) 90% 62%) 0,transparent 42%),radial-gradient(circle at 78% 24%,hsl(var(--h3) 90% 60%) 0,transparent 40%),radial-gradient(circle at 60% 85%,hsl(var(--h1) 90% 45%) 0,transparent 46%);animation:dr var(--t,9s) ease-in-out infinite alternate;filter:blur(2px)}
+@keyframes dr{0%{transform:translate(-6%,-4%) rotate(0) scale(1)}50%{transform:translate(5%,6%) rotate(60deg) scale(1.12)}100%{transform:translate(-3%,4%) rotate(140deg) scale(1)}}
+.av::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1.500px rgba(255,255,255,.25),inset 0 -8px 14px rgba(0,0,0,.18)}
+.av span{position:relative;z-index:1}
+@media(max-width:520px){.g{grid-template-columns:repeat(2,1fr)}.in .av{width:64px;height:64px;font-size:22px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Names become colour</h1><p>Every name hashes to its own drifting mesh, so no two initials look the same.</p></div>
+<label class="in"><span class="av" id="pv"><span id="pi"></span></span><div style="flex:1;min-width:0"><small>Type a name</small><input id="nm" value="Amara Diallo" autocomplete="off" aria-label="Name"></div></label>
+<div class="g" id="g"></div></div>
+<script>
+function hash(s){let h=2166136261;for(const c of s.toLowerCase()){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function ini(n){const p=n.trim().split(/\s+/).filter(Boolean);return ((p[0]||'?')[0]+((p.length>1?p[p.length-1][0]:'')||'')).toUpperCase()}
+function paint(el,n,t){const h=hash(n),a=h%360,b=(a+70+(h>>8)%80)%360,c=(a+190+(h>>16)%90)%360;el.style.setProperty('--h1',a);el.style.setProperty('--h2',b);el.style.setProperty('--h3',c);el.style.setProperty('--t',(7+(h%7))+'s');el.style.animationDelay='0s'}
+const g=document.getElementById('g'),pv=document.getElementById('pv'),pi=document.getElementById('pi'),nm=document.getElementById('nm');
+['Priya Nair','Marcus Webb','Hannah Cho','Tomas Novak','Lucas Ferreira','Imani Cole','Sana Iyer','Kofi Mensah'].forEach(n=>{const t=document.createElement('div');t.className='t';t.innerHTML='<span class="av"><span>'+ini(n)+'</span></span><b>'+n+'</b><span>'+(hash(n)%360)+' deg</span>';paint(t.firstChild,n);g.appendChild(t)});
+function up(){const n=nm.value||'?';pi.textContent=ini(n);paint(pv,n)}nm.addEventListener('input',()=>{off=true;up()});up();
+/* Idle demo: names are typed into the field one letter at a time, so the preview avatar re-hashes to a new colour mesh and new initials live; the grid meshes drift continuously. */
+let off=false;addEventListener('pointerdown',()=>off=true,{once:true});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),L=['Noor Haddad','Chidi Okafor','Elena Rossi','Jun Park'];(async()=>{await sleep(3400);let k=0;while(!off){nm.value='';for(const c of L[k++%L.length]){if(off)return;nm.value+=c;up();await sleep(110)}await sleep(1900)}})()}
+</script></body></html>

@@ -1,0 +1,40 @@
+ROLE
+You are a senior trust and safety designer and front-end engineer with 15+ years of experience. Build "Verified Seal Badge": three scalloped trust seals with a turning ring of lettering, a pulsing centre and a checkmark that draws itself, each in its own metal.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight navy with gold, blue and emerald seals, soft coloured glows and mono captions.
+- Palette: #8E93BE, #1F2347, #0B0C18, #EEF0FF
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading; three cards each with a generated 14-lobe scalloped crest, an SVG textPath ring, an inner circle, a check and a glint, plus title and caption.
+
+INTERACTION & STATES
+- Decorative with an accessible label on each seal.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ring rotates 16s, 22s reverse and 12s linear; centre pulses scale 1 to 1.07 over 3.2s; check redraws via pathLength over a 5s cycle; a 30px glint sweeps across the clipped crest every 4s.
+
+IDLE AUTOPLAY
+- All three seals animate continuously and out of sync.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A flat circle with a tick; the scalloped edge and text ring make it a seal.
+- Ring text that is too small to be seen as lettering.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

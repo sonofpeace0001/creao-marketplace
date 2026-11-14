@@ -1,0 +1,41 @@
+ROLE
+You are a senior international onboarding designer and front-end engineer with 15+ years of experience. Build "Phone Country Input": an international phone field with a country picker, per-country number masks, a format hint and a validity ring that completes into a tick.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight ink with indigo focus glow, coloured country tiles and mono digits.
+- Palette: #818CF8, #EDEEF5, #9A9DB5, #0C0D12, #14151D, #4B4E63
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Label; field with country button (code tile, dial code, chevron), number input and validity ring; dropdown listbox of six countries; format hint line.
+
+INTERACTION & STATES
+- The picker lists countries with dial codes; choosing one re-masks the number (for example 4 3 3 for the UK, 5 5 for India) and updates the hint; the ring becomes a green tick at full length; Escape and outside click close the menu.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Menu: 250ms spring from translateY -8px and scale .98; chevron rotates 180 degrees.
+- Validity: ring fills green and the tick scales in over 250ms.
+
+IDLE AUTOPLAY
+- The menu opens, the highlight moves, a new country is picked and a matching number is typed at 110ms per digit, then repeats with the next country.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Free-text country codes; always offer a list.
+- A single mask for every country.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

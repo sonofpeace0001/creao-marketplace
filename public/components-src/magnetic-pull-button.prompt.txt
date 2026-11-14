@@ -1,0 +1,42 @@
+ROLE
+You are a senior interaction designer and front-end engineer with 15+ years of experience. Build "Magnetic Pull Button": buttons that lean toward the cursor inside a halo, with the label and arrow travelling further than the shell for a layered parallax pull.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream paper with an ink-black pill and a single vermilion accent.
+- Palette: #1B1712, #E5482B, #F4EFE6, #6F665A, #9A9080
+- Type: Bricolage Grotesque (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Headline and intro; a primary pill with label and arrow chip, an outline pill and a round play button, each wrapped in an invisible magnetic halo; hint line.
+
+INTERACTION & STATES
+- Pointer distance inside the halo drives an eased offset; shell, label and icon move at 1x, 0.35x and 0.6x for depth; springs back with overshoot on leave; disabled for reduced motion.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Halo radius = 0.85 x the larger button dimension; pull strength k = (1 - distance/radius) x 0.55 + 0.12.
+- Shell moves 1x, label 0.35x, arrow chip 0.6x of the offset for parallax depth.
+- Entering: 120ms linear tracking. Leaving: 500ms cubic-bezier(.2,1.6,.4,1) spring with visible overshoot.
+
+IDLE AUTOPLAY
+- A ghost cursor glides along the button row on a Lissajous path (x: sin(0.7t), y: sin(1.3t+1)) so the pull is visible without a mouse.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain translate toward the cursor with no depth layers.
+- Shadow that stays still while the button moves; it must lengthen with the pull.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

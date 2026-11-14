@@ -1,0 +1,40 @@
+ROLE
+You are a senior portfolio designer and front-end engineer with 15+ years of experience. Build "Skill Meter Badges": five skill rows with five-segment meters that empty and refill with a staggered sweep and a glint travelling along the filled segments.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper with an italic serif title, white rows, a distinct colour per skill and mono metadata.
+- Palette: #F3EFE7, #1C1914, #D4380D, #988F7B, #2563EB, #ECE7DB
+- Type: Instrument Serif, Inter Tight, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; five rows each with initials tile, skill name, five-step meter, level word and years of experience.
+
+INTERACTION & STATES
+- Rows slide 5px on hover; the meter is an image with a full text alternative such as React: Expert, 5 of 5.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Segment fill scaleX 0 to 1 over 500ms spring with 90ms stagger; rows refill 260ms apart; a 65% white glint crosses filled segments every 2.8s offset per row.
+
+IDLE AUTOPLAY
+- Meters empty and refill every 5 seconds and glint continuously.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Percent bars that suggest false precision; use a five-step scale.
+- Colour as the only level indicator; the level word is always shown.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

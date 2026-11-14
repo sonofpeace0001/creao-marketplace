@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>State Morph Icons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0D0F14;color:#EAEDF5;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(520px 340px at 50% 0,rgba(99,102,241,.18),transparent 70%)}
+.w{width:100%;max-width:640px;display:grid;gap:22px}
+.hd h1{font-size:26px;font-weight:800;letter-spacing:-.04em}.hd p{color:#7B8099;font-size:14px;margin-top:6px}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.t{--c:#818CF8;position:relative;border:0;border-radius:24px;background:#151821;padding:20px 12px 16px;display:grid;justify-items:center;gap:14px;cursor:pointer;color:inherit;font:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);transition:background .3s,box-shadow .3s}
+.t:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.ic{position:relative;width:64px;height:64px;border-radius:50%;background:#1D2130;display:grid;place-items:center;transition:background .4s,transform .4s cubic-bezier(.3,1.6,.5,1)}
+.ic svg{position:absolute;width:30px;height:30px;overflow:visible;transition:all .45s cubic-bezier(.3,1.4,.4,1)}.ic svg *{fill:none;stroke:#fff;stroke-width:2.400;stroke-linecap:round;stroke-linejoin:round}
+.ic .id{opacity:1;transform:none}.ic .rg{opacity:0;transform:scale(.4) rotate(-90deg);width:50px;height:50px}.ic .ok,.ic .er{opacity:0;transform:scale(.3)}
+.ic .rg circle{stroke:rgba(255,255,255,.2)}.ic .rg circle.v{stroke:#fff;stroke-dasharray:1;stroke-dashoffset:.75;animation:spin 1s linear infinite;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ic .ok path,.ic .er path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s .15s}
+.t[data-s=busy] .id{opacity:0;transform:scale(.4)}.t[data-s=busy] .rg{opacity:1;transform:none}.t[data-s=busy] .ic{background:var(--c)}
+.t[data-s=ok] .id,.t[data-s=err] .id{opacity:0;transform:scale(.4)}.t[data-s=ok] .ic{background:#16A34A;transform:scale(1.08)}.t[data-s=ok] .ok{opacity:1;transform:none}.t[data-s=ok] .ok path{stroke-dashoffset:0}
+.t[data-s=err] .ic{background:#DC2626;animation:sh .45s}.t[data-s=err] .er{opacity:1;transform:none}.t[data-s=err] .er path{stroke-dashoffset:0}
+@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.t b{font-size:14px;font-weight:700}.t small{font:500 11.500px 'JetBrains Mono';color:#7B8099;margin-top:-8px;min-height:15px;letter-spacing:.04em}
+.t[data-s=ok] small{color:#4ADE80}.t[data-s=err] small{color:#F87171}.t[data-s=busy] small{color:#A5B4FC}
+@media(max-width:520px){.g{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Icons that carry the state</h1><p>Idle, working, done, failed. One icon, four honest moments.</p></div><div class="g" id="g"></div></div>
+<script>
+const T=[['Upload','#6366F1','<path d="M12 16V5M7 10l5-5 5 5M5 19h14"/>',['Ready','Uploading 64%','Uploaded','Upload failed']],['Save','#0EA5E9','<path d="M5 4h11l3 3v13H5ZM8 4v5h7M8 20v-6h8v6"/>',['Unsaved','Saving...','All changes saved','Could not save']],['Send','#EC4899','<path d="M21 3 10 14M21 3l-7 18-4-7-7-4Z"/>',['Draft','Sending...','Delivered','Not delivered']],['Sync','#F59E0B','<path d="M20 8a8 8 0 0 0-14-2.500L4 8M4 4v4h4M4 16a8 8 0 0 0 14 2.500L20 16M20 20v-4h-4"/>',['Out of date','Syncing...','Up to date','Offline']]];
+const g=document.getElementById('g');
+T.forEach(([n,c,p,L],i)=>{const b=document.createElement('button');b.className='t';b.dataset.s='idle';b.style.setProperty('--c',c);b.setAttribute('aria-label',n+', click to run');
+ b.innerHTML='<span class="ic"><svg class="id" viewBox="0 0 24 24">'+p+'</svg><svg class="rg" viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" stroke-width="4" fill="none"/><circle class="v" cx="25" cy="25" r="20" stroke-width="4" pathLength="1" fill="none"/></svg><svg class="ok" viewBox="0 0 24 24"><path pathLength="1" d="m5 12.500 4.500 4.500L19 7"/></svg><svg class="er" viewBox="0 0 24 24"><path pathLength="1" d="m6 6 12 12M18 6 6 18"/></svg></span><b>'+n+'</b><small>'+L[0]+'</small>';b._L=L;
+ b.onclick=()=>run(b,i===2?0:Math.random()<.2?1:0);g.appendChild(b)});
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function run(b,fail){if(b.dataset.s==='busy')return;b.dataset.s='busy';b.querySelector('small').textContent=b._L[1];await sleep(1700);b.dataset.s=fail?'err':'ok';b.querySelector('small').textContent=b._L[fail?3:2];await sleep(1800);b.dataset.s='idle';b.querySelector('small').textContent=b._L[0]}
+const tiles=[...g.children];tiles[0].dataset.s='ok';tiles[0].querySelector('small').textContent=tiles[0]._L[2];tiles[1].dataset.s='busy';tiles[1].querySelector('small').textContent=tiles[1]._L[1];tiles[2].dataset.s='err';tiles[2].querySelector('small').textContent=tiles[2]._L[3];
+/* Idle demo: every tile runs its own loop at a different rhythm: idle, working, then done or failed, so all four states are always on screen. */
+let off=false;addEventListener('pointerdown',()=>off=true,{once:true});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setTimeout(()=>{tiles.forEach((b,i)=>{b.dataset.s='idle';b.querySelector('small').textContent=b._L[0];setTimeout(function loop(){if(off)return;run(b,i===2&&Math.random()<.5?1:0).then(()=>setTimeout(loop,500+i*400))},i*700)})},3600);
+</script></body></html>

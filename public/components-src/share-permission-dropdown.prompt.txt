@@ -1,0 +1,40 @@
+ROLE
+You are a senior collaboration product designer and front-end engineer with 15+ years of experience. Build "Share Permission Dropdown": a share dialog where each person has a role dropdown with descriptions and a Remove access action; roles roll to their new label and removed rows collapse.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cool grey page, a white dialog, indigo accents, generated avatars and a red destructive row.
+- Palette: #4F46E5, #8189A8, #12162E, #9AA1BD, #F1F2FA, #DC2626
+- Type: Plus Jakarta Sans, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Dialog header with people count; invite field; four people rows (Owner fixed) with role buttons; role popover with Editor, Commenter, Viewer descriptions, ticks and Remove; link sharing row with Copy link.
+
+INTERACTION & STATES
+- Choosing a role rolls the label vertically and closes the menu; Remove access collapses the row and updates the count; Copy link confirms in place.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Label roll 400ms cubic-bezier(.3,1.3,.4,1); row removal collapses max-height and fades over 450ms; menu enters on a 320ms spring; ticks scale in on a spring.
+
+IDLE AUTOPLAY
+- A role is changed, another person is removed and later restored, looping.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Letting the owner be removed.
+- Destructive actions styled like ordinary options.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

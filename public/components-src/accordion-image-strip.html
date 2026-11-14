@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Accordion Image Strip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter+Tight:wght@500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E0C14;color:#F6F2FF;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:760px;display:grid;gap:16px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font:700 32px/1 'Fraunces';letter-spacing:-.02em}.hd span{font:500 12px 'Geist Mono';letter-spacing:.1em;text-transform:uppercase;color:#8A83A8}
+.st{display:flex;gap:10px;height:min(420px,70vh)}
+.pn{position:relative;flex:1;border-radius:24px;overflow:hidden;cursor:pointer;border:0;padding:0;background:#000;transition:flex .8s cubic-bezier(.3,1,.35,1);box-shadow:0 20px 30px -20px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,255,255,.1);color:inherit;text-align:left}
+.pn.on{flex:5.200}.pn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.pn .im{position:absolute;inset:0;transform:scale(1.15);transition:transform 1.4s cubic-bezier(.3,1,.35,1),filter .6s;filter:brightness(.62) saturate(.85)}.pn.on .im{transform:scale(1);filter:none}
+.pn .im svg{width:100%;height:100%;display:block}
+.pn::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,6,16,.85));pointer-events:none}
+.vt{position:absolute;left:50%;bottom:22px;z-index:2;white-space:nowrap;font:700 18px 'Fraunces';letter-spacing:-.01em;transform-origin:left bottom;transform:rotate(-90deg) translate(-8px,-50%);transition:opacity .35s}.pn.on .vt{opacity:0}
+.nm{position:absolute;left:14px;top:14px;z-index:2;font:600 12px 'Geist Mono';letter-spacing:.1em;color:#FFE0A8;padding:5px 9px;border-radius:99px;background:rgba(10,8,18,.5);backdrop-filter:blur(6px)}
+.dt{position:absolute;left:24px;right:24px;bottom:22px;z-index:2;opacity:0;transform:translateY(20px);transition:opacity .4s,transform .7s cubic-bezier(.3,1.2,.4,1)}.pn.on .dt{opacity:1;transform:none;transition-delay:.35s}
+.dt small{font:500 11.500px 'Geist Mono';letter-spacing:.18em;text-transform:uppercase;color:#FFD9A0}.dt h2{font:700 clamp(24px,4vw,36px)/1.05 'Fraunces';letter-spacing:-.02em;margin:6px 0 8px}.dt p{font-size:14px;color:#D9D2EC;line-height:1.5;max-width:34ch}
+.dt .cta{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 16px;border-radius:99px;background:#fff;color:#14101F;font:700 13px 'Inter Tight'}.dt .cta svg{width:15px;height:15px}.dt .cta svg *{fill:none;stroke:currentColor;stroke-width:2.600;stroke-linecap:round;stroke-linejoin:round}
+.pg{display:flex;gap:6px;justify-content:center}.pg i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .4s cubic-bezier(.3,1.6,.5,1)}.pg i.on{width:28px;border-radius:4px;background:#fff}
+@media(max-width:560px){.st{flex-direction:column;height:auto}.pn{flex:none;height:64px}.pn.on{flex:none;height:300px}.vt{transform:none;left:18px;bottom:20px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Five places, one strip</h1><span>Hover or tap to open</span></div><div class="st" id="st" role="tablist"></div><div class="pg" id="pg"></div></div>
+<script>
+function scene(s){const r=(n=1)=>{s=(s*9301+49297)%233280;return s/233280*n};const P=[['#FFB27A','#F472B6','#6366F1','#2B1B5E'],['#FDE68A','#FDBA74','#F97316','#7C2D12'],['#A7F3D0','#34D399','#059669','#064E3B'],['#BAE6FD','#38BDF8','#0369A1','#0C2A4A'],['#FBCFE8','#C084FC','#7C3AED','#2E1065'],['#FEF3C7','#FCA5A5','#E11D48','#4C0519']],c=P[Math.floor(r(6))];
+ const id='g'+Math.floor(r(1e6));let h='<svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c[2]+'"/><stop offset=".55" stop-color="'+c[1]+'"/><stop offset="1" stop-color="'+c[0]+'"/></linearGradient></defs><rect width="400" height="500" fill="url(#'+id+')"/>';
+ h+='<circle cx="'+(100+r(200))+'" cy="'+(110+r(60))+'" r="'+(36+r(20))+'" fill="#FFF6D6" opacity=".95"/>';
+ for(let l=0;l<4;l++){let d='M0 500 L0 '+(250+l*50);const a=26+r(30),f=.012+r(.02),ph=r(6);for(let x=0;x<=400;x+=8)d+=' L'+x+' '+(250+l*50-a*Math.sin(x*f+ph)-a*.5*Math.sin(x*f*2.3+ph*2)).toFixed(1);d+=' L400 500Z';h+='<path d="'+d+'" fill="'+c[3]+'" opacity="'+(.3+l*.22)+'"/>'}
+ return h+'</svg>'}
+const S=[['Dolomites','Italy',20,'Above the clouds','Ridge walking with a refuge that serves polenta until the last hiker is down.'],['Oaxaca','Mexico',1,'Markets at sunrise','Mole, mezcal and the colours of Tuesday, before the heat arrives.'],['Hokkaido','Japan',8,'Powder season','Cedar forests, quiet onsen towns and snow that squeaks underfoot.'],['Reykjavik','Iceland',4,'Midnight sun','Amber evenings, black sand and a hot pool on every corner.'],['Marrakech','Morocco',16,'Rooftop hours','Mint tea above the souks as the call to prayer drifts over.']];
+const st=document.getElementById('st'),pg=document.getElementById('pg');let cur=0;
+S.forEach(([n,c,sd,t,d],i)=>{const b=document.createElement('button');b.className='pn';b.setAttribute('role','tab');b.setAttribute('aria-label',n+', '+c);b.innerHTML='<div class="im">'+scene(sd)+'</div><span class="nm">0'+(i+1)+'</span><span class="vt">'+n+'</span><div class="dt"><small>'+n+', '+c+'</small><h2>'+t+'</h2><p>'+d+'</p><span class="cta">Plan this trip<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>';b.onclick=()=>{off=true;go(i)};b.addEventListener('pointerenter',()=>{off=true;go(i)});b.addEventListener('focus',()=>{off=true;go(i)});st.appendChild(b);pg.insertAdjacentHTML('beforeend','<i></i>')});
+const ps=[...st.children],ds=[...pg.children];
+function go(i){cur=i;ps.forEach((p,k)=>{p.classList.toggle('on',k===i);p.setAttribute('aria-selected',k===i)});ds.forEach((d,k)=>d.classList.toggle('on',k===i))}
+go(1);
+/* Idle demo: the panels open one after another every 2.2s; the chosen panel grows to five times its neighbours, its picture settles from a 1.15 zoom and loses its dimming, and its caption rises while the others fold to a vertical label, until you hover or tap. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2800);let k=2;while(!off){go(k++%5);await sleep(2200)}})()}
+</script></body></html>

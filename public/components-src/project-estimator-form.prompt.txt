@@ -1,0 +1,41 @@
+ROLE
+You are a senior agency designer and front-end engineer with 15+ years of experience. Build "Project Estimator Form": a split-screen scoping form where three sliders and four add-ons drive an animated total, a delivery estimate and a colour-coded cost breakdown.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm stone paper beside a near-black results panel, serif display figures and a vermilion accent.
+- Palette: #1B1B18, #FBF9F4, #D4380D, #FF6B35, #A9A597, #C9C5B8
+- Type: Instrument Sans, Instrument Serif, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Left: heading, three range sliders (pages, integrations, weeks) with live values, four add-on cards; right: estimate, ETA, four-colour stacked bar, legend with four amounts, quote button.
+
+INTERACTION & STATES
+- Moving any control recomputes cost, rush premium and the breakdown; slider tracks fill to the thumb; add-on cards invert when selected.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Total eases 14% per frame; breakdown segments animate flex 500ms cubic-bezier(.3,1.1,.4,1).
+- Checkbox draws its tick over 300ms with a spring box.
+
+IDLE AUTOPLAY
+- Sliders glide to four preset scopes and add-ons toggle, so the total keeps recounting.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A single opaque number; show where the money goes.
+- Sliders without filled tracks, which hide the value.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

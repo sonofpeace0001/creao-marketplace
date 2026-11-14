@@ -1,0 +1,40 @@
+ROLE
+You are a senior mobile settings designer and front-end engineer with 15+ years of experience. Build "Settings Toggle List": a settings list in which each switch also animates its own icon: Wi-Fi arcs rise one by one, the plane flies off and back, rays spin, the bell rings, the pin drops.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Pale blue-grey page, a white card, coloured icon wells that fill on enable and green switches.
+- Palette: #E9ECF4, #11152B, #8A90B0, #34C759, #6C7396, #EFF1F8
+- Type: Outfit, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; card of six rows (Wi-Fi, Airplane mode, Bluetooth, Brightness, Notifications, Location), each with icon well, title, mono caption and switch.
+
+INTERACTION & STATES
+- Toggling flips the switch with a spring, fills the icon well with its colour and plays that icon's keyframes.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Wi-Fi arcs fade up in a 100ms stagger; airplane translates out and back over 900ms; sun rays rotate 6s linear; bell swings with decaying rotation over 900ms; pin drops 12px with a spring; switch knob 450ms spring.
+
+IDLE AUTOPLAY
+- A setting flips every 1.6s in turn.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- One shared animation for every icon.
+- Icon motion that continues forever once on, apart from the sun's slow spin.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

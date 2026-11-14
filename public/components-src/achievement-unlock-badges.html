@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Achievement Unlock Badges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 480px at 50% 0,#1D2A4F,#0A0E1F 75%);color:#EEF2FF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.w{position:relative;width:100%;max-width:640px;display:grid;gap:22px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font-size:26px;font-weight:800;letter-spacing:-.045em}.hd span{font:500 12px 'Geist Mono';letter-spacing:.1em;text-transform:uppercase;color:#7C88B5}.hd b{color:#FFD24A}
+.tst{position:absolute;left:50%;top:-34px;transform:translate(-50%,-30px);display:flex;align-items:center;gap:12px;padding:10px 20px 10px 10px;border-radius:99px;background:#fff;color:#0A0E1F;box-shadow:0 18px 30px -10px rgba(0,0,0,.7);opacity:0;white-space:nowrap;z-index:5}
+.tst i{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FFD24A,#F59E0B);display:grid;place-items:center}.tst i svg{width:18px;height:18px}.tst i svg *{fill:none;stroke:#fff;stroke-width:2.600;stroke-linecap:round;stroke-linejoin:round}.tst small{display:block;font:600 10px 'Geist Mono';letter-spacing:.14em;color:#8D7A2F}.tst b{font-size:14px;font-weight:700}
+.tst.on{animation:tt 3.200s cubic-bezier(.3,1.5,.5,1) forwards}@keyframes tt{0%{opacity:0;transform:translate(-50%,-30px)}12%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-24px)}}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.a{--a:#FFD24A;--b:#D97706;position:relative;border-radius:24px;padding:22px 12px 16px;background:#11172C;display:grid;justify-items:center;gap:12px;text-align:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);overflow:hidden}
+.md{position:relative;width:88px;height:96px}
+.md svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.md .sh{fill:#252C48;transition:fill .5s}.md .rm{fill:none;stroke:#3A4366;stroke-width:2;transition:stroke .5s}
+.md .gl{position:absolute;inset:0;display:grid;place-items:center}.md .gl svg{position:static;width:36px;height:36px}.md .gl svg *{fill:none;stroke:#5C6690;stroke-width:2.200;stroke-linecap:round;stroke-linejoin:round;transition:stroke .5s}
+.md .lk{position:absolute;right:-4px;bottom:2px;width:30px;height:30px;border-radius:50%;background:#1A2140;display:grid;place-items:center;box-shadow:0 0 0 3px #11172C;transition:all .4s cubic-bezier(.3,1.6,.5,1)}.md .lk svg{position:static;width:15px;height:15px}.md .lk svg *{fill:none;stroke:#7C88B5;stroke-width:2.400;stroke-linecap:round;stroke-linejoin:round}
+.md .glow{position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle,var(--a),transparent 62%);opacity:0;transition:opacity .6s}
+.a.on .md .sh{fill:url(#none)}.a.on .md .gl svg *{stroke:#fff}.a.on .md .lk{transform:scale(0);opacity:0}.a.on .md .glow{opacity:.45}
+.a.on .md .shp{fill:var(--a)}.a.on .md .rm{stroke:rgba(255,255,255,.6)}
+.md .shp{fill:#252C48;transition:fill .5s}
+.md .bs{position:absolute;inset:0;overflow:hidden;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);pointer-events:none}.md .bs::after{content:"";position:absolute;top:-20%;left:-80%;width:45%;height:140%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.8),transparent);transform:rotate(20deg);opacity:0}
+.a.pop .md{animation:pm .9s cubic-bezier(.3,1.8,.5,1)}@keyframes pm{0%{transform:scale(1)}25%{transform:scale(.85) rotate(-6deg)}55%{transform:scale(1.22) rotate(3deg)}100%{transform:scale(1)}}
+.a.pop .md .bs::after{animation:sw .9s ease-out .15s forwards}@keyframes sw{0%{opacity:1;left:-80%}100%{opacity:1;left:150%}}
+.a.shake .md .lk{animation:sk .45s}@keyframes sk{20%{transform:rotate(-24deg)}40%{transform:rotate(22deg)}60%{transform:rotate(-14deg)}80%{transform:rotate(8deg)}}
+.a b{font-size:14.500px;font-weight:700;letter-spacing:-.02em}.a small{font:500 11.500px 'Geist Mono';color:#7C88B5;margin-top:-6px;min-height:15px}.a.on small{color:#FFD24A}.a:not(.on) b{color:#8F9ACB}
+.pb{width:100%;height:5px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}.pb i{display:block;height:100%;width:var(--p,0%);background:linear-gradient(90deg,var(--a),var(--b));border-radius:3px;transition:width .6s cubic-bezier(.3,1,.4,1)}
+.pt{position:absolute;left:50%;top:38%;width:7px;height:7px;margin:-3px;border-radius:2px;background:var(--c);animation:bs .9s cubic-bezier(.2,.8,.3,1) forwards;pointer-events:none}@keyframes bs{from{transform:translate(0,0) rotate(0)}to{transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.2);opacity:0}}
+@media(max-width:520px){.g{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="tst" id="ts"><i><svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg></i><div><small>ACHIEVEMENT UNLOCKED</small><b id="tn"></b></div></div>
+<div class="hd"><h1>Earn it, then show it</h1><span><b id="ct">2</b> / 6 unlocked</span></div><div class="g" id="g"></div></div>
+<script>
+const A=[['First deploy','Ship to production','#FFD24A','#D97706','<path d="M12 3c3 2 5 5 5 9l-2 2.500H9L7 12c0-4 2-7 5-9ZM9 15l-2 3.500 3-1M15 15l2 3.500-3-1"/>'],['Bug squasher','Close 25 issues','#4ADE80','#15803D','<path d="M12 8a4 4 0 0 1 4 4v3a4 4 0 0 1-8 0v-3a4 4 0 0 1 4-4ZM8 12H4M20 12h-4M8 16l-3 2M16 16l3 2M9 6l-2-2M15 6l2-2"/>'],['Night owl','Ship after midnight','#A78BFA','#6D28D9','<path d="M20 14.500A8 8 0 0 1 9.500 4 8 8 0 1 0 20 14.500Z"/>'],['Team player','Review 50 pull requests','#60A5FA','#1D4ED8','<path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3 20c0-3 2.500-5 5-5s5 2 5 5M13 20c0-3 2.500-5 5-5s3 2 3 5"/>'],['Streak keeper','30 days in a row','#FB923C','#C2410C','<path d="M12 2c1 4.500 6 6.500 6 12a6 6 0 0 1-12 0c0-2.500 1.200-3.800 2-5 .8 1.400 1.600 2 2.400 2C10.500 8 11.500 5.500 12 2Z"/>'],['Zero downtime','99.99% for a quarter','#F472B6','#BE185D','<path d="M12 3 4.500 6v5.500c0 4.700 3.200 8 7.500 9.500 4.300-1.500 7.500-4.800 7.500-9.500V6Z"/><path d="m8.800 12 2.400 2.400 4-4.600"/>']];
+const g=document.getElementById('g'),ts=document.getElementById('ts'),tn=document.getElementById('tn'),ct=document.getElementById('ct');
+A.forEach(([n,d,a,b,p],i)=>{const e=document.createElement('article');e.className='a';e.style.cssText='--a:'+a+';--b:'+b;
+ e.innerHTML='<div class="md"><i class="glow"></i><svg viewBox="0 0 88 96"><path class="shp" d="M44 2 84 24v48L44 94 4 72V24Z"/><path class="rm" d="M44 8 78 27v42L44 88 10 69V27Z"/></svg><i class="bs"></i><div class="gl"><svg viewBox="0 0 24 24">'+p+'</svg></div><span class="lk"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span></div><b>'+n+'</b><small>'+d+'</small><div class="pb"><i></i></div>';e._n=n;e._d=d;g.appendChild(e)});
+const cs=[...g.children];
+const setP=(e,p)=>e.querySelector('.pb i').style.width=p+'%';
+function count(){ct.textContent=cs.filter(c=>c.classList.contains('on')).length}
+function unlock(e){e.classList.add('shake');setTimeout(()=>{e.classList.remove('shake');e.classList.add('on','pop');setP(e,100);e.querySelector('small').textContent='Unlocked';count();tn.textContent=e._n;ts.classList.remove('on');void ts.offsetWidth;ts.classList.add('on');
+ const C=[e.style.getPropertyValue('--a'),'#fff','#FFD24A','#60A5FA','#F472B6'];for(let i=0;i<18;i++){const p=document.createElement('i');p.className='pt';const a=i/18*Math.PI*2,d=60+Math.random()*50;p.style.cssText='--c:'+C[i%5]+';--x:'+Math.cos(a)*d+'px;--y:'+Math.sin(a)*d+'px;--r:'+(Math.random()*500-250)+'deg;'+(i%3?'':'border-radius:50%');e.appendChild(p);setTimeout(()=>p.remove(),950)}setTimeout(()=>e.classList.remove('pop'),1000)},480)}
+function lock(e,p){e.classList.remove('on');e.querySelector('small').textContent=e._d;setP(e,p)}
+cs.forEach((e,i)=>{if(i<2){e.classList.add('on');setP(e,100);e.querySelector('small').textContent='Unlocked'}else setP(e,[0,0,64,38,82,91][i])});count();
+/* Idle demo: the next locked badge's progress fills, its padlock rattles and breaks away, the medal pops with a glint and confetti, and an Achievement unlocked toast drops in; then the set re-locks and repeats. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),pr=[0,0,64,38,82,91];(async()=>{await sleep(3200);while(true){for(const i of [2,4,5,3]){setP(cs[i],100);await sleep(700);unlock(cs[i]);await sleep(3600)}await sleep(800);cs.forEach((c,i)=>{if(i>=2)lock(c,pr[i])});count();await sleep(1500)}})()}
+</script></body></html>

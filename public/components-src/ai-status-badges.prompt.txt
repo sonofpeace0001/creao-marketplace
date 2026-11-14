@@ -1,0 +1,40 @@
+ROLE
+You are a senior AI product designer and front-end engineer with 15+ years of experience. Build "AI Status Badges": a single capsule that morphs through Thinking, Searching, Writing, Checking and Done, resizing to each label, with a full gallery of animated states below.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Ink black with violet and cyan, a conic orbiting border while working and a calm emerald on completion.
+- Palette: #6E7291, #090A10, #ECEDF5, #767A93, #8B5CF6, #22D3EE
+- Type: Geist, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading; morphing capsule with icon swap and shimmering label; five gallery pills each with its animated icon and timestamp.
+
+INTERACTION & STATES
+- Status changes swap the icon with a spring, change the label with a shimmer and ellipsis, resize the capsule, and stop the orbit when done.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Capsule width eases 500ms cubic-bezier(.3,1.2,.4,1) from its old to its measured new width; border conic rotates 3s via @property; label shimmer 1.7s; icons: orbiting arc, spinning globe, writing pen, scanning lens, drawn check.
+
+IDLE AUTOPLAY
+- The capsule advances every 2.2s (3.2s on Thinking) and the gallery icons all animate continuously.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A spinner for every state; each stage has its own icon.
+- Width jumps; measure and transition.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

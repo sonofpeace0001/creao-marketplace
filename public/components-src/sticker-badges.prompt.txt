@@ -1,0 +1,40 @@
+ROLE
+You are a senior brand illustrator and front-end engineer with 15+ years of experience. Build "Sticker Badges": six die-cut stickers with white borders, glossy highlights and a peel corner, slapped onto a paper board one after another, then lifted in a wave.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Kraft paper with dot texture, a cream sticker sheet, bold colour stickers in starburst, circle, hexagon, pill and ticket shapes and handwritten notes.
+- Palette: #D9C7A7, #2A1D0E, #6B5434, #FFF9EE, #F3E6CB
+- Type: Bricolage Grotesque, Caveat (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Hand-lettered title; sticker board with six shapes (best seller, staff pick, hand made, only 3 left, organic, free shipping) each with label and mini note or icon.
+
+INTERACTION & STATES
+- Hover or focus flips the tilt and scales 1.1; a peel corner appears; stickers are labelled for assistive tech.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Drop-in: translateY -70px, rotate +28 degrees, scale 1.3 to a squash at 55% and a stretch at 75% over 700ms, staggered 260ms; glint sweeps every 5s; die-cut border built from chained drop-shadows plus a soft ground shadow.
+
+IDLE AUTOPLAY
+- Stickers drop on in sequence, then lift one by one in a wave, then repeat.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A plain coloured shape with no white cut border.
+- Stickers that all share a rotation.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Holo Foil Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 520px at 50% 40%,#10333F 0,#061018 70%);color:#E6F6F5;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.stage{perspective:900px;display:grid;justify-items:center;gap:26px}
+.card{--rx:-8deg;--ry:12deg;--px:62%;--py:30%;position:relative;width:min(300px,82vw);aspect-ratio:300/420;border-radius:20px;padding:10px;background:linear-gradient(145deg,#F3D58A,#B8862F 45%,#F8E3A6 70%,#9A6E22);transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .5s cubic-bezier(.2,1.2,.4,1);box-shadow:0 40px 50px -26px rgba(0,0,0,.85),0 0 60px -10px rgba(122,215,255,.25);cursor:default}
+.card.live{transition:transform .08s linear}
+.in{position:relative;height:100%;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#0E2A36,#081822);display:grid;grid-template-rows:auto 1fr auto auto;padding:12px;gap:10px}
+.top{display:flex;justify-content:space-between;align-items:baseline}.top b{font-size:18px;letter-spacing:-.02em}.top span{font:600 12px 'IBM Plex Mono';color:#F3D58A}
+.art{position:relative;border-radius:8px;overflow:hidden;border:2px solid #C9A04A;background:#06141C}
+.art svg{width:100%;height:100%;display:block}
+.foil{position:absolute;inset:0;background:repeating-linear-gradient(115deg,#FF6B8B 0%,#FFD36B 10%,#6BFFB0 20%,#6BD7FF 30%,#B06BFF 40%,#FF6B8B 50%);background-size:260% 260%;background-position:var(--px) var(--py);mix-blend-mode:color-dodge;opacity:.6;pointer-events:none}
+.glare{position:absolute;inset:0;background:radial-gradient(260px circle at var(--px) var(--py),rgba(255,255,255,.55),transparent 55%);mix-blend-mode:soft-light;pointer-events:none}
+.type{font:600 11px 'IBM Plex Mono';letter-spacing:.1em;text-transform:uppercase;color:#7AD7FF;display:flex;justify-content:space-between;border-top:1px solid rgba(122,215,255,.25);padding-top:8px}
+.txt{font-size:13px;line-height:1.45;color:#B5D3D6;min-height:56px}.txt b{color:#F3D58A}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.st div{background:rgba(122,215,255,.08);border-radius:8px;padding:6px 8px;text-align:center}.st b{display:block;font-size:17px}.st small{font:600 9px 'IBM Plex Mono';letter-spacing:.1em;color:#6E9AA0}
+.hint{font:600 11px 'IBM Plex Mono';letter-spacing:.14em;text-transform:uppercase;color:#4E7C84}
+@media(prefers-reduced-motion:reduce){.card{transition:none!important;transform:none!important}}
+</style></head><body>
+<div class="stage"><div class="card" id="c"><div class="in">
+<div class="top"><b>Aurelia, Tidecaller</b><span>HP 120</span></div>
+<div class="art"><svg viewBox="0 0 260 220" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B2A4A"/><stop offset="1" stop-color="#1B6A7A"/></linearGradient><radialGradient id="mn"><stop offset="0" stop-color="#FFF6D6"/><stop offset="1" stop-color="#F3D58A"/></radialGradient></defs><rect width="260" height="220" fill="url(#sk)"/><g fill="#fff" opacity=".8"><circle cx="30" cy="30" r="1.200"/><circle cx="80" cy="18" r="1"/><circle cx="210" cy="26" r="1.400"/><circle cx="170" cy="50" r="1"/><circle cx="52" cy="70" r="1"/><circle cx="236" cy="78" r="1.100"/></g><circle cx="150" cy="78" r="34" fill="url(#mn)"/><path d="M0 150c30-14 55-14 85 0s55 14 85 0 55-14 90 0v70H0Z" fill="#0F4A63"/><path d="M0 172c34-12 60-12 92 0s58 12 92 0 54-12 76 0v48H0Z" fill="#0A3047"/><path d="M0 194c30-9 60-9 90 0s60 9 90 0 60-9 80 0v26H0Z" fill="#06202F"/><path d="M118 96c10 10 14 30 12 52-8-6-14-22-12-52Z" fill="#7AD7FF" opacity=".9"/></svg><div class="foil"></div><div class="glare"></div></div>
+<div class="txt"><b>Moonpull.</b> Flip a coin. On heads, return every opponent's attached energy to their hand.</div>
+<div class="st"><div><b>40</b><small>TIDE</small></div><div><b>2</b><small>RETREAT</small></div><div><b>R</b><small>RARITY</small></div></div>
+</div><div class="glare" style="border-radius:20px"></div></div>
+<div class="hint">Tilt it. The foil follows the light.</div></div>
+<script>
+const c=document.getElementById('c');let real=0;
+function aim(x,y){const r=c.getBoundingClientRect(),px=Math.min(1,Math.max(0,(x-r.left)/r.width)),py=Math.min(1,Math.max(0,(y-r.top)/r.height));
+ c.style.setProperty('--ry',((px-.5)*30).toFixed(1)+'deg');c.style.setProperty('--rx',((.5-py)*24).toFixed(1)+'deg');c.style.setProperty('--px',(px*100).toFixed(0)+'%');c.style.setProperty('--py',(py*100).toFixed(0)+'%')}
+addEventListener('pointermove',e=>{real=performance.now();c.classList.add('live');aim(e.clientX,e.clientY)});
+c.addEventListener('pointerleave',()=>{real=0});
+/* Idle demo: the card sways in the light on a slow Lissajous until a real pointer arrives. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)(function loop(n){if(!real||n-real>2200){c.classList.add('live');const t=n/1000+1.4,r=c.getBoundingClientRect();aim(r.left+r.width*(.5+.55*Math.sin(t*.8)),r.top+r.height*(.5+.5*Math.cos(t*.6)))}requestAnimationFrame(loop)})(0);
+</script></body></html>

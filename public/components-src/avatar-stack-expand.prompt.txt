@@ -1,0 +1,40 @@
+ROLE
+You are a senior collaboration product designer and front-end engineer with 15+ years of experience. Build "Avatar Stack Expand": a reviewers row of overlapping avatars that spreads apart with a spring and shows name tooltips, with compact stacks in the list rows below.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cool grey page, white card, generated illustrated faces with a white ring and an ink overflow chip.
+- Palette: #141830, #EDF0F7, #6C7194, #EEF0F7, #8A8FAE, #6366F1
+- Type: Plus Jakarta Sans (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Card header; large stack of six faces plus a +2 chip; two list rows with mini stacks; expand toggle.
+
+INTERACTION & STATES
+- Hover, focus or the button spreads the stack from -16px overlap to a 10px gap; hovering a face lifts it 8px and reveals a name tooltip; Enter or Space toggles for keyboard users.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Margin transition 500ms cubic-bezier(.3,1.4,.4,1); lift and scale 1.12 over 400ms; tooltip fades and scales .9 to 1 over 250ms.
+
+IDLE AUTOPLAY
+- The stack closes and opens every few seconds, and while open a highlight with a tooltip walks along the reviewers.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Stacks where the overlap hides every face; keep the ring and offset.
+- Tooltips that clip at the card edge.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

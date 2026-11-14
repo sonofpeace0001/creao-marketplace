@@ -1,0 +1,40 @@
+ROLE
+You are a senior photography portfolio designer and front-end engineer with 15+ years of experience. Build "Lightbox Expand Gallery": a masonry grid of nine frames where a tile expands out of its slot into a centred lightbox with a caption, and flies back into place on close.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream gallery card with serif title, softly blurred scrim and a caption card.
+- Palette: #1B1812, #E8590C, #EDE9E0, #FBF8F1, #9A917B, #8F866F
+- Type: Instrument Serif, Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; three-column masonry of varied-height tiles with hover captions; blurred scrim; floating lightbox; caption card; close button.
+
+INTERACTION & STATES
+- Click a tile to open, click the scrim, close button or press Escape to return; tiles keep their place while hidden.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- The lightbox starts at the tile's exact rectangle and transitions left, top, width, height and radius over 600ms cubic-bezier(.3,1.1,.3,1); scrim fades 450ms; caption springs up with a .25s delay.
+
+IDLE AUTOPLAY
+- Frames open and close in turn, each held for 2.8s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A fade-in modal with no spatial link to the tile.
+- Layout shift in the grid when a tile is lifted out.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

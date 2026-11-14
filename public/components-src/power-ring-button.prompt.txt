@@ -1,0 +1,40 @@
+ROLE
+You are a senior hardware dashboard designer and front-end engineer with 15+ years of experience. Build "Power Ring Button": a glowing power button inside a progress ring: pressing runs a boot sequence with a log and a filling arc, then live CPU, temperature, memory and uptime readouts tick.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black console with cyan and mint glow, tick-marked ring, recessed button and mono telemetry.
+- Palette: #7CF0FF, #4F6C74, #0C1218, #22D3EE, #05080C, #DDF3F6
+- Type: Space Grotesk, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Four readout tiles (CPU, temperature, memory, uptime); central power button with ring, tick marks, glowing core icon; status and sub-status lines.
+
+INTERACTION & STATES
+- Click toggles power: on runs a 4 percent per 34ms boot with four log messages; off drains the ring while saving state; readouts reset.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Ring fills via pathLength stroke-dashoffset; core gains a 60px cyan bloom; an expanding pulse ring every 2.4s while online; readouts update every 800ms.
+
+IDLE AUTOPLAY
+- The unit powers down and boots again on repeat, with the readouts ticking in between.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A toggle with no intermediate state; booting is the interesting part.
+- Telemetry that does not reset when powered off.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

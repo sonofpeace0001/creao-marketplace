@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Delta Trend Badges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F4F5F7;color:#0F1115;font-family:'Geist',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:700px;display:grid;gap:20px}
+.hd{display:flex;justify-content:space-between;align-items:end}.hd h1{font-size:26px;font-weight:700;letter-spacing:-.04em}.hd span{display:flex;align-items:center;gap:8px;font:500 12px 'Geist Mono';letter-spacing:.1em;text-transform:uppercase;color:#7C828F}.hd span i{width:8px;height:8px;border-radius:50%;background:#16A34A;animation:pu 1.600s ease-out infinite}@keyframes pu{70%{box-shadow:0 0 0 8px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.c{--c:#16A34A;--bg:#E6F7EC;border-radius:22px;background:#fff;padding:16px 16px 14px;box-shadow:inset 0 0 0 1px rgba(15,17,21,.07),0 16px 22px -20px rgba(15,17,21,.4);display:grid;gap:10px;overflow:hidden;transition:transform .3s cubic-bezier(.3,1.4,.4,1)}
+.c:hover{transform:translateY(-3px)}.c.dn{--c:#DC2626;--bg:#FDE8E8}
+.t{font-size:13px;font-weight:600;color:#6B7280}
+.v{display:flex;align-items:baseline;justify-content:space-between;gap:8px}.v b{font:600 28px 'Geist';letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.dl{display:inline-flex;align-items:center;gap:5px;padding:4px 9px 4px 7px;border-radius:99px;background:var(--bg);color:var(--c);font:600 12.500px 'Geist Mono';font-variant-numeric:tabular-nums;transition:background .4s,color .4s}
+.dl svg{width:13px;height:13px;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}.dl svg *{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.c.dn .dl svg{transform:rotate(90deg)}
+.sp{height:38px;margin:0 -4px}.sp svg{width:100%;height:100%;overflow:visible}.sp .ln{fill:none;stroke:var(--c);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .4s}.sp .ar{fill:var(--c);opacity:.12;transition:fill .4s}.sp .pt{fill:var(--c);transition:fill .4s}
+.ft{display:flex;justify-content:space-between;font:500 11.500px 'Geist Mono';color:#9AA0AC}
+@media(max-width:560px){.g{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Deltas that move with the data</h1><span><i></i>Streaming</span></div><div class="g" id="g"></div></div>
+<script>
+const M=[['Revenue','$',48210,0,'#16A34A'],['Signups','',1284,0,'#16A34A'],['Churn','',2.4,1,'#DC2626'],['Conversion','',3.8,0,'#16A34A'],['Avg order','$',86.5,0,'#16A34A'],['Support wait','',4.2,1,'#DC2626']];
+const g=document.getElementById('g');let seed=5;const R=()=>(seed=seed*16807%2147483647)/2147483647;
+const TR=[1,1,-1,1,1,-1];
+const S=M.map((m,k)=>({m,k,val:m[2],pts:Array.from({length:18},(_,i)=>50+TR[k]*i*(.9+k*.12)+Math.sin(i*.9+k*1.7)*3+R()*3),shown:m[2]}));
+S.forEach((s,i)=>{const a=document.createElement('article');a.className='c';a.innerHTML='<div class="t">'+s.m[0]+'</div><div class="v"><b>--</b><span class="dl"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg><span>0.0%</span></span></div><div class="sp"><svg viewBox="0 0 120 38" preserveAspectRatio="none"><path class="ar"/><path class="ln"/><circle class="pt" r="3"/></svg></div><div class="ft"><span>vs last 7 days</span><span>live</span></div>';g.appendChild(a);s.el=a});
+function draw(s){const mn=Math.min(...s.pts)-4,mx=Math.max(...s.pts)+4,P=s.pts.map((y,i)=>[i/(s.pts.length-1)*120,36-(y-mn)/(mx-mn)*32]),d=P.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+ s.el.querySelector('.ln').setAttribute('d',d);s.el.querySelector('.ar').setAttribute('d',d+' L120 38 L0 38Z');const pt=s.el.querySelector('.pt');pt.setAttribute('cx',P[P.length-1][0]);pt.setAttribute('cy',P[P.length-1][1]);
+ const ch=(s.pts[s.pts.length-1]-s.pts[0])/s.pts[0]*45,good=s.m[3]===1?ch<0:ch>0;s.el.classList.toggle('dn',!good);s.el.querySelector('.dl span').textContent=(ch>=0?'+':'')+ch.toFixed(1)+'%';s.el.querySelector('.dl svg').style.transform=ch<0?'rotate(180deg)':'none'}
+function fmt(s,v){const m=s.m;return (m[1]||'')+(m[2]>100?Math.round(v).toLocaleString('en-US'):v.toFixed(1))+(m[0]==='Churn'||m[0]==='Conversion'?'%':m[0]==='Support wait'?'m':'')}
+function step(){S.forEach(s=>{const last=s.pts[s.pts.length-1];s.pts.push(Math.max(15,Math.min(110,last+TR[s.k]*.5+(R()-.5)*6)));s.pts.shift();s.val=s.m[2]*(1+(s.pts[s.pts.length-1]-s.pts[0])/260);draw(s)})}
+S.forEach(s=>draw(s));(function tw(){S.forEach(s=>{s.shown+=(s.val-s.shown)*.1;s.el.querySelector('b').textContent=fmt(s,s.shown)});requestAnimationFrame(tw)})();
+/* Idle demo: the data streams. Every 1.4s each sparkline takes a new point, the badge recomputes its percentage, flips arrow direction and colour, and the headline number eases to its new value. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(step,1400);
+</script></body></html>

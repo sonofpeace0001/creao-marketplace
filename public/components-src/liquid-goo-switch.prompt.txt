@@ -1,0 +1,40 @@
+ROLE
+You are a senior motion designer and front-end engineer with 15+ years of experience. Build "Liquid Goo Switch": four settings switches whose knob throws a second blob that an SVG goo filter stretches and re-merges as it crosses a colour-flooding track.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper with a white settings card, tangerine, blue, green and violet tracks and bold rounded type.
+- Palette: #1F1A12, #F3EFE7, #8E846C, #F0EBDF, #9A8F76, #FF5A36
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; settings card of four rows (Wi-Fi, Dark mode, Focus mode, Auto-save) each with title, helper text and a 96 by 48 switch with ON and OFF labels.
+
+INTERACTION & STATES
+- Real role=switch buttons with aria-checked; clicking flips the state and floods the track with the row's colour.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Two blobs share one filter group (feGaussianBlur 6 then alpha matrix 22 -9); the main blob moves 550ms cubic-bezier(.6,-.25,.3,1.3) and the trailing one follows after a 90ms delay so the metaball neck stretches; track colour 500ms.
+
+IDLE AUTOPLAY
+- The switches flip in turn every 1.3s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Applying the goo filter to the label text; filter only the blob layer.
+- A single blob moving at constant speed, which shows no stretch.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

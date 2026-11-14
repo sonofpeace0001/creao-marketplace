@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Live Status Pills</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0C10;color:#ECEEF4;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(520px 340px at 20% 0,rgba(244,63,94,.14),transparent 70%)}
+.w{width:100%;max-width:640px;display:grid;gap:26px}
+.hd h1{font-size:28px;font-weight:800;letter-spacing:-.045em}.hd p{color:#767B90;font-size:14px;margin-top:6px}
+.sc{border-radius:22px;background:#13151C;padding:22px;display:grid;gap:16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.sc small{font:500 11.500px 'JetBrains Mono';letter-spacing:.14em;text-transform:uppercase;color:#6B7086}
+.rw{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.p{display:inline-flex;align-items:center;gap:9px;padding:8px 14px 8px 12px;border-radius:99px;font:700 12.500px 'JetBrains Mono';letter-spacing:.1em;text-transform:uppercase;background:var(--bg);color:var(--c);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 40%,transparent)}
+.dot{position:relative;width:9px;height:9px;border-radius:50%;background:var(--c)}.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--c);animation:rp 1.600s ease-out infinite}@keyframes rp{to{transform:scale(3.200);opacity:0}}
+.live{--c:#FF4D6A;--bg:rgba(255,77,106,.14)}.live.solid{background:#FF4D6A;color:#fff;box-shadow:0 10px 20px -8px rgba(255,77,106,.8)}.live.solid .dot,.live.solid .dot::after{background:#fff}
+.rec{--c:#FF5A5A;--bg:rgba(255,90,90,.12)}.rec .dot{animation:bk 1s steps(1) infinite}.rec .dot::after{display:none}@keyframes bk{50%{opacity:.15}}
+.air{--c:#FFD24A;--bg:#2A2108;border-radius:8px;letter-spacing:.2em;animation:gl 2.400s ease-in-out infinite}@keyframes gl{50%{box-shadow:inset 0 0 0 1px rgba(255,210,74,.5),0 0 22px rgba(255,210,74,.5)}}.air .dot{border-radius:2px}.air .dot::after{display:none}
+.syn{--c:#5EB0FF;--bg:rgba(94,176,255,.12)}.syn svg{width:15px;height:15px;animation:sp 1.100s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}.syn svg *{fill:none;stroke:currentColor;stroke-width:2.600;stroke-linecap:round;stroke-linejoin:round}
+.typ{--c:#B4B8CC;--bg:#1D2029;text-transform:none;letter-spacing:.02em;font:600 13px 'Inter Tight'}.typ i{display:flex;gap:3px}.typ i b{width:5px;height:5px;border-radius:50%;background:currentColor;animation:bn 1.200s ease-in-out infinite}.typ i b:nth-child(2){animation-delay:.15s}.typ i b:nth-child(3){animation-delay:.3s}@keyframes bn{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+.eq{--c:#34D399;--bg:rgba(52,211,153,.12)}.eq i{display:flex;align-items:flex-end;gap:2px;height:13px}.eq i b{width:3px;border-radius:2px;background:currentColor;animation:eq 1s ease-in-out infinite}.eq i b:nth-child(1){animation-delay:-.4s}.eq i b:nth-child(2){animation-delay:-.1s}.eq i b:nth-child(3){animation-delay:-.7s}.eq i b:nth-child(4){animation-delay:-.25s}@keyframes eq{0%,100%{height:3px}50%{height:13px}}
+.tm{font-variant-numeric:tabular-nums}
+.cnt{--c:#C4B5FD;--bg:rgba(139,92,246,.14)}.vw{display:inline-block;height:1.2em;overflow:hidden;vertical-align:-3px;font-variant-numeric:tabular-nums}.vw span{display:block;height:1.2em;line-height:1.2em;transition:transform .45s cubic-bezier(.3,1.3,.4,1)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>Badges with a pulse</h1><p>Signals that tell you something is happening right now.</p></div>
+<div class="sc"><small>Broadcast</small><div class="rw"><span class="p live solid"><i class="dot"></i>Live</span><span class="p live"><i class="dot"></i>Live <span class="vw" id="vw"><span id="v1">4,812</span></span> watching</span><span class="p rec"><i class="dot"></i>Rec <span class="tm" id="tm">00:42</span></span><span class="p air"><i class="dot"></i>On air</span></div></div>
+<div class="sc"><small>Activity</small><div class="rw"><span class="p syn"><svg viewBox="0 0 24 24"><path d="M20 8a8 8 0 0 0-14-2.500L4 8M4 4v4h4M4 16a8 8 0 0 0 14 2.500L20 16M20 20v-4h-4"/></svg>Syncing</span><span class="p typ">Priya is typing<i><b></b><b></b><b></b></i></span><span class="p eq"><i><b></b><b></b><b></b><b></b></i>Now playing</span><span class="p cnt"><i class="dot"></i><span class="tm" id="cd">Starts in 02:14</span></span></div></div></div>
+<script>
+const pad=n=>String(n).padStart(2,'0');let s=42,c=134,v=4812;const v1=document.getElementById('v1'),vw=document.getElementById('vw');
+const rows=[...document.querySelectorAll('.p.live:not(.solid)')];
+setInterval(()=>{s++;document.getElementById('tm').textContent=pad(Math.floor(s/60))+':'+pad(s%60);c=c<=0?134:c-1;document.getElementById('cd').textContent='Starts in '+pad(Math.floor(c/60))+':'+pad(c%60)},1000);
+function bump(){const nv=v+Math.round((Math.random()*160-50));const nw=document.createElement('span');nw.textContent=nv.toLocaleString('en-US');vw.appendChild(nw);vw.firstChild.style.transform='translateY(-100%)';nw.style.transform='translateY(0)';
+ const old=vw.firstChild;setTimeout(()=>{old.remove();nw.id='v1'},470);v=nv}
+/* Everything here is live by design: the timer and countdown tick every second, the viewer count rolls to a new number every 2.4s, and each pill pulses on its own. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(bump,2400);
+</script></body></html>

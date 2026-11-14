@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pull Lever Toggle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 480px at 50% 30%,#3A3F4A,#1A1C22 75%);color:#E9ECF2;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+.w{display:grid;gap:22px;justify-items:center;text-align:center}
+.w h1{font-size:26px;font-weight:700;letter-spacing:-.04em}.w p{color:#8E96A6;font-size:14px;margin-top:6px}
+.pn{display:flex;gap:26px;padding:26px 30px;border-radius:26px;background:linear-gradient(160deg,#4A505D,#2C3038);box-shadow:0 40px 50px -26px rgba(0,0,0,.9),inset 0 2px 0 rgba(255,255,255,.18),inset 0 -3px 0 rgba(0,0,0,.4),0 0 0 2px #14161B}
+.u{display:grid;justify-items:center;gap:14px;width:128px}
+.led{width:14px;height:14px;border-radius:50%;background:#3B2020;box-shadow:inset 0 1px 2px rgba(0,0,0,.7),0 0 0 3px #1B1D23;transition:background .3s,box-shadow .3s}
+.u.on .led{background:#4ADE80;box-shadow:0 0 12px 3px rgba(74,222,128,.8),0 0 0 3px #1B1D23,inset 0 1px 2px rgba(255,255,255,.5)}
+.sl{position:relative;width:70px;height:170px;border-radius:35px;background:linear-gradient(90deg,#14161B,#262A32 40%,#14161B);box-shadow:inset 0 6px 12px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.12);cursor:pointer;touch-action:none;border:0;padding:0;outline:0}
+.sl:focus-visible{box-shadow:inset 0 6px 12px rgba(0,0,0,.8),0 0 0 3px #7DD3FC}
+.sl::before{content:"";position:absolute;left:50%;top:18px;bottom:18px;width:8px;margin-left:-4px;border-radius:4px;background:#07080B;box-shadow:inset 0 2px 3px rgba(0,0,0,.9)}
+.pv{position:absolute;left:50%;top:50%;width:0;height:0}
+.ar{position:absolute;left:-7px;top:0;width:14px;height:var(--l,72px);border-radius:7px;background:linear-gradient(90deg,#9AA1AE,#E3E7EE 45%,#8C93A0);box-shadow:0 2px 4px rgba(0,0,0,.5);transform-origin:50% 0;transform:rotate(var(--a,35deg));transition:transform .6s cubic-bezier(.3,1.6,.45,.9)}
+.kn{position:absolute;left:50%;bottom:-24px;width:50px;height:50px;margin-left:-25px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#FF8A7A,#E5342A 55%,#8E1810);box-shadow:0 8px 12px rgba(0,0,0,.5),inset 0 -4px 6px rgba(0,0,0,.35)}
+.u.on .kn{background:radial-gradient(circle at 35% 28%,#8AF0B2,#22A55A 55%,#0E5C2F)}
+.lb{font:600 12px 'IBM Plex Mono';letter-spacing:.14em;text-transform:uppercase;color:#9AA2B2}.lb b{display:block;font:700 15px 'Space Grotesk';letter-spacing:-.01em;color:#F2F4F8;text-transform:none;margin-bottom:3px}
+.st{font:600 12px 'IBM Plex Mono';letter-spacing:.14em;color:#8E96A6;transition:color .3s}.u.on .st{color:#4ADE80}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div><h1>Throw the switch</h1><p>A physical lever with a spring, a stop at each end and a lamp that answers.</p></div>
+<div class="pn" id="pn"></div></div>
+<script>
+const U=[['Main power','Grid supply'],['Pump station','Line 2'],['Cooling loop','Circuit B']];
+const pn=document.getElementById('pn'),us=[];
+U.forEach(([n,s],i)=>{const u=document.createElement('div');u.className='u';u.innerHTML='<i class="led"></i><button class="sl" role="switch" aria-checked="false" aria-label="'+n+'"><span class="pv"><span class="ar"><span class="kn"></span></span></span></button><div class="lb"><b>'+n+'</b>'+s+'</div><div class="st">OFF</div>';pn.appendChild(u);const b=u.querySelector('.sl');b._on=false;us.push(u);
+ b.onclick=()=>{if(b._drag)return;off=true;set(u,!b._on)};b.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();off=true;set(u,!b._on)}});
+ let sy=null,sa=0;b.addEventListener('pointerdown',e=>{sy=e.clientY;b._drag=false;b.setPointerCapture(e.pointerId)});b.addEventListener('pointermove',e=>{if(sy===null)return;const d=e.clientY-sy;if(Math.abs(d)>6){b._drag=true;off=true;const ar=u.querySelector('.ar');ar.style.transition='none';ar.style.setProperty('--a',Math.max(-35,Math.min(35,(b._on?-35:35)+d*.5))+'deg')}});
+ b.addEventListener('pointerup',e=>{if(sy===null)return;const wasDrag=b._drag;sy=null;const ar=u.querySelector('.ar');ar.style.transition='';if(wasDrag){const d=parseFloat(ar.style.getPropertyValue('--a'));set(u,d<0);setTimeout(()=>b._drag=false,0)}})});
+function set(u,on){const b=u.querySelector('.sl');b._on=on;b.setAttribute('aria-checked',on);u.classList.toggle('on',on);u.querySelector('.ar').style.setProperty('--a',(on?-35:35)+'deg');u.querySelector('.st').textContent=on?'ON':'OFF'}
+us.forEach(u=>set(u,false));set(us[0],true);set(us[2],true);
+/* Idle demo: the levers are thrown in turn; each arm swings through its arc with a spring bounce at the stop and its lamp lights or dims, until a real click or drag. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2800);let k=1;while(!off){const u=us[k++%3];set(u,!u.querySelector('.sl')._on);await sleep(1500)}})()}
+</script></body></html>

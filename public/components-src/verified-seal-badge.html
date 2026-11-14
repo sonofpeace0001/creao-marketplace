@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Verified Seal Badge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(700px 480px at 50% 0,#1F2347,#0B0C18 75%);color:#EEF0FF;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:700px;display:grid;gap:28px;justify-items:center;text-align:center}
+.w h1{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.05em}.w p{color:#8E93BE;font-size:14px;margin-top:8px}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;width:100%}
+.s{display:grid;justify-items:center;gap:14px;padding:22px 10px 18px;border-radius:26px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.sl{position:relative;width:min(150px,28vw);aspect-ratio:1}
+.sl svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.rg{transform-origin:50% 50%;animation:rot 16s linear infinite}.s:nth-child(2) .rg{animation-duration:22s;animation-direction:reverse}.s:nth-child(3) .rg{animation-duration:12s}
+@keyframes rot{to{transform:rotate(360deg)}}
+.sc{filter:drop-shadow(0 10px 14px var(--g))}
+.ck{transform-origin:50% 50%;animation:pu 3.200s ease-in-out infinite}@keyframes pu{50%{transform:scale(1.07)}}
+.ck path{stroke-dasharray:1;stroke-dashoffset:0;animation:cd 5s ease-in-out infinite}@keyframes cd{0%{stroke-dashoffset:1}20%,90%{stroke-dashoffset:0}100%{stroke-dashoffset:1}}
+.sh{animation:sw 4s ease-in-out infinite;transform-origin:50% 50%}@keyframes sw{0%,60%{transform:translateX(-120%) rotate(18deg)}100%{transform:translateX(120%) rotate(18deg)}}
+.s b{font-size:15px;font-weight:700}.s small{font:500 11.500px 'Geist Mono';letter-spacing:.08em;color:#8E93BE;margin-top:-8px}
+@media(max-width:520px){.g{grid-template-columns:1fr}.sl{width:140px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="w"><div><h1>Seals that earn their trust</h1><p>A scalloped crest, a turning ring of text and a check that draws itself.</p></div><div class="g" id="g"></div></div>
+<script>
+const V=[['Verified creator','Identity confirmed','#F5C542','#B8860B','#FFF3B8','rgba(245,197,66,.55)','VERIFIED CREATOR  *  ORIGINAL WORK  *  '],['Trusted seller','Reviewed by the team','#4DA3FF','#1E5FD6','#CFE6FF','rgba(77,163,255,.55)','TRUSTED SELLER  *  100% GENUINE  *  '],['Open source','Audited, MIT licensed','#34D399','#0F8A5F','#C9F7E2','rgba(52,211,153,.55)','OPEN SOURCE  *  AUDITED  *  COMMUNITY  *  ']];
+const g=document.getElementById('g');
+function scallop(n,R,a){let d='';for(let i=0;i<=360;i+=2){const t=i*Math.PI/180,r=R+a*Math.cos(n*t);d+=(i?'L':'M')+(60+r*Math.cos(t)).toFixed(2)+' '+(60+r*Math.sin(t)).toFixed(2)}return d+'Z'}
+V.forEach(([t,s,c1,c2,c3,gl,ring],i)=>{const id='g'+i;g.insertAdjacentHTML('beforeend','<div class="s"><div class="sl" role="img" aria-label="'+t+' seal"><svg viewBox="0 0 120 120"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+c3+'"/><stop offset=".45" stop-color="'+c1+'"/><stop offset="1" stop-color="'+c2+'"/></linearGradient><path id="p'+i+'" d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1-94 0"/><clipPath id="c'+i+'"><path d="'+scallop(14,44,2.600)+'"/></clipPath></defs>'
+ +'<g class="sc" style="--g:'+gl+'"><path d="'+scallop(14,44,2.600)+'" fill="url(#'+id+')"/></g><g clip-path="url(#c'+i+')"><rect class="sh" x="-20" y="-10" width="30" height="140" fill="rgba(255,255,255,.55)"/></g>'
+ +'<circle cx="60" cy="60" r="33" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1"/>'
+ +'<g class="rg"><text font-family="Geist Mono" font-weight="600" font-size="7.200" letter-spacing="1.800" fill="'+c2+'" opacity=".95"><textPath href="#p'+i+'" startOffset="0">'+ring.replace(/\*/g,'&#9679;').replace(/ /g,'&#160;')+'</textPath></text></g>'
+ +'<g class="ck"><circle cx="60" cy="60" r="21" fill="#fff" opacity=".96"/><path pathLength="1" d="m50 60.500 7.500 7.500L71 52" fill="none" stroke="'+c2+'" stroke-width="5.500" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div><b>'+t+'</b><small>'+s+'</small></div>')});
+</script></body></html>

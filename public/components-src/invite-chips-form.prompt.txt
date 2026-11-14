@@ -1,0 +1,41 @@
+ROLE
+You are a senior collaboration product designer and front-end engineer with 15+ years of experience. Build "Invite Chips Form": a team invite form with an email tag input: chips with initials avatars, paste-to-split, invalid flagging, a sliding role switch and a live send count.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Cool grey canvas, a white card and indigo chips with per-person colours.
+- Palette: #4F46E5, #14151F, #6C6F85, #DFE1EC, #DC2626, #EEEFF6
+- Type: Geist (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Heading and instruction; tag field holding chips plus a free input; role segmented control with a sliding thumb; Send button with a count badge; keyboard hint.
+
+INTERACTION & STATES
+- Enter, comma or space commits a chip; paste splits on whitespace, commas and semicolons; Backspace on empty input removes the last chip; invalid addresses become red chips marked invalid and do not count; blur commits the pending text.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Chip enter: scale .4 to 1 with a 350ms spring; remove: 250ms shrink and fade.
+- Invalid chip shakes 400ms; count badge bumps to 1.35 scale for 200ms; role thumb slides 300ms cubic-bezier(.3,1.3,.4,1).
+
+IDLE AUTOPLAY
+- A new address is typed and committed, a typo is flagged then removed, the role switches to Admin and back, and extra chips clear, in a loop.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Validation on submit only; flag at commit time.
+- Chips that lose invalid input; keep it visible so it can be fixed.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

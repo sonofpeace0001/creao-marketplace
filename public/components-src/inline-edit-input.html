@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Inline Edit Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F6F1E7;color:#241C14;font-family:'Figtree',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{position:relative;width:100%;max-width:520px;border-radius:26px;background:#FFFDF9;padding:32px;box-shadow:0 30px 50px -32px rgba(36,28,20,.45),inset 0 0 0 1px rgba(36,28,20,.07)}
+.tg{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C2410C;margin-bottom:12px}.tg i{width:8px;height:8px;border-radius:50%;background:#C2410C;display:block}
+.fd{position:relative;display:block;border-radius:14px;margin:0 -10px;padding:6px 10px;cursor:text;transition:background .2s}
+.fd:not(.ed):hover{background:#F6F1E7}
+.vw{display:flex;align-items:center;gap:10px}
+.vw span.v{flex:1;min-width:0}.vw .pn{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#A09785;opacity:0;transform:scale(.8);transition:all .2s cubic-bezier(.3,1.5,.5,1);flex:none}.vw .pn svg{width:16px;height:16px}
+.fd:not(.ed):hover .pn,.fd.hv .pn{opacity:1;transform:none;background:#EFE8D8;color:#241C14}
+.fd.hv{background:#F6F1E7}
+.ti .v{font:700 32px/1.15 'Fraunces';letter-spacing:-.03em}.de .v{font-size:16px;line-height:1.6;color:#5D5446}
+.ip{display:none;align-items:center;gap:8px}.fd.ed .ip{display:flex}.fd.ed .vw{display:none}.fd.ed{background:#fff;box-shadow:inset 0 0 0 2px #C2410C,0 0 0 5px rgba(194,65,12,.12)}
+.ip input{flex:1;min-width:0;border:0;outline:0;background:none;color:inherit;font:inherit;padding:0}.ti .ip input{font:700 32px/1.15 'Fraunces';letter-spacing:-.03em}.de .ip input{font:400 16px/1.6 'Figtree';color:#241C14}
+.ip button{width:34px;height:34px;border:0;border-radius:10px;display:grid;place-items:center;cursor:pointer;flex:none;transition:transform .15s}.ip button:active{transform:scale(.9)}.ip svg{width:17px;height:17px}.ip .ok{background:#241C14;color:#FFFDF9}.ip .no{background:#EFE8D8;color:#5D5446}.ip button:focus-visible{outline:2px solid #C2410C;outline-offset:2px}
+.fd.fl{animation:fl .9s}@keyframes fl{0%{background:#DCFCE7}100%{background:transparent}}
+.mt{display:flex;gap:18px;margin-top:22px;padding-top:18px;border-top:1px solid #EFE8D8;font-size:13.500px;color:#8C8372}.mt b{color:#241C14;font-weight:600}
+.sv{position:absolute;right:22px;top:20px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#15803D;opacity:0;transform:translateY(-6px);transition:all .3s cubic-bezier(.3,1.4,.4,1)}.sv.on{opacity:1;transform:none}.sv svg{width:16px;height:16px}
+.hint{margin-top:16px;font-size:13px;color:#A09785}.hint kbd{font:600 11px 'Figtree';padding:2px 6px;border-radius:5px;background:#F0E9D9;box-shadow:0 1px 0 #DDD3BD;color:#5D5446}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="c"><div class="sv" id="sv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg>Saved</div>
+<div class="tg"><i></i>Project brief</div>
+<div class="fd ti" id="f1"><div class="vw"><span class="v">Autumn campaign launch</span><span class="pn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16Zm9-13 4 4"/></svg></span></div><div class="ip"><input aria-label="Project title"><button class="ok" aria-label="Save"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></button><button class="no" aria-label="Cancel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div></div>
+<div class="fd de" id="f2" style="margin-top:6px"><div class="vw"><span class="v">A four week push across email, paid social and the homepage, built around the new range and a single clear offer.</span><span class="pn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16Zm9-13 4 4"/></svg></span></div><div class="ip"><input aria-label="Description"><button class="ok" aria-label="Save"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></button><button class="no" aria-label="Cancel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div></div>
+<div class="mt"><span>Owner <b>Amara Diallo</b></span><span>Due <b>14 Oct</b></span><span>Budget <b>$24,000</b></span></div>
+<div class="hint">Click any text to edit. <kbd>Enter</kbd> saves, <kbd>Esc</kbd> cancels.</div></div>
+<script>
+const sv=document.getElementById('sv');
+function wire(f){const v=f.querySelector('.v'),i=f.querySelector('input'),ok=f.querySelector('.ok'),no=f.querySelector('.no');let old='';
+ const open=()=>{if(f.classList.contains('ed'))return;old=v.textContent;i.value=old;f.classList.add('ed');i.focus();i.setSelectionRange(old.length,old.length)};
+ const save=()=>{const t=i.value.trim();if(t)v.textContent=t;f.classList.remove('ed');f.classList.remove('fl');void f.offsetWidth;f.classList.add('fl');sv.classList.add('on');setTimeout(()=>sv.classList.remove('on'),1600)};
+ const cancel=()=>{f.classList.remove('ed')};
+ f.addEventListener('click',e=>{if(!e.target.closest('.ip'))open()});f.setAttribute('tabindex','0');f.addEventListener('keydown',e=>{if(!f.classList.contains('ed')&&(e.key==='Enter'||e.key===' ')&&e.target===f){e.preventDefault();open()}});
+ i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();save()}else if(e.key==='Escape')cancel()});ok.onclick=save;no.onclick=cancel;f._api={open,save,cancel,i,v}}
+const f1=document.getElementById('f1'),f2=document.getElementById('f2');wire(f1);wire(f2);
+/* Idle demo: a hovered field opens, the text is retyped, saved with a green flash and a Saved tick, then the next field, in a loop. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+ async function edit(f,txt,cancel){f.classList.add('hv');await sleep(900);if(off){f.classList.remove('hv');return false}f.classList.remove('hv');f._api.open();f._api.i.value='';await sleep(300);for(const c of txt){if(off)return false;f._api.i.value+=c;await sleep(45)}await sleep(500);if(cancel){f._api.cancel()}else f._api.save();await sleep(1600);return !off}
+ (async()=>{await sleep(3200);const s=[[f1,'Autumn range launch, Oct 14'],[f2,'A four week push across email, paid social and the homepage, led by one clear offer.'],[f1,'Autumn campaign launch']];let k=0;
+  while(!off){const[f,t]=s[k++%s.length];if(!await edit(f,t,false))return}})()}
+</script></body></html>

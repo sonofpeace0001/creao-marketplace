@@ -1,0 +1,40 @@
+ROLE
+You are a senior motion designer and front-end engineer with 15+ years of experience. Build "Reveal Transition Gallery": one frame that changes picture with six different clip-path transitions: vertical blinds, circle iris, diagonal wipe, tile dissolve, curtain split and rising shutter.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm paper page and a bold generated landscape, with an ink pill naming the active effect.
+- Palette: #1D1A14, #F2EEE6, #9A9179, #FFD23F, #4C4638, #DED6C3
+- Type: Bricolage Grotesque, DM Mono (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Header; stage with two stacked layers and an effect name pill; six effect chips.
+
+INTERACTION & STATES
+- Choosing an effect plays that transition from the current picture to the next, and the layers swap when it ends.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Blinds: ten strips each clip from inset(0 0 100% 0) to 0 over 600ms with a 70ms stagger; iris: circle 0 to 80 percent over 1.2s; diagonal wipe: triangle polygon growing to 230 percent; tiles: an 8 by 5 grid scaling from 0 on a spring with diagonal delay plus jitter; curtain: inset 50 percent each side to 0; shutter: inset(100% 0 0 0) to 0.
+
+IDLE AUTOPLAY
+- A new picture appears every 3s with the next effect in turn.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Cross-fades presented as transitions.
+- Effects whose strips show different crops of the image; each cell offsets the same artwork.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

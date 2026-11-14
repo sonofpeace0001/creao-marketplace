@@ -1,0 +1,40 @@
+ROLE
+You are a senior automotive HMI designer and front-end engineer with 15+ years of experience. Build "Speedometer Gauge": a 270 degree dashboard gauge with tick marks, colour zones, a spring-driven needle, big digital speed, gear indicator, RPM bar and drive modes.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep navy dash, cyan arc glow, amber and red zones, crisp mono tick numbers.
+- Palette: #2A3446, #8FA0BD, #0B1018, #1B2434, #FF4D3D, #111827
+- Type: Unbounded, Space Grotesk, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- SVG dial with arc, ticks and numerals, needle and hub; centre gear badge and speed; RPM LED bar; Eco, Comfort, Sport pills.
+
+INTERACTION & STATES
+- Choosing a drive mode changes acceleration character and arc colour.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Needle follows target speed on a spring with slight overshoot; arc sweeps in step; RPM bar surges on shifts.
+
+IDLE AUTOPLAY
+- After a short delay the car accelerates, shifts gears with RPM dips, cruises, brakes, and repeats.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- A needle that moves linearly; it needs inertia.
+- Cartoon colours; keep the palette restrained.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

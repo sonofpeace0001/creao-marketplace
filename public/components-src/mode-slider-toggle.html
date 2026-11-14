@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mode Slider Toggle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#34D399;--c2:#059669;background:#0B0E13;color:#ECF0F6;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;transition:background .6s}
+.cd{position:relative;width:100%;max-width:520px;border-radius:32px;padding:28px;background:#12161D;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 40px 60px -36px rgba(0,0,0,.9);overflow:hidden}
+.cd::before{content:"";position:absolute;inset:-30% -10% auto;height:70%;background:radial-gradient(60% 100% at 50% 0,color-mix(in srgb,var(--c) 28%,transparent),transparent 70%);transition:background .6s;pointer-events:none}
+.hd{position:relative;display:flex;justify-content:space-between;align-items:center}.hd h1{font-size:22px;font-weight:800;letter-spacing:-.04em}.hd span{font:600 11.500px 'Geist Mono';letter-spacing:.14em;text-transform:uppercase;color:var(--c);transition:color .5s}
+.gg{position:relative;margin:18px auto 58px;width:min(300px,76vw);aspect-ratio:2/1.1}
+.gg svg{width:100%;height:100%;overflow:visible}.gg .tr{fill:none;stroke:#1F2630;stroke-width:12;stroke-linecap:round}.gg .fl{fill:none;stroke:var(--c);stroke-width:12;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--g));transition:stroke-dashoffset .8s cubic-bezier(.3,1.2,.4,1),stroke .5s;filter:drop-shadow(0 0 10px var(--c))}
+.gg .nd{transform-origin:100px 100px;transform:rotate(calc(-90deg + var(--g)*180deg));transition:transform .8s cubic-bezier(.3,1.5,.4,1)}.gg .nd line{stroke:#fff;stroke-width:3.500;stroke-linecap:round}.gg .nd circle{fill:#fff}
+.gg .val{position:absolute;left:0;right:0;top:calc(100% + 2px);text-align:center}.gg .val b{display:block;font:800 40px/1 'Sora';letter-spacing:-.06em}.gg .val small{font:600 11px 'Geist Mono';letter-spacing:.14em;color:#6F7B8D}
+.sl{position:relative;margin:28px 12px 8px;height:64px;border-radius:99px;background:#0B0E13;box-shadow:inset 0 3px 8px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.06);touch-action:none;cursor:grab}
+.sl .fl2{position:absolute;left:6px;top:6px;bottom:6px;width:calc(var(--x) + 26px);border-radius:99px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 25%,#0B0E13),color-mix(in srgb,var(--c) 55%,#0B0E13));transition:width .5s cubic-bezier(.3,1.4,.4,1),background .5s}
+.sl .th{position:absolute;left:6px;top:6px;width:52px;height:52px;border-radius:50%;background:linear-gradient(160deg,#fff,#D8DEE8);box-shadow:0 8px 14px rgba(0,0,0,.5),0 0 0 4px color-mix(in srgb,var(--c) 40%,transparent);transform:translateX(var(--x));transition:transform .5s cubic-bezier(.3,1.5,.4,1);display:grid;place-items:center}
+.sl.dr .th,.sl.dr .fl2{transition:none}.sl.dr{cursor:grabbing}
+.sl .th svg{width:22px;height:22px}.sl .th svg *{fill:none;stroke:var(--c2);stroke-width:2.400;stroke-linecap:round;stroke-linejoin:round;transition:stroke .5s}
+.tk{display:grid;grid-template-columns:repeat(3,1fr);margin:6px 6px 0}.tk button{border:0;background:none;color:#6F7B8D;font:700 13.500px 'Sora';padding:10px 0;cursor:pointer;transition:color .3s;display:grid;gap:3px;justify-items:center}.tk button small{font:500 10.500px 'Geist Mono';letter-spacing:.06em;color:#4A5565}.tk button:nth-child(1){justify-items:start}.tk button:nth-child(3){justify-items:end}
+.tk button[aria-pressed=true]{color:#fff}.tk button:focus-visible{outline:2px solid var(--c);border-radius:10px}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.st div{padding:12px 14px;border-radius:16px;background:#0E1218;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}.st small{display:block;font:600 10px 'Geist Mono';letter-spacing:.14em;color:#5A6577}.st b{font:700 18px 'Sora';letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="cd" id="cd"><div class="hd"><h1>Drive mode</h1><span id="md">Balanced</span></div>
+<div class="gg"><svg viewBox="0 0 200 110"><path class="tr" d="M12 100A88 88 0 0 1 188 100" pathLength="1"/><path class="fl" d="M12 100A88 88 0 0 1 188 100" pathLength="1"/><g class="nd"><line x1="100" y1="100" x2="100" y2="34"/><circle cx="100" cy="100" r="7"/></g></svg><div class="val"><b id="pw">0</b><small>KILOWATTS</small></div></div>
+<div class="sl" id="sl" role="slider" aria-valuemin="0" aria-valuemax="2" aria-valuenow="1" aria-label="Drive mode" tabindex="0"><span class="fl2"></span><span class="th"><svg viewBox="0 0 24 24" id="ic"></svg></span></div>
+<div class="tk" id="tk"><button><span>Eco</span><small>Max range</small></button><button><span>Balanced</span><small>Everyday</small></button><button><span>Turbo</span><small>Full power</small></button></div>
+<div class="st"><div><small>RANGE</small><b id="rg">0 km</b></div><div><small>0 - 100</small><b id="ac">0.0 s</b></div><div><small>REGEN</small><b id="rn">0%</b></div></div></div>
+<script>
+const M=[['Eco','#34D399','#059669',.28,'M5 19c0-9 6-14 15-14 0 9-5 15-14 15M5 19c3-5 6-8 10-10',420,9.4,100,38],['Balanced','#38BDF8','#0369A1',.62,'M3 12h4l3-8 4 16 3-8h4',350,6.8,70,62],['Turbo','#FB923C','#C2410C',1,'M13 2 4 14h6l-1 8 9-12h-6Z',270,3.4,30,118]];
+const cd=document.getElementById('cd'),sl=document.getElementById('sl'),bs=[...document.querySelectorAll('#tk button')],ic=document.getElementById('ic'),root=document.body;let cur=1,shown=0,target=0;
+function pos(i){const w=sl.clientWidth-64;return w*i/2}
+function set(i){cur=i;const m=M[i];root.style.setProperty('--c',m[1]);root.style.setProperty('--c2',m[2]);cd.style.setProperty('--g',m[3]);sl.style.setProperty('--x',pos(i)+'px');sl.setAttribute('aria-valuenow',i);ic.innerHTML='<path d="'+m[4]+'"/>';document.getElementById('md').textContent=m[0];bs.forEach((b,k)=>b.setAttribute('aria-pressed',k===i));target=m[8]; document.getElementById('rg').textContent=m[5]+' km';document.getElementById('ac').textContent=m[6]+' s';document.getElementById('rn').textContent=m[7]+'%'}
+bs.forEach((b,i)=>b.onclick=()=>{off=true;set(i)});
+let d=null;sl.addEventListener('pointerdown',e=>{off=true;d=1;sl.classList.add('dr');sl.setPointerCapture(e.pointerId);mv(e)});sl.addEventListener('pointermove',e=>{if(d)mv(e)});['pointerup','pointercancel'].forEach(ev=>sl.addEventListener(ev,e=>{if(!d)return;d=null;sl.classList.remove('dr');const r=sl.getBoundingClientRect(),x=Math.max(0,Math.min(1,(e.clientX-r.left-32)/(r.width-64)));set(Math.round(x*2))}));
+function mv(e){const r=sl.getBoundingClientRect(),w=r.width-64,x=Math.max(0,Math.min(w,e.clientX-r.left-32));sl.style.setProperty('--x',x+'px');const f=x/w;cd.style.setProperty('--g',.28+f*.72);target=38+f*80}
+sl.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){off=true;set(Math.min(2,cur+1));e.preventDefault()}if(e.key==='ArrowLeft'){off=true;set(Math.max(0,cur-1));e.preventDefault()}});
+(function tw(){shown+=(target-shown)*.08;document.getElementById('pw').textContent=Math.round(shown);requestAnimationFrame(tw)})();
+addEventListener('resize',()=>set(cur));set(1);shown=62;document.fonts.ready.then(()=>set(cur));
+/* Idle demo: the mode slider is driven through Eco, Balanced and Turbo; the thumb springs between detents, the gauge sweeps, the accent colour of the whole card changes and the kilowatt readout counts to each mode, until a real touch. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2800);const o=[2,1,0,1];let k=0;while(!off){set(o[k++%4]);await sleep(2200)}})()}
+</script></body></html>

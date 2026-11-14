@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Keyline Grid Icons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0C3AA6;color:#E8F0FF;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:24px 24px}
+.w{width:100%;max-width:700px;display:grid;grid-template-columns:1.25fr 1fr;gap:20px;align-items:stretch}
+.cv{position:relative;border-radius:22px;background:#0B3294;box-shadow:inset 0 0 0 1.500px rgba(255,255,255,.35);padding:16px;display:grid;gap:12px}
+.cv .ti{display:flex;justify-content:space-between;font:600 11px 'IBM Plex Mono';letter-spacing:.14em;text-transform:uppercase;color:#9CB8FF}
+.bd{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);background-size:calc(100%/24) calc(100%/24);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.bd svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.pad{fill:rgba(255,255,255,.06);stroke:rgba(255,255,255,.4);stroke-dasharray:.4 .4;stroke-width:.06}
+.kl{fill:rgba(255,196,0,.12);stroke:#FFC400;stroke-width:.09;opacity:0;transition:opacity .4s}.kl.on{opacity:1}
+.gl{fill:none;stroke:#fff;stroke-width:1.700;stroke-linecap:round;stroke-linejoin:round}
+.gl.d{stroke-dasharray:1;stroke-dashoffset:1;animation:dr 2s cubic-bezier(.6,0,.2,1) forwards}@keyframes dr{to{stroke-dashoffset:0}}
+.pt{fill:#FF5A7A;opacity:0;transition:opacity .3s}.pt.on{opacity:1}
+.lg{display:flex;flex-wrap:wrap;gap:8px}
+.lg button{border:0;border-radius:99px;padding:6px 11px;background:rgba(255,255,255,.1);color:#CFE0FF;font:600 11px 'IBM Plex Mono';letter-spacing:.06em;cursor:pointer;transition:all .25s}.lg button[aria-pressed=true]{background:#FFC400;color:#2B1F00}.lg button:focus-visible{outline:2px solid #fff}
+.sd{display:grid;gap:12px;align-content:space-between}
+.pn{border-radius:22px;background:#0B3294;box-shadow:inset 0 0 0 1.500px rgba(255,255,255,.35);padding:16px}
+.pn h2{font:700 11px 'IBM Plex Mono';letter-spacing:.14em;text-transform:uppercase;color:#9CB8FF;margin-bottom:14px}
+.sz{display:flex;align-items:flex-end;gap:14px}.sz div{display:grid;justify-items:center;gap:6px}.sz svg{display:block}.sz svg *{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round}.sz small{font:500 10.500px 'IBM Plex Mono';color:#9CB8FF}
+.ru{display:grid;gap:7px;font:500 12.500px 'IBM Plex Mono';color:#CFE0FF}.ru div{display:flex;justify-content:space-between;border-bottom:1px dashed rgba(255,255,255,.2);padding-bottom:6px}.ru b{color:#FFC400;font-weight:600}
+h1{grid-column:1/-1;font-size:24px;font-weight:800;letter-spacing:-.04em;margin-bottom:-6px}h1 span{color:#FFC400}
+@media(max-width:620px){.w{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="w"><h1>Draw it on the <span>keyline</span></h1>
+<div class="cv"><div class="ti"><span>camera / 24 x 24</span><span id="md">Grid</span></div>
+<div class="bd"><svg viewBox="0 0 24 24" aria-label="Camera icon on a 24 pixel keyline grid"><rect class="pad" x="2" y="2" width="20" height="20"/>
+<circle class="kl" data-m="circle" cx="12" cy="12" r="10"/><rect class="kl" data-m="square" x="3" y="3" width="18" height="18" rx="1"/><rect class="kl" data-m="portrait" x="5" y="2" width="14" height="20" rx="1"/><rect class="kl" data-m="landscape" x="2" y="5" width="20" height="14" rx="1"/>
+<g id="gl"><path class="gl" pathLength="1" d="M3 8.500h3.500l1.800-2.800h7.400l1.800 2.800H21v11H3Z"/><circle class="gl" pathLength="1" cx="12" cy="13.500" r="3.800"/></g>
+<g id="pts"><circle class="pt" cx="3" cy="8.500" r=".35"/><circle class="pt" cx="21" cy="19.500" r=".35"/><circle class="pt" cx="12" cy="13.500" r=".35"/><circle class="pt" cx="8.300" cy="5.700" r=".35"/></g></svg></div>
+<div class="lg" id="lg"></div></div>
+<div class="sd"><div class="pn"><h2>Optical sizes</h2><div class="sz" id="sz"></div></div><div class="pn"><h2>Spec</h2><div class="ru"><div><span>Live area</span><b>20 x 20</b></div><div><span>Padding</span><b>2 px</b></div><div><span>Stroke</span><b>1.7 px</b></div><div><span>Corner radius</span><b>2 px</b></div><div><span>Keyline</span><b id="kn">none</b></div></div></div></div></div>
+<script>
+const M=['Grid','circle','square','portrait','landscape','all'],lg=document.getElementById('lg'),md=document.getElementById('md'),kn=document.getElementById('kn'),kls=[...document.querySelectorAll('.kl')],pts=[...document.querySelectorAll('.pt')];
+const D='<path d="M3 8.500h3.500l1.800-2.800h7.400l1.800 2.800H21v11H3Z"/><circle cx="12" cy="13.500" r="3.800"/>';
+[[16,1.9],[20,1.8],[24,1.7],[32,1.6],[48,1.5]].forEach(([s,w])=>{document.getElementById('sz').insertAdjacentHTML('beforeend','<div><svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" aria-hidden="true" style="stroke-width:'+w+'">'+D+'</svg><small>'+s+'</small></div>')});
+M.forEach(m=>{const b=document.createElement('button');b.textContent=m==='Grid'?'GRID':m.toUpperCase();b.setAttribute('aria-pressed','false');b.onclick=()=>{off=true;show(m)};lg.appendChild(b)});
+function show(m){md.textContent=m==='Grid'?'Grid':m==='all'?'All keylines':m[0].toUpperCase()+m.slice(1)+' keyline';kn.textContent=m==='Grid'?'none':m;kls.forEach(k=>k.classList.toggle('on',m==='all'||k.dataset.m===m));pts.forEach(p=>p.classList.toggle('on',m!=='Grid'));[...lg.children].forEach((b,i)=>b.setAttribute('aria-pressed',M[i]===m))}
+show('circle');
+function redraw(){document.querySelectorAll('.gl').forEach(g=>{g.classList.remove('d');void g.getBBox();g.classList.add('d')})}
+/* Idle demo: the keyline overlays cycle through circle, square, portrait, landscape and all, with the glyph redrawing itself and its anchor points lighting up, until a button is pressed. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3600);let k=3;while(!off){redraw();show(M[k++%6]);await sleep(2200)}})()}
+</script></body></html>

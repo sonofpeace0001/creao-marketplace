@@ -1,0 +1,40 @@
+ROLE
+You are a senior scheduling product designer and front-end engineer with 15+ years of experience. Build "Timezone Picker Dropdown": a time zone picker beside a live analog clock: every city row shows its own ticking local time, offset and day or night icon, and choosing a city sweeps the clock hands to its time.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight blue with an amber sun and indigo moon, a precise tick-marked clock face and mono readouts.
+- Palette: #9AA7DA, #7F8BBA, #8A96C6, #0B1020, #1B2754, #EDF1FF
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Analog clock with hour, minute and second hands plus digital time and weekday; labelled trigger with icon, city and GMT offset; popover of eight cities with live times.
+
+INTERACTION & STATES
+- Choosing a city changes the clock, digital time, trigger icon and offset; times are computed with Intl.DateTimeFormat for real IANA zones and tick every second.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Hands transition 900ms cubic-bezier(.3,1.3,.4,1) via the shortest rotation path; second hand ticks without easing; rows enter with a 28ms stagger.
+
+IDLE AUTOPLAY
+- Cities are chosen in turn every 2.2s while the clock runs live.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Hard-coded times that do not tick.
+- Hands that spin the long way round between zones.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

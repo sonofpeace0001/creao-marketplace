@@ -1,0 +1,40 @@
+ROLE
+You are a senior interaction designer and front-end engineer with 15+ years of experience. Build "State Morph Icons": four action icons that morph through idle, working, success and failure, with a spinning ring, a drawn checkmark or cross and honest status captions.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Graphite cards with a coloured working state, green success and red failure, set in a friendly geometric sans and mono captions.
+- Palette: #7B8099, #0D0F14, #EAEDF5, #818CF8, #151821, #1D2130
+- Type: Manrope, JetBrains Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header; four tiles (Upload, Save, Send, Sync) each with a circular icon well, label and status text.
+
+INTERACTION & STATES
+- Click runs a tile: idle icon shrinks, a ring spins, then a check or cross draws; the caption narrates each state; failure shakes.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Icon crossfade with scale .4 to 1 over 450ms spring; ring spins 1s linear; check and cross draw via stroke-dashoffset over 500ms after a 150ms delay; failure shakes 450ms.
+
+IDLE AUTOPLAY
+- Each tile runs its own loop at a different rhythm so idle, working, success and failure are all visible at once.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Success shown without a drawn mark.
+- Status that changes colour without changing words.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

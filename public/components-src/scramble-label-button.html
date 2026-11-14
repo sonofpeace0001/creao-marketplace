@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Scramble Label Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0D0A;color:#E6EBDD;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px 14px;-webkit-font-smoothing:antialiased;background-image:linear-gradient(rgba(190,242,100,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(190,242,100,.04) 1px,transparent 1px);background-size:34px 34px}
+.w{width:100%;max-width:640px;display:grid;gap:34px;justify-items:center;text-align:center}
+.w h1{font-size:clamp(24px,4.4vw,36px);font-weight:700;letter-spacing:-.04em}.w p{color:#7C8672;font-size:15px;margin-top:8px}
+.row{display:grid;gap:16px;width:100%;max-width:440px}
+.sc{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;border:1.500px solid #BEF264;background:transparent;color:#BEF264;border-radius:6px;padding:18px 22px;font:700 15px 'JetBrains Mono';letter-spacing:.12em;text-transform:uppercase;cursor:pointer;overflow:hidden;transition:color .25s,background .25s}
+.sc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:100%;background:#BEF264;transform:translateX(-101%);transition:transform .35s cubic-bezier(.7,0,.2,1);z-index:0}
+.sc:hover::before,.sc.on::before,.sc:focus-visible::before{transform:none}
+.sc:hover,.sc.on,.sc:focus-visible{color:#0B0D0A}
+.sc .t,.sc .n{position:relative;z-index:1}
+.sc .n{font-weight:500;opacity:.6;font-size:12px}
+.sc:focus-visible{outline:2px solid #fff;outline-offset:4px}
+.sc.alt{border-color:#7C8672;color:#E6EBDD}.sc.alt::before{background:#E6EBDD}
+.sc.red{border-color:#FB7185;color:#FB7185}.sc.red::before{background:#FB7185}
+.sc .gl{display:inline-block;min-width:.62em;text-align:center}.sc .gl.s{opacity:.55}
+@media(prefers-reduced-motion:reduce){.sc,.sc::before{transition:none}}
+</style></head><body>
+<div class="w"><div><h1>Labels that decode themselves</h1><p>Hover or focus a button and its label scrambles through glyphs before it locks in, left to right.</p></div>
+<div class="row">
+<button class="sc on" data-t="Request access" data-n="01"><span class="t">Request access</span><span class="n">01</span></button>
+<button class="sc alt" data-t="Read the manifesto" data-n="02"><span class="t">Read the manifesto</span><span class="n">02</span></button>
+<button class="sc red" data-t="Delete workspace" data-n="03"><span class="t">Delete workspace</span><span class="n">03</span></button>
+</div></div>
+<script>
+const G='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+<>/\\=';
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('.sc').forEach(b=>{const t=b.querySelector('.t'),final=b.dataset.t;let id=0;
+ const run=()=>{if(reduce)return;cancelAnimationFrame(id);let f=0;const L=final.length;
+  const step=()=>{f++;const lock=Math.floor(f/2.2);let out='';
+   for(let i=0;i<L;i++){const ch=final[i];if(ch===' '||i<lock)out+=ch;else out+='<span class="gl s">'+G[Math.floor(Math.random()*G.length)]+'</span>'}
+   t.innerHTML=out;if(lock<L)id=requestAnimationFrame(step);else t.textContent=final};step()};
+ b._run=run;b.addEventListener('mouseenter',run);b.addEventListener('focus',run)});
+/* Idle demo: the highlight walks down the list and each label re-decodes. Stops on real input. */
+{const bs=[...document.querySelectorAll('.sc')];let i=0,timer;const stop=()=>{clearInterval(timer);bs.forEach(b=>b.classList.remove('on'))};
+ addEventListener('pointermove',stop,{once:true});addEventListener('keydown',stop,{once:true});
+ if(!reduce)timer=setInterval(()=>{bs[i].classList.remove('on');i=(i+1)%bs.length;bs[i].classList.add('on');bs[i]._run()},2400)}
+</script></body></html>

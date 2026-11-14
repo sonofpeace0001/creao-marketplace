@@ -1,0 +1,40 @@
+ROLE
+You are a senior data visualisation designer and front-end engineer with 15+ years of experience. Build "Team Constellation Avatars": eight teammates floating around a glowing hub, joined by lines that light up with racing data dots when you hover a person.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Deep space blue with a violet hub, cyan highlights and softly drifting faces.
+- Palette: #7DD3FC, #0A0E22, #16204A, #080A18, #EAF0FF, #8190C0
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading; constellation canvas with an Atlas Team hub, eight avatar nodes with role-labelled tooltips, thirteen connecting lines with travelling dots.
+
+INTERACTION & STATES
+- Hover or focus a person to ring and label them and light their connections; line endpoints follow the floating nodes every frame.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Nodes drift +-6px on 4 to 6s alternate loops with offset delays; lines recompute each frame; data dots travel at .25 per second, .9 on active links; hub emits a 2.6s pulse.
+
+IDLE AUTOPLAY
+- A highlight walks around the team every 1.5s, lighting links in turn.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Static lines that detach from drifting nodes.
+- More than a dozen links, which turns the constellation into noise.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

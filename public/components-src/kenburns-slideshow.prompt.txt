@@ -1,0 +1,40 @@
+ROLE
+You are a senior travel editorial designer and front-end engineer with 15+ years of experience. Build "Ken Burns Slideshow": a cinematic slideshow where every picture crossfades while slowly zooming and drifting in its own direction, with rising captions and segmented progress.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Black stage, rich generated landscapes, a serif headline and mono location labels.
+- Palette: #0B0A10, #F5F1FF, #FFD9A0, #D9D2EC
+- Type: Fraunces, Inter Tight, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Four slides with image, gradient scrim and caption (place, headline, body); slide counter; previous and next buttons; segmented progress bar.
+
+INTERACTION & STATES
+- Auto-plays, 6.5s per slide; progress segments are clickable; arrows and left or right keys navigate and stop the autoplay.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Crossfade 1.2s; each image animates scale 1 to 1.18 to 1.24 with a per-slide transform origin and drift over 7.5s linear; caption rises 16px over 800ms with a .5s delay; progress fill driven by requestAnimationFrame.
+
+IDLE AUTOPLAY
+- The slideshow runs itself and loops continuously.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- The same zoom on every slide.
+- Progress that does not reflect elapsed time.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Create Tag Select</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F7F6F3;color:#2A2823;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:start center;padding:8vh 14px 24px;-webkit-font-smoothing:antialiased}
+.pg{position:relative;width:100%;max-width:560px;border-radius:24px;background:#fff;padding:34px 38px 40px;box-shadow:0 26px 38px -28px rgba(42,40,35,.45),inset 0 0 0 1px rgba(42,40,35,.08);min-height:470px}
+.pg h1{font:600 34px/1.1 'Newsreader';letter-spacing:-.02em;margin-bottom:22px}
+.pr{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start;margin-bottom:6px}.pr>span{font-size:14px;color:#8D897F;padding:8px 0;display:flex;align-items:center;gap:8px}.pr>span svg{width:16px;height:16px}.pr>span svg *{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pr>div{font-size:14.500px;color:#2A2823;padding:8px 0}
+.fd{position:relative}
+.fl{display:flex;flex-wrap:wrap;gap:6px;min-height:40px;align-items:center;padding:6px 10px;border-radius:10px;cursor:text;transition:background .15s,box-shadow .15s}.fl:hover{background:#F3F2EE}.fl.act{background:#fff;box-shadow:inset 0 0 0 2px #2F6BFF}
+.tg{--bg:#E8E6DE;--fg:#4A463C;display:inline-flex;align-items:center;gap:6px;padding:3px 6px 3px 10px;border-radius:7px;background:var(--bg);color:var(--fg);font-size:13.500px;font-weight:600;animation:pop .4s cubic-bezier(.3,1.7,.5,1);max-width:100%}
+.tg button{width:16px;height:16px;border:0;border-radius:4px;background:none;color:inherit;opacity:.55;cursor:pointer;font-size:14px;line-height:1;display:grid;place-items:center}.tg button:hover{opacity:1;background:rgba(0,0,0,.08)}
+@keyframes pop{from{transform:scale(.5);opacity:0}}
+.fl input{flex:1;min-width:90px;border:0;outline:0;background:none;font:500 14.500px 'Inter Tight';color:#2A2823}.fl input::placeholder{color:#B1AD9F}
+.pp{position:absolute;left:0;top:calc(100% + 6px);width:300px;border-radius:14px;background:#fff;box-shadow:0 26px 48px -14px rgba(42,40,35,.45),inset 0 0 0 1px rgba(42,40,35,.1);padding:6px;opacity:0;transform:translateY(-6px) scale(.97);transform-origin:top left;pointer-events:none;transition:opacity .2s,transform .3s cubic-bezier(.3,1.5,.5,1);z-index:6}
+.pp.on{opacity:1;transform:none;pointer-events:auto}
+.hd{font-size:12px;font-weight:600;color:#9B978B;padding:8px 10px 6px}
+.o{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:9px;cursor:pointer;transition:background .12s;animation:in .3s cubic-bezier(.3,1.4,.5,1) both;animation-delay:calc(var(--i)*25ms)}@keyframes in{from{opacity:0;transform:translateY(5px)}}
+.o.hl{background:#F2F1EC}.o .ck{margin-left:auto;width:16px;height:16px;opacity:0;transform:scale(.4);transition:all .3s cubic-bezier(.3,1.8,.5,1);color:#2F6BFF}.o.sel .ck{opacity:1;transform:none}.o .ck svg{width:16px;height:16px}.o .ck svg *{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.o.cr{color:#2A2823;font-size:14px;font-weight:500}.o.cr span.pl{font-size:14px}.o.cr em{font-style:normal;color:#8D897F}
+.o .tg{animation:none;padding:3px 10px}
+.sw{width:14px;height:14px;border-radius:5px;background:var(--bg);flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
+.rw{display:flex;gap:7px;padding:6px 10px 10px}.rw i{width:18px;height:18px;border-radius:6px;background:var(--bg);cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);transition:transform .2s cubic-bezier(.3,1.7,.5,1)}.rw i:hover{transform:scale(1.2)}.rw i.on{box-shadow:0 0 0 2px #fff,0 0 0 3.500px #2F6BFF}
+.bd{margin-top:26px;display:grid;gap:10px}.bd div{height:11px;border-radius:6px;background:#F0EEE8}.bd div:nth-child(2){width:88%}.bd div:nth-child(3){width:64%}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="pg" id="pg"><h1>Launch checklist</h1>
+<div class="pr"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Status</span><div>In progress</div></div>
+<div class="pr"><span><svg viewBox="0 0 24 24"><path d="M3 12l9-9h8v8l-9 9ZM15.500 8.500h.01"/></svg>Tags</span><div class="fd" style="padding:0"><div class="fl" id="fl"><input id="in" placeholder="Search or create" autocomplete="off" aria-label="Tags"></div><div class="pp" id="pp" role="listbox"></div></div></div>
+<div class="pr"><span><svg viewBox="0 0 24 24"><rect x="3.500" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.500 10h17"/></svg>Due</span><div>14 December 2026</div></div>
+<div class="bd"><div></div><div></div><div></div></div></div>
+<script>
+const COL=[['#E8E6DE','#4A463C'],['#FFE2D1','#8A3B12'],['#FBF3C4','#7A5B05'],['#D9F0E0','#1F6B3A'],['#D3E5FB','#1A4F8F'],['#EADCF8','#5B2E91'],['#FADDE8','#8F2A55'],['#DCE9E9','#2B5A5A']];
+let T=[['Design',3],['Engineering',4],['Marketing',1],['Legal',5]],sel=[1],hl=0,open=false,list=[],cc=T.length;
+const fl=document.getElementById('fl'),inp=document.getElementById('in'),pp=document.getElementById('pp');
+const CK='<span class="ck"><svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span>';
+function tag(i,x){const c=COL[T[i][1]];return '<span class="tg" style="--bg:'+c[0]+';--fg:'+c[1]+'">'+T[i][0]+(x?'<button type="button" aria-label="Remove '+T[i][0]+'" data-r="'+i+'">&times;</button>':'')+'</span>'}
+function chips(){fl.querySelectorAll('.tg').forEach(e=>e.remove());sel.forEach(i=>{fl.insertAdjacentHTML('beforebegin','');const t=document.createElement('span');t.innerHTML=tag(i,true);const e=t.firstChild;e.querySelector('button').onclick=ev=>{ev.stopPropagation();off=true;sel=sel.filter(x=>x!==i);chips();render()};fl.insertBefore(e,inp)})}
+function render(){const q=inp.value.trim().toLowerCase();list=T.map((t,i)=>i).filter(i=>T[i][0].toLowerCase().includes(q));const exact=T.some(t=>t[0].toLowerCase()===q);let h='';
+ const rows=list.map((i,k)=>({t:'o',i}));if(q&&!exact)rows.push({t:'c'});hl=Math.min(hl,Math.max(0,rows.length-1));list=rows;
+ h='<div class="hd">Select an option or create one</div>'+rows.map((r,k)=>r.t==='c'?'<div class="o cr'+(k===hl?' hl':'')+'" data-c="1" style="--i:'+k+'"><span class="pl">Create</span><span class="tg" style="--bg:'+COL[cc%8][0]+';--fg:'+COL[cc%8][1]+'">'+inp.value.trim().replace(/</g,'')+'</span></div>':'<div class="o'+(k===hl?' hl':'')+(sel.includes(r.i)?' sel':'')+'" data-i="'+r.i+'" style="--i:'+k+'">'+tag(r.i,false)+CK+'</div>').join('');
+ pp.innerHTML=h;pp.querySelectorAll('.o').forEach(o=>o.onmousedown=e=>{e.preventDefault();off=true;act(o)})}
+function act(o){if(o.dataset.c){create()}else{const i=+o.dataset.i;sel=sel.includes(i)?sel.filter(x=>x!==i):[...sel,i];chips();render()}}
+function create(){const n=inp.value.trim();if(!n)return;T.push([n,cc%8]);cc++;sel.push(T.length-1);inp.value='';chips();render()}
+function setOpen(o){open=o;pp.classList.toggle('on',o);fl.classList.toggle('act',o);if(o)render()}
+fl.onclick=()=>{off=true;inp.focus();setOpen(true)};inp.addEventListener('input',()=>{off=true;hl=0;setOpen(true);render()});inp.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){hl=(hl+1)%Math.max(1,list.length);render();e.preventDefault()}else if(e.key==='ArrowUp'){hl=(hl+list.length-1)%Math.max(1,list.length);render();e.preventDefault()}else if(e.key==='Enter'){const r=list[hl];if(r){act(pp.querySelectorAll('.o')[hl])}e.preventDefault()}else if(e.key==='Escape')setOpen(false);else if(e.key==='Backspace'&&!inp.value&&sel.length){sel.pop();chips();render()}});
+document.addEventListener('pointerdown',e=>{if(open&&!document.querySelector('.fd').contains(e.target))setOpen(false)});
+chips();setOpen(true);hl=2;render();
+/* Idle demo: a new tag name is typed, the menu offers Create with its colour swatch, Enter makes the tag and drops it into the field with a pop, then existing tags are toggled and removed; the loop repeats with a fresh name, until a real click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),N=['Launch','Beta','Urgent'];(async()=>{await sleep(3000);let k=0;while(!off){const nm=N[k++%3];setOpen(true);for(const c of nm){if(off)return;inp.value+=c;hl=0;render();await sleep(150)}await sleep(900);if(off)return;hl=list.length-1;render();await sleep(500);create();await sleep(1200);if(off)return;setOpen(true);hl=0;render();await sleep(500);const el=pp.querySelectorAll('.o')[0];if(el)act(el);await sleep(1100);sel.pop();chips();render();await sleep(1000);if(k%3===0){T=[['Design',3],['Engineering',4],['Marketing',1],['Legal',5]];sel=[1];cc=4;chips();render();await sleep(800)}}})()}
+</script></body></html>

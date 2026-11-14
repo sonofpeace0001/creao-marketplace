@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pixel Icon Set</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1B1530;color:#F4EEFF;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:24px 24px}
+.w{width:100%;max-width:620px;display:grid;gap:22px}
+.hd{display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap}.hd h1{font:400 18px/1.4 'Press Start 2P';letter-spacing:-.02em;color:#FFD23F;text-shadow:3px 3px 0 #C9184A}.hd span{font:400 10px 'Press Start 2P';color:#9B8FC4}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.c{position:relative;background:#241C42;border:4px solid #0E0A1F;box-shadow:inset 0 0 0 4px #3B2F66,6px 6px 0 #0E0A1F;padding:18px 10px 14px;display:grid;justify-items:center;gap:14px;cursor:pointer;color:inherit;font:inherit}
+.c:hover{transform:translate(-2px,-2px);box-shadow:inset 0 0 0 4px #5B4B99,8px 8px 0 #0E0A1F}.c:active{transform:translate(3px,3px);box-shadow:inset 0 0 0 4px #5B4B99,2px 2px 0 #0E0A1F}.c:focus-visible{outline:4px solid #FFD23F;outline-offset:3px}
+.c svg{width:min(104px,22vw);height:min(104px,22vw);image-rendering:pixelated;shape-rendering:crispEdges}
+.c .f{position:absolute;right:8px;top:8px;font:400 8px 'Press Start 2P';color:#7B6EAA}
+.c b{font:400 10px 'Press Start 2P';letter-spacing:.02em;color:#F4EEFF}
+.c .bob{transform-box:fill-box}
+.c.bb svg{animation:bb .52s steps(2) infinite}@keyframes bb{50%{transform:translateY(-4px)}}
+.hint{font:400 9px/1.7 'Press Start 2P';color:#7B6EAA;text-align:center}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="w"><div class="hd"><h1>PIXEL ICONS</h1><span>8 x 8 / 2 FRAMES</span></div><div class="g" id="g"></div><div class="hint">PRESS ANY TILE TO PAUSE ITS ANIMATION</div></div>
+<script>
+const PAL={k:'#1B1530',w:'#FFFFFF',r:'#FF4D6D',R:'#C9184A',y:'#FFD23F',Y:'#F08A24',b:'#4CC9F0',B:'#3A86FF',g:'#3DDC97',G:'#1F9D68',p:'#B388FF'};
+const I=[['HEART',['.kk..kk.','krrkkrrk','krwrrrrk','krrrrrrk','.krrrrk.','..krrk..','...kk...','........'],['........','.kk..kk.','krrkkrrk','krwrrrrk','.krrrrk.','..krrk..','...kk...','........']],
+['COIN',['..kkkk..','.kyyyyk.','kywyyyYk','kyyyyyYk','kyyyyyYk','kyyyyYYk','.kYYYYk.','..kkkk..'],['...kk...','..kyYk..','..kwyk..','..kyyk..','..kyyk..','..kyYk..','..kyYk..','...kk...']],
+['GHOST',['..kkkk..','.kwwwwk.','kwkwwkwk','kwwwwwwk','kwwwwwwk','kwwwwwwk','kwkwwkwk','.k.kk.k.'],['..kkkk..','.kwwwwk.','kwwwwwwk','kwkwwkwk','kwwwwwwk','kwwwwwwk','kwkwwkwk','..k..k..']],
+['MUSHROOM',['..kkkk..','.krrrwrk','krwrrrrk','krrrrwrk','kkkkkkkk','.kwwwwk.','.kwkkwk.','..kkkk..'],['..kkkk..','.krwrrrk','krrrrwrk','krwrrrrk','kkkkkkkk','.kwwwwk.','.kwkkwk.','..kkkk..']],
+['POTION',['..kkkk..','..kwwk..','...kk...','..kbbk..','.kbbbbk.','kbbwbbbk','kbbbbbbk','.kkkkkk.'],['..kkkk..','..kwwk..','...kk...','..kbwk..','.kbbbbk.','kbbbbbbk','kbbbwbbk','.kkkkkk.']],
+['GEM',['........','..kkkk..','.kbwbbk.','kbbbbbBk','.kbbbBk.','..kbBk..','...kk...','........'],['w......w','..kkkk..','.kbbbbk.','kbwbbbBk','.kbbbBk.','..kbBk..','...kk...','w......w']]];
+const g=document.getElementById('g');
+function svg(rows){let h='';rows.forEach((r,y)=>[...r].forEach((c,x)=>{if(c!=='.')h+='<rect x="'+x+'" y="'+y+'" width="1.020" height="1.020" fill="'+PAL[c]+'"/>'}));return '<svg viewBox="0 0 8 8" aria-hidden="true">'+h+'</svg>'}
+I.forEach(([n,a,b],i)=>{const t=document.createElement('button');t.className='c bb';t.dataset.f=0;t.setAttribute('aria-label',n+' pixel icon, click to pause');t.innerHTML='<span class="f">F1</span><div class="sv">'+svg(a)+'</div><b>'+n+'</b>';t._fr=[a,b];t._p=false;
+ t.onclick=()=>{t._p=!t._p;t.classList.toggle('bb',!t._p);t.setAttribute('aria-pressed',t._p)};g.appendChild(t)});
+const ts=[...g.children];let f=0;
+/* The idle loop is the component: every icon flips between its two frames at 520ms with stepped easing while it bobs, and any tile can be paused. */
+function tick(){f^=1;ts.forEach(t=>{if(t._p)return;t.querySelector('.sv').innerHTML=svg(t._fr[f]);t.querySelector('.f').textContent='F'+(f+1)})}
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(tick,520);
+</script></body></html>

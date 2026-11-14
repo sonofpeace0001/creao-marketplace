@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Swatch Picker Dropdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{--c:#8B5CF6;background:#0C0D14;color:#EEF0FA;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(560px 380px at 70% 0,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%);transition:background-image .6s}
+.w{width:100%;max-width:560px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.pv{border-radius:28px;padding:22px;background:linear-gradient(150deg,var(--c),color-mix(in srgb,var(--c) 45%,#000));min-height:300px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 36px 50px -26px var(--c);transition:background .5s,box-shadow .5s;position:relative;overflow:hidden}
+.pv::before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.18)}.pv::after{content:"";position:absolute;left:-40px;bottom:-60px;width:180px;height:180px;border-radius:50%;background:rgba(0,0,0,.14)}
+.pv b{font-size:26px;font-weight:800;letter-spacing:-.05em;position:relative}.pv span{font:500 12.500px 'Geist Mono';opacity:.85;position:relative}.pv .bt{align-self:flex-start;position:relative;border:0;border-radius:99px;padding:11px 20px;background:#fff;color:#111;font:700 13.500px 'Sora'}
+.dd{position:relative}
+.dd>label{display:block;font:600 11.500px 'Geist Mono';letter-spacing:.14em;text-transform:uppercase;color:#7C839B;margin-bottom:9px}
+.tr{width:100%;display:flex;align-items:center;gap:12px;border:0;border-radius:16px;padding:11px 14px;background:#14161F;color:inherit;font:inherit;cursor:pointer;box-shadow:inset 0 0 0 1.500px rgba(255,255,255,.1);transition:box-shadow .2s;text-align:left}
+.tr:hover,.tr[aria-expanded=true]{box-shadow:inset 0 0 0 2px var(--c)}.tr:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.tr i{width:30px;height:30px;border-radius:9px;background:var(--c);box-shadow:inset 0 0 0 1.500px rgba(255,255,255,.25);transition:background .4s;flex:none}
+.tr .n{flex:1}.tr .n b{display:block;font-size:14.500px;font-weight:700}.tr .n span{font:500 11.500px 'Geist Mono';color:#7C839B}
+.tr svg{width:16px;height:16px;color:#7C839B;transition:transform .3s}.tr[aria-expanded=true] svg{transform:rotate(180deg)}
+.pp{position:absolute;left:0;top:calc(100% + 10px);width:100%;border-radius:20px;background:#171A25;padding:14px;box-shadow:0 30px 50px -14px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,255,255,.1);opacity:0;transform:translateY(-8px) scale(.96);transform-origin:top;pointer-events:none;transition:opacity .22s,transform .35s cubic-bezier(.3,1.5,.5,1);z-index:5}
+.pp.on{opacity:1;transform:none;pointer-events:auto}
+.gr{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.sw{position:relative;aspect-ratio:1;border:0;border-radius:50%;background:var(--s);cursor:pointer;transform:scale(0);transition:transform .45s cubic-bezier(.3,1.8,.5,1);transition-delay:calc(var(--i)*14ms);padding:0}
+.pp.on .sw{transform:scale(1)}.sw:hover{transform:scale(1.18)!important;transition-delay:0s}.sw:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.sw.on::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2.500px solid #fff;animation:rg .4s cubic-bezier(.3,1.8,.5,1)}@keyframes rg{from{transform:scale(.6);opacity:0}}
+.sw.on::before{content:"";position:absolute;left:50%;top:50%;width:9px;height:5px;margin:-4px 0 0 -4.500px;border:solid #fff;border-width:0 0 2.500px 2.500px;transform:rotate(-45deg);filter:drop-shadow(0 1px 1px rgba(0,0,0,.4));z-index:1}
+.hx{display:flex;align-items:center;gap:10px;margin-top:14px;padding:9px 12px;border-radius:12px;background:#0F111A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}.hx span{font:600 13px 'Geist Mono';color:#7C839B}.hx input{flex:1;min-width:0;border:0;outline:0;background:none;color:#fff;font:600 14px 'Geist Mono';letter-spacing:.06em;text-transform:uppercase}
+.rc{display:flex;align-items:center;gap:8px;margin-top:12px;font:600 11px 'Geist Mono';letter-spacing:.12em;color:#7C839B}.rc i{width:20px;height:20px;border-radius:50%;background:var(--s);cursor:pointer;display:block;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media(max-width:540px){.w{grid-template-columns:1fr}.pv{min-height:180px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="w"><div class="pv"><span>Brand accent</span><div><b id="pn">Violet</b><br><span id="ph">#8B5CF6</span></div><button class="bt" tabindex="-1">Get started</button></div>
+<div class="dd" id="dd"><label for="tr">Accent colour</label><button class="tr" id="tr" aria-haspopup="listbox" aria-expanded="false"><i id="ti"></i><span class="n"><b id="tn">Violet</b><span id="th">#8B5CF6</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="pp" id="pp" role="listbox"><div class="gr" id="gr"></div><div class="hx"><span>#</span><input id="hx" maxlength="6" aria-label="Hex colour" value="8B5CF6"></div><div class="rc">RECENT<i style="--s:#EC4899"></i><i style="--s:#0EA5E9"></i><i style="--s:#10B981"></i></div></div></div></div>
+<script>
+const C=[['Rose','#F43F5E'],['Pink','#EC4899'],['Fuchsia','#D946EF'],['Violet','#8B5CF6'],['Indigo','#6366F1'],['Blue','#3B82F6'],['Sky','#0EA5E9'],['Cyan','#06B6D4'],['Teal','#14B8A6'],['Emerald','#10B981'],['Lime','#84CC16'],['Amber','#F59E0B'],['Orange','#F97316'],['Red','#EF4444'],['Slate','#64748B'],['Stone','#78716C'],['Coral','#FF6B6B'],['Gold','#EAB308']];
+const gr=document.getElementById('gr'),pp=document.getElementById('pp'),tr=document.getElementById('tr'),hx=document.getElementById('hx');let cur=3,open=false;
+C.forEach(([n,c],i)=>{const b=document.createElement('button');b.className='sw';b.style.cssText='--s:'+c+';--i:'+i;b.setAttribute('role','option');b.setAttribute('aria-label',n);b.onclick=()=>{off=true;pick(i)};gr.appendChild(b)});
+const sws=[...gr.children];
+function pick(i){cur=i;const[n,c]=C[i];document.body.style.setProperty('--c',c);sws.forEach((s,k)=>{s.classList.remove('on');if(k===i){void s.offsetWidth;s.classList.add('on')}s.setAttribute('aria-selected',k===i)});['tn','pn'].forEach(id=>document.getElementById(id).textContent=n);['th','ph'].forEach(id=>document.getElementById(id).textContent=c);document.getElementById('ti').style.background=c;hx.value=c.slice(1)}
+function setOpen(o){open=o;pp.classList.toggle('on',o);tr.setAttribute('aria-expanded',o)}
+tr.onclick=()=>{off=true;setOpen(!open)};hx.addEventListener('input',()=>{off=true;if(/^[0-9a-fA-F]{6}$/.test(hx.value)){const c='#'+hx.value.toUpperCase();document.body.style.setProperty('--c',c);['th','ph'].forEach(id=>document.getElementById(id).textContent=c);['tn','pn'].forEach(id=>document.getElementById(id).textContent='Custom');document.getElementById('ti').style.background=c;sws.forEach(s=>s.classList.remove('on'))}});
+addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+document.querySelectorAll('.rc i').forEach(i=>i.onclick=()=>{off=true;const k=C.findIndex(c=>c[1]===getComputedStyle(i).getPropertyValue('--s').trim());if(k>=0)pick(k)});
+pick(3);setOpen(true);
+/* Idle demo: swatches pop in with a ripple stagger, then colours are picked one by one; the selection ring springs onto each, the preview card, glow and page accent all re-tint, and a custom hex is typed at the end, until a real click. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(3000);while(!off){for(const i of [9,12,1,6]){if(off)return;pick(i);await sleep(1300)}if(off)return;hx.value='';for(const c of 'FF6B6B'){if(off)return;hx.value+=c;hx.dispatchEvent(new Event('input'));await sleep(160)}await sleep(1500);setOpen(false);await sleep(1200);setOpen(true);await sleep(600)}})()}
+</script></body></html>

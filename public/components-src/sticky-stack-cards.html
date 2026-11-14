@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sticky Stack Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFE9DD;color:#1F1A14;font-family:'Inter Tight',sans-serif;min-height:100vh;display:grid;place-items:center;padding:20px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:520px;display:grid;gap:16px}
+.head{display:flex;justify-content:space-between;align-items:end}.head h1{font:700 clamp(24px,4.4vw,32px) 'Fraunces';letter-spacing:-.03em;line-height:1}.head span{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8A7F6E}
+.scroll{height:min(560px,78vh);overflow-y:auto;border-radius:26px;background:#E4DCCB;box-shadow:inset 0 0 0 1px rgba(31,26,20,.08);padding:18px 18px 60px;scrollbar-width:none;scroll-behavior:auto}
+.scroll::-webkit-scrollbar{display:none}
+.sc{--s:1;--b:1;position:sticky;top:calc(18px + var(--i)*22px);height:300px;margin-bottom:34px;border-radius:22px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;transform:scale(var(--s));transform-origin:50% 0;filter:brightness(var(--b));box-shadow:0 22px 30px -18px rgba(31,26,20,.45),inset 0 0 0 1px rgba(255,255,255,.35);overflow:hidden}
+.sc .n{font:700 13px 'Inter Tight';letter-spacing:.14em;opacity:.7}
+.sc h2{font:700 clamp(28px,5.4vw,38px) 'Fraunces';letter-spacing:-.04em;line-height:.98;max-width:62%}
+.sc p{font-size:14px;line-height:1.45;max-width:58%;opacity:.82;font-weight:500;margin-top:8px}
+.sc svg{position:absolute;right:-26px;bottom:-26px;width:176px;height:176px;opacity:.9}
+.s0{background:#FFB59A;--i:0}.s1{background:#BFD7A8;--i:1}.s2{background:#A9C4F2;--i:2}.s3{background:#F5D77E;--i:3}
+.dots{display:flex;gap:6px;justify-content:center}.dots i{width:22px;height:4px;border-radius:2px;background:#C9BFAA;transition:background .2s,width .2s}.dots i.on{background:#1F1A14;width:34px}
+</style></head><body>
+<div class="w"><div class="head"><h1>How we ship</h1><span>Scroll</span></div>
+<div class="scroll" id="sc">
+<article class="sc s0"><div><div class="n">01 / DISCOVER</div></div><div><h2>Listen before drawing</h2><p>Two weeks of interviews, support logs and usage data turned into one page the whole team can argue with.</p></div><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="none" stroke="#1F1A14" stroke-width="2" stroke-dasharray="3 7"/><circle cx="100" cy="100" r="50" fill="#1F1A14" opacity=".12"/><circle cx="100" cy="100" r="14" fill="#1F1A14"/></svg></article>
+<article class="sc s1"><div><div class="n">02 / SHAPE</div></div><div><h2>Prototype the risky part</h2><p>One clickable path through the hardest decision, tested with eight real customers by Friday.</p></div><svg viewBox="0 0 200 200"><rect x="30" y="50" width="120" height="90" rx="14" fill="none" stroke="#1F1A14" stroke-width="2"/><rect x="50" y="70" width="50" height="10" rx="5" fill="#1F1A14"/><rect x="50" y="92" width="80" height="8" rx="4" fill="#1F1A14" opacity=".3"/><rect x="50" y="108" width="64" height="8" rx="4" fill="#1F1A14" opacity=".3"/></svg></article>
+<article class="sc s2"><div><div class="n">03 / BUILD</div></div><div><h2>Ship in thin slices</h2><p>Every merge reaches production behind a flag. Nothing waits for a launch day to be real.</p></div><svg viewBox="0 0 200 200"><path d="M30 150 90 90l30 30 50-60" fill="none" stroke="#1F1A14" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="170" cy="60" r="10" fill="#1F1A14"/></svg></article>
+<article class="sc s3"><div><div class="n">04 / LEARN</div></div><div><h2>Measure, then decide</h2><p>A weekly readout of what moved, what did not, and the one thing we will cut next.</p></div><svg viewBox="0 0 200 200"><rect x="40" y="110" width="26" height="50" rx="4" fill="#1F1A14" opacity=".35"/><rect x="82" y="80" width="26" height="80" rx="4" fill="#1F1A14" opacity=".6"/><rect x="124" y="46" width="26" height="114" rx="4" fill="#1F1A14"/></svg></article>
+</div><div class="dots" id="dots"><i></i><i></i><i></i><i></i></div></div>
+<script>
+const sc=document.getElementById('sc'),cards=[...sc.querySelectorAll('.sc')],dots=[...document.querySelectorAll('#dots i')];
+function update(){const cr=sc.getBoundingClientRect();let active=0;
+ cards.forEach((c,i)=>{const nx=cards[i+1];let p=0;if(nx){const topI=cr.top+18+i*22,nTop=nx.getBoundingClientRect().top;p=Math.max(0,Math.min(1,1-(nTop-topI-22)/280))}
+  c.style.setProperty('--s',(1-.06*p).toFixed(3));c.style.setProperty('--b',(1-.22*p).toFixed(3));if(c.getBoundingClientRect().top<=cr.top+18+i*22+6)active=i});
+ dots.forEach((d,i)=>d.classList.toggle('on',i===active))}
+sc.addEventListener('scroll',update,{passive:true});
+const max=()=>sc.scrollHeight-sc.clientHeight;sc.scrollTop=max()*.36;update();
+/* Idle demo: the stack scrolls itself down and back until a real wheel, touch or key event. */
+let off=false;['wheel','touchstart','pointerdown','keydown'].forEach(ev=>addEventListener(ev,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setTimeout(()=>{const t0=performance.now();(function loop(n){if(off)return;const k=(1-Math.cos((n-t0)/1000*.55))/2;sc.scrollTop=max()*(.36+.64*k)%(max()+1);update();requestAnimationFrame(loop)})(t0)},3600);
+</script></body></html>

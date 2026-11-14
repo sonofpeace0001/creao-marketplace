@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Storage Donut Progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B0E14;color:#EAF0FA;font-family:'Manrope',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.cd{width:100%;max-width:640px;border-radius:32px;background:linear-gradient(160deg,#141926,#0F131D);padding:30px;display:grid;grid-template-columns:240px 1fr;gap:30px;align-items:center;box-shadow:0 40px 60px -34px #000,inset 0 0 0 1px rgba(255,255,255,.08)}
+.dn{position:relative;width:240px;height:240px}.dn svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.sg{fill:none;stroke-width:22;stroke-dasharray:var(--l) 1000;stroke-dashoffset:calc(var(--o)*-1);transition:stroke-width .3s,opacity .3s;cursor:pointer}
+.sg:hover,.sg.hl{stroke-width:28}.dn.dim .sg:not(.hl){opacity:.35}
+.bgc{fill:none;stroke:rgba(255,255,255,.06);stroke-width:22}
+.ct{position:absolute;inset:0;display:grid;place-items:center;align-content:center;text-align:center;pointer-events:none}.ct b{font:800 40px/1 'Manrope';letter-spacing:-.05em;font-variant-numeric:tabular-nums}.ct b small{font-size:.45em;color:#8A93A8;font-weight:700}.ct span{font:600 11.500px 'JetBrains Mono';letter-spacing:.12em;text-transform:uppercase;color:#7C869C;margin-top:6px}
+.dn .wr{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);padding:5px 12px;border-radius:99px;background:#F59E0B;color:#2A1A00;font:700 11.500px 'JetBrains Mono';letter-spacing:.08em;opacity:0;transition:opacity .3s}.dn.low .wr{opacity:1}
+.lg{display:grid;gap:5px}.lg h1{font-size:20px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}
+.r{display:grid;grid-template-columns:14px 1fr auto;gap:12px;align-items:center;padding:9px 10px;border-radius:13px;cursor:pointer;transition:background .2s}.r:hover,.r.hl{background:rgba(255,255,255,.06)}
+.r i{width:12px;height:12px;border-radius:4px;background:var(--c)}.r b{font-size:14px;font-weight:600}.r span{font:600 12.500px 'JetBrains Mono';color:#9AA4BA;font-variant-numeric:tabular-nums}
+.ft{margin-top:8px;display:flex;justify-content:space-between;align-items:center;padding:12px 10px 0;border-top:1px solid rgba(255,255,255,.08);font:600 12.500px 'JetBrains Mono';color:#7C869C}.ft b{color:#EAF0FA}
+.up{border:0;border-radius:12px;padding:9px 14px;background:#fff;color:#0B0E14;font:700 13px 'Manrope';cursor:pointer;transition:transform .15s}.up:active{transform:scale(.96)}.up:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(max-width:560px){.cd{grid-template-columns:1fr;justify-items:center}.lg{width:100%}}
+</style></head><body>
+<div class="cd"><div class="dn" id="dn"><svg viewBox="0 0 120 120"><circle class="bgc" cx="60" cy="60" r="46"/><g id="sg"></g></svg><div class="ct"><b id="us">0<small> GB</small></b><span id="of">of 200 GB used</span></div><div class="wr">ALMOST FULL</div></div>
+<div class="lg"><h1>Cloud storage</h1><div id="lg"></div><div class="ft"><span><b id="fr">0</b> GB free</span><button class="up" id="up">Clean up</button></div></div></div>
+<script>
+const CAP=200,C=2*Math.PI*46;const CT=[['Photos','#F472B6',64],['Videos','#818CF8',46],['Documents','#34D399',22],['Apps','#FBBF24',14],['Other','#64748B',9]];
+const cur=CT.map(c=>c[2]),tgt=CT.map(c=>c[2]);const NS='http://www.w3.org/2000/svg',sg=document.getElementById('sg'),lg=document.getElementById('lg'),dn=document.getElementById('dn');const segs=[],rows=[];
+CT.forEach((c,i)=>{const s=document.createElementNS(NS,'circle');s.setAttribute('class','sg');s.setAttribute('cx',60);s.setAttribute('cy',60);s.setAttribute('r',46);s.style.stroke=c[1];s.dataset.i=i;sg.appendChild(s);segs.push(s);
+ const r=document.createElement('div');r.className='r';r.innerHTML='<i style="--c:'+c[1]+'"></i><b>'+c[0]+'</b><span></span>';lg.appendChild(r);rows.push(r);
+ [s,r].forEach(el=>{el.onpointerenter=()=>{off=true;hl(i)};el.onpointerleave=()=>hl(-1)})});
+function hl(i){segs.forEach((s,k)=>s.classList.toggle('hl',k===i));rows.forEach((r,k)=>r.classList.toggle('hl',k===i));dn.classList.toggle('dim',i>=0)}
+function paint(){let off2=0;const tot=cur.reduce((a,b)=>a+b,0);const gap=2.2;CT.forEach((c,i)=>{const len=Math.max(0,cur[i]/CAP*(C)-gap);segs[i].style.setProperty('--l',len);segs[i].style.setProperty('--o',off2);off2+=cur[i]/CAP*C;rows[i].lastChild.textContent=cur[i].toFixed(1)+' GB'});
+ document.getElementById('us').innerHTML=tot.toFixed(1)+'<small> GB</small>';document.getElementById('fr').textContent=(CAP-tot).toFixed(1);dn.classList.toggle('low',tot/CAP>.9)}
+hl(-1);paint();
+function loop(){for(let i=0;i<cur.length;i++)cur[i]+=(tgt[i]-cur[i])*.07;paint();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+document.getElementById('up').onclick=()=>{off=true;tgt[1]=Math.max(10,tgt[1]-18);tgt[0]=Math.max(10,tgt[0]-12)};
+/* Idle demo: files keep arriving, so the five segments grow at different rates with a soft ease, the centre figure counts up and the free space shrinks; past 90 percent an ALMOST FULL chip appears, then a clean-up shrinks Videos and Photos and the cycle restarts, until you hover a segment or press Clean up. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2800);while(!off){const k=Math.floor(Math.random()*3);tgt[[0,1,3][k]]+=3+Math.random()*5;tgt[2]+=1.2;const tot=tgt.reduce((a,b)=>a+b,0);if(tot>CAP*.93){await sleep(2400);if(off)return;tgt[1]=40;tgt[0]=52;tgt[3]=16;tgt[2]=20;tgt[4]=9;await sleep(2600)}await sleep(900)}})()}
+</script></body></html>

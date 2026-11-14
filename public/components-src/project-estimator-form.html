@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Project Estimator Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Instrument+Serif&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDEAE2;color:#1B1B18;font-family:'Instrument Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.f{width:100%;max-width:760px;display:grid;grid-template-columns:1.2fr 1fr;border-radius:28px;overflow:hidden;background:#FBF9F4;box-shadow:0 40px 60px -38px rgba(27,27,24,.5),inset 0 0 0 1px rgba(27,27,24,.08)}
+.in{padding:28px;display:grid;gap:22px;align-content:start}
+.in h1{font:400 34px/1 'Instrument Serif';letter-spacing:-.02em}.in h1 i{color:#D4380D}.in>p{color:#76736A;font-size:14px;margin-top:-12px}
+.rw label{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:10px}.rw label b{font:500 14px 'Geist Mono';color:#D4380D}
+.rw input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;outline:0;cursor:pointer;background:linear-gradient(90deg,#1B1B18 var(--p,50%),#DAD6CA var(--p,50%))}
+.rw input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#FBF9F4;border:3px solid #1B1B18;box-shadow:0 4px 8px rgba(27,27,24,.3);transition:transform .15s}
+.rw input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#FBF9F4;border:3px solid #1B1B18}
+.rw input:active::-webkit-slider-thumb{transform:scale(1.18)}.rw input:focus-visible{outline:3px solid #D4380D;outline-offset:6px}
+.ck{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ck label{position:relative;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;box-shadow:inset 0 0 0 1.500px #D9D5C8;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s,box-shadow .2s}
+.ck input{position:absolute;opacity:0}.ck .bx{width:20px;height:20px;border-radius:6px;box-shadow:inset 0 0 0 1.500px #A9A597;display:grid;place-items:center;transition:all .25s cubic-bezier(.3,1.6,.5,1)}
+.ck .bx svg{width:12px;height:12px;stroke-dasharray:18;stroke-dashoffset:18;transition:stroke-dashoffset .3s}
+.ck label:has(input:checked){background:#1B1B18;color:#FBF9F4;box-shadow:none}.ck label:has(input:checked) .bx{background:#FF6B35;box-shadow:none}.ck label:has(input:checked) svg{stroke-dashoffset:0}
+.ck label:has(input:focus-visible){outline:3px solid #D4380D;outline-offset:2px}
+.out{background:#1B1B18;color:#FBF9F4;padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.out small{font:600 11px 'Instrument Sans';letter-spacing:.16em;text-transform:uppercase;color:#A9A597}
+.tot{font:400 64px/1 'Instrument Serif';letter-spacing:-.04em;margin-top:8px}.tot sup{font-size:.45em;vertical-align:.9em}
+.eta{font-size:14px;color:#C9C5B8;margin-top:8px}.eta b{color:#FF6B35}
+.st{display:flex;height:12px;border-radius:6px;overflow:hidden;gap:2px}.st i{display:block;height:100%;transition:flex .5s cubic-bezier(.3,1.1,.4,1)}
+.lg{display:grid;gap:8px;font-size:13px}.lg div{display:flex;justify-content:space-between;align-items:center;color:#C9C5B8}.lg div span{display:flex;align-items:center;gap:8px}.lg div span::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c)}.lg b{font:500 13px 'Geist Mono';color:#FBF9F4}
+.go{border:0;border-radius:14px;padding:15px;background:#FF6B35;color:#1B1B18;font:700 15px 'Instrument Sans';cursor:pointer}.go:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(max-width:640px){.f{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<form class="f" onsubmit="return false"><div class="in"><h1>Scope your <i>build</i></h1><p>Move the sliders. The estimate updates as you think.</p>
+<div class="rw"><label for="pg">Pages and templates <b id="pgv">12</b></label><input type="range" id="pg" min="3" max="40" value="12"></div>
+<div class="rw"><label for="ig">Integrations <b id="igv">4</b></label><input type="range" id="ig" min="0" max="12" value="4"></div>
+<div class="rw"><label for="wk">Delivery window <b id="wkv">10 weeks</b></label><input type="range" id="wk" min="4" max="24" value="10"></div>
+<div class="ck"><label><input type="checkbox" id="cms" checked><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="#1B1B18" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span>Headless CMS</label><label><input type="checkbox" id="i18n"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="#1B1B18" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span>5 languages</label><label><input type="checkbox" id="mo" checked><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="#1B1B18" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span>Motion design</label><label><input type="checkbox" id="ac"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="#1B1B18" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7"/></svg></span>WCAG audit</label></div></div>
+<div class="out"><div><small>Estimated investment</small><div class="tot" aria-live="polite"><sup>$</sup><span id="tt">0</span></div><div class="eta">Ready in about <b id="et">10</b> weeks, with a 3 person squad.</div></div>
+<div><div class="st" id="st"><i style="background:#FF6B35"></i><i style="background:#F4C95D"></i><i style="background:#7BB6A8"></i><i style="background:#8E9AF0"></i></div><div class="lg" style="margin-top:14px"><div style="--c:#FF6B35"><span>Design and build</span><b id="l1"></b></div><div style="--c:#F4C95D"><span>Integrations</span><b id="l2"></b></div><div style="--c:#7BB6A8"><span>Add-ons</span><b id="l3"></b></div><div style="--c:#8E9AF0"><span>Rush premium</span><b id="l4"></b></div></div></div>
+<button class="go">Request a detailed quote</button></div></form>
+<script>
+const $=i=>document.getElementById(i),pg=$('pg'),ig=$('ig'),wk=$('wk');let shown=0,target=0;
+const usd=v=>'$'+Math.round(v).toLocaleString('en-US');
+function calc(){const a=+pg.value*2400,b=+ig.value*3800,c=($('cms').checked?9000:0)+($('i18n').checked?12000:0)+($('mo').checked?11000:0)+($('ac').checked?6500:0),rush=Math.max(0,(12-+wk.value))*((a+b+c)*.035),tot=a+b+c+rush;target=tot;
+ $('pgv').textContent=pg.value;$('igv').textContent=ig.value;$('wkv').textContent=wk.value+' weeks';$('et').textContent=wk.value;
+ [pg,ig,wk].forEach(r=>r.style.setProperty('--p',((r.value-r.min)/(r.max-r.min)*100)+'%'));
+ [a,b,c,rush].forEach((v,i)=>{$('l'+(i+1)).textContent=usd(v);$('st').children[i].style.flex=Math.max(v,1)})}
+['input','change'].forEach(e=>document.querySelector('form').addEventListener(e,calc));
+(function tw(){shown+=(target-shown)*.14;if(Math.abs(target-shown)<1)shown=target;$('tt').textContent=Math.round(shown).toLocaleString('en-US');requestAnimationFrame(tw)})();
+calc();shown=target;
+/* Idle demo: the sliders glide to new scopes and add-ons toggle, so the total keeps recounting, until real input. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sc=[[28,8,6,1,1,0],[7,2,16,0,0,0],[20,10,8,1,1,1],[12,4,10,1,0,1]],sleep=ms=>new Promise(r=>setTimeout(r,ms));
+ (async()=>{await sleep(3600);let i=0;while(!off){const[p,g,w,c,l,a]=sc[i++%sc.length];const go=[[pg,p],[ig,g],[wk,w]];for(let s=0;s<14&&!off;s++){go.forEach(([r,t])=>{r.value=+r.value+(t-r.value)*.35});calc();await sleep(60)}go.forEach(([r,t])=>r.value=t);$('cms').checked=!!c;$('i18n').checked=!!l;$('ac').checked=!!a;calc();await sleep(2200)}})()}
+</script></body></html>

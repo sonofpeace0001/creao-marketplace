@@ -1,0 +1,40 @@
+ROLE
+You are a senior automotive UI designer and front-end engineer with 15+ years of experience. Build "Mode Slider Toggle": a three-detent drive-mode slider (Eco, Balanced, Turbo) that springs between positions while a gauge sweeps, the accent colour changes and the power readout counts.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Charcoal cockpit card with green, blue and orange modes, a glowing arc gauge and a white pearl thumb.
+- Palette: #0B0E13, #6F7B8D, #34D399, #059669, #ECF0F6, #12161D
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with mode name; arc gauge with needle and kilowatt readout; draggable track with filled progress and thumb; detent labels; range, 0 to 100 and regen stats.
+
+INTERACTION & STATES
+- Drag the thumb or click a label; the thumb snaps to the nearest detent with a spring; arrow keys step; the gauge, colours and stats update.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Thumb snaps 500ms cubic-bezier(.3,1.5,.4,1); gauge needle rotates -90 to +90 degrees over 800ms with overshoot; page accent transitions 500 to 600ms; kilowatt number eases 8 percent per frame.
+
+IDLE AUTOPLAY
+- The slider is driven Turbo, Balanced, Eco, Balanced in turn.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Readout text under the needle; it sits below the arc.
+- Free-floating thumb positions with no detent.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

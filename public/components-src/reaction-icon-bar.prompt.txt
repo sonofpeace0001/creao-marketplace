@@ -1,0 +1,40 @@
+ROLE
+You are a senior social product designer and front-end engineer with 15+ years of experience. Build "Reaction Icon Bar": a reactions row with outline icons that fill, pop and burst into particles on tap while the counter rolls to the new number.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Ink-navy post card with a pill reaction bar and a distinct hue per reaction.
+- Palette: #161827, #0E0F18, #ECEEF8, #F59E0B, #EC4899, #7C809C
+- Type: Plus Jakarta Sans, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Post card; pill bar of five reactions (like, love, spark, laugh, wow) with counts; hint line.
+
+INTERACTION & STATES
+- Tap toggles a reaction with aria-pressed; the icon fills with a tint of its colour, pops, emits ten particles and its counter rolls up; tapping again reverses it.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Icon keyframes scale .7, 1.45 with -10 degree twist, back to 1 over 500ms spring; particles travel 26 to 42px in 700ms and shrink to zero; counter rolls 350ms.
+
+IDLE AUTOPLAY
+- Reactions are tapped in turn every 1.6s with the previous one released.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Emoji; every glyph is an SVG.
+- Counters that jump without rolling.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

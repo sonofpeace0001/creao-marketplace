@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Border Beam Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(900px 500px at 50% 0,#17203A 0,#080B14 70%);color:#E7ECF8;font-family:'Sora',sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px 14px;-webkit-font-smoothing:antialiased}
+.w{width:100%;max-width:620px;display:grid;gap:34px;justify-items:center;text-align:center}
+.w h1{font-size:clamp(24px,4.4vw,36px);font-weight:700;letter-spacing:-.04em}.w p{color:#7F8AA8;font-size:15px;margin-top:10px}
+.row{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;align-items:center}
+.bb{--a:0deg;--c1:#7C5CFF;--c2:#22D3EE;--sp:3.4s;position:relative;display:inline-flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:17px 28px;background:#0C1020;color:#fff;font:600 16px 'Sora';cursor:pointer;isolation:isolate;animation:spin var(--sp) linear infinite}
+.bb::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--a),transparent 0 62%,var(--c1) 80%,var(--c2) 94%,transparent 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:-1}
+.bb::after{content:"";position:absolute;inset:-10px;border-radius:24px;background:conic-gradient(from var(--a),transparent 0 62%,var(--c1) 82%,var(--c2) 94%,transparent 100%);filter:blur(22px);opacity:.38;z-index:-2;transition:opacity .3s}
+.bb:hover::after{opacity:.7}
+.bb svg{width:18px;height:18px}
+.bb:focus-visible{outline:2px solid #fff;outline-offset:5px}
+.bb.g{--c1:#34D399;--c2:#FDE047;--sp:2.6s}
+.bb.p{--c1:#FB7185;--c2:#F59E0B;--sp:4.4s;border-radius:99px}.bb.p::after{border-radius:99px}
+.bb.fill{background:linear-gradient(180deg,#1B2142,#0C1020)}
+@keyframes spin{to{--a:360deg}}
+.kb{font:600 11px 'Sora';padding:3px 7px;border-radius:6px;background:rgba(255,255,255,.1);color:#B6C0DE;letter-spacing:.04em}
+@media(prefers-reduced-motion:reduce){.bb{animation:none}.bb{--a:140deg}}
+</style></head><body>
+<div class="w"><div><h1>A light that circles the edge</h1><p>Conic-gradient borders with a soft bloom underneath, each on its own orbit speed.</p></div>
+<div class="row">
+<button class="bb fill" style="--a:200deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 14.500 9.500 21 12l-6.500 2.500L12 21l-2.500-6.500L3 12l6.500-2.500Z"/></svg>Generate with AI<span class="kb">Ctrl K</span></button>
+<button class="bb g" style="--a:60deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500 10 17.500 19 7"/></svg>Deploy to production</button>
+<button class="bb p" style="--a:300deg">Join the beta</button>
+</div></div></body></html>

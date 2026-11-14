@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mention Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ECEFF8;color:#171B2E;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.app{position:relative;width:100%;max-width:500px;border-radius:24px;background:#fff;box-shadow:0 30px 50px -30px rgba(23,27,46,.45),inset 0 0 0 1px rgba(23,27,46,.07);overflow:visible}
+.hd{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid #EEF0F7;font-weight:700;font-size:15px}.hd i{width:9px;height:9px;border-radius:50%;background:#22C55E;display:block}.hd span{margin-left:auto;font-size:12.500px;font-weight:500;color:#8A90AE}
+.th{padding:18px 20px;display:grid;gap:14px;min-height:150px;align-content:end}
+.m{display:flex;gap:10px;animation:in .4s cubic-bezier(.3,1.3,.4,1)}@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 12px 'Plus Jakarta Sans';color:#fff;flex:none}
+.m .bb{background:#F3F5FC;border-radius:4px 16px 16px 16px;padding:10px 14px;font-size:14.500px;line-height:1.5;max-width:360px}.m b.n{display:block;font-size:12px;margin-bottom:2px}.m.me{flex-direction:row-reverse}.m.me .bb{background:#4F46E5;color:#fff;border-radius:16px 4px 16px 16px}
+.pill{display:inline-block;padding:0 7px;margin:0 1px;border-radius:7px;background:#E3E0FF;color:#3730A3;font-weight:700}.me .pill{background:rgba(255,255,255,.22);color:#fff}
+.cm{position:relative;margin:0 14px 14px;border-radius:18px;background:#F6F7FC;box-shadow:inset 0 0 0 1.500px transparent;transition:box-shadow .2s,background .2s;display:flex;align-items:flex-end;gap:10px;padding:10px 10px 10px 16px}
+.cm:focus-within,.cm.act{background:#fff;box-shadow:inset 0 0 0 2px #4F46E5}
+.ed{flex:1;min-height:26px;padding:4px 0;font-size:15px;line-height:1.55;outline:0;word-break:break-word;cursor:text}
+.ed .ph{color:#A5ABC7}.cur{display:inline-block;width:2px;height:1.2em;background:#4F46E5;vertical-align:-3px;animation:bl 1s steps(1) infinite;margin-left:1px}@keyframes bl{50%{opacity:0}}
+.sd{width:40px;height:40px;border:0;border-radius:13px;background:#4F46E5;color:#fff;display:grid;place-items:center;cursor:pointer;flex:none;transition:transform .15s,opacity .2s}.sd:active{transform:scale(.92)}.sd:disabled{opacity:.35}.sd svg{width:18px;height:18px}.sd:focus-visible{outline:3px solid #171B2E;outline-offset:2px}
+.pop{position:absolute;left:14px;bottom:calc(100% - 4px);width:290px;border-radius:16px;background:#fff;padding:6px;box-shadow:0 24px 44px -14px rgba(23,27,46,.45),inset 0 0 0 1px rgba(23,27,46,.09);opacity:0;transform:translateY(8px) scale(.97);pointer-events:none;transition:all .2s cubic-bezier(.3,1.3,.4,1);transform-origin:bottom left;z-index:5}
+.pop.on{opacity:1;transform:none;pointer-events:auto}
+.pop .it{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:11px;cursor:pointer}.pop .it.hl{background:#EEF0FF}.pop .it b{display:block;font-size:14px}.pop .it span{font-size:12px;color:#8A90AE}.pop .it mark{background:none;color:#4F46E5}
+.pop .it .st{margin-left:auto;width:9px;height:9px;border-radius:50%;background:var(--s)}
+.pop .hd2{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9AA0BD;padding:6px 10px 4px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="app"><div class="hd"><i></i># launch-room<span>6 people</span></div>
+<div class="th" id="th"><div class="m"><span class="av" style="background:#0891B2">MW</span><div class="bb"><b class="n">Marcus Webb</b>The staging deploy is green. Waiting on copy sign-off before we flip the flag.</div></div></div>
+<div class="cm" id="cm"><div class="ed" id="ed" tabindex="0" role="textbox" aria-multiline="true" aria-label="Message"></div><button class="sd" id="sd" aria-label="Send" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><div class="pop" id="pp" role="listbox" aria-label="Mention a teammate"></div></div></div>
+<script>
+const P=[['Priya Nair','Design lead','#7C3AED','#22C55E'],['Marcus Webb','Staff engineer','#0891B2','#22C55E'],['Amara Diallo','Product manager','#DB2777','#F59E0B'],['Hannah Cho','Brand designer','#2563EB','#94A3B8'],['Tomas Novak','DevOps','#DC2626','#22C55E']];
+const ed=document.getElementById('ed'),pp=document.getElementById('pp'),sd=document.getElementById('sd'),cm=document.getElementById('cm'),th=document.getElementById('th');
+let M=[],q=null,hl=0,flt=[];const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function draw(){let h='';M.forEach(t=>{h+=t.p?'<span class="pill">@'+esc(t.v)+'</span>':esc(t.v)});if(q!==null)h+='<span style="color:#4F46E5;font-weight:600">@'+esc(q)+'</span>';if(!h)h='<span class="ph">Message #launch-room, type @ to mention</span>';else h+='<i class="cur"></i>';ed.innerHTML=h;sd.disabled=!M.length&&q===null;popup()}
+function popup(){if(q===null){pp.classList.remove('on');return}flt=P.map((p,i)=>i).filter(i=>P[i][0].toLowerCase().includes(q.toLowerCase()));hl=Math.min(hl,Math.max(0,flt.length-1));
+ pp.innerHTML='<div class="hd2">People</div>'+(flt.length?flt.map((i,k)=>{let n=P[i][0];const a=q?n.toLowerCase().indexOf(q.toLowerCase()):-1;if(a>=0)n=n.slice(0,a)+'<mark>'+n.slice(a,a+q.length)+'</mark>'+n.slice(a+q.length);return '<div class="it'+(k===hl?' hl':'')+'" data-i="'+i+'" role="option"><span class="av" style="background:'+P[i][2]+'">'+P[i][0].split(' ').map(x=>x[0]).join('')+'</span><div><b>'+n+'</b><span>'+P[i][1]+'</span></div><i class="st" style="--s:'+P[i][3]+'"></i></div>'}).join(''):'<div class="it"><span>No one called &ldquo;'+esc(q)+'&rdquo;</span></div>');
+ pp.classList.add('on');pp.querySelectorAll('.it[data-i]').forEach(o=>o.onmousedown=e=>{e.preventDefault();pick(+o.dataset.i)})}
+function last(){return M[M.length-1]}
+function addTxt(c){if(last()&&!last().p)last().v+=c;else M.push({v:c})}
+function pick(i){M.push({p:1,v:P[i][0]});q=null;M.push({v:' '});draw()}
+function key(k){if(q!==null){if(k==='ArrowDown'){hl=(hl+1)%Math.max(1,flt.length);draw();return}if(k==='ArrowUp'){hl=(hl+flt.length-1)%Math.max(1,flt.length);draw();return}if((k==='Enter'||k==='Tab')&&flt.length){pick(flt[hl]);return}if(k==='Escape'){q=null;draw();return}if(k==='Backspace'){q=q.length?q.slice(0,-1):(q=null);draw();return}if(k===' '&&!flt.length){addTxt('@'+q+' ');q=null;draw();return}if(k.length===1){q+=k;hl=0;draw();return}return}
+ if(k==='@'){q='';hl=0;draw()}else if(k==='Backspace'){const l=last();if(!l)return;if(l.p)M.pop();else{l.v=l.v.slice(0,-1);if(!l.v)M.pop()}draw()}else if(k==='Enter')send();else if(k.length===1){addTxt(k);draw()}}
+function send(){if(!M.length)return;const h=M.map(t=>t.p?'<span class="pill">@'+esc(t.v)+'</span>':esc(t.v)).join('').trim();const m=document.createElement('div');m.className='m me';m.innerHTML='<span class="av" style="background:#4F46E5">You</span><div class="bb">'+h+'</div>';th.appendChild(m);while(th.children.length>3)th.firstChild.remove();M=[];q=null;draw()}
+ed.addEventListener('keydown',e=>{if(e.key.length===1&&(e.ctrlKey||e.metaKey))return;if(['ArrowDown','ArrowUp','Enter','Tab','Backspace','Escape'].includes(e.key)||e.key.length===1){if(e.key==='Tab'&&q===null)return;e.preventDefault();off=true;key(e.key)}});sd.onclick=send;
+ed.addEventListener('focus',()=>cm.classList.add('act'));ed.addEventListener('blur',()=>cm.classList.remove('act'));
+M=[{v:'Looks great. '},{p:1,v:'Priya Nair'},{v:' can you confirm the final headline?'}];draw();
+/* Idle demo: a message is composed, @ opens the people picker, names filter and insert as chips, and the message is sent, in a loop. */
+let off=false;['pointerdown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+ async function ty(s,d=65){for(const c of s){if(off)return false;key(c);await sleep(d)}return true}
+ (async()=>{await sleep(3600);while(!off){M=[];q=null;draw();cm.classList.add('act');
+  if(!await ty('Thanks '))return;if(!await ty('@'))return;await sleep(700);if(!await ty('pr',160))return;await sleep(600);key('Enter');await sleep(300);if(!await ty('can you check the headline with '))return;if(!await ty('@'))return;await sleep(600);if(!await ty('ma',160))return;await sleep(500);key('ArrowDown');await sleep(300);key('ArrowUp');await sleep(300);key('Enter');await sleep(300);if(!await ty('by Friday?'))return;await sleep(900);send();await sleep(2800)}})()}
+</script></body></html>

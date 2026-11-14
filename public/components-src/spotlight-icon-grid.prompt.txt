@@ -1,0 +1,40 @@
+ROLE
+You are a senior creative developer and icon designer with 15+ years of experience. Build "Spotlight Icon Grid": thirty-two dim icons that wake in their own colour, glow and swell as an invisible spotlight passes over them.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Near-black grid of rounded tiles with eight accent colours and a soft indigo cursor halo.
+- Palette: #07080D, #EDEEF7, #767A96, #0C0D15, #10111B, #2B2E44
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Heading and intro; eight-column grid of 32 icon tiles; footer caption.
+
+INTERACTION & STATES
+- Each tile reads its distance to the pointer and eases its colour, background, border, glow and scale by a smoothstep falloff.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Falloff radius 20% of grid width; scale 1 to 1.1; glow up to 26px; 120ms linear transitions.
+
+IDLE AUTOPLAY
+- A ghost light moves on a Lissajous path after 3s and whenever the pointer has been still for 2.2s.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Binary hover states; the falloff must be smooth.
+- Low-contrast sleeping icons that vanish; keep them readable.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

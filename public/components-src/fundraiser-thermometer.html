@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Fundraiser Thermometer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F8EFE2;color:#2A1A10;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(600px 400px at 85% 0,rgba(244,63,94,.14),transparent 70%)}
+.cd{width:100%;max-width:640px;border-radius:32px;background:#fff;padding:28px;display:grid;grid-template-columns:150px 1fr;gap:30px;align-items:center;box-shadow:0 36px 50px -34px rgba(42,26,16,.55),inset 0 0 0 1px rgba(42,26,16,.07)}
+.th{position:relative;height:340px;display:grid;place-items:center}
+.th svg{height:100%;width:auto;overflow:visible}
+.tb{fill:#F4EADB;stroke:#E2D3BD;stroke-width:3}.hg{fill:url(#mg)}
+.mc{transition:none}
+.tk{stroke:#C9B89C;stroke-width:2}.tkt{fill:#8D7B62;font:600 11px 'DM Mono';text-anchor:start}
+.bb{transform-origin:75px 300px;animation:bb 2.600s ease-in-out infinite}@keyframes bb{50%{transform:scale(1.03)}}
+.bl{fill:#fff;opacity:.55}
+.bub{fill:#fff;opacity:0}
+.mn{display:grid;gap:16px}
+.mn small{font:500 12px 'DM Mono';letter-spacing:.14em;text-transform:uppercase;color:#A0907A}.mn h1{font-size:26px;font-weight:800;letter-spacing:-.045em;line-height:1.05}
+.am{font:800 52px/1 'Bricolage Grotesque';letter-spacing:-.06em;font-variant-numeric:tabular-nums;color:#E11D48}.am span{font-size:18px;font-weight:600;color:#A0907A;letter-spacing:0;margin-left:6px}
+.st{display:flex;gap:22px}.st div b{display:block;font-size:22px;font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.st div span{font-size:12.500px;color:#A0907A}
+.fd{display:grid;gap:4px;max-height:132px;overflow:hidden;position:relative}.fd::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34px;background:linear-gradient(transparent,#fff)}
+.dn{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:14px;background:#FBF5EB;animation:in .5s cubic-bezier(.3,1.5,.5,1)}@keyframes in{from{opacity:0;transform:translateY(-14px) scale(.96)}}
+.dn i{width:32px;height:32px;border-radius:50%;background:var(--c);display:grid;place-items:center;font:800 12px 'Bricolage Grotesque';color:#fff;font-style:normal}.dn b{font-size:14px}.dn span{margin-left:auto;font:700 14px 'DM Mono';color:#E11D48}
+.gv{border:0;border-radius:16px;padding:14px;background:#2A1A10;color:#fff;font:700 15px 'Bricolage Grotesque';cursor:pointer;transition:transform .15s}.gv:active{transform:scale(.97)}.gv:focus-visible{outline:3px solid #E11D48;outline-offset:3px}
+.coin{position:absolute;left:50%;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF1B8,#E0A93B 60%,#8F6410);box-shadow:0 4px 8px rgba(0,0,0,.3);z-index:3;animation:cn .9s cubic-bezier(.5,0,.8,.6) forwards}@keyframes cn{from{top:-20px;opacity:1}to{top:230px;opacity:0}}
+@media(max-width:560px){.cd{grid-template-columns:1fr}.th{height:240px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="cd" id="cd"><div class="th" id="th"><svg viewBox="0 0 150 340"><defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FB7185"/><stop offset="1" stop-color="#BE123C"/></linearGradient><clipPath id="cp"><path d="M64 22a11 11 0 0 1 22 0v226a32 32 0 1 1-22 0Z"/></clipPath></defs>
+<path class="tb" d="M58 22a17 17 0 0 1 34 0v218a38 38 0 1 1-34 0Z"/><g id="tks"></g><g clip-path="url(#cp)"><rect class="hg mc" id="fl" x="40" y="300" width="70" height="0"/><g id="bs"></g></g><circle class="bb" cx="75" cy="296" r="30" fill="url(#mg)"/><ellipse class="bl" cx="64" cy="284" rx="7" ry="10" transform="rotate(25 64 284)"/></svg></div>
+<div class="mn"><div><small>Roof repair fund</small><h1>Help Maple Street Library reopen</h1></div><div class="am" id="am">$0<span>of $50,000</span></div>
+<div class="st"><div><b id="dc">0</b><span>donors</span></div><div><b id="pp">0%</b><span>of goal</span></div><div><b id="dl">19</b><span>days left</span></div></div>
+<div class="fd" id="fd"></div><button class="gv" id="gv">Give $25</button></div></div>
+<script>
+const GOAL=50000,TOP=20,BOT=300,H=BOT-TOP-18;const NM=[['Amara D.','#F43F5E'],['Priya N.','#8B5CF6'],['Marcus W.','#0EA5E9'],['Hannah C.','#10B981'],['Tomas N.','#F59E0B'],['Imani C.','#EC4899'],['Lucas F.','#14B8A6'],['Anonymous','#78716C']];
+const tks=document.getElementById('tks'),fl=document.getElementById('fl'),fd=document.getElementById('fd'),th=document.getElementById('th');
+[10,20,30,40,50].forEach(k=>{const y=BOT-18-(k/50)*(H+0)+0;const yy=BOT-(k/50)*(BOT-TOP-30)-0;tks.insertAdjacentHTML('beforeend','<line class="tk" x1="96" y1="'+yy+'" x2="112" y2="'+yy+'"/><text class="tkt" x="118" y="'+(yy+4)+'">$'+k+'k</text>')});
+function yAt(v){return BOT-(v/GOAL)*(BOT-TOP-30)}
+let amt=31400,shown=amt,donors=412,idx=0;const bs=document.getElementById('bs');
+function draw(v){const y=yAt(v);fl.setAttribute('y',y);fl.setAttribute('height',BOT-y+60)}
+function txt(v){document.getElementById('am').innerHTML='$'+Math.round(v).toLocaleString('en-US')+'<span>of $50,000</span>';document.getElementById('pp').textContent=Math.round(v/GOAL*100)+'%'}
+function donate(n){const[nm,c]=NM[idx++%NM.length];amt=Math.min(GOAL,amt+n);donors++;document.getElementById('dc').textContent=donors.toLocaleString('en-US');
+ const e=document.createElement('div');e.className='dn';e.innerHTML='<i style="--c:'+c+'">'+nm[0]+'</i><b>'+nm+'</b><span>+$'+n+'</span>';fd.insertBefore(e,fd.firstChild);while(fd.children.length>4)fd.lastChild.remove();
+ const cn=document.createElement('i');cn.className='coin';th.appendChild(cn);setTimeout(()=>cn.remove(),950);
+ for(let i=0;i<3;i++){const b=document.createElementNS('http://www.w3.org/2000/svg','circle');b.setAttribute('cx',62+Math.random()*26);b.setAttribute('cy',yAt(amt)+30);b.setAttribute('r',2+Math.random()*3);b.setAttribute('class','bub');bs.appendChild(b);b.animate([{opacity:.7,transform:'translateY(0)'},{opacity:0,transform:'translateY(-'+(30+Math.random()*30)+'px)'}],{duration:1100+Math.random()*500,delay:i*120,easing:'ease-out'}).onfinish=()=>b.remove()}}
+[['Amara D.',40],['Priya N.',25],['Marcus W.',100]].forEach(([n,a],i)=>{const c=NM[i][1],e=document.createElement('div');e.className='dn';e.style.animation='none';e.innerHTML='<i style="--c:'+c+'">'+n[0]+'</i><b>'+n+'</b><span>+$'+a+'</span>';fd.appendChild(e)});idx=3;
+document.getElementById('dc').textContent=donors;draw(amt);txt(amt);
+document.getElementById('gv').onclick=()=>{off=true;donate(25)};
+(function tw(){shown+=(amt-shown)*.08;if(Math.abs(amt-shown)<.5)shown=amt;draw(shown);txt(shown);requestAnimationFrame(tw)})();
+/* Idle demo: donations arrive every 1.5 seconds; a gold coin drops into the tube, the mercury rises with a spring-like ease and sends up bubbles, the amount counts up, the donor feed slides a new row in at the top, and when the goal is reached the fund resets, until you give. */
+let off=false;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await sleep(2200);const sizes=[25,40,75,120,50,200,30,500,60];let k=0;while(true){if(!off){donate(sizes[k++%sizes.length]);if(amt>=GOAL){await sleep(2500);amt=24000;donors=380}}await sleep(1500)}})()}
+</script></body></html>

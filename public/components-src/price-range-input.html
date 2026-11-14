@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Price Range Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EFF3EC;color:#14201A;font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px 14px;-webkit-font-smoothing:antialiased}
+.c{width:100%;max-width:480px;border-radius:28px;background:#fff;padding:26px;box-shadow:0 30px 50px -32px rgba(20,32,26,.45),inset 0 0 0 1px rgba(20,32,26,.07)}
+.hd{display:flex;justify-content:space-between;align-items:baseline}.hd h2{font-size:21px;font-weight:800;letter-spacing:-.04em}.hd span{font:500 13px 'DM Mono';color:#16A34A}
+.hist{display:flex;align-items:flex-end;gap:3px;height:96px;margin-top:20px}.hist i{flex:1;border-radius:4px 4px 1px 1px;background:#DCE5DD;transition:background .2s,height .4s cubic-bezier(.3,1.2,.4,1)}.hist i.in{background:#16A34A}
+.rg{position:relative;height:30px;margin:2px 0 0}
+.tr{position:absolute;left:0;right:0;top:12px;height:6px;border-radius:3px;background:#DCE5DD}.fl{position:absolute;top:12px;height:6px;border-radius:3px;background:#16A34A}
+.rg input{position:absolute;left:0;right:0;top:0;width:100%;height:30px;margin:0;background:none;pointer-events:none;-webkit-appearance:none;appearance:none}
+.rg input::-webkit-slider-thumb{-webkit-appearance:none;pointer-events:auto;width:26px;height:26px;border-radius:50%;background:#fff;border:4px solid #16A34A;box-shadow:0 5px 10px rgba(20,32,26,.28);cursor:grab;transition:transform .15s}
+.rg input::-moz-range-thumb{pointer-events:auto;width:18px;height:18px;border-radius:50%;background:#fff;border:4px solid #16A34A;box-shadow:0 5px 10px rgba(20,32,26,.28);cursor:grab}
+.rg input:active::-webkit-slider-thumb{transform:scale(1.18);cursor:grabbing}.rg input:focus-visible::-webkit-slider-thumb{outline:3px solid #14201A;outline-offset:2px}
+.nums{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-top:16px}
+.nm{border-radius:16px;background:#F3F7F1;padding:10px 14px;box-shadow:inset 0 0 0 1.500px transparent;transition:box-shadow .2s,background .2s}.nm:focus-within{background:#fff;box-shadow:inset 0 0 0 2px #14201A}
+.nm small{display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B7C71}
+.nm div{display:flex;align-items:center;gap:3px}.nm span{font:700 20px 'Bricolage Grotesque';color:#16A34A}.nm input{width:100%;min-width:0;border:0;outline:0;background:none;font:800 24px 'Bricolage Grotesque';letter-spacing:-.04em;color:#14201A}
+.dash{width:14px;height:2px;background:#B8C7BC;border-radius:1px}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid #EAEFE8}
+.ft b{font-size:22px;font-weight:800;letter-spacing:-.04em}.ft span{font-size:14px;color:#6B7C71;margin-left:6px}
+.ft button{border:0;border-radius:14px;padding:14px 22px;background:#14201A;color:#fff;font:700 15px 'Bricolage Grotesque';cursor:pointer}.ft button:focus-visible{outline:3px solid #16A34A;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="c"><div class="hd"><h2>Price per night</h2><span id="av">avg $186</span></div>
+<div class="hist" id="hs" aria-hidden="true"></div>
+<div class="rg"><div class="tr"></div><div class="fl" id="fl"></div><input type="range" id="a" min="40" max="600" step="5" value="120" aria-label="Minimum price"><input type="range" id="b" min="40" max="600" step="5" value="340" aria-label="Maximum price"></div>
+<div class="nums"><label class="nm"><small>Minimum</small><div><span>$</span><input id="na" inputmode="numeric" aria-label="Minimum price in dollars"></div></label><i class="dash"></i><label class="nm"><small>Maximum</small><div><span>$</span><input id="nb" inputmode="numeric" aria-label="Maximum price in dollars"></div></label></div>
+<div class="ft"><div><b id="ct">0</b><span>stays</span></div><button>Show results</button></div></div>
+<script>
+const MIN=40,MAX=600,N=40,hs=document.getElementById('hs'),a=document.getElementById('a'),b=document.getElementById('b'),na=document.getElementById('na'),nb=document.getElementById('nb'),fl=document.getElementById('fl');
+const H=[];let seed=11;const r=()=>(seed=seed*16807%2147483647)/2147483647;for(let i=0;i<N;i++){const x=i/(N-1);H.push(Math.round(14+78*Math.exp(-Math.pow((x-.28)/.2,2))+22*Math.exp(-Math.pow((x-.7)/.12,2))+r()*10))}
+H.forEach(h=>{const e=document.createElement('i');e.style.height=h+'%';hs.appendChild(e)});const bars=[...hs.children];
+function paint(from){let lo=+a.value,hi=+b.value;if(lo>hi-20){if(from==='a')lo=a.value=hi-20;else hi=b.value=lo+20}
+ const p=v=>(v-MIN)/(MAX-MIN)*100;fl.style.left=p(lo)+'%';fl.style.right=(100-p(hi))+'%';
+ let c=0;bars.forEach((e,i)=>{const v=MIN+(MAX-MIN)*i/(N-1),on=v>=lo-7&&v<=hi+7;e.classList.toggle('in',on);if(on)c+=H[i]});document.getElementById('ct').textContent=Math.round(c*2.4).toLocaleString('en-US');
+ if(from!=='na')na.value=lo;if(from!=='nb')nb.value=hi;document.getElementById('av').textContent='avg $'+Math.round((lo+hi)/2*.78)}
+a.addEventListener('input',()=>paint('a'));b.addEventListener('input',()=>paint('b'));
+const typed=(el,s)=>el.addEventListener('input',()=>{const v=Math.max(MIN,Math.min(MAX,+el.value.replace(/\D/g,'')||MIN));s.value=v;paint(s===a?'na':'nb')});typed(na,a);typed(nb,b);
+na.addEventListener('blur',()=>paint());nb.addEventListener('blur',()=>paint());paint();
+/* Idle demo: the two handles glide to new price bands so the histogram highlight and result count keep updating, until real input. */
+let off=false;['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>off=true,{once:true}));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const sleep=ms=>new Promise(r=>setTimeout(r,ms)),bands=[[60,180],[250,520],[150,300],[400,590],[120,340]];
+ (async()=>{await sleep(3600);let k=0;while(!off){const[lo,hi]=bands[k++%bands.length];const l0=+a.value,h0=+b.value;for(let s=1;s<=24&&!off;s++){const e=1-Math.pow(1-s/24,3);a.value=Math.round((l0+(lo-l0)*e)/5)*5;b.value=Math.round((h0+(hi-h0)*e)/5)*5;paint();await sleep(30)}await sleep(1800)}})()}
+</script></body></html>

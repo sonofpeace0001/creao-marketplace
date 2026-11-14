@@ -1,0 +1,40 @@
+ROLE
+You are a senior game and gamification designer and front-end engineer with 15+ years of experience. Build "Achievement Unlock Badges": six hexagon medals that start locked and grey, then fill with progress, rattle their padlock, pop with a glint and confetti, and trigger an unlock toast.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Midnight blue with jewel-coloured medals, a gold toast and mono captions.
+- Palette: #FFD24A, #7C88B5, #0A0E1F, #11172C, #252C48, #1D2A4F
+- Type: Sora, Geist Mono (loaded from Google Fonts via <link>)
+- Theme: dark
+
+ANATOMY
+- Header with unlocked counter; unlock toast; six cards each with a hexagon medal, glyph, padlock, title, requirement and progress bar.
+
+INTERACTION & STATES
+- Unlocking removes the padlock with a shake, fills the medal colour, glows, announces the achievement in a toast and updates the counter.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Padlock shake 450ms; medal pop scale .85 to 1.22 over 900ms; glint sweep 900ms; 18 confetti pieces; toast drops 30px and holds for 3.2s.
+
+IDLE AUTOPLAY
+- Four locked badges unlock one after another every 3.6s, then the set re-locks and repeats.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Unlock states that only change colour.
+- A toast with no accessible name for the achievement.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.

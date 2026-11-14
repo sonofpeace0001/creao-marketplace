@@ -1,0 +1,40 @@
+ROLE
+You are a senior productivity app designer and front-end engineer with 15+ years of experience. Build "Inline Edit Input": click-to-edit text with a pencil affordance, save and cancel buttons, keyboard commit and a green flash and Saved tick on success.
+
+GOAL
+One self-contained HTML file that looks like part of a funded product's real interface — specific, considered and never a generic template.
+
+ART DIRECTION
+- Mood: Warm cream card, serif title, terracotta focus ring and quiet metadata.
+- Palette: #241C14, #C2410C, #F6F1E7, #EFE8D8, #5D5446, #FFFDF9
+- Type: Fraunces, Figtree (loaded from Google Fonts via <link>)
+- Theme: light
+
+ANATOMY
+- Eyebrow; editable title and description; metadata row; Saved indicator; keyboard hint.
+
+INTERACTION & STATES
+- Hover reveals a pencil; click or Enter opens the field with the caret at the end; Enter or the tick saves, Escape or the cross cancels; saving flashes the row green.
+- Every interactive element has a visible :focus-visible state and a sensible hover/active state.
+
+MOTION SPEC (exact values, do not approximate)
+- Pencil scales .8 to 1 over 200ms; focus ring 2px with a 5px halo; success flash 900ms; Saved tick slides in 300ms.
+
+IDLE AUTOPLAY
+- Each field is hovered, opened, retyped, saved and flashed in turn, then the next field, looping.
+- Autoplay stops permanently on the first real pointer, touch or key event and is fully disabled under prefers-reduced-motion.
+
+AVOID (these make it generic)
+- Edit mode that shifts the layout.
+- Saving on blur with no confirmation.
+
+CONSTRAINTS
+- Single HTML file with inline CSS (and only the small amount of vanilla JS the behaviour needs). No frameworks, no build step.
+- Inline SVG icons only — no emoji, no stock imagery. Real, specific copy; no lorem ipsum.
+- Responsive from 360px up; honour prefers-reduced-motion; keep text contrast at WCAG AA or better.
+- Semantic HTML with proper roles/labels where the component is interactive.
+
+ACCEPTANCE CHECKLIST
+- No layout shift, overflow or clipped text at 1440px and 390px.
+- Every state described above is reachable and looks intentional.
+- It could not be mistaken for a different component or another product's default styling.
