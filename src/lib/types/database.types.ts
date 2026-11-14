@@ -275,6 +275,11 @@ export type Database = {
         | "real_estate"
         | "institutions"
         | "portfolio_creative"
+        | "agency_studio"
+        | "events_venues"
+        | "entertainment_media"
+        | "education"
+        | "health_wellness"
         | "ui_components"
       item_kind: "component" | "page"
       item_status: "draft" | "published" | "archived"
@@ -412,6 +417,11 @@ export const Constants = {
         "real_estate",
         "institutions",
         "portfolio_creative",
+        "agency_studio",
+        "events_venues",
+        "entertainment_media",
+        "education",
+        "health_wellness",
         "ui_components",
       ],
       item_kind: ["component", "page"],

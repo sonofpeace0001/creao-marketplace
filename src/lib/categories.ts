@@ -10,6 +10,11 @@ export const CATEGORIES: { key: ItemCategory; label: string; description: string
   { key: "real_estate", label: "Real Estate", description: "Agencies, property management, architecture, interior design" },
   { key: "institutions", label: "Institutions", description: "Churches, schools, clinics, nonprofits, coworking spaces" },
   { key: "portfolio_creative", label: "Portfolio & Creative", description: "Designers, photographers, artists, musicians, and other creatives" },
+  { key: "agency_studio", label: "Agency & Studio", description: "Digital, brand, PR, video and design studios and the agencies behind them" },
+  { key: "events_venues", label: "Events & Venues", description: "Conferences, festivals, weddings, hotels, retreats and unique venues" },
+  { key: "entertainment_media", label: "Entertainment & Media", description: "Film, music, podcasts, publishing, streaming, theatre and games" },
+  { key: "education", label: "Education & Courses", description: "Online academies, schools, tutoring, test prep and learning apps" },
+  { key: "health_wellness", label: "Health & Wellness", description: "Telehealth, clinics, mental health, fitness, sleep and aesthetics" },
   { key: "ui_components", label: "UI Components", description: "Reusable buttons, cards, navs, forms, and other interface pieces — not tied to a business niche" },
 ];
 
